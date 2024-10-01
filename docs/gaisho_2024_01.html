@@ -31,6 +31,22 @@
     }
   </style>
   <link rel="stylesheet" href="gaisho_2024_01_files/libs/revealjs/dist/theme/quarto.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="gaisho_2024_01_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="gaisho_2024_01_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="gaisho_2024_01_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -320,8 +336,1779 @@
       margin-right: 0; 
     }
   </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/editor/editor.main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+  <style type="text/css">
+  .monaco-editor pre {
+    background-color: unset !important;
+  }
+
+  .qwebr-editor-toolbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .qwebr-editor-toolbar-left-buttons, .qwebr-editor-toolbar-right-buttons {
+    display: flex;
+  }
+
+  .qwebr-non-interactive-loading-container.qwebr-cell-needs-evaluation, .qwebr-non-interactive-loading-container.qwebr-cell-evaluated {
+    justify-content: center;
+    display: flex;
+    background-color: rgba(250, 250, 250, 0.65);
+    border: 1px solid rgba(233, 236, 239, 0.65);
+    border-radius: 0.5rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .qwebr-r-project-logo {
+    color: #2767B0; /* R Project's blue color */
+  }
+
+  .qwebr-icon-status-spinner {
+    color: #7894c4;
+  }
+
+  .qwebr-icon-run-code {
+    color: #0d9c29
+  }
+
+  body.quarto-light .qwebr-output-code-stdout {
+    color: #111;
+  }
+
+  body.quarto-dark .qwebr-output-code-stdout {
+    color: #EEE;
+  }
+
+  .qwebr-output-code-stderr {
+    color: #db4133;
+  }
+
+  body.quarto-light .qwebr-editor {
+    border: 1px solid #EEEEEE;
+  }
+
+  body.quarto-light .qwebr-editor-toolbar {
+    background-color: #EEEEEE;
+    padding: 0.2rem 0.5rem;
+  }
+
+  body.quarto-dark .qwebr-editor {
+    border: 1px solid #111;
+  }
+
+  body.quarto-dark .qwebr-editor-toolbar {
+    background-color: #111;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .qwebr-button {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+    text-align: center;
+    padding: 0.375rem 0.75rem;
+    font-size: .9rem;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+
+  body.quarto-light .qwebr-button {
+    background-color: #EEEEEE;
+    color: #000;
+    border-color: #dee2e6;
+    border: 1px solid rgba(0,0,0,0);
+  }
+
+  body.quarto-dark .qwebr-button {
+    background-color: #111;
+    color: #EEE;
+    border-color: #dee2e6;
+    border: 1px solid rgba(0,0,0,0);
+  }
+
+  body.quarto-light .qwebr-button:hover {
+    color: #000;
+    background-color: #d9dce0;
+    border-color: #c8ccd0;
+  }
+
+  body.quarto-dark .qwebr-button:hover {
+    color: #d9dce0;
+    background-color: #323232;
+    border-color: #d9dce0;
+  }
+
+  .qwebr-button:disabled,.qwebr-button.disabled,fieldset:disabled .qwebr-button {
+    pointer-events: none;
+    opacity: .65
+  }
+
+  .qwebr-button-reset {
+    color: #696969; /*#4682b4;*/
+  }
+
+  .qwebr-button-copy {
+    color: #696969;
+  }
+
+  /* Style the code highlight lines */
+  body.quarto-light .qwebr-editor-highlight-line {
+    background-color: lightblue;
+  }
+
+  body.quarto-dark .qwebr-editor-highlight-line {
+    background-color: darkblue;
+  }
+
+  /* Style the modal pop-up */
+
+  /* The Modal (background) */
+  .qwebr-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+  }
+
+  /* Modal Content */
+  .qwebr-modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+
+  .qwebr-modal-content-code {
+    max-height: 50vh;
+    min-height: 5vh;
+    overflow: scroll;
+    border: 1px solid #888;
+  }
+
+  /* The Close Button */
+  .qwebr-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .qwebr-modal-close:hover,
+  .qwebr-modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .qwebr-download-btn {
+    margin-top: 10px;
+    text-decoration: none !important;
+  }
+
+  /* Styling to download image that is created */
+
+  .qwebr-canvas-image {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+  }
+
+  .qwebr-canvas-image-download-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: none;
+  }
+
+  figure:hover .qwebr-canvas-image-download-btn {
+    display: block;
+  }
+
+  /* Custom styling for RevealJS Presentations*/
+
+  /* Reset the style of the interactive area */
+  .reveal div.qwebr-interactive-area {
+    display: block;
+    box-shadow: none;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+  } 
+
+  /* Provide space to entries */
+  .reveal div.qwebr-output-code-area pre div {
+    margin: 1px 2px 1px 10px;
+  }
+
+  /* Collapse the inside code tags to avoid extra space between line outputs */
+  .reveal pre div code.qwebr-output-code-stdout, .reveal pre div code.qwebr-output-code-stderr {
+    padding: 0;
+    display: contents;
+  }
+
+  body.reveal.quarto-light pre div code.qwebr-output-code-stdout {
+    color: #111;
+  }
+
+  body.reveal.quarto-dark pre div code.qwebr-output-code-stdout {
+    color: #EEEEEE;
+  }
+
+  .reveal pre div code.qwebr-output-code-stderr {
+    color: #db4133;
+  }
+
+
+  /* Create a border around console and output (does not effect graphs) */
+  body.reveal.quarto-light div.qwebr-console-area {
+    border: 1px solid #EEEEEE;
+    box-shadow: 2px 2px 10px #EEEEEE;
+  }
+
+  body.reveal.quarto-dark div.qwebr-console-area {
+    border: 1px solid #111;
+    box-shadow: 2px 2px 10px #111;
+  }
+
+
+  /* Cap output height and allow text to scroll */
+  /* TODO: Is there a better way to fit contents/max it parallel to the monaco editor size? */
+  .reveal div.qwebr-output-code-area pre {
+    max-height: 400px;
+    overflow: scroll;
+  }
+
+  </style>
+  <script type="module">
+  // Document level settings ----
+
+  // Determine if we need to install R packages
+  globalThis.qwebrInstallRPackagesList = [''];
+
+  // Specify possible locations to search for the repository
+  globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
+
+  // Check to see if we have an empty array, if we do set to skip the installation.
+  globalThis.qwebrSetupRPackages = !(qwebrInstallRPackagesList.indexOf("") !== -1);
+  globalThis.qwebrAutoloadRPackages = true;
+
+  // Display a startup message?
+  globalThis.qwebrShowStartupMessage = true;
+  globalThis.qwebrShowHeaderMessage = false;
+
+  // Describe the webR settings that should be used
+  globalThis.qwebrCustomizedWebROptions = {
+    "baseURL": "https://webr.r-wasm.org/v0.4.0/",
+    "serviceWorkerUrl": "",
+    "homedir": "/home/web_user", 
+    "channelType": "ChannelType.Automatic"
+  };
+
+  // Store cell data
+  globalThis.qwebrCellDetails = [{"options":{"fig-height":5,"warning":"true","fig-cap":"","editor-font-scale":"0.5","autorun":"false","comment":"","output":"true","results":"markup","editor-word-wrap":"true","label":"unnamed-chunk-1","editor-max-height":"","out-height":"","message":"true","out-width":"700px","read-only":"false","context":"interactive","classes":"","fig-width":7,"dpi":72,"editor-quick-suggestions":"false"},"code":"1 + 2 # 足し算\n3 * 4 # かけ算\n6 ** 2 # 累乗\nsqrt(2) # 平方根","id":1},{"options":{"fig-height":5,"warning":"true","fig-cap":"","editor-font-scale":"0.5","autorun":"false","comment":"","output":"true","results":"markup","editor-word-wrap":"true","label":"unnamed-chunk-2","editor-max-height":"","out-height":"","message":"true","out-width":"700px","read-only":"false","context":"interactive","classes":"","fig-width":7,"dpi":72,"editor-quick-suggestions":"false"},"code":"# 関数mymeanを定義\nmymean <- function(x) {\n  x1 <- sum(x)\n  x2 <- length(x)\n  x <- x1 / x2\n  return(x)\n}\nx <- 1:100 # 1から100までの数列\nmymean(x)","id":2},{"options":{"fig-height":5,"warning":"true","fig-cap":"","editor-font-scale":"0.5","autorun":"false","comment":"","output":"true","results":"markup","editor-word-wrap":"true","label":"unnamed-chunk-3","editor-max-height":"","out-height":"","message":"true","out-width":"700px","read-only":"false","context":"interactive","classes":"","fig-width":7,"dpi":72,"editor-quick-suggestions":"false"},"code":"# サイコロを作成し，投げる回数と試行回数を設定\ndice <- 1:6; toss <- 10; trial <- 10\nresult <- numeric(trial)\n# 繰り返し処理\nfor (i in 1:trial) {\n  x <- sample(dice, toss, replace = TRUE)\n  result[i] <- mymean(x)\n}\nresult","id":3},{"options":{"fig-height":5,"warning":"true","fig-cap":"","editor-font-scale":"0.5","autorun":"false","comment":"","output":"true","results":"markup","editor-word-wrap":"true","label":"unnamed-chunk-4","editor-max-height":"","out-height":"","message":"true","out-width":"700px","read-only":"false","context":"interactive","classes":"","fig-width":7,"dpi":72,"editor-quick-suggestions":"false"},"code":"for (i in 1:trial) {\n  if (result[i] > 3.5) {\n    print(\"大きい\") # 条件を満たすとき\n  } else {\n    print(\"小さい\") # 条件を満たさないとき\n  }\n}","id":4},{"options":{"fig-height":5,"warning":"true","fig-cap":"","editor-font-scale":"0.5","autorun":"false","comment":"","output":"true","results":"markup","editor-word-wrap":"true","label":"unnamed-chunk-5","editor-max-height":"","out-height":"","message":"true","out-width":"700px","read-only":"false","context":"interactive","classes":"","fig-width":7,"dpi":72,"editor-quick-suggestions":"false"},"code":"dice <- 1:6\ntoss <- 10\nx <- sample(dice, toss, replace = TRUE)\nmean(x)","id":5}];
+
+  </script>
+  <script type="module">
+  // Declare startupMessageQWebR globally
+  globalThis.qwebrStartupMessage = document.createElement("p");
+
+  // Verify if OffScreenCanvas is supported
+  globalThis.qwebrOffScreenCanvasSupport = function() {
+    return typeof OffscreenCanvas !== 'undefined'
+  }
+
+  // Function to set the button text
+  globalThis.qwebrSetInteractiveButtonState = function(buttonText, enableCodeButton = true) {
+    document.querySelectorAll(".qwebr-button-run").forEach((btn) => {
+      btn.innerHTML = buttonText;
+      btn.disabled = !enableCodeButton;
+    });
+  }
+
+  // Function to update the status message in non-interactive cells
+  globalThis.qwebrUpdateStatusMessage = function(message) {
+    document.querySelectorAll(".qwebr-status-text.qwebr-cell-needs-evaluation").forEach((elem) => {
+      elem.innerText = message;
+    });
+  }
+
+  // Function to update the status message
+  globalThis.qwebrUpdateStatusHeader = function(message) {
+    qwebrStartupMessage.innerHTML = `
+      <i class="fa-solid fa-spinner fa-spin qwebr-icon-status-spinner"></i>
+      <span>${message}</span>`;
+  }
+
+  // Function to return true if element is found, false if not
+  globalThis.qwebrCheckHTMLElementExists = function(selector) {
+    const element = document.querySelector(selector);
+    return !!element;
+  }
+
+  // Function that detects whether reveal.js slides are present
+  globalThis.qwebrIsRevealJS = function() {
+    // If the '.reveal .slides' selector exists, RevealJS is likely present
+    return qwebrCheckHTMLElementExists('.reveal .slides');
+  }
+
+  // Initialize the Quarto sidebar element
+  function qwebrSetupQuartoSidebar() {
+    var newSideBarDiv = document.createElement('div');
+    newSideBarDiv.id = 'quarto-margin-sidebar';
+    newSideBarDiv.className = 'sidebar margin-sidebar';
+    newSideBarDiv.style.top = '0px';
+    newSideBarDiv.style.maxHeight = 'calc(0px + 100vh)';
+
+    return newSideBarDiv;
+  }
+
+  // Position the sidebar in the document
+  function qwebrPlaceQuartoSidebar() {
+    // Get the reference to the element with id 'quarto-document-content'
+    var referenceNode = document.getElementById('quarto-document-content');
+
+    // Create the new div element
+    var newSideBarDiv = qwebrSetupQuartoSidebar();
+
+    // Insert the new div before the 'quarto-document-content' element
+    referenceNode.parentNode.insertBefore(newSideBarDiv, referenceNode);
+  }
+
+  function qwebrPlaceMessageContents(content, html_location = "title-block-header", revealjs_location = "title-slide") {
+
+    // Get references to header elements
+    const headerHTML = document.getElementById(html_location);
+    const headerRevealJS = document.getElementById(revealjs_location);
+
+    // Determine where to insert the quartoTitleMeta element
+    if (headerHTML || headerRevealJS) {
+      // Append to the existing "title-block-header" element or "title-slide" div
+      (headerHTML || headerRevealJS).appendChild(content);
+    } else {
+      // If neither headerHTML nor headerRevealJS is found, insert after "webr-monaco-editor-init" script
+      const monacoScript = document.getElementById("qwebr-monaco-editor-init");
+      const header = document.createElement("header");
+      header.setAttribute("id", "title-block-header");
+      header.appendChild(content);
+      monacoScript.after(header);
+    }
+  }
+
+
+
+  function qwebrOffScreenCanvasSupportWarningMessage() {
+    
+    // Verify canvas is supported.
+    if(qwebrOffScreenCanvasSupport()) return;
+
+    // Create the main container div
+    var calloutContainer = document.createElement('div');
+    calloutContainer.classList.add('callout', 'callout-style-default', 'callout-warning', 'callout-titled');
+
+    // Create the header div
+    var headerDiv = document.createElement('div');
+    headerDiv.classList.add('callout-header', 'd-flex', 'align-content-center');
+
+    // Create the icon container div
+    var iconContainer = document.createElement('div');
+    iconContainer.classList.add('callout-icon-container');
+
+    // Create the icon element
+    var iconElement = document.createElement('i');
+    iconElement.classList.add('callout-icon');
+
+    // Append the icon element to the icon container
+    iconContainer.appendChild(iconElement);
+
+    // Create the title container div
+    var titleContainer = document.createElement('div');
+    titleContainer.classList.add('callout-title-container', 'flex-fill');
+    titleContainer.innerText = 'Warning: Web Browser Does Not Support Graphing!';
+
+    // Append the icon container and title container to the header div
+    headerDiv.appendChild(iconContainer);
+    headerDiv.appendChild(titleContainer);
+
+    // Create the body container div
+    var bodyContainer = document.createElement('div');
+    bodyContainer.classList.add('callout-body-container', 'callout-body');
+
+    // Create the paragraph element for the body content
+    var paragraphElement = document.createElement('p');
+    paragraphElement.innerHTML = 'This web browser does not have support for displaying graphs through the <code>quarto-webr</code> extension since it lacks an <code>OffScreenCanvas</code>. Please upgrade your web browser to one that supports <code>OffScreenCanvas</code>.';
+
+    // Append the paragraph element to the body container
+    bodyContainer.appendChild(paragraphElement);
+
+    // Append the header div and body container to the main container div
+    calloutContainer.appendChild(headerDiv);
+    calloutContainer.appendChild(bodyContainer);
+
+    // Append the main container div to the document depending on format
+    qwebrPlaceMessageContents(calloutContainer, "title-block-header"); 
+
+  }
+
+
+  // Function that attaches the document status message and diagnostics
+  function displayStartupMessage(showStartupMessage, showHeaderMessage) {
+    if (!showStartupMessage) {
+      return;
+    }
+
+    // Create the outermost div element for metadata
+    const quartoTitleMeta = document.createElement("div");
+    quartoTitleMeta.classList.add("quarto-title-meta");
+
+    // Create the first inner div element
+    const firstInnerDiv = document.createElement("div");
+    firstInnerDiv.setAttribute("id", "qwebr-status-message-area");
+
+    // Create the second inner div element for "WebR Status" heading and contents
+    const secondInnerDiv = document.createElement("div");
+    secondInnerDiv.setAttribute("id", "qwebr-status-message-title");
+    secondInnerDiv.classList.add("quarto-title-meta-heading");
+    secondInnerDiv.innerText = "WebR Status";
+
+    // Create another inner div for contents
+    const secondInnerDivContents = document.createElement("div");
+    secondInnerDivContents.setAttribute("id", "qwebr-status-message-body");
+    secondInnerDivContents.classList.add("quarto-title-meta-contents");
+
+    // Describe the WebR state
+    qwebrStartupMessage.innerText = "🟡 Loading...";
+    qwebrStartupMessage.setAttribute("id", "qwebr-status-message-text");
+    // Add `aria-live` to auto-announce the startup status to screen readers
+    qwebrStartupMessage.setAttribute("aria-live", "assertive");
+
+    // Append the startup message to the contents
+    secondInnerDivContents.appendChild(qwebrStartupMessage);
+
+    // Add a status indicator for COOP and COEP Headers if needed
+    if (showHeaderMessage) {
+      const crossOriginMessage = document.createElement("p");
+      crossOriginMessage.innerText = `${crossOriginIsolated ? '🟢' : '🟡'} COOP & COEP Headers`;
+      crossOriginMessage.setAttribute("id", "qwebr-coop-coep-header");
+      secondInnerDivContents.appendChild(crossOriginMessage);
+    }
+
+    // Combine the inner divs and contents
+    firstInnerDiv.appendChild(secondInnerDiv);
+    firstInnerDiv.appendChild(secondInnerDivContents);
+    quartoTitleMeta.appendChild(firstInnerDiv);
+
+    // Place message on webpage
+    qwebrPlaceMessageContents(quartoTitleMeta); 
+  }
+
+  function qwebrAddCommandHistoryModal() {
+    // Create the modal div
+    var modalDiv = document.createElement('div');
+    modalDiv.id = 'qwebr-history-modal';
+    modalDiv.className = 'qwebr-modal';
+
+    // Create the modal content div
+    var modalContentDiv = document.createElement('div');
+    modalContentDiv.className = 'qwebr-modal-content';
+
+    // Create the span for closing the modal
+    var closeSpan = document.createElement('span');
+    closeSpan.id = 'qwebr-command-history-close-btn';
+    closeSpan.className = 'qwebr-modal-close';
+    closeSpan.innerHTML = '&times;';
+
+    // Create the h1 element for the modal
+    var modalH1 = document.createElement('h1');
+    modalH1.textContent = 'R History Command Contents';
+
+    // Create an anchor element for downloading the Rhistory file 
+    var downloadLink = document.createElement('a');
+    downloadLink.href = '#';
+    downloadLink.id = 'qwebr-download-history-btn';
+    downloadLink.className = 'qwebr-download-btn';
+
+    // Create an 'i' element for the icon
+    var icon = document.createElement('i');
+    icon.className = 'bi bi-file-code';
+
+    // Append the icon to the anchor element
+    downloadLink.appendChild(icon);
+
+    // Add the text 'Download R History' to the anchor element
+    downloadLink.appendChild(document.createTextNode(' Download R History File'));
+
+    // Create the pre for command history contents
+    var commandContentsPre = document.createElement('pre');
+    commandContentsPre.id = 'qwebr-command-history-contents';
+    commandContentsPre.className = 'qwebr-modal-content-code';
+
+    // Append the close span, h1, and history contents pre to the modal content div
+    modalContentDiv.appendChild(closeSpan);
+    modalContentDiv.appendChild(modalH1);
+    modalContentDiv.appendChild(downloadLink);
+    modalContentDiv.appendChild(commandContentsPre);
+
+    // Append the modal content div to the modal div
+    modalDiv.appendChild(modalContentDiv);
+
+    // Append the modal div to the body
+    document.body.appendChild(modalDiv);
+  }
+
+  function qwebrRegisterRevealJSCommandHistoryModal() {
+    // Select the <ul> element inside the <div> with data-panel="Custom0"
+    let ulElement = document.querySelector('div[data-panel="Custom0"] > ul.slide-menu-items');
+
+    // Find the last <li> element with class slide-tool-item
+    let lastItem = ulElement.querySelector('li.slide-tool-item:last-child');
+
+    // Calculate the next data-item value
+    let nextItemValue = 0;
+    if (lastItem) {
+        nextItemValue = parseInt(lastItem.dataset.item) + 1;
+    }
+
+    // Create a new <li> element
+    let newListItem = document.createElement('li');
+    newListItem.className = 'slide-tool-item';
+    newListItem.dataset.item = nextItemValue.toString(); // Set the next available data-item value
+
+    // Create the <a> element inside the <li>
+    let newLink = document.createElement('a');
+    newLink.href = '#';
+    newLink.id = 'qwebrRHistoryButton'; // Set the ID for the new link
+    
+    // Create the <kbd> element inside the <a>
+    let newKbd = document.createElement('kbd');
+    newKbd.textContent = ' '; // Set to empty as we are not registering a keyboard shortcut
+
+    // Create text node for the link text
+    let newText = document.createTextNode(' View R History');
+
+    // Append <kbd> and text node to <a>
+    newLink.appendChild(newKbd);
+    newLink.appendChild(newText);
+
+    // Append <a> to <li>
+    newListItem.appendChild(newLink);
+
+    // Append <li> to <ul>
+    ulElement.appendChild(newListItem);
+  }
+
+  // Handle setting up the R history modal
+  function qwebrCodeLinks() {
+
+    if (qwebrIsRevealJS()) {
+      qwebrRegisterRevealJSCommandHistoryModal();
+      return;
+    }
+
+    // Create the container div
+    var containerDiv = document.createElement('div');
+    containerDiv.className = 'quarto-code-links';
+
+    // Create the h2 element
+    var h2 = document.createElement('h2');
+    h2.textContent = 'webR Code Links';
+
+    // Create the ul element
+    var ul = document.createElement('ul');
+
+    // Create the li element
+    var li = document.createElement('li');
+
+    // Create the a_history_btn element
+    var a_history_btn = document.createElement('a');
+    a_history_btn.href = 'javascript:void(0)';
+    a_history_btn.setAttribute('id', 'qwebrRHistoryButton');
+
+    // Create the i_history_btn element
+    var i_history_btn = document.createElement('i');
+    i_history_btn.className = 'bi bi-file-code';
+
+    // Create the text node for the link text
+    var text_history_btn = document.createTextNode('View R History');
+
+    // Append the icon element and link text to the a element
+    a_history_btn.appendChild(i_history_btn);
+    a_history_btn.appendChild(text_history_btn);
+
+    // Append the a element to the li element
+    li.appendChild(a_history_btn);
+
+    // Append the li element to the ul element
+    ul.appendChild(li);
+
+    // Append the h2 and ul elements to the container div
+    containerDiv.appendChild(h2);
+    containerDiv.appendChild(ul);
+
+    // Append the container div to the element with the ID 'quarto-margin-sidebar'
+    var sidebar = document.getElementById('quarto-margin-sidebar');
+      
+    // If the sidebar element is not found, create it
+    if(!sidebar) {
+      qwebrPlaceQuartoSidebar();
+    }
+    
+    // Re-select the sidebar element (if it was just created)
+    sidebar = document.getElementById('quarto-margin-sidebar');   
+
+
+    // If the sidebar element exists, append the container div to it
+    if(sidebar) {
+      // Append the container div to the sidebar
+      sidebar.appendChild(containerDiv);
+      // Force the sidebar to be clickable by removing the 'zindex-bottom' class
+      // added in pre-release: https://github.com/quarto-dev/quarto-cli/commit/f0c53a1ffcaa1de4eccbf07803b096898248adcc
+      sidebar.className = 'sidebar margin-sidebar';
+    } else {
+      // Get a debugger ...
+      console.warn('Element with ID "quarto-margin-sidebar" not found.');
+    }
+  }
+
+  // Call the function to append the code links for qwebR into the right sidebar
+  qwebrCodeLinks();
+
+  // Add the command history modal
+  qwebrAddCommandHistoryModal();
+
+  displayStartupMessage(qwebrShowStartupMessage, qwebrShowHeaderMessage);
+  qwebrOffScreenCanvasSupportWarningMessage();
+  </script>
+  <script type="module">
+  // Define a global storage and retrieval solution ----
+
+  // Store commands executed in R
+  globalThis.qwebrRCommandHistory = [];
+
+  // Function to retrieve the command history
+  globalThis.qwebrFormatRHistory = function() {
+     return qwebrRCommandHistory.join("\n\n");
+  }
+
+  // Retrieve HTML Elements ----
+
+  // Get the command modal
+  const command_history_modal = document.getElementById("qwebr-history-modal");
+
+  // Get the button that opens the command modal
+  const command_history_btn = document.getElementById("qwebrRHistoryButton");
+
+  // Get the <span> element that closes the command modal
+  const command_history_close_span = document.getElementById("qwebr-command-history-close-btn");
+
+  // Get the download button for r history information
+  const command_history_download_btn = document.getElementById("qwebr-download-history-btn");
+
+  // Plug in command history into modal/download button ----
+
+  // Function to populate the modal with command history
+  function populateCommandHistoryModal() {
+      document.getElementById("qwebr-command-history-contents").innerHTML = qwebrFormatRHistory() || "No commands have been executed yet.";
+  }
+
+  // Function to format the current date and time to
+  // a string with the format YYYY-MM-DD-HH-MM-SS
+  function formatDateTime() {
+      const now = new Date();
+
+      const year = now.getFullYear();
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+      return `${year}-${month}-${day}-${hours}-${minutes}-${seconds}`;
+  }
+
+
+  // Function to convert document title with datetime to a safe filename
+  function safeFileName() {
+      // Get the current page title
+      let pageTitle = document.title;
+
+      // Combine the current page title with the current date and time
+      let pageNameWithDateTime = `Rhistory-${pageTitle}-${formatDateTime()}`;
+
+      // Replace unsafe characters with safe alternatives
+      let safeFilename = pageNameWithDateTime.replace(/[\\/:\*\?! "<>\|]/g, '-');
+
+      return safeFilename;
+  }
+
+
+  // Function to download list contents as text file
+  function downloadRHistory() {
+      // Get the current page title + datetime and use it as the filename
+      const filename = `${safeFileName()}.R`;
+
+      // Get the text contents of the R History list
+      const text = qwebrFormatRHistory();
+
+      // Create a new Blob object with the text contents
+      const blob = new Blob([text], { type: 'text/plain' });
+    
+      // Create a new anchor element for the download
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+
+      // Append the anchor to the body, click it, and remove it
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+  }
+
+  // Register event handlers ----
+
+  // When the user clicks the View R History button, open the command modal
+  command_history_btn.onclick = function() {
+      populateCommandHistoryModal();
+      command_history_modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the command modal
+  command_history_close_span.onclick = function() {
+      command_history_modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the command modal, close it
+  window.onclick = function(event) {
+      if (event.target == command_history_modal) {
+          command_history_modal.style.display = "none";
+      }
+  }
+
+  // Add an onclick event listener to the download button so that
+  // the user can download the R history as a text file
+  command_history_download_btn.onclick = function() {
+      downloadRHistory();
+  };
+  </script>
+  <script type="module">
+  // Supported Evaluation Types for Context
+  globalThis.EvalTypes = Object.freeze({
+    Interactive: 'interactive',
+    Setup: 'setup',
+    Output: 'output',
+  });
+
+  // Function that obtains the font size for a given element 
+  globalThis.qwebrCurrentFontSizeOnElement = function(element, cssProperty = 'font-size') {
+
+    const currentFontSize = parseFloat(
+      window
+      .getComputedStyle(element)
+      .getPropertyValue(cssProperty)
+    );
+    
+    return currentFontSize;
+  }
+
+  // Function to determine font scaling
+  globalThis.qwebrScaledFontSize = function(div, qwebrOptions) {
+    // Determine if we should compute font-size using RevealJS's `--r-main-font-size` 
+    // or if we can directly use the document's `font-size`.
+    const cssProperty = document.body.classList.contains('reveal') ? 
+      "--r-main-font-size" : "font-size";
+    
+    // Get the current font size on the div element
+    const elementFontSize = qwebrCurrentFontSizeOnElement(div, cssProperty);
+
+    // Determine the scaled font size value
+    const scaledFontSize = ((qwebrOptions['editor-font-scale'] ?? 1) * elementFontSize) ?? 17.5;
+
+    return scaledFontSize;
+  }
+
+
+  // Function that dispatches the creation request
+  globalThis.qwebrCreateHTMLElement = function (
+    cellData
+  ) {
+
+    // Extract key components
+    const evalType = cellData.options.context;
+    const qwebrCounter = cellData.id;
+
+    // We make an assumption that insertion points are defined by the Lua filter as:
+    // qwebr-insertion-location-{qwebrCounter} 
+    const elementLocator = document.getElementById(`qwebr-insertion-location-${qwebrCounter}`);
+
+    // Figure out the routine to use to insert the element.
+    let qwebrElement;
+    switch ( evalType ) {
+      case EvalTypes.Interactive:
+        qwebrElement = qwebrCreateInteractiveElement(qwebrCounter, cellData.options);
+        break;
+      case EvalTypes.Output: 
+        qwebrElement = qwebrCreateNonInteractiveOutputElement(qwebrCounter, cellData.options);
+        break;
+      case EvalTypes.Setup: 
+        qwebrElement = qwebrCreateNonInteractiveSetupElement(qwebrCounter, cellData.options);
+        break;
+      default: 
+        qwebrElement = document.createElement('div');
+        qwebrElement.textContent = 'Error creating `quarto-webr` element';
+    }
+
+    // Insert the dynamically generated object at the document location.
+    elementLocator.appendChild(qwebrElement);
+  };
+
+  // Function that setups the interactive element creation
+  globalThis.qwebrCreateInteractiveElement = function (qwebrCounter, qwebrOptions) {
+
+    // Create main div element
+    var mainDiv = document.createElement('div');
+    mainDiv.id = 'qwebr-interactive-area-' + qwebrCounter;
+    mainDiv.className = `qwebr-interactive-area`;
+    if (qwebrOptions.classes) {
+      mainDiv.className += " " + qwebrOptions.classes
+    }
+
+    // Add a unique cell identifier that users can customize
+    if (qwebrOptions.label) {
+      mainDiv.setAttribute('data-id', qwebrOptions.label);
+    }
+
+    // Create toolbar div
+    var toolbarDiv = document.createElement('div');
+    toolbarDiv.className = 'qwebr-editor-toolbar';
+    toolbarDiv.id = 'qwebr-editor-toolbar-' + qwebrCounter;
+
+    // Create a div to hold the left buttons
+    var leftButtonsDiv = document.createElement('div');
+    leftButtonsDiv.className = 'qwebr-editor-toolbar-left-buttons';
+
+    // Create a div to hold the right buttons
+    var rightButtonsDiv = document.createElement('div');
+    rightButtonsDiv.className = 'qwebr-editor-toolbar-right-buttons';
+
+    // Create Run Code button
+    var runCodeButton = document.createElement('button');
+    runCodeButton.className = 'btn btn-default qwebr-button qwebr-button-run';
+    runCodeButton.disabled = true;
+    runCodeButton.type = 'button';
+    runCodeButton.id = 'qwebr-button-run-' + qwebrCounter;
+    runCodeButton.textContent = '🟡 Loading webR...';
+    runCodeButton.title = `Run code (Shift + Enter)`;
+
+    // Append buttons to the leftButtonsDiv
+    leftButtonsDiv.appendChild(runCodeButton);
+
+    // Create Reset button
+    var resetButton = document.createElement('button');
+    resetButton.className = 'btn btn-light btn-xs qwebr-button qwebr-button-reset';
+    resetButton.type = 'button';
+    resetButton.id = 'qwebr-button-reset-' + qwebrCounter;
+    resetButton.title = 'Start over';
+    resetButton.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i>';
+
+    // Create Copy button
+    var copyButton = document.createElement('button');
+    copyButton.className = 'btn btn-light btn-xs qwebr-button qwebr-button-copy';
+    copyButton.type = 'button';
+    copyButton.id = 'qwebr-button-copy-' + qwebrCounter;
+    copyButton.title = 'Copy code';
+    copyButton.innerHTML = '<i class="fa-regular fa-copy"></i>';
+
+    // Append buttons to the rightButtonsDiv
+    rightButtonsDiv.appendChild(resetButton);
+    rightButtonsDiv.appendChild(copyButton);
+
+    // Create console area div
+    var consoleAreaDiv = document.createElement('div');
+    consoleAreaDiv.id = 'qwebr-console-area-' + qwebrCounter;
+    consoleAreaDiv.className = 'qwebr-console-area';
+
+    // Create editor div
+    var editorDiv = document.createElement('div');
+    editorDiv.id = 'qwebr-editor-' + qwebrCounter;
+    editorDiv.className = 'qwebr-editor';
+
+    // Create output code area div
+    var outputCodeAreaDiv = document.createElement('div');
+    outputCodeAreaDiv.id = 'qwebr-output-code-area-' + qwebrCounter;
+    outputCodeAreaDiv.className = 'qwebr-output-code-area';
+    outputCodeAreaDiv.setAttribute('aria-live', 'assertive');
+
+    // Create pre element inside output code area
+    var preElement = document.createElement('pre');
+    preElement.style.visibility = 'hidden';
+    outputCodeAreaDiv.appendChild(preElement);
+
+    // Create output graph area div
+    var outputGraphAreaDiv = document.createElement('div');
+    outputGraphAreaDiv.id = 'qwebr-output-graph-area-' + qwebrCounter;
+    outputGraphAreaDiv.className = 'qwebr-output-graph-area';
+
+    // Append buttons to the toolbar
+    toolbarDiv.appendChild(leftButtonsDiv);
+    toolbarDiv.appendChild(rightButtonsDiv);
+
+    // Append all elements to the main div
+    mainDiv.appendChild(toolbarDiv);
+    consoleAreaDiv.appendChild(editorDiv);
+    consoleAreaDiv.appendChild(outputCodeAreaDiv);
+    mainDiv.appendChild(consoleAreaDiv);
+    mainDiv.appendChild(outputGraphAreaDiv);
+
+    return mainDiv;
+  }
+
+  // Function that adds output structure for non-interactive output
+  globalThis.qwebrCreateNonInteractiveOutputElement = function(qwebrCounter, qwebrOptions) {
+    // Create main div element
+    var mainDiv = document.createElement('div');
+    mainDiv.id = 'qwebr-noninteractive-area-' + qwebrCounter;
+    mainDiv.className = `qwebr-noninteractive-area`;
+    if (qwebrOptions.classes) {
+      mainDiv.className += " " + qwebrOptions.classes
+    }
+    
+    // Add a unique cell identifier that users can customize
+    if (qwebrOptions.label) {
+      mainDiv.setAttribute('data-id', qwebrOptions.label);
+    }
+    
+    // Create a status container div
+    var statusContainer = createLoadingContainer(qwebrCounter);
+
+    // Create output code area div
+    var outputCodeAreaDiv = document.createElement('div');
+    outputCodeAreaDiv.id = 'qwebr-output-code-area-' + qwebrCounter;
+    outputCodeAreaDiv.className = 'qwebr-output-code-area';
+    outputCodeAreaDiv.setAttribute('aria-live', 'assertive');
+
+    // Create pre element inside output code area
+    var preElement = document.createElement('pre');
+    preElement.style.visibility = 'hidden';
+    outputCodeAreaDiv.appendChild(preElement);
+
+    // Create output graph area div
+    var outputGraphAreaDiv = document.createElement('div');
+    outputGraphAreaDiv.id = 'qwebr-output-graph-area-' + qwebrCounter;
+    outputGraphAreaDiv.className = 'qwebr-output-graph-area';
+
+    // Append all elements to the main div
+    mainDiv.appendChild(statusContainer);
+    mainDiv.appendChild(outputCodeAreaDiv);
+    mainDiv.appendChild(outputGraphAreaDiv);
+
+    return mainDiv;
+  };
+
+  // Function that adds a stub in the page to indicate a setup cell was used.
+  globalThis.qwebrCreateNonInteractiveSetupElement = function(qwebrCounter, qwebrOptions) {
+    // Create main div element
+    var mainDiv = document.createElement('div');
+    mainDiv.id = `qwebr-noninteractive-setup-area-${qwebrCounter}`;
+    mainDiv.className = `qwebr-noninteractive-setup-area`;
+    if (qwebrOptions.classes) {
+      mainDiv.className += " " + qwebrOptions.classes
+    }
+
+
+    // Add a unique cell identifier that users can customize
+    if (qwebrOptions.label) {
+      mainDiv.setAttribute('data-id', qwebrOptions.label);
+    }
+
+    // Create a status container div
+    var statusContainer = createLoadingContainer(qwebrCounter);
+
+    // Append status onto the main div
+    mainDiv.appendChild(statusContainer);
+
+    return mainDiv;
+  }
+
+
+  // Function to create loading container with specified ID
+  globalThis.createLoadingContainer = function(qwebrCounter) {
+
+    // Create a status container
+    const container = document.createElement('div');
+    container.id = `qwebr-non-interactive-loading-container-${qwebrCounter}`;
+    container.className = 'qwebr-non-interactive-loading-container qwebr-cell-needs-evaluation';
+
+    // Create an R project logo to indicate its a code space
+    const rProjectIcon = document.createElement('i');
+    rProjectIcon.className = 'fa-brands fa-r-project fa-3x qwebr-r-project-logo';
+
+    // Setup a loading icon from font awesome
+    const spinnerIcon = document.createElement('i');
+    spinnerIcon.className = 'fa-solid fa-spinner fa-spin fa-1x qwebr-icon-status-spinner';
+
+    // Add a section for status text
+    const statusText = document.createElement('p');
+    statusText.id = `qwebr-status-text-${qwebrCounter}`;
+    statusText.className = `qwebr-status-text qwebr-cell-needs-evaluation`;
+    statusText.innerText = 'Loading webR...';
+
+    // Incorporate an inner container
+    const innerContainer = document.createElement('div');
+
+    // Append elements to the inner container
+    innerContainer.appendChild(spinnerIcon);
+    innerContainer.appendChild(statusText);
+
+    // Append elements to the main container
+    container.appendChild(rProjectIcon);
+    container.appendChild(innerContainer);
+
+    return container;
+  }
+  </script>
+  <script type="module">
+  // Function to install a single package
+  async function qwebrInstallRPackage(packageName) {
+    await mainWebR.evalRVoid(`webr::install('${packageName}');`);
+  }
+
+  // Function to load a single package
+  async function qwebrLoadRPackage(packageName) {
+    await mainWebR.evalRVoid(`require('${packageName}', quietly = TRUE)`);
+  }
+
+  // Generic function to process R packages
+  async function qwebrProcessRPackagesWithStatus(packages, processType, displayStatusMessageUpdate = true) {
+    // Switch between contexts
+    const messagePrefix = processType === 'install' ? 'Installing' : 'Loading';
+
+    // Modify button state
+    qwebrSetInteractiveButtonState(`🟡 ${messagePrefix} package ...`, false);
+
+    // Iterate over packages
+    for (let i = 0; i < packages.length; i++) {
+      const activePackage = packages[i];
+      const formattedMessage = `${messagePrefix} package ${i + 1} out of ${packages.length}: ${activePackage}`;
+
+      // Display the update in header
+      if (displayStatusMessageUpdate) {
+        qwebrUpdateStatusHeader(formattedMessage);
+      }
+
+      // Display the update in non-active areas
+      qwebrUpdateStatusMessage(formattedMessage);
+
+      // Run package installation
+      if (processType === 'install') {
+        await qwebrInstallRPackage(activePackage);
+      } else {
+        await qwebrLoadRPackage(activePackage);
+      }
+    }
+
+    // Clean slate
+    if (processType === 'load') {
+      await mainWebR.flush();
+    }
+  }
+
+  // Start a timer
+  const initializeWebRTimerStart = performance.now();
+
+  // Encase with a dynamic import statement
+  globalThis.qwebrInstance = import(qwebrCustomizedWebROptions.baseURL + "webr.mjs").then(
+    async ({ WebR, ChannelType }) => {
+      // Populate WebR options with defaults or new values based on `webr` meta
+      globalThis.mainWebR = new WebR(qwebrCustomizedWebROptions);
+
+      // Initialization WebR
+      await mainWebR.init();
+
+      // Setup a shelter
+      globalThis.mainWebRCodeShelter = await new mainWebR.Shelter();
+
+      // Setup a pager to allow processing help documentation 
+      await mainWebR.evalRVoid('webr::pager_install()'); 
+
+      // Override the existing install.packages() to use webr::install()
+      await mainWebR.evalRVoid('webr::shim_install()'); 
+
+      // Specify the repositories to pull from
+      // Note: webR does not use the `repos` option, but instead uses `webr_pkg_repos`
+      // inside of `install()`. However, other R functions still pull from `repos`.
+      await mainWebR.evalRVoid(`
+        options(
+          webr_pkg_repos = c(${qwebrPackageRepoURLS.map(repoURL => `'${repoURL}'`).join(',')}),
+          repos = c(${qwebrPackageRepoURLS.map(repoURL => `'${repoURL}'`).join(',')})
+        )
+      `);
+
+      // Check to see if any packages need to be installed
+      if (qwebrSetupRPackages) {
+        // Obtain only a unique list of packages
+        const uniqueRPackageList = Array.from(new Set(qwebrInstallRPackagesList));
+
+        // Install R packages one at a time (either silently or with a status update)
+        await qwebrProcessRPackagesWithStatus(uniqueRPackageList, 'install', qwebrShowStartupMessage);
+
+        if (qwebrAutoloadRPackages) {
+          // Load R packages one at a time (either silently or with a status update)
+          await qwebrProcessRPackagesWithStatus(uniqueRPackageList, 'load', qwebrShowStartupMessage);
+        }
+      }
+    }
+  );
+
+  // Stop timer
+  const initializeWebRTimerEnd = performance.now();
+
+  </script>
+  <script type="module">
+  // Function to verify a given JavaScript Object is empty
+  globalThis.qwebrIsObjectEmpty = function (arr) {
+      return Object.keys(arr).length === 0;
+  }
+
+  // Global version of the Escape HTML function that converts HTML 
+  // characters to their HTML entities.
+  globalThis.qwebrEscapeHTMLCharacters = function(unsafe) {
+      return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    };
+
+  // Passthrough results
+  globalThis.qwebrIdentity = function(x) {
+      return x;
+  };
+
+  // Append a comment
+  globalThis.qwebrPrefixComment = function(x, comment) {
+      return `${comment}${x}`;
+  };
+
+  // Function to store the code in the history
+  globalThis.qwebrLogCodeToHistory = function(codeToRun, options) {
+      qwebrRCommandHistory.push(
+          `# Ran code in ${options.label} at ${new Date().toLocaleString()} ----\n${codeToRun}`
+      );
+  }
+
+  // Function to attach a download button onto the canvas
+  // allowing the user to download the image.
+  function qwebrImageCanvasDownloadButton(canvas, canvasContainer) {
+
+      // Create the download button
+      const downloadButton = document.createElement('button');
+      downloadButton.className = 'qwebr-canvas-image-download-btn';
+      downloadButton.textContent = 'Download Image';
+      canvasContainer.appendChild(downloadButton);
+
+      // Trigger a download of the image when the button is clicked
+      downloadButton.addEventListener('click', function() {
+          const image = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = image;
+          link.download = 'qwebr-canvas-image.png';
+          link.click();
+      });
+    }
+    
+
+  // Function to parse the pager results
+  globalThis.qwebrParseTypePager = async function (msg) { 
+
+      // Split out the event data
+      const { path, title, deleteFile } = msg.data; 
+
+      // Process the pager data by reading the information from disk
+      const paged_data = await mainWebR.FS.readFile(path).then((data) => {
+          // Obtain the file content
+          let content = new TextDecoder().decode(data);
+
+          // Remove excessive backspace characters until none remain
+          while(content.match(/.[\b]/)){
+          content = content.replace(/.[\b]/g, '');
+          }
+
+          // Returned cleaned data
+          return content;
+      });
+
+      // Unlink file if needed
+      if (deleteFile) { 
+          await mainWebR.FS.unlink(path); 
+      } 
+
+      // Return extracted data with spaces
+      return paged_data;
+  } 
+
+  // Function to run the code using webR and parse the output
+  globalThis.qwebrComputeEngine = async function(
+      codeToRun, 
+      elements, 
+      options) {
+
+      // Call into the R compute engine that persists within the document scope.
+      // To be prepared for all scenarios, the following happens: 
+      // 1. We setup a canvas device to write to by making a namespace call into the {webr} package
+      // 2. We use values inside of the options array to set the figure size.
+      // 3. We capture the output stream information (STDOUT and STERR)
+      // 4. We disable the current device's image creation.
+      // 5. Piece-wise parse the results into the different output areas
+
+      // Create a pager variable for help/file contents
+      let pager = [];
+
+      // Handle how output is processed
+      let showMarkup = options.results === "markup" && options.output !== "asis";
+      let processOutput;
+
+      if (showMarkup) {
+          processOutput = qwebrEscapeHTMLCharacters;
+      } else {
+          processOutput = qwebrIdentity;
+      }
+
+      // ---- 
+      // Convert from Inches to Pixels by using DPI (dots per inch)
+      // for bitmap devices (dpi * inches = pixels)
+      let fig_width = options["fig-width"] * options["dpi"]
+      let fig_height = options["fig-height"] * options["dpi"]
+
+      // Initialize webR
+      await mainWebR.init();
+
+      // Configure capture output
+      let captureOutputOptions = {
+          withAutoprint: true,
+          captureStreams: true,
+          captureConditions: false,
+          // env: webR.objs.emptyEnv, // maintain a global environment for webR v0.2.0
+      };
+      
+      // Determine if the browser supports OffScreen
+      if (qwebrOffScreenCanvasSupport()) {
+          // Mirror default options of webr::canvas()
+          // with changes to figure height and width.
+          captureOutputOptions.captureGraphics = {
+              width: fig_width,
+              height: fig_height,
+              bg: "white", // default: transparent
+              pointsize: 12,
+              capture: true
+          };
+      }  else {
+          // Disable generating graphics
+          captureOutputOptions.captureGraphics = false;
+      }
+
+      // Store the code to run in history
+      qwebrLogCodeToHistory(codeToRun, options);
+
+      // Setup a webR canvas by making a namespace call into the {webr} package
+      // Evaluate the R code
+      // Remove the active canvas silently
+      const result = await mainWebRCodeShelter.captureR(
+          `${codeToRun}`,
+          captureOutputOptions
+      );
+
+      // -----
+
+      // Start attempting to parse the result data
+      processResultOutput:try {
+          
+          // Avoid running through output processing
+          if (options.results === "hide" || options.output === "false") { 
+              break processResultOutput; 
+          }
+
+          // Merge output streams of STDOUT and STDErr (messages and errors are combined.)
+          // Require both `warning` and `message` to be true to display `STDErr`. 
+          const out = result.output
+          .filter(
+              evt => evt.type === "stdout" || 
+              ( evt.type === "stderr" && (options.warning === "true" && options.message === "true")) 
+          )
+          .map((evt, index) => {
+              const className = `qwebr-output-code-${evt.type}`;
+              const outputResult = qwebrPrefixComment(processOutput(evt.data), options.comment);
+              return `<code id="${className}-editor-${elements.id}-result-${index + 1}" class="${className}">${outputResult}</code>`;
+          })
+          .join("\n");
+
+
+          // Clean the state
+          // We're now able to process pager events.
+          // As a result, we cannot maintain a true 1-to-1 output order 
+          // without individually feeding each line
+          const msgs = await mainWebR.flush();
+
+          // Use `map` to process the filtered "pager" events asynchronously
+          const pager = await Promise.all(
+              msgs.filter(msg => msg.type === 'pager').map(
+                  async (msg) => {
+                      return await qwebrParseTypePager(msg);
+                  }
+              )
+          );
+
+          // Nullify the output area of content
+          elements.outputCodeDiv.innerHTML = "";
+          elements.outputGraphDiv.innerHTML = "";
+
+          // Design an output object for messages
+          const pre = document.createElement("pre");
+          if (/\S/.test(out)) {
+              // Display results as HTML elements to retain output styling
+              const div = document.createElement("div");
+              div.innerHTML = out;
+
+              // Calculate a scaled font-size value
+              const scaledFontSize = qwebrScaledFontSize(
+                  elements.outputCodeDiv, options);
+
+              // Override output code cell size
+              pre.style.fontSize = `${scaledFontSize}px`;
+              pre.appendChild(div);
+          } else {
+              // If nothing is present, hide the element.
+              pre.style.visibility = "hidden";
+          }
+
+          elements.outputCodeDiv.appendChild(pre);
+
+          // Determine if we have graphs to display
+          if (result.images.length > 0) {
+
+              // Create figure element
+              const figureElement = document.createElement("figure");
+              figureElement.className = "qwebr-canvas-image";
+
+              // Place each rendered graphic onto a canvas element
+              result.images.forEach((img) => {
+
+                  // Construct canvas for object
+                  const canvas = document.createElement("canvas");
+
+                  // Add an image download button
+                  qwebrImageCanvasDownloadButton(canvas, figureElement);
+
+                  // Set canvas size to image
+                  canvas.width = img.width;
+                  canvas.height = img.height;
+
+                  // Apply output truncations
+                  canvas.style.width = options["out-width"] ? options["out-width"] : `${fig_width}px`;
+                  if (options["out-height"]) {
+                      canvas.style.height = options["out-height"];
+                  }
+
+                  // Apply styling
+                  canvas.style.display = "block";
+                  canvas.style.margin = "auto";
+
+                  // Draw image onto Canvas
+                  const ctx = canvas.getContext("2d");
+                  ctx.drawImage(img, 0, 0, img.width, img.height);
+            
+                  // Append canvas to figure output area
+                  figureElement.appendChild(canvas);
+
+              });
+              
+              if (options['fig-cap']) {
+                  // Create figcaption element
+                  const figcaptionElement = document.createElement('figcaption');
+                  figcaptionElement.innerText = options['fig-cap'];
+                  // Append figcaption to figure
+                  figureElement.appendChild(figcaptionElement);    
+              }
+          
+              elements.outputGraphDiv.appendChild(figureElement);
+
+          }
+
+          // Display the pager data
+          if (pager) {
+          // Use the `pre` element to preserve whitespace.
+          pager.forEach((paged_data, index) => {
+              let pre_pager = document.createElement("pre");
+              pre_pager.innerText = paged_data;
+              pre_pager.classList.add("qwebr-output-code-pager");
+              pre_pager.setAttribute("id", `qwebr-output-code-pager-editor-${elements.id}-result-${index + 1}`);
+              elements.outputCodeDiv.appendChild(pre_pager);
+          });
+          }
+      } finally {
+          // Clean up the remaining code
+          mainWebRCodeShelter.purge();
+      }
+  }
+
+  // Function to execute the code (accepts code as an argument)
+  globalThis.qwebrExecuteCode = async function (
+      codeToRun,
+      id,
+      options = {}) {
+
+      // If options are not passed, we fall back on the bare minimum to handle the computation
+      if (qwebrIsObjectEmpty(options)) {
+          options = { 
+              "context": "interactive", 
+              "fig-width": 7, "fig-height": 5, 
+              "out-width": "700px", "out-height": "", 
+              "dpi": 72,
+              "results": "markup", 
+              "warning": "true", "message": "true",
+          };
+      }
+
+      // Next, we access the compute areas values
+      const elements = {
+          runButton: document.getElementById(`qwebr-button-run-${id}`),
+          outputCodeDiv: document.getElementById(`qwebr-output-code-area-${id}`),
+          outputGraphDiv: document.getElementById(`qwebr-output-graph-area-${id}`),
+          id: id,
+      }
+
+      // Disallowing execution of other code cells
+      document.querySelectorAll(".qwebr-button-run").forEach((btn) => {
+          btn.disabled = true;
+      });
+
+      if (options.context == EvalTypes.Interactive) {
+          // Emphasize the active code cell
+          elements.runButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin qwebr-icon-status-spinner"></i> <span>Run Code</span>';
+      }
+
+      // Evaluate the code and parse the output into the document
+      await qwebrComputeEngine(codeToRun, elements, options);
+
+      // Switch to allowing execution of code
+      document.querySelectorAll(".qwebr-button-run").forEach((btn) => {
+          btn.disabled = false;
+      });
+
+      if (options.context == EvalTypes.Interactive) {
+          // Revert to the initial code cell state
+          elements.runButton.innerHTML = '<i class="fa-solid fa-play qwebr-icon-run-code"></i> <span>Run Code</span>';
+      }
+  }
+
+  </script>
 </head>
 <body class="quarto-light">
+<script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
+<script type="module" id="qwebr-monaco-editor-init">
+
+  // Configure the Monaco Editor's loader
+  require.config({
+    paths: {
+      'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs'
+    }
+  });
+</script>
+<script type="module">
+// Function to update Monaco Editors when body class changes
+function updateMonacoEditorsOnBodyClassChange() {
+    // Select the body element
+    const body = document.querySelector('body');
+
+    // Options for the observer (which mutations to observe)
+    const observerOptions = {
+        attributes: true,  // Observe changes to attributes
+        attributeFilter: ['class'] // Only observe changes to the 'class' attribute
+    };
+
+    // Callback function to execute when mutations are observed
+    const bodyClassChangeCallback = function(mutationsList, observer) {
+        for(let mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                // Class attribute has changed
+                // Update all Monaco Editors on the page
+                updateMonacoEditorTheme();
+            }
+        }
+    };
+
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(bodyClassChangeCallback);
+
+    // Start observing the target node for configured mutations
+    observer.observe(body, observerOptions);
+}
+
+// Function to update all instances of Monaco Editors on the page
+function updateMonacoEditorTheme() {
+    // Determine what VS Theme to use
+    const vsThemeToUse = document.body.classList.contains("quarto-dark") ? 'vs-dark' : 'vs' ;
+
+    // Iterate through all initialized Monaco Editors
+    qwebrEditorInstances.forEach( function(editorInstance) { 
+        editorInstance.updateOptions({ theme: vsThemeToUse }); 
+    });
+}
+
+// Call the function to start observing changes to body class
+updateMonacoEditorsOnBodyClassChange();
+</script>
+<script type="module">
+// Global array to store Monaco Editor instances
+globalThis.qwebrEditorInstances = [];
+
+function isValidCodeLineNumbers(stringCodeLineNumbers) {
+  // Regular expression to match valid input strings
+  const regex = /^(\d+(-\d+)?)(,\d+(-\d+)?)*$/;
+  return regex.test(stringCodeLineNumbers);
+}
+
+// Function that builds and registers a Monaco Editor instance    
+globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
+
+  const initialCode = cellData.code;
+  const qwebrCounter = cellData.id;
+  const qwebrOptions = cellData.options;
+
+  // Retrieve the previously created document elements
+  let runButton = document.getElementById(`qwebr-button-run-${qwebrCounter}`);
+  let resetButton = document.getElementById(`qwebr-button-reset-${qwebrCounter}`);
+  let copyButton = document.getElementById(`qwebr-button-copy-${qwebrCounter}`);
+  let editorDiv = document.getElementById(`qwebr-editor-${qwebrCounter}`);
+
+  // Load the Monaco Editor and create an instance
+  let editor;
+  require(['vs/editor/editor.main'], function () {
+    editor = monaco.editor.create(editorDiv, {
+      value: initialCode,
+      language: 'r',
+      theme: 'vs-light',
+      automaticLayout: true,           // Works wonderfully with RevealJS
+      scrollBeyondLastLine: false,
+      minimap: {
+        enabled: false
+      },
+      fontSize: qwebrScaledFontSize(editorDiv, qwebrOptions),         
+      renderLineHighlight: "none",      // Disable current line highlighting
+      hideCursorInOverviewRuler: true,  // Remove cursor indictor in right hand side scroll bar
+      readOnly: qwebrOptions['read-only'] ?? false,
+      quickSuggestions: qwebrOptions['editor-quick-suggestions'] ?? false,
+      wordWrap: (qwebrOptions['editor-word-wrap'] == 'true' ? "on" : "off")
+    });
+
+    // Store the official counter ID to be used in keyboard shortcuts
+    editor.__qwebrCounter = qwebrCounter;
+
+    // Store the official div container ID
+    editor.__qwebrEditorId = `qwebr-editor-${qwebrCounter}`;
+
+    // Store the initial code value and options
+    editor.__qwebrinitialCode = initialCode;
+    editor.__qwebrOptions = qwebrOptions;
+
+    // Set at the model level the preferred end of line (EOL) character to LF.
+    // This prevent `\r\n` from being given to the webR engine if the user is on Windows.
+    // See details in: https://github.com/coatless/quarto-webr/issues/94
+    // Associated error text: 
+    // Error: <text>:1:7 unexpected input
+
+    // Retrieve the underlying model
+    const model = editor.getModel();
+    // Set EOL for the model
+    model.setEOL(monaco.editor.EndOfLineSequence.LF);
+    
+    // Dynamically modify the height of the editor window if new lines are added.
+    let ignoreEvent = false;
+    const updateHeight = () => {
+      // Increment editor height by 2 to prevent vertical scroll bar from appearing
+      const contentHeight = editor.getContentHeight() + 2;
+
+      // Retrieve editor-max-height option
+      const maxEditorHeight = qwebrOptions['editor-max-height'];
+
+      // If editor-max-height is missing, allow infinite growth. Otherwise, threshold.
+      const editorHeight = !maxEditorHeight ?  contentHeight : Math.min(contentHeight, maxEditorHeight);
+
+      // We're avoiding a width change
+      //editorDiv.style.width = `${width}px`;
+      editorDiv.style.height = `${editorHeight}px`;
+      try {
+        ignoreEvent = true;
+
+        // The key to resizing is this call
+        editor.layout();
+      } finally {
+        ignoreEvent = false;
+      }
+    };
+
+    // Function to generate decorations to highlight lines
+    // in the editor based on input string.
+    function decoratorHighlightLines(codeLineNumbers) {
+      // Store the lines to be lighlight
+      let linesToHighlight = [];
+      
+      // Parse the codeLineNumbers string to get the line numbers to highlight
+      // First, split the string by commas
+      codeLineNumbers.split(',').forEach(part => {
+        // Check if we have a range of lines
+        if (part.includes('-')) {
+            // Handle range of lines (e.g., "6-8")
+            const [start, end] = part.split('-').map(Number);
+            for (let i = start; i <= end; i++) {
+                linesToHighlight.push(i);
+            }
+        } else {
+            // Handle single line (e.g., "7")
+            linesToHighlight.push(Number(part));
+        }
+      });
+  
+      // Create monaco decorations for the lines to highlight
+      const decorations = linesToHighlight.map(lineNumber => ({
+          range: new monaco.Range(lineNumber, 1, lineNumber, 1),
+          options: {
+              isWholeLine: true,
+              className: 'qwebr-editor-highlight-line'
+          }
+      }));
+  
+      // Return decorations to be applied to the editor
+      return decorations;
+    }
+
+    // Ensure that the editor-code-line-numbers option is set and valid
+    // then apply styling
+    if (qwebrOptions['editor-code-line-numbers']) {
+      // Remove all whitespace from the string
+      const codeLineNumbers = qwebrOptions['editor-code-line-numbers'].replace(/\s/g,'');
+      // Check if the string is valid for line numbers, e.g., "1,3-5,7"
+      if (isValidCodeLineNumbers(codeLineNumbers)) {
+        // Apply the decorations to the editor
+        editor.createDecorationsCollection(decoratorHighlightLines(codeLineNumbers));
+      } else {
+        // Warn the user that the input is invalid
+        console.warn(`Invalid "editor-code-line-numbers" value in code cell ${qwebrOptions['label']}: ${codeLineNumbers}`);
+      }
+    }
+
+    // Helper function to check if selected text is empty
+    function isEmptyCodeText(selectedCodeText) {
+      return (selectedCodeText === null || selectedCodeText === undefined || selectedCodeText === "");
+    }
+
+    // Registry of keyboard shortcuts that should be re-added to each editor window
+    // when focus changes.
+    const addWebRKeyboardShortCutCommands = () => {
+      // Add a keydown event listener for Shift+Enter to run all code in cell
+      editor.addCommand(monaco.KeyMod.Shift | monaco.KeyCode.Enter, () => {
+
+        // Retrieve all text inside the editor
+        qwebrExecuteCode(editor.getValue(), editor.__qwebrCounter, editor.__qwebrOptions);
+      });
+
+      // Add a keydown event listener for CMD/Ctrl+Enter to run selected code
+      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
+
+        // Get the selected text from the editor
+        const selectedText = editor.getModel().getValueInRange(editor.getSelection());
+        // Check if no code is selected
+        if (isEmptyCodeText(selectedText)) {
+          // Obtain the current cursor position
+          let currentPosition = editor.getPosition();
+          // Retrieve the current line content
+          let currentLine = editor.getModel().getLineContent(currentPosition.lineNumber);
+
+          // Propose a new position to move the cursor to
+          let newPosition = new monaco.Position(currentPosition.lineNumber + 1, 1);
+
+          // Check if the new position is beyond the last line of the editor
+          if (newPosition.lineNumber > editor.getModel().getLineCount()) {
+            // Add a new line at the end of the editor
+            editor.executeEdits("addNewLine", [{
+            range: new monaco.Range(newPosition.lineNumber, 1, newPosition.lineNumber, 1),
+            text: "\n", 
+            forceMoveMarkers: true,
+            }]);
+          }
+          
+          // Run the entire line of code.
+          qwebrExecuteCode(currentLine, editor.__qwebrCounter, editor.__qwebrOptions);
+
+          // Move cursor to new position
+          editor.setPosition(newPosition);
+        } else {
+          // Code to run when Ctrl+Enter is pressed with selected code
+          qwebrExecuteCode(selectedText, editor.__qwebrCounter, editor.__qwebrOptions);
+        }
+      });
+    }
+
+    // Register an on focus event handler for when a code cell is selected to update
+    // what keyboard shortcut commands should work.
+    // This is a workaround to fix a regression that happened with multiple
+    // editor windows since Monaco 0.32.0 
+    // https://github.com/microsoft/monaco-editor/issues/2947
+    editor.onDidFocusEditorText(addWebRKeyboardShortCutCommands);
+
+    // Register an on change event for when new code is added to the editor window
+    editor.onDidContentSizeChange(updateHeight);
+
+    // Manually re-update height to account for the content we inserted into the call
+    updateHeight();
+
+    // Store the editor instance in the global dictionary
+    qwebrEditorInstances[editor.__qwebrCounter] = editor;
+
+  });
+
+  // Add a click event listener to the run button
+  runButton.onclick = function () {
+    qwebrExecuteCode(editor.getValue(), editor.__qwebrCounter, editor.__qwebrOptions);
+  };
+
+  // Add a click event listener to the reset button
+  copyButton.onclick = function () {
+    // Retrieve current code data
+    const data = editor.getValue();
+    
+    // Write code data onto the clipboard.
+    navigator.clipboard.writeText(data || "");
+  };
+  
+  // Add a click event listener to the copy button
+  resetButton.onclick = function () {
+    editor.setValue(editor.__qwebrinitialCode);
+  };
+  
+}
+</script>
   <div class="reveal">
     <div class="slides">
 
@@ -419,10 +2206,6 @@ Soichi Matsuura
 <li>The translation should be submitted by next week. <!-- 翻訳は学期末までに提出する必要があります。 --></li>
 <li>The translation will be evaluated based on the accuracy of the translation and the quality of the writing. <!-- 翻訳は、翻訳の正確さと執筆の質に基づいて評価されます。 --></li>
 </ul>
-</section>
-<section id="participation" class="slide level2">
-<h2>Participation</h2>
-<p>Class participation is critical. <!-- クラス参加は重要です。 --> The class should be a common learning experience, where students collaborate with their group members and contribute to in-class discussions. <!-- クラスは、学生がグループメンバーと協力して授業中のディスカッションに貢献する共通の学習体験であるべきです。 --> The instructor and your team members will each evaluate your participation at the end of the term. <!-- 最終的に、講師とチームメンバーは、あなたの参加を評価します。 --> Criteria that will be used to judge the effectiveness of your participation include (1) Do you work well with others in preparing the group cases? <!-- あなたの参加の効果を判断するために使用される基準には、(1) グループケースの準備において他の人と協力していますか？ --> (2) Do your comments show evidence of appropriate, insightful analysis of the case? (3) Are you a good listener as well as speaker? Can you play off the comments of others? (4) Are you willing to test new ideas? Or are all your comments “safe”? To encourage widespread participation, a random number generator will be used to create a call list. Each student should expect to be called upon at least once per class. Your group will also present twice to the class during the quarter.</p>
 </section></section>
 <section>
 <section id="前半戦-第3限" class="title-slide slide level1 center">
@@ -462,50 +2245,511 @@ Soichi Matsuura
 </section>
 <section class="slide level2">
 
-<p>Risk-based auditing starts by assessing whether an audit is even needed, based on a review of information in the financial statements. If the review finds adverse trends or irregularities, audit scope may be expanded accordingly. Through audits, stakeholders may effectively evaluate and improve the effectiveness of risk management, control, and corporate governance. In the USA, audits of publicly traded companies are governed by rules laid down by the Public Company Accounting Oversight Board (PCAOB), which was established by Section 404 of the Sarbanes–Oxley Act of 2002.</p>
-</section>
-<section class="slide level2">
-
-<p>Such an audit is called an <strong>integrated audit</strong>, where auditors, in addition to an opinion on the financial statements, must also express an opinion on the effectiveness of a company’s internal control over financial reporting, in accordance with PCAOB Auditing Standard No.5.</p>
+<ul>
+<li><strong>Risk-based auditing</strong> starts by assessing whether an audit is even needed, based on a review of information in the financial statements. <!-- - **リスクベースの監査**は、財務諸表の情報を検討して、監査が必要かどうかを評価することから始まる。 --> <!-- - If the review finds adverse trends or irregularities, audit scope may be expanded accordingly. --> <!-- - 検討が不利なトレンドや不正規な点を見つけた場合、監査範囲をそれに応じて拡大することがある。 --></li>
+<li>Through audits, stakeholders may effectively evaluate and improve the effectiveness of risk management, control, and corporate governance. <!-- - 監査を通じて、ステークホルダーはリスク管理、コントロール、および企業統治の効果を効果的に評価し、改善することができる。 --></li>
+<li>In the USA, audits of publicly traded companies are governed by rules laid down by the <strong>Public Company Accounting Oversight Board</strong> (PCAOB), which was established by Section 404 of the Sarbanes–Oxley Act of 2002. <!-- - 米国では、公開企業の監査は、2002年のサーベインズ・オクスリー法の第404条によって設立された公開会社会計監査委員会（PCAOB）によって定められた規則によって規制されている。 --></li>
+<li>Such an audit is called an <strong>integrated audit</strong>, where auditors, in addition to an opinion on the financial statements, must also express an opinion on the effectiveness of a company’s internal control over financial reporting, in accordance with PCAOB Auditing Standard No.5. <!-- - このような監査は**統合監査**と呼ばれ、監査人は、財務諸表に対する意見に加えて、PCAOB監査基準第5号に従って、企業の財務報告に対する内部統制の有効性についても意見を述べなければならない。 --></li>
+</ul>
 </section>
 <section id="computers-in-auditing-and-the-birth-of-audit-analytics" class="slide level2">
 <h2>Computers in Auditing and the Birth of Audit Analytics</h2>
+<!-- When I received my undergraduate degree in statistics in 1971, the job market offered very little employment in statistics. 
+Mainframe computers had just been introduced, and data resided on 80-column Hollerith cards. 
+All data analyses were done on paper ledgers with adding machines. 
+Microcomputers, cloud computing, and remote storage were yet to be invented. 
+What a difference 50 years has made. 
+For a growing number of people, data analysis is a central part of their job today. 
+ -->
+<ul>
+<li>Increased data availability, more powerful computing, and an emphasis on analytics-driven decision in business has created a plethora of jobs in data science. There are around 2.5 million openings (and increasing) for data analytics jobs in the USA at any time. <!-- データの利用可能性の増加、より強力なコンピューティング、ビジネスにおける分析に基づく意思決定の重視が、データサイエンスの多くの仕事を生み出しました。米国では、常に約250万件のデータ分析の仕事があります（増加中）。 --></li>
+<li>A significant share of employees analyze data with Microsoft Excel or other spreadsheet programs like Google Sheets. <!-- 従業員の多くは、Microsoft ExcelやGoogle Sheetsなどのスプレッドシートプログラムでデータを分析しています。 --> <!-- - Others use proprietary statistical software like SAS, Stata, or SPSS that they often first learned in school.  --> <!-- その他の人は、学校で最初に学んだことが多いSAS、Stata、またはSPSSなどの専用の統計ソフトウェアを使用しています。 --></li>
+<li>While Excel and SAS are widely used tools, they have serious limitations. <!-- ExcelとSASは広く使用されているツールですが、重大な制限があります。 --> <!-- Excel conflates metadata (headings and descriptions) with formulas and data; and all are called “cells” in Excel.  --> <!-- Excelはメタデータ（見出しと説明）を数式とデータと混同し、すべてをExcelでは「セル」と呼びます。 --> <!-- Furthermore Excel is horrendously slow, cannot handle datasets above a certain size, and does not easily allow for reproducing previously conducted analyses on new datasets.  --> <!-- さらに、Excelは非常に遅く、ある一定のサイズを超えるデータセットを処理できず、以前に実施された分析を新しいデータセットで再現することが容易ではありません。 --> <!-- The main weaknesses of programs like SAS are that they were developed for very specific uses in the mainframe era of the 1970s and 1980s and have missed out on many of the newest developments in analytics.  --> <!-- SASなどのプログラムの主な弱点は、1970年代と1980年代のメインフレーム時代に非常に特定の用途のために開発されたため、分析の最新の進展の多くを見逃していることです。 --></li>
+<li>Nor do they have a large community of contributors constantly adding new tools. <!-- また、新しいツールを継続的に追加している多くのコントリビューターのコミュニティを持っていません。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="r-or-python">R or Python</h3>
+<ul>
+<li>For those who have reached the limits of Excel, SAS, and their ilk, there is a next step: learn R or Python. <!-- Excel、SASなどの限界に達した人々にとって、次のステップがあります：RまたはPythonを学ぶ。 --></li>
+<li>R and Python are the two most popular programming languages used by data analysts and data scientists. <!-- RとPythonは、データアナリストとデータサイエンティストによって使用される最も人気のあるプログラミング言語です。 --></li>
+<li>Both are free and open source and were developed in the early 1990s—R (an open-source version of the “S” language) for statistical analysis and Python (after Monty Python) as a general-purpose programming language. <!-- 両方とも無料でオープンソースであり、1990年代初頭に開発されました。R（統計分析のためのオープンソース版「S」言語）とPython（Monty Pythonの後）は、汎用プログラミング言語として開発されました。 --></li>
+<li>For anyone interested in machine learning, working with large datasets, or creating complex data visualizations, both have become standard tools for analysis. <!-- 機械学習、大規模データセットの操作、または複雑なデータの視覚化を行いたい人にとって、両方とも分析のための標準的なツールとなっています。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Corporate computing offers more data analytics jobs requiring Python. <!-- 企業のコンピューティングは、Pythonを必要とするデータ分析の仕事がさらに多く提供されています。 --></li>
+<li>In contrast, in academe, consulting, and finance, R offers an expanded set of data cleaning and analysis tools that are useful in one-off data analysis. <!-- 一方、学術、コンサルティング、および金融業界では、Rは、一時的なデータ分析に役立つデータクリーニングおよび分析ツールの拡張セットを提供しています。 --></li>
+<li>Learning either requires a significant time investment—particularly if you have never coded before. <!-- どちらかを学ぶには、特に以前にコードを書いたことがない場合、かなりの時間を投資する必要があります。 --></li>
+<li>Python is better for data manipulation and repeated tasks, while R is good for ad hoc analysis and exploring datasets. <!-- Pythonはデータ操作と繰り返しタスクに適していますが、Rはアドホック分析とデータセットの探索に適しています。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="python">Python</h3>
+<ul>
+<li>Python tends to be in demand in companies run by computer scientists and with a code base, partly because <em>it is easy to learn once you know other languages</em>. <!-- Pythonは、他の言語を知っていると簡単に学べるため、コンピュータサイエンティストによって運営され、コードベースを持つ企業で需要が高い傾向があります。 --></li>
+<li>Python is most useful for relatively routine, predictable processes. <!-- Pythonは、比較的予測可能なプロセスに最も役立ちます。 --></li>
+<li>From pulling data, to running automated analyses over and over, to producing visualizations like maps and charts from the results, Python is the better choice. <!-- データを取得して、繰り返し自動分析を実行して、結果から地図やグラフのような視覚化を生成するまで、Pythonがより良い選択肢です。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="r">R</h3>
+<ul>
+<li>R tends to be in demand in consulting fields where every <em>report is ad hoc</em>. <!-- Rは、すべてのレポートがアドホックであるコンサルティング分野で需要が高い傾向があります。 --></li>
+<li>Neither is a particularly efficient language from a purely operational standpoint; for that you would turn to C++. <!-- どちらも、純粋に運用上の観点からは特に効率的な言語ではありません。その場合は、C++に切り替えます。 --></li>
+<li>Over the past 5 years there has been substantial competition in offerings of interactive development environments (IDEs) to promote the use of either language. <!-- 過去5年間、どちらかの言語の使用を促進するためのインタラクティブ開発環境（IDE）の提供において、大きな競争がありました。 --></li>
+<li>The R IDE is called <strong>R-Studio</strong> and is managed by J.J.Allaire (originally from South Bend, IN, and who developed the ColdFusion web development software many years ago). <!-- R IDEはR-Studioと呼ばれ、J.J.Allaire（元々はサウスベンド出身で、多年前にColdFusionウェブ開発ソフトウェアを開発した）が管理しています。 --> <!-- - Python is supported on NetBeans and Eclipse IDEs through plugins; but the go to Python environment is Anaconda, which has its own version of Python, and supports R as well as other programs. --> <!-- Pythonは、プラグインを介してNetBeansおよびEclipse IDEでサポートされています。しかし、Pythonの環境はAnacondaであり、独自のPythonのバージョンを持ち、Rをはじめとする他のプログラムもサポートしています。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="r-1">R!</h3>
+<ul>
+<li>R is good for <strong>statistics-heavy projects</strong> and <strong>one-time analyses</strong> of a dataset. <!-- Rは統計に重点を置いたプロジェクトやデータセットの一回限りの分析に適しています。 --></li>
+<li>R is also more difficult to learn, as many of its conventions assume you have a solid background in statistics. <!-- Rを学ぶのは難しいですが、その多くの慣習は、統計学に堅固な背景があることを前提としています。 --></li>
+<li>Python conceptually uses the same control structures and data types that you will find in other languages, which is why computer scientists prefer Python. <!-- Pythonは、概念的には他の言語で見つけることができる同じ制御構造とデータ型を使用しているため、コンピュータサイエンティストはPythonを好むのです。 --> <!-- - They see R as being more of a statistical tool that also happens to have a language, rather than a well-designed language before anything else (as Python arguably is).  --> <!-- 彼らは、Rを言語よりもむしろ統計ツールと見なしているため、Pythonが明らかにそうであるように、Rは最初に設計された言語ではないと見なしています。 --> <!-- - R has Reticulate that allows any program written in Python to be used in R; it also has Rcpp (written and maintained by Chicago’s Dirk Eddelbuettel) that allows C++ programs to be used in R.  --> <!-- Rには、Pythonで書かれたプログラムをRで使用できるReticulateがあります。また、シカゴのDirk Eddelbuettelが書いて保守しているRcppがあり、C++プログラムをRで使用できます。 --> <!-- - Although powerful, R as a programming language may seem very unfamiliar and quirky to developers in more general-purpose languages. --> <!-- パワフルであるが、プログラミング言語としてのRは、より汎用の言語の開発者にとって非常に馴染み深く、奇抜に見えるかもしれない。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="reporting-with-r">Reporting with R</h3>
+<ul>
+<li>No matter how brilliant your analyses are, if you cannot communicate them, they are worthless. <!-- あなたの分析がどれほど優れていても、それを伝えることができなければ、それは無価値です。 --></li>
+<li>Report writing, publication on webs, GitHub, and other outlets are all essential parts of being a data analyst. <!-- レポートの作成、WebやGitHubなどの出版物は、データアナリストであるための不可欠な部分です。 --></li>
+<li>In support of this, R has the report writing tool called knitr (the author himself spells it with a lower case letter k). <!-- これをサポートするために、Rにはレポート作成ツールknitr（著者自身は小文字のkで綴ります）があります。 --> <!-- - Python has its counterpart, Jupyter notebooks (which can be used with R now), and although they are conceptually similar, their intended purpose is quite different.  --> <!-- Pythonには、Jupyterノートブック（現在はRと一緒に使用できます）があり、概念的には似ていますが、それらの意図された目的はかなり異なります。 --></li>
+<li>Though not particularly well suited for exploratory analysis, knitr is a powerful tool for dynamic data report generation so much so that it is a worthy addition to any programmer’s toolbox. <!-- 探索的分析にはあまり適していませんが、knitrは動的データレポート生成のための強力なツールであり、それだけでプログラマーのツールボックスに価値のある追加です。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="r-and-knitr">R and knitr</h3>
+<ul>
+<li>For example, assume you have a CSV file with some entries that you want to present to someone (or yourself) in some graphical way on regular basis. <!-- たとえば、定期的にいくつかのエントリをグラフィカルに表現したいCSVファイルがあるとします。 --></li>
+<li>You can open it in Excel, add a pivot table and graphs; but assume then that you need to combine this data with one or more XML files and some more data in a database—this becomes a scripting task. <!-- それをExcelで開いて、ピボットテーブルとグラフを追加できます。しかし、このデータを1つ以上のXMLファイルとデータベース内のさらなるデータと組み合わせる必要があるとします。 --></li>
+<li>Excel can still help, but it would be laborious. <!-- Excelはまだ役立ちますが、手間がかかります。 --></li>
+<li>Python can also accomplish this, but you will need to learn quite a few libraries before you are ready. <!-- Pythonでもこれを達成できますが、準備が整うまでにかなりの数のライブラリを学ぶ必要があります。 --></li>
+<li><code>knitr</code> and R Markdown can easily generate PDF reports with all the graphical and data-processing tools of R included. <!-- しかし、knitrとR Markdownは、Rのすべてのグラフィカルおよびデータ処理ツールを含むPDFレポートを簡単に生成できます。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="r-and-ml">R and ML</h3>
+<ul>
+<li>Additionally, <strong>R segues statistics with machine learning</strong>, which is important since the concepts of machine learning and artificial intelligence derive from statistics. <!-- さらに、Rは統計学と機械学習を結びつけており、機械学習と人工知能の概念は統計学に由来しているため、重要です。 --></li>
+<li>Much of the Python-based literature on machine learning completely misses underlying statistical concepts and consequently fails to be as effective as R in developing machine learning algorithms. <!-- 機械学習に関するPythonベースの文献の多くは、根本的な統計的概念を完全に見逃しており、その結果、機械学習アルゴリズムの開発においてRほど効果的ではありません。 --></li>
+<li>It is written by computer scientists who understand well the Python scientific stack, and who will demonstrate the steps in rote manner of how to achieve a certain goal, but <em>would not be able to impart much insight into what happens behind the scenes</em>. <!-- それは、Python科学スタックをよく理解しているコンピュータサイエンティストによって書かれており、特定の目標を達成するための手順を単純に示すが、裏側で何が起こっているかについて多くの洞察を提供することはできません。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="r-and-ai">R and AI</h3>
+<!-- Much of the popular press “artificial intelligence” news you may read is a product of hackers who may understand “how” to program something, but along the way seem to have missed the “why?” and “what?” In contrast, books by authors who actually teach statistical curricula on which the machine learning practice is based and which skillfully elucidate deep theoretical foundations, all seem to exclusively presume basic to intermediate knowledge of R.  -->
+<!-- あなたが読むかもしれない多くの一般向けの報道「人工知能」ニュースは、何かをプログラムする方法を理解しているハッカーの製品かもしれませんが、その過程で「なぜ？」と「何？」を見逃しているようです。対照的に、実際に機械学習の実践が基づく統計カリキュラムを教える著者による本は、深い理論的基盤を巧みに明らかにし、すべてが基本的から中級的なRの知識を前提としているようです。 -->
+<ul>
+<li><p>If you are planning to work in machine learning, R is a much more worthwhile investment than Python. <!-- 機械学習で働く予定がある場合、PythonよりもRに投資する価値があります。 --></p></li>
+<li><p>The preceding are some of my admittedly biased opinions. <!-- これまでのところは、私の偏見のある意見のいくつかです。 --></p></li>
+<li><p>I think R is the better language; but with the caveat that “your mileage may vary” and you should choose your own path. <!-- 私はRがより優れた言語だと思いますが、「結果は異なるかもしれません」の警告と、自分自身の道を選ぶべきだと思います。 --></p></li>
+<li><p>I firmly believe, though, that the extra effort in learning R will be rewarded tenfold if you intend to work in data analytics. <!-- ただし、データ分析で働くつもりであれば、Rを学ぶための追加の努力は、10倍に報われると確信しています。 --></p></li>
+</ul>
 </section>
 <section id="the-roots-of-modern-financial-accounting-and-auditing" class="slide level2">
 <h2>The Roots of Modern Financial Accounting and Auditing</h2>
+<ul>
+<li><p>Accounting and auditing are ancient, with many modern practices that are rooted in traditions that date back millennia. <!-- 会計と監査は古代のものであり、数千年前にさかのぼる伝統に根ざした多くの現代の慣行があります。 --></p></li>
+<li><p>This section details the evolution of accounting, with explanations of how historical developments live on in idiosyncrasies of accounting and auditing today. <!-- このセクションでは、会計の進化について詳しく説明し、歴史的な発展が今日の会計と監査の独自性に生き続けている方法について説明します。 --></p></li>
+<li><p>(in this class, this section is not covered)</p></li>
+</ul>
+<!-- - The earliest extant record of humans keeping track of numbers are the Lebombo Bones (several dozen have been found to date), which have been carbon dated to about 35,000 BCE.  -->
+<!-- 人間が数を追跡する最古の現存する記録は、レボンボの骨（これまでに数十個が見つかっています）であり、約35,000年前に放射性炭素年代測定されました。 -->
+<!-- These are arguably the oldest known accounting computers.  -->
+<!-- これらはおそらく最古の知られている会計コンピュータです。 -->
+<!-- They are tally sticks with counting notches carved into a baboon’s fibula, found in the Lebombo mountains located between South Africa and Swaziland. -->
+<!-- これらは、南アフリカとスワジランドの間にあるレボンボ山脈で見つかった、ヒヒの脛骨に刻まれた数え棒です。 -->
+<!-- In the middle of the ninth millennium BCE, communities began coalescing around marketplaces that eventually became the cities of antiquity.  -->
+<!-- 9千年紀の中頃、コミュニティは市場を中心に結集し始め、やがて古代の都市となりました。 -->
+<!-- Accounting was practiced in the ancient Middle East by means of small counters—tokens modeled in clay in different shapes, each symbolizing a particular commodity.  -->
+<!-- 古代中東では、特定の商品を象徴するさまざまな形状の粘土で作られた小さなカウンター（トークン）を使って会計が行われていました。 -->
+<!-- Their shapes include spheres, .at and lenticular disks, cones, tetrahedrons, and cylinders.  -->
+<!-- その形状には、球、平らでレンズ状の円盤、円錐、四面体、円筒が含まれます。 -->
+<!-- These forms seem fully arbitrary and were decided based on the requirement of least production effort.  -->
+<!-- これらの形態は完全に任意的であり、最小の生産努力の要件に基づいて決定されました。 -->
+<!-- They were easy to identify and replicate and embodied daily life commodities. -->
+<!-- これらは簡単に識別および複製でき、日常生活の商品を具現化していました。 -->
+<!-- With stylized signs, all information could be recorded directly on clay tablets, which were cheaper and more portable than tokens.  -->
+<!-- 定式化された記号を使えば、すべての情報をトークンよりも安価で持ち運びが容易な粘土板に直接記録することができました。 -->
+<!-- The earliest scribes served as lawyers and accountants in the early cities.  -->
+<!-- 最初の書記は、初期の都市で弁護士や会計士として活躍しました。 -->
+<!-- They would record trade transactions, debts, and advances, in duplicate on clay tablets to be retained by the parties to the transaction.  -->
+<!-- 彼らは、取引、負債、前払いを粘土板に二重に記録し、取引の当事者が保持するようにしました。 -->
+<!-- The earliest texts were pictographs on tablets written with a stylus, with accounting-specific writing systems evolving into more expressive systems that described politics, religion, and news. -->
+<!-- 初期のテキストは、スタイラスで書かれたタブレット上の絵文字であり、会計専用の文字システムが進化して、政治、宗教、ニュースを記述するより表現豊かなシステムになりました。 -->
+<!-- 
+Many commodities were exchanged in the early barter communities—silver, grain, and so forth based on standardized weighs, and thus establishing an absolute value for any particular item was complex and inexact. 
+Under King Croesus of Lydia (in modern Turkey), the touchstone (mined from local riverbeds) was used to standardize the content of gold alloys, allowing standardized coinage and a single denomination for the price of any item. 
+The earliest coins were blank droplets of metal of standard weight, issued by the treasury; later coins were stamped with punches for easy accounting. 
+It was the custom of unmarried ladies in Lydia to sell their virtue in exchange for coins, in order to accumulate a dowry sufficient for them to marry. 
+In this regard, accounting can credibly lay claim to being “the oldest profession.”
+
+The Kingdom of Lydia was short lived; but their idea of standardized coinage lived on, first in the Athenian silver drachma, and later the Roman Solidus, which provided Mediterranean trade with an unprecedented assurance of quality and value for a num.raire commodity—one which could be traded with all others. 
+Issuing standardized coinage was a profitable business for government. 
+Governments essentially take out non-interest bearing loans on the money they mint; in turn, this begot profitable industries in money changing, accepting deposits, and lending money at interest. 
+Rome developed sophisticated financial and contracting systems for transport and trade, far-reaching tax collection, and a vast bureaucratic network.
+
+Parallel developments in Asia saw China evolve from Cowry shells as standard coinage in the .fth century BCE, to copper coins in the Qin Dynasty period (third century BCE). 
+Qin coins were practical—round with a square hole in the middle (for stringing together), which remained the common design for most Chinese copper coins until the twentieth century. 
+Because of the low value of the coinage, seigniorage and government profits were substantial, as was the tax on transactions. 
+The Qin Dynasty took a no nonsense attitude toward executing anyone caught making transactions with local coins, or any currency not sanctioned by the government; a policy revived in the Tang Dynasty when they introduced paper (tree bark) currencies.
+
+
+The Roman Empire sank into medieval chaos after about the third century. 
+Predicting the collapse of civilization, Boethius and Cassiodorus in the sixth century collected existing studies in mathematics (including accounting) into the quadrivium, comprising the four subjects of arithmetic, geometry, music, and astronomy. 
+These were to be taught to Roman patricians in the monastic schools, which before Saint Benedict of Nursia were more or less safe country estates for offspring of the Roman elite. 
+Until the fifteenth century, European accounting was static and unchanged from the Roman practices. 
+Meanwhile in the Middle East, firstly the Umayyad Caliphate, and then the Abbasid Caliphate of Baghdad rapidly gained power over Central Asia by adopting our modern Arabic number system from India. 
+This was a substantial improvement over the cumbersome notation of the Romans. 
+It allowed easier additions and subtractions, as well as allowing accounting to extend itself to multiplication (for prices and cost allocations) and division (for rates). 
+Baghdad became the world’s center of accounting innovations. -->
+</section>
+<section class="slide level2">
+
 <h3 id="al-khwarizmi-algebra-of-double-entry">Al-Khwarizmi Algebra of Double-Entry</h3>
+<ul>
+<li>In the Islamic world, the <em>word account took on religious significance</em>, relating to one’s obligation to account to God on all matters pertaining to human endeavor. <!-- イスラム世界では、アカウントという言葉は、人間の努力に関するすべての問題について神に報告する義務を意味する宗教的な意味を持ちました。 --></li>
+<li>According to the Qur’an, followers are required to keep records of their indebtedness. <!-- クルアーンによると、信者は自分の負債について記録を保持することが求められています。 --></li>
+<li>Thus Islam provides general approval and guidelines for the recording and reporting of transactions. <!-- したがって、イスラム教は取引の記録と報告のための一般的な承認とガイドラインを提供しています。 --> <!-- - The Islamic law of inheritance defines exactly how the estate is calculated after death of an individual.  --> <!-- イスラム法の相続法は、個人の死後に資産がどのように計算されるかを正確に定義しています。 --> <!-- - The power of testamentary disposition is basically limited to one-third of the net estate (i.e., the assets remaining after the payment of funeral expenses and debts), providing for every member of the family by allotting fixed shares not only to wives and children but also to fathers and mothers.  --> <!-- 遺言の権限は基本的に純資産の3分の1に制限されています（つまり、葬儀費用と負債の支払い後に残る資産）。 --> <!-- 家族のすべてのメンバーに、妻や子供だけでなく、父親や母親にも固定の割合を割り当てることで、家族のすべてのメンバーに提供します。 --></li>
+<li>Clearly this requires ratios, multiplication, and division that were well beyond the scope of Roman numerals and abaci. <!-- このため、ローマ数字とアバキの範囲をはるかに超える比率、乗算、および除算が必要です。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><p>The complexity of Islamic inheritance law served as an impetus behind the development of algebra by medieval Islamic mathematicians. <!-- イスラム教の相続法の複雑さは、中世のイスラム数学者による代数の発展の原動力となりました。 --></p></li>
+<li><p>Al-Khwarizmis “The Compendious Book on Calculation by Completion and Balancing” devoted a chapter on the solution to the Islamic law of inheritance using linear equations. <!-- アル＝ワリズミの「完全な計算とバランスによる計算に関する簡潔な本」は、線形方程式を使用してイスラム教の相続法の解決に1章を捧げています。 --></p></li>
+<li><p>In 15th century, Latin translations of al.Khwarizmis “Book of Addition and Subtraction According to the Hindu Calculation” on the use of Indian numerals, introduced the decimal positional number system to the Western world. <!-- 12世紀には、アル＝ワリズミの「ヒンドゥー計算による加算と減算の本」のラテン語訳が、インドの数字の使用に関する西洋世界への10進位置数システムを紹介しました。 --> <!-- - Hindu Arabic numerals and algebra were introduced to Europe from Arab mathematics at the end of the tenth century by Pope Sylvester II and in the twelfth century by Fibonacci. --> <!-- ヒンドゥー・アラビア数字と代数は、10世紀末にシルヴェスター2世によって、12世紀にはフィボナッチによって、アラブ数学からヨーロッパに導入されました。 --></p></li>
+<li><p>Al-Khwarizm (Latinized as Algorithmi from which we derived the word “algorithm”) introduced algebra (from the Arabic al-jabr meaning “restoration”) to accounting, leading to three fundamental accounting -− algebreic concepts <!-- 代数（アラビア語のal-jabrという言葉から派生したal-Khwarizm（アルゴリズミとしてラテン化され、私たちが「アルゴリズム」という言葉を得た）は、会計に代数（アラビア語のal-jabrという言葉の意味する「復元」）を導入し、3つの基本的な会計代数概念につながりました。 --></p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="fundamental-accounting-algebraic-concepts">3 Fundamental Accounting-Algebraic Concepts</h3>
+<ol type="1">
+<li><em>Debits = Credits</em> : The “Bookkeeping equation” for error control, which is the accounting equivalent of algebraic manipulations on the left-hand and right-hand side of an equation.</li>
+<li><em>Assets = Liabilities + Owner’s Equity</em> : “Real” accounts for tracking wealth, and the “basic accounting equation.” An elaborate form of this equation is presented in a balance sheet that lists all assets, liabilities, and equity, as well as totals to ensure that it balances.</li>
+<li><em>Closing process</em> where “Nominal” accounts for tracking activity are closed to Owner’s Equity : Closing out these accounts at year end yields the net income (the owner’s increment in wealth) — arguably the most important single statistic produced in the accounting process.</li>
+</ol>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Algebra manipulates formulas around an equal sign, <em>the only constraint being the formula on the right of the equal sign must have the same value as the formula on the left</em>. <!-- 代数は等号の周りの式を操作します。等号の右側の式は、左側の式と同じ値でなければなりません。 --></li>
+<li>Double-entry bookkeeping manipulates debit and credit balances around an equal sign, the only constraint being that the debits must have the same value as the credits. <!-- 複式簿記は、等号の周りの借方と貸方の残高を操作します。唯一の制約は、借方が貸方と同じ値でなければなりません。 --></li>
+<li><strong>Accounting is applied algebra</strong>. <!-- 会計は応用代数です。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Though not specific in this regard, Al-Khwarizmis book hinted at what were to become the standards for later accounting:
+<ul>
+<li><em>error control</em> (through double-entry),</li>
+<li><em>nominal accounts</em> (which appear on the Income Statement) and</li>
+<li><em>real accounts</em> (which appear on the Balance Sheet). <!-- アル＝ワリズミの本は、後の会計の標準となるものを示唆していました。エラー制御（複式簿記を通じて）、名義勘定（損益計算書に表示される）および実勘定（貸借対照表に表示される）。 --></li>
+</ul></li>
+<li>Nominal accounts are revenue or expense accounts that are closed to a zero balance at the end of each accounting period. <!-- 名義勘定は、各会計期間の終わりにゼロ残高になる収益または費用の勘定です。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>They start with a zero balance at the beginning of a new accounting period, accumulate balances during the period, and return to zero at the year end by means of closing entries. <!-- 新しい会計期間の開始時にゼロ残高で始まり、期間中に残高を蓄積し、期末には閉鎖仕訳によってゼロに戻ります。 --></li>
+<li><strong>Nominal accounts</strong> are income statement accounts and are also called “temporary accounts” in contrast to balance sheet (asset, liability, and owners’ equity) accounts that are called “permanent accounts” or “real accounts.”</li>
+<li><strong>Real accounts</strong> are asset, liability, reserve, and capital accounts that appear on a balance sheet. <!-- 名義勘定は損益計算書の勘定であり、「一時的な勘定」とも呼ばれます。これに対して、貸借対照表（資産、負債、オーナーズエクイティ）の勘定は「永久的な勘定」または「実勘定」と呼ばれます。実勘定は貸借対照表に表示される資産、負債、準備金、資本の勘定です。 --></li>
+<li>The balances of real accounts are not canceled out at the end of an accounting period but are carried over to the next period. <!-- 実勘定の残高は会計期間の終わりにキャンセルされるのではなく、次の期間に持ち越されます。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="al-khwarizmis-method">Al-Khwarizmis method</h3>
+<ul>
+<li>Al-Khwarizmis method was an immediate hit and was widely disseminated throughout the educated world. <!-- アル＝ワリズミの方法はすぐにヒットし、教育を受けた世界中に広く普及しました。 --></li>
+</ul>
+<!-- この節は省略します。 -->
+<ul>
+<li>we skip this section.</li>
+</ul>
+<!-- In 756, the Abbasid Caliph Al-Mansur sent 4000 Arab mercenaries to assist the Chinese Tang Dynasty in the An Shi Rebellion.  -->
+<!-- 756年、アッバース朝カリフのアル＝マンスールは、アン・シーの反乱で中国の唐朝を支援するために4000人のアラブ傭兵を派遣しました。 -->
+<!-- After the war, they remained in China and established an alliance with the Tang court where they were known as the Black-robed Arabs.  -->
+<!-- 戦後、彼らは中国に留まり、唐の宮廷と同盟を結び、黒衣のアラブ人として知られるようになりました。 -->
+<!-- The Tang Dynasty brought in Arab scholars and adopted Abbasid innovations in money and accounting.  -->
+<!-- 唐朝はアラブの学者を招き入れ、アッバース朝の金融と会計の革新を採用しました。 -->
+<!-- Trade flourished: the Tangs reopened the Silk Road and hugely expanded their maritime presence into the Persian Gulf and the Red Sea, into Persia, Mesopotamia, (sailing up the Euphrates River in modern-day Iraq), into Arabia, Egypt, Ethiopia, and Somalia in the Horn of Africa.  -->
+<!-- 貿易は繁栄し、唐朝はシルクロードを再開し、ペルシャ湾と紅海、ペルシャ、メソポタミア（現代のイラクのユーフラテス川を遡って）、アラビア、エジプト、エチオピア、アフリカの角のソマリアに大規模に海上進出しました。 -->
+<!-- They established the most extensive taxation system to date.  -->
+<!-- 彼らはこれまでに最も広範な課税制度を確立しました。 -->
+<!-- Each citizen was taxed on iron and salt usage and owed the Dynasty corvfie labor of 20 days a year.  -->
+<!-- 各市民は鉄と塩の使用に課税され、毎年20日間のダイナスティの労働を負っていました。 -->
+<!-- The state practiced the “equal-field system” in which most land was state owned and granted to individual farmers to prevent the formation of large estates.  -->
+<!-- 国家は「均田制度」を実施し、ほとんどの土地が国有であり、大規模な土地所有を防ぐために個々の農民に与えられました。 -->
+<!-- This allowed greater government control over the individual farmers but required a huge professional bureaucracy, including accountants selected by Imperial examination.  -->
+<!-- これにより、個々の農民に対する政府のコントロールが強化されましたが、皇帝の試験で選ばれた会計士を含む巨大な専門官僚が必要でした。 -->
+<!-- The banknote was first developed in China in the Tang Dynasty during the seventh century, with local issues of paper currency.  -->
+<!-- 7世紀の唐代に中国で最初に発展した紙幣は、地方の紙幣の発行でした。 -->
+<!-- Its roots were in merchant receipts of deposit as merchants and wholesalers desired to avoid the heavy bulk of copper coinage in large commercial transactions.  -->
+<!-- その起源は、商人や卸売業者が大規模な商取引での銅貨の重い重量を避けたいと考えたため、預金の商人の領収書にありました。 -->
+<!-- The Tang Dynasty paid local merchants with money certificates called “flying cash,” because of its tendency to blow away.  -->
+<!-- 唐代は「飛び現金」と呼ばれるお金の証明書で地元の商人に支払いを行いました。 -->
+<!-- These certificates bearing different amounts of money could be converted into hard cash on demand at the capital.  -->
+<!-- これらの証明書は、異なる金額のお金を含んでおり、首都で要求に応じて現金に換金できました。 -->
+<!-- Since they were transferable, they were exchanged among merchants almost like currency.  -->
+<!-- 移転可能であったため、商人の間で通貨のように交換されました。 -->
+<!-- The threat of penalties and possibly execution also encouraged merchants to use “.ying cash.” -->
+<!-- 罰金や可能性のある処刑の脅威は、商人が「飛び現金」を使用することを奨励しました。 -->
+<!-- Abbasid and Tang innovations in accounting would have been much less influential were it not for the rise of the Mongol conqueror Genghis Khan and later his grandson Kublai Khan who were deeply in.uenced by the bureaucracy of the Tang Dynasty.  -->
+<!-- アッバース朝と唐代の会計の革新は、モンゴルの征服者チンギス・カンとその孫クビライ・カンの台頭がなければ、はるかに影響力が少なかったでしょう。 -->
+<!-- Genghis and his progeny nearly conquered the known world in the thirteenth century.  -->
+<!-- チンギスとその子孫は、13世紀にほぼ知られている世界を征服しました。 -->
+<!-- Germany lost nearly a million soldiers (most of its adult males) defending Europe against their invasion.  -->
+<!-- ドイツは、彼らの侵略に対するヨーロッパの防衛でほぼ100万人の兵士（ほとんどの成人男性）を失いました。 -->
+<!-- Genghis Khan gave his accountants an unprecedented position of power in the Mongol Empire.  -->
+<!-- チンギス・カンは、彼の会計士にモンゴル帝国で前例のない権力を与えました。 -->
+<!-- When a city was sacked by Mongols, the accountants were the first to enter, tallying up the total asset value of the city (before soldiers could loot or pillage) from which the Mongols took 10%, to be allocated between the troops on well defined principles.  -->
+<!-- モンゴル人によって都市が略奪されると、会計士が最初に入り、兵士が略奪や略奪を行う前に、都市の総資産価値を集計し、モンゴル人が10％を取り、明確に定義された原則に基づいて兵士に割り当てられました。 -->
+<!-- Conquered cities were subjugated, then encouraged to remain going-concerns, so that they could be reliably tithed—in this the accountants also played a pivotal role. -->
+<!-- 征服された都市は服従され、その後、継続的な関心を持つよう奨励され、信頼できるように十分に徴税されました。この中で、会計士も重要な役割を果たしました。 -->
+<!-- The Caliphate of Baghdad had provided fertile ground for the advancement of mathematics at a time that Europe was stuck in the quadrivium.  -->
+<!-- バグダッドのカリフ国は、ヨーロッパが四学の中で立ち往生していた時期に数学の進歩の肥沃な土壌を提供していました。 -->
+<!-- Many of the ancient libraries of Rome and Greece had been transferred to Baghdad, where scholars integrated the Hindu numerical notation into geometry and the algebra of linear and quadratic equations.  -->
+<!-- ローマとギリシャの多くの古代の図書館がバグダッドに移され、学者たちはヒンドゥー数値表記を幾何学と線形および二次方程式の代数に統合しました。 -->
+<!-- These works were disseminated throughout the Abbasid Caliphate, including into Moorish Spain, making this body of knowledge accessible to Europeans in the colleges at Granada, Cordova, and Seville around the beginning of the twelfth century.  -->
+<!-- これらの作品は、アッバース朝カリフ国全体に広まり、ムーア人のスペインにも広まり、12世紀初頭にグラナダ、コルドバ、セビリアの大学でヨーロッパ人にこの知識を提供しました。 -->
+<!-- The Italian mathematician Fibonacci became exposed to this knowledge traveling extensively throughout Egypt, Syria, Greece, and Sicily.  -->
+<!-- イタリアの数学者フィボナッチは、エジプト、シリア、ギリシャ、シチリアを広く旅行して、この知識に触れました。 -->
+<!-- He eventually returned to Italy to publish his Liber Abbaci (book of calculation), which promoted the use of Arabic numerals for calculations.  -->
+<!-- 彼は最終的にイタリアに戻り、アラビア数字を計算に使用することを推進した「リベル・アバッチ」（計算の本）を出版しました。 -->
+<!-- The book was written in Latin during the year 1202 and was influential and widely read. -->
+<!-- この本は1202年にラテン語で書かれ、影響力があり、広く読まれました。 -->
+<!-- The introduction of double-entry bookkeeping into Europe is an interesting one in itself. 
+
+Arabic numerals were known in Europe, but it was considered sinful to use them. 
+For example, the statutes of the Arte del Cambio of 1299 prohibited the bankers of Florence from using Arabic numerals (even though they had been slipping them into documents since the tenth century just to ease calculations). 
+Pope Sylvester II who reigned for three years at the turn of the millennium, endorsed and promoted study of Arabic arithmetic, mathematics, and astronomy, reintroducing the abacus to Europe. 
+After his death, he was widely denounced as a sorcerer in league with the devil for exactly this reason.
+
+It was into this politically and religiously charged atmosphere that the innovations in Fibbonaci’s Liber Abbaci started with merchants and bankers synthesizing alternatives to the abacus and daybooks of unwieldy Roman numerals. 
+Fibbonaci himself was a merchant as well as a mathematician. 
+He traveled extensively throughout the Mediterranean as a merchant prior to 1200. 
+Not only did he encourage adoption of the Hindu.Arabic numerals for commercial accounting, but he actually set out an account contrasting completely the Roman .gures versus the Arabic numerals.
+
+Importantly, the Hindu.Arabic system mathematics also covered systems of equations, and these were in addition introduced into Spain by the Moors. 
+From an accounting perspective, the conceptualization of debits and credits provided a generalization at the accounting systems (financial statement) level in addition to details at the transaction (journal entry) level. 
+Equations—by de.nition—require an equality of two sides of the equation—on one side dependent variables, on the other independent. 
+In an exchange transaction there is a natural dichotomization into independent variables (assets) and dependent variables (claims). 
+These are reected in the Latin words debere (to owe) and credere (to entrust), which are the basis for our modern words, debit and credit.
+
+The Hindu.Arabic systems of equations were focused on equilibrium—in the balance sheet at any date, an equilibrium of exchange transactions is preserved. 
+The use of an equilibrium device may at first have been pro forma. 
+But it is easy to see how the change from ad hoc single-entry to equilibrium bookkeeping could lead to a complete double-entry system (particularly given European bankers’ early penchant for slipping Arabic numerals into their financial records, despite the fact that they might be accused of colluding with the devil). 
+Once .gures began to be disposed in a single column, instead of being scattered all over the page and reduced to order only outside the account-book on the abacus or in the mind, then the advantages of having two clearly separated columns, simply to facilitate computation, would quickly become apparent (De Roover 1956, 1955, 1938). -->
+</section>
+<section class="slide level2">
+
 <h3 id="the-renaissance">The Renaissance</h3>
 <ul>
 <li>For two centuries, during the rise of the great Italian banking centers of Genoa, Florence, and Venice, Italian banking recorded transactions, made loans, issued scripts, and carried on with numerous other financial activities that we would recognize today. <!-- 2世紀にわたり、イタリアのジェノヴァ、フィレンツェ、ヴェネツィアの大きな銀行センターが台頭する中、イタリアの銀行は取引を記録し、融資を行い、スクリプトを発行し、多くの他の金融活動を行っていました。 --></li>
 <li>Initially they used single-entry recording (date, and account affected), but this proved error prone as transaction volume increased. <!-- 最初は単式記入（日付と影響を受ける勘定科目）を使用していましたが、取引量が増加すると誤りが生じることがわかりました。 --></li>
 <li>Fibbonaci’s Liber Abbaci was widely read, and influential. <!-- フィボナッチの「リベル・アバッチ」は広く読まれ、影響力があった。 --></li>
 <li>Giovanni di Bicci de’ Medici introduced double-entry bookkeeping for the Medici bank in the fourteenth century. <!-- 14世紀にジョヴァンニ・ディ・ビッチ・デ・メディチがメディチ銀行に複式簿記を導入しました。 --></li>
-<li>By the end of the fifteenth century, merchant ventures in Venice used this system widely. 15世紀末までに、ヴェネツィアの商人たちはこのシステムを広く使用していました。</li>
+<li>By the end of the fifteenth century, merchant ventures in Venice used this system widely. <!-- 15世紀末までに、ヴェネツィアの商人たちはこのシステムを広く使用していました。 --></li>
 </ul>
 </section>
 <section class="slide level2">
 
-<p>The fifteenth century also saw the invention of the printing press in Germany, and affordable, widely available reading glasses from Venetian glassmakers. <!-- 19世紀には、ドイツで印刷機が発明され、ヴェネツィアのガラス職人から手頃な価格で入手可能な読書眼鏡が登場した。 --> Leo X’s Vatican was an enthusiastic customer, where printing presses were used to churn out indulgences, and subsequently, Italy became a center of printing, book publishing, and literature. <!-- レオ10世のバチカンは熱心な顧客であり、印刷機が贖宥状を大量生産するために使用され、その後、イタリアは印刷、書籍出版、文学の中心地となった。 --> One of the first great texts on mathematics was published by a close friend of Leonardo da Vinci, Venetian Luca Pacioli, in 1494. <!-- 最初の偉大な数学のテキストの1つは、レオナルド・ダ・ヴィンチの親友であるヴェネツィア人のルカ・パチオリによって1494年に出版された。 --> Summa de Arithmetica, Geometria, Proportioni et Proportionalita (Everything About Arithmetic, Geometry and Proportion) formally described the widely used but still controversial system of double-entry for a much wider audience. <!-- 「Summa de Arithmetica, Geometria, Proportioni et Proportionalita（算術、幾何学、比例と比例についてすべて）」は、広範な観衆のために広く使用されているがまだ議論の余地のある複式記入システムを正式に記述した。 --> Pacioli’s Summa included one chapter titled, Details of Accounting and Recording that popularized the Method of Venice for accounting (an evolution of Al-Khwarizmi’s method). <!-- パチオリのSummaには、「会計と記録の詳細」の1章が含まれており、会計のためのヴェネツィア法（アル＝ワリズミの方法の進化）を広めた。 --> Pacioli’s Summa described the components of bookkeeping as: a memorandum book, journal, and ledger, with the journal and ledger similar to modern equivalents. <!-- パチオリのSummaは、帳簿の構成要素を、日記帳、仕訳帳、元帳として記述し、日記帳と元帳は現代の相当物に似ている。 --> A trial balance was used when the books were closed. <!-- 帳簿を閉じる際には、試算表が使用された。 --> The profit or loss was entered into the capital account to balance the balance sheet. <!-- 利益または損失は、貸借対照表をバランスさせるために資本勘定に入力された。 --> Thanks to Gutenberg’s printing press, Summa was published throughout Europe. <!-- グーテンベルクの印刷機のおかげで、Summaはヨーロッパ中で出版された。 --></p>
-<p>Pacioli’s Summa was translated into the most commonly read vernaculars in Europe and was influential not only in investment and merchant ventures but in accounting in the great estates of Europe. <!-- パチオリのSummaは、ヨーロッパで最も一般的に読まれる方言に翻訳され、投資や商業活動だけでなく、ヨーロッパの大農場の会計にも影響を与えました。 --> Over the next 400 years it became the standard, in only slightly modi.ed form, for accounting in all realms of business in Europe. <!-- その後の400年間で、わずかに修正された形で、ヨーロッパのあらゆるビジネス領域の会計の標準となりました。 --> Before the Industrial Revolution, China and India were the wealthiest economies in the world. Mughal India’s annual revenues were twenty times that of France. <!-- 産業革命以前、中国とインドは世界で最も豊かな経済でした。ムガル帝国インドの年間収入はフランスの20倍でした。 --> In China, Qianlong demanded that Britain’s ambassador Lord McCartney kowtow and informed him that China was in need of nothing from the West. <!-- 中国では、乾隆帝(けんりゅうてい)はイギリスの大使マッカートニー卿に頭を下げるよう要求し、中国は西洋から何も必要としていないことを伝えました。 --></p>
-<h3 id="the-industrial-revolution">The Industrial Revolution</h3>
+<ul>
+<li>The fifteenth century also saw <em>the invention of the printing press in Germany</em>, and affordable, widely available reading glasses from Venetian glassmakers. <!-- 19世紀には、ドイツで印刷機が発明され、ヴェネツィアのガラス職人から手頃な価格で入手可能な読書眼鏡が登場した。 --></li>
+<li>Leo X’s Vatican was an enthusiastic customer, where printing presses were used to churn out indulgences, and subsequently, Italy became a center of printing, book publishing, and literature. <!-- レオ10世のバチカンは熱心な顧客であり、印刷機が贖宥状を大量生産するために使用され、その後、イタリアは印刷、書籍出版、文学の中心地となった。 --></li>
+<li>One of the first great texts on mathematics was published by a close friend of Leonardo da Vinci, Venetian <strong>Luca Pacioli</strong>, in 1494. <!-- 最初の偉大な数学のテキストの1つは、レオナルド・ダ・ヴィンチの親友であるヴェネツィア人のルカ・パチオリによって1494年に出版された。 --></li>
+<li><strong>Summa de Arithmetica, Geometria, Proportioni et Proportionalita</strong> (Everything About Arithmetic, Geometry and Proportion) formally described the widely used but still controversial system of double-entry for a much wider audience. <!-- 「Summa de Arithmetica, Geometria, Proportioni et Proportionalita（算術、幾何学、比例と比例についてすべて）」は、広範な観衆のために広く使用されているがまだ議論の余地のある複式記入システムを正式に記述した。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Pacioli’s Summa included one chapter titled, Details of Accounting and Recording that popularized the Method of Venice for accounting. <!-- パチオリのSummaには、「会計と記録の詳細」の1章が含まれており、会計のためのヴェネツィア法（アル＝ワリズミの方法の進化）を広めた。 --></li>
+<li>Pacioli’s Summa described the components of bookkeeping as: a memorandum book, journal, and ledger, with the journal and ledger similar to modern equivalents. <!-- パチオリのSummaは、帳簿の構成要素を、日記帳、仕訳帳、元帳として記述し、日記帳と元帳は現代の相当物に似ている。 --></li>
+<li>A trial balance was used when the books were closed. <!-- 帳簿を閉じる際には、試算表が使用された。 --></li>
+<li>The profit or loss was entered into the capital account to balance the balance sheet. <!-- 利益または損失は、貸借対照表をバランスさせるために資本勘定に入力された。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="summa">Summa</h3>
+<ul>
+<li>Thanks to Gutenberg’s printing press, Summa was published throughout Europe. <!-- グーテンベルクの印刷機のおかげで、Summaはヨーロッパ中で出版された。 --></li>
+<li>Pacioli’s Summa was translated into the most commonly read vernaculars in Europe and was influential not only in investment and merchant ventures but in accounting in the great estates of Europe. <!-- パチオリのSummaは、ヨーロッパで最も一般的に読まれる方言に翻訳され、投資や商業活動だけでなく、ヨーロッパの大農場の会計にも影響を与えました。 --></li>
+<li>Over the next 400 years it became the standard, in only slightly modi.ed form, for accounting in all realms of business in Europe. <!-- その後の400年間で、わずかに修正された形で、ヨーロッパのあらゆるビジネス領域の会計の標準となりました。 --> <!-- - Before the Industrial Revolution, China and India were the wealthiest economies in the world. --> <!-- Mughal India’s annual revenues were twenty times that of France. --> <!-- 産業革命以前、中国とインドは世界で最も豊かな経済でした。ムガル帝国インドの年間収入はフランスの20倍でした。 --> <!-- - In China, Qianlong demanded that Britain’s ambassador Lord McCartney kowtow and informed him that China was in need of nothing from the West. --> <!-- 中国では、乾隆帝(けんりゅうてい)はイギリスの大使マッカートニー卿に頭を下げるよう要求し、中国は西洋から何も必要としていないことを伝えました。 --></li>
+</ul>
+<!-- 
+### The Industrial Revolution
+
+
+Europe was only a minor economic player in the world at the start of the Industrial Revolution in the late eighteenth century. England, and specifically Charles II, set out to change that. After the death of Oliver Cromwell in 1658, which resulted in his restoration, one of Charles II first tasks was to set up a body to move mathematics and the science forward in England. The Royal Society of London for Improving Natural Knowledge, known simply as the Royal Society, was founded in November 1660. Members of the Royal Society were initially chosen almost evenly from Parliamentarians, and Monarchists (leading some to believe that the Royal Society may have been a Masonic society). England was the first European country to place science and mathematics at the center of national policy. This was not merely an abstract goal. As a country with growing colonial and industrial ambitions, it needed better tools for navigation (clocks, sextants), for business (accounting, patents, methods), and government (statistics).
+
+Modern businesses grew out of the cottage industries of the day. Home sewing grew into textile mills; mines became larger and more efficient. Goldsmiths’ safes were used to hold the monetary deposits of merchants and others, using gold notes as receipts. These receipts evolved into banknotes and these new bankers loaned money and performed other banking tasks. Adam Smith chronicled the merits of specialization. Stock in businesses allowed operations to grow without limit as the technology became available for greater scale. The Bank of England was founded as a joint stock company and became the central bank of Britain.
+
+Much of Britain’s wealth depended on textiles and specifically the wool trade. The wool of British sheep was highly priced, and sheep owners in the Cotswolds and other areas became rich. Instead of selling all wool to continental merchants, the domestic system of textile manufacturing developed. Small farmers did the spinning, cleaning, and weaving in their homes. About half of the manufactured cloth was exported and a wealthy merchant class developed.
+
+At this time manufacturing productivity levels were similar around the world and changed little over time. But the Industrial Revolution inched Britain’s productivity growth up an average about 2% a year, pushing it to the largest economy in the world at the end of the nineteenth century. The factory system was invented for the textile industry. Power-driven machines required an army of laborers, working long hours at monotonous tasks in unsafe conditions for low wages. By 1800 most cotton manufacturing was done at factories. Cotton provided about half of Britain’s exports well into the nineteenth century. By 1850 over 1900 factories were in the cotton industry with 330,000 workers, about 85% using steam and 15% using water power. The human toll was excruciating—the average age of death for a factory worker in 1800 was 17 (Bryson 2010).
+
+The potter Josiah Wedgwood was keenly interested in the scienti.c advances of his day. It was this interest that underpinned his adoption of its approach and methods to revolutionize the quality of his pottery. His unique glazes began to distinguish his wares from anything else on the market. He was perhaps the most famous potter of all time. He built a successful business, but the depression years of 1770.1772 were financially difficult for Wedgewood—demand dropped, inventories rose, and prices had to be cut. He also found that his clerks were embezzling funds, while ignoring debt payments and other paperwork.
+
+Wedgwood turned his creative genius toward a detailed examination of his company’s transactions. He was interested in developing a system that would allow him to quickly discover inefficient operations and to identify sources of overhead. In the process, he discovered a long history of embezzlement by his head clerk. This resulted in a new clerk and weekly accounting reviews. Eventually, Wedgwood was able to calculate detailed costs for materials and labor for each step of manufacturing for each product. Overhead costs were analyzed and allocated to specific products. Wedgwood’s early work in cost accounting in.uenced the understanding of industrial economics, as businessmen discovered that costs to produce some products were considerably more than for others, with profound effects on profitability. Economists evolved concepts of economies of scale and sunk costs. Wedgwood’s own factory started to differentiate markets. Based on his cost accounting, demand became a primary factor for production and pricing. The market could be divided between high-price, high-quality, and high-cost products for elite customers, while a mass market was developed with low-cost and low-price pottery. Technology and mechanization were given roles in economic scaling. Wedgwood’s cost accounting innovations allowed him to survive economic downturns where competitors could not. -->
+</section>
+<section class="slide level2">
+
 <h3 id="the-birth-of-modern-auditing">The Birth of Modern Auditing</h3>
 <ul>
-<li>At the start of the 19th century, eleven Londoners listed their occupation as the archaic “Accomptants.”</li>
-<li>As industry, mass transportation and capital markets expanded so did the need for accountants.</li>
-<li>Business regulation increased, and industry was often taxed heavily, promoting the need for professionals. The Bankruptcy Act of 1831 allowed accountants to be appointed “Official Assignees,” the first government recognition of the new profession.</li>
-<li>A primary role became the preparation of accounts and the balance sheet of public companies.</li>
-<li>Bankrupt firms were especially likely to use their services, which increasingly served an audit function.</li>
+<li>At the start of the 19th century, eleven Londoners listed their occupation as the archaic “Accomptants.” <!-- 19世紀初頭、ロンドンの11人が職業を古風な「会計士」としてリストアップしました。 --></li>
+<li>As industry, mass transportation and capital markets expanded so did the need for accountants. <!-- 産業、大量輸送、資本市場が拡大するにつれて、会計士の需要も拡大しました。 --> Business regulation increased, and industry was often taxed heavily, promoting the need for professionals. <!-- ビジネス規制が増加し、産業はしばしば重税を課され、専門家の必要性が高まりました。 --> The Bankruptcy Act of 1831 allowed accountants to be appointed “Official Assignees,” the first government recognition of the new profession. <!-- 1831年の破産法は、会計士が「公式譲渡人」として任命されることを許可し、新しい職業の最初の政府認識となりました。 --></li>
+<li>A primary role became the preparation of accounts and the balance sheet of public companies. <!-- 主要な役割は、公開会社の会計と貸借対照表の作成となりました。 --></li>
+<li>Bankrupt firms were especially likely to use their services, which increasingly served an audit function. <!-- 破産した企業は、彼らのサービスを利用する可能性が特に高く、監査機能を果たすようになりました。 --></li>
 </ul>
-<p>The British Companies Act of 1844 established the incorporation of business by a formal registration process. It required annual appointment of auditors to examine the accounts and balance sheet of all public companies (the role of accountants under the British Companies Act would change substantially over the century). The Companies Act of 1862 required banks to be audited and established the practice of limited cash dividends to be paid only out of profits. By 1900, the audit was the central practice of accountants. The earliest of the Big Six accounting firms were started in mid-nineteenth century London. William Deloitte opened a London firm in 1845. Samuel Price and Edwin Waterhouse formed their partnership in 1849. William Cooper started his firm in 1854, to be joined by his brothers in 1861. William Peat started in 1867. These men were active in establishing the Institute of Accounting in the 1870s, and a royal charter was granted in 1880. With the Institute and professional requirements to become Chartered Accountants, the profession of accountants was firmly established.</p>
-<p>Many of the current methods in cost accounting were developed after 1880. The Scienti.c Management analysis of mass production was a major factor. Engineers using job analysis as well as time and motion studies determined “scienti.c” standards of material and labor to produce each unit of output. Complex machines required complex engineering and efficient use of workers to perform specialized and repetitive tasks. Standard costs became a significant efficiency measure. Frederick Taylor analyzed the best ways to use labor and machines, and standards were determined to minimize waste. The focus was on cost cutting rather than product quality. Actual costs could be compared to standard costs to measure performance, and the variances between actual and standard costs analyzed to determine potential corrective action. Measuring and allocating overhead costs also were major concerns of Scienti.c Management.</p>
-<p>Prior to the 1950s, management used cost accounting information primarily for planning purposes; while operating control normally was based on non-accounting information. For example, Du Pont used ROI for planning, but control was based on factors such as timeliness of delivery to customers and product quality. Multidivisional business organizations became more pronounced, and businesses turned to decoupling—different production processes took place at different sites, perhaps thousands of miles away.</p>
-<h3 id="public-accounting">Public Accounting</h3>
+</section>
+<section class="slide level2">
+
+<h3 id="audit-firms">Audit firms</h3>
+<ul>
+<li>The British Companies Act of 1844 established the incorporation of business by a formal registration process. <!-- 1844年の英国会社法は、公式の登録プロセスによる事業の設立を確立しました。 --></li>
+<li>It required annual appointment of auditors to examine the accounts and balance sheet of all public companies (the role of accountants under the British Companies Act would change substantially over the century). <!-- すべての公開会社の会計と貸借対照表を調査するための監査人の年次任命が必要とされました（英国会社法における会計士の役割は、その後の世紀にわたって大幅に変わりました）。 --></li>
+<li>The Companies Act of 1862 required banks to be audited and established the practice of limited cash dividends to be paid only out of profits. <!-- 1862年の会社法は、銀行の監査を義務付け、利益からのみ支払われる限られた現金配当の実践を確立しました。 --> By 1900, the audit was the central practice of accountants. <!-- 1900年までに、監査は会計士の中心的な実践となりました。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="the-big-six">The Big Six</h3>
+<ul>
+<li>The earliest of the Big Six accounting firms were started in mid-nineteenth century London. <!-- 最初のビッグシックス会計事務所のいくつかは、19世紀中頃にロンドンで設立されました。 --></li>
+<li>William <strong>Deloitte</strong> opened a London firm in 1845. <!-- ウィリアム・デロイトは1845年にロンドンの会社を設立しました。 --></li>
+<li>Samuel <strong>Price</strong> and Edwin <strong>Waterhouse</strong> formed their partnership in 1849. <!-- サミュエル・プライスとエドウィン・ウォーターハウスは1849年にパートナーシップを結成しました。 --></li>
+<li>William <strong>Cooper</strong> started his firm in 1854, to be joined by his brothers in 1861. <!-- ウィリアム・クーパーは1854年に自分の会社を設立し、1861年に兄弟が加わりました。 --> William <strong>Peat</strong> (KPMG創設者の1人) started in 1867. <!-- ウィリアム・ピートは1867年に始めました。 --></li>
+<li>These men were active in establishing the Institute of Accounting in the 1870s, and a royal charter was granted in 1880. <!-- これらの人々は、1870年代に会計協会を設立する活動を行い、1880年に王室特許が付与されました。 --></li>
+<li>With the Institute and professional requirements to become <strong>Chartered Accountants</strong>, the profession of accountants was firmly established. <!-- 会計士としてのプロフェッショナル要件としての協会とチャータード会計士になるための要件が確立され、会計士の職業はしっかりと確立されました。 --></li>
+</ul>
+<!-- Many of the current methods in cost accounting were developed after 1880. -->
+<!-- 現在の原価計算の多くの方法は、1880年以降に開発されました。 -->
+<!-- The Scientific Management analysis of mass production was a major factor. -->
+<!-- 大量生産の科学的管理分析は主要な要因でした。 -->
+<!-- Engineers using job analysis as well as time and motion studies determined “scienti.c” standards of material and labor to produce each unit of output. -->
+<!-- ジョブ分析と時間と動作の研究を使用するエンジニアは、各出力単位を生産するための材料と労働の「科学的」基準を決定しました。 -->
+<!-- Complex machines required complex engineering and efficient use of workers to perform specialized and repetitive tasks. -->
+<!-- Standard costs became a significant efficiency measure. -->
+<!-- 複雑な機械は、専門的で反復的なタスクを実行するために労働者を効率的に使用するために、複雑なエンジニアリングと効率的な使用を必要としました。標準原価は、重要な効率指標となりました。 -->
+<!-- Frederick Taylor analyzed the best ways to use labor and machines, and standards were determined to minimize waste. -->
+<!-- フレデリック・テイラーは、労働力と機械を最も効果的に使用する方法を分析し、無駄を最小限に抑えるための基準が決定されました。 -->
+<!-- The focus was on cost cutting rather than product quality. -->
+<!-- 重点は製品の品質ではなく、コスト削減に置かれました。 -->
+<!-- Actual costs could be compared to standard costs to measure performance, and the variances between actual and standard costs analyzed to determine potential corrective action. -->
+<!-- 実際のコストは、パフォーマンスを測定するために標準コストと比較でき、実際のコストと標準コストの差異は、潜在的な是正措置を決定するために分析されました。 -->
+<!-- Measuring and allocating overhead costs also were major concerns of Scienti.c Management. -->
+<!-- 諸経費の計測と配分も、科学的管理の主要な関心事でした。 -->
+<!-- Prior to the 1950s, management used cost accounting information primarily for planning purposes; while operating control normally was based on non-accounting information. -->
+<!-- 1950年代以前、経営者は主に計画目的のために原価計算情報を使用し、運営管理は通常、会計情報以外の情報に基づいていました。 -->
+<!-- For example, Du Pont used ROI for planning, but control was based on factors such as timeliness of delivery to customers and product quality. -->
+<!-- Multidivisional business organizations became more pronounced, and businesses turned to decoupling—different production processes took place at different sites, perhaps thousands of miles away. -->
+<!-- 
+### Public Accounting
+
+
+Until the nineteenth century, firms tended to be small and raised money from partnerships, short-term bank loans, or profits. New industries from the early nineteenth century including canals, railroads, and utilities needed large amounts of capital from private sources. The English and American organized exchanges which provided the mechanisms for the needed cash. Parliament regulated business and capital markets through British Companies Acts. American regulations were based on state laws, which were not particularly effective, yet by the turn of the twentieth century, America overtook Britain as the leading industrial power in the world. Financiers provided the capital to establish large corporations and combinations and, as demonstrated by J. P. Morgan, maintained substantial power over industries. Insiders bene.ted from price .xing, stock manipulation, and various schemes of questionable legality. Accountants usually aided managers and speculators. Mergers, cutthroat competitions, railroad rebates, and bribery were some of the techniques used by businesses. Beginning with Standard Oil, the trust was used to acquire businesses across state lines. By 1890, 300 trusts controlled 5000 companies. By 1900, the largest dozen trusts had capital of over $1 billion. The investment bankers became directors (78 companies at J. P. Morgan).
+
+Government regulation was demanded by the public, often subject to monopoly pricing and various predatory practices alone. Federal regulations began with the Interstate Commerce Commission (ICC) Act of 1887 to regulated railroads. Federal antitrust began with the Sherman Act of 1890. Following the panic of 1907, the USA experienced a decade of reform in legislation. The Clayton Act of 1913 prohibited interlocking directorships. The Federal Reserve was established the next year, as was the Federal Trade Commission (FTC).
+
+Disclosure of financial information was voluntary. During the nineteenth and early twentieth century, the balance sheet was paramount. The income statement was neglected because it was open to abuse (no accounting standard regulations existed), and the concept of earnings power had to wait to the post-World War I period. At the turn of the century, the stock exchanges were dominated by the railroad industry (60% of NYSE firms at 1900, for example). They were considered safe investments because they paid fairly consistent dividends—ignoring bankruptcies that did occur in this industry. Industrial firms did catch on in the 1920s (44% of NYSE firms in 1920), and the income statement became more important as industrials tended to pay dividends based on earnings. Unfortunately, the Roaring Twenties also was a time of rampant speculation, with securities bought on credit and with little regard to underlying earnings power. Until 1910, the NYSE had an “unlisted department” for firms that disclosed no financial information. Although 90% of NYSE firms had audits in some form by 1926, audited financial statements were not required until 1933—when stock prices stood at 10% of 1929 highs. Insider trading was common and not illegal; “preferred list” sales of new securities at discounted prices were made before the issues went public; syndicated stock pools manipulated stock prices.
+
+The U.S. economy, which hinged on farming, had been in trouble since the early 1920s. Waves of immigrant farmers plowed increasingly marginal land, creating dustbowls, and impoverishing local banks that lent to them. But since there were no national records, knowledge about the problem was scarce. When the stock market crashed, the regulators panicked. The Federal Reserve cut back the money supply, turning a recession and stock panic into a major depression. From 1929 until 1932, 11,000 banks failed, gross national product fell about 10% a year, steel production dwindled to 12% of capacity, and the unemployment rate hit 25%. The Hawley.Smoot Tariff Act dramatically increased tariffs, with effect being to limit world trade—which effectively made this a global depression. Franklin D. Roosevelt was President Hoover’s opponent in 1932, promising a New Deal. He won in a landslide and delivered. During the first 100 days, a remarkable amount of legislation was passed (some of it a holdover from the Hoover administration). The Glass.Steagall Act separated commercial from investment banking and created the Federal Deposit Insurance Corporation to insure bank deposits; the Social Security Act established retirement and disability pensions funded with payroll taxes.
+
+New Deal legislation led to federal responsibility for protecting investors from malpractice in the investment markets with the Securities Act of 1933. The Act was modeled on state regulations, British Companies Acts, and earlier Congressional legislation. The Securities and Exchange Commission (SEC) Act of 1934 created the SEC to administer the legislation. The Securities Acts required companies to present registration statements with new public offerings of stocks, bonds, and other securities, to make “full and fair” disclosure of financial information. Information relevant to the “prudent investor” was to be disclosed in the registration statement. Antifraud and liability regulations increased the legal responsibilities of accountants, who became liable to the public as well as the management of the firms audited. Modern financial reporting and the development of generally accepted accounting principles (GAAP) started with this federal legislation. The SEC has the authority to regulate accounting. This was delegated to the private sector and the American Institute of Accountants (AIA— later the American Institute of Certified Public Accountants or AICPA). It gave the Committee on Accounting Procedure (CAP) the responsibility to issue accounting standards in 1938. The CAP’s standards were called Accounting Research Bulletins (ARBs) and from 1938.1959, 51 ARBs were issued. Few ARBs are still in effect, but the basic structure of financial accounting has not changed much from these initial standards. Both the accounting profession and the financial community cited the CAP and this was replaced by the Accounting Principles Board (APB) in 1959. This was another AICPA committee and had many of the same problems. The APB would issue 31 Opinions until they were superseded in 1973. -->
 </section>
 <section id="emerging-technologies-and-intangible-assets" class="slide level2">
 <h2>Emerging Technologies and Intangible Assets</h2>
+<ul>
+<li>Information technology plays a pivotal role in audit today. <!-- 情報技術は、財務管理と監査において重要な役割を果たしています。 --> <!-- Most, if not all financial data is now digitally recorded, and dispersed among servers, clouds, and networks of computers, over which the audited firm has no control.  --> <!-- ほとんどすべての財務データは、現在デジタルで記録され、サーバーやクラウド、コンピュータネットワークに分散されています。 --> <!-- Additionally, firm data particularly in finance, IT, insurance, and medicine now comprise most of the audited value of the firm.  --> <!-- さらに、金融、IT、保険、医療などの企業データは、現在、企業の監査価値の大部分を占めています。 --></li>
+<li>Financial audits are critical mechanisms ensuring the integrity of information systems and the reporting of organizational finances. <!-- 財務監査は、情報システムの完全性と組織の財務報告の保証を行うための重要なメカニズムです。 --> <!-- They help avoid the abuses that led to passage of legislation such as the Foreign Corrupt Practices Act, and the Sarbanes.Oxley Act.  --> <!-- これらは、外国腐敗行為法やサーベインズ・オクスリー法などの法律の成立につながった悪用を回避するのに役立ちます。 --> <!-- - They help provide assurance that International Accounting Standards are consistently applied in calculating firm value, while controlling asset market bubbles.  --> <!-- これらは、企業価値の計算に国際会計基準が一貫して適用され、資産市場のバブルがコントロールされることを保証するのに役立ちます。 --></li>
+<li>Expanding audit challenges have fueled a growth market in auditing throughout the past decade. <!-- 拡大する監査の課題は、過去10年間を通じて監査の成長市場を推進しています。 --></li>
+<li>Both undergraduate and graduate accounting enrollments are at their highest level in the past 40 years, with accounting students making up 40% of business school enrollments (Fig. 1). <!-- 大学生と大学院生の会計登録は、過去40年間で最高水準にあり、会計学生はビジネススクールの登録の40%を占めています（図1）。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Graduate degrees are increasingly important to the profession, around <strong>40% of accounting graduates hired by public accounting firms have graduate degrees</strong>. <!-- 大学院の学位は、専門職にとってますます重要になっており、公認会計士事務所に雇用された会計学の卒業生の約40%が大学院の学位を持っています。 --></li>
+<li>The second largest group and hired into public accounting had degrees in <strong>information technology and computer science</strong>. <!-- 2番目に多いグループは、情報技術とコンピュータサイエンスの学位を持って公認会計士事務所に雇用されました。 --></li>
+<li>The most prestigious of the accounting firms, the largest accounting firms, the Big Four, have increased their intake substantially (Table 1). <!-- 会計士の中で最も名声のある、最大の会計士事務所であるビッグフォーは、採用を大幅に増やしています（表1）。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>The financial information sector of the USA and world economies are major contributors to jobs’ growth and wealth. <!-- アメリカと世界経済の金融情報部門は、雇用の成長と富に大きく貢献しています。 --></li>
+<li>In 2018, it represented around 15% of the US economy (about 2 trillion dollars) and around 10% of the global economy (around 7 trillion dollars). <!-- 2018年、アメリカ経済の約15%（約2兆ドル）、世界経済の約10%（約7兆ドル）を占めています。 --></li>
+<li>In addition to accounting firms, large banks, rating agencies, funds, private investment, and many other fields require accounting expertise to function competitively in current markets. <!-- 会計事務所に加えて、大手銀行、格付け機関、ファンド、民間投資など、多くの分野が、現在の市場で競争力を持つために会計の専門知識を必要としています。 --></li>
+<li>Increasingly that means expertise in information technologies as well. <!-- それはますます情報技術の専門知識を意味しています。 --></li>
+</ul>
 </section>
 <section id="financial-accounting" class="slide level2">
 <h2>Financial Accounting</h2>
+<ul>
+<li>Accountancy is the process of <em>communicating financial information</em> about a business entity to users such as shareholders and managers. <!-- 会計は、株主や経営者などのユーザーに対して、事業体に関する財務情報を伝達するプロセスです。 --></li>
+<li>The communication is generally in the form of <strong>financial statements</strong> that show, in money terms, the economic resources under the control of management; the art lies in selecting the information that is relevant to the user and is reliable. <!-- そのコミュニケーションは、経営陣の管理下にある経済的資源を金銭的に示す財務諸表の形で一般的に行われます。 --> <!-- この技術は財務諸表利用者にとって重要で信頼性のある情報を選択することにあります。 --></li>
+<li>The principles of accountancy are applied to business entities in three divisions of practical art, named accounting, bookkeeping, and auditing. <!-- 会計の原則は、会計、簿記、監査という3つの技術の部門に適用されます。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Accounting is defined by <strong>the American Institute of Certified Public Accountants</strong> (AICPA) as “<em>the art of recording, classifying, and summarizing in a significant manner and in terms of money, transactions and events which are, in part at least, of financial character, and interpreting the results thereof.</em>” <!-- 会計は、米国公認会計士協会（AICPA）によって「金銭的な性格の一部である取引や事象を記録、分類、要約し、その結果を解釈する」と定義されています。 --></li>
+<li>Accounting is called “<strong>the language of business</strong>” because it is the vehicle for reporting financial information about a business entity to many different groups of people. <!-- 今日、会計は「ビジネスの言語」と呼ばれています。なぜなら、それは事業体に関する財務情報を多くの異なるグループの人々に報告するための手段だからです。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="management-accounting">Management Accounting</h3>
+<ul>
+<li>Accounting that concentrates on reporting to people inside the business entity is called <em>management accounting</em> and is used to provide information to employees, managers, owner-managers, and auditors. <!-- 組織内の人々に報告することに焦点を当てた会計は管理会計と呼ばれ、従業員、マネージャー、オーナーマネージャー、監査人に情報を提供するために使用されます。 --></li>
+<li>Management accounting is concerned primarily with providing a basis <em>for making management or operating decisions</em>. <!-- 管理会計は、主に管理または運営上の意思決定の基盤を提供することに関心があります。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="financial-accounting-1">Financial Accounting</h3>
+<ul>
+<li>Accounting that provides information to <em>people outside the business entity</em> is called <strong>financial accounting</strong> and provides information to present and potential shareholders, creditors such as banks or vendors, financial analysts, economists, and government agencies. <!-- 組織外の人々に情報を提供する会計は財務会計と呼ばれ、現在および将来の株主、銀行やベンダーなどの債権者、金融アナリスト、経済学者、政府機関に情報を提供します。 --></li>
+<li>Because these <em>users have different needs</em>, the presentation of financial accounts is very structured and subject to many more rules than management accounting. <!-- これらのユーザーは異なるニーズを持っているため、財務諸表の提示は非常に構造化されており、管理会計よりも多くの規則に従っています。 --></li>
+<li>The body of rules that governs financial accounting in a given jurisdiction is called <strong>GAAP</strong>. <!-- 特定の管轄区域で財務会計を規制する規則体系を一般に受け入れられた会計原則、またはGAAPと呼びます。 --> <!-- Other rules include International Financial Reporting Standards, or IFRS, or US GAAP. --> <!-- その他の規則には、国際財務報告基準（IFRS）または米国GAAPが含まれます。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="th-century-developments">19th Century Developments</h3>
+<ul>
+<li>Accounting standards have historically been set by <em>the American Institute of Certified Public Accountants</em> (AICPA) subject to Securities and Exchange Commission regulations. <!-- 会計基準は、証券取引委員会の規制に従う米国公認会計士協会（AICPA）によって歴史的に設定されてきました。 --></li>
+<li>The AICPA first created the Committee on Accounting Procedure in 1939 and replaced that with the <em>Accounting Principles Board</em> in 1951. <!-- AICPAは1939年に会計手続委員会を設立し、1951年に会計原則委員会に置き換えました。 --></li>
+<li>In 1973, the Accounting Principles Board was replaced by the <strong>Financial Accounting Standards Board</strong> (FASB) under the supervision of the Financial Accounting Foundation with the Financial Accounting Standards Advisory Council serving to advise and provide input on the accounting standards. <!-- 1973年、会計原則委員会は、会計基準に関する助言を提供し、入力を提供するための財務会計基準諮問委員会を監督する財団の監督下にある財務会計基準委員会（FASB）に置き換えられました。 --> <!-- - Other organizations involved in determining United States’ accounting standards include the Governmental Accounting Standards Board (GASB), formed in 1984, and the Public Company Accounting Oversight Board (PCAOB). --> <!-- 米国の会計基準を決定する他の組織には、1984年に設立された政府会計基準委員会（GASB）と公開会社会計監査監督委員会（PCAOB）が含まれます。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="th-century-developments-1">20th Century Developments</h3>
+<ul>
+<li>In 2008, the FASB issued the FASB Accounting Standards Codification, which reorganized the thousands of US GAAP pronouncements into roughly 90 accounting topics. <!-- 2008年、FASBはFASB会計基準コーディネーションを発行し、数千の米国GAAP声明を約90の会計トピックに再編しました。 --></li>
+<li>In 2008, the Securities and Exchange Commission issued a preliminary “<strong>roadmap</strong>” that may lead the USA to abandon Generally Accepted Accounting Principles in the future and to join more than 100 countries around the world instead of using the London-based International Financial Reporting Standards. <!-- 2008年、証券取引委員会は、将来米国が一般に受け入れられた会計原則を放棄し、ロンドンを拠点とする国際財務報告基準の代わりに世界中の100か国以上に参加する可能性がある「ロードマップ」を発行しました。 --> <!-- - As of 2010, the convergence project was underway with the FASB meeting routinely with the IASB. --> <!-- 2010年時点で、FASBは定期的にIASBと会合を開催していました。 --></li>
+<li>The SEC expressed their aim to fully adopt International Financial Reporting Standards in the USA by 2014. <!-- SECは、2014年までに米国で国際財務報告基準を完全に採用することを目指していました。 --> <!-- With the convergence of the US GAAP and the international IFRS accounting systems, as the highest authority over International Financial Reporting Standards, the International Accounting Standards Board is becoming more important in the US. --> <!-- US GAAPと国際IFRS会計システムのコンバージェンスにより、国際財務報告基準の最高機関として、国際会計基準委員会は米国でますます重要になっています。 --></li>
+</ul>
 </section>
 <section id="the-products-of-accounting-financial-statements" class="slide level2">
 <h2>The Products of Accounting: Financial Statements</h2>
@@ -564,9 +2808,9 @@ Soichi Matsuura
 <section class="slide level2">
 
 <p>A company’s balance sheet is set up like the basic accounting equation.</p>
-<p><span class="math display">\[
+<p><span class="math display">
 Assets = Liabilities + Shareholders' Equity
-\]</span></p>
+</span></p>
 <p>On the left side of the balance sheet, companies list their assets. On the right side, they list their liabilities and shareholders’ equity. <!-- Sometimes balance sheets show assets at the top, followed by liabilities, with shareholders' equity at the bottom. --></p>
 </section>
 <section id="current-and-noncurrent-assets-and-liabilities" class="slide level2">
@@ -635,17 +2879,22 @@ Assets = Liabilities + Shareholders' Equity
 <section id="the-methodology-of-accounting" class="slide level2">
 <h2>The Methodology of Accounting</h2>
 <ul>
-<li>Financial accounting is the vehicle through which firms can <strong>record and repor</strong>t important economic transactions that affect their wealth. <!-- 財務会計は、企業が自らの富に影響を与える重要な経済取引を記録し報告できる手段です。 --></li>
+<li>Financial accounting is the vehicle through which firms can <strong>record and report</strong> important economic transactions that affect their wealth. <!-- 財務会計は、企業が自らの富に影響を与える重要な経済取引を記録し報告できる手段です。 --></li>
 <li>It is a quasi-axiomatic system where fundamental “principles” are loosely applied to the recording of economic events (transactions) that affect firm wealth. <!-- これは、基本的な「原則」が企業の富に影響を与える経済的イベント（取引）の記録に緩く適用される準公理的システムです。 --></li>
 <li>These detailed transactions are summarized into accounts based on a firm-specific classification called <em>the Chart of Accounts</em>. <!-- これらの詳細な取引は、勘定科目と呼ばれる企業固有の分類に基づいて集計されます。--></li>
-<li>The accounts are further organized and summarized for reporting in accordance with <strong>generally accepted accounting principles</strong> (GAAP). <!-- これらの勘定科目は、一般に受け入れられた会計原則（GAAP）に従って報告するためにさらに整理され要約されます。--></li>
 </ul>
 </section>
 <section class="slide level2">
 
 <ul>
-<li>The accounting perspective in practice today derives from Al-Khwarizmi’s eighth century system of algebraic balancing and arithmetic manipulation. <!-- 現在の実践の会計視点は、アル＝ワリズミの8世紀の代数的バランスと算術操作のシステムに由来します。--></li>
+<li>The accounts are further organized and summarized for reporting in accordance with <strong>generally accepted accounting principles</strong> (GAAP). <!-- これらの勘定科目は、一般に受け入れられた会計原則（GAAP）に従って報告するためにさらに整理され要約されます。--></li>
+<li>The accounting perspective in practice today derives from al-Khwarizmi’s eighth century system of algebraic balancing and arithmetic manipulation. <!-- 現在の実践の会計視点は、アル＝ワリズミの8世紀の代数的バランスと算術操作のシステムに由来します。--></li>
 <li>The system is inherently linear—prices and costs are assumed to be additive and generally are considered fixed across transactions. <!-- このシステムは本質的に線形です。価格とコストは加法的であると仮定され、通常、取引を超えて固定されていると考えられています。--></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
 <li>But in practice, many economic processes are non-linear and data may be incomplete and inaccurate. <!-- しかし、実際には、多くの経済プロセスは非線形であり、データは不完全で不正確である可能性があります。--></li>
 <li>Consequently, modern accounting reports are economic approximations that are made to facilitate tractability and scalability in accounting systems. <!-- したがって、現代の会計報告は、会計システムの追跡性と拡張性を容易にするために行われる経済的近似値です。--></li>
 <li>The perspective adopted by modern auditors reects trade-offs made in accounting reports, and many standard audit procedures accommodate the inherent uncertainty of financial accounting. <!-- 現代の監査人が採用する視点は、会計報告で行われるトレードオフを反映しており、多くの標準的な監査手続きは財務会計の固有の不確実性に適応しています。--></li>
@@ -701,6 +2950,89 @@ Assets = Liabilities + Shareholders' Equity
 <li>Unfortunately, many built-in machine editors try to convert quotation marks to distinct opening and closing forms, which will cause the resulting code to throw an error.</li>
 <li>Be aware that ‘copy &amp; paste’ code may require some additional editing.</li>
 </ul>
+<!-- ## The R Programming Language -->
+</section></section>
+<section>
+<section id="r-入門" class="title-slide slide level1 center">
+<h1>R 入門</h1>
+
+</section>
+<section id="rとは" class="slide level2">
+<h2>Rとは</h2>
+<ul>
+<li>Rは統計解析やデータ処理のためのプログラミング言語</li>
+<li>いくつかのパッケージ、関数、データ構造を覚えればすぐに使える</li>
+<li>データの読み込み、加工、可視化、分析、報告まで一貫して使える</li>
+<li>データ分析のためのプログラミング言語として最も広く使われている</li>
+</ul>
+</section>
+<section id="まず使ってみよう" class="slide level2">
+<h2>まず使ってみよう</h2>
+<p>電卓のように使ってみましょう。</p>
+<div id="qwebr-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="利点関数化" class="slide level2">
+<h2>利点：関数化</h2>
+<p>プログラミングをするメリットの1つは関数化です。</p>
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>関数として定義しておけば、何度も使いまわすことができます。</p>
+</section>
+<section id="利点繰り返し処理" class="slide level2">
+<h2>利点：繰り返し処理</h2>
+<p>サイコロを10回振って，出た目の平均を計算する，という処理を10回繰り返す。</p>
+<div id="qwebr-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="利点分岐処理" class="slide level2">
+<h2>利点：分岐処理</h2>
+<p>条件によって処理を変えることもできます。 先ほどのサイコロの例で、平均値が3.5より大きい場合は「大きい」と表示する。</p>
+<div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="エクササイズ" class="slide level2">
+<h2>エクササイズ</h2>
+<p>サイコロの出た目の平均値は，理論的には <span class="math display">
+\frac{1+2+3+4+5+6}{6} = 3.5
+</span></p>
+<p>となりますが，実際にサイコロをたくさん降ると平均値が3.5になるか確認してください。</p>
+<div id="qwebr-insertion-location-5"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="cuiとgui" class="slide level2">
+<h2>CUIとGUI</h2>
+<ul>
+<li><strong>CUI</strong> (Character User Interface) : 文字だけで操作するインターフェース</li>
+<li><em>GUI</em> (Graphical User Interface) : グラフィカルなインターフェース</li>
+</ul>
+<p>CUIはコマンドを覚える必要があるけれど、マウスのクリックとは異なり、書いておけばいつでも<strong>再現</strong>できる。 <strong>再現性</strong>がデータ分析で非常に重要なので、クリックがメインのアプリケーションは使わない。</p>
+</section>
+<section id="rstudioやvs-code" class="slide level2">
+<h2>RStudioやVS Code</h2>
+<ul>
+<li>とはいえ、コマンドを覚えるのは大変なので、RStudioやVS Codeのような統合開発環境を使うと便利です。</li>
+<li>あとは、MicrosoftのCopilotなどのAIがコードを書いてくれるツールもあります。</li>
+<li>Github CopilotがVS CodeやRsudioで使えるようになるととても便利です。</li>
+</ul>
+</section>
+<section id="rの実行環境" class="slide level2">
+<h2>Rの実行環境</h2>
+<ol type="1">
+<li>自分のPCにRなどをインストールする方法</li>
+</ol>
+<ul>
+<li>ネット環境がなくても使える</li>
+<li>いろいろインストールしなきゃならない</li>
+</ul>
+<ol start="2" type="1">
+<li>Posit CloudやGoogle Colarabolatoryを使う方法</li>
+</ol>
+<ul>
+<li>インストール不要</li>
+<li>ネットに繋げないと使えない</li>
+</ul>
+<p>こだわりがなければ、Posit Cloudを使うのが一番簡単</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -723,7 +3055,6 @@ Assets = Liabilities + Shareholders' Equity
   <script src="gaisho_2024_01_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="gaisho_2024_01_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="gaisho_2024_01_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="gaisho_2024_01_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -883,34 +3214,16 @@ Assets = Liabilities + Shareholders' Equity
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1400,
 
         height: 700,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom
@@ -1141,6 +3454,122 @@ Assets = Liabilities + Shareholders' Equity
         }
       }
     });
+    </script>
+    <script type="module">
+    // Handle cell initialization initialization
+    qwebrCellDetails.map(
+      (entry) => {
+        // Handle the creation of the element
+        qwebrCreateHTMLElement(entry);
+        // In the event of interactive, initialize the monaco editor
+        if (entry.options.context == EvalTypes.Interactive) {
+          qwebrCreateMonacoEditorInstance(entry);
+        }
+      }
+    );
+
+    // Identify non-interactive cells (in order)
+    const filteredEntries = qwebrCellDetails.filter(entry => {
+      const contextOption = entry.options && entry.options.context;
+      return ['output', 'setup'].includes(contextOption) || (contextOption == "interactive" && entry.options && entry.options.autorun === 'true');
+    });
+
+    // Condition non-interactive cells to only be run after webR finishes its initialization.
+    qwebrInstance.then(
+      async () => {
+        const nHiddenCells = filteredEntries.length;
+        var currentHiddenCell = 0;
+
+
+        // Modify button state
+        qwebrSetInteractiveButtonState(`🟡 Running hidden code cells ...`, false);
+
+        // Begin processing non-interactive sections
+        // Due to the iteration policy, we must use a for() loop.
+        // Otherwise, we would need to switch to using reduce with an empty
+        // starting promise
+        for (const entry of filteredEntries) {
+
+          // Determine cell being examined
+          currentHiddenCell = currentHiddenCell + 1;
+          const formattedMessage = `Evaluating hidden cell ${currentHiddenCell} out of ${nHiddenCells}`;
+
+          // Update the document status header
+          if (qwebrShowStartupMessage) {
+            qwebrUpdateStatusHeader(formattedMessage);
+          }
+
+          // Display the update in non-active areas
+          qwebrUpdateStatusMessage(formattedMessage);
+
+          // Extract details on the active cell
+          const evalType = entry.options.context;
+          const cellCode = entry.code;
+          const qwebrCounter = entry.id;
+
+          if (['output', 'setup'].includes(evalType)) {
+            // Disable further global status updates
+            const activeContainer = document.getElementById(`qwebr-non-interactive-loading-container-${qwebrCounter}`);
+            activeContainer.classList.remove('qwebr-cell-needs-evaluation');
+            activeContainer.classList.add('qwebr-cell-evaluated');
+
+            // Update status on the code cell
+            const activeStatus = document.getElementById(`qwebr-status-text-${qwebrCounter}`);
+            activeStatus.innerText = " Evaluating hidden code cell...";
+            activeStatus.classList.remove('qwebr-cell-needs-evaluation');
+            activeStatus.classList.add('qwebr-cell-evaluated');
+          }
+
+          switch (evalType) {
+            case 'interactive':
+              // TODO: Make this more standardized.
+              // At the moment, we're overriding the interactive status update by pretending its
+              // output-like. 
+              const tempOptions = entry.options;
+              tempOptions["context"] = "output"
+              // Run the code in a non-interactive state that is geared to displaying output
+              await qwebrExecuteCode(`${cellCode}`, qwebrCounter, tempOptions);
+              break;
+            case 'output':
+              // Run the code in a non-interactive state that is geared to displaying output
+              await qwebrExecuteCode(`${cellCode}`, qwebrCounter, entry.options);
+              break;
+            case 'setup':
+              const activeDiv = document.getElementById(`qwebr-noninteractive-setup-area-${qwebrCounter}`);
+
+              // Store code in history
+              qwebrLogCodeToHistory(cellCode, entry.options);
+
+              // Run the code in a non-interactive state with all output thrown away
+              await mainWebR.evalRVoid(`${cellCode}`);
+              break;
+            default: 
+              break; 
+          }
+
+          if (['output', 'setup'].includes(evalType)) {
+            // Disable further global status updates
+            const activeContainer = document.getElementById(`qwebr-non-interactive-loading-container-${qwebrCounter}`);
+            // Disable visibility
+            activeContainer.style.visibility = 'hidden';
+            activeContainer.style.display = 'none';
+          }
+        }
+      }
+    ).then(
+      () => {
+        // Release document status as ready
+
+        if (qwebrShowStartupMessage) {
+          qwebrStartupMessage.innerText = "🟢 Ready!"
+        }
+      
+        qwebrSetInteractiveButtonState(
+          `<i class="fa-solid fa-play qwebr-icon-run-code"></i> <span>Run Code</span>`, 
+          true
+        );  
+      }
+    );
     </script>
     
 
