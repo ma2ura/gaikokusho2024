@@ -1,0 +1,476 @@
+---
+title: |
+  <b>外国書購読 Day1</b> </br>
+  <span style="color: #282A36; ">Day1:Guidance and Introduction</span>
+author: "Soichi Matsuura"
+format:
+  revealjs:
+    theme: ["default", "dracula.scss"]
+    transition: convex
+    slide-number: true
+    df_print: paged
+    code-line-numbers: false
+# webr:
+#   packages: ['dplyr','ggplot2','readr'] # Install R packages on document open
+# filters:
+#   - webr
+execute:
+  echo: true
+  warning: false
+---
+
+# Guidannce and Introduction
+
+## Introduction
+
+<!-- この科目の目的は，財務諸表監査にデータサイエンスを組み込みことをネタに，監査の勉強とRの勉強をやってみましょう，というものです。--->
+- This lecture is designed to introduce the concept of audit analytics and how it can be used in auditing financial statements.
+- The course will cover the basics of financial accounting and auditing, and how data science can be used to improve the audit process.
+- The course will also cover the use of R programming language for data analysis and visualization.
+- This course never requires any prior knowledge of R programming language, but some basic knowledge of accounting or auditing is recommended.
+
+## Course Objectives
+
+- Understand the basics of financial accounting and auditing
+- Learn how data science can be used in auditing financial statements
+- Learn how to use R programming language for data analysis and visualization
+
+
+## Textbook
+
+::::{.columns}
+:::{.column width=49%}
+![Audit Analytics](img/auditanalytics.jpg){width=80%}
+:::
+
+:::{.column width=2%}
+:::
+
+:::{.column width=49%}
+- Title: Audit Analytics: Data Science for the Accounting Profession (Use R!)
+- Author: Westland, J. C.
+- Publisher: Springer
+- Year: 2019
+
+配布するので，買わなくてもよいです。
+:::
+::::
+
+## Grade
+
+The final grade will be based on the following components:
+
+- Attendance and Participation: 50%
+- Presentation: 30%
+- Final Report: 20%
+
+
+## Schedule
+
+:::{.columns}
+::::{.column width=49%}
+- Day 1: Fundamentals of Auditing Financial Reports (Chapter1)
+- Day 2: Foundations of Audit Analytics (Chapter 2)
+- Day 3: Analysis of Accounting Transactions (Chapter 3)
+- Day 4: Risk Assessment and Planning (Chapter 4)
+::::
+
+::::{.column width=2%}
+::::
+
+::::{.column width=49%}
+
+- Day 5: Analytical Review: Technical Analysis (Chapter 5)
+- Day 6: Intelligence Scanning (Chapter 6) ?
+- Day 7: Design of Audit Programs (Chapter 7)
+- Day 8: Interim Compliance Tests (Chapter 8)
+::::
+:::
+
+## Assignments
+
+- This class requires **about 4 pages translation** of the textbook for all students.
+<!-- この授業では、全学生にテキストの約4ページの翻訳が必要です。 -->
+- The translation should be submitted by next week.
+<!-- 翻訳は学期末までに提出する必要があります。 -->
+- The translation will be evaluated based on the accuracy of the translation and the quality of the writing.
+<!-- 翻訳は、翻訳の正確さと執筆の質に基づいて評価されます。 -->
+
+## Participation
+
+Class participation is critical. 
+<!-- クラス参加は重要です。 -->
+The class should be a common learning experience, where students collaborate with their group members and contribute to in-class discussions.
+<!-- クラスは、学生がグループメンバーと協力して授業中のディスカッションに貢献する共通の学習体験であるべきです。 -->
+The instructor and your team members will each evaluate your participation at the end of the term.
+<!-- 最終的に、講師とチームメンバーは、あなたの参加を評価します。 -->
+Criteria that will be used to judge the effectiveness of your participation include (1) Do you work well with others in preparing the group cases? 
+<!-- あなたの参加の効果を判断するために使用される基準には、(1) グループケースの準備において他の人と協力していますか？ -->
+(2) Do your comments show evidence of appropriate, insightful analysis of the case? (3) Are you a good listener as well as speaker? Can you play off the comments of others? (4) Are you willing to test new ideas? Or are all your comments “safe”? To
+encourage widespread participation, a random number generator will be used to create a call list.
+Each student should expect to be called upon at least once per class. 
+Your group will also present
+twice to the class during the quarter. 
+
+
+
+# 前半戦 第3限
+
+## Auditing
+
+- **An audit** is an *independent examination* of the records of an organization to ascertain how far the financial statements as well as non financial disclosures, present a true and fair view of the concern.
+- It also provides **assurance** that the systems of record-keeping are well-controlled and accurate as required by law.
+Auditing has become such a ubiquitous phenomenon in the corporate and the public sector that academics started identifying an ``Audit Society`` (Power 1997). 堀口先生訳「監査社会」
+
+
+
+## History of Auditing
+
+- The earliest surviving mention of a public official charged with auditing government expenditure is a reference to the Auditor of the Exchequer(財務省) in England in 1314 (Matthews 2006).
+<!-- 政府支出の監査を担当する公務員に関する現存する最古の記述は、1314年のイギリスの大蔵監査役に関する言及である（Matthews 2006）。 -->
+- The medieval Latin term was **auditus compoti** from Latin auditus "a hearing," at a time that literacy levels were low, and an official examination of accounts was presented orally.
+<!-- 中世ラテン語の用語は、ラテン語のauditus「聴聞」に由来する**auditus compoti**で、当時は識字率が低く、公式の会計検査は口頭で行われた。 -->
+
+
+---
+
+- Auditing initially existed primarily for governmental accounting and was concerned mostly with record-keeping rather than accounting procedures (Matthews 2006).
+<!-- - 監査は当初、主に政府会計のために存在し、会計処理よりもむしろ記録保持に関心があった（Matthews 2006）。 -->
+It was not until the Industrial Revolution in the eighteenth century that auditing began evolving into a field of fraud detection and financial accountability.
+<!-- 監査が不正発見と財務説明責任の分野に発展し始めたのは、18世紀の産業革命以降のことである。 -->
+
+- The early twentieth century saw the standardization of ‘auditors’ testing methods and reporting practices and a growing role by banks and shareholders for public companies.
+<!-- - 20世紀初頭には、「監査人」の検査方法と報告慣行が標準化され、公開企業に対する銀行と株主の役割が増大した。 -->
+Auditors developed a system for examining a **representative sample** of a company’s transactions, rather than examining each transaction in detail, allowing audits to be completed in less time and at lower costs.
+<!-- 監査人は、各取引を詳細に調査するのではなく、企業の取引の代表的なサンプルを調査するシステムを開発し、監査をより短時間かつ低コストで完了できるようにした。 -->
+
+
+---
+
+- By that time, audit findings were regularly presented as standard "Independent Auditor’s Reports" accompanying a firm’s financial statements.
+<!-- その頃には、監査結果は、会社の財務諸表に添付される標準的な「独立監査人の報告書」として定期的に提示されるようになっていた。 -->
+- Statistical sampling of transactions is now the industry standard in performing audits.
+<!-- 現在では、取引の統計的サンプリングが監査を実施する際の業界標準となっている。 -->
+- As a consequence, computer tools to conduct statistical samples and opinions based on them are an integral part of modern auditing.
+<!-- その結果、統計的サンプルを実施するためのコンピュータ・ツールとそれに基づく意見は、現代の監査に不可欠な要素となっている。 -->
+- It is only when gross errors or fraudulent activities are uncovered that comprehensive audits are performed.
+<!-- 包括的な監査が行われるのは、重大な誤りや不正行為が発覚した場合のみである。 -->
+- As businesses have increased in complexity, such “risk-based” auditing has evolved to make auditing more efficient and economical.
+<!-- ビジネスが複雑化するにつれ、このような「リスクベース」の監査は、監査をより効率的かつ経済的にするために進化してきた。 -->
+
+---
+
+
+Risk-based auditing starts by assessing whether an audit is even needed, based on a review of information in the financial statements.
+If the review finds adverse trends or irregularities, audit scope may be expanded accordingly.
+Through audits, stakeholders may effectively evaluate and improve the effectiveness of risk management, control, and corporate governance.
+In the USA, audits of publicly traded companies are governed by rules laid down by the Public Company Accounting Oversight Board (PCAOB), which was established by Section 404 of the Sarbanes–Oxley Act of 2002.
+
+---
+
+Such an audit is called an **integrated audit**, where auditors, in addition to an opinion on the financial statements, must also express an opinion on the effectiveness of a company’s internal control over financial reporting, in accordance with PCAOB Auditing Standard No.5.
+
+
+## Computers in Auditing and the Birth of Audit Analytics
+
+## The Roots of Modern Financial Accounting and Auditing
+
+### Al-Khwarizmi Algebra of Double-Entry
+
+### The Renaissance
+
+- For two centuries, during the rise of the great Italian banking centers of Genoa, Florence, and Venice, Italian banking recorded transactions, made loans, issued scripts, and carried on with numerous other financial activities that we would recognize today.
+<!-- 2世紀にわたり、イタリアのジェノヴァ、フィレンツェ、ヴェネツィアの大きな銀行センターが台頭する中、イタリアの銀行は取引を記録し、融資を行い、スクリプトを発行し、多くの他の金融活動を行っていました。 -->
+- Initially they used single-entry recording (date, and account affected), but this proved error prone as transaction volume increased.
+<!-- 最初は単式記入（日付と影響を受ける勘定科目）を使用していましたが、取引量が増加すると誤りが生じることがわかりました。 -->
+- Fibbonaci’s Liber Abbaci was widely read, and influential.
+<!-- フィボナッチの「リベル・アバッチ」は広く読まれ、影響力があった。 -->
+- Giovanni di Bicci de’ Medici introduced double-entry bookkeeping for the Medici bank in the fourteenth century.
+<!-- 14世紀にジョヴァンニ・ディ・ビッチ・デ・メディチがメディチ銀行に複式簿記を導入しました。 -->
+- By the end of the fifteenth century, merchant ventures in Venice used this system widely.
+15世紀末までに、ヴェネツィアの商人たちはこのシステムを広く使用していました。
+
+---
+
+The fifteenth century also saw the invention of the printing press in Germany, and affordable, widely available reading glasses from Venetian glassmakers.
+<!-- 19世紀には、ドイツで印刷機が発明され、ヴェネツィアのガラス職人から手頃な価格で入手可能な読書眼鏡が登場した。 -->
+Leo X’s Vatican was an enthusiastic customer, where printing presses were used to churn out indulgences, and subsequently, Italy became a center of printing, book publishing, and literature.
+<!-- レオ10世のバチカンは熱心な顧客であり、印刷機が贖宥状を大量生産するために使用され、その後、イタリアは印刷、書籍出版、文学の中心地となった。 -->
+One of the first great texts on mathematics was published by a close friend of Leonardo da Vinci, Venetian Luca Pacioli, in 1494.
+<!-- 最初の偉大な数学のテキストの1つは、レオナルド・ダ・ヴィンチの親友であるヴェネツィア人のルカ・パチオリによって1494年に出版された。 -->
+Summa de Arithmetica, Geometria, Proportioni et Proportionalita (Everything About Arithmetic, Geometry and Proportion) formally described the widely used but still controversial system of double-entry for a much wider audience.
+<!-- 「Summa de Arithmetica, Geometria, Proportioni et Proportionalita（算術、幾何学、比例と比例についてすべて）」は、広範な観衆のために広く使用されているがまだ議論の余地のある複式記入システムを正式に記述した。 -->
+Pacioli’s Summa included one chapter titled, Details of Accounting and Recording that popularized the Method of Venice for accounting (an evolution of Al-Khwarizmi’s method).
+<!-- パチオリのSummaには、「会計と記録の詳細」の1章が含まれており、会計のためのヴェネツィア法（アル＝ワリズミの方法の進化）を広めた。 -->
+Pacioli’s Summa described the components of bookkeeping as: a memorandum book, journal, and ledger, with the journal and ledger similar to modern equivalents.
+<!-- パチオリのSummaは、帳簿の構成要素を、日記帳、仕訳帳、元帳として記述し、日記帳と元帳は現代の相当物に似ている。 -->
+A trial balance was used when the books were closed.
+<!-- 帳簿を閉じる際には、試算表が使用された。 -->
+The profit or loss was entered into the capital account to balance the balance sheet.
+<!-- 利益または損失は、貸借対照表をバランスさせるために資本勘定に入力された。 -->
+Thanks to Gutenberg’s printing press, Summa was published throughout Europe.
+<!-- グーテンベルクの印刷機のおかげで、Summaはヨーロッパ中で出版された。 -->
+
+
+Pacioli’s Summa was translated into the most commonly read vernaculars in Europe and was influential not only in investment and merchant ventures but in accounting in the great estates of Europe.
+<!-- パチオリのSummaは、ヨーロッパで最も一般的に読まれる方言に翻訳され、投資や商業活動だけでなく、ヨーロッパの大農場の会計にも影響を与えました。 -->
+Over the next 400 years it became the standard, in only slightly modi.ed form, for accounting in all realms of business in Europe.
+<!-- その後の400年間で、わずかに修正された形で、ヨーロッパのあらゆるビジネス領域の会計の標準となりました。 -->
+Before the Industrial Revolution, China and India were the wealthiest economies in the world.
+Mughal India’s annual revenues were twenty times that of France.
+<!-- 産業革命以前、中国とインドは世界で最も豊かな経済でした。ムガル帝国インドの年間収入はフランスの20倍でした。 -->
+In China, Qianlong demanded that Britain’s ambassador Lord McCartney kowtow and informed him that China was in need of nothing from the West.
+<!-- 中国では、乾隆帝(けんりゅうてい)はイギリスの大使マッカートニー卿に頭を下げるよう要求し、中国は西洋から何も必要としていないことを伝えました。 -->
+
+### The Industrial Revolution
+
+
+### The Birth of Modern Auditing
+
+
+- At the start of the 19th century, eleven Londoners listed their occupation as the archaic “Accomptants.”
+- As industry, mass transportation and capital markets expanded so did the need for accountants.
+- Business regulation increased, and industry was often taxed heavily, promoting the need for professionals.
+The Bankruptcy Act of 1831 allowed accountants to be appointed “Official Assignees,” the first government recognition of the new profession.
+- A primary role became the preparation of accounts and the balance sheet of public companies.
+- Bankrupt firms were especially likely to use their services, which increasingly served an audit function.
+
+The British Companies Act of 1844 established the incorporation of business by a formal registration process.
+It required annual appointment of auditors to examine the accounts and balance sheet of all public companies (the role of accountants under the British Companies Act would change substantially over the century).
+The Companies Act of 1862 required banks to be audited and established the practice of limited cash dividends to be paid only out of profits.
+By 1900, the audit was the central practice of accountants.
+The earliest of the Big Six accounting firms were started in mid-nineteenth century London.
+William Deloitte opened a London firm in 1845.
+Samuel Price and Edwin Waterhouse formed their partnership in 1849.
+William Cooper started his firm in 1854, to be joined by his brothers in 1861.
+William Peat started in 1867.
+These men were active in establishing the Institute of Accounting in the 1870s, and a royal charter was granted in 1880.
+With the Institute and professional requirements to become Chartered Accountants, the profession of accountants was firmly established.
+
+Many of the current methods in cost accounting were developed after 1880.
+The Scienti.c Management analysis of mass production was a major factor.
+Engineers using job analysis as well as time and motion studies determined “scienti.c” standards of material and labor to produce each unit of output.
+Complex machines required complex engineering and efficient use of workers to perform specialized and repetitive tasks.
+Standard costs became a significant efficiency measure.
+Frederick Taylor analyzed the best ways to use labor and machines, and standards were determined to minimize waste.
+The focus was on cost cutting rather than product quality.
+Actual costs could be compared to standard costs to measure performance, and the variances between actual and standard costs analyzed to determine potential corrective action.
+Measuring and allocating overhead costs also were major concerns of Scienti.c Management.
+
+Prior to the 1950s, management used cost accounting information primarily for planning purposes; while operating control normally was based on non-accounting information.
+For example, Du Pont used ROI for planning, but control was based on factors such as timeliness of delivery to customers and product quality.
+Multidivisional business organizations became more pronounced, and businesses turned to decoupling—different production processes took place at different sites, perhaps thousands of miles away.
+
+
+### Public Accounting
+
+
+## Emerging Technologies and Intangible  Assets
+
+## Financial Accounting
+
+## The Products of Accounting: Financial Statements
+
+There are four main financial statements.
+
+1. Balance sheets
+2. Income statements
+3. Cash flow statements
+4. Statements of shareholders' equity.
+
+---
+
+- Balance sheets show what a company owns and what it owes  **at a fixed point in time**.
+- Income statements show how much money a company made and spent **over a period of time**.
+- Cash flow statements show the exchange of money between a company and the outside world also over a period of time.
+- Statement of shareholders' equity shows changes in the interests of the company’s shareholders over time.
+
+## The Balance Sheet
+
+A balance sheet provides detailed information about a company’s *assets*, *liabilities*, and *shareholders' equity*.
+
+### Assets
+
+- Assets : company owns that have value.
+  - This typically means they can either *be sold* or *used* by the company to make products or provide services that can be sold.
+  - Assets include *physical* property.
+  - It also includes things that cannot be touched but nevertheless exist and have value.
+
+---
+
+### Liabilities
+
+- Liabilities are amounts of money that a company owes to others.
+  - This can include **all kinds of obligations**, like money borrowed from a bank to launch a new product, rent for use of a building, money owed to suppliers for materials, payroll a company owes to its employees, environmental cleanup costs, or taxes owed to the government.
+  - Liabilities also include obligations to provide goods or services to customers *in the future*.
+
+
+---
+
+### Shareholders' Equity
+
+- Shareholders' equity is sometimes called **capital** or **net worth**.
+  - It is the money that would be left if a company sold all of its assets and paid off all of its liabilities.
+  - This leftover money belongs to the shareholders, or the owners, of the company.
+
+---
+
+A company’s balance sheet is set up like the basic accounting equation.
+
+$$
+Assets = Liabilities + Shareholders' Equity
+$$
+
+On the left side of the balance sheet, companies list their assets.
+On the right side, they list their liabilities and shareholders' equity.
+<!-- Sometimes balance sheets show assets at the top, followed by liabilities, with shareholders' equity at the bottom. -->
+
+## Current and Noncurrent Assets and Liabilities
+
+- Assets are generally listed based on how quickly they will be converted into cash.
+- Current assets are things a company expects to convert to cash within 1 year.
+<!-- A good example is inventory. Most companies expect to sell their inventory for cash within 1 year. -->
+- Noncurrent assets are things a company does not expect to convert to cash within 1 year or that would take longer than 1 year to sell.
+<!-- Noncurrent assets include fixed assets. -->
+<!-- Fixed assets are those assets used to operate the business but that are not available for sale, such as trucks, of.ce furniture, and other property. -->
+
+---
+
+- Liabilities are generally listed based on their due dates.
+- Liabilities are said to be either current or long term.
+- Current liabilities are obligations a company expects to pay off within the year.
+- Long-term liabilities are obligations due more than 1 year away.
+
+---
+
+- Shareholders' equity is the amount owners invested in the company’s stock, plus or minus the company’s earnings or losses since inception.
+- Sometimes companies distribute earnings, instead of retaining them.
+- These distributions are called dividends.
+- A balance sheet shows a snapshot of a company’s assets, liabilities, and shareholders' equity at the end of the reporting period.
+- It does not show the flows into and out of the accounts during the period.
+
+## The Income Statement
+
+- An income statement is a report that shows how much revenue a company earned over **a specific time period**.
+- An income statement also shows *the costs and expenses associated with earning that revenue*.
+- The literal “bottom line” of the statement usually shows the company’s net earnings or losses.
+<!-- This tells you how much the company earned or lost over the period.  -->
+- Income statements also report 'EPS'.
+- This calculation tells you *how much money shareholders would receive if the company decided to distribute all of the net earnings for the period*.
+
+## Cash Flow Statements
+
+- Cash flow statements report a *company’s inflow and outflow of cash*.
+- This is important because a company needs to have enough cash on hand to pay its expenses and purchase assets.
+- While an income statement can tell you whether a company made a profit, a cash flow statement can tell you whether the company generated cash.
+
+---
+
+<!-- A cash flow statement shows changes over time rather than absolute dollar amounts at a point in time.  -->
+<!-- It uses and reorders the information from a company’s balance sheet and income statement.  -->
+- Cash Flow Statements may be generalized to **Working Capital Statements**, which replace cash in the calculations, with more general Current Assets and Current Liabilities, both of which are expected to expire within the operating cycle (typically 1 year) and thus are what would be called “*near-cash*.”
+- The bottom line of the cash flow statement shows the net increase or decrease in cash for the period.
+
+---
+
+Cash flow statements are divided into three main parts.
+Each part reviews the cash flow from one of three types of activities:
+
+1. **operating** activities
+2. **investing** activities
+3. **financing** activities
+
+
+## The Methodology of Accounting
+
+- Financial accounting is the vehicle through which firms can **record and repor**t important economic transactions that affect their wealth.
+<!-- 財務会計は、企業が自らの富に影響を与える重要な経済取引を記録し報告できる手段です。 -->
+- It is a quasi-axiomatic system where fundamental “principles” are loosely applied to the recording of economic events (transactions) that affect firm wealth.
+<!-- これは、基本的な「原則」が企業の富に影響を与える経済的イベント（取引）の記録に緩く適用される準公理的システムです。 -->
+- These detailed transactions are summarized into accounts based on a firm-specific classification called *the Chart of Accounts*.
+<!-- これらの詳細な取引は、勘定科目と呼ばれる企業固有の分類に基づいて集計されます。-->
+- The accounts are further organized and summarized for reporting in accordance with **generally accepted accounting principles** (GAAP).
+<!-- これらの勘定科目は、一般に受け入れられた会計原則（GAAP）に従って報告するためにさらに整理され要約されます。-->
+
+---
+
+
+- The accounting perspective in practice today derives from Al-Khwarizmi’s eighth century system of algebraic balancing and arithmetic manipulation.
+<!-- 現在の実践の会計視点は、アル＝ワリズミの8世紀の代数的バランスと算術操作のシステムに由来します。-->
+- The system is inherently linear—prices and costs are assumed to be additive and generally are considered fixed across transactions.
+<!-- このシステムは本質的に線形です。価格とコストは加法的であると仮定され、通常、取引を超えて固定されていると考えられています。-->
+- But in practice, many economic processes are non-linear and data may be incomplete and inaccurate.
+<!-- しかし、実際には、多くの経済プロセスは非線形であり、データは不完全で不正確である可能性があります。-->
+- Consequently, modern accounting reports are economic approximations that are made to facilitate tractability and scalability in accounting systems.
+<!-- したがって、現代の会計報告は、会計システムの追跡性と拡張性を容易にするために行われる経済的近似値です。-->
+- The perspective adopted by modern auditors reects trade-offs made in accounting reports, and many standard audit procedures accommodate the inherent uncertainty of financial accounting.
+<!-- 現代の監査人が採用する視点は、会計報告で行われるトレードオフを反映しており、多くの標準的な監査手続きは財務会計の固有の不確実性に適応しています。-->
+
+### The Accounting Process and Major Document Files
+
+### Code and Data Repositories for Audit Analytics
+
+# 後半戦 第4限
+
+## R Packages Required for This Book
+
+- The code requires R packages that are specified in the `library("package_name")` commands.
+- To install `tidyverse` package, type `install.packages("tidyverse")` and then press the Enter/Return key.
+- To load the previously installed package, type `library(tidyverse)`.
+- These will be packages such as `tidyverse` and `keras`.
+
+## `Keras`
+
+- `Keras` is the API for the *Tensorflow machine learning language* and requires a separate keras installation with `install_keras`; general notes on Tensorflow installation are provided below.
+- Tensorflow itself is a collection of algorithms written in multiple languages inside a Python wrapper.
+- It requires a Python environment be installed; further information can be found at `https://www.tensorflow.org/`.
+- Tensorflow Installation Tensorflow is a machine learning package used in this book; commands to Tensorflow are called using the Keras API.
+<!-- - Prior to using the tensorflow R package, you need to install a version of TensorFlow on your system using the R `install_tensorflow()` function, which provides an easy-to-use wrapper for the various steps required to install TensorFlow. -->
+
+## TensorFlow
+
+You can also choose to install TensorFlow manually (as described at `https://www.tensorflow.org/install/`).
+TensorFlow for R is tested and supported on the following 64-bit systems:
+
+
+<!-- 1. Ubuntu 16.04 or later
+2. Windows 7 or later
+3. macOS 10.12.6 (Sierra) or later (no GPU support)
+ -->
+
+1. install the `tensorflow` R package from GitHub or the CRAN repository.
+2. use the `install_tensorflow()` function to install TensorFlow.
+<!-- 3. Note that on Windows you need a working installation of Anaconda.
+4. install_tensorflow() is a wrapper around reticulate::py_install. -->
+
+## Installation
+
+```{r}
+#| echo: false
+#| eval: false
+install.packages("tensorflow")
+library(tensorflow)
+install_tensorflow()
+```
+
+You can confirm that the installation succeeded with:
+
+```{r}
+#| echo: false
+#| eval: false
+
+library(tensorflow)
+tf$constant("Hello Tensorflow")
+## tf.Tensor("Hellow Tensorflow", shape = (), dtype = string)
+```
+
+
+This will provide you with a default installation of TensorFlow suitable for use with the tensorflow R package. There is much more to Tensorflow, and interested readers should review the materials at https://tensorflowfirstudio.com/ and at https:// www.tensorflow.org/.
+
+
+## A caveat on code ’copy & paste’
+
+- Though code from this book is available in the package repositories, readers may be tempted in some situations to ’copy and paste’ code directly from the book.
+- Unfortunately, many built-in machine editors try to convert quotation marks to distinct opening and closing forms, which will cause the resulting code to throw an error.
+- Be aware that 'copy & paste' code may require some additional editing.
+
