@@ -65,8 +65,8 @@ filters:
 
 The final grade will be based on the following components:
 
-- Attendance and Participation: 50%
-- Presentation: 30%
+- Attendance and Participation: 40%
+- Presentation: 40%
 - Final Report: 20%
 
 
@@ -146,8 +146,42 @@ Auditors developed a system for examining a **representative sample** of a compa
 - As businesses have increased in complexity, such “risk-based” auditing has evolved to make auditing more efficient and economical.
 <!-- ビジネスが複雑化するにつれ、このような「リスクベース」の監査は、監査をより効率的かつ経済的にするために進化してきた。 -->
 
----
+## 推薦図書1
 
+If you want to learn a computer based auditing tools for Python, This book is recommended.
+
+:::{.columns}
+::::{.column width=50%}
+- 稲垣・小澤・野呂・蜂谷 (著)
+- **Pythonではじめる 会計データサイエンス**
+- 2023年出版
+- 中央経済社
+::::
+
+::::{.column width=50%}
+![Pythonではじめる 会計データサイエンス](img/python_accounting.jpg){width=60%}
+::::
+:::
+
+
+## 推薦図書2
+
+If you want to learn a statistical accounting and finance research, This book is recommended.
+
+:::{.columns}
+::::{.column width=50%}
+- 笠原・村宮 著
+- **実証会計・ファイナンス : Rによる財務・株式データの分析**
+- 2022年出版
+- 新世社
+::::
+
+::::{.column width=50%}
+![実証会計・ファイナンス](img/kasahara_muramiya.jpg){width=60%}
+::::
+:::
+
+---
 
 - **Risk-based auditing** starts by assessing whether an audit is even needed, based on a review of information in the financial statements.
 <!-- - **リスクベースの監査**は、財務諸表の情報を検討して、監査が必要かどうかを評価することから始まる。 -->
@@ -162,22 +196,23 @@ Auditors developed a system for examining a **representative sample** of a compa
 
 ## Computers in Auditing and the Birth of Audit Analytics
 
-<!-- When I received my undergraduate degree in statistics in 1971, the job market offered very little employment in statistics. 
-Mainframe computers had just been introduced, and data resided on 80-column Hollerith cards. 
-All data analyses were done on paper ledgers with adding machines. 
-Microcomputers, cloud computing, and remote storage were yet to be invented. 
-What a difference 50 years has made. 
-For a growing number of people, data analysis is a central part of their job today. 
+<!-- When I received my undergraduate degree in statistics in 1971, the job market offered very little employment in statistics.
+Mainframe computers had just been introduced, and data resided on 80-column Hollerith cards.
+All data analyses were done on paper ledgers with adding machines.
+Microcomputers, cloud computing, and remote storage were yet to be invented.
+What a difference 50 years has made.
+For a growing number of people, data analysis is a central part of their job today.
  -->
 
 
-- Increased data availability, more powerful computing, and an emphasis on analytics-driven decision in business has created a plethora of jobs in data science. There are around 2.5 million openings (and increasing) for data analytics jobs in the USA at any time.
+- Increased data availability, more powerful computing, and an emphasis on **analytics-driven decision** in business has created a plethora of jobs in data science.
+- There are around 2.5 million openings (and increasing) for data analytics jobs in the USA at any time.
 <!-- データの利用可能性の増加、より強力なコンピューティング、ビジネスにおける分析に基づく意思決定の重視が、データサイエンスの多くの仕事を生み出しました。米国では、常に約250万件のデータ分析の仕事があります（増加中）。 -->
-- A significant share of employees analyze data with Microsoft Excel or other spreadsheet programs like Google Sheets. 
+- A significant share of employees analyze data with Microsoft Excel or other spreadsheet programs like Google Sheets.
 <!-- 従業員の多くは、Microsoft ExcelやGoogle Sheetsなどのスプレッドシートプログラムでデータを分析しています。 -->
 <!-- - Others use proprietary statistical software like SAS, Stata, or SPSS that they often first learned in school.  -->
 <!-- その他の人は、学校で最初に学んだことが多いSAS、Stata、またはSPSSなどの専用の統計ソフトウェアを使用しています。 -->
-- While Excel and SAS are widely used tools, they have serious limitations. 
+- While Excel and SAS are widely used tools, they have *serious limitations*.
 <!-- ExcelとSASは広く使用されているツールですが、重大な制限があります。 -->
 <!-- Excel conflates metadata (headings and descriptions) with formulas and data; and all are called “cells” in Excel.  -->
 <!-- Excelはメタデータ（見出しと説明）を数式とデータと混同し、すべてをExcelでは「セル」と呼びます。 -->
@@ -193,33 +228,33 @@ For a growing number of people, data analysis is a central part of their job tod
 
 ### R or Python
 
-- For those who have reached the limits of Excel, SAS, and their ilk, there is a next step: learn R or Python. 
+- For those who have reached the limits of Excel, SAS, and their ilk, there is a next step: learn R or Python.
 <!-- Excel、SASなどの限界に達した人々にとって、次のステップがあります：RまたはPythonを学ぶ。 -->
-- R and Python are the two most popular programming languages used by data analysts and data scientists. 
+- R and Python are the **two most popular programming languages** used by data analysts and data scientists.
 <!-- RとPythonは、データアナリストとデータサイエンティストによって使用される最も人気のあるプログラミング言語です。 -->
-- Both are free and open source and were developed in the early 1990s—R (an open-source version of the “S” language) for statistical analysis and Python (after Monty Python) as a general-purpose programming language. 
+- Both are free and open source and were developed in the early 1990s — R (an open-source version of the “S” language) for statistical analysis and Python as a general-purpose programming language.
 <!-- 両方とも無料でオープンソースであり、1990年代初頭に開発されました。R（統計分析のためのオープンソース版「S」言語）とPython（Monty Pythonの後）は、汎用プログラミング言語として開発されました。 -->
 - For anyone interested in machine learning, working with large datasets, or creating complex data visualizations, both have become standard tools for analysis.
 <!-- 機械学習、大規模データセットの操作、または複雑なデータの視覚化を行いたい人にとって、両方とも分析のための標準的なツールとなっています。 -->
 
 ---
 
-- Corporate computing offers more data analytics jobs requiring Python. 
+- Corporate computing offers more data analytics jobs requiring Python.
 <!-- 企業のコンピューティングは、Pythonを必要とするデータ分析の仕事がさらに多く提供されています。 -->
-- In contrast, in academe, consulting, and finance, R offers an expanded set of data cleaning and analysis tools that are useful in one-off data analysis. 
+- In contrast, in academe, consulting, and finance, R offers an expanded set of data cleaning and analysis tools that are useful in one-off data analysis.
 <!-- 一方、学術、コンサルティング、および金融業界では、Rは、一時的なデータ分析に役立つデータクリーニングおよび分析ツールの拡張セットを提供しています。 -->
-- Learning either requires a significant time investment—particularly if you have never coded before. 
+- Learning either requires a significant time investment—particularly if you have never coded before.
 <!-- どちらかを学ぶには、特に以前にコードを書いたことがない場合、かなりの時間を投資する必要があります。 -->
 - Python is better for data manipulation and repeated tasks, while R is good for ad hoc analysis and exploring datasets.
 <!-- Pythonはデータ操作と繰り返しタスクに適していますが、Rはアドホック分析とデータセットの探索に適しています。 -->
 
---- 
+---
 
 ### Python
 
-- Python tends to be in demand in companies run by computer scientists and with a code base, partly because *it is easy to learn once you know other languages*. 
+- Python tends to be in demand in companies run by computer scientists and with a code base, partly because *it is easy to learn once you know other languages*.
 <!-- Pythonは、他の言語を知っていると簡単に学べるため、コンピュータサイエンティストによって運営され、コードベースを持つ企業で需要が高い傾向があります。 -->
-- Python is most useful for relatively routine, predictable processes. 
+- Python is most useful for relatively routine, predictable processes.
 <!-- Pythonは、比較的予測可能なプロセスに最も役立ちます。 -->
 - From pulling data, to running automated analyses over and over, to producing visualizations like maps and charts from the results, Python is the better choice.
 <!-- データを取得して、繰り返し自動分析を実行して、結果から地図やグラフのような視覚化を生成するまで、Pythonがより良い選択肢です。 -->
@@ -228,26 +263,28 @@ For a growing number of people, data analysis is a central part of their job tod
 
 ### R
 
-- R tends to be in demand in consulting fields where every *report is ad hoc*. 
+- R tends to be in demand in consulting fields where every *report is ad hoc*.
 <!-- Rは、すべてのレポートがアドホックであるコンサルティング分野で需要が高い傾向があります。 -->
-- Neither is a particularly efficient language from a purely operational standpoint; for that you would turn to C++. 
+- Neither is a particularly efficient language from a purely operational standpoint; for that you would turn to C++.
 <!-- どちらも、純粋に運用上の観点からは特に効率的な言語ではありません。その場合は、C++に切り替えます。 -->
-- Over the past 5 years there has been substantial competition in offerings of interactive development environments (IDEs) to promote the use of either language. 
+- Over the past 5 years there has been substantial competition in offerings of interactive development environments (IDEs) to promote the use of either language.
 <!-- 過去5年間、どちらかの言語の使用を促進するためのインタラクティブ開発環境（IDE）の提供において、大きな競争がありました。 -->
-- The R IDE is called **R-Studio** and is managed by J.J.Allaire (originally from South Bend, IN, and who developed the ColdFusion web development software many years ago). 
+- The R IDE is called **RStudio** and is managed by J.J.Allaire (originally from South Bend, IN, and who developed the ColdFusion web development software many years ago).
 <!-- R IDEはR-Studioと呼ばれ、J.J.Allaire（元々はサウスベンド出身で、多年前にColdFusionウェブ開発ソフトウェアを開発した）が管理しています。 -->
 <!-- - Python is supported on NetBeans and Eclipse IDEs through plugins; but the go to Python environment is Anaconda, which has its own version of Python, and supports R as well as other programs. -->
 <!-- Pythonは、プラグインを介してNetBeansおよびEclipse IDEでサポートされています。しかし、Pythonの環境はAnacondaであり、独自のPythonのバージョンを持ち、Rをはじめとする他のプログラムもサポートしています。 -->
+- 最近はPosit社が開発している**Positoron**が注目されている。
 
 ---
 
+
 ### R!
 
-- R is good for **statistics-heavy projects** and **one-time analyses** of a dataset. 
+- R is good for **statistics-heavy projects** and **one-time analyses** of a dataset.
 <!-- Rは統計に重点を置いたプロジェクトやデータセットの一回限りの分析に適しています。 -->
-- R is also more difficult to learn, as many of its conventions assume you have a solid background in statistics. 
+- R is also more difficult to learn, as many of its conventions assume you have a solid background in statistics.
 <!-- Rを学ぶのは難しいですが、その多くの慣習は、統計学に堅固な背景があることを前提としています。 -->
-- Python conceptually uses the same control structures and data types that you will find in other languages, which is why computer scientists prefer Python. 
+- Python conceptually uses the same control structures and data types that you will find in other languages, which is why computer scientists prefer Python.
 <!-- Pythonは、概念的には他の言語で見つけることができる同じ制御構造とデータ型を使用しているため、コンピュータサイエンティストはPythonを好むのです。 -->
 <!-- - They see R as being more of a statistical tool that also happens to have a language, rather than a well-designed language before anything else (as Python arguably is).  -->
 <!-- 彼らは、Rを言語よりもむしろ統計ツールと見なしているため、Pythonが明らかにそうであるように、Rは最初に設計された言語ではないと見なしています。 -->
@@ -260,30 +297,30 @@ For a growing number of people, data analysis is a central part of their job tod
 
 ### Reporting with R
 
-- No matter how brilliant your analyses are, if you cannot communicate them, they are worthless. 
+- No matter how brilliant your analyses are, if you cannot communicate them, they are worthless.
 <!-- あなたの分析がどれほど優れていても、それを伝えることができなければ、それは無価値です。 -->
-- Report writing, publication on webs, GitHub, and other outlets are all essential parts of being a data analyst. 
+- Report writing, publication on webs, GitHub, and other outlets are all essential parts of being a data analyst.
 <!-- レポートの作成、WebやGitHubなどの出版物は、データアナリストであるための不可欠な部分です。 -->
-- In support of this, R has the report writing tool called knitr (the author himself spells it with a lower case letter k). 
+- In support of this, R has the report writing tool called `knitr`.
 <!-- これをサポートするために、Rにはレポート作成ツールknitr（著者自身は小文字のkで綴ります）があります。 -->
 <!-- - Python has its counterpart, Jupyter notebooks (which can be used with R now), and although they are conceptually similar, their intended purpose is quite different.  -->
 <!-- Pythonには、Jupyterノートブック（現在はRと一緒に使用できます）があり、概念的には似ていますが、それらの意図された目的はかなり異なります。 -->
 - Though not particularly well suited for exploratory analysis, knitr is a powerful tool for dynamic data report generation so much so that it is a worthy addition to any programmer’s toolbox.
 <!-- 探索的分析にはあまり適していませんが、knitrは動的データレポート生成のための強力なツールであり、それだけでプログラマーのツールボックスに価値のある追加です。 -->
 
---- 
+---
 
 ### R and knitr
 
-- For example, assume you have a CSV file with some entries that you want to present to someone (or yourself) in some graphical way on regular basis. 
+- For example, assume you have a CSV file with some entries that you want to present to someone (or yourself) in some graphical way on regular basis.
 <!-- たとえば、定期的にいくつかのエントリをグラフィカルに表現したいCSVファイルがあるとします。 -->
-- You can open it in Excel, add a pivot table and graphs; but assume then that you need to combine this data with one or more XML files and some more data in a database—this becomes a scripting task. 
+- You can open it in Excel, add a pivot table and graphs; but assume then that you need to combine this data with one or more XML files and some more data in a database—this becomes a scripting task.
 <!-- それをExcelで開いて、ピボットテーブルとグラフを追加できます。しかし、このデータを1つ以上のXMLファイルとデータベース内のさらなるデータと組み合わせる必要があるとします。 -->
-- Excel can still help, but it would be laborious. 
+- Excel can still help, but it would be laborious.
 <!-- Excelはまだ役立ちますが、手間がかかります。 -->
-- Python can also accomplish this, but you will need to learn quite a few libraries before you are ready. 
+- Python can also accomplish this, but you will need to learn quite a few libraries before you are ready.
 <!-- Pythonでもこれを達成できますが、準備が整うまでにかなりの数のライブラリを学ぶ必要があります。 -->
-- `knitr` and R Markdown can easily generate PDF reports with all the graphical and data-processing tools of R included. 
+- `knitr` and R Markdown can easily generate PDF reports with all the graphical and data-processing tools of R included.
 <!-- しかし、knitrとR Markdownは、Rのすべてのグラフィカルおよびデータ処理ツールを含むPDFレポートを簡単に生成できます。 -->
 
 ---
@@ -291,9 +328,9 @@ For a growing number of people, data analysis is a central part of their job tod
 ### R and ML
 
 
-- Additionally, **R segues statistics with machine learning**, which is important since the concepts of machine learning and artificial intelligence derive from statistics. 
+- Additionally, **R segues statistics with machine learning**, which is important since the concepts of machine learning and artificial intelligence derive from statistics.
 <!-- さらに、Rは統計学と機械学習を結びつけており、機械学習と人工知能の概念は統計学に由来しているため、重要です。 -->
-- Much of the Python-based literature on machine learning completely misses underlying statistical concepts and consequently fails to be as effective as R in developing machine learning algorithms. 
+- Much of the Python-based literature on machine learning completely misses underlying statistical concepts and consequently fails to be as effective as R in developing machine learning algorithms.
 <!-- 機械学習に関するPythonベースの文献の多くは、根本的な統計的概念を完全に見逃しており、その結果、機械学習アルゴリズムの開発においてRほど効果的ではありません。 -->
 - It is written by computer scientists who understand well the Python scientific stack, and who will demonstrate the steps in rote manner of how to achieve a certain goal, but *would not be able to impart much insight into what happens behind the scenes*.
 <!-- それは、Python科学スタックをよく理解しているコンピュータサイエンティストによって書かれており、特定の目標を達成するための手順を単純に示すが、裏側で何が起こっているかについて多くの洞察を提供することはできません。 -->
@@ -308,16 +345,16 @@ For a growing number of people, data analysis is a central part of their job tod
 - If you are planning to work in machine learning, R is a much more worthwhile investment than Python.
 <!-- 機械学習で働く予定がある場合、PythonよりもRに投資する価値があります。 -->
 
-- The preceding are some of my admittedly biased opinions. 
+- The preceding are some of my admittedly biased opinions.
 <!-- これまでのところは、私の偏見のある意見のいくつかです。 -->
-- I think R is the better language; but with the caveat that “your mileage may vary” and you should choose your own path. 
+- I think R is the better language; but with the caveat that “your mileage may vary” and you should choose your own path.
 <!-- 私はRがより優れた言語だと思いますが、「結果は異なるかもしれません」の警告と、自分自身の道を選ぶべきだと思います。 -->
 - I firmly believe, though, that the extra effort in learning R will be rewarded tenfold if you intend to work in data analytics.
 <!-- ただし、データ分析で働くつもりであれば、Rを学ぶための追加の努力は、10倍に報われると確信しています。 -->
 
 ## The Roots of Modern Financial Accounting and Auditing
 
-- Accounting and auditing are ancient, with many modern practices that are rooted in traditions that date back millennia. 
+- Accounting and auditing are ancient, with many modern practices that are rooted in traditions that date back millennia.
 <!-- 会計と監査は古代のものであり、数千年前にさかのぼる伝統に根ざした多くの現代の慣行があります。 -->
 - This section details the evolution of accounting, with explanations of how historical developments live on in idiosyncrasies of accounting and auditing today.
 <!-- このセクションでは、会計の進化について詳しく説明し、歴史的な発展が今日の会計と監査の独自性に生き続けている方法について説明します。 -->
@@ -353,31 +390,31 @@ For a growing number of people, data analysis is a central part of their job tod
 <!-- 彼らは、取引、負債、前払いを粘土板に二重に記録し、取引の当事者が保持するようにしました。 -->
 <!-- The earliest texts were pictographs on tablets written with a stylus, with accounting-specific writing systems evolving into more expressive systems that described politics, religion, and news. -->
 <!-- 初期のテキストは、スタイラスで書かれたタブレット上の絵文字であり、会計専用の文字システムが進化して、政治、宗教、ニュースを記述するより表現豊かなシステムになりました。 -->
-<!-- 
-Many commodities were exchanged in the early barter communities—silver, grain, and so forth based on standardized weighs, and thus establishing an absolute value for any particular item was complex and inexact. 
-Under King Croesus of Lydia (in modern Turkey), the touchstone (mined from local riverbeds) was used to standardize the content of gold alloys, allowing standardized coinage and a single denomination for the price of any item. 
-The earliest coins were blank droplets of metal of standard weight, issued by the treasury; later coins were stamped with punches for easy accounting. 
-It was the custom of unmarried ladies in Lydia to sell their virtue in exchange for coins, in order to accumulate a dowry sufficient for them to marry. 
+<!--
+Many commodities were exchanged in the early barter communities—silver, grain, and so forth based on standardized weighs, and thus establishing an absolute value for any particular item was complex and inexact.
+Under King Croesus of Lydia (in modern Turkey), the touchstone (mined from local riverbeds) was used to standardize the content of gold alloys, allowing standardized coinage and a single denomination for the price of any item.
+The earliest coins were blank droplets of metal of standard weight, issued by the treasury; later coins were stamped with punches for easy accounting.
+It was the custom of unmarried ladies in Lydia to sell their virtue in exchange for coins, in order to accumulate a dowry sufficient for them to marry.
 In this regard, accounting can credibly lay claim to being “the oldest profession.”
 
-The Kingdom of Lydia was short lived; but their idea of standardized coinage lived on, first in the Athenian silver drachma, and later the Roman Solidus, which provided Mediterranean trade with an unprecedented assurance of quality and value for a num.raire commodity—one which could be traded with all others. 
-Issuing standardized coinage was a profitable business for government. 
-Governments essentially take out non-interest bearing loans on the money they mint; in turn, this begot profitable industries in money changing, accepting deposits, and lending money at interest. 
+The Kingdom of Lydia was short lived; but their idea of standardized coinage lived on, first in the Athenian silver drachma, and later the Roman Solidus, which provided Mediterranean trade with an unprecedented assurance of quality and value for a num.raire commodity—one which could be traded with all others.
+Issuing standardized coinage was a profitable business for government.
+Governments essentially take out non-interest bearing loans on the money they mint; in turn, this begot profitable industries in money changing, accepting deposits, and lending money at interest.
 Rome developed sophisticated financial and contracting systems for transport and trade, far-reaching tax collection, and a vast bureaucratic network.
 
-Parallel developments in Asia saw China evolve from Cowry shells as standard coinage in the .fth century BCE, to copper coins in the Qin Dynasty period (third century BCE). 
-Qin coins were practical—round with a square hole in the middle (for stringing together), which remained the common design for most Chinese copper coins until the twentieth century. 
-Because of the low value of the coinage, seigniorage and government profits were substantial, as was the tax on transactions. 
+Parallel developments in Asia saw China evolve from Cowry shells as standard coinage in the .fth century BCE, to copper coins in the Qin Dynasty period (third century BCE).
+Qin coins were practical—round with a square hole in the middle (for stringing together), which remained the common design for most Chinese copper coins until the twentieth century.
+Because of the low value of the coinage, seigniorage and government profits were substantial, as was the tax on transactions.
 The Qin Dynasty took a no nonsense attitude toward executing anyone caught making transactions with local coins, or any currency not sanctioned by the government; a policy revived in the Tang Dynasty when they introduced paper (tree bark) currencies.
 
 
-The Roman Empire sank into medieval chaos after about the third century. 
-Predicting the collapse of civilization, Boethius and Cassiodorus in the sixth century collected existing studies in mathematics (including accounting) into the quadrivium, comprising the four subjects of arithmetic, geometry, music, and astronomy. 
-These were to be taught to Roman patricians in the monastic schools, which before Saint Benedict of Nursia were more or less safe country estates for offspring of the Roman elite. 
-Until the fifteenth century, European accounting was static and unchanged from the Roman practices. 
-Meanwhile in the Middle East, firstly the Umayyad Caliphate, and then the Abbasid Caliphate of Baghdad rapidly gained power over Central Asia by adopting our modern Arabic number system from India. 
-This was a substantial improvement over the cumbersome notation of the Romans. 
-It allowed easier additions and subtractions, as well as allowing accounting to extend itself to multiplication (for prices and cost allocations) and division (for rates). 
+The Roman Empire sank into medieval chaos after about the third century.
+Predicting the collapse of civilization, Boethius and Cassiodorus in the sixth century collected existing studies in mathematics (including accounting) into the quadrivium, comprising the four subjects of arithmetic, geometry, music, and astronomy.
+These were to be taught to Roman patricians in the monastic schools, which before Saint Benedict of Nursia were more or less safe country estates for offspring of the Roman elite.
+Until the fifteenth century, European accounting was static and unchanged from the Roman practices.
+Meanwhile in the Middle East, firstly the Umayyad Caliphate, and then the Abbasid Caliphate of Baghdad rapidly gained power over Central Asia by adopting our modern Arabic number system from India.
+This was a substantial improvement over the cumbersome notation of the Romans.
+It allowed easier additions and subtractions, as well as allowing accounting to extend itself to multiplication (for prices and cost allocations) and division (for rates).
 Baghdad became the world’s center of accounting innovations. -->
 
 
@@ -385,11 +422,11 @@ Baghdad became the world’s center of accounting innovations. -->
 
 ### Al-Khwarizmi Algebra of Double-Entry
 
-- In the Islamic world, the *word account took on religious significance*, relating to one’s obligation to account to God on all matters pertaining to human endeavor. 
+- In the Islamic world, the *word account took on religious significance*, relating to one’s obligation to account to God on all matters pertaining to human endeavor.
 <!-- イスラム世界では、アカウントという言葉は、人間の努力に関するすべての問題について神に報告する義務を意味する宗教的な意味を持ちました。 -->
-- According to the Qur’an, followers are required to keep records of their indebtedness. 
+- According to the Qur’an, followers are required to keep records of their indebtedness.
 <!-- クルアーンによると、信者は自分の負債について記録を保持することが求められています。 -->
-- Thus Islam provides general approval and guidelines for the recording and reporting of transactions. 
+- Thus Islam provides general approval and guidelines for the recording and reporting of transactions.
 <!-- したがって、イスラム教は取引の記録と報告のための一般的な承認とガイドラインを提供しています。 -->
 <!-- - The Islamic law of inheritance defines exactly how the estate is calculated after death of an individual.  -->
 <!-- イスラム法の相続法は、個人の死後に資産がどのように計算されるかを正確に定義しています。 -->
@@ -401,9 +438,9 @@ Baghdad became the world’s center of accounting innovations. -->
 
 ---
 
-- The complexity of Islamic inheritance law served as an impetus behind the development of algebra by medieval Islamic mathematicians. 
+- The complexity of Islamic inheritance law served as an impetus behind the development of algebra by medieval Islamic mathematicians.
 <!-- イスラム教の相続法の複雑さは、中世のイスラム数学者による代数の発展の原動力となりました。 -->
-- Al-Khwarizmis “The Compendious Book on Calculation by Completion and Balancing” devoted a chapter on the solution to the Islamic law of inheritance using linear equations. 
+- Al-Khwarizmis “The Compendious Book on Calculation by Completion and Balancing” devoted a chapter on the solution to the Islamic law of inheritance using linear equations.
 <!-- アル＝ワリズミの「完全な計算とバランスによる計算に関する簡潔な本」は、線形方程式を使用してイスラム教の相続法の解決に1章を捧げています。 -->
 - In 15th century, Latin translations of al.Khwarizmis “Book of Addition and Subtraction According to the Hindu Calculation” on the use of Indian numerals, introduced the decimal positional number system to the Western world.
 <!-- 12世紀には、アル＝ワリズミの「ヒンドゥー計算による加算と減算の本」のラテン語訳が、インドの数字の使用に関する西洋世界への10進位置数システムを紹介しました。 -->
@@ -423,29 +460,29 @@ Baghdad became the world’s center of accounting innovations. -->
 
 ---
 
-- Algebra manipulates formulas around an equal sign, *the only constraint being the formula on the right of the equal sign must have the same value as the formula on the left*. 
+- Algebra manipulates formulas around an equal sign, *the only constraint being the formula on the right of the equal sign must have the same value as the formula on the left*.
 <!-- 代数は等号の周りの式を操作します。等号の右側の式は、左側の式と同じ値でなければなりません。 -->
-- Double-entry bookkeeping manipulates debit and credit balances around an equal sign, the only constraint being that the debits must have the same value as the credits. 
+- Double-entry bookkeeping manipulates debit and credit balances around an equal sign, the only constraint being that the debits must have the same value as the credits.
 <!-- 複式簿記は、等号の周りの借方と貸方の残高を操作します。唯一の制約は、借方が貸方と同じ値でなければなりません。 -->
 - **Accounting is applied algebra**.
 <!-- 会計は応用代数です。 -->
 
 ---
 
-- Though not specific in this regard, Al-Khwarizmis book hinted at what were to become the standards for later accounting: 
-  - *error control* (through double-entry), 
-  - *nominal accounts* (which appear on the Income Statement) and 
-  - *real accounts* (which appear on the Balance Sheet). 
+- Though not specific in this regard, Al-Khwarizmis book hinted at what were to become the standards for later accounting:
+  - *error control* (through double-entry),
+  - *nominal accounts* (which appear on the Income Statement) and
+  - *real accounts* (which appear on the Balance Sheet).
 <!-- アル＝ワリズミの本は、後の会計の標準となるものを示唆していました。エラー制御（複式簿記を通じて）、名義勘定（損益計算書に表示される）および実勘定（貸借対照表に表示される）。 -->
-- Nominal accounts are revenue or expense accounts that are closed to a zero balance at the end of each accounting period. 
+- Nominal accounts are revenue or expense accounts that are closed to a zero balance at the end of each accounting period.
 <!-- 名義勘定は、各会計期間の終わりにゼロ残高になる収益または費用の勘定です。 -->
 
 ---
 
-- They start with a zero balance at the beginning of a new accounting period, accumulate balances during the period, and return to zero at the year end by means of closing entries. 
+- They start with a zero balance at the beginning of a new accounting period, accumulate balances during the period, and return to zero at the year end by means of closing entries.
 <!-- 新しい会計期間の開始時にゼロ残高で始まり、期間中に残高を蓄積し、期末には閉鎖仕訳によってゼロに戻ります。 -->
-- **Nominal accounts** are income statement accounts and are also called “temporary accounts” in contrast to balance sheet (asset, liability, and owners’ equity) accounts that are called “permanent accounts” or “real accounts.” 
-- **Real accounts** are asset, liability, reserve, and capital accounts that appear on a balance sheet. 
+- **Nominal accounts** are income statement accounts and are also called “temporary accounts” in contrast to balance sheet (asset, liability, and owners’ equity) accounts that are called “permanent accounts” or “real accounts.”
+- **Real accounts** are asset, liability, reserve, and capital accounts that appear on a balance sheet.
 <!-- 名義勘定は損益計算書の勘定であり、「一時的な勘定」とも呼ばれます。これに対して、貸借対照表（資産、負債、オーナーズエクイティ）の勘定は「永久的な勘定」または「実勘定」と呼ばれます。実勘定は貸借対照表に表示される資産、負債、準備金、資本の勘定です。 -->
 - The balances of real accounts are not canceled out at the end of an accounting period but are carried over to the next period.
 <!-- 実勘定の残高は会計期間の終わりにキャンセルされるのではなく、次の期間に持ち越されます。 -->
@@ -455,7 +492,7 @@ Baghdad became the world’s center of accounting innovations. -->
 
 ### Al-Khwarizmis method
 
-- Al-Khwarizmis method was an immediate hit and was widely disseminated throughout the educated world. 
+- Al-Khwarizmis method was an immediate hit and was widely disseminated throughout the educated world.
 <!-- アル＝ワリズミの方法はすぐにヒットし、教育を受けた世界中に広く普及しました。 -->
 
 
@@ -519,27 +556,27 @@ Baghdad became the world’s center of accounting innovations. -->
 <!-- この本は1202年にラテン語で書かれ、影響力があり、広く読まれました。 -->
 
 
-<!-- The introduction of double-entry bookkeeping into Europe is an interesting one in itself. 
+<!-- The introduction of double-entry bookkeeping into Europe is an interesting one in itself.
 
-Arabic numerals were known in Europe, but it was considered sinful to use them. 
-For example, the statutes of the Arte del Cambio of 1299 prohibited the bankers of Florence from using Arabic numerals (even though they had been slipping them into documents since the tenth century just to ease calculations). 
-Pope Sylvester II who reigned for three years at the turn of the millennium, endorsed and promoted study of Arabic arithmetic, mathematics, and astronomy, reintroducing the abacus to Europe. 
+Arabic numerals were known in Europe, but it was considered sinful to use them.
+For example, the statutes of the Arte del Cambio of 1299 prohibited the bankers of Florence from using Arabic numerals (even though they had been slipping them into documents since the tenth century just to ease calculations).
+Pope Sylvester II who reigned for three years at the turn of the millennium, endorsed and promoted study of Arabic arithmetic, mathematics, and astronomy, reintroducing the abacus to Europe.
 After his death, he was widely denounced as a sorcerer in league with the devil for exactly this reason.
 
-It was into this politically and religiously charged atmosphere that the innovations in Fibbonaci’s Liber Abbaci started with merchants and bankers synthesizing alternatives to the abacus and daybooks of unwieldy Roman numerals. 
-Fibbonaci himself was a merchant as well as a mathematician. 
-He traveled extensively throughout the Mediterranean as a merchant prior to 1200. 
+It was into this politically and religiously charged atmosphere that the innovations in Fibbonaci’s Liber Abbaci started with merchants and bankers synthesizing alternatives to the abacus and daybooks of unwieldy Roman numerals.
+Fibbonaci himself was a merchant as well as a mathematician.
+He traveled extensively throughout the Mediterranean as a merchant prior to 1200.
 Not only did he encourage adoption of the Hindu.Arabic numerals for commercial accounting, but he actually set out an account contrasting completely the Roman .gures versus the Arabic numerals.
 
-Importantly, the Hindu.Arabic system mathematics also covered systems of equations, and these were in addition introduced into Spain by the Moors. 
-From an accounting perspective, the conceptualization of debits and credits provided a generalization at the accounting systems (financial statement) level in addition to details at the transaction (journal entry) level. 
-Equations—by de.nition—require an equality of two sides of the equation—on one side dependent variables, on the other independent. 
-In an exchange transaction there is a natural dichotomization into independent variables (assets) and dependent variables (claims). 
+Importantly, the Hindu.Arabic system mathematics also covered systems of equations, and these were in addition introduced into Spain by the Moors.
+From an accounting perspective, the conceptualization of debits and credits provided a generalization at the accounting systems (financial statement) level in addition to details at the transaction (journal entry) level.
+Equations—by de.nition—require an equality of two sides of the equation—on one side dependent variables, on the other independent.
+In an exchange transaction there is a natural dichotomization into independent variables (assets) and dependent variables (claims).
 These are reected in the Latin words debere (to owe) and credere (to entrust), which are the basis for our modern words, debit and credit.
 
-The Hindu.Arabic systems of equations were focused on equilibrium—in the balance sheet at any date, an equilibrium of exchange transactions is preserved. 
-The use of an equilibrium device may at first have been pro forma. 
-But it is easy to see how the change from ad hoc single-entry to equilibrium bookkeeping could lead to a complete double-entry system (particularly given European bankers’ early penchant for slipping Arabic numerals into their financial records, despite the fact that they might be accused of colluding with the devil). 
+The Hindu.Arabic systems of equations were focused on equilibrium—in the balance sheet at any date, an equilibrium of exchange transactions is preserved.
+The use of an equilibrium device may at first have been pro forma.
+But it is easy to see how the change from ad hoc single-entry to equilibrium bookkeeping could lead to a complete double-entry system (particularly given European bankers’ early penchant for slipping Arabic numerals into their financial records, despite the fact that they might be accused of colluding with the devil).
 Once .gures began to be disposed in a single column, instead of being scattered all over the page and reduced to order only outside the account-book on the abacus or in the mind, then the advantages of having two clearly separated columns, simply to facilitate computation, would quickly become apparent (De Roover 1956, 1955, 1938). -->
 
 ---
@@ -568,19 +605,32 @@ Once .gures began to be disposed in a single column, instead of being scattered 
 - **Summa de Arithmetica, Geometria, Proportioni et Proportionalita** (Everything About Arithmetic, Geometry and Proportion) formally described the widely used but still controversial system of double-entry for a much wider audience.
 <!-- 「Summa de Arithmetica, Geometria, Proportioni et Proportionalita（算術、幾何学、比例と比例についてすべて）」は、広範な観衆のために広く使用されているがまだ議論の余地のある複式記入システムを正式に記述した。 -->
 
+## スンマ（スムマ）
+
+:::{.columns}
+:::{.column width=50%}
+『**算術、幾何、比および比例に関する全集**』(スムマ)の初版本は、100冊ほど現存するといわれている。日本では、大阪学院、大阪商業、神奈川大、久留米大、慶應、**神戸大学**、専修大、日大、広島修道大、早稲田の図書館に蔵書がある(wikipediaより)。
+:::
+
+:::{.column width=50%}
+![Summa](img/zumuma2.gif){width=80%}
+
+:::
+:::
+
 ---
 
 
-- Pacioli’s Summa included one chapter titled, Details of Accounting and Recording that popularized the Method of Venice for accounting.
+- Pacioli’s Summa included one chapter titled, *Details of Accounting and Recording* that popularized the Method of Venice for accounting.
 <!-- パチオリのSummaには、「会計と記録の詳細」の1章が含まれており、会計のためのヴェネツィア法（アル＝ワリズミの方法の進化）を広めた。 -->
-- Pacioli’s Summa described the components of bookkeeping as: a memorandum book, journal, and ledger, with the journal and ledger similar to modern equivalents.
+- Pacioli’s Summa described the components of bookkeeping as: a memorandum book(日記帳), journal(仕訳帳), and ledger(元帳), with the journal and ledger similar to modern equivalents.
 <!-- パチオリのSummaは、帳簿の構成要素を、日記帳、仕訳帳、元帳として記述し、日記帳と元帳は現代の相当物に似ている。 -->
-- A trial balance was used when the books were closed.
+- A trial balance(試算表) was used when the books were closed.
 <!-- 帳簿を閉じる際には、試算表が使用された。 -->
 - The profit or loss was entered into the capital account to balance the balance sheet.
 <!-- 利益または損失は、貸借対照表をバランスさせるために資本勘定に入力された。 -->
 
---- 
+---
 
 ### Summa
 
@@ -596,7 +646,7 @@ Once .gures began to be disposed in a single column, instead of being scattered 
 <!-- - In China, Qianlong demanded that Britain’s ambassador Lord McCartney kowtow and informed him that China was in need of nothing from the West. -->
 <!-- 中国では、乾隆帝(けんりゅうてい)はイギリスの大使マッカートニー卿に頭を下げるよう要求し、中国は西洋から何も必要としていないことを伝えました。 -->
 
-<!-- 
+<!--
 ### The Industrial Revolution
 
 
@@ -636,14 +686,14 @@ The Bankruptcy Act of 1831 allowed accountants to be appointed “Official Assig
 
 - The British Companies Act of 1844 established the incorporation of business by a formal registration process.
 <!-- 1844年の英国会社法は、公式の登録プロセスによる事業の設立を確立しました。 -->
-- It required annual appointment of auditors to examine the accounts and balance sheet of all public companies (the role of accountants under the British Companies Act would change substantially over the century).
+- It required *annual appointment of auditors* to examine the accounts and balance sheet of all public companies (the role of accountants under the British Companies Act would change substantially over the century).
 <!-- すべての公開会社の会計と貸借対照表を調査するための監査人の年次任命が必要とされました（英国会社法における会計士の役割は、その後の世紀にわたって大幅に変わりました）。 -->
-- The Companies Act of 1862 required banks to be audited and established the practice of limited cash dividends to be paid only out of profits.
+- The Companies Act of 1862 *required banks to be audited* and established the practice of *limited cash dividends* to be paid only out of profits.
 <!-- 1862年の会社法は、銀行の監査を義務付け、利益からのみ支払われる限られた現金配当の実践を確立しました。 -->
 By 1900, the audit was the central practice of accountants.
 <!-- 1900年までに、監査は会計士の中心的な実践となりました。 -->
 
---- 
+---
 
 ### The Big Six
 
@@ -686,7 +736,7 @@ William **Peat** (KPMG創設者の1人) started in 1867.
 <!-- For example, Du Pont used ROI for planning, but control was based on factors such as timeliness of delivery to customers and product quality. -->
 <!-- Multidivisional business organizations became more pronounced, and businesses turned to decoupling—different production processes took place at different sites, perhaps thousands of miles away. -->
 
-<!-- 
+<!--
 ### Public Accounting
 
 
@@ -703,39 +753,39 @@ New Deal legislation led to federal responsibility for protecting investors from
 ## Emerging Technologies and Intangible Assets
 
 
-- Information technology plays a pivotal role in audit today. 
+- Information technology plays a pivotal role in audit today.
 <!-- 情報技術は、財務管理と監査において重要な役割を果たしています。 -->
 <!-- Most, if not all financial data is now digitally recorded, and dispersed among servers, clouds, and networks of computers, over which the audited firm has no control.  -->
 <!-- ほとんどすべての財務データは、現在デジタルで記録され、サーバーやクラウド、コンピュータネットワークに分散されています。 -->
 <!-- Additionally, firm data particularly in finance, IT, insurance, and medicine now comprise most of the audited value of the firm.  -->
 <!-- さらに、金融、IT、保険、医療などの企業データは、現在、企業の監査価値の大部分を占めています。 -->
-- Financial audits are critical mechanisms ensuring the integrity of information systems and the reporting of organizational finances. 
+- Financial audits are critical mechanisms ensuring the integrity of information systems and the reporting of organizational finances.
 <!-- 財務監査は、情報システムの完全性と組織の財務報告の保証を行うための重要なメカニズムです。 -->
 <!-- They help avoid the abuses that led to passage of legislation such as the Foreign Corrupt Practices Act, and the Sarbanes.Oxley Act.  -->
 <!-- これらは、外国腐敗行為法やサーベインズ・オクスリー法などの法律の成立につながった悪用を回避するのに役立ちます。 -->
 <!-- - They help provide assurance that International Accounting Standards are consistently applied in calculating firm value, while controlling asset market bubbles.  -->
 <!-- これらは、企業価値の計算に国際会計基準が一貫して適用され、資産市場のバブルがコントロールされることを保証するのに役立ちます。 -->
-- Expanding audit challenges have fueled a growth market in auditing throughout the past decade. 
+- Expanding audit challenges have fueled a growth market in auditing throughout the past decade.
 <!-- 拡大する監査の課題は、過去10年間を通じて監査の成長市場を推進しています。 -->
 - Both undergraduate and graduate accounting enrollments are at their highest level in the past 40 years, with accounting students making up 40% of business school enrollments (Fig. 1).
 <!-- 大学生と大学院生の会計登録は、過去40年間で最高水準にあり、会計学生はビジネススクールの登録の40%を占めています（図1）。 -->
 
 ---
 
-- Graduate degrees are increasingly important to the profession, around **40% of accounting graduates hired by public accounting firms have graduate degrees**. 
+- Graduate degrees are increasingly important to the profession, around **40% of accounting graduates hired by public accounting firms have graduate degrees**.
 <!-- 大学院の学位は、専門職にとってますます重要になっており、公認会計士事務所に雇用された会計学の卒業生の約40%が大学院の学位を持っています。 -->
-- The second largest group and hired into public accounting had degrees in **information technology and computer science**. 
+- The second largest group and hired into public accounting had degrees in **information technology and computer science**.
 <!-- 2番目に多いグループは、情報技術とコンピュータサイエンスの学位を持って公認会計士事務所に雇用されました。 -->
 - The most prestigious of the accounting firms, the largest accounting firms, the Big Four, have increased their intake substantially (Table 1).
 <!-- 会計士の中で最も名声のある、最大の会計士事務所であるビッグフォーは、採用を大幅に増やしています（表1）。 -->
 
 ---
 
-- The financial information sector of the USA and world economies are major contributors to jobs’ growth and wealth. 
+- The financial information sector of the USA and world economies are major contributors to jobs’ growth and wealth.
 <!-- アメリカと世界経済の金融情報部門は、雇用の成長と富に大きく貢献しています。 -->
-- In 2018, it represented around 15% of the US economy (about 2 trillion dollars) and around 10% of the global economy (around 7 trillion dollars). 
+- In 2018, it represented around 15% of the US economy (about 2 trillion dollars) and around 10% of the global economy (around 7 trillion dollars).
 <!-- 2018年、アメリカ経済の約15%（約2兆ドル）、世界経済の約10%（約7兆ドル）を占めています。 -->
-- In addition to accounting firms, large banks, rating agencies, funds, private investment, and many other fields require accounting expertise to function competitively in current markets. 
+- In addition to accounting firms, large banks, rating agencies, funds, private investment, and many other fields require accounting expertise to function competitively in current markets.
 <!-- 会計事務所に加えて、大手銀行、格付け機関、ファンド、民間投資など、多くの分野が、現在の市場で競争力を持つために会計の専門知識を必要としています。 -->
 - Increasingly that means expertise in information technologies as well.
 <!-- それはますます情報技術の専門知識を意味しています。 -->
@@ -767,7 +817,7 @@ New Deal legislation led to federal responsibility for protecting investors from
 - Management accounting is concerned primarily with providing a basis *for making management or operating decisions*.
 <!-- 管理会計は、主に管理または運営上の意思決定の基盤を提供することに関心があります。 -->
 
---- 
+---
 
 ### Financial Accounting
 
@@ -780,7 +830,7 @@ New Deal legislation led to federal responsibility for protecting investors from
 <!-- Other rules include International Financial Reporting Standards, or IFRS, or US GAAP. -->
 <!-- その他の規則には、国際財務報告基準（IFRS）または米国GAAPが含まれます。 -->
 
---- 
+---
 
 ### 19th Century Developments
 
@@ -940,7 +990,7 @@ Each part reviews the cash flow from one of three types of activities:
 - The system is inherently linear—prices and costs are assumed to be additive and generally are considered fixed across transactions.
 <!-- このシステムは本質的に線形です。価格とコストは加法的であると仮定され、通常、取引を超えて固定されていると考えられています。-->
 
---- 
+---
 
 - But in practice, many economic processes are non-linear and data may be incomplete and inaccurate.
 <!-- しかし、実際には、多くの経済プロセスは非線形であり、データは不完全で不正確である可能性があります。-->
