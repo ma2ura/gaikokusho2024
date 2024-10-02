@@ -8,7 +8,7 @@
 <link href="gaisho_2024_01_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="gaisho_2024_01_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="gaisho_2024_01_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.54">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Soichi Matsuura">
   <title>外国書購読 Day1  Day1:Guidance and Introduction</title>
@@ -626,7 +626,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"options":{"message":"true","out-width":"700px","dpi":72,"warning":"true","editor-word-wrap":"true","editor-font-scale":"0.5","comment":"","label":"unnamed-chunk-1","fig-width":7,"editor-max-height":"","output":"true","read-only":"false","context":"interactive","classes":"","out-height":"","fig-cap":"","fig-height":5,"results":"markup","editor-quick-suggestions":"false","autorun":"false"},"id":1,"code":"1 + 2 # 足し算\n3 * 4 # かけ算\n6 ** 2 # 累乗\nsqrt(2) # 平方根"},{"options":{"message":"true","out-width":"700px","dpi":72,"warning":"true","editor-word-wrap":"true","editor-font-scale":"0.5","comment":"","label":"unnamed-chunk-2","fig-width":7,"editor-max-height":"","output":"true","read-only":"false","context":"interactive","classes":"","out-height":"","fig-cap":"","fig-height":5,"results":"markup","editor-quick-suggestions":"false","autorun":"false"},"id":2,"code":"# 関数mymeanを定義\nmymean <- function(x) {\n  x1 <- sum(x)\n  x2 <- length(x)\n  x <- x1 / x2\n  return(x)\n}\nx <- 1:100 # 1から100までの数列\nmymean(x)"},{"options":{"message":"true","out-width":"700px","dpi":72,"warning":"true","editor-word-wrap":"true","editor-font-scale":"0.5","comment":"","label":"unnamed-chunk-3","fig-width":7,"editor-max-height":"","output":"true","read-only":"false","context":"interactive","classes":"","out-height":"","fig-cap":"","fig-height":5,"results":"markup","editor-quick-suggestions":"false","autorun":"false"},"id":3,"code":"# サイコロを作成し，投げる回数と試行回数を設定\ndice <- 1:6; toss <- 10; trial <- 10\nresult <- numeric(trial)\n# 繰り返し処理\nfor (i in 1:trial) {\n  x <- sample(dice, toss, replace = TRUE)\n  result[i] <- mymean(x)\n}\nresult"},{"options":{"message":"true","out-width":"700px","dpi":72,"warning":"true","editor-word-wrap":"true","editor-font-scale":"0.5","comment":"","label":"unnamed-chunk-4","fig-width":7,"editor-max-height":"","output":"true","read-only":"false","context":"interactive","classes":"","out-height":"","fig-cap":"","fig-height":5,"results":"markup","editor-quick-suggestions":"false","autorun":"false"},"id":4,"code":"for (i in 1:trial) {\n  if (result[i] > 3.5) {\n    print(\"大きい\") # 条件を満たすとき\n  } else {\n    print(\"小さい\") # 条件を満たさないとき\n  }\n}"},{"options":{"message":"true","out-width":"700px","dpi":72,"warning":"true","editor-word-wrap":"true","editor-font-scale":"0.5","comment":"","label":"unnamed-chunk-5","fig-width":7,"editor-max-height":"","output":"true","read-only":"false","context":"interactive","classes":"","out-height":"","fig-cap":"","fig-height":5,"results":"markup","editor-quick-suggestions":"false","autorun":"false"},"id":5,"code":"dice <- 1:6\ntoss <- 10\nx <- sample(dice, toss, replace = TRUE)\nmean(x)"}];
+  globalThis.qwebrCellDetails = [{"code":"1 + 2 # 足し算\n3 * 4 # かけ算\n6 ** 2 # 累乗\nsqrt(2) # 平方根","id":1,"options":{"editor-word-wrap":"true","out-height":"","warning":"true","autorun":"false","dpi":72,"editor-font-scale":"0.5","output":"true","comment":"","editor-max-height":"","fig-cap":"","out-width":"700px","editor-quick-suggestions":"false","label":"unnamed-chunk-1","message":"true","fig-width":7,"results":"markup","context":"interactive","read-only":"false","classes":"","fig-height":5}},{"code":"# 関数mymeanを定義\nmymean <- function(x) {\n  x1 <- sum(x)\n  x2 <- length(x)\n  x <- x1 / x2\n  return(x)\n}\nx <- 1:100 # 1から100までの数列\nmymean(x)","id":2,"options":{"editor-word-wrap":"true","out-height":"","warning":"true","autorun":"false","dpi":72,"editor-font-scale":"0.5","output":"true","comment":"","editor-max-height":"","fig-cap":"","out-width":"700px","editor-quick-suggestions":"false","label":"unnamed-chunk-2","message":"true","fig-width":7,"results":"markup","context":"interactive","read-only":"false","classes":"","fig-height":5}},{"code":"# サイコロを作成し，投げる回数と試行回数を設定\ndice <- 1:6; toss <- 10; trial <- 10\nresult <- numeric(trial)\n# 繰り返し処理\nfor (i in 1:trial) {\n  x <- sample(dice, toss, replace = TRUE)\n  result[i] <- mymean(x)\n}\nresult","id":3,"options":{"editor-word-wrap":"true","out-height":"","warning":"true","autorun":"false","dpi":72,"editor-font-scale":"0.5","output":"true","comment":"","editor-max-height":"","fig-cap":"","out-width":"700px","editor-quick-suggestions":"false","label":"unnamed-chunk-3","message":"true","fig-width":7,"results":"markup","context":"interactive","read-only":"false","classes":"","fig-height":5}},{"code":"for (i in 1:trial) {\n  if (result[i] > 3.5) {\n    print(\"大きい\") # 条件を満たすとき\n  } else {\n    print(\"小さい\") # 条件を満たさないとき\n  }\n}","id":4,"options":{"editor-word-wrap":"true","out-height":"","warning":"true","autorun":"false","dpi":72,"editor-font-scale":"0.5","output":"true","comment":"","editor-max-height":"","fig-cap":"","out-width":"700px","editor-quick-suggestions":"false","label":"unnamed-chunk-4","message":"true","fig-width":7,"results":"markup","context":"interactive","read-only":"false","classes":"","fig-height":5}},{"code":"dice <- 1:6\ntoss <- 10\nx <- sample(dice, toss, replace = TRUE)\nmean(x)","id":5,"options":{"editor-word-wrap":"true","out-height":"","warning":"true","autorun":"false","dpi":72,"editor-font-scale":"0.5","output":"true","comment":"","editor-max-height":"","fig-cap":"","out-width":"700px","editor-quick-suggestions":"false","label":"unnamed-chunk-5","message":"true","fig-width":7,"results":"markup","context":"interactive","read-only":"false","classes":"","fig-height":5}}];
 
   </script>
   <script type="module">
@@ -2173,8 +2173,8 @@ Soichi Matsuura
 <h2>Grade</h2>
 <p>The final grade will be based on the following components:</p>
 <ul>
-<li>Attendance and Participation: 50%</li>
-<li>Presentation: 30%</li>
+<li>Attendance and Participation: 40%</li>
+<li>Presentation: 40%</li>
 <li>Final Report: 20%</li>
 </ul>
 </section>
@@ -2243,6 +2243,46 @@ Soichi Matsuura
 <li>As businesses have increased in complexity, such “risk-based” auditing has evolved to make auditing more efficient and economical. <!-- ビジネスが複雑化するにつれ、このような「リスクベース」の監査は、監査をより効率的かつ経済的にするために進化してきた。 --></li>
 </ul>
 </section>
+<section id="推薦図書1" class="slide level2">
+<h2>推薦図書1</h2>
+<p>If you want to learn a computer based auditing tools for Python, This book is recommended.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>稲垣・小澤・野呂・蜂谷 (著)</li>
+<li><strong>Pythonではじめる 会計データサイエンス</strong></li>
+<li>2023年出版</li>
+<li>中央経済社</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/python_accounting.jpg" style="width:60.0%"></p>
+<figcaption>Pythonではじめる 会計データサイエンス</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="推薦図書2" class="slide level2">
+<h2>推薦図書2</h2>
+<p>If you want to learn a statistical accounting and finance research, This book is recommended.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>笠原・村宮 著</li>
+<li><strong>実証会計・ファイナンス : Rによる財務・株式データの分析</strong></li>
+<li>2022年出版</li>
+<li>新世社</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/kasahara_muramiya.jpg" style="width:60.0%"></p>
+<figcaption>実証会計・ファイナンス</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
 <section class="slide level2">
 
 <ul>
@@ -2254,17 +2294,18 @@ Soichi Matsuura
 </section>
 <section id="computers-in-auditing-and-the-birth-of-audit-analytics" class="slide level2">
 <h2>Computers in Auditing and the Birth of Audit Analytics</h2>
-<!-- When I received my undergraduate degree in statistics in 1971, the job market offered very little employment in statistics. 
-Mainframe computers had just been introduced, and data resided on 80-column Hollerith cards. 
-All data analyses were done on paper ledgers with adding machines. 
-Microcomputers, cloud computing, and remote storage were yet to be invented. 
-What a difference 50 years has made. 
-For a growing number of people, data analysis is a central part of their job today. 
+<!-- When I received my undergraduate degree in statistics in 1971, the job market offered very little employment in statistics.
+Mainframe computers had just been introduced, and data resided on 80-column Hollerith cards.
+All data analyses were done on paper ledgers with adding machines.
+Microcomputers, cloud computing, and remote storage were yet to be invented.
+What a difference 50 years has made.
+For a growing number of people, data analysis is a central part of their job today.
  -->
 <ul>
-<li>Increased data availability, more powerful computing, and an emphasis on analytics-driven decision in business has created a plethora of jobs in data science. There are around 2.5 million openings (and increasing) for data analytics jobs in the USA at any time. <!-- データの利用可能性の増加、より強力なコンピューティング、ビジネスにおける分析に基づく意思決定の重視が、データサイエンスの多くの仕事を生み出しました。米国では、常に約250万件のデータ分析の仕事があります（増加中）。 --></li>
+<li>Increased data availability, more powerful computing, and an emphasis on <strong>analytics-driven decision</strong> in business has created a plethora of jobs in data science.</li>
+<li>There are around 2.5 million openings (and increasing) for data analytics jobs in the USA at any time. <!-- データの利用可能性の増加、より強力なコンピューティング、ビジネスにおける分析に基づく意思決定の重視が、データサイエンスの多くの仕事を生み出しました。米国では、常に約250万件のデータ分析の仕事があります（増加中）。 --></li>
 <li>A significant share of employees analyze data with Microsoft Excel or other spreadsheet programs like Google Sheets. <!-- 従業員の多くは、Microsoft ExcelやGoogle Sheetsなどのスプレッドシートプログラムでデータを分析しています。 --> <!-- - Others use proprietary statistical software like SAS, Stata, or SPSS that they often first learned in school.  --> <!-- その他の人は、学校で最初に学んだことが多いSAS、Stata、またはSPSSなどの専用の統計ソフトウェアを使用しています。 --></li>
-<li>While Excel and SAS are widely used tools, they have serious limitations. <!-- ExcelとSASは広く使用されているツールですが、重大な制限があります。 --> <!-- Excel conflates metadata (headings and descriptions) with formulas and data; and all are called “cells” in Excel.  --> <!-- Excelはメタデータ（見出しと説明）を数式とデータと混同し、すべてをExcelでは「セル」と呼びます。 --> <!-- Furthermore Excel is horrendously slow, cannot handle datasets above a certain size, and does not easily allow for reproducing previously conducted analyses on new datasets.  --> <!-- さらに、Excelは非常に遅く、ある一定のサイズを超えるデータセットを処理できず、以前に実施された分析を新しいデータセットで再現することが容易ではありません。 --> <!-- The main weaknesses of programs like SAS are that they were developed for very specific uses in the mainframe era of the 1970s and 1980s and have missed out on many of the newest developments in analytics.  --> <!-- SASなどのプログラムの主な弱点は、1970年代と1980年代のメインフレーム時代に非常に特定の用途のために開発されたため、分析の最新の進展の多くを見逃していることです。 --></li>
+<li>While Excel and SAS are widely used tools, they have <em>serious limitations</em>. <!-- ExcelとSASは広く使用されているツールですが、重大な制限があります。 --> <!-- Excel conflates metadata (headings and descriptions) with formulas and data; and all are called “cells” in Excel.  --> <!-- Excelはメタデータ（見出しと説明）を数式とデータと混同し、すべてをExcelでは「セル」と呼びます。 --> <!-- Furthermore Excel is horrendously slow, cannot handle datasets above a certain size, and does not easily allow for reproducing previously conducted analyses on new datasets.  --> <!-- さらに、Excelは非常に遅く、ある一定のサイズを超えるデータセットを処理できず、以前に実施された分析を新しいデータセットで再現することが容易ではありません。 --> <!-- The main weaknesses of programs like SAS are that they were developed for very specific uses in the mainframe era of the 1970s and 1980s and have missed out on many of the newest developments in analytics.  --> <!-- SASなどのプログラムの主な弱点は、1970年代と1980年代のメインフレーム時代に非常に特定の用途のために開発されたため、分析の最新の進展の多くを見逃していることです。 --></li>
 <li>Nor do they have a large community of contributors constantly adding new tools. <!-- また、新しいツールを継続的に追加している多くのコントリビューターのコミュニティを持っていません。 --></li>
 </ul>
 </section>
@@ -2273,8 +2314,8 @@ For a growing number of people, data analysis is a central part of their job tod
 <h3 id="r-or-python">R or Python</h3>
 <ul>
 <li>For those who have reached the limits of Excel, SAS, and their ilk, there is a next step: learn R or Python. <!-- Excel、SASなどの限界に達した人々にとって、次のステップがあります：RまたはPythonを学ぶ。 --></li>
-<li>R and Python are the two most popular programming languages used by data analysts and data scientists. <!-- RとPythonは、データアナリストとデータサイエンティストによって使用される最も人気のあるプログラミング言語です。 --></li>
-<li>Both are free and open source and were developed in the early 1990s—R (an open-source version of the “S” language) for statistical analysis and Python (after Monty Python) as a general-purpose programming language. <!-- 両方とも無料でオープンソースであり、1990年代初頭に開発されました。R（統計分析のためのオープンソース版「S」言語）とPython（Monty Pythonの後）は、汎用プログラミング言語として開発されました。 --></li>
+<li>R and Python are the <strong>two most popular programming languages</strong> used by data analysts and data scientists. <!-- RとPythonは、データアナリストとデータサイエンティストによって使用される最も人気のあるプログラミング言語です。 --></li>
+<li>Both are free and open source and were developed in the early 1990s — R (an open-source version of the “S” language) for statistical analysis and Python as a general-purpose programming language. <!-- 両方とも無料でオープンソースであり、1990年代初頭に開発されました。R（統計分析のためのオープンソース版「S」言語）とPython（Monty Pythonの後）は、汎用プログラミング言語として開発されました。 --></li>
 <li>For anyone interested in machine learning, working with large datasets, or creating complex data visualizations, both have become standard tools for analysis. <!-- 機械学習、大規模データセットの操作、または複雑なデータの視覚化を行いたい人にとって、両方とも分析のための標準的なツールとなっています。 --></li>
 </ul>
 </section>
@@ -2303,7 +2344,8 @@ For a growing number of people, data analysis is a central part of their job tod
 <li>R tends to be in demand in consulting fields where every <em>report is ad hoc</em>. <!-- Rは、すべてのレポートがアドホックであるコンサルティング分野で需要が高い傾向があります。 --></li>
 <li>Neither is a particularly efficient language from a purely operational standpoint; for that you would turn to C++. <!-- どちらも、純粋に運用上の観点からは特に効率的な言語ではありません。その場合は、C++に切り替えます。 --></li>
 <li>Over the past 5 years there has been substantial competition in offerings of interactive development environments (IDEs) to promote the use of either language. <!-- 過去5年間、どちらかの言語の使用を促進するためのインタラクティブ開発環境（IDE）の提供において、大きな競争がありました。 --></li>
-<li>The R IDE is called <strong>R-Studio</strong> and is managed by J.J.Allaire (originally from South Bend, IN, and who developed the ColdFusion web development software many years ago). <!-- R IDEはR-Studioと呼ばれ、J.J.Allaire（元々はサウスベンド出身で、多年前にColdFusionウェブ開発ソフトウェアを開発した）が管理しています。 --> <!-- - Python is supported on NetBeans and Eclipse IDEs through plugins; but the go to Python environment is Anaconda, which has its own version of Python, and supports R as well as other programs. --> <!-- Pythonは、プラグインを介してNetBeansおよびEclipse IDEでサポートされています。しかし、Pythonの環境はAnacondaであり、独自のPythonのバージョンを持ち、Rをはじめとする他のプログラムもサポートしています。 --></li>
+<li>The R IDE is called <strong>RStudio</strong> and is managed by J.J.Allaire (originally from South Bend, IN, and who developed the ColdFusion web development software many years ago). <!-- R IDEはR-Studioと呼ばれ、J.J.Allaire（元々はサウスベンド出身で、多年前にColdFusionウェブ開発ソフトウェアを開発した）が管理しています。 --> <!-- - Python is supported on NetBeans and Eclipse IDEs through plugins; but the go to Python environment is Anaconda, which has its own version of Python, and supports R as well as other programs. --> <!-- Pythonは、プラグインを介してNetBeansおよびEclipse IDEでサポートされています。しかし、Pythonの環境はAnacondaであり、独自のPythonのバージョンを持ち、Rをはじめとする他のプログラムもサポートしています。 --></li>
+<li>最近はPosit社が開発している<strong>Positoron</strong>が注目されている。</li>
 </ul>
 </section>
 <section class="slide level2">
@@ -2321,7 +2363,7 @@ For a growing number of people, data analysis is a central part of their job tod
 <ul>
 <li>No matter how brilliant your analyses are, if you cannot communicate them, they are worthless. <!-- あなたの分析がどれほど優れていても、それを伝えることができなければ、それは無価値です。 --></li>
 <li>Report writing, publication on webs, GitHub, and other outlets are all essential parts of being a data analyst. <!-- レポートの作成、WebやGitHubなどの出版物は、データアナリストであるための不可欠な部分です。 --></li>
-<li>In support of this, R has the report writing tool called knitr (the author himself spells it with a lower case letter k). <!-- これをサポートするために、Rにはレポート作成ツールknitr（著者自身は小文字のkで綴ります）があります。 --> <!-- - Python has its counterpart, Jupyter notebooks (which can be used with R now), and although they are conceptually similar, their intended purpose is quite different.  --> <!-- Pythonには、Jupyterノートブック（現在はRと一緒に使用できます）があり、概念的には似ていますが、それらの意図された目的はかなり異なります。 --></li>
+<li>In support of this, R has the report writing tool called <code>knitr</code>. <!-- これをサポートするために、Rにはレポート作成ツールknitr（著者自身は小文字のkで綴ります）があります。 --> <!-- - Python has its counterpart, Jupyter notebooks (which can be used with R now), and although they are conceptually similar, their intended purpose is quite different.  --> <!-- Pythonには、Jupyterノートブック（現在はRと一緒に使用できます）があり、概念的には似ていますが、それらの意図された目的はかなり異なります。 --></li>
 <li>Though not particularly well suited for exploratory analysis, knitr is a powerful tool for dynamic data report generation so much so that it is a worthy addition to any programmer’s toolbox. <!-- 探索的分析にはあまり適していませんが、knitrは動的データレポート生成のための強力なツールであり、それだけでプログラマーのツールボックスに価値のある追加です。 --></li>
 </ul>
 </section>
@@ -2388,31 +2430,31 @@ For a growing number of people, data analysis is a central part of their job tod
 <!-- 彼らは、取引、負債、前払いを粘土板に二重に記録し、取引の当事者が保持するようにしました。 -->
 <!-- The earliest texts were pictographs on tablets written with a stylus, with accounting-specific writing systems evolving into more expressive systems that described politics, religion, and news. -->
 <!-- 初期のテキストは、スタイラスで書かれたタブレット上の絵文字であり、会計専用の文字システムが進化して、政治、宗教、ニュースを記述するより表現豊かなシステムになりました。 -->
-<!-- 
-Many commodities were exchanged in the early barter communities—silver, grain, and so forth based on standardized weighs, and thus establishing an absolute value for any particular item was complex and inexact. 
-Under King Croesus of Lydia (in modern Turkey), the touchstone (mined from local riverbeds) was used to standardize the content of gold alloys, allowing standardized coinage and a single denomination for the price of any item. 
-The earliest coins were blank droplets of metal of standard weight, issued by the treasury; later coins were stamped with punches for easy accounting. 
-It was the custom of unmarried ladies in Lydia to sell their virtue in exchange for coins, in order to accumulate a dowry sufficient for them to marry. 
+<!--
+Many commodities were exchanged in the early barter communities—silver, grain, and so forth based on standardized weighs, and thus establishing an absolute value for any particular item was complex and inexact.
+Under King Croesus of Lydia (in modern Turkey), the touchstone (mined from local riverbeds) was used to standardize the content of gold alloys, allowing standardized coinage and a single denomination for the price of any item.
+The earliest coins were blank droplets of metal of standard weight, issued by the treasury; later coins were stamped with punches for easy accounting.
+It was the custom of unmarried ladies in Lydia to sell their virtue in exchange for coins, in order to accumulate a dowry sufficient for them to marry.
 In this regard, accounting can credibly lay claim to being “the oldest profession.”
 
-The Kingdom of Lydia was short lived; but their idea of standardized coinage lived on, first in the Athenian silver drachma, and later the Roman Solidus, which provided Mediterranean trade with an unprecedented assurance of quality and value for a num.raire commodity—one which could be traded with all others. 
-Issuing standardized coinage was a profitable business for government. 
-Governments essentially take out non-interest bearing loans on the money they mint; in turn, this begot profitable industries in money changing, accepting deposits, and lending money at interest. 
+The Kingdom of Lydia was short lived; but their idea of standardized coinage lived on, first in the Athenian silver drachma, and later the Roman Solidus, which provided Mediterranean trade with an unprecedented assurance of quality and value for a num.raire commodity—one which could be traded with all others.
+Issuing standardized coinage was a profitable business for government.
+Governments essentially take out non-interest bearing loans on the money they mint; in turn, this begot profitable industries in money changing, accepting deposits, and lending money at interest.
 Rome developed sophisticated financial and contracting systems for transport and trade, far-reaching tax collection, and a vast bureaucratic network.
 
-Parallel developments in Asia saw China evolve from Cowry shells as standard coinage in the .fth century BCE, to copper coins in the Qin Dynasty period (third century BCE). 
-Qin coins were practical—round with a square hole in the middle (for stringing together), which remained the common design for most Chinese copper coins until the twentieth century. 
-Because of the low value of the coinage, seigniorage and government profits were substantial, as was the tax on transactions. 
+Parallel developments in Asia saw China evolve from Cowry shells as standard coinage in the .fth century BCE, to copper coins in the Qin Dynasty period (third century BCE).
+Qin coins were practical—round with a square hole in the middle (for stringing together), which remained the common design for most Chinese copper coins until the twentieth century.
+Because of the low value of the coinage, seigniorage and government profits were substantial, as was the tax on transactions.
 The Qin Dynasty took a no nonsense attitude toward executing anyone caught making transactions with local coins, or any currency not sanctioned by the government; a policy revived in the Tang Dynasty when they introduced paper (tree bark) currencies.
 
 
-The Roman Empire sank into medieval chaos after about the third century. 
-Predicting the collapse of civilization, Boethius and Cassiodorus in the sixth century collected existing studies in mathematics (including accounting) into the quadrivium, comprising the four subjects of arithmetic, geometry, music, and astronomy. 
-These were to be taught to Roman patricians in the monastic schools, which before Saint Benedict of Nursia were more or less safe country estates for offspring of the Roman elite. 
-Until the fifteenth century, European accounting was static and unchanged from the Roman practices. 
-Meanwhile in the Middle East, firstly the Umayyad Caliphate, and then the Abbasid Caliphate of Baghdad rapidly gained power over Central Asia by adopting our modern Arabic number system from India. 
-This was a substantial improvement over the cumbersome notation of the Romans. 
-It allowed easier additions and subtractions, as well as allowing accounting to extend itself to multiplication (for prices and cost allocations) and division (for rates). 
+The Roman Empire sank into medieval chaos after about the third century.
+Predicting the collapse of civilization, Boethius and Cassiodorus in the sixth century collected existing studies in mathematics (including accounting) into the quadrivium, comprising the four subjects of arithmetic, geometry, music, and astronomy.
+These were to be taught to Roman patricians in the monastic schools, which before Saint Benedict of Nursia were more or less safe country estates for offspring of the Roman elite.
+Until the fifteenth century, European accounting was static and unchanged from the Roman practices.
+Meanwhile in the Middle East, firstly the Umayyad Caliphate, and then the Abbasid Caliphate of Baghdad rapidly gained power over Central Asia by adopting our modern Arabic number system from India.
+This was a substantial improvement over the cumbersome notation of the Romans.
+It allowed easier additions and subtractions, as well as allowing accounting to extend itself to multiplication (for prices and cost allocations) and division (for rates).
 Baghdad became the world’s center of accounting innovations. -->
 </section>
 <section class="slide level2">
@@ -2534,27 +2576,27 @@ Baghdad became the world’s center of accounting innovations. -->
 <!-- 彼は最終的にイタリアに戻り、アラビア数字を計算に使用することを推進した「リベル・アバッチ」（計算の本）を出版しました。 -->
 <!-- The book was written in Latin during the year 1202 and was influential and widely read. -->
 <!-- この本は1202年にラテン語で書かれ、影響力があり、広く読まれました。 -->
-<!-- The introduction of double-entry bookkeeping into Europe is an interesting one in itself. 
+<!-- The introduction of double-entry bookkeeping into Europe is an interesting one in itself.
 
-Arabic numerals were known in Europe, but it was considered sinful to use them. 
-For example, the statutes of the Arte del Cambio of 1299 prohibited the bankers of Florence from using Arabic numerals (even though they had been slipping them into documents since the tenth century just to ease calculations). 
-Pope Sylvester II who reigned for three years at the turn of the millennium, endorsed and promoted study of Arabic arithmetic, mathematics, and astronomy, reintroducing the abacus to Europe. 
+Arabic numerals were known in Europe, but it was considered sinful to use them.
+For example, the statutes of the Arte del Cambio of 1299 prohibited the bankers of Florence from using Arabic numerals (even though they had been slipping them into documents since the tenth century just to ease calculations).
+Pope Sylvester II who reigned for three years at the turn of the millennium, endorsed and promoted study of Arabic arithmetic, mathematics, and astronomy, reintroducing the abacus to Europe.
 After his death, he was widely denounced as a sorcerer in league with the devil for exactly this reason.
 
-It was into this politically and religiously charged atmosphere that the innovations in Fibbonaci’s Liber Abbaci started with merchants and bankers synthesizing alternatives to the abacus and daybooks of unwieldy Roman numerals. 
-Fibbonaci himself was a merchant as well as a mathematician. 
-He traveled extensively throughout the Mediterranean as a merchant prior to 1200. 
+It was into this politically and religiously charged atmosphere that the innovations in Fibbonaci’s Liber Abbaci started with merchants and bankers synthesizing alternatives to the abacus and daybooks of unwieldy Roman numerals.
+Fibbonaci himself was a merchant as well as a mathematician.
+He traveled extensively throughout the Mediterranean as a merchant prior to 1200.
 Not only did he encourage adoption of the Hindu.Arabic numerals for commercial accounting, but he actually set out an account contrasting completely the Roman .gures versus the Arabic numerals.
 
-Importantly, the Hindu.Arabic system mathematics also covered systems of equations, and these were in addition introduced into Spain by the Moors. 
-From an accounting perspective, the conceptualization of debits and credits provided a generalization at the accounting systems (financial statement) level in addition to details at the transaction (journal entry) level. 
-Equations—by de.nition—require an equality of two sides of the equation—on one side dependent variables, on the other independent. 
-In an exchange transaction there is a natural dichotomization into independent variables (assets) and dependent variables (claims). 
+Importantly, the Hindu.Arabic system mathematics also covered systems of equations, and these were in addition introduced into Spain by the Moors.
+From an accounting perspective, the conceptualization of debits and credits provided a generalization at the accounting systems (financial statement) level in addition to details at the transaction (journal entry) level.
+Equations—by de.nition—require an equality of two sides of the equation—on one side dependent variables, on the other independent.
+In an exchange transaction there is a natural dichotomization into independent variables (assets) and dependent variables (claims).
 These are reected in the Latin words debere (to owe) and credere (to entrust), which are the basis for our modern words, debit and credit.
 
-The Hindu.Arabic systems of equations were focused on equilibrium—in the balance sheet at any date, an equilibrium of exchange transactions is preserved. 
-The use of an equilibrium device may at first have been pro forma. 
-But it is easy to see how the change from ad hoc single-entry to equilibrium bookkeeping could lead to a complete double-entry system (particularly given European bankers’ early penchant for slipping Arabic numerals into their financial records, despite the fact that they might be accused of colluding with the devil). 
+The Hindu.Arabic systems of equations were focused on equilibrium—in the balance sheet at any date, an equilibrium of exchange transactions is preserved.
+The use of an equilibrium device may at first have been pro forma.
+But it is easy to see how the change from ad hoc single-entry to equilibrium bookkeeping could lead to a complete double-entry system (particularly given European bankers’ early penchant for slipping Arabic numerals into their financial records, despite the fact that they might be accused of colluding with the devil).
 Once .gures began to be disposed in a single column, instead of being scattered all over the page and reduced to order only outside the account-book on the abacus or in the mind, then the advantages of having two clearly separated columns, simply to facilitate computation, would quickly become apparent (De Roover 1956, 1955, 1938). -->
 </section>
 <section class="slide level2">
@@ -2577,12 +2619,26 @@ Once .gures began to be disposed in a single column, instead of being scattered 
 <li><strong>Summa de Arithmetica, Geometria, Proportioni et Proportionalita</strong> (Everything About Arithmetic, Geometry and Proportion) formally described the widely used but still controversial system of double-entry for a much wider audience. <!-- 「Summa de Arithmetica, Geometria, Proportioni et Proportionalita（算術、幾何学、比例と比例についてすべて）」は、広範な観衆のために広く使用されているがまだ議論の余地のある複式記入システムを正式に記述した。 --></li>
 </ul>
 </section>
+<section id="スンマスムマ" class="slide level2">
+<h2>スンマ（スムマ）</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>『<strong>算術、幾何、比および比例に関する全集</strong>』(スムマ)の初版本は、100冊ほど現存するといわれている。日本では、大阪学院、大阪商業、神奈川大、久留米大、慶應、<strong>神戸大学</strong>、専修大、日大、広島修道大、早稲田の図書館に蔵書がある(wikipediaより)。</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/zumuma2.gif" style="width:80.0%"></p>
+<figcaption>Summa</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
 <section class="slide level2">
 
 <ul>
-<li>Pacioli’s Summa included one chapter titled, Details of Accounting and Recording that popularized the Method of Venice for accounting. <!-- パチオリのSummaには、「会計と記録の詳細」の1章が含まれており、会計のためのヴェネツィア法（アル＝ワリズミの方法の進化）を広めた。 --></li>
-<li>Pacioli’s Summa described the components of bookkeeping as: a memorandum book, journal, and ledger, with the journal and ledger similar to modern equivalents. <!-- パチオリのSummaは、帳簿の構成要素を、日記帳、仕訳帳、元帳として記述し、日記帳と元帳は現代の相当物に似ている。 --></li>
-<li>A trial balance was used when the books were closed. <!-- 帳簿を閉じる際には、試算表が使用された。 --></li>
+<li>Pacioli’s Summa included one chapter titled, <em>Details of Accounting and Recording</em> that popularized the Method of Venice for accounting. <!-- パチオリのSummaには、「会計と記録の詳細」の1章が含まれており、会計のためのヴェネツィア法（アル＝ワリズミの方法の進化）を広めた。 --></li>
+<li>Pacioli’s Summa described the components of bookkeeping as: a memorandum book(日記帳), journal(仕訳帳), and ledger(元帳), with the journal and ledger similar to modern equivalents. <!-- パチオリのSummaは、帳簿の構成要素を、日記帳、仕訳帳、元帳として記述し、日記帳と元帳は現代の相当物に似ている。 --></li>
+<li>A trial balance(試算表) was used when the books were closed. <!-- 帳簿を閉じる際には、試算表が使用された。 --></li>
 <li>The profit or loss was entered into the capital account to balance the balance sheet. <!-- 利益または損失は、貸借対照表をバランスさせるために資本勘定に入力された。 --></li>
 </ul>
 </section>
@@ -2594,7 +2650,7 @@ Once .gures began to be disposed in a single column, instead of being scattered 
 <li>Pacioli’s Summa was translated into the most commonly read vernaculars in Europe and was influential not only in investment and merchant ventures but in accounting in the great estates of Europe. <!-- パチオリのSummaは、ヨーロッパで最も一般的に読まれる方言に翻訳され、投資や商業活動だけでなく、ヨーロッパの大農場の会計にも影響を与えました。 --></li>
 <li>Over the next 400 years it became the standard, in only slightly modi.ed form, for accounting in all realms of business in Europe. <!-- その後の400年間で、わずかに修正された形で、ヨーロッパのあらゆるビジネス領域の会計の標準となりました。 --> <!-- - Before the Industrial Revolution, China and India were the wealthiest economies in the world. --> <!-- Mughal India’s annual revenues were twenty times that of France. --> <!-- 産業革命以前、中国とインドは世界で最も豊かな経済でした。ムガル帝国インドの年間収入はフランスの20倍でした。 --> <!-- - In China, Qianlong demanded that Britain’s ambassador Lord McCartney kowtow and informed him that China was in need of nothing from the West. --> <!-- 中国では、乾隆帝(けんりゅうてい)はイギリスの大使マッカートニー卿に頭を下げるよう要求し、中国は西洋から何も必要としていないことを伝えました。 --></li>
 </ul>
-<!-- 
+<!--
 ### The Industrial Revolution
 
 
@@ -2625,8 +2681,8 @@ Wedgwood turned his creative genius toward a detailed examination of his company
 <h3 id="audit-firms">Audit firms</h3>
 <ul>
 <li>The British Companies Act of 1844 established the incorporation of business by a formal registration process. <!-- 1844年の英国会社法は、公式の登録プロセスによる事業の設立を確立しました。 --></li>
-<li>It required annual appointment of auditors to examine the accounts and balance sheet of all public companies (the role of accountants under the British Companies Act would change substantially over the century). <!-- すべての公開会社の会計と貸借対照表を調査するための監査人の年次任命が必要とされました（英国会社法における会計士の役割は、その後の世紀にわたって大幅に変わりました）。 --></li>
-<li>The Companies Act of 1862 required banks to be audited and established the practice of limited cash dividends to be paid only out of profits. <!-- 1862年の会社法は、銀行の監査を義務付け、利益からのみ支払われる限られた現金配当の実践を確立しました。 --> By 1900, the audit was the central practice of accountants. <!-- 1900年までに、監査は会計士の中心的な実践となりました。 --></li>
+<li>It required <em>annual appointment of auditors</em> to examine the accounts and balance sheet of all public companies (the role of accountants under the British Companies Act would change substantially over the century). <!-- すべての公開会社の会計と貸借対照表を調査するための監査人の年次任命が必要とされました（英国会社法における会計士の役割は、その後の世紀にわたって大幅に変わりました）。 --></li>
+<li>The Companies Act of 1862 <em>required banks to be audited</em> and established the practice of <em>limited cash dividends</em> to be paid only out of profits. <!-- 1862年の会社法は、銀行の監査を義務付け、利益からのみ支払われる限られた現金配当の実践を確立しました。 --> By 1900, the audit was the central practice of accountants. <!-- 1900年までに、監査は会計士の中心的な実践となりました。 --></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -2661,7 +2717,7 @@ Wedgwood turned his creative genius toward a detailed examination of his company
 <!-- 1950年代以前、経営者は主に計画目的のために原価計算情報を使用し、運営管理は通常、会計情報以外の情報に基づいていました。 -->
 <!-- For example, Du Pont used ROI for planning, but control was based on factors such as timeliness of delivery to customers and product quality. -->
 <!-- Multidivisional business organizations became more pronounced, and businesses turned to decoupling—different production processes took place at different sites, perhaps thousands of miles away. -->
-<!-- 
+<!--
 ### Public Accounting
 
 
