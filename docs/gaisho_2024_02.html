@@ -8,7 +8,7 @@
 <link href="gaisho_2024_02_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="gaisho_2024_02_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="gaisho_2024_02_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.54">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Soichi Matsuura">
   <title>外国書購読 Day2  Foundations of Audit Analytics</title>
@@ -116,6 +116,8 @@
   <link href="gaisho_2024_02_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="gaisho_2024_02_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="gaisho_2024_02_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="gaisho_2024_02_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="gaisho_2024_02_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="gaisho_2024_02_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -701,7 +703,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"id":1,"options":{"label":"unnamed-chunk-1","fig-cap":"","editor-font-scale":"0.5","read-only":"false","warning":"true","editor-max-height":"","message":"true","editor-quick-suggestions":"false","results":"markup","classes":"","output":"true","editor-word-wrap":"true","comment":"","dpi":72,"out-width":"700px","autorun":"false","fig-width":7,"fig-height":5,"context":"interactive","out-height":""},"code":"# assign 5 to x\n\n# show x\n\n# assign 1 to 10 to vector_1_10\n\n# show vector_1_10 usign print()"}];
+  globalThis.qwebrCellDetails = [{"id":1,"options":{"editor-quick-suggestions":"false","editor-font-scale":"0.5","dpi":72,"comment":"","out-height":"","fig-height":5,"classes":"","fig-cap":"","editor-word-wrap":"true","label":"unnamed-chunk-1","output":"true","fig-width":7,"warning":"true","out-width":"700px","read-only":"false","autorun":"false","context":"interactive","message":"true","results":"markup","editor-max-height":""},"code":"# assign 5 to x\n\n# show x\n\n# assign 1 to 10 to vector_1_10\n\n# show vector_1_10 usign print()"},{"id":2,"options":{"editor-quick-suggestions":"false","editor-font-scale":"0.5","dpi":72,"comment":"","out-height":"","fig-height":5,"classes":"","fig-cap":"","editor-word-wrap":"true","label":"unnamed-chunk-2","output":"true","fig-width":7,"warning":"true","out-width":"700px","read-only":"false","autorun":"false","context":"interactive","message":"true","results":"markup","editor-max-height":""},"code":"mat <- seq(1, 25) |> matrix(5,5,byrow = T)\n\n# inverse matrix\n\n# determinant of the matrix\n\nqr(mat)$rank # 2 なので正則でない"},{"id":3,"options":{"editor-quick-suggestions":"false","editor-font-scale":"0.5","dpi":72,"comment":"","out-height":"","fig-height":5,"classes":"","fig-cap":"","editor-word-wrap":"true","label":"unnamed-chunk-3","output":"true","fig-width":7,"warning":"true","out-width":"700px","read-only":"false","autorun":"false","context":"interactive","message":"true","results":"markup","editor-max-height":""},"code":"mydata <- data.frame(\n  ID = c(1, 2, 3, 4),\n  Color = c(\"red\", \"white\", \"red\", NA),\n  Passed = c(TRUE, TRUE, TRUE, FALSE)\n)\n\n# mydataからColorを取り出す\n\n# mydataからIDの3番目の要素を取り出す"},{"id":4,"options":{"editor-quick-suggestions":"false","editor-font-scale":"0.5","dpi":72,"comment":"","out-height":"","fig-height":5,"classes":"","fig-cap":"","editor-word-wrap":"true","label":"unnamed-chunk-4","output":"true","fig-width":7,"warning":"true","out-width":"700px","read-only":"false","autorun":"false","context":"interactive","message":"true","results":"markup","editor-max-height":""},"code":"mylist <- list(\n  a <- c(\"one\", \"two\", \"three\"),\n  b <- c(1,2,3),\n  c <- matrix(1:9, nrow = 3)\n)\n\n# mylistからaを取り出す\n\n# mylistからbの2番目の要素を取り出す"}];
 
   </script>
   <script type="module">
@@ -2516,169 +2518,49 @@ Soichi Matsuura
 <h3 id="knit-and-kableextra"><code>knit</code> and <code>kableExtra</code></h3>
 <p>You can make more beautiful graphs using the <code>knitr</code> package.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>expand for full code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(knitr, kableExtra)</span>
 <span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a>industry_stats<span class="sc">$</span>ticker <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">t</span>() <span class="sc">|&gt;</span></span>
-<span id="cb25-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">|&gt;</span> <span class="fu">kable_styling</span>(<span class="st">"striped"</span>, <span class="at">font_size =</span> <span class="dv">18</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(</span>
+<span id="cb25-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span>),</span>
+<span id="cb25-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">font_size =</span> <span class="dv">28</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<table class="table table-striped caption-top" data-quarto-postprocess="true" style="font-size: 18px; margin-left: auto; margin-right: auto;">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed caption-top" data-quarto-postprocess="true" style="font-size: 28px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr class="header">
-<th style="text-align: right;" data-quarto-table-cell-role="th">A</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">AAN</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">AAP</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">ABM</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">AFL</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">AIG</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">AMD</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">AMP</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">AMTD</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">ARW</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">AWI</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">AXP</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">BA</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">BAC</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">BBY</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">BC</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">BKS</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">BOH</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">BR</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">BSX</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">C</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">CAH</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">CAT</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">CCI</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">CVC</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">CVS</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">CYH</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">D</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">DBD</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">DFS</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">DGX</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">DNB</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">EFX</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">EMR</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">F</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">FDX</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">FNF</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">GCO</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">GE</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">GM</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">GNW</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">GPI</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">GPN</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">GPS</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">GS</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">H</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">HD</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">HIG</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">HNT</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">HON</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">HRB</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">HTZ</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">HUM</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">IBM</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">JLL</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">JWN</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">KBH</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">KBR</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">KEY</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">KND</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">KODK</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">LMT</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">LNKD</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">LXK</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">MDT</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">MET</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">MOH</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">MSI</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">MUSA</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">NGVC</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">NLSN</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">NNI</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">NSM</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">NYT</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Var1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Freq</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: left;">A</td>
 <td style="text-align: right;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AAN</td>
 <td style="text-align: right;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AAP</td>
 <td style="text-align: right;">22</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ABM</td>
 <td style="text-align: right;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AFL</td>
 <td style="text-align: right;">12</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">30</td>
-<td style="text-align: right;">55</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">44</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">44</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">24</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">33</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">36</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">84</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">54</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">60</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">24</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">22</td>
 </tr>
 </tbody>
 </table>
+</div>
 
 
 </div>
@@ -2761,8 +2643,7 @@ Soichi Matsuura
 
 <h3 id="ai">AI</h3>
 <ul>
-<li>The field of <em>artificial intelligence</em> was motivated by Vannevar Bush and Bush’s (1945) article “As we may think” and initiated projects in rule-based and symbolic programs such as early chess programs that involved hardcoded rules crafted by programmers. <!-- 人工知能の分野は、Vannevar Bushによる1945年の論文「As we may think」に触発され、プログラマーによって作成されたハードコードされたルールを含む初期のチェスプログラムなど、ルールベースおよびシンボリックプログラムのプロジェクトを開始した。 --> <!-- - Despite considerable but sporadic funding,  --></li>
-<li>The field only began flourishing with the machine learning competitions hosted by website Kaggle in 2010. <!-- かなりの資金が投入されているものの、2010年にKaggleのウェブサイトで開催された機械学習コンペティションによって、この分野は本格的に発展し始めた。 --></li>
+<li>The field of <em>artificial intelligence</em> was motivated by Vannevar Bush and Bush’s (1945) article “As we may think” and initiated projects in rule-based and symbolic programs such as early chess programs that involved hardcoded rules crafted by programmers. <!-- 人工知能の分野は、Vannevar Bushによる1945年の論文「As we may think」に触発され、プログラマーによって作成されたハードコードされたルールを含む初期のチェスプログラムなど、ルールベースおよびシンボリックプログラムのプロジェクトを開始した。 --> <!-- - Despite considerable but sporadic funding,  --> <!-- - The field only began flourishing with the machine learning competitions hosted by website Kaggle in 2010. --> <!-- かなりの資金が投入されているものの、2010年にKaggleのウェブサイトで開催された機械学習コンペティションによって、この分野は本格的に発展し始めた。 --></li>
 <li><strong>Random forests</strong> quickly became a favorite on the platform, but by 2014, <strong>gradient boosting machines</strong> were outperforming them, and by 2016, <strong>perceptron models</strong>, in particular building on the successes at Google, began dominating the field. <!-- ランダムフォレストはすぐにプラットフォームで人気を博したが、2014年には勾配ブースティングマシンがそれを上回り、2016年には特にGoogleの成功を基にしたパーセプトロンモデルが分野を席巻し始めた。 --></li>
 </ul>
 </section>
@@ -2771,17 +2652,17 @@ Soichi Matsuura
 <h3 id="ml">ML</h3>
 <ul>
 <li>Machine learning re-envisioned several of the fundamental methods of statistics. <!-- 機械学習は、統計学の基本的な手法をいくつか再構築した。 --></li>
-<li>Computationally intensive <strong>stochastic gradient boosting</strong>(確率的勾配ブースティング) replaces the first-order conditions in calculus used in statistics search for solutions. <!-- 計算量の多い確率的勾配ブースティングは、統計学の解探索に使用される微分条件を置き換える。 --></li>
-<li>The easy to compute, <strong>squared-error loss function</strong> of parametric statistics gave way to a larger selection of solution concepts. <!-- 計算しやすい二乗誤差損失関数は、パラメトリック統計学の解概念の選択肢を広げた。 --></li>
-<li>Machine learning is not limited to fitting statistical depictions of probability distributions typically defined with 1, 2, or 3 parameters. <!-- ; highly customizable distributions can be crafted by altering the weights of successive layers of machine learning networks. --> <!-- 機械学習は、通常1、2、または3つのパラメータで定義される確率分布の統計的表現に適合することに限られていない。機械学習ネットワークの連続した層の重みを変更することで、高度にカスタマイズ可能な分布を作成できる。 --></li>
+<li>Computationally intensive <strong>stochastic gradient boosting</strong> replaces the first-order conditions in calculus used in statistics search for solutions. <!-- 計算量の多い確率的勾配ブースティングは、統計学の解探索に使用される微分条件を置き換える。 --> <!-- - The easy to compute, **squared-error loss function** of parametric statistics gave way to a larger selection of solution concepts. --></li>
+<li>The simple <strong>squared-error loss function</strong> in parametric statistics expanded to a wider range of solution concepts. <!-- 計算しやすい二乗誤差損失関数は、パラメトリック統計学の解概念の選択肢を広げた。 --></li>
+<li>Machine learning is not limited to fitting statistical depictions of probability distributions typically defined with 1~3 parameters. <!-- ; highly customizable distributions can be crafted by altering the weights of successive layers of machine learning networks. --> <!-- 機械学習は、通常1、2、または3つのパラメータで定義される確率分布の統計的表現に適合することに限られていない。機械学習ネットワークの連続した層の重みを変更することで、高度にカスタマイズ可能な分布を作成できる。 --></li>
 </ul>
 </section>
 <section class="slide level2">
 
 <h3 id="clasification">Clasification</h3>
 <ul>
-<li>For classification problems, <strong>cross-entropy measures</strong>(交差エントロピー指標) offered much better fit than, say, comparable logit or probit models. <!-- 分類問題において、交差エントロピー測度は、例えば、比較可能なロジットやプロビットモデルよりもはるかに良い適合性を提供した。 --> <!-- - One particular challenge, ImageNet was notoriously difficult in 2012, consisting of classifying high-resolution color images into 1000 different categories after training on 1.4 million images.  --> <!-- 一つの特定の課題であるImageNetは、2012年には悪名高く、140万枚の画像を学習した後、高解像度のカラー画像を1000の異なるカテゴリに分類することから成る。 --></li>
-<li>In 2011, the top-five accuracy of the winning model, based on classical approaches to computer vision, was only 74.3%. <!-- 2011年には、コンピュータビジョンにおける古典的なアプローチに基づいた勝者モデルのトップ5の精度はわずか74.3%であった。 --> In 2012, a deep-learning method was able to achieve a top-five accuracy of 83.6%. <!-- 2012年には、ディープラーニング手法がトップ5の精度を83.6%に達成することができた。 --> By 2015, the winner reached an accuracy of 96.4%. <!-- and the classification task on ImageNet was considered to be a completely solved problem. --> <!-- 2015年には、勝者は96.4%の精度に達し、ImageNetの分類課題は完全に解決されたと考えられた。 --></li>
+<li>For classification problems, <strong>cross-entropy measures</strong> offered much better fit than, say, comparable logit or probit models. <!-- 分類問題において、交差エントロピー測度は、例えば、比較可能なロジットやプロビットモデルよりもはるかに良い適合性を提供した。 --> <!-- - One particular challenge, ImageNet was notoriously difficult in 2012, consisting of classifying high-resolution color images into 1000 different categories after training on 1.4 million images.  --> <!-- 一つの特定の課題であるImageNetは、2012年には悪名高く、140万枚の画像を学習した後、高解像度のカラー画像を1000の異なるカテゴリに分類することから成る。 --></li>
+<li>In 2011, the top-five accuracy of the winning model, based on classical approaches to computer vision, was only 74.3%. <!-- 2011年には、コンピュータビジョンにおける古典的なアプローチに基づいた勝者モデルのトップ5の精度はわずか74.3%であった。 --> <!-- In 2012, a deep-learning method was able to achieve a top-five accuracy of 83.6%. --> <!-- 2012年には、ディープラーニング手法がトップ5の精度を83.6%に達成することができた。 --> By 2015, the winner reached an accuracy of 96.4%. <!-- and the classification task on ImageNet was considered to be a completely solved problem. --> <!-- 2015年には、勝者は96.4%の精度に達し、ImageNetの分類課題は完全に解決されたと考えられた。 --></li>
 <li>Business analytics’ embrace of machine learning is inspired by the numerous successes: near-human-level image classification, language translation, speech recognition, handwriting transcription, text-to-speech conversion, autonomous driving and better than human Go and Chess games. <!-- ビジネスアナリティクスが機械学習を受け入れるのは、多くの成功に触発されている。例えば、人間に近いレベルの画像分類、言語翻訳、音声認識、手書き文字の転写、テキスト読み上げ変換、自動運転、人間よりも優れた囲碁やチェスのゲームなど。 --></li>
 </ul>
 </section>
@@ -2864,10 +2745,10 @@ Soichi Matsuura
 <h2>Numerical vs.&nbsp;Categorical</h2>
 <!-- ## 量的変数と質的変数 -->
 <ul>
-<li>There are two basic types of structured data: <strong>numeric</strong> and <strong>categorical</strong>. <!-- 構造化データ（structured data）には、主に量的データと質的データの2種類が存在する。 --></li>
+<li>Two basic types of structured data: <strong>numeric</strong> and <strong>categorical</strong>. <!-- 構造化データ（structured data）には、主に量的データと質的データの2種類が存在する。 --></li>
 <li>Numeric data comes in two forms: <strong>continuous</strong>, such as wind speed or time duration, and <strong>discrete</strong>, such as the count of the occurrence of an event. <!-- 量的データには、風速や経過時間のような連続データと、事象の発生回数のような離散データの2種類がある。 -->
 <ul>
-<li>Categorical data takes only a fixed set of values, such as a type of TV screen or a state name. <!-- 質的データは、テレビ画面の種類（プラズマ、LCD、LEDなど）や州名（アラバマ、アラスカなど）のように、固定の種類の値を取る。 --></li>
+<li>Categorical data takes only a fixed set of values <!-- - , such as a type of TV screen or a state name. --> <!-- 質的データは、テレビ画面の種類（プラズマ、LCD、LEDなど）や州名（アラバマ、アラスカなど）のように、固定の種類の値を取る。 --></li>
 <li>Binary data is an <em>important special case of categorical data</em> that <strong>takes on only one of two values</strong>, such as 0/1 etc. <!-- 二値データは、0/1、はい/いいえ、真/偽のような、2つの値のいずれか一方しか取らない質的データの重要な特殊ケースです。 --></li>
 </ul></li>
 <li>Another useful type of categorical data is <strong>ordinal data</strong> in which the categories are ordered; an example of this is a numerical rating (1, 2, 3, 4, or 5). <!-- もう一つの重要な質的データの形式は、カテゴリに順序が付与される順序データで、数値評価（1、2、3、4、または5）がその例である。 --></li>
@@ -2878,7 +2759,7 @@ Soichi Matsuura
 <p>Why do we bother with a taxonomy of data types?</p>
 <!-- なぜ分析者はデータの型(type)をこのように分類するのだろうか？ -->
 <ul>
-<li>It turns out that for the purposes of data analysis and predictive modeling, the data type is important to help determine the type of visual display, data analysis, or statistical model. <!-- その理由は、データ分析や予測モデリングを行う上で、データの型が視覚表現、データ分析、あるいは統計モデルの選択に大きな影響を与えるからである。 --></li>
+<li>It turns out that for the purposes of data analysis and predictive modeling, <em>the data type is important</em> to help determine the type of visual display, data analysis, or statistical model. <!-- その理由は、データ分析や予測モデリングを行う上で、データの型が視覚表現、データ分析、あるいは統計モデルの選択に大きな影響を与えるからである。 --></li>
 <li>In fact, data science software, such as R and Python, uses these data types to improve computational performance. <!-- 実際、RやPythonのようなデータサイエンス・ソフトウェアは、計算性能を向上させるためにこれらのデータの型を利用している。 --></li>
 <li>More importantly, the data type for a variable determines how software will handle computations for that variable. <!-- さらに重要なことは、データの型によって、ソフトウェアがその変数の計算をどのように処理するかが決まるということである。 --></li>
 </ul>
@@ -2886,12 +2767,12 @@ Soichi Matsuura
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>sox_stats <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(　<span class="co"># csvファイルを読み込む</span></span>
-<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"ch_2_data_types.csv"</span>, <span class="co"># 使用するデータ</span></span>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>sox_stats <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(　<span class="co"># read csv file</span></span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"ch_2_data_types.csv"</span>, <span class="co"># dataset</span></span>
 <span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span></span>
 <span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>))</span>
 <span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># |&gt; filter(card != "card")</span></span>
-<span id="cb30-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sox_stats) <span class="co"># 記述統計量を表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sox_stats) <span class="co"># descriptive stats</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    ticker               date          card                disc       
  Length:1514        Min.   :2005   Length:1514        Min.   :0.0000  
@@ -2937,12 +2818,13 @@ Soichi Matsuura
 </div>
 <!-- ## 連続(区間、浮動小数点数、数値)データ -->
 </section>
-<section id="continuous-interval-float-numeric-data" class="slide level2">
-<h2>Continuous (Interval, Float, Numeric) Data</h2>
+<section id="continuous-data" class="slide level2">
+<h2>Continuous Data</h2>
+<p>Continuous data has numeric*(実数値).</p>
 <ul>
 <li>Many of our key financial metrics are continuous measures. <!-- 主要な財務指標の多くは連続的な測定値である。 --></li>
 <li>Conceptually, we can subdivide continuous data without end. <!-- 概念的には、連続データは際限なく分割することができる。 --></li>
-<li>We can look at the density functions of continuous data using the plotluck package. <!-- plotluckパッケージを使って連続データの密度関数を見ることができる。 --></li>
+<li>We can look at the density functions of continuous data using the <code>plotluck</code> package. <!-- plotluckパッケージを使って連続データの密度関数を見ることができる。 --></li>
 </ul>
 <!-- ## 離散 (整数、カウント)データ -->
 </section>
@@ -2952,8 +2834,7 @@ Soichi Matsuura
 <li>In practice, our minimum level of resolution in accounts is one dollar (or single monetary unit). <!-- 実際には、（連続データであったとしても）財務諸表における最小の単位は1ドルや1円（または（1,000ドルのような）金額単位）である。 --></li>
 <li>This resolution limit is in fact the basis of audit procedures such as dollar-unit sampling. <!-- 実際に、このような単位の限界は、金額単位サンプリングなどの監査手続の基礎となっている。 --> <!-- We are not limited to dollar levels of resolution; annual reports may use thousands or millions of dollars as their level of resolution. --> <!-- 年次報告書では、1,000ドルや100万ドルを金額単位として利用することもある。 --></li>
 <li>In this example we use ggplot to produce a histogram of discrete values. <!-- この例では、離散データのヒストグラムを作成するためにggplotを使用している。 --></li>
-<li>The level of resolution determines the number of bins, in this case 20. <!-- 金額単位はビン数（ヒストグラムの棒の数）を決定し、この場合は20である。 --></li>
-<li>Human cognition tends to be overwhelmed by large numbers of bins, which is why we often see financial statistics summarized at levels of resolution larger than one dollar. <!-- 人間の認知は多数のビンに圧倒される傾向があり、これが1ドルより大きな金額単位で要約された金融の記述統計をよく目にする理由である。 --></li>
+<li>The level of resolution determines the number of bins, in this case 20. <!-- 金額単位はビン数（ヒストグラムの棒の数）を決定し、この場合は20である。 --> <!-- - Human cognition tends to be overwhelmed by large numbers of bins, which is why we often see financial statistics summarized at levels of resolution larger than one dollar. --> <!-- 人間の認知は多数のビンに圧倒される傾向があり、これが1ドルより大きな金額単位で要約された金融の記述統計をよく目にする理由である。 --></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -2961,16 +2842,16 @@ Soichi Matsuura
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a>sox_stats <span class="sc">|&gt;</span> <span class="co"># 変数を選択して作図</span></span>
 <span id="cb32-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="st">"audit_fee"</span>,<span class="st">"non_audit_fee"</span>, <span class="st">"tax_fees"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb32-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> audit_fee)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> audit_fee) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="gaisho_2024_02_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
 <section id="categorical-data" class="slide level2">
 <h2>Categorical Data</h2>
 <!-- ## 質的データ（ 列挙型，列挙，因子，名義，多項） -->
-<p>Categorical (Enums, Enumerated, Factors, Nominal, Polychotomous) Data</p>
+<p><em>Categorical</em> (Enums, Enumerated, Factors, Nominal, Polychotomous) Data</p>
 <ul>
-<li>Categorical data can take on only a specific set of values representing a set of possible categories. <!-- 質的データは、カテゴリーの種類（ティッカーデータ）を表す特定の値（AAPなど）のみを取ることができる。 --></li>
+<li>Categorical data can <em>take on only a specific set of values</em> representing a set of possible categories. <!-- 質的データは、カテゴリーの種類（ティッカーデータ）を表す特定の値（AAPなど）のみを取ることができる。 --></li>
 <li>The firm’s Chart of Accounts imposes a categorical data scheme on the economic events which are the basis of journal entries in the accounting system. <!-- 会社の財務諸表は、会計システムの仕訳の基礎となる経済事象に、質的データの体系（勘定など）を与えている。 --></li>
 <li>In our Sarbanes-Oxley data, we might be interested in the variation over time of audit fees, categorized by the firms they were charged to. <!-- Sarbanes-Oxley法のデータについて分析者が、監査人が担当する企業ごとに分類された監査報酬の時系列の変動に関心がある場合には、下記のように分析する。 --></li>
 </ul>
@@ -2983,7 +2864,7 @@ Soichi Matsuura
 <span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">as.character</span>(ticker) <span class="sc">&lt;</span> <span class="st">"AI"</span>) <span class="sc">|&gt;</span> <span class="co"># AIより前の文字</span></span>
 <span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> ticker, <span class="at">y =</span> audit_fee) <span class="sc">+</span> <span class="co"># 作図</span></span>
 <span id="cb33-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="co"># ヴァイオリンプロット</span></span>
-<span id="cb33-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">"log10"</span>) <span class="co"># 対数変換</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">"log10"</span>, <span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="co"># 対数変換</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="gaisho_2024_02_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
@@ -3001,18 +2882,17 @@ Soichi Matsuura
 <span id="cb34-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="co"># データの変換</span></span>
 <span id="cb34-8"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="at">change =</span> <span class="fu">as.numeric</span>(change), <span class="co"># 数値に変換</span></span>
 <span id="cb34-9"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="at">capitalization =</span> <span class="fu">as.numeric</span>( <span class="co"># Bを削除</span></span>
-<span id="cb34-10"><a href="" aria-hidden="true" tabindex="-1"></a>          <span class="fu">str_replace</span>(capitalization, <span class="st">"B"</span>, <span class="st">""</span>)</span>
-<span id="cb34-11"><a href="" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb34-12"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb34-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>( <span class="co"># ロング型</span></span>
-<span id="cb34-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(price, change, percent_change, volume,</span>
-<span id="cb34-15"><a href="" aria-hidden="true" tabindex="-1"></a>            vol_ave, capitalization, pe_ratio),</span>
-<span id="cb34-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"metric"</span>, <span class="co"># 変数名</span></span>
-<span id="cb34-17"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span> <span class="co"># 値</span></span>
-<span id="cb34-18"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb34-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> metric, <span class="at">y =</span> value) <span class="sc">+</span> <span class="co"># データ</span></span>
-<span id="cb34-20"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="co"># 箱ひげ図</span></span>
-<span id="cb34-21"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">"log10"</span>) <span class="co"># 縦軸を対数</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-10"><a href="" aria-hidden="true" tabindex="-1"></a>          <span class="fu">str_replace</span>(capitalization, <span class="st">"B"</span>, <span class="st">""</span>))</span>
+<span id="cb34-11"><a href="" aria-hidden="true" tabindex="-1"></a>          ) <span class="sc">|&gt;</span></span>
+<span id="cb34-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>( <span class="co"># wide to long</span></span>
+<span id="cb34-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(price, change, percent_change, volume,</span>
+<span id="cb34-14"><a href="" aria-hidden="true" tabindex="-1"></a>            vol_ave, capitalization, pe_ratio),</span>
+<span id="cb34-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"metric"</span>, <span class="co"># 変数名</span></span>
+<span id="cb34-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span> <span class="co"># 値</span></span>
+<span id="cb34-17"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb34-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> metric, <span class="at">y =</span> value) <span class="sc">+</span> <span class="co"># データ</span></span>
+<span id="cb34-19"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="co"># 箱ひげ図</span></span>
+<span id="cb34-20"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">"log10"</span>, <span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="co"># 縦軸を対数</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -3031,10 +2911,15 @@ Soichi Matsuura
 <section class="slide level2">
 
 <div class="cell">
+<details class="code-fold">
+<summary>expand for full code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sox_stats) <span class="sc">+</span></span>
 <span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> non_audit_fee, <span class="at">y =</span> audit_fee, <span class="at">col =</span> card) <span class="sc">+</span> <span class="co"># 軸と色分け</span></span>
 <span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="co"># ヴァイオリンプロット</span></span>
-<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">col =</span> <span class="st">"Fraud = 1 (green)"</span>) <span class="co"># 軸ラベル</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">col =</span> <span class="st">"Fraud = 1 (green)"</span>) <span class="sc">+</span> <span class="co"># 軸ラベル</span></span>
+<span id="cb35-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
+<span id="cb35-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 
 </div>
 <img data-src="gaisho_2024_02_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
@@ -3042,7 +2927,7 @@ Soichi Matsuura
 
 <div class="cell">
 <details class="code-fold">
-<summary>コード</summary>
+<summary>expand for full code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># card変数に文字列"card"が含まれていてエラー</span></span>
 <span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a>sox_stats<span class="sc">$</span>card <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(sox_stats<span class="sc">$</span>card) <span class="co"># 整数に変換</span></span>
 <span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># gather ではなく pivot_longer を使う</span></span>
@@ -3056,8 +2941,8 @@ Soichi Matsuura
 <span id="cb36-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sox_stats_long) <span class="sc">+</span></span>
 <span id="cb36-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> non_audit_fee, <span class="at">y =</span> audit_fee, <span class="at">col =</span> metric) <span class="sc">+</span></span>
 <span id="cb36-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="co"># バイオリン・プロット</span></span>
-<span id="cb36-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">"log2"</span>) <span class="sc">+</span></span>
-<span id="cb36-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">"log2"</span>) <span class="co"># 対数軸</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">"log2"</span>, <span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
+<span id="cb36-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">"log2"</span>, <span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="co"># 対数軸</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -3097,543 +2982,88 @@ Soichi Matsuura
 
 <h3 id="setting">Setting</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a>invoice_no <span class="ot">&lt;-</span> date <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span> <span class="do">## placeholder</span></span>
-<span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a>journal_ent_no <span class="ot">&lt;-</span> <span class="fu">cbind.data.frame</span>(invoice_no, date)</span>
-<span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a>date <span class="ot">&lt;-</span> <span class="fu">rdate</span>(<span class="dv">1000</span>)</span>
-<span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a>journal_ent_no<span class="sc">$</span>date <span class="ot">&lt;-</span> date[<span class="fu">order</span>(date)]</span>
-<span id="cb38-5"><a href="" aria-hidden="true" tabindex="-1"></a>journal_ent_no<span class="sc">$</span>invoice_no <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">1000</span>) <span class="sc">+</span> <span class="fu">rbinom</span>(<span class="dv">1000</span>,<span class="dv">1</span>,.<span class="dv">1</span>)</span>
-<span id="cb38-6"><a href="" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> <span class="fu">duplicated</span>(journal_ent_no<span class="sc">$</span>invoice_no)</span>
-<span id="cb38-7"><a href="" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">1000</span>)</span>
-<span id="cb38-8"><a href="" aria-hidden="true" tabindex="-1"></a>journal_dups <span class="ot">&lt;-</span> <span class="fu">cbind.data.frame</span>(raw,duplicates)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a>journal_ent_no <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">date =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,</span>
+<span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">invoice_no =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span></span>
+<span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use the <code>rdate</code> function to generate a random date for each of the 1000 journal entries.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a>invoice_no <span class="ot">&lt;-</span> date <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span> <span class="do">## placeholder</span></span>
+<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a>journal_ent_no <span class="ot">&lt;-</span> <span class="fu">cbind.data.frame</span>(invoice_no,date)</span>
+<span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a>date <span class="ot">&lt;-</span> <span class="fu">rdate</span>(<span class="dv">1000</span>)</span>
+<span id="cb39-4"><a href="" aria-hidden="true" tabindex="-1"></a>journal_ent_no<span class="sc">$</span>date <span class="ot">&lt;-</span> date[<span class="fu">order</span>(date)]</span>
+<span id="cb39-5"><a href="" aria-hidden="true" tabindex="-1"></a>journal_ent_no<span class="sc">$</span>invoice_no <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">1000</span>) <span class="sc">+</span> <span class="fu">rbinom</span>(<span class="dv">1000</span>,<span class="dv">1</span>,.<span class="dv">1</span>) <span class="co"># add some errors</span></span>
+<span id="cb39-6"><a href="" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> <span class="fu">duplicated</span>(journal_ent_no<span class="sc">$</span>invoice_no)</span>
+<span id="cb39-7"><a href="" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">1000</span>)</span>
+<span id="cb39-8"><a href="" aria-hidden="true" tabindex="-1"></a>journal_dups <span class="ot">&lt;-</span> <span class="fu">cbind.data.frame</span>(raw,duplicates)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="journal_dups-data"><code>journal_dups</code> Data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(journal_dups)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,000
+Columns: 2
+$ raw        &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …
+$ duplicates &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FAL…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(journal_dups<span class="sc">$</span>duplicates)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+FALSE  TRUE 
+  901    99 </code></pre>
+</div>
 </div>
 </section>
 <section class="slide level2">
 
 <h3 id="make-a-graph">Make a graph</h3>
+<p>You can find the duplicated invoices by looking at the graph.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(journal_dups) <span class="sc">+</span></span>
-<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> invoice_no, <span class="at">y =</span> raw,</span>
-<span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> duplicates, <span class="at">color =</span> duplicates) <span class="sc">+</span></span>
-<span id="cb39-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="co"># 散布図</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(journal_dups) <span class="sc">+</span></span>
+<span id="cb44-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> invoice_no, <span class="at">y =</span> raw,</span>
+<span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> duplicates, <span class="at">color =</span> duplicates) <span class="sc">+</span></span>
+<span id="cb44-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="co"># 散布図</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="gaisho_2024_02_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a>journal_ent_no[journal_dups<span class="sc">$</span>duplicates <span class="sc">==</span> <span class="cn">TRUE</span>,] <span class="sc">%&gt;%</span></span>
-<span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">longtable =</span> T, <span class="at">caption =</span> <span class="st">"Duplicated Invoices"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb40-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(</span>
-<span id="cb40-4"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>),</span>
-<span id="cb40-5"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">full_width =</span> F,</span>
-<span id="cb40-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">font_size =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb40-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">width =</span> <span class="st">"3em"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb40-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column_spec</span>(<span class="dv">2</span>, <span class="at">width =</span> <span class="st">"4em"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a>journal_ent_no <span class="sc">|&gt;</span></span>
+<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(duplicates <span class="sc">==</span> <span class="cn">TRUE</span>, invoice_no <span class="sc">&lt;</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">longtable =</span> T, <span class="at">caption =</span> <span class="st">"Duplicated Invoices"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(</span>
+<span id="cb45-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>),</span>
+<span id="cb45-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">full_width =</span> F, <span class="at">font_size =</span> <span class="dv">28</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table table-striped table-hover table-condensed caption-top" data-quarto-postprocess="true" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="table table-striped table-hover table-condensed caption-top" data-quarto-postprocess="true" style="font-size: 28px; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>Duplicated Invoices</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">invoice_no</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">date</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left; width: 3em;">16</td>
-<td style="text-align: right; width: 4em;">16</td>
+<td style="text-align: right;">16</td>
 <td style="text-align: left;">2024-01-06</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; width: 3em;">26</td>
-<td style="text-align: right; width: 4em;">26</td>
+<td style="text-align: right;">26</td>
 <td style="text-align: left;">2024-01-10</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; width: 3em;">50</td>
-<td style="text-align: right; width: 4em;">50</td>
+<td style="text-align: right;">50</td>
 <td style="text-align: left;">2024-01-17</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; width: 3em;">86</td>
-<td style="text-align: right; width: 4em;">86</td>
+<td style="text-align: right;">86</td>
 <td style="text-align: left;">2024-01-30</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">104</td>
-<td style="text-align: right; width: 4em;">104</td>
-<td style="text-align: left;">2024-02-05</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">112</td>
-<td style="text-align: right; width: 4em;">112</td>
-<td style="text-align: left;">2024-02-08</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">144</td>
-<td style="text-align: right; width: 4em;">144</td>
-<td style="text-align: left;">2024-02-19</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">149</td>
-<td style="text-align: right; width: 4em;">149</td>
-<td style="text-align: left;">2024-02-22</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">162</td>
-<td style="text-align: right; width: 4em;">162</td>
-<td style="text-align: left;">2024-02-25</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">167</td>
-<td style="text-align: right; width: 4em;">167</td>
-<td style="text-align: left;">2024-02-28</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">187</td>
-<td style="text-align: right; width: 4em;">187</td>
-<td style="text-align: left;">2024-03-07</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">195</td>
-<td style="text-align: right; width: 4em;">195</td>
-<td style="text-align: left;">2024-03-10</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">212</td>
-<td style="text-align: right; width: 4em;">212</td>
-<td style="text-align: left;">2024-03-14</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">217</td>
-<td style="text-align: right; width: 4em;">217</td>
-<td style="text-align: left;">2024-03-16</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">220</td>
-<td style="text-align: right; width: 4em;">220</td>
-<td style="text-align: left;">2024-03-18</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">224</td>
-<td style="text-align: right; width: 4em;">224</td>
-<td style="text-align: left;">2024-03-19</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">233</td>
-<td style="text-align: right; width: 4em;">233</td>
-<td style="text-align: left;">2024-03-23</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">240</td>
-<td style="text-align: right; width: 4em;">240</td>
-<td style="text-align: left;">2024-03-26</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">242</td>
-<td style="text-align: right; width: 4em;">242</td>
-<td style="text-align: left;">2024-03-27</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">248</td>
-<td style="text-align: right; width: 4em;">248</td>
-<td style="text-align: left;">2024-03-28</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">251</td>
-<td style="text-align: right; width: 4em;">251</td>
-<td style="text-align: left;">2024-03-29</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">253</td>
-<td style="text-align: right; width: 4em;">253</td>
-<td style="text-align: left;">2024-03-30</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">256</td>
-<td style="text-align: right; width: 4em;">256</td>
-<td style="text-align: left;">2024-04-01</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">259</td>
-<td style="text-align: right; width: 4em;">259</td>
-<td style="text-align: left;">2024-04-03</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">261</td>
-<td style="text-align: right; width: 4em;">261</td>
-<td style="text-align: left;">2024-04-04</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">267</td>
-<td style="text-align: right; width: 4em;">267</td>
-<td style="text-align: left;">2024-04-08</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">297</td>
-<td style="text-align: right; width: 4em;">297</td>
-<td style="text-align: left;">2024-04-22</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">310</td>
-<td style="text-align: right; width: 4em;">310</td>
-<td style="text-align: left;">2024-04-28</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">319</td>
-<td style="text-align: right; width: 4em;">319</td>
-<td style="text-align: left;">2024-05-01</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">322</td>
-<td style="text-align: right; width: 4em;">322</td>
-<td style="text-align: left;">2024-05-01</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">339</td>
-<td style="text-align: right; width: 4em;">339</td>
-<td style="text-align: left;">2024-05-09</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">347</td>
-<td style="text-align: right; width: 4em;">347</td>
-<td style="text-align: left;">2024-05-13</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">353</td>
-<td style="text-align: right; width: 4em;">353</td>
-<td style="text-align: left;">2024-05-14</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">361</td>
-<td style="text-align: right; width: 4em;">361</td>
-<td style="text-align: left;">2024-05-18</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">368</td>
-<td style="text-align: right; width: 4em;">368</td>
-<td style="text-align: left;">2024-05-20</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">376</td>
-<td style="text-align: right; width: 4em;">376</td>
-<td style="text-align: left;">2024-05-22</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">384</td>
-<td style="text-align: right; width: 4em;">384</td>
-<td style="text-align: left;">2024-05-26</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">390</td>
-<td style="text-align: right; width: 4em;">390</td>
-<td style="text-align: left;">2024-05-28</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">407</td>
-<td style="text-align: right; width: 4em;">407</td>
-<td style="text-align: left;">2024-06-04</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">442</td>
-<td style="text-align: right; width: 4em;">442</td>
-<td style="text-align: left;">2024-06-18</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">452</td>
-<td style="text-align: right; width: 4em;">452</td>
-<td style="text-align: left;">2024-06-21</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">463</td>
-<td style="text-align: right; width: 4em;">463</td>
-<td style="text-align: left;">2024-06-26</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">467</td>
-<td style="text-align: right; width: 4em;">467</td>
-<td style="text-align: left;">2024-06-26</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">473</td>
-<td style="text-align: right; width: 4em;">473</td>
-<td style="text-align: left;">2024-06-28</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">480</td>
-<td style="text-align: right; width: 4em;">480</td>
-<td style="text-align: left;">2024-06-30</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">490</td>
-<td style="text-align: right; width: 4em;">490</td>
-<td style="text-align: left;">2024-07-03</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">495</td>
-<td style="text-align: right; width: 4em;">495</td>
-<td style="text-align: left;">2024-07-06</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">507</td>
-<td style="text-align: right; width: 4em;">507</td>
-<td style="text-align: left;">2024-07-11</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">512</td>
-<td style="text-align: right; width: 4em;">512</td>
-<td style="text-align: left;">2024-07-12</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">514</td>
-<td style="text-align: right; width: 4em;">514</td>
-<td style="text-align: left;">2024-07-13</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">517</td>
-<td style="text-align: right; width: 4em;">517</td>
-<td style="text-align: left;">2024-07-14</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">519</td>
-<td style="text-align: right; width: 4em;">519</td>
-<td style="text-align: left;">2024-07-15</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">528</td>
-<td style="text-align: right; width: 4em;">528</td>
-<td style="text-align: left;">2024-07-18</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">536</td>
-<td style="text-align: right; width: 4em;">536</td>
-<td style="text-align: left;">2024-07-20</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">546</td>
-<td style="text-align: right; width: 4em;">546</td>
-<td style="text-align: left;">2024-07-23</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">549</td>
-<td style="text-align: right; width: 4em;">549</td>
-<td style="text-align: left;">2024-07-24</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">555</td>
-<td style="text-align: right; width: 4em;">555</td>
-<td style="text-align: left;">2024-07-25</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">576</td>
-<td style="text-align: right; width: 4em;">576</td>
-<td style="text-align: left;">2024-08-01</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">582</td>
-<td style="text-align: right; width: 4em;">582</td>
-<td style="text-align: left;">2024-08-02</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">590</td>
-<td style="text-align: right; width: 4em;">590</td>
-<td style="text-align: left;">2024-08-06</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">638</td>
-<td style="text-align: right; width: 4em;">638</td>
-<td style="text-align: left;">2024-08-24</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">667</td>
-<td style="text-align: right; width: 4em;">667</td>
-<td style="text-align: left;">2024-09-01</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">677</td>
-<td style="text-align: right; width: 4em;">677</td>
-<td style="text-align: left;">2024-09-06</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">685</td>
-<td style="text-align: right; width: 4em;">685</td>
-<td style="text-align: left;">2024-09-09</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">690</td>
-<td style="text-align: right; width: 4em;">690</td>
-<td style="text-align: left;">2024-09-11</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">693</td>
-<td style="text-align: right; width: 4em;">693</td>
-<td style="text-align: left;">2024-09-12</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">703</td>
-<td style="text-align: right; width: 4em;">703</td>
-<td style="text-align: left;">2024-09-16</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">713</td>
-<td style="text-align: right; width: 4em;">713</td>
-<td style="text-align: left;">2024-09-21</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">722</td>
-<td style="text-align: right; width: 4em;">722</td>
-<td style="text-align: left;">2024-09-25</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">730</td>
-<td style="text-align: right; width: 4em;">730</td>
-<td style="text-align: left;">2024-09-26</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">737</td>
-<td style="text-align: right; width: 4em;">737</td>
-<td style="text-align: left;">2024-09-30</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">748</td>
-<td style="text-align: right; width: 4em;">748</td>
-<td style="text-align: left;">2024-10-02</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">760</td>
-<td style="text-align: right; width: 4em;">760</td>
-<td style="text-align: left;">2024-10-07</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">778</td>
-<td style="text-align: right; width: 4em;">778</td>
-<td style="text-align: left;">2024-10-15</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">781</td>
-<td style="text-align: right; width: 4em;">781</td>
-<td style="text-align: left;">2024-10-15</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">786</td>
-<td style="text-align: right; width: 4em;">786</td>
-<td style="text-align: left;">2024-10-16</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">788</td>
-<td style="text-align: right; width: 4em;">788</td>
-<td style="text-align: left;">2024-10-17</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">790</td>
-<td style="text-align: right; width: 4em;">790</td>
-<td style="text-align: left;">2024-10-18</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">798</td>
-<td style="text-align: right; width: 4em;">798</td>
-<td style="text-align: left;">2024-10-21</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">802</td>
-<td style="text-align: right; width: 4em;">802</td>
-<td style="text-align: left;">2024-10-21</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">805</td>
-<td style="text-align: right; width: 4em;">805</td>
-<td style="text-align: left;">2024-10-24</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">810</td>
-<td style="text-align: right; width: 4em;">810</td>
-<td style="text-align: left;">2024-10-26</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">812</td>
-<td style="text-align: right; width: 4em;">812</td>
-<td style="text-align: left;">2024-10-27</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">823</td>
-<td style="text-align: right; width: 4em;">823</td>
-<td style="text-align: left;">2024-10-30</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">831</td>
-<td style="text-align: right; width: 4em;">831</td>
-<td style="text-align: left;">2024-11-02</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">837</td>
-<td style="text-align: right; width: 4em;">837</td>
-<td style="text-align: left;">2024-11-04</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">840</td>
-<td style="text-align: right; width: 4em;">840</td>
-<td style="text-align: left;">2024-11-06</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">855</td>
-<td style="text-align: right; width: 4em;">855</td>
-<td style="text-align: left;">2024-11-13</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">872</td>
-<td style="text-align: right; width: 4em;">872</td>
-<td style="text-align: left;">2024-11-19</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">878</td>
-<td style="text-align: right; width: 4em;">878</td>
-<td style="text-align: left;">2024-11-20</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">889</td>
-<td style="text-align: right; width: 4em;">889</td>
-<td style="text-align: left;">2024-11-24</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">901</td>
-<td style="text-align: right; width: 4em;">901</td>
-<td style="text-align: left;">2024-11-28</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">921</td>
-<td style="text-align: right; width: 4em;">921</td>
-<td style="text-align: left;">2024-12-05</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">941</td>
-<td style="text-align: right; width: 4em;">941</td>
-<td style="text-align: left;">2024-12-11</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">944</td>
-<td style="text-align: right; width: 4em;">944</td>
-<td style="text-align: left;">2024-12-12</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">950</td>
-<td style="text-align: right; width: 4em;">950</td>
-<td style="text-align: left;">2024-12-14</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">952</td>
-<td style="text-align: right; width: 4em;">952</td>
-<td style="text-align: left;">2024-12-15</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; width: 3em;">976</td>
-<td style="text-align: right; width: 4em;">976</td>
-<td style="text-align: left;">2024-12-23</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; width: 3em;">996</td>
-<td style="text-align: right; width: 4em;">996</td>
-<td style="text-align: left;">2024-12-30</td>
 </tr>
 </tbody>
 </table>
@@ -3645,22 +3075,37 @@ Soichi Matsuura
 <section class="slide level2">
 
 <ul>
-<li>But graphs provide immediate access to the degree of problem, by looking at the number of exceptions in the graph, and are most visible if exceptions are rendered in a contrasting color such as the green used in the accompanying charts. <!-- このグラフは，グラフ内の例外の数をみることで，問題の程度にすぐアクセスできる手段を提供している。また例外が緑のような補色で作図されている場合は，非常に見やすい。 --></li>
+<li>But graphs provide immediate access to the degree of problem, by looking at the number of exceptions in the graph, and are most visible if exceptions are rendered in a contrasting color such as the green used in the accompanying charts. <!-- このグラフは，グラフ内の例外の数をみることで，問題の程度にすぐアクセスできる手段を提供している。
+また例外が緑のような補色で作図されている場合は，非常に見やすい。 --></li>
 <li>Often this is all that the auditor needs to render an opinion on internal controls, as it is the client’s responsibility to correct these problems. <!-- しばしば，これが監査人が内部統制に関する意見を出すために必要なものすべてであり，これらの問題を修正するのはクライアントの責任である。 --></li>
 </ul>
+</section>
+<section class="slide level2">
+
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a>journal_dups <span class="ot">&lt;-</span> journal_dups <span class="sc">|&gt;</span></span>
-<span id="cb41-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="co"># new variables</span></span>
-<span id="cb41-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">omit =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb41-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">invoice =</span> journal_ent_no<span class="sc">$</span>invoice_no,</span>
-<span id="cb41-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">omit =</span> <span class="sc">!</span>raw <span class="sc">%in%</span> journal_ent_no<span class="sc">$</span>invoice</span>
-<span id="cb41-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb41-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(journal_dups) <span class="sc">+</span></span>
-<span id="cb41-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> invoice_no, <span class="at">y =</span> raw, <span class="at">col =</span> omit) <span class="sc">+</span></span>
-<span id="cb41-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">col =</span> <span class="st">"Invoice Omitted?"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>expand for full code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a>journal_dups <span class="ot">&lt;-</span> journal_dups <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">invoice =</span> journal_ent_no<span class="sc">$</span>invoice_no,</span>
+<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">omit =</span> <span class="sc">!</span>raw <span class="sc">%in%</span> journal_ent_no<span class="sc">$</span>invoice</span>
+<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(journal_dups) <span class="sc">+</span></span>
+<span id="cb46-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> invoice_no, <span class="at">y =</span> raw, <span class="at">col =</span> omit) <span class="sc">+</span></span>
+<span id="cb46-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">col =</span> <span class="st">"Invoice Omitted?"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 
 </div>
 <img data-src="gaisho_2024_02_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="whats-raw-in-hogehoge">What’s <code></code>!raw %in% hogehoge`</h3>
+<ul>
+<li>The <code>!</code> operator is used to <em>negate</em> a logical value.</li>
+<li><code>%in%</code> is a binary operator that returns a logical value indicating whether the element on the left is found in the element on the right.</li>
+<li>So <code>!raw %in% journal_ent_no$invoice</code> returns a logical vector of the same length as <code>raw</code> that is <code>TRUE</code> if the corresponding element of <code>raw</code> is not found in <code>journal_ent_no$invoice</code>.</li>
+</ul>
+</section>
 <section id="data-storage-and-retrieval" class="slide level2">
 <h2>Data Storage and Retrieval</h2>
 <!-- ## データの格納と検索 -->
@@ -3668,14 +3113,13 @@ Soichi Matsuura
 <li>The amount of recorded data produced by human activity has probably been growing exponentially for more than a millennium. <!-- 人間の活動によって記録されたデータの量は、おそらく1000年以上にわたり指数関数的に増加してきた。 --></li>
 <li>Most data today is digitized, both for archival storage as well as display. <!-- 現在のほとんどのデータは、アーカイブストレージと表示の両方のためにデジタル化されている。 --></li>
 <li>This is good for the environment (newsprint alone in the 1970s accounted for 17% of US waste) but it also means that this data is potentially available for computer processing. <!-- これは環境にとって良いことである(1970年代の新聞印刷物だけでも、米国の廃棄物の17%を占めていた)が、コンピュータ処理に利用可能であることも意味している。 --></li>
-<li>The current amount of digitized data is around 20 trillion GB. <!-- 現在のデジタル化されたデータの量は約20兆GBである。 --></li>
-<li>Much of this increase has been fueled by new structures for storing and retrieving data <span class="math inline">-</span> video, text, and vast streams of surveillance data <span class="math inline">-</span> that have arisen since the commercialization of the internet in the 1990s. <!-- この情報増加の大部分は、1990年代のインターネットの商業化以来生じてきたデータの格納と検索のための新しい構造(動画、テキスト、大量の監視データのストリームなど)によって促進された。 --></li>
+<li>The current amount of digitized data is around 20 trillion GB (=2000万PB = 2万EB = 20ZB). <!-- 現在のデジタル化されたデータの量は約20兆GBである。 --></li>
 </ul>
 </section>
 <section class="slide level2">
 
 <ul>
-<li>This was not always the case. <!-- これは必ずしもそうではなかった。 --></li>
+<li>Much of this increase has been fueled by new structures for storing and retrieving data - video, text, and vast streams of surveillance data - that have arisen since the commercialization of the internet in the 1990s. <!-- この情報増加の大部分は、1990年代のインターネットの商業化以来生じてきたデータの格納と検索のための新しい構造(動画、テキスト、大量の監視データのストリームなど)によって促進された。 --> <!-- - This was not always the case. --> <!-- これは必ずしもそうではなかった。 --></li>
 <li>In the nineteenth century, vectors, matrices, and determinants were central tools in engineering and mathematics. <!-- 19世紀，ベクトル，行列，行列式は，高額と数学の中心的なツールであった。 --></li>
 <li>As accounting developed professional standards in this period, they naturally gravitated to representations that were matrix-like: <span class="math inline">accounts \times values for financial reporting</span>, and <span class="math inline">transactions × values</span> for journal entries and ledgers. <!-- この時代，会計が専門的な基準を発展させるにあたり，自然と行列に似た表現：財務報告における勘定科目$\times$金額，仕訳帳や元帳における取引$\times$金額といった表現に重心が移っていった。 --></li>
 <li>In the twentieth century, spreadsheet tools and rectangular tables of data brought matrices into the computer domain (Fig.5). - <!-- 20正規には，スプレッドシートツールとデータの矩形テーブルが行列をコンピュータ領域にもたらした（図5）。 --></li>
@@ -3683,13 +3127,35 @@ Soichi Matsuura
 </section>
 <section class="slide level2">
 
+<h3 id="terminology">Terminology</h3>
 <ul>
-<li>Terminology for matrix data can be confusing. –&gt; <!-- 行列データの用語は混乱を招くことがある。 --></li>
+<li>Terminology for matrix data can be confusing. <!-- 行列データの用語は混乱を招くことがある。 --></li>
 <li>Statisticians and data scientists use different terms for the same thing. <!-- 統計学者とデータサイエンティストは，同じものに対して異なる用語を使用している。 --></li>
 <li>For a statistician, predictor variables are used in a model to predict a response or dependent variable. <!-- 統計学者にとって，予測変数は応答変数または従属変数を予測するためにモデルで用いられる。 --></li>
 <li>For a data scientist, features are used to predict a target. <!-- データサイエンティストにとって，特徴量はターゲットを予測するために用いられる。 --></li>
-<li>One synonym is particularly confusing: computer scientists will use the term sample for a single row; a sample to a statistician means a collection of rows. <!-- 特に混乱を招くのは，サンプルという用語である。 --> <!-- コンピュータサイエンティストは，サンプルという用語を単一の行に用いるが，統計学者にとってサンプルとは行の集合を意味する。 --> Within the past decade, twentieth-century concepts of data storage and retrieval have given way to richer modalities. <!-- 過去10年間で，20世紀のデータの格納と検索の概念は，より豊かな形式に置き換えられてきた。 --> Storage of text has learned from the older discipline of library science; but entirely new approaches are demanded by music and video data. <!-- テキストの格納は，古い学問である図書館学から学んできたが，音楽や動画データにはまったく新しいアプローチが求められている。 --> One reason that machine learning is able to take on new tasks is their ability to analyze data that would be impossible with the matrix based methods of statistics. <!-- 機械学習が新しいタスクに取り組むことができる理由の一つは，統計学の行列ベースの方法では不可能なデータを分析できる能力である。 --> Statistics evolved in the early twentieth century, building on the matrix algebra that dominated most of science then. <!-- 統計学は20世紀初頭に発展し，当時の科学の大部分を支配していた行列代数に基づいていた。 --> Einstein’s work with tensors initiated a revolution in physics. <!-- アインシュタインのテンソルに関する研究は，物理学に革命をもたらした。 --> Physics “tensors” are not exactly the same as the computer science discipline’s “tensor”; the computer science tensor might more correctly be called an array (a multidimensional extension of a matrix). <!-- 物理学の「テンソル」とコンピュータサイエンスの「テンソル」は，厳密には同じものではない。より正確には，コンピュータサイエンスのテンソルは，(行列の多次元拡張である)配列とよばれるべきである。 --> In the language of R, tensors are called arrays, which is probably the more acceptable term in mathematics. <!-- R言語では，テンソルは配列と呼ばれているが，数学ではおそらくより受け入れられる用語である。 --> Until recently, tensor methods were not available for data analysis. <!-- 最近まで，テンソル法はデータ分析には利用できなかった。 --> Tensor representation of data is now standard in machine learning models. <!-- データのテンソル表現は，現在では機械学習モデルの標準である。 --> <!-- For example: --> <!-- 例えば： --></li>
+<li>One synonym is particularly confusing: computer scientists will use the term <strong>sample</strong> for a single row; a sample to a statistician means a collection of rows. <!-- 特に混乱を招くのは，サンプルという用語である。 --> <!-- コンピュータサイエンティストは，サンプルという用語を単一の行に用いるが，統計学者にとってサンプルとは行の集合を意味する。 --></li>
 </ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Within the past decade, twentieth-century concepts of data storage and retrieval have given way to richer modalities. <!-- 過去10年間で，20世紀のデータの格納と検索の概念は，より豊かな形式に置き換えられてきた。 --></li>
+<li>Storage of text has learned from the older discipline of library science; but entirely new approaches are demanded by music and video data. <!-- テキストの格納は，古い学問である図書館学から学んできたが，音楽や動画データにはまったく新しいアプローチが求められている。 --></li>
+<li>One reason that machine learning is able to take on new tasks is their ability to analyze data that would be impossible with the matrix based methods of statistics. <!-- 機械学習が新しいタスクに取り組むことができる理由の一つは，統計学の行列ベースの方法では不可能なデータを分析できる能力である。 --></li>
+<li>Statistics evolved in the early twentieth century, building on the matrix algebra that dominated most of science then. <!-- 統計学は20世紀初頭に発展し，当時の科学の大部分を支配していた行列代数に基づいていた。 --></li>
+</ul>
+<!-- - Einstein’s work with tensors initiated a revolution in physics. -->
+<!-- アインシュタインのテンソルに関する研究は，物理学に革命をもたらした。 -->
+<!-- - Physics “tensors” are not exactly the same as the computer science discipline’s “tensor”; the computer science tensor might more correctly be called an array (a multidimensional extension of a matrix). -->
+<!-- 物理学の「テンソル」とコンピュータサイエンスの「テンソル」は，厳密には同じものではない。より正確には，コンピュータサイエンスのテンソルは，(行列の多次元拡張である)配列とよばれるべきである。 -->
+<!-- In the language of R, tensors are called arrays, which is probably the more acceptable term in mathematics. -->
+<!-- R言語では，テンソルは配列と呼ばれているが，数学ではおそらくより受け入れられる用語である。 -->
+<!-- Until recently, tensor methods were not available for data analysis. -->
+<!-- 最近まで，テンソル法はデータ分析には利用できなかった。 -->
+<!-- Tensor representation of data is now standard in machine learning models. -->
+<!-- データのテンソル表現は，現在では機械学習モデルの標準である。 -->
+<!-- For example: -->
+<!-- 例えば： -->
 <!--
 - Vector data—2D tensors of shape (samples, features)
 - Timeseries data or sequence data—3D tensors of shape (samples, timesteps, features)
@@ -3700,24 +3166,89 @@ Soichi Matsuura
 - 時系列またはシーケンスデータ : 3Dテンソル形(サンプル，時点，特徴量)
 - 画像 : 4Dテンソル形(サンプル，高さ，幅，チャンネル)または(サンプル，チャンネル，高さ，幅)
 - 動画 : 5Dテンソル形(サンプル，フレーム，高さ，幅，チャンネル)または(サンプル, フレーム, チャンネル, 高さ, 幅) -->
-<p>Tensor data comes from many sources: sensor measurements, events, text, images, and videos. <!-- テンソルデータは多くのソース，たとえばセンサー測定，イベント，文字列，画像や動画などから得られる。 --> Social networks, drones, surveillance cameras, and other Internet of Things devices are generating massive volumes of data which, from a traditional statistical standpoint, would be considered unstructured. <!-- ソーシャル・ネットワークやドローン，監視カメラ，その他のIOTデバイスは，従来の統計的観点からは非構造化とみなされるであろう大量のデータを生成している。 --> These data streams need the extensions to statistics that are provided by machine learning. <!-- これらのデータストリームは，機械学習によって提供される統計への拡張を必要としている。 --></p>
-<p>The R language uses seven main storage formats for data: vectors, matrices, arrays, data frames, tibbles (tidyverse), lists, and factors. <!-- R言語はデータに対して、ベクトル、行列、配列、データフレーム、tibbles(tidyverse)、リスト、ファクターといった7つの主要な格納形式を使用する。 --></p>
+<!-- Tensor data comes from many sources: sensor measurements, events, text, images, and videos. -->
+<!-- テンソルデータは多くのソース，たとえばセンサー測定，イベント，文字列，画像や動画などから得られる。 -->
+<!-- Social networks, drones, surveillance cameras, and other Internet of Things devices are generating massive volumes of data which, from a traditional statistical standpoint, would be considered unstructured. -->
+<!-- ソーシャル・ネットワークやドローン，監視カメラ，その他のIOTデバイスは，従来の統計的観点からは非構造化とみなされるであろう大量のデータを生成している。 -->
+<!-- These data streams need the extensions to statistics that are provided by machine learning. -->
+<!-- これらのデータストリームは，機械学習によって提供される統計への拡張を必要としている。 -->
+</section>
+<section id="big-data" class="slide level2">
+<h2>Big Data</h2>
+<p>The R language uses <strong>seven main storage formats</strong> for data:</p>
+<ul>
+<li>vectors :ベクトル</li>
+<li>matrices :行列</li>
+<li>arrays :配列</li>
+<li>data frames :データフレーム</li>
+<li>tibbles : データフレームの上位互換</li>
+<li>lists : リスト</li>
+<li>factors : 因子(ファクター)</li>
+</ul>
+<!-- R言語はデータに対して、ベクトル、行列、配列、データフレーム、tibbles(tidyverse)、リスト、ファクターといった7つの主要な格納形式を使用する。 -->
+</section>
+<section class="slide level2">
 
-<img data-src="gaisho_2024_02_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch quarto-figure-center"><p class="caption">Growth of Stored Data (source: EMC Digital Universe)</p></section>
+<div class="cell">
+<details class="code-fold">
+<summary>コード</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>big_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">system.file</span>(</span>
+<span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"extdata"</span>, <span class="st">"ch1_amount_data.csv"</span>,</span>
+<span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-5"><a href="" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb47-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb47-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="sc">-</span>year),</span>
+<span id="cb47-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"data_type"</span>,</span>
+<span id="cb47-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb47-10"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb47-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(big_data)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+   year data_type       value
+  &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+1  1930 transient          0 
+2  1930 financial  323436613.
+3  1930 text       332755554.
+4  1930 multimedia         0 
+5  1930 mobile             0 
+6  1932 transient          0 </code></pre>
+</div>
+</div>
+<p><code>pivot_longer()</code> is a function from tidyverse that replaces columns with indicators, and is used here to gather multiple lines on a single graph./</p>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<details class="code-fold">
+<summary>expand for full code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a>big_data<span class="sc">$</span>amount <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(big_data<span class="sc">$</span>value)</span>
+<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>big_data <span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> amount, <span class="at">col=</span>data_type) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> data_type, <span class="at">size =</span> amount), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb49-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb49-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">"sqrt"</span>) <span class="sc">+</span></span>
+<span id="cb49-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">1990</span>,<span class="dv">2020</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span></span>
+<span id="cb49-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Number of Bits of Storage"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="gaisho_2024_02_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"></section>
 <section id="vectors" class="slide level2">
 <h2>Vectors</h2>
 <!-- ## ベクトル -->
 <p>You can make a vector using <code>c()</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">5.3</span>, <span class="dv">6</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">4</span>) <span class="co"># number vector</span></span>
-<span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"one"</span>, <span class="st">"two"</span>, <span class="st">"three"</span>) <span class="co"># character vector</span></span>
-<span id="cb42-3"><a href="" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>) <span class="co"># logical vector</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">5.3</span>, <span class="dv">6</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">4</span>) <span class="co"># number vector</span></span>
+<span id="cb50-2"><a href="" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"one"</span>, <span class="st">"two"</span>, <span class="st">"three"</span>) <span class="co"># character vector</span></span>
+<span id="cb50-3"><a href="" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>) <span class="co"># logical vector</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Refer to elements of a vector using subscripts.</p>
 <!-- 添え字を使ってベクトルの要素を指定する。 -->
 <!-- `a[c(2,4)]`とするとベクトルの2番目と4番目の要素を取り出す。 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a>a[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)] <span class="co"># 2nd and 4th elements of the vector</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a>a[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)] <span class="co"># 2nd and 4th elements of the vector</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2 6</code></pre>
 </div>
@@ -3727,51 +3258,61 @@ Soichi Matsuura
 <h2>Matrix</h2>
 <p>All columns in a matrix must have the same mode (numeric, character, etc.) and the same length. <!-- 行列のすべての列は同じモード(数値、文字など)と同じ長さでなければならない。 --> The general format is <!-- 一般的な形式は次のとおりである。 --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a>vector <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">25</span>) <span class="co"># sequence of numbers from 1 to 25</span></span>
-<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a>char_vector_rownames <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>))</span>
-<span id="cb45-5"><a href="" aria-hidden="true" tabindex="-1"></a>char_vector_colnames <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a>vector <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">25</span>) <span class="co"># sequence of numbers from 1 to 25</span></span>
+<span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb53-3"><a href="" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">5</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<!--
+面倒だから除外
+char_vector_rownames <- as.character(seq(1, 5))
+char_vector_colnames <- as.character(seq(1, 5))
+-->
 </section>
 <section class="slide level2">
 
 <p>Transfer the vector to a <span class="math inline">r \times c</span> matrix .</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vector,</span>
-<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> r, <span class="co"># row</span></span>
-<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> c, <span class="co"># column</span></span>
-<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">FALSE</span>, <span class="co"># 行と列を入れ替えない</span></span>
-<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(char_vector_rownames, char_vector_colnames)</span>
-<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb46-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat) <span class="co"># 行列を表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vector,</span>
+<span id="cb54-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> r, <span class="co"># row</span></span>
+<span id="cb54-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> c, <span class="co"># column</span></span>
+<span id="cb54-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">FALSE</span> <span class="co"># 行と列を入れ替えない</span></span>
+<span id="cb54-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb54-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat) <span class="co"># 行列を表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  1  2  3  4  5
-1 1  6 11 16 21
-2 2  7 12 17 22
-3 3  8 13 18 23
-4 4  9 14 19 24
-5 5 10 15 20 25</code></pre>
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    6   11   16   21
+[2,]    2    7   12   17   22
+[3,]    3    8   13   18   23
+[4,]    4    9   14   19   24
+[5,]    5   10   15   20   25</code></pre>
 </div>
 </div>
+<!-- # dimnames = list(char_vector_rownames, char_vector_colnames) -->
 </section>
 <section class="slide level2">
 
 <p>If you want to fill the matrix by rows, use <code>byrow = TRUE</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vector, <span class="co">#</span></span>
-<span id="cb48-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> r, <span class="at">ncol =</span> c, <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="co">#</span></span>
-<span id="cb48-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">dimnames=</span><span class="fu">list</span>(char_vector_rownames, char_vector_colnames))</span>
-<span id="cb48-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vector, <span class="co">#</span></span>
+<span id="cb56-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> r, <span class="at">ncol =</span> c, <span class="at">byrow =</span> <span class="cn">TRUE</span> <span class="co">#</span></span>
+<span id="cb56-3"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb56-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   1  2  3  4  5
-1  1  2  3  4  5
-2  6  7  8  9 10
-3 11 12 13 14 15
-4 16 17 18 19 20
-5 21 22 23 24 25</code></pre>
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    2    3    4    5
+[2,]    6    7    8    9   10
+[3,]   11   12   13   14   15
+[4,]   16   17   18   19   20
+[5,]   21   22   23   24   25</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
+<p>You get a <span class="math inline">5 \times 5</span> matrix. Next, you try to solve the inverse matrix with <code>solve()</code> and calculate the determinant of the matrix with <code>det()</code>.</p>
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<!-- dimnames=list(char_vector_rownames, char_vector_colnames)) -->
 </section>
 <section class="slide level2">
 
@@ -3786,40 +3327,83 @@ Soichi Matsuura
 
 <h3 id="indexing">Indexing</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 5行4列の行列を作成</span></span>
-<span id="cb50-2"><a href="" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow=</span><span class="dv">5</span>,<span class="at">ncol=</span><span class="dv">4</span>)</span>
-<span id="cb50-3"><a href="" aria-hidden="true" tabindex="-1"></a> <span class="co"># another example</span></span>
-<span id="cb50-4"><a href="" aria-hidden="true" tabindex="-1"></a>cells <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">26</span>,<span class="dv">24</span>,<span class="dv">68</span>)</span>
-<span id="cb50-5"><a href="" aria-hidden="true" tabindex="-1"></a>rnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"R1"</span>, <span class="st">"R2"</span>)</span>
-<span id="cb50-6"><a href="" aria-hidden="true" tabindex="-1"></a>cnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"C1"</span>, <span class="st">"C2"</span>)</span>
-<span id="cb50-7"><a href="" aria-hidden="true" tabindex="-1"></a>mymatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(cells,</span>
-<span id="cb50-8"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="at">nrow =</span> <span class="dv">2</span>,</span>
-<span id="cb50-9"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="at">ncol =</span> <span class="dv">2</span>,</span>
-<span id="cb50-10"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb50-11"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="at">dimnames =</span> <span class="fu">list</span>(rnames, cnames)</span>
-<span id="cb50-12"><a href="" aria-hidden="true" tabindex="-1"></a>                )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 5行4列の行列を作成</span></span>
+<span id="cb58-2"><a href="" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow=</span><span class="dv">5</span>,<span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb58-3"><a href="" aria-hidden="true" tabindex="-1"></a> <span class="co"># another example</span></span>
+<span id="cb58-4"><a href="" aria-hidden="true" tabindex="-1"></a>cells <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">26</span>,<span class="dv">24</span>,<span class="dv">68</span>)</span>
+<span id="cb58-5"><a href="" aria-hidden="true" tabindex="-1"></a>rnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"R1"</span>, <span class="st">"R2"</span>)</span>
+<span id="cb58-6"><a href="" aria-hidden="true" tabindex="-1"></a>cnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"C1"</span>, <span class="st">"C2"</span>)</span>
+<span id="cb58-7"><a href="" aria-hidden="true" tabindex="-1"></a>mymatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(cells,</span>
+<span id="cb58-8"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb58-9"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb58-10"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb58-11"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="at">dimnames =</span> <span class="fu">list</span>(rnames, cnames)</span>
+<span id="cb58-12"><a href="" aria-hidden="true" tabindex="-1"></a>                )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <p>Extract elements from a matrix using subscripts.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat[, <span class="dv">4</span>] <span class="co"># 4th column of the matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat[, <span class="dv">4</span>] <span class="co"># 4th column of the matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> 1  2  3  4  5 
- 4  9 14 19 24 </code></pre>
+<pre><code>[1]  4  9 14 19 24</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">3</span>,] <span class="co"># 3rd row of the matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">3</span>,] <span class="co"># 3rd row of the matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> 1  2  3  4  5 
-11 12 13 14 15 </code></pre>
+<pre><code>[1] 11 12 13 14 15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="co"># rows 2 to 4 and columns 1 to 3</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="co"># rows 2 to 4 and columns 1 to 3</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   1  2  3
-2  6  7  8
-3 11 12 13
-4 16 17 18</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    6    7    8
+[2,]   11   12   13
+[3,]   16   17   18</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="suppliments-matrix">Suppliments: Matrix</h3>
+<p>Now you have below matrix.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># set seed for reproducibility</span></span>
+<span id="cb65-2"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">9</span>) <span class="co"># 9 random numbers</span></span>
+<span id="cb65-3"><a href="" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(x, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>) <span class="co"># 3x3 matrix</span></span>
+<span id="cb65-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat) <span class="co"># print the matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]   15    3    6
+[2,]   19   10   11
+[3,]   14    2    5</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="inverse-matrix">Inverse Matrix</h3>
+<p>You caliculate the inverse matrix using <code>solve()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(mat)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1] [,2] [,3]
+[1,] -1.866667  0.2  1.8
+[2,] -3.933333  0.6  3.4
+[3,]  6.800000 -0.8 -6.2</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="unit-matrix">Unit Matrix</h3>
+<p>You can check the unit matrix by multiplying the matrix and its inverse matrix. Multiplication of matrices is done using <code>%*%</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat <span class="sc">%*%</span> <span class="fu">solve</span>(mat) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">5</span>) <span class="co"># unit matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    0    0
+[2,]    0    1    0
+[3,]    0    0    1</code></pre>
 </div>
 </div>
 </section>
@@ -3827,28 +3411,34 @@ Soichi Matsuura
 <h2>array</h2>
 <p>Arrays are similar to matrices but can have more than two dimensions. <!-- 配列(arrays)は行列と似ているが、2つ以上の次元を持つことができる。 --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two vectors of different lengths.</span></span>
-<span id="cb57-2"><a href="" aria-hidden="true" tabindex="-1"></a>vector1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">3</span>) <span class="co"># vector with 3 elements</span></span>
-<span id="cb57-3"><a href="" aria-hidden="true" tabindex="-1"></a>vector2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">15</span>) <span class="co"># vector with 6 elements</span></span>
-<span id="cb57-4"><a href="" aria-hidden="true" tabindex="-1"></a>column.names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"COL1"</span>, <span class="st">"COL2"</span>, <span class="st">"COL3"</span>)</span>
-<span id="cb57-5"><a href="" aria-hidden="true" tabindex="-1"></a>row.names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ROW1"</span>, <span class="st">"ROW2"</span>, <span class="st">"ROW3"</span>)</span>
-<span id="cb57-6"><a href="" aria-hidden="true" tabindex="-1"></a>matrix.names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Matrix1"</span>, <span class="st">"Matrix2"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two vectors of different lengths.</span></span>
+<span id="cb71-2"><a href="" aria-hidden="true" tabindex="-1"></a>vector1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">3</span>) <span class="co"># vector with 3 elements</span></span>
+<span id="cb71-3"><a href="" aria-hidden="true" tabindex="-1"></a>vector2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">15</span>) <span class="co"># vector with 6 elements</span></span>
+<span id="cb71-4"><a href="" aria-hidden="true" tabindex="-1"></a>column.names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"COL1"</span>, <span class="st">"COL2"</span>, <span class="st">"COL3"</span>)</span>
+<span id="cb71-5"><a href="" aria-hidden="true" tabindex="-1"></a>row.names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ROW1"</span>, <span class="st">"ROW2"</span>, <span class="st">"ROW3"</span>)</span>
+<span id="cb71-6"><a href="" aria-hidden="true" tabindex="-1"></a>matrix.names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Matrix1"</span>, <span class="st">"Matrix2"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <h3 id="take-these-vectors-as-input-to-the-array.">Take these vectors as input to the array.</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">array</span>(</span>
-<span id="cb58-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(vector1, vector2),</span>
-<span id="cb58-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>),</span>
-<span id="cb58-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">dimnames =</span> <span class="fu">list</span>(row.names, column.names, matrix.names)</span>
-<span id="cb58-5"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb58-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(result)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">array</span>(</span>
+<span id="cb72-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(vector1, vector2), <span class="co"># vectors</span></span>
+<span id="cb72-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>), <span class="co"># 3x3x2 array</span></span>
+<span id="cb72-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">dimnames =</span> <span class="fu">list</span>(row.names, column.names, matrix.names)</span>
+<span id="cb72-5"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb72-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(result)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "array"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="show-the-array.">Show the array.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result) <span class="co"># 2 matrices of 3x3</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , Matrix1
 
@@ -3870,44 +3460,62 @@ ROW3    3   12   15</code></pre>
 <section id="data.frame-and-tibble" class="slide level2">
 <h2>data.frame and tibble</h2>
 <ul>
-<li>A data frame is more general than a matrix, in that different columns can have different modes (numeric, character, factor, etc.) similar to SAS and SPSS datasets. <!-- データフレーム(data frame)は行列よりも一般的であり、SASやSPSSのデータセットのように、異なる列には数値、文字、ファクターなどの異なる型をもちうる。 --></li>
-<li>Data frames represent the most widely used format for data storage and retrieval in the R language <!-- データフレームは、R言語でのデータの格納と検索で最も広く使用されている型である。 --></li>
+<li><p>A data frame is more general than a matrix, in that <strong>different columns can have different modes</strong> (numeric, character, factor, etc.). <!-- similar to SAS and SPSS datasets. --> <!-- データフレーム(data frame)は行列よりも一般的であり、SASやSPSSのデータセットのように、異なる列には数値、文字、ファクターなどの異なる型をもちうる。 --></p></li>
+<li><p>Data frames represent <strong>the most widely used format</strong> for data storage and retrieval in the <em>R</em> language <!-- データフレームは、R言語でのデータの格納と検索で最も広く使用されている型である。 --></p></li>
+<li><p>Type <code>data.frame</code> is like a spreadsheet of Excel. Column means variable and row means observation.</p></li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="co"># 数値ベクトル</span></span>
-<span id="cb62-2"><a href="" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"white"</span>, <span class="st">"red"</span>, <span class="cn">NA</span>)　<span class="co"># 文字ベクトル</span></span>
-<span id="cb62-3"><a href="" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>) <span class="co"># 論理ベクトル</span></span>
-<span id="cb62-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-5"><a href="" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(d, e, f) <span class="co"># データフレームを生成</span></span>
-<span id="cb62-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mydata) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ID"</span>, <span class="st">"Color"</span>, <span class="st">"Passed"</span>) <span class="co"># 変数名</span></span>
-<span id="cb62-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># データフレームの要素を特定する様々な方法</span></span>
-<span id="cb62-9"><a href="" aria-hidden="true" tabindex="-1"></a>mydata[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="co"># columns 1 and 2 of data frame</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  ID Color
-1  1   red
-2  2 white
-3  3   red
-4  4  &lt;NA&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="" aria-hidden="true" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="st">"ID"</span>,<span class="st">"Color"</span>)] <span class="co"># columns ID and Age from data frame</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  ID Color
-1  1   red
-2  2 white
-3  3   red
-4  4  &lt;NA&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>X1 <span class="co"># variable x1 in the data frame</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>NULL</code></pre>
-</div>
-</div>
-<p>Tibbles are the tidyverse’s improvements on data frames, designed to address problems in data analysis at an earlier point. <!-- tibbleは、tidyverseによるデータフレームの改良版であり、データ分析の問題をより早い段階で解決するために設計されている。 --> Otherwise they are used exactly as data frames. <!-- それ以外はデータフレームと同じように使用される。 --></p>
 </section>
 <section class="slide level2">
 
-<p>In R, the basic rectangular data structure is a data.frame(). <!-- Rでは、基本的な長方形のデータ構造は`data.frame()`である。 --> A <code>data.frame()</code> also has an implicit integer index based on the row order. <!-- `data.frame()`には、行の順序に基づいた暗黙的な整数インデックスもある。 --> While a custom key can be created through the row.names() attribute, the native R <code>data.frame()</code> does not support user-specified or multilevel indexes. <!-- `row.names()`属性を介してカスタムキーを作成することができるが、基本Rの `data.frame()`はユーザー指定のインデックスや多レベルインデックスをサポートしていない。 --> To overcome this deficiency, two new packages are gaining widespread use: data.table and dplyr. <!-- この欠点を克服するために、data.tableとdplyrの2つの新しいパッケージが広く使用されている。 --> Both support multilevel indexes and offer significant speedups in working with a data.frame. <!-- 両方とも多レベルインデックスをサポートし、`data.frame`を使用した場合の処理速度を大幅に向上させる。 --></p>
+<h3 id="create-a-data-frame">Create a data frame</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="" aria-hidden="true" tabindex="-1"></a>ID <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="co"># numeric vector</span></span>
+<span id="cb76-2"><a href="" aria-hidden="true" tabindex="-1"></a>Color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"white"</span>, <span class="st">"red"</span>, <span class="cn">NA</span>)　<span class="co"># character vector</span></span>
+<span id="cb76-3"><a href="" aria-hidden="true" tabindex="-1"></a>Passed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>) <span class="co"># logical vector</span></span>
+<span id="cb76-4"><a href="" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(ID, Color, Passed) <span class="co"># create data frame</span></span>
+<span id="cb76-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># access elements of the data frame</span></span>
+<span id="cb76-6"><a href="" aria-hidden="true" tabindex="-1"></a>mydata[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="co"># columns 1 and 2 of data frame</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID Color
+1  1   red
+2  2 white
+3  3   red
+4  4  &lt;NA&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="" aria-hidden="true" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="st">"ID"</span>,<span class="st">"Color"</span>)] <span class="co"># columns ID and Age from data frame</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID Color
+1  1   red
+2  2 white
+3  3   red
+4  4  &lt;NA&gt;</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="example-data-frame">Example: Data Frame</h3>
+<div id="qwebr-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section class="slide level2">
+
+<h3 id="tibbles">Tibbles</h3>
+<ul>
+<li><p>Tibbles are the tidyverse’s <strong>improvements</strong> on data frames, designed to address problems in data analysis at an earlier point. <!-- tibbleは、tidyverseによるデータフレームの改良版であり、データ分析の問題をより早い段階で解決するために設計されている。 --></p></li>
+<li><p>Otherwise they are used exactly as data frames. <!-- それ以外はデータフレームと同じように使用される。 --></p></li>
+<li><p>Tibbles are more user-friendly than data frames. <!-- だいたい同じだけど、tibbleの方が見やすい。 --></p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>In <em>R</em>, the basic rectangular data structure is a <code>data.frame()</code>. <!-- Rでは、基本的な長方形のデータ構造は`data.frame()`である。 --></li>
+<li>A <code>data.frame()</code> also has an implicit integer index based on the row order. <!-- `data.frame()`には、行の順序に基づいた暗黙的な整数インデックスもある。 --></li>
+<li>While a custom key can be created through the row.names() attribute, the native R <code>data.frame()</code> does not support user-specified or multilevel indexes. <!-- `row.names()`属性を介してカスタムキーを作成することができるが、基本Rの `data.frame()`はユーザー指定のインデックスや多レベルインデックスをサポートしていない。 --></li>
+<li>To overcome this deficiency, two new packages are gaining widespread use: <code>data.table</code> and <code>dplyr</code>. <!-- この欠点を克服するために、data.tableとdplyrの2つの新しいパッケージが広く使用されている。 --></li>
+<li>Both support multilevel indexes and offer significant speedups in working with a data.frame. <!-- 両方とも多レベルインデックスをサポートし、`data.frame`を使用した場合の処理速度を大幅に向上させる。 --></li>
+</ul>
 </section>
 <section id="list" class="slide level2">
 <h2>List</h2>
@@ -3916,25 +3524,30 @@ ROW3    3   12   15</code></pre>
 <li>A list allows you to gather a variety of (possibly unrelated) objects under one name. <!-- リストを使用すると、さまざまな(おそらく関連のない)オブジェクトを1つの名前の下にまとめることができる。 --></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> b <span class="ot">&lt;-</span> <span class="st">"seven"</span></span>
-<span id="cb68-2"><a href="" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb68-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># example of a list with 4 components -</span></span>
-<span id="cb68-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># a string, a numeric vector, a matrix, and a scaler</span></span>
-<span id="cb68-5"><a href="" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">"Fred"</span>, <span class="at">mynumbers =</span> a, <span class="at">mymatrix =</span> y, <span class="at">age =</span> <span class="fl">5.3</span>)</span>
-<span id="cb68-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># example of a list containing two lists</span></span>
-<span id="cb68-7"><a href="" aria-hidden="true" tabindex="-1"></a>list1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">"Fred"</span>, <span class="at">mynumbers =</span> a, <span class="at">mymatrix =</span> y, <span class="at">age =</span> <span class="fl">5.3</span>)</span>
-<span id="cb68-8"><a href="" aria-hidden="true" tabindex="-1"></a>list2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">"Joe"</span>, <span class="at">mynumbers =</span> b, <span class="at">mymatrix =</span> z, <span class="at">age =</span> <span class="fl">10.11</span>) <span class="co"># 誤字</span></span>
-<span id="cb68-9"><a href="" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(list1,list2)</span>
-<span id="cb68-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="do">## Identify elements of a list using the [[]] convention.</span></span>
-<span id="cb68-11"><a href="" aria-hidden="true" tabindex="-1"></a>w[[<span class="dv">1</span>]] <span class="co"># 1st component of the list</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> b <span class="ot">&lt;-</span> <span class="st">"seven"</span></span>
+<span id="cb80-2"><a href="" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb80-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># example of a list with 4 components -</span></span>
+<span id="cb80-4"><a href="" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">"Fred"</span>, <span class="at">mynumbers =</span> a, <span class="at">mymatrix =</span> y, <span class="at">age =</span> <span class="fl">5.3</span>)</span>
+<span id="cb80-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-6"><a href="" aria-hidden="true" tabindex="-1"></a>list1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">"Fred"</span>, <span class="at">mynumbers =</span> a, <span class="at">mymatrix =</span> y, <span class="at">age =</span> <span class="fl">5.3</span>)</span>
+<span id="cb80-7"><a href="" aria-hidden="true" tabindex="-1"></a>list2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">"Joe"</span>, <span class="at">mynumbers =</span> b, <span class="at">mymatrix =</span> z, <span class="at">age =</span> <span class="fl">10.11</span>) <span class="co"># 誤字</span></span>
+<span id="cb80-8"><a href="" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(list1,list2)</span>
+<span id="cb80-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="do">## Identify elements of a list using the [[]] convention.</span></span>
+<span id="cb80-10"><a href="" aria-hidden="true" tabindex="-1"></a>w[[<span class="dv">1</span>]] <span class="co"># 1st component of the list</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Fred"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="" aria-hidden="true" tabindex="-1"></a>v[[<span class="st">"mynumbers"</span>]] <span class="co"># component named mynumbers in list</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="" aria-hidden="true" tabindex="-1"></a>v[[<span class="st">"mynumbers"</span>]] <span class="co"># component named mynumbers in list</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "seven"</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
+<h3 id="example-list">Example: list</h3>
+<div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 <section id="factors" class="slide level2">
 <h2>Factors</h2>
@@ -3950,9 +3563,9 @@ ROW3    3   12   15</code></pre>
 <h3 id="make-factors">Make factors</h3>
 <p>Nominal variables are those that represent discrete categories without any intrinsic order.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"male"</span>, <span class="dv">20</span>), <span class="fu">rep</span>(<span class="st">"female"</span>, <span class="dv">30</span>))</span>
-<span id="cb72-2"><a href="" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(gender)　<span class="co"># ファクター型に変換</span></span>
-<span id="cb72-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gender)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"male"</span>, <span class="dv">20</span>), <span class="fu">rep</span>(<span class="st">"female"</span>, <span class="dv">30</span>))</span>
+<span id="cb84-2"><a href="" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(gender)　<span class="co"># ファクター型に変換</span></span>
+<span id="cb84-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gender)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>female   male 
     30     20 </code></pre>
@@ -3964,9 +3577,9 @@ ROW3    3   12   15</code></pre>
 <h3 id="ordered-factors">Ordered Factors</h3>
 <p>Ordered factores are those that represent discrete categories with an intrinsic order.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"medium"</span>,<span class="st">"large"</span>, <span class="st">"small"</span>)  <span class="co"># 文字ベクトル</span></span>
-<span id="cb74-2"><a href="" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> <span class="fu">ordered</span>(rating) <span class="co"># 順序付きファクターに変換</span></span>
-<span id="cb74-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rating)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"medium"</span>,<span class="st">"large"</span>, <span class="st">"small"</span>)  <span class="co"># 文字ベクトル</span></span>
+<span id="cb86-2"><a href="" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> <span class="fu">ordered</span>(rating) <span class="co"># 順序付きファクターに変換</span></span>
+<span id="cb86-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rating)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] medium large  small 
 Levels: large &lt; medium &lt; small</code></pre>
@@ -3978,9 +3591,9 @@ Levels: large &lt; medium &lt; small</code></pre>
 
 <h3 id="ordered-factors-2">Ordered Factors 2</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"medium"</span>, <span class="st">"large"</span>, <span class="st">"small"</span>) <span class="co"># 文字ベクトル</span></span>
-<span id="cb76-2"><a href="" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> <span class="fu">ordered</span>(rating, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"small"</span>, <span class="st">"medium"</span>, <span class="st">"large"</span>))</span>
-<span id="cb76-3"><a href="" aria-hidden="true" tabindex="-1"></a>rating</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"medium"</span>, <span class="st">"large"</span>, <span class="st">"small"</span>) <span class="co"># 文字ベクトル</span></span>
+<span id="cb88-2"><a href="" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> <span class="fu">ordered</span>(rating, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"small"</span>, <span class="st">"medium"</span>, <span class="st">"large"</span>))</span>
+<span id="cb88-3"><a href="" aria-hidden="true" tabindex="-1"></a>rating</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] medium large  small 
 Levels: small &lt; medium &lt; large</code></pre>
@@ -4004,18 +3617,18 @@ Levels: small &lt; medium &lt; large</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>コード</summary>
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="" aria-hidden="true" tabindex="-1"></a>arry <span class="ot">&lt;-</span> <span class="fu">read.csv</span>( <span class="co">#</span></span>
-<span id="cb78-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"morph_array.csv"</span>, <span class="co">#</span></span>
-<span id="cb78-3"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb78-4"><a href="" aria-hidden="true" tabindex="-1"></a>arry <span class="sc">|&gt;</span></span>
-<span id="cb78-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">longtable =</span> T) <span class="sc">|&gt;</span> <span class="co">#</span></span>
-<span id="cb78-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>( <span class="co"># specify table style</span></span>
-<span id="cb78-7"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>),</span>
-<span id="cb78-8"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">full_width =</span> F, <span class="at">font_size =</span> <span class="dv">12</span></span>
-<span id="cb78-9"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="" aria-hidden="true" tabindex="-1"></a>arry <span class="ot">&lt;-</span> <span class="fu">read.csv</span>( <span class="co">#</span></span>
+<span id="cb90-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"morph_array.csv"</span>, <span class="co">#</span></span>
+<span id="cb90-3"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb90-4"><a href="" aria-hidden="true" tabindex="-1"></a>arry <span class="sc">|&gt;</span></span>
+<span id="cb90-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">longtable =</span> T) <span class="sc">|&gt;</span> <span class="co">#</span></span>
+<span id="cb90-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>( <span class="co"># specify table style</span></span>
+<span id="cb90-7"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>),</span>
+<span id="cb90-8"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">full_width =</span> F, <span class="at">font_size =</span> <span class="dv">18</span></span>
+<span id="cb90-9"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-striped table-hover table-condensed caption-top" data-quarto-postprocess="true" style="font-size: 12px; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="table table-striped table-hover table-condensed caption-top" data-quarto-postprocess="true" style="font-size: 18px; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">scope</th>
@@ -4108,15 +3721,15 @@ Levels: small &lt; medium &lt; large</code></pre>
 
 <h3 id="data-inspection">Data Inspection</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(arry) <span class="co">#  要素・コンポーネントの数</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(arry) <span class="co">#  要素・コンポーネントの数</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(arry) <span class="co"># オブジェクトのクラス・型</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(arry) <span class="co"># オブジェクトのクラス・型</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data.frame"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(arry) <span class="co"># オブジェクトの変数名</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(arry) <span class="co"># オブジェクトの変数名</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "scope"  "ben_1"  "cost_1" "ben_2"  "cost_2" "ben_3"  "cost_3" "ben_4" 
  [9] "cost_4" "ben_5"  "cost_5"</code></pre>
@@ -4125,10 +3738,10 @@ Levels: small &lt; medium &lt; large</code></pre>
 </section>
 <section class="slide level2">
 
-<h3 id="data-manipulation">Data manipulation</h3>
+<h3 id="list-1">List</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="" aria-hidden="true" tabindex="-1"></a>list1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>) <span class="co"># リスト作成</span></span>
-<span id="cb85-2"><a href="" aria-hidden="true" tabindex="-1"></a>list1</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="" aria-hidden="true" tabindex="-1"></a>list1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>) <span class="co"># リスト作成</span></span>
+<span id="cb97-2"><a href="" aria-hidden="true" tabindex="-1"></a>list1</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] "a"
@@ -4144,14 +3757,14 @@ Levels: small &lt; medium &lt; large</code></pre>
 <section id="data-manipulation-of-lists" class="slide level2">
 <h2>Data Manipulation of Lists</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(list1, list1) <span class="co"># オブジェクトを列として結合</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(list1, list1) <span class="co"># オブジェクトを列として結合</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     list1 list1
 [1,] "a"   "a"  
 [2,] "b"   "b"  
 [3,] "c"   "c"  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(list1, list1) <span class="co"># オブジェクトを行として結合</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(list1, list1) <span class="co"># オブジェクトを行として結合</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      [,1] [,2] [,3]
 list1 "a"  "b"  "c" 
@@ -4174,11 +3787,16 @@ list1 "a"  "b"  "c" </code></pre>
 <section id="further-study" class="slide level2">
 <h2>Further Study</h2>
 <ul>
-<li><p>This chapter should be seen as a survey of what is possible for auditors interested in an analytical, algorithmic approach to auditing. <!-- この章は、監査に興味のある監査人が分析的かつアルゴリズム的なアプローチを取ることができることを調査したものである。 --> <!-- - I have tried to delineate some of the parts of data analytics you should familiarize yourself with. --> <!-- データ分析のいくつかの部分を説明し、独学できるようにした。 --> <!-- Additionally, Wikipedia is a great resource for statistics; some years ago, there were many disparate sites which publicized a great deal of useful information, and most of their content has been transferred to Wikipedia. --> <!-- さらに、Wikipediaは統計学の素晴らしい情報源である。 --> <!-- 数年前には、多くの離散したサイトが有用な情報を公開していたが、そのほとんどはWikipediaに移されている。 --></p></li>
-<li><p>The R package vignettes and package writeups are excellent sources of empirical statistical methods which might be motivated by particular data structures unique to accounting and auditing. <!-- Rパッケージのビネット(vignettes)と解説は、会計および監査に固有の特定のデータ構造によって動機付けられる可能性のある経験的統計手法の優れた情報源である。 --> <!-- The Journal of Statistical Software was founded by Jan de Leeuw in 1996, the year before the Comprehensive R Archive Network (CRAN) first made R and contributed R packages widely available on the Internet. --> <!-- Journal of Statistical Softwareは、Comprehensive R Archive Network (CRAN)によってRと寄稿されたRパッケージがインターネット上で広く利用できるようになる前年、1996年にJan de Leeuwによって設立された。 --></p></li>
-<li><p>Within a few years, R came increasingly to dominate contributions to JSS, which is often the definitive source for information behind the packages in R. <!-- 数年のうちに、RはますますJSSへの投稿を支配するようになり、JSSはしばしばRのパッケージの背後にある情報の決定的な情報源となっている。 --> <!-- - Many very helpful solutions, articles and tutorials are continually being created by the large group of R experts that contribute to Internet resources like stackoverflow and R-bloggers. --> <!-- stackoverflowやR-bloggersのようなインターネットリソースに寄稿しているR専門家の大きなグループによって、非常に役立つ多くの解決策、論文、チュートリアルが継続的に作成されている。 --></p></li>
-<li><p>Searches of the Internet will also find an increasing number of “data camp” type resources that are parts of larger educational programs. <!-- インターネットを検索すると、大規模な教育プログラムの一部である「データキャンプ」タイプのリソースも増えている。 --></p></li>
-<li><p>Whatever your challenge, you should be able to find assistance through one or more of these resources. <!-- どんな問題でも、これらの１つ以上のリソースから助力を見つけることができるはずである。 --></p></li>
+<li>This chapter should be seen as a survey of what is possible for auditors interested in an analytical, algorithmic approach to auditing. <!-- この章は、監査に興味のある監査人が分析的かつアルゴリズム的なアプローチを取ることができることを調査したものである。 --> <!-- - I have tried to delineate some of the parts of data analytics you should familiarize yourself with. --> <!-- データ分析のいくつかの部分を説明し、独学できるようにした。 --> <!-- Additionally, Wikipedia is a great resource for statistics; some years ago, there were many disparate sites which publicized a great deal of useful information, and most of their content has been transferred to Wikipedia. --> <!-- さらに、Wikipediaは統計学の素晴らしい情報源である。 --> <!-- 数年前には、多くの離散したサイトが有用な情報を公開していたが、そのほとんどはWikipediaに移されている。 --> <!-- - The _R_ package writeups are excellent sources of empirical statistical methods which might be motivated by particular data structures unique to accounting and auditing. --></li>
+<li>The <em>R</em> package writeups are excellent sources for empirical statistical methods tailored to data structures unique to accounting and auditing. <!-- Rパッケージのビネット(vignettes)と解説は、会計および監査に固有の特定のデータ構造によって動機付けられる可能性のある経験的統計手法の優れた情報源である。 --> <!-- The Journal of Statistical Software was founded by Jan de Leeuw in 1996, the year before the Comprehensive R Archive Network (CRAN) first made R and contributed R packages widely available on the Internet. --> <!-- Journal of Statistical Softwareは、Comprehensive R Archive Network (CRAN)によってRと寄稿されたRパッケージがインターネット上で広く利用できるようになる前年、1996年にJan de Leeuwによって設立された。 --></li>
+</ul>
+<!-- - Within a few years, R came increasingly to dominate contributions to JSS, which is often the definitive source for information behind the packages in R. -->
+<!-- 数年のうちに、RはますますJSSへの投稿を支配するようになり、JSSはしばしばRのパッケージの背後にある情報の決定的な情報源となっている。 -->
+<!-- - Many very helpful solutions, articles and tutorials are continually being created by the large group of R experts that contribute to Internet resources like stackoverflow and R-bloggers. -->
+<!-- stackoverflowやR-bloggersのようなインターネットリソースに寄稿しているR専門家の大きなグループによって、非常に役立つ多くの解決策、論文、チュートリアルが継続的に作成されている。 -->
+<ul>
+<li>Searches of the Internet will also find an increasing number of “data camp” type resources that are parts of larger educational programs. <!-- インターネットを検索すると、大規模な教育プログラムの一部である「データキャンプ」タイプのリソースも増えている。 --></li>
+<li>Whatever your challenge, you should be able to find assistance through one or more of these resources. <!-- どんな問題でも、これらの１つ以上のリソースから助力を見つけることができるはずである。 --></li>
 </ul>
 </section>
 <section id="r-packages-required-for-this-chapter" class="slide level2">
@@ -4240,6 +3858,7 @@ list1 "a"  "b"  "c" </code></pre>
   <script src="gaisho_2024_02_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="gaisho_2024_02_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="gaisho_2024_02_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="gaisho_2024_02_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="gaisho_2024_02_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -4259,7 +3878,8 @@ list1 "a"  "b"  "c" </code></pre>
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -4413,7 +4033,7 @@ list1 "a"  "b"  "c" </code></pre>
         margin: 0.1,
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealNotes,
           RevealSearch,
