@@ -703,7 +703,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"code":"d <- c(1, 2, 3, \"4\", 5)\n# What is the class of d?\nclass(d)\n\ne <- c(1, 2, 3, NA, 5, 6)\n# What is the class of e?\nclass(e)","id":1,"options":{"output":"true","fig-cap":"","autorun":"false","editor-quick-suggestions":"false","comment":"","read-only":"false","editor-word-wrap":"true","editor-max-height":"","context":"interactive","dpi":72,"fig-width":7,"message":"true","classes":"","results":"markup","out-width":"700px","out-height":"","label":"unnamed-chunk-1","editor-font-scale":"0.5","fig-height":5,"warning":"true"}},{"code":"mydata <- data.frame(\n  ID = c(1, 2, 3, 4),\n  Color = c(\"red\", \"white\", \"red\", NA),\n  Passed = c(TRUE, TRUE, TRUE, FALSE)\n)\n\n# mydataからColorを取り出す\n\n# mydataからIDの3番目の要素を取り出す","id":2,"options":{"output":"true","fig-cap":"","autorun":"false","editor-quick-suggestions":"false","comment":"","read-only":"false","editor-word-wrap":"true","editor-max-height":"","context":"interactive","dpi":72,"fig-width":7,"message":"true","classes":"","results":"markup","out-width":"700px","out-height":"","label":"unnamed-chunk-2","editor-font-scale":"0.5","fig-height":5,"warning":"true"}},{"code":"mylist <- list(\n  a = c(\"one\", \"two\", \"three\"),\n  b = c(1,2,3),\n  c = matrix(1:9, nrow = 3)\n)\n# mylistからaを取り出す\n\n# mylistからbの2番目の要素を取り出す","id":3,"options":{"output":"true","fig-cap":"","autorun":"false","editor-quick-suggestions":"false","comment":"","read-only":"false","editor-word-wrap":"true","editor-max-height":"","context":"interactive","dpi":72,"fig-width":7,"message":"true","classes":"","results":"markup","out-width":"700px","out-height":"","label":"unnamed-chunk-3","editor-font-scale":"0.5","fig-height":5,"warning":"true"}},{"code":"# 2024年10月16日を日付オブジェクトstartとして作成\n\n# 2025年10月16日を日付オブジェクトendとして作成\n\n# start から年をyear, 月をmonthとして作成","id":4,"options":{"output":"true","fig-cap":"","autorun":"false","editor-quick-suggestions":"false","comment":"","read-only":"false","editor-word-wrap":"true","editor-max-height":"","context":"interactive","dpi":72,"fig-width":7,"message":"true","classes":"","results":"markup","out-width":"700px","out-height":"","label":"unnamed-chunk-4","editor-font-scale":"0.5","fig-height":5,"warning":"true"}}];
+  globalThis.qwebrCellDetails = [{"id":1,"options":{"read-only":"false","editor-word-wrap":"true","out-width":"700px","fig-height":5,"results":"markup","classes":"","context":"interactive","message":"true","out-height":"","editor-quick-suggestions":"false","editor-max-height":"","warning":"true","label":"unnamed-chunk-1","fig-width":7,"dpi":72,"output":"true","comment":"","autorun":"false","fig-cap":"","editor-font-scale":"0.5"},"code":"d <- c(1, 2, 3, \"4\", 5)\n# What is the class of d?\nclass(d)\n\ne <- c(1, 2, 3, NA, 5, 6)\n# What is the class of e?\nclass(e)"},{"id":2,"options":{"read-only":"false","editor-word-wrap":"true","out-width":"700px","fig-height":5,"results":"markup","classes":"","context":"interactive","message":"true","out-height":"","editor-quick-suggestions":"false","editor-max-height":"","warning":"true","label":"unnamed-chunk-2","fig-width":7,"dpi":72,"output":"true","comment":"","autorun":"false","fig-cap":"","editor-font-scale":"0.5"},"code":"mydata <- data.frame(\n  ID = c(1, 2, 3, 4),\n  Color = c(\"red\", \"white\", \"red\", NA),\n  Passed = c(TRUE, TRUE, TRUE, FALSE)\n)\n\n# mydataからColorを取り出す\n\n# mydataからIDの3番目の要素を取り出す"},{"id":3,"options":{"read-only":"false","editor-word-wrap":"true","out-width":"700px","fig-height":5,"results":"markup","classes":"","context":"interactive","message":"true","out-height":"","editor-quick-suggestions":"false","editor-max-height":"","warning":"true","label":"unnamed-chunk-3","fig-width":7,"dpi":72,"output":"true","comment":"","autorun":"false","fig-cap":"","editor-font-scale":"0.5"},"code":"mylist <- list(\n  a = c(\"one\", \"two\", \"three\"),\n  b = c(1,2,3),\n  c = matrix(1:9, nrow = 3)\n)\n# mylistからaを取り出す\n\n# mylistからbの2番目の要素を取り出す"},{"id":4,"options":{"read-only":"false","editor-word-wrap":"true","out-width":"700px","fig-height":5,"results":"markup","classes":"","context":"interactive","message":"true","out-height":"","editor-quick-suggestions":"false","editor-max-height":"","warning":"true","label":"unnamed-chunk-4","fig-width":7,"dpi":72,"output":"true","comment":"","autorun":"false","fig-cap":"","editor-font-scale":"0.5"},"code":"# 2024年10月16日を日付オブジェクトstartとして作成\n\n# 2025年10月16日を日付オブジェクトendとして作成\n\n# start から年をyear, 月をmonthとして作成"}];
 
   </script>
   <script type="module">
@@ -2258,9 +2258,8 @@ Soichi Matsuura
 <span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>( <span class="co"># wide to long</span></span>
 <span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="sc">-</span>year), <span class="co"># year column is not included</span></span>
 <span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"data_type"</span>,</span>
-<span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
-<span id="cb4-6"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(big_data)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
+<span id="cb4-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(big_data)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
    year data_type       value
@@ -2273,7 +2272,7 @@ Soichi Matsuura
 6  1932 transient          0 </code></pre>
 </div>
 </div>
-<p><code>pivot_longer()</code> is a function from tidyverse that replaces columns with indicators, and is used here to gather multiple lines on a single graph./</p>
+<p><code>pivot_longer()</code> is a function from tidyverse that replaces columns with indicators, and is used here to gather multiple lines on a single graph.</p>
 </section>
 <section class="slide level2">
 
@@ -2378,23 +2377,16 @@ Soichi Matsuura
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># create a 3x3 matrix</span></span>
 <span id="cb23-2"><a href="" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">9</span>) <span class="sc">|&gt;</span> <span class="fu">matrix</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb23-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mat)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(mat) <span class="co"># inverse matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3]
-[1,]   41   77   57
-[2,]   26   66   48
-[3,]    9   93   33</code></pre>
+<pre><code>            [,1]        [,2]        [,3]
+[1,] -0.01560961  0.01235129  0.01488975
+[2,]  0.10570584 -0.09820414 -0.01102523
+[3,] -0.03167387  0.04447981 -0.00619459</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(mat) <span class="co"># inverse matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(mat) <span class="co"># determinant of the matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            [,1]        [,2]         [,3]
-[1,]  0.10132979 -0.12234043  0.002925532
-[2,]  0.01888298 -0.03723404  0.021542553
-[3,] -0.08085106  0.13829787 -0.031205674</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(mat) <span class="co"># determinant of the matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -22560</code></pre>
+<pre><code>[1] 52788</code></pre>
 </div>
 </div>
 </section>
@@ -2402,19 +2394,19 @@ Soichi Matsuura
 
 <p>Extract elements from a matrix using subscripts.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat[, <span class="dv">3</span>] <span class="co"># 3th column of the matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat[, <span class="dv">3</span>] <span class="co"># 3th column of the matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 57 48 33</code></pre>
+<pre><code>[1] 70 74 12</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">3</span>,]  <span class="co"># 3rd row of the matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">3</span>,]  <span class="co"># 3rd row of the matrix</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  9 93 33</code></pre>
+<pre><code>[1] 84 16 12</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="co"># rows 2 to 4 and columns 1 to 3</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="co"># rows 2 to 4 and columns 1 to 3</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
-[1,]   26   66
-[2,]    9   93</code></pre>
+[1,]   53   30
+[2,]   84   16</code></pre>
 </div>
 </div>
 </section>
@@ -2430,20 +2422,12 @@ Soichi Matsuura
 
 <h3 id="create-a-data-frame">Create a data frame</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">ID     =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
-<span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Color  =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"white"</span>, <span class="st">"red"</span>, <span class="cn">NA</span>),</span>
-<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Passed =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb35-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb35-6"><a href="" aria-hidden="true" tabindex="-1"></a>mydata[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="co"># columns 1 and 2 of data frame</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  ID Color
-1  1   red
-2  2 white
-3  3   red
-4  4  &lt;NA&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="st">"ID"</span>,<span class="st">"Color"</span>)] <span class="co"># columns ID and Age from data frame</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">ID     =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Color  =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"white"</span>, <span class="st">"red"</span>, <span class="cn">NA</span>),</span>
+<span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Passed =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb33-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-6"><a href="" aria-hidden="true" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="st">"ID"</span>,<span class="st">"Color"</span>)] <span class="co"># columns ID and Age from data frame</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  ID Color
 1  1   red
@@ -2466,17 +2450,21 @@ Soichi Matsuura
 <li>A list allows you to gather a variety of objects under one name. <!-- リストを使用すると、さまざまな(おそらく関連のない)オブジェクトを1つの名前の下にまとめることができる。 --></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="st">"seven"</span>; b <span class="ot">&lt;-</span> <span class="st">"seven"</span></span>
-<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">0</span> ; y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># example of a list with 4 components -</span></span>
-<span id="cb39-5"><a href="" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb39-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"Fred"</span>,</span>
-<span id="cb39-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">mynumbers =</span> a,</span>
-<span id="cb39-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">mymatrix =</span> y,</span>
-<span id="cb39-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fl">5.3</span></span>
-<span id="cb39-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb39-11"><a href="" aria-hidden="true" tabindex="-1"></a>w</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="st">"seven"</span>; b <span class="ot">&lt;-</span> <span class="st">"seven"</span></span>
+<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">0</span> ; y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># example of a list with 4 components -</span></span>
+<span id="cb35-5"><a href="" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb35-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"Fred"</span>,</span>
+<span id="cb35-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">mynumbers =</span> a,</span>
+<span id="cb35-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">mymatrix =</span> y,</span>
+<span id="cb35-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fl">5.3</span></span>
+<span id="cb35-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb35-11"><a href="" aria-hidden="true" tabindex="-1"></a>w</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="list-output" class="slide level2 output-location-slide"><h2>List</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
 <pre><code>$name
 [1] "Fred"
@@ -2490,20 +2478,18 @@ $mymatrix
 $age
 [1] 5.3</code></pre>
 </div>
-</div>
-</section>
-<section class="slide level2">
+</div></section><section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a>list1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">"Fred"</span>, <span class="at">mynumbers =</span> a, <span class="at">mymatrix =</span> y, <span class="at">age =</span> <span class="fl">5.3</span>)</span>
-<span id="cb41-2"><a href="" aria-hidden="true" tabindex="-1"></a>list2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">"Joe"</span>,  <span class="at">mynumbers =</span> b, <span class="at">mymatrix =</span> z, <span class="at">age =</span> <span class="fl">10.11</span>) <span class="co"># 誤字</span></span>
-<span id="cb41-3"><a href="" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(list1,list2)</span>
-<span id="cb41-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify elements of a list using the [[]] convention.</span></span>
-<span id="cb41-5"><a href="" aria-hidden="true" tabindex="-1"></a>w[[<span class="dv">1</span>]] <span class="co"># 1st component of the list</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a>list1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">"Fred"</span>, <span class="at">mynumbers =</span> a, <span class="at">mymatrix =</span> y, <span class="at">age =</span> <span class="fl">5.3</span>)</span>
+<span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a>list2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">"Joe"</span>,  <span class="at">mynumbers =</span> b, <span class="at">mymatrix =</span> z, <span class="at">age =</span> <span class="fl">10.11</span>) <span class="co"># 誤字</span></span>
+<span id="cb37-3"><a href="" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(list1,list2)</span>
+<span id="cb37-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify elements of a list using the [[]] convention.</span></span>
+<span id="cb37-5"><a href="" aria-hidden="true" tabindex="-1"></a>w[[<span class="dv">1</span>]] <span class="co"># 1st component of the list</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Fred"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a>v[[<span class="st">"mynumbers"</span>]] <span class="co"># component named mynumbers in list</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a>v[[<span class="st">"mynumbers"</span>]] <span class="co"># component named mynumbers in list</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "seven"</code></pre>
 </div>
@@ -2527,14 +2513,14 @@ $age
 <h2>Make factors</h2>
 <p>Nominal variables are those that represent discrete categories without any intrinsic order.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"male"</span>, <span class="dv">20</span>), <span class="fu">rep</span>(<span class="st">"female"</span>, <span class="dv">30</span>))</span>
-<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gender)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"male"</span>, <span class="dv">20</span>), <span class="fu">rep</span>(<span class="st">"female"</span>, <span class="dv">30</span>))</span>
+<span id="cb41-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gender)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Length     Class      Mode 
        50 character character </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(gender)　<span class="co"># ファクター型に変換</span></span>
-<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gender)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(gender)　<span class="co"># ファクター型に変換</span></span>
+<span id="cb43-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gender)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>female   male 
     30     20 </code></pre>
@@ -2545,13 +2531,13 @@ $age
 <h2>Ordered Factors</h2>
 <p>Ordered factores are those that represent discrete categories with an intrinsic order.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"medium"</span>,<span class="st">"large"</span>, <span class="st">"small"</span>)  <span class="co"># 文字ベクトル</span></span>
-<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rating)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"medium"</span>,<span class="st">"large"</span>, <span class="st">"small"</span>)  <span class="co"># 文字ベクトル</span></span>
+<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rating)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "medium" "large"  "small" </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> <span class="fu">ordered</span>(rating) <span class="co"># 順序付きファクターに変換</span></span>
-<span id="cb51-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rating)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>rating <span class="ot">&lt;-</span> <span class="fu">ordered</span>(rating) <span class="co"># 順序付きファクターに変換</span></span>
+<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rating)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] medium large  small 
 Levels: large &lt; medium &lt; small</code></pre>
@@ -2564,16 +2550,16 @@ Levels: large &lt; medium &lt; small</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>コード</summary>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a>arry <span class="ot">&lt;-</span> <span class="fu">read.csv</span>( <span class="co">#</span></span>
-<span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"morph_array.csv"</span>, <span class="co">#</span></span>
-<span id="cb53-3"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb53-4"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb53-5"><a href="" aria-hidden="true" tabindex="-1"></a>arry <span class="sc">|&gt;</span></span>
-<span id="cb53-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">longtable =</span> T) <span class="sc">|&gt;</span> <span class="co">#</span></span>
-<span id="cb53-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>( <span class="co"># specify table style</span></span>
-<span id="cb53-8"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>),</span>
-<span id="cb53-9"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">full_width =</span> F, <span class="at">font_size =</span> <span class="dv">18</span></span>
-<span id="cb53-10"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a>arry <span class="ot">&lt;-</span> <span class="fu">read.csv</span>( <span class="co">#</span></span>
+<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"morph_array.csv"</span>, <span class="co">#</span></span>
+<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb49-5"><a href="" aria-hidden="true" tabindex="-1"></a>arry <span class="sc">|&gt;</span></span>
+<span id="cb49-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">longtable =</span> T) <span class="sc">|&gt;</span> <span class="co">#</span></span>
+<span id="cb49-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>( <span class="co"># specify table style</span></span>
+<span id="cb49-8"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>),</span>
+<span id="cb49-9"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">full_width =</span> F, <span class="at">font_size =</span> <span class="dv">18</span></span>
+<span id="cb49-10"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-striped table-hover table-condensed caption-top" data-quarto-postprocess="true" style="font-size: 18px; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -2669,15 +2655,15 @@ Levels: large &lt; medium &lt; small</code></pre>
 
 <h3 id="data-inspection">Data Inspection</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(arry) <span class="co">#  要素・コンポーネントの数</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(arry) <span class="co">#  要素・コンポーネントの数</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(arry) <span class="co"># オブジェクトのクラス・型</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(arry) <span class="co"># オブジェクトのクラス・型</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data.frame"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(arry) <span class="co"># オブジェクトの変数名</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(arry) <span class="co"># オブジェクトの変数名</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "scope"  "ben_1"  "cost_1" "ben_2"  "cost_2" "ben_3"  "cost_3" "ben_4" 
  [9] "cost_4" "ben_5"  "cost_5"</code></pre>
@@ -2704,12 +2690,12 @@ Levels: large &lt; medium &lt; small</code></pre>
 <h2>PCAOB</h2>
 <p>Guidance from the PCAOB’s AS 2100 through 2600 can be used to structure the sampling and analysis decision-making in an audit: <!-- PCAOB監査基準（以下、AS）の2100から2600までのガイダンス（PCAOBのウェブサイトpcaobus.orgで入手可能）は、監査におけるサンプリングと意思決定分析（analysis decision-making）を構成するために利用することができる。 --></p>
 <ol type="1">
-<li><strong>Planning and risk assessment phase</strong> : Using the <em>audit risk assessment matrix</em>, determine which transaction flows will have predicted error rates(予想逸脱率) greater than tolerable rate(許容逸脱率), or predicted error amounts greater than tolerable misstatement amount. <!-- 1. **監査計画とリスク評価の段階**： 監査リスク評価マトリクスを使用して、どの取引フローにおいて、予想逸脱率が許容逸脱率を超えるか、または予想虚偽表示額が許容虚偽表示額を超えるかを決定する。--> <!--memo 「許容逸脱率」－母集団における実際の逸脱率が一定の率を上回らないような適切な保証水準を得るために、監査人が設定した所定の内部統制の逸脱率をいう。 --></li>
-</ol>
+<li><strong>Planning and risk assessment phase</strong> : Using the <em>audit risk assessment matrix</em>, determine which transaction flows will have predicted error rates(予想逸脱率) greater than tolerable rate(許容逸脱率), or predicted error amounts greater than tolerable misstatement amount. <!-- 1. **監査計画とリスク評価の段階**： 監査リスク評価マトリクスを使用して、どの取引フローにおいて、予想逸脱率が許容逸脱率を超えるか、または予想虚偽表示額が許容虚偽表示額を超えるかを決定する。--> <!--memo 「許容逸脱率」－母集団における実際の逸脱率が一定の率を上回らないような適切な保証水準を得るために、監査人が設定した所定の内部統制の逸脱率をいう。 -->
 <ul>
 <li>Their function is to provide the foundation for determining initial audit scope, the budget and predicted contract cost of the audit, and for selecting particular audit tests that will be performed. <!-- この機能は、初期の監査範囲、および監査契約にかかる予算および予定費用を決定し、特定の監査手続の実施を選択するための基礎を提供する。 --></li>
 <li>This work typically uses <em>little or no transaction data from the client</em>, rather relies on the prior years audit conclusions and tests, benchmarks from similar firms in the client’s industry and available audit resources. <!-- この業務では、通常、被監査会社からの取引データはほとんどまたは全く使用しない。 --> <!-- むしろ前年度の監査の結論や監査手続の結果、被監査会社が属する産業の類似企業から算定したベンチマーク、及び利用可能な監査リソースに依存する。 --></li>
-</ul>
+</ul></li>
+</ol>
 </section>
 <section class="slide level2">
 
@@ -2750,10 +2736,10 @@ Levels: large &lt; medium &lt; small</code></pre>
 <section id="the-origin-of-accounting-transactions-1" class="slide level2">
 <h2>The Origin of Accounting Transactions</h2>
 <ol type="1">
-<li><p><em>The definition of the boundaries of the firm</em>. Thus the same event may be an accounting transaction on a divisional financial statement, but will not be incorporated into the consolidated financial statements. <!-- 1. **会社の境界についての定義** 従って、同じ事象が部門レベルの財務諸表上では会計取引である可能性があっても、連結財務諸表には組み込まれないことがある。 --></p></li>
-<li><p><em>The relevant commercial law applying to the event-transaction</em>. Often this pertains to the definition of “<strong>ownership</strong>” of an asset, or “<strong>obligation</strong>” for a <em>promise, warranty, or contract</em>. <!-- Where ownership and obligations cannot be determined, the firm may need to report “contingent” liabilities or assets in a note. --> <!-- Before the nineteenth century, law mainly related to product transactions, but the twentieth century witnessed an explosion of intricacies in the law which have made this determination much more difficult. --> <!-- 2. **事象-取引に適用される商法の関連規定** 多くの場合、これは資産の「所有権」または契約（promise）の「義務」、保証（warranty）、もしくは契約の定義に関係する。所有権や義務が確定できない場合、企業は「偶発（contingent）」債務や資産を注記で報告する必要があるかもしれない。19世紀以前は、法律は主に製品の売買取引に関するものであったが、20世紀に入ると、法律が爆発的に複雑になり、この判断がより難しくなった。 --></p></li>
-<li><p><em>The capture system for recording the event-transaction</em>. Auditor responsibility for capture of transactions has expanded significantly over the past two decades, particularly with the <em>Sarbanes–Oxley Act of 2002</em>. Firms are expected to have capture systems to assure that where there is a legal ownership or liability, that it shows up in the accounting reports. <!-- 3. **事象-取引の記録システム** 過去20年間、特に2002年のSOX法により、監査人の取引の記録に対する責任は大幅に拡大した。
-企業は、法的な所有権や義務がある場合、それが財務諸表へ表示されることを確実なものとするために、記録システムを構築することが期待されている。 --></p></li>
+<li><em>The definition of the boundaries of the firm</em>. Thus the same event may be an accounting transaction on a divisional financial statement, but will not be incorporated into the consolidated financial statements. <!-- 1. **会社の境界についての定義** 従って、同じ事象が部門レベルの財務諸表上では会計取引である可能性があっても、連結財務諸表には組み込まれないことがある。 --></li>
+<li><em>The relevant commercial law applying to the event-transaction</em>. Often this pertains to the definition of “<strong>ownership</strong>” of an asset, or “<strong>obligation</strong>” for a <em>promise, warranty, or contract</em>. <!-- Where ownership and obligations cannot be determined, the firm may need to report “contingent” liabilities or assets in a note. --> <!-- Before the nineteenth century, law mainly related to product transactions, but the twentieth century witnessed an explosion of intricacies in the law which have made this determination much more difficult. --> <!-- 2. **事象-取引に適用される商法の関連規定** 多くの場合、これは資産の「所有権」または契約（promise）の「義務」、保証（warranty）、もしくは契約の定義に関係する。所有権や義務が確定できない場合、企業は「偶発（contingent）」債務や資産を注記で報告する必要があるかもしれない。19世紀以前は、法律は主に製品の売買取引に関するものであったが、20世紀に入ると、法律が爆発的に複雑になり、この判断がより難しくなった。 --></li>
+<li><em>The capture system for recording the event-transaction</em>. Auditor responsibility for capture of transactions has expanded significantly over the past two decades, particularly with the <em>Sarbanes–Oxley Act of 2002</em>. Firms are expected to have capture systems to assure that where there is a legal ownership or liability, that it shows up in the accounting reports. <!-- 3. **事象-取引の記録システム** 過去20年間、特に2002年のSOX法により、監査人の取引の記録に対する責任は大幅に拡大した。
+企業は、法的な所有権や義務がある場合、それが財務諸表へ表示されることを確実なものとするために、記録システムを構築することが期待されている。 --></li>
 </ol>
 </section>
 <section id="chart-of-accounts" class="slide level2">
@@ -2849,12 +2835,12 @@ Levels: large &lt; medium &lt; small</code></pre>
 <li>We can use these functions: <code>ymd()</code>，<code>mdy()</code>，<code>dmy()</code> etc. <!-- 日時の解析: ymd(), ymd_hms, dmy(), dmy_hms, mdy()など --></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(auditanalytics, tidyverse)</span>
-<span id="cb60-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="dv">20101215</span>) <span class="co"># year month day</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(auditanalytics, tidyverse)</span>
+<span id="cb56-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="dv">20101215</span>) <span class="co"># year month day</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2010-12-15"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(<span class="st">"4/1/17"</span>) <span class="co"># month day year</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(<span class="st">"4/1/17"</span>) <span class="co"># month day year</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2017-04-01"</code></pre>
 </div>
@@ -2864,18 +2850,18 @@ Levels: large &lt; medium &lt; small</code></pre>
 <h2>Other funcitons in <code>lubridate</code> packages</h2>
 <p>A simple function to get and set elements of a date-time, <code>year()</code>, <code>month()</code>, <code>mday()</code>, etc. <!-- ## 日時の要素を取得・設定する簡単な関数, year(), month(), mday(),など --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="" aria-hidden="true" tabindex="-1"></a>bday <span class="ot">&lt;-</span> <span class="fu">dmy</span>(<span class="st">"14/10/1979"</span>)</span>
-<span id="cb64-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(bday) <span class="co"># 月を取得</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="" aria-hidden="true" tabindex="-1"></a>bday <span class="ot">&lt;-</span> <span class="fu">dmy</span>(<span class="st">"14/10/1979"</span>)</span>
+<span id="cb60-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(bday) <span class="co"># 月を取得</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(bday, <span class="at">label =</span> <span class="cn">TRUE</span>) <span class="co"># 1979年10月14日は日曜日</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(bday, <span class="at">label =</span> <span class="cn">TRUE</span>) <span class="co"># 1979年10月14日は日曜日</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 日
 Levels: 日 &lt; 月 &lt; 火 &lt; 水 &lt; 木 &lt; 金 &lt; 土</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">year</span>(bday) <span class="ot">&lt;-</span> <span class="dv">2016</span></span>
-<span id="cb68-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(bday, <span class="at">label =</span> <span class="cn">TRUE</span>) <span class="co"># 2016年10月14日は金曜日</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">year</span>(bday) <span class="ot">&lt;-</span> <span class="dv">2016</span></span>
+<span id="cb64-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(bday, <span class="at">label =</span> <span class="cn">TRUE</span>) <span class="co"># 2016年10月14日は金曜日</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 金
 Levels: 日 &lt; 月 &lt; 火 &lt; 水 &lt; 木 &lt; 金 &lt; 土</code></pre>
@@ -2886,16 +2872,16 @@ Levels: 日 &lt; 月 &lt; 火 &lt; 水 &lt; 木 &lt; 金 &lt; 土</code></pre>
 <h2><code>with_tz()</code> and <code>force_tz()</code></h2>
 <p>Helper functions for handling time zones in <code>lubridate</code>: <code>with_tz()</code>, <code>force_tz()</code>. <!-- ## lubridateのタイムゾーンを扱うためのヘルパー関数: with_tz(), force_tz() --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(<span class="st">"2010-12-13 15:30:30"</span>) <span class="co"># time stamp</span></span>
-<span id="cb70-2"><a href="" aria-hidden="true" tabindex="-1"></a>time <span class="co"># 2010年12月13日15時30分30秒</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(<span class="st">"2010-12-13 15:30:30"</span>) <span class="co"># time stamp</span></span>
+<span id="cb66-2"><a href="" aria-hidden="true" tabindex="-1"></a>time <span class="co"># 2010年12月13日15時30分30秒</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2010-12-13 15:30:30 UTC"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">with_tz</span>(time, <span class="st">"America/Chicago"</span>) <span class="co"># time zone change</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">with_tz</span>(time, <span class="st">"America/Chicago"</span>) <span class="co"># time zone change</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2010-12-13 09:30:30 CST"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">force_tz</span>(time, <span class="st">"America/Chicago"</span>) <span class="co">#</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">force_tz</span>(time, <span class="st">"America/Chicago"</span>) <span class="co">#</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2010-12-13 15:30:30 CST"</code></pre>
 </div>
@@ -2993,17 +2979,17 @@ finish <- ymd_hms("2024-10-16 16:40:00")
 
 <p>Even where values and quantities are unimodally distributed, their product can be multimodal, as is seen in the following graph (Fig. 2). <!-- 値と数量が単峰性分布であっても、その積は多峰性になることがある。 --> <!-- 以下のグラフ（図2）を見てみよう。 --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="" aria-hidden="true" tabindex="-1"></a>price <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">lambda =</span> <span class="dv">2</span>)  <span class="co"># ポワソン分布から1000個の乱数を生成</span></span>
-<span id="cb76-2"><a href="" aria-hidden="true" tabindex="-1"></a>quantity <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1000</span>, <span class="dv">10000</span>) <span class="co"># ポワソン分布から1000個の乱数を生成</span></span>
-<span id="cb76-3"><a href="" aria-hidden="true" tabindex="-1"></a>value <span class="ot">&lt;-</span> price <span class="sc">*</span> quantity      <span class="co"># 価格と数量の積</span></span>
-<span id="cb76-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(value, <span class="at">geom =</span> <span class="st">"histogram"</span>) <span class="co"># ヒストグラム</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="" aria-hidden="true" tabindex="-1"></a>price <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">lambda =</span> <span class="dv">2</span>)  <span class="co"># ポワソン分布から1000個の乱数を生成</span></span>
+<span id="cb72-2"><a href="" aria-hidden="true" tabindex="-1"></a>quantity <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1000</span>, <span class="dv">10000</span>) <span class="co"># ポワソン分布から1000個の乱数を生成</span></span>
+<span id="cb72-3"><a href="" aria-hidden="true" tabindex="-1"></a>value <span class="ot">&lt;-</span> price <span class="sc">*</span> quantity      <span class="co"># 価格と数量の積</span></span>
+<span id="cb72-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(value, <span class="at">geom =</span> <span class="st">"histogram"</span>) <span class="co"># ヒストグラム</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="gaisho_2024_03_files/figure-revealjs/qplot01-1.png" width="960" class="r-stretch"></section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(value, <span class="at">geom =</span> <span class="st">"density"</span>)   <span class="co"># 密度分布</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(value, <span class="at">geom =</span> <span class="st">"density"</span>)   <span class="co"># 密度分布</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="gaisho_2024_03_files/figure-revealjs/qqplot2-1.png" width="960" class="r-stretch"></section>
@@ -3012,17 +2998,7 @@ finish <- ymd_hms("2024-10-16 16:40:00")
 <ul>
 <li>Because accounting systems use linear operators, and <strong>summation</strong> is central to most accounting computations, it is natural to assume - when sampling, summarizing, or estimating errors - that errors are Normally distributed, because of the <strong>Central Limit Theorem</strong> (CLT). <!-- 会計システムは線形演算を使用し、ほとんどの会計計算において加算が中心的な役割を果たすため、サンプリング、要約、誤差の推定を行う際には、中心極限定理（CLT）により、誤差は正規分布に従うと仮定するのが自然である。 --></li>
 <li>The CLT provides useful approximations, and is appropriate in many situations. <!-- 中心極限定理は有用な近似値を提供し、多くの状況において適切である。 --> <!-- Nonetheless, the auditor should not blindly invoke CLT convergence to justify Normality assumptions in the search for material errors in the financial statements (Fig. 3). --> <!-- それにもかかわらず、監査人は、財務諸表における重大な誤りを探すために正規性の仮定を正当化するために、中心極限定理の収束を盲目的に引き合いに出すべきではない（図3）。 --> <!-- - In a search for material errors, it may not be the entire transaction or account distribution that is important, but just **the upper tail**. --> <!-- 重大な誤りを探す際には、取引や勘定の分布全体が重要なのではなく、上側のテールだけが重要であるかもしれない。 --></li>
-<li>Audit decisions tend to focus on the existence of material misstatements, which limit them to the upper tail. <!-- 監査の意思決定は、重大な誤りの存在に焦点を当てる傾向があり、これは上側のテールに限定される。 --></li>
-</ul>
-<!-- For a broad range of distributions, the asymptotic upper tail distribution can be inferred from the Fisher–Tippett–Gnedenko (FTG) theorem, an extreme value counterpart to the CLT. -->
-<!-- 広範囲の分布については、中心極限定理の極限値に対応するフィッシャー・ティペット・グネデンコ(FTG)の定理から、漸近的な上側テール分布を推定することができる。 -->
-<!-- The FTG Theorem proves that extreme values can only converge to either the Gumbel, Fréchet, or Weibull distributions or they do not converge at all. -->
-<!-- FTG定理は、極値はガンベル分布、フレシェ分布、またはワイブル分布のいずれかにしか収束しないことを証明している。 -->
-<!-- FTG convergence applies only to the right tail of the distribution, and is widely invoked in insurance risk models. -->
-<!-- FTG収束は分布の右側テールにのみ適用され、保険リスクモデルで広く引用されている。 -->
-<!-- This can be very useful in practice, empirical distributions in finance can be complicated, with multiple modes which may not be stable over time. -->
-<!-- これは実務で非常に有用であり、金融における経験分布は複雑であり、複数のモードがあり、時間の経過とともに安定しない場合がある。 -->
-<ul>
+<li>Audit decisions tend to focus on the existence of material misstatements, which limit them to the upper tail. <!-- 監査の意思決定は、重大な誤りの存在に焦点を当てる傾向があり、これは上側のテールに限定される。 --> <!-- For a broad range of distributions, the asymptotic upper tail distribution can be inferred from the Fisher–Tippett–Gnedenko (FTG) theorem, an extreme value counterpart to the CLT. --> <!-- 広範囲の分布については、中心極限定理の極限値に対応するフィッシャー・ティペット・グネデンコ(FTG)の定理から、漸近的な上側テール分布を推定することができる。 --> <!-- The FTG Theorem proves that extreme values can only converge to either the Gumbel, Fréchet, or Weibull distributions or they do not converge at all. --> <!-- FTG定理は、極値はガンベル分布、フレシェ分布、またはワイブル分布のいずれかにしか収束しないことを証明している。 --> <!-- FTG convergence applies only to the right tail of the distribution, and is widely invoked in insurance risk models. --> <!-- FTG収束は分布の右側テールにのみ適用され、保険リスクモデルで広く引用されている。 --> <!-- This can be very useful in practice, empirical distributions in finance can be complicated, with multiple modes which may not be stable over time. --> <!-- これは実務で非常に有用であり、金融における経験分布は複雑であり、複数のモードがあり、時間の経過とともに安定しない場合がある。 --></li>
 <li>Being able to more accurately characterize accounting distributions that matter allows the auditor to potentially reduce sample sizes, and lower the cost of auditing. <!-- 重要な会計分布をより正確に特徴付けることができれば、監査人はサンプルサイズを縮小し、監査のコストを削減することができる。 --></li>
 </ul>
 </section>
@@ -3033,7 +3009,7 @@ finish <- ymd_hms("2024-10-16 16:40:00")
 <li>Generally, auditing assumes underlying Gaussian distributions of account and transaction values. <!-- 一般的に監査では、勘定残高や取引金額が正規分布（ガウス分布）に従うと仮定している。 --> <!-- - Evidence has existed for some time (Loebbecke and Steinbart 1987) that empirical distributions of account and transaction values are kurtotic and can be multimodal. --> <!-- 会計取引の金額について経験的に想定されている分布が盲目的であり、（実際の分布が）多峰形な可能性があるという実証的証拠は以前から存在する（Loebbecke and Steinbart 1987）。 --></li>
 <li>Gaussian assumptions are made for convenience, and there has been no clear evidence to date this assumption is unreasonable. <!-- 便宜上正規分布（ガウス分布）が仮定されているわけだが、この仮定が不合理であるという明確な実証的証拠もこれまで存在していない。 --></li>
 <li>Auditors are concerned with the potential errors in audit decision-making that can arise from mis-classifying audit asset and transaction distributions. <!-- 監査人は、監査する資産や取引の分布を誤分類することから生じる可能性のある監査意思決定における失敗の可能性を懸念している。 --></li>
-<li>If these are large, then auditors are either collecting more evidence than needed (driving up audit costs) or unnecessarily incurring additional risk of an incorrect audit opinion (and thus potential litigation). <!-- これらの監査意思決定における失敗が大きい場合、監査人は必要以上の監査証拠を収集することになる（ひいては監査コストを押し上げる）か、不必要に誤った監査意見（ひいては潜在的な訴訟につながる）の追加的な損害のリスクを負うことになる。 --></li>
+<li>If these are large, then auditors are either collecting more evidence than needed or unnecessarily incurring additional risk of an incorrect audit opinion. <!-- これらの監査意思決定における失敗が大きい場合、監査人は必要以上の監査証拠を収集することになる（ひいては監査コストを押し上げる）か、不必要に誤った監査意見（ひいては潜在的な訴訟につながる）の追加的な損害のリスクを負うことになる。 --></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -3096,8 +3072,7 @@ finish <- ymd_hms("2024-10-16 16:40:00")
 <li>The audit risk model expresses the risk of an auditor providing an inappropriate opinion of a commercial entity’s accounting statements and is calculated: <span class="math inline">AR = IR \times CR \times DR</span> . <!-- 監査リスクモデルは、営利企業の財務諸表に対する監査意見の表明が不適切なものとなるリスクを表すものであり、$AR = IR \times CR \times DR$で計算される。 --></li>
 <li>In this formula, <span class="math inline">IR</span> refers to the risk involved in a business or transaction. <!-- この式において、$IR$とは、事業や取引に潜む固有のリスクを指す。 --> <!-- Example, transactions involving exchange of cash may have higher $IR$ than transactions involving settlement by checks. --> <!-- 例えば、現金の授受を伴う取引は、小切手による決済を伴う取引よりも$IR$が高くなる可能性がある。 --></li>
 <li><span class="math inline">CR</span> refers to the risk that a misstatement could occur but <strong>may not be detected and corrected or prevented by entity’s internal control mechanism</strong>. <!-- $CR$とは、（事業や取引に潜む）虚偽表示が発生するが、企業の内部統制の仕組みによって発見・是正されない、または防止されないリスクをいう。 --></li>
-<li><span class="math inline">DR</span> is the probability that <em>the audit procedures may fail to detect existence of a material error or fraud</em>. <!-- $DR$とは、監査手続が重要な誤謬や不正の存在を発見できない可能性のことである。 --></li>
-<li>While <span class="math inline">CR</span> depends on <em>the strength or weakness of the internal control procedures</em>, DR is either due to sampling error or human factors. <!-- $CR$が（被監査会社による）内部統制の手続の厳格さや甘さに依存するのに対し、$DR$は（監査人による）サンプリングエラーや人的要因によるものである。 --></li>
+<li><span class="math inline">DR</span> is the probability that <em>the audit procedures may fail to detect existence of a material error or fraud</em>. <!-- $DR$とは、監査手続が重要な誤謬や不正の存在を発見できない可能性のことである。 --> <!-- - While $CR$ depends on *the strength or weakness of the internal control procedures*, DR is either due to sampling error or human factors. --> <!-- $CR$が（被監査会社による）内部統制の手続の厳格さや甘さに依存するのに対し、$DR$は（監査人による）サンプリングエラーや人的要因によるものである。 --></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -3149,6 +3124,11 @@ finish <- ymd_hms("2024-10-16 16:40:00")
 <li>Defining Professional Requirements Standard (SAS No.&nbsp;102).</li>
 <li>Guidance on audit documentation (SAS 103).</li>
 <li>Communicating internal control related matters (SAS 112 and SAS 115).</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
 <li>Audit Risk Alerts such as Communicating Internal Control Related Matters in an Audit—Understanding SAS No.&nbsp;115 These discuss several approaches to the audit sampling process.</li>
 <li>Statistical audit sampling in tests of controls and for substantive tests of details.</li>
 <li>Non-statistical audit sampling in tests of controls and for substantive tests of details.</li>
@@ -3198,19 +3178,24 @@ finish <- ymd_hms("2024-10-16 16:40:00")
 <li><strong>Judgmental sampling</strong> : Items are audited based on personal hunches and convenience involving a subjective selection of items for testing and a subjective evaluation of the results.</li>
 <li><strong>Random sampling</strong> : Applies random number generators to assure that each population unit or item has an equal probability of being selected for the sample.</li>
 <li><strong>Fixed-interval sampling</strong> : Specify an interval and a random starting point which must be greater than zero and less than or equal to the selection interval.</li>
-<li><strong>Random-interval sampling</strong> :Specify an interval and a random seed which is the basis for a series of pseudo-random numbers.</li>
 </ol>
 </section>
 <section class="slide level2">
 
-<ol start="5" type="1">
-<li><p><strong>Conditional sampling</strong> : Apply a condition to subject only a portion of the population to selection.</p></li>
-<li><p><strong>Stratified sampling</strong> : A process of dividing a population in subgroups each of which is a set of sampling units with similar characteristics. <!-- Stratified sampling may be considered a particular form of conditional sampling — conditioned on item size (in dollars, etc.). --></p></li>
-<li><p><strong>Transaction or Record sampling</strong> : Treat seach recorded transaction equivalently.</p></li>
-<li><p><strong>Monetary Unit Sampling</strong> : Treats each recorded dollar equivalently.</p></li>
-<li><p><strong>Estimation sampling</strong> : Sampling with an objective to estimate the proportion of errors to see if it is less than some acceptable level.</p></li>
-<li><p><strong>Acceptance sampling</strong> : Sampling with an objective to reject or accept the population under certain conditions.</p></li>
-<li><p><strong>Discovery sampling</strong> : Sampling with an objective to determine if the population is error free.</p></li>
+<ol start="4" type="1">
+<li><strong>Random-interval sampling</strong> :Specify an interval and a random seed which is the basis for a series of pseudo-random numbers.</li>
+<li><strong>Conditional sampling</strong> : Apply a condition to subject only a portion of the population to selection.</li>
+<li><strong>Stratified sampling</strong> : A process of dividing a population in subgroups each of which is a set of sampling units with similar characteristics. <!-- Stratified sampling may be considered a particular form of conditional sampling — conditioned on item size (in dollars, etc.). --></li>
+<li><strong>Transaction or Record sampling</strong> : Treat seach recorded transaction equivalently.</li>
+</ol>
+</section>
+<section class="slide level2">
+
+<ol start="8" type="1">
+<li><strong>Monetary Unit Sampling</strong> : Treats each recorded dollar equivalently.</li>
+<li><strong>Estimation sampling</strong> : Sampling with an objective to estimate the proportion of errors to see if it is less than some acceptable level.</li>
+<li><strong>Acceptance sampling</strong> : Sampling with an objective to reject or accept the population under certain conditions.</li>
+<li><strong>Discovery sampling</strong> : Sampling with an objective to determine if the population is error free.</li>
 </ol>
 <!--
 1. 判断サンプリング（judgmental sampling）：サンプル項目は個人的な直感や簡便な方法に基づいて項目の監査を行う方法。主観的に監査手続を行う項目を選択し、その結果を主観的に評価する。
@@ -3304,16 +3289,16 @@ finish <- ymd_hms("2024-10-16 16:40:00")
 <h2>Audit and Statistics</h2>
 <p>In the past, the auditors initial step when confronted with a new database is to “foot” the dataset (i.e., compute a total) and “agree” that total to the client’s records (i.e., see whether client’s records agree with the computed total). <!-- 従来、監査人が新しいデータベースを扱うときの最初のステップは、データベースの「集計（foot）（すなわち、合計を計算すること）」と、その合計が被監査会社の記録と「一致（agree）」しているか確認することであった。 --> This is done with the “sum” command in R. <!-- Rでは`sum`コマンドで計算できる。 --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="" aria-hidden="true" tabindex="-1"></a>disburse <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>( <span class="co"># csvファイルの読み込み</span></span>
-<span id="cb78-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"extdata"</span>,  <span class="st">"ch_2_AP_disbursements_journal.csv"</span>, <span class="co"># ファイル名</span></span>
-<span id="cb78-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb78-4"><a href="" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># ファイルがない場合はエラーを返す</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="" aria-hidden="true" tabindex="-1"></a>disburse <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>( <span class="co"># csvファイルの読み込み</span></span>
+<span id="cb74-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"extdata"</span>,  <span class="st">"ch_2_AP_disbursements_journal.csv"</span>, <span class="co"># ファイル名</span></span>
+<span id="cb74-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb74-4"><a href="" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># ファイルがない場合はエラーを返す</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(disburse) <span class="co"># descriptive statistics</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(disburse) <span class="co"># descriptive statistics</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> disbursement_no        date            amount_paid  
  Length:50          Length:50          Min.   :2417  
@@ -3323,8 +3308,8 @@ finish <- ymd_hms("2024-10-16 16:40:00")
                                        3rd Qu.:2800  
                                        Max.   :3190  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># output the total amount paid</span></span>
-<span id="cb81-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">'</span><span class="sc">\n\n</span><span class="st"> 支払帳の合計金額 = '</span>, <span class="fu">sum</span>(disburse<span class="sc">$</span>amount_paid))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># output the total amount paid</span></span>
+<span id="cb77-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">'</span><span class="sc">\n\n</span><span class="st"> 支払帳の合計金額 = '</span>, <span class="fu">sum</span>(disburse<span class="sc">$</span>amount_paid))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 
@@ -3339,12 +3324,11 @@ Rには、標準のsummaryコマンド以外に、データから基本的な統
 ここでは、本書で紹介する銀行業界のデータに適用できる、最も有用な3つのパッケージを紹介する。
 --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc) <span class="co"># 記述統計量の計算</span></span>
-<span id="cb83-2"><a href="" aria-hidden="true" tabindex="-1"></a>bank_fin <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>(</span>
-<span id="cb83-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"extdata"</span>, <span class="st">"ch_2_yahoo_fin.csv"</span>,</span>
-<span id="cb83-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb83-5"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb83-6"><a href="" aria-hidden="true" tabindex="-1"></a>Hmisc<span class="sc">::</span><span class="fu">describe</span>(bank_fin) <span class="co"># Show summary statistics</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc) <span class="co"># 記述統計量の計算</span></span>
+<span id="cb79-2"><a href="" aria-hidden="true" tabindex="-1"></a>bank_fin <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>(</span>
+<span id="cb79-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"extdata"</span>, <span class="st">"ch_2_yahoo_fin.csv"</span>,</span>
+<span id="cb79-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb79-5"><a href="" aria-hidden="true" tabindex="-1"></a>Hmisc<span class="sc">::</span><span class="fu">describe</span>(bank_fin) <span class="co"># Show summary statistics</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>bank_fin 
 
@@ -3438,8 +3422,8 @@ For the frequency table, variable is rounded to the nearest 5
 <h3 id="bank-financial-data">Bank Financial Data</h3>
 <p>The <em>describe</em> and <em>describeBy</em> functions of the <em>psych</em> package offer rich reporting of summary statistics, though much of this may be superfluous in auditing. <!-- `psych`パッケージの`describe`関数と`describeBy`関数は、要約統計量の豊富なレポーティングを提供するが、その多くは監査には不必要かもしれない。 --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co"># 心理統計学のためのパッケージ</span></span>
-<span id="cb85-2"><a href="" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(bank_fin) <span class="co"># 記述統計量の出力</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co"># 心理統計学のためのパッケージ</span></span>
+<span id="cb81-2"><a href="" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(bank_fin) <span class="co"># 記述統計量の出力</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                vars  n      mean         sd   median   trimmed      mad    min
 ticker*            1 38      9.55       8.61     7.50      8.91     9.64   1.00
@@ -3469,7 +3453,7 @@ pe_ratio             506.93      506.92 3.19     9.35     22.61</code></pre>
 <h3 id="bank-financial-data-by-group">Bank Financial Data by Group</h3>
 <!-- ### 特定のグループごとの要約統計量をdescribeByで指定可能 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describeBy</span>(bank_fin, bank_fin<span class="sc">$</span>name)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describeBy</span>(bank_fin, bank_fin<span class="sc">$</span>name)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  Descriptive statistics by group 
@@ -3656,12 +3640,12 @@ pe_ratio          297.54    292.26  2.28     3.57    29.21</code></pre>
 <p>If the auditor wishes to use summary statistics for further processing, these can be formatted into data frames using the <em>tidy</em> function in <em>broom</em>; alternatively, the data frames can be used to print formatted tables, which may be included in audit papers.</p>
 <!-- 監査人がさらなる処理に要約統計量を使用したい場合は、broom の tidy 関数を使用してデータフレームにフォーマットすることができる。あるいは、データフレームを利用してフォーマットされた表を印刷し、監査調書に含めることもできる。 -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(kableExtra, broom, pastecs) <span class="co"># パッケージの読み込み</span></span>
-<span id="cb89-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="do">## Tidy these up and write them as a formated table, using kableExtra</span></span>
-<span id="cb89-3"><a href="" aria-hidden="true" tabindex="-1"></a>pastecs<span class="sc">::</span><span class="fu">stat.desc</span>(bank_fin) <span class="sc">|&gt;</span></span>
-<span id="cb89-4"><a href="" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span></span>
-<span id="cb89-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">longtable =</span> T, <span class="at">caption =</span> <span class="st">"Summary Statistics"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb89-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">full_width =</span> F, <span class="at">font_size =</span> <span class="dv">18</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(kableExtra, broom, pastecs) <span class="co"># パッケージの読み込み</span></span>
+<span id="cb85-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="do">## Tidy these up and write them as a formated table, using kableExtra</span></span>
+<span id="cb85-3"><a href="" aria-hidden="true" tabindex="-1"></a>pastecs<span class="sc">::</span><span class="fu">stat.desc</span>(bank_fin) <span class="sc">|&gt;</span></span>
+<span id="cb85-4"><a href="" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span></span>
+<span id="cb85-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">longtable =</span> T, <span class="at">caption =</span> <span class="st">"Summary Statistics"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb85-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">full_width =</span> F, <span class="at">font_size =</span> <span class="dv">18</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table caption-top" data-quarto-postprocess="true" style="font-size: 18px; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>Summary Statistics</caption>
@@ -3909,18 +3893,18 @@ In any case, outliers should be identified and are usually worthy of further inv
 <div class="cell">
 <details class="code-fold">
 <summary>コード</summary>
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="" aria-hidden="true" tabindex="-1"></a>disburse <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>(</span>
-<span id="cb90-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"extdata"</span>, <span class="st">"ch_2_AP_disbursements_journal.csv"</span>, <span class="co"># csv file</span></span>
-<span id="cb90-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="" aria-hidden="true" tabindex="-1"></a>disburse <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>(</span>
+<span id="cb86-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"extdata"</span>, <span class="st">"ch_2_AP_disbursements_journal.csv"</span>, <span class="co"># csv file</span></span>
+<span id="cb86-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(disburse[,<span class="st">"amount_paid"</span>]))</span>
-<span id="cb91-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(d,</span>
-<span id="cb91-3"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Normal Q-Q Plot"</span>, <span class="co"># QQプロットを作成</span></span>
-<span id="cb91-4"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Theoretical Quantiles"</span>, <span class="co"># x軸のラベル</span></span>
-<span id="cb91-5"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Sample Quantiles"</span>, <span class="co"># y軸のラベル</span></span>
-<span id="cb91-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.it =</span> <span class="cn">TRUE</span>) <span class="co"># プロットするかどうか</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(disburse[,<span class="st">"amount_paid"</span>]))</span>
+<span id="cb87-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(d,</span>
+<span id="cb87-3"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Normal Q-Q Plot"</span>, <span class="co"># QQプロットを作成</span></span>
+<span id="cb87-4"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Theoretical Quantiles"</span>, <span class="co"># x軸のラベル</span></span>
+<span id="cb87-5"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Sample Quantiles"</span>, <span class="co"># y軸のラベル</span></span>
+<span id="cb87-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.it =</span> <span class="cn">TRUE</span>) <span class="co"># プロットするかどうか</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="gaisho_2024_03_files/figure-revealjs/qqplot_disburse-1.png" width="960" class="r-stretch"></section>
@@ -3944,19 +3928,19 @@ In any case, outliers should be identified and are usually worthy of further inv
 
 <h3 id="density-and-cumulative-distribution">Density and Cumulative Distribution</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">density</span>(disburse[,<span class="st">"amount_paid"</span>]) <span class="co"># density</span></span>
-<span id="cb92-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d, <span class="at">main =</span> <span class="st">"Density of Amount Paid"</span>)  <span class="co"># plot density</span></span>
-<span id="cb92-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(d, <span class="at">col=</span><span class="st">"violet"</span>, <span class="at">border=</span><span class="st">"black"</span>) <span class="co"># add color</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">density</span>(disburse[,<span class="st">"amount_paid"</span>]) <span class="co"># density</span></span>
+<span id="cb88-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d, <span class="at">main =</span> <span class="st">"Density of Amount Paid"</span>)  <span class="co"># plot density</span></span>
+<span id="cb88-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(d, <span class="at">col=</span><span class="st">"violet"</span>, <span class="at">border=</span><span class="st">"black"</span>) <span class="co"># add color</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="gaisho_2024_03_files/figure-revealjs/density-1.png" width="960" class="r-stretch"></section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb93-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ecdf</span>(disburse[,<span class="st">"amount_paid"</span>]), <span class="co"># 累積分布関数を計算</span></span>
-<span id="cb93-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">"Cumulative Density of Amount Paid"</span> <span class="co"># 図のタイトル</span></span>
-<span id="cb93-4"><a href="" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># 誤植 ~いらない</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb89-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ecdf</span>(disburse[,<span class="st">"amount_paid"</span>]), <span class="co"># 累積分布関数を計算</span></span>
+<span id="cb89-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">"Cumulative Density of Amount Paid"</span> <span class="co"># 図のタイトル</span></span>
+<span id="cb89-4"><a href="" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># 誤植 ~いらない</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="gaisho_2024_03_files/figure-revealjs/CDF-1.png" width="960" class="r-stretch"><p><code>ecdf()</code> is a function that computes the empirical cumulative distribution function of a dataset.</p>
@@ -4012,12 +3996,12 @@ In any case, outliers should be identified and are usually worthy of further inv
 
 <p>Exploratory data analysis (EDA) using R’s <code>plotluck</code> package and <code>ch_2_data_types.csv</code> data file.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>(</span>
-<span id="cb94-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"extdata"</span>, <span class="st">"ch_2_data_types.csv"</span>, <span class="co"># csv file</span></span>
-<span id="cb94-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb94-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># regression model OLS</span></span>
-<span id="cb94-5"><a href="" aria-hidden="true" tabindex="-1"></a>lr <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> insd <span class="sc">~</span> audit_fee <span class="sc">+</span> effective_404, <span class="at">data =</span> df)</span>
-<span id="cb94-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lr) <span class="co"># 結果の表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>(</span>
+<span id="cb90-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"extdata"</span>, <span class="st">"ch_2_data_types.csv"</span>, <span class="co"># csv file</span></span>
+<span id="cb90-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">package =</span> <span class="st">"auditanalytics"</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb90-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># regression model OLS</span></span>
+<span id="cb90-5"><a href="" aria-hidden="true" tabindex="-1"></a>lr <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> insd <span class="sc">~</span> audit_fee <span class="sc">+</span> effective_404, <span class="at">data =</span> df)</span>
+<span id="cb90-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lr) <span class="co"># 結果の表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -4053,11 +4037,11 @@ F-statistic: 2.454 on 2 and 1509 DF,  p-value: 0.08627</code></pre>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="" aria-hidden="true" tabindex="-1"></a>lgt <span class="ot">&lt;-</span> <span class="fu">glm</span>( <span class="co"># general linear method</span></span>
-<span id="cb96-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> insd <span class="sc">~</span> audit_fee <span class="sc">+</span> effective_404, <span class="co"># 回帰モデル</span></span>
-<span id="cb96-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="co"># link function</span></span>
-<span id="cb96-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df) <span class="co"># data frame</span></span>
-<span id="cb96-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lgt) <span class="co"># 結果の表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="" aria-hidden="true" tabindex="-1"></a>lgt <span class="ot">&lt;-</span> <span class="fu">glm</span>( <span class="co"># general linear method</span></span>
+<span id="cb92-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> insd <span class="sc">~</span> audit_fee <span class="sc">+</span> effective_404, <span class="co"># 回帰モデル</span></span>
+<span id="cb92-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="co"># link function</span></span>
+<span id="cb92-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df) <span class="co"># data frame</span></span>
+<span id="cb92-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lgt) <span class="co"># 結果の表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -4087,7 +4071,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 
 <h3 id="graph-of-the-logit-model">Graph of the Logit Model</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lgt) <span class="co"># 図の作成</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lgt) <span class="co"># 図の作成</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -4166,21 +4150,21 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <h2><code>keras</code></h2>
 <p>Examples below assume that Tensorflow is installed. See <a href="https://www.tensorflow.org/install/">https://www.tensorflow.org/install/</a>。 <!-- 以下の例は、Tensorflowがインストールされていることを前提としている --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("keras") # install keras packages</span></span>
-<span id="cb99-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(keras)</span>
-<span id="cb99-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># install_keras() # Run this only once. Installation takes time.</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("keras") # install keras packages</span></span>
+<span id="cb95-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(keras)</span>
+<span id="cb95-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># install_keras() # Run this only once. Installation takes time.</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- これで準備が整った。 -->
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="" aria-hidden="true" tabindex="-1"></a>mnist <span class="ot">&lt;-</span> <span class="fu">dataset_mnist</span>() <span class="co"># MNISTデータを読み込む</span></span>
-<span id="cb100-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mnist)   <span class="co"># List class</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="" aria-hidden="true" tabindex="-1"></a>mnist <span class="ot">&lt;-</span> <span class="fu">dataset_mnist</span>() <span class="co"># MNISTデータを読み込む</span></span>
+<span id="cb96-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mnist)   <span class="co"># List class</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "list"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mnist) <span class="co"># See the structure of the data</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mnist) <span class="co"># See the structure of the data</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 2
  $ train:List of 2
@@ -4196,62 +4180,62 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="" aria-hidden="true" tabindex="-1"></a>train_images <span class="ot">&lt;-</span> mnist<span class="sc">$</span>train<span class="sc">$</span>x <span class="co"># image data for training</span></span>
-<span id="cb104-2"><a href="" aria-hidden="true" tabindex="-1"></a>train_labels <span class="ot">&lt;-</span> mnist<span class="sc">$</span>train<span class="sc">$</span>y <span class="co"># label data for training</span></span>
-<span id="cb104-3"><a href="" aria-hidden="true" tabindex="-1"></a>test_images <span class="ot">&lt;-</span> mnist<span class="sc">$</span>test<span class="sc">$</span>x   <span class="co"># test image data</span></span>
-<span id="cb104-4"><a href="" aria-hidden="true" tabindex="-1"></a>test_labels <span class="ot">&lt;-</span> mnist<span class="sc">$</span>test<span class="sc">$</span>y   <span class="co"># test label data</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="" aria-hidden="true" tabindex="-1"></a>train_images <span class="ot">&lt;-</span> mnist<span class="sc">$</span>train<span class="sc">$</span>x <span class="co"># image data for training</span></span>
+<span id="cb100-2"><a href="" aria-hidden="true" tabindex="-1"></a>train_labels <span class="ot">&lt;-</span> mnist<span class="sc">$</span>train<span class="sc">$</span>y <span class="co"># label data for training</span></span>
+<span id="cb100-3"><a href="" aria-hidden="true" tabindex="-1"></a>test_images <span class="ot">&lt;-</span> mnist<span class="sc">$</span>test<span class="sc">$</span>x   <span class="co"># test image data</span></span>
+<span id="cb100-4"><a href="" aria-hidden="true" tabindex="-1"></a>test_labels <span class="ot">&lt;-</span> mnist<span class="sc">$</span>test<span class="sc">$</span>y   <span class="co"># test label data</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <p>Construct a neural network model. Keras Model composed of a linear stack of layers.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="" aria-hidden="true" tabindex="-1"></a>network <span class="ot">&lt;-</span> <span class="fu">keras_model_sequential</span>() <span class="co"># null model</span></span>
-<span id="cb105-2"><a href="" aria-hidden="true" tabindex="-1"></a>network <span class="sc">|&gt;</span></span>
-<span id="cb105-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 28*28 pixel images are flattened into 784 pixel vectors</span></span>
-<span id="cb105-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layer_dense</span>(<span class="at">units =</span> <span class="dv">512</span>, <span class="at">input_shape =</span> <span class="fu">c</span>(<span class="dv">28</span> <span class="sc">*</span> <span class="dv">28</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb105-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ReLU activation function converts negative values to zero</span></span>
-<span id="cb105-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layer_activation</span>(<span class="st">'relu'</span>) <span class="sc">|&gt;</span> <span class="co"># ReLU activation function</span></span>
-<span id="cb105-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layer_dense</span>(<span class="at">units =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span>  <span class="co"># 10 output layers 1:10</span></span>
-<span id="cb105-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># softmax activation function convert the output to a probability distribution</span></span>
-<span id="cb105-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layer_activation</span>(<span class="st">"softmax"</span>) <span class="co"># softmax activation function</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="" aria-hidden="true" tabindex="-1"></a>network <span class="ot">&lt;-</span> <span class="fu">keras_model_sequential</span>() <span class="co"># null model</span></span>
+<span id="cb101-2"><a href="" aria-hidden="true" tabindex="-1"></a>network <span class="sc">|&gt;</span></span>
+<span id="cb101-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 28*28 pixel images are flattened into 784 pixel vectors</span></span>
+<span id="cb101-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layer_dense</span>(<span class="at">units =</span> <span class="dv">512</span>, <span class="at">input_shape =</span> <span class="fu">c</span>(<span class="dv">28</span> <span class="sc">*</span> <span class="dv">28</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb101-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ReLU activation function converts negative values to zero</span></span>
+<span id="cb101-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layer_activation</span>(<span class="st">'relu'</span>) <span class="sc">|&gt;</span> <span class="co"># ReLU activation function</span></span>
+<span id="cb101-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layer_dense</span>(<span class="at">units =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span>  <span class="co"># 10 output layers 1:10</span></span>
+<span id="cb101-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># softmax activation function convert the output to a probability distribution</span></span>
+<span id="cb101-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">layer_activation</span>(<span class="st">"softmax"</span>) <span class="co"># softmax activation function</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <p>Specify the algorithm and function series.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="" aria-hidden="true" tabindex="-1"></a>network <span class="sc">|&gt;</span> <span class="fu">compile</span>(       <span class="co"># モデルをコンパイル</span></span>
-<span id="cb106-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">optimizer =</span> <span class="st">"rmsprop"</span>,  <span class="co"># 最適化アルゴリズム</span></span>
-<span id="cb106-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">loss =</span> <span class="st">"categorical_crossentropy"</span>, <span class="co"># 損失関数</span></span>
-<span id="cb106-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">metrics =</span> <span class="fu">c</span>(<span class="st">"accuracy"</span>) <span class="co"># 評価関数</span></span>
-<span id="cb106-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="" aria-hidden="true" tabindex="-1"></a>network <span class="sc">|&gt;</span> <span class="fu">compile</span>(       <span class="co"># モデルをコンパイル</span></span>
+<span id="cb102-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">optimizer =</span> <span class="st">"rmsprop"</span>,  <span class="co"># 最適化アルゴリズム</span></span>
+<span id="cb102-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">loss =</span> <span class="st">"categorical_crossentropy"</span>, <span class="co"># 損失関数</span></span>
+<span id="cb102-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">metrics =</span> <span class="fu">c</span>(<span class="st">"accuracy"</span>) <span class="co"># 評価関数</span></span>
+<span id="cb102-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <h3 id="training-and-test-data">Training and Test Data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Training data</span></span>
-<span id="cb107-2"><a href="" aria-hidden="true" tabindex="-1"></a>train_images <span class="ot">&lt;-</span> <span class="fu">array_reshape</span>( <span class="co"># 行列に変換</span></span>
-<span id="cb107-3"><a href="" aria-hidden="true" tabindex="-1"></a>    train_images,              <span class="co"># 訓練用画像データ</span></span>
-<span id="cb107-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="dv">60000</span>, <span class="dv">28</span> <span class="sc">*</span> <span class="dv">28</span>)          <span class="co"># 画像の形状</span></span>
-<span id="cb107-5"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb107-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Test data</span></span>
-<span id="cb107-7"><a href="" aria-hidden="true" tabindex="-1"></a>test_images <span class="ot">&lt;-</span> <span class="fu">array_reshape</span>( <span class="co"># 行列に変換</span></span>
-<span id="cb107-8"><a href="" aria-hidden="true" tabindex="-1"></a>    test_images,              <span class="co"># テスト用画像データ</span></span>
-<span id="cb107-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="dv">10000</span>, <span class="dv">28</span> <span class="sc">*</span> <span class="dv">28</span>)         <span class="co"># 画像の形状</span></span>
-<span id="cb107-10"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb107-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 0が黒，255が白のデータを0-1の範囲に正規化</span></span>
-<span id="cb107-12"><a href="" aria-hidden="true" tabindex="-1"></a>train_images <span class="ot">&lt;-</span> train_images <span class="sc">/</span> <span class="dv">255</span></span>
-<span id="cb107-13"><a href="" aria-hidden="true" tabindex="-1"></a>test_images  <span class="ot">&lt;-</span> test_images  <span class="sc">/</span> <span class="dv">255</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Training data</span></span>
+<span id="cb103-2"><a href="" aria-hidden="true" tabindex="-1"></a>train_images <span class="ot">&lt;-</span> <span class="fu">array_reshape</span>( <span class="co"># 行列に変換</span></span>
+<span id="cb103-3"><a href="" aria-hidden="true" tabindex="-1"></a>    train_images,              <span class="co"># 訓練用画像データ</span></span>
+<span id="cb103-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="dv">60000</span>, <span class="dv">28</span> <span class="sc">*</span> <span class="dv">28</span>)          <span class="co"># 画像の形状</span></span>
+<span id="cb103-5"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb103-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Test data</span></span>
+<span id="cb103-7"><a href="" aria-hidden="true" tabindex="-1"></a>test_images <span class="ot">&lt;-</span> <span class="fu">array_reshape</span>( <span class="co"># 行列に変換</span></span>
+<span id="cb103-8"><a href="" aria-hidden="true" tabindex="-1"></a>    test_images,              <span class="co"># テスト用画像データ</span></span>
+<span id="cb103-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="dv">10000</span>, <span class="dv">28</span> <span class="sc">*</span> <span class="dv">28</span>)         <span class="co"># 画像の形状</span></span>
+<span id="cb103-10"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb103-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 0が黒，255が白のデータを0-1の範囲に正規化</span></span>
+<span id="cb103-12"><a href="" aria-hidden="true" tabindex="-1"></a>train_images <span class="ot">&lt;-</span> train_images <span class="sc">/</span> <span class="dv">255</span></span>
+<span id="cb103-13"><a href="" aria-hidden="true" tabindex="-1"></a>test_images  <span class="ot">&lt;-</span> test_images  <span class="sc">/</span> <span class="dv">255</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="" aria-hidden="true" tabindex="-1"></a>train_labels <span class="ot">&lt;-</span> <span class="fu">to_categorical</span>(train_labels) <span class="co">#</span></span>
-<span id="cb108-2"><a href="" aria-hidden="true" tabindex="-1"></a>test_labels <span class="ot">&lt;-</span> <span class="fu">to_categorical</span>(test_labels)   <span class="co">#</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="" aria-hidden="true" tabindex="-1"></a>train_labels <span class="ot">&lt;-</span> <span class="fu">to_categorical</span>(train_labels) <span class="co">#</span></span>
+<span id="cb104-2"><a href="" aria-hidden="true" tabindex="-1"></a>test_labels <span class="ot">&lt;-</span> <span class="fu">to_categorical</span>(test_labels)   <span class="co">#</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p>Label data is one hot encoded. <!-- ラベルデータをone-hotエンコーディング --></p></li>
@@ -4263,34 +4247,34 @@ Number of Fisher Scoring iterations: 4</code></pre>
 
 <h3 id="training-the-model">Training the Model</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="" aria-hidden="true" tabindex="-1"></a>history <span class="ot">&lt;-</span> network <span class="sc">|&gt;</span></span>
-<span id="cb109-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fit</span>( <span class="co"># training the model</span></span>
-<span id="cb109-3"><a href="" aria-hidden="true" tabindex="-1"></a>        train_images, <span class="co"># training image data</span></span>
-<span id="cb109-4"><a href="" aria-hidden="true" tabindex="-1"></a>        train_labels, <span class="co"># training label data</span></span>
-<span id="cb109-5"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">epochs =</span> <span class="dv">10</span>,  <span class="co"># the number of times the model will be trained</span></span>
-<span id="cb109-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">batch_size =</span> <span class="dv">128</span> <span class="co"># the number of samples per gradient update</span></span>
-<span id="cb109-7"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="" aria-hidden="true" tabindex="-1"></a>history <span class="ot">&lt;-</span> network <span class="sc">|&gt;</span></span>
+<span id="cb105-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fit</span>( <span class="co"># training the model</span></span>
+<span id="cb105-3"><a href="" aria-hidden="true" tabindex="-1"></a>        train_images, <span class="co"># training image data</span></span>
+<span id="cb105-4"><a href="" aria-hidden="true" tabindex="-1"></a>        train_labels, <span class="co"># training label data</span></span>
+<span id="cb105-5"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">epochs =</span> <span class="dv">10</span>,  <span class="co"># the number of times the model will be trained</span></span>
+<span id="cb105-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">batch_size =</span> <span class="dv">128</span> <span class="co"># the number of samples per gradient update</span></span>
+<span id="cb105-7"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/10
-469/469 - 1s - loss: 0.2602 - accuracy: 0.9245 - 1s/epoch - 3ms/step
+469/469 - 1s - loss: 0.2545 - accuracy: 0.9254 - 1s/epoch - 3ms/step
 Epoch 2/10
-469/469 - 2s - loss: 0.1051 - accuracy: 0.9690 - 2s/epoch - 3ms/step
+469/469 - 1s - loss: 0.1036 - accuracy: 0.9688 - 1s/epoch - 2ms/step
 Epoch 3/10
-469/469 - 2s - loss: 0.0690 - accuracy: 0.9790 - 2s/epoch - 5ms/step
+469/469 - 1s - loss: 0.0679 - accuracy: 0.9795 - 1s/epoch - 2ms/step
 Epoch 4/10
-469/469 - 2s - loss: 0.0500 - accuracy: 0.9850 - 2s/epoch - 5ms/step
+469/469 - 1s - loss: 0.0494 - accuracy: 0.9850 - 1s/epoch - 2ms/step
 Epoch 5/10
-469/469 - 3s - loss: 0.0377 - accuracy: 0.9889 - 3s/epoch - 6ms/step
+469/469 - 1s - loss: 0.0376 - accuracy: 0.9886 - 1s/epoch - 2ms/step
 Epoch 6/10
-469/469 - 2s - loss: 0.0288 - accuracy: 0.9912 - 2s/epoch - 4ms/step
+469/469 - 1s - loss: 0.0289 - accuracy: 0.9914 - 1s/epoch - 2ms/step
 Epoch 7/10
-469/469 - 2s - loss: 0.0224 - accuracy: 0.9936 - 2s/epoch - 4ms/step
+469/469 - 1s - loss: 0.0219 - accuracy: 0.9937 - 1s/epoch - 2ms/step
 Epoch 8/10
-469/469 - 2s - loss: 0.0177 - accuracy: 0.9947 - 2s/epoch - 5ms/step
+469/469 - 1s - loss: 0.0166 - accuracy: 0.9952 - 1s/epoch - 2ms/step
 Epoch 9/10
-469/469 - 3s - loss: 0.0133 - accuracy: 0.9961 - 3s/epoch - 6ms/step
+469/469 - 1s - loss: 0.0131 - accuracy: 0.9963 - 1s/epoch - 3ms/step
 Epoch 10/10
-469/469 - 2s - loss: 0.0107 - accuracy: 0.9967 - 2s/epoch - 3ms/step</code></pre>
+469/469 - 2s - loss: 0.0104 - accuracy: 0.9972 - 2s/epoch - 3ms/step</code></pre>
 </div>
 </div>
 </section>
@@ -4298,7 +4282,7 @@ Epoch 10/10
 
 <h3 id="plot">Plot</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(history) <span class="co"># 訓練の履歴をプロット</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(history) <span class="co"># 訓練の履歴をプロット</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="gaisho_2024_03_files/figure-revealjs/plot_keras-1.png" width="960" class="r-stretch"></section>
@@ -4306,9 +4290,9 @@ Epoch 10/10
 
 <p>model evaluation <!-- # モデルを評価 --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="" aria-hidden="true" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> network <span class="sc">|&gt;</span></span>
-<span id="cb112-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">evaluate</span>(test_images, test_labels, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
-<span id="cb112-3"><a href="" aria-hidden="true" tabindex="-1"></a>metrics <span class="sc">|&gt;</span> <span class="fu">kable</span>()</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="" aria-hidden="true" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> network <span class="sc">|&gt;</span></span>
+<span id="cb108-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">evaluate</span>(test_images, test_labels, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
+<span id="cb108-3"><a href="" aria-hidden="true" tabindex="-1"></a>metrics <span class="sc">|&gt;</span> <span class="fu">kable</span>()</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>
@@ -4320,11 +4304,11 @@ Epoch 10/10
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">loss</td>
-<td style="text-align: right;">0.0765595</td>
+<td style="text-align: right;">0.0728296</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">accuracy</td>
-<td style="text-align: right;">0.9817000</td>
+<td style="text-align: right;">0.9814000</td>
 </tr>
 </tbody>
 </table>
@@ -4378,8 +4362,7 @@ l (\theta) = \log L(\theta)
 <!-- #### ここ完全に英語版wikipediaの文章のコピペ (あとで消す) -->
 <ul>
 <li>In statistics, the <strong>score</strong> (or informant) is the gradient of the <em>log-likelihood function</em> with respect to the parameter vector. <!-- 統計学において、スコア（またはインフォーマント）は、パラメータベクトルに関する対数尤度関数の勾配である。 --></li>
-<li>Evaluated at a particular point, the score indicates the steepness of the log-likelihood function and thereby the sensitivity to infinitesimal changes to the parameter values. <!-- パラメータベクトルの特定の点で評価されるスコアは、対数尤度関数の急勾配を示し、それによってパラメータ値の微小な変化に対する感度を示す。 --></li>
-<li>If the log-likelihood function is continuous over the parameter space, the score will vanish at a local maximum or minimum; this fact is used in maximum likelihood estimation to find the parameter values that maximize the likelihood function. <!-- 対数尤度関数がパラメータ空間上で連続である場合、スコアは局所的な最大値または最小値で消滅する。 --> <!-- この事実は、最尤推定において尤度関数を最大化するパラメータ値を見つけるために用いられている。 --></li>
+<li>Evaluated at a particular point, the score indicates the steepness of the log-likelihood function and thereby the sensitivity to infinitesimal changes to the parameter values. <!-- パラメータベクトルの特定の点で評価されるスコアは、対数尤度関数の急勾配を示し、それによってパラメータ値の微小な変化に対する感度を示す。 --> <!-- - If the log-likelihood function is continuous over the parameter space, the score will vanish at a local maximum or minimum; this fact is used in maximum likelihood estimation to find the parameter values that maximize the likelihood function. --> <!-- 対数尤度関数がパラメータ空間上で連続である場合、スコアは局所的な最大値または最小値で消滅する。 --> <!-- この事実は、最尤推定において尤度関数を最大化するパラメータ値を見つけるために用いられている。 --></li>
 <li>Since the score is a function of the observations that are subject to sampling error, it lends itself to a test statistic known as score test in which the parameter is held at a particular value. <!-- スコアは、サンプリング誤差の影響を受ける観測値の関数であるため、パラメータを特定の値に保持するスコア検定として知られる検定統計量に適している。 --> <!-- Further, the ratio of two likelihood functions evaluated at two distinct parameter values can be understood as a definite integral of the score function. --> <!-- さらに、2つの異なるパラメータ値で評価された2つの尤度関数の比は、スコア関数の定積分として理解することができる。 --></li>
 </ul>
 <!-- ### フィッシャー情報量 -->
