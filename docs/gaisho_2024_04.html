@@ -12,7 +12,7 @@
 
   <meta name="author" content="Soichi Matsuura">
   <meta name="dcterms.date" content="2024-10-16">
-  <title>外国書購読 Day2  Risk Assessment and Planning</title>
+  <title>外国書購読 Day4  Risk Assessment and Planning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -420,7 +420,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title"><p><b>外国書購読 Day2</b> <br> <span style="color: #282A36; ">Risk Assessment and Planning</span></p></h1>
+  <h1 class="title"><p><b>外国書購読 Day4</b> <br> <span style="color: #282A36; ">Risk Assessment and Planning</span></p></h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -436,44 +436,47 @@ Soichi Matsuura
 <section id="machine-learning-methods" class="title-slide slide level1 center">
 <h1>Machine Learning Methods</h1>
 <!-- ## 機械学習 -->
-<p>Over the past decade, very useful extensions to twentieth century statistical models have been provided by advances in machine learning, and in particular deep-learning. <!-- この10年間で、20世紀の統計モデルに非常に有用な拡張機能が機械学習の進歩、とりわけ深層学習によって提供されている。 --> Deep learning is a branch of artificial intelligence that is computationally intensive, but highly flexible for inference from data. <!-- 深層学習は、計算量が多いが、データからの推論に非常に柔軟な人工知能の分野です。 --> Inference is a decision $$ (estimation, prediction) based on data <span class="math inline">x \in X</span> that hopefully contains information about a particular set of constructs. <!-- 推論は、データ$x \in X$に基づいて、特定の構造に関する情報を含んでいることを期待して、決定$\delta$（推定、予測）を行う。 --> Inference may be about: <!-- 推論は以下のようなものについて行われる。 --></p>
+<ul>
+<li>Over the past decade, very useful extensions to twentieth century statistical models have been provided by advances in machine learning, and in particular deep-learning. <!-- この10年間で、20世紀の統計モデルに非常に有用な拡張機能が機械学習の進歩、とりわけ深層学習によって提供されている。 --> <!-- - Deep learning is a branch of artificial intelligence that is computationally intensive, but highly flexible for inference from data. --> <!-- 深層学習は、計算量が多いが、データからの推論に非常に柔軟な人工知能の分野です。 --></li>
+<li>Inference is a decision <span class="math inline">\delta</span> (estimation, prediction) based on data <span class="math inline">x \in X</span> that hopefully contains information about a particular set of constructs. <!-- 推論は、データ$x \in X$に基づいて、特定の構造に関する情報を含んでいることを期待して、決定$\delta$（推定、予測）を行う。 --></li>
+<li>Inference may be about: <!-- 推論は以下のようなものについて行われる。 -->
 <ol type="1">
 <li>Classification — e.g., identifying faces, threats. <!-- 1. 分類 : たとえば、顔、脅威の識別 --></li>
 <li>Estimation — e.g., a vector <span class="math inline">\theta = \{\theta_1, \dots , \theta_n\}</span>. <!-- 2. 推定 : たとえば、ベクトル$\theta = \{\theta_1, \dots , \theta_n\}$。 --></li>
 <li>Other decisions that may or may not be carried out in real time; e.g., driving a car. <!-- 3. リアルタイムで行われるかどうかはわからないその他の決定: たとえば、車の運転。 --></li>
-</ol>
+</ol></li>
+</ul>
 </section>
 <section id="goals-of-machine-learning" class="slide level2">
 <h2>Goals of Machine Learning</h2>
 <ul>
-<li>The implicit goal of machine learning is construction of decision strategies that minimize risk. <!-- 機械学習の暗黙の目標は、リスクを最小化する決定戦略の構築である。 --></li>
-<li>Risk is an informal concept inherited from gambling, and roughly implies the expected loss from using a given decision strategy δ. <!-- リスクは、ギャンブルから受け継がれたインフォーマルな概念であり、おおよそ与えられた決定戦略$\delta$を使用した場合の期待損失を意味する。 --></li>
+<li>The implicit goal of machine learning is <strong>construction of decision strategies that minimize risk</strong>. <!-- 機械学習の暗黙の目標は、リスクを最小化する決定戦略の構築である。 --></li>
+<li>Risk is an informal concept inherited from gambling, and roughly implies <em>the expected loss from using a given decision strategy <span class="math inline">\delta</span></em>. <!-- リスクは、ギャンブルから受け継がれたインフォーマルな概念であり、おおよそ与えられた決定戦略$\delta$を使用した場合の期待損失を意味する。 --></li>
 <li>Frequentist and Bayesian statisticians both base their decision strategies on real-world data, but sharply divided on the actual implementation and interpretation of decision risk. <!-- 頻度論的統計学者とベイズ統計学者は、ともに現実世界のデータに基づいて決定戦略を立てるが、決定リスクの実際の実装と解釈については、はっきりと分かれている。 --></li>
 </ul>
 </section>
-<section class="slide level2">
-
+<section id="risk-and-ai" class="slide level2">
+<h2>Risk and AI</h2>
 <ul>
 <li>In practice, risk presents deep learning (and AI in general) with its greatest challenges. <!-- 実際、リスクは深層学習（およびAI全般）にとって最大の課題である。 --></li>
 <li>For example, self-driving cars are trained on massive datasets extracted from many other cars; that knowledge of how to drive is encapsulated in weights in a network model that is firm-wired into a computer unit in a car. <!-- たとえば、自動運転車は、多くの他の車から抽出された大規模なデータセットで訓練される。 --> <!-- その運転方法の知識は、車のコンピュータユニットに固定されたネットワークモデルの重みにカプセル化されている。 --></li>
-<li>It matters whether that unit was trained to save pedestrians, or to save property, or to save the driver—each implies a different decision risk. <!-- そのユニットが歩行者を救うために訓練されたか、財産を救うために訓練されたか、運転手を救うために訓練されたかは重要な問題である。 --></li>
+<li>It matters whether that unit was trained to save pedestrians, or to save property, or to save the driver - each implies a different decision risk. <!-- そのユニットが歩行者を救うために訓練されたか、財産を救うために訓練されたか、運転手を救うために訓練されたかは重要な問題である。 --></li>
 </ul>
 </section>
 <section class="slide level2">
 
 <ul>
-<li>Traditionally, statistics have used a <strong>squared-error loss function</strong> <span class="math inline">l(\theta, \delta (X)) = \mathrm{E}_{\delta} [\delta (X) - \theta )^2]</span> where <span class="math inline">\delta(X) = \hat{\theta}</span> in the case of estimation. <!-- 従来、統計学では、推定の場合は$\delta(X) = \hat{\theta}$となる損失関数$l(\theta, \delta (X)) = \mathrm{E}_{\del/ta} [\delta (X) - \theta )^2]$を使用してきた。 --></li>
-<li>This is easy to compute using pencil and paper, particularly when optimization relied on <em>first-order conditions</em> from calculus. <!-- これは、最適化が微積分の一次条件に依存していたときに、鉛筆と紙を使って簡単に計算することができた。 --></li>
+<li>Traditionally, statistics have used a <strong>squared-error loss function</strong> <span class="math inline">l(\theta, \delta (X)) = \mathrm{E}_{\delta} [\delta (X) - \theta )^2]</span> where <span class="math inline">\delta(X) = \hat{\theta}</span> in the case of estimation. <!-- 従来、統計学では、推定の場合は$\delta(X) = \hat{\theta}$となる損失関数$l(\theta, \delta (X)) = \mathrm{E}_{\del/ta} [\delta (X) - \theta )^2]$を使用してきた。 --> <!-- - This is easy to compute using pencil and paper, particularly when optimization relied on *first-order conditions* from calculus. --> <!-- これは、最適化が微積分の一次条件に依存していたときに、鉛筆と紙を使って簡単に計算することができた。 --></li>
 <li>But most real-world decisions are not optimally made with squared-error loss functions. <!-- しかし、ほとんどの現実世界の決定は、二乗誤差損失関数を用いて最適に行われるものではない。 --></li>
 <li>Although squared-error loss is still widely used, machine learning practitioners will also use more complex, sometimes asymmetric loss functions that more closely fit the real-world problems. <!-- 二乗誤差損失は今でも広く使われているが、機械学習を用いる実務家は、より複雑で、時には非対称な損失関数を使うこともある。 --> <!-- In particular for classification problems such as image recognition, squared-error loss makes little sense, and practitioners will tend to use cross-entropy, drawn from information theory, where the Kraft–McMillan theorem establishes the rationale for its application.  --> <!-- 特に画像認識などの分類問題では、二乗誤差損失はあまり意味がなく、実務家は情報理論から引き出された交差エントロピーを使う傾向がある。クラフト・マクミランの定理は、その適用根拠を確立している。 --></li>
 <li>Business situations prefer asymmetric loss that penalizes costs and rewards revenues. <!-- ビジネスの現場では、コストをペナルティ、収益を報酬とする非対称損失が好まれている。 --></li>
 </ul>
 </section>
-<section class="slide level2">
-
+<section id="search-algorithms" class="slide level2">
+<h2>Search Algorithms</h2>
 <ul>
-<li><p>Whereas traditional statistics relies heavily on first-order conditions from calculus, <em>deep learning uses compute-intensive search algorithms</em> that explore the response surface of the risk function. <!-- 従来の統計学は、微積分の一階条件に大きく依存していたのに対し、深層学習は、リスク関数の応答曲面を探索する計算量の多い探索アルゴリズムを用いている。 --></p></li>
-<li><p>The following example presents the “Hello World” of machine learning: recognizing handwritten numbers on the National Institute of Standards dataset. <!-- 以下の例は、機械学習の「Hello World」を示している: 国立標準技術研究所(National Institute of Standards)のデータセットに書かれた数値を認識する。 --></p></li>
+<li>Whereas traditional statistics relies heavily on first-order conditions from calculus, <em>deep learning uses compute-intensive search algorithms</em> that explore the response surface of the risk function. <!-- 従来の統計学は、微積分の一階条件に大きく依存していたのに対し、深層学習は、リスク関数の応答曲面を探索する計算量の多い探索アルゴリズムを用いている。 --></li>
+<li>The following example presents the “Hello World” of machine learning: recognizing handwritten numbers on the National Institute of Standards dataset. <!-- 以下の例は、機械学習の「Hello World」を示している: 国立標準技術研究所(National Institute of Standards)のデータセットに書かれた数値を認識する。 --></li>
 </ul>
 </section>
 <section id="keras" class="slide level2">
@@ -586,25 +589,25 @@ Soichi Matsuura
 <span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/10
-469/469 - 1s - loss: 0.2546 - accuracy: 0.9269 - 1s/epoch - 3ms/step
+469/469 - 1s - loss: 0.2538 - accuracy: 0.9259 - 1s/epoch - 3ms/step
 Epoch 2/10
-469/469 - 1s - loss: 0.1028 - accuracy: 0.9688 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.1022 - accuracy: 0.9700 - 1s/epoch - 2ms/step
 Epoch 3/10
-469/469 - 1s - loss: 0.0675 - accuracy: 0.9801 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0678 - accuracy: 0.9793 - 1s/epoch - 2ms/step
 Epoch 4/10
-469/469 - 1s - loss: 0.0499 - accuracy: 0.9850 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0489 - accuracy: 0.9850 - 1s/epoch - 2ms/step
 Epoch 5/10
-469/469 - 1s - loss: 0.0374 - accuracy: 0.9884 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0375 - accuracy: 0.9886 - 1s/epoch - 2ms/step
 Epoch 6/10
-469/469 - 1s - loss: 0.0288 - accuracy: 0.9913 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0283 - accuracy: 0.9918 - 1s/epoch - 2ms/step
 Epoch 7/10
-469/469 - 1s - loss: 0.0225 - accuracy: 0.9937 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0210 - accuracy: 0.9940 - 1s/epoch - 2ms/step
 Epoch 8/10
-469/469 - 1s - loss: 0.0168 - accuracy: 0.9950 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0167 - accuracy: 0.9954 - 1s/epoch - 2ms/step
 Epoch 9/10
-469/469 - 1s - loss: 0.0133 - accuracy: 0.9965 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0122 - accuracy: 0.9966 - 1s/epoch - 2ms/step
 Epoch 10/10
-469/469 - 1s - loss: 0.0101 - accuracy: 0.9972 - 1s/epoch - 2ms/step</code></pre>
+469/469 - 1s - loss: 0.0098 - accuracy: 0.9973 - 1s/epoch - 2ms/step</code></pre>
 </div>
 </div>
 </section>
@@ -634,11 +637,11 @@ Epoch 10/10
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">loss</td>
-<td style="text-align: right;">0.073069</td>
+<td style="text-align: right;">0.0718203</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">accuracy</td>
-<td style="text-align: right;">0.979600</td>
+<td style="text-align: right;">0.9823000</td>
 </tr>
 </tbody>
 </table>
@@ -665,13 +668,9 @@ Statistical Perspectives on Audit Evidence and its Information Content
 </section>
 <section id="補足" class="slide level2">
 <h2>補足</h2>
-<p>パラメータが<span class="math inline">\theta</span>である母集団の従う分布の確率密度関数を<span class="math inline">f(x \mid \theta)</span>とする。 そのとき，尤度関数は，</p>
+<p>パラメータが<span class="math inline">\theta</span>である母集団の従う分布の確率密度関数を<span class="math inline">f(x \mid \theta)</span>とする。 そのとき，尤度関数と対数尤度関数は、</p>
 <p><span class="math display">
-L (\theta) = f(x \mid \theta)
-</span></p>
-<p>となり，対数尤度関数は，</p>
-<p><span class="math display">
-l (\theta) = \log L(\theta)
+L (\theta) = f(x \mid \theta), \quad l (\theta) = \log L(\theta)
 </span></p>
 <p>となり，スコア関数は次式で定義される。</p>
 <p><span class="math display">
@@ -684,8 +683,7 @@ l (\theta) = \log L(\theta)
 <ul>
 <li>The log-likelihood has an intuitive interpretation, as suggested by the term <strong>“support</strong>.” <!-- wikiからのコピペ --> <!-- 対数尤度には、「サポート」という用語が示すように、直感的な解釈がある。 --></li>
 <li>Given independent events, the overall log-likelihood is the sum of the log-likelihoods of the individual events, just as the overall log-probability is the sum of the log-probability of the individual events. <!-- wiki likelihood functionから コピペ --> <!-- 独立した事象が与えられたとき、全体の対数尤度は個々の事象の対数尤度の和であり、全体の対数確率は個々の事象の対数確率の和である。 --></li>
-<li>Viewing data as evidence, this is interpreted as “support from independent evidence adds,” and the log-likelihood is the “<em>weight of evidence</em>.” <!-- wiki likelihood functionから コピペ --> <!-- データを証拠として見ると、これは「独立した証拠からのサポートが加わる」と解釈され、対数尤度は「証拠の重み」となる。 --></li>
-<li>Interpreting <em>negative log-probability</em> as <em>information content</em>, log-likelihood of a model, given an event, is the negative of the surprisal of the event, given the model <!-- a model is supported by an event to the extent that the event is unsurprising, given the model. --> <!-- - wikiから完コピ --> <!-- 負の対数確率を情報量や驚きとして解釈すると、ある事象が与えられたときのモデルのサポート（対数尤度）は、そのモデル所与としたときの，当該事象の意外性（負の対数確率）の負の値となる。 --> <!-- つまり，そのモデルを所与として，当該事象が驚くべきものではない範囲で，モデルは事象によってサポートされる。 --> <!-- Just as the likelihood, given no event, being 1, the log-likelihood, given no event, is 0, which corresponds to the value of the empty sum: without any data, there is no support for any models. wikiから完コピ --> <!-- 事象がない場合の尤度が1であるように、事象がない場合の対数尤度は0であり、これは空の和の値に対応する: データがない場合、どのモデルにもサポートはない。 --> <!-- The log-likelihood is particularly convenient for maximum likelihood estimation. --> <!-- 対数尤度は、最尤推定に特に便利である。 --> <!-- Because logarithms are strictly increasing functions, maximizing the likelihood is equivalent to maximizing the log-likelihood. --> <!-- 対数は単調増加関数であるため、尤度を最大化することは対数尤度を最大化することと同じである。 --> <!-- Since concavity plays a key role in the maximization, and since most common probability distributions—in particular the exponential family—are only logarithmically concave, it is usually more convenient to work with a logarithmic transformation of the likelihood function, known as the log-likelihood function. --> <!-- 凹性は最大化において重要な役割を果たすが、一般的な確率分布、特に指数族は対数的に凹であるため、対数尤度関数として知られる尤度関数の対数変換で作業する方が便利である。 --></li>
+<li>Viewing data as evidence, this is interpreted as “support from independent evidence adds,” and the log-likelihood is the “<em>weight of evidence</em>.” <!-- wiki likelihood functionから コピペ --> <!-- データを証拠として見ると、これは「独立した証拠からのサポートが加わる」と解釈され、対数尤度は「証拠の重み」となる。 --> <!-- - Interpreting *negative log-probability* as *information content*, log-likelihood of a model, given an event, is the negative of the surprisal of the event, given the model --> <!-- a model is supported by an event to the extent that the event is unsurprising, given the model. --> <!-- - wikiから完コピ --> <!-- 負の対数確率を情報量や驚きとして解釈すると、ある事象が与えられたときのモデルのサポート（対数尤度）は、そのモデル所与としたときの，当該事象の意外性（負の対数確率）の負の値となる。 --> <!-- つまり，そのモデルを所与として，当該事象が驚くべきものではない範囲で，モデルは事象によってサポートされる。 --> <!-- Just as the likelihood, given no event, being 1, the log-likelihood, given no event, is 0, which corresponds to the value of the empty sum: without any data, there is no support for any models. wikiから完コピ --> <!-- 事象がない場合の尤度が1であるように、事象がない場合の対数尤度は0であり、これは空の和の値に対応する: データがない場合、どのモデルにもサポートはない。 --> <!-- The log-likelihood is particularly convenient for maximum likelihood estimation. --> <!-- 対数尤度は、最尤推定に特に便利である。 --> <!-- Because logarithms are strictly increasing functions, maximizing the likelihood is equivalent to maximizing the log-likelihood. --> <!-- 対数は単調増加関数であるため、尤度を最大化することは対数尤度を最大化することと同じである。 --> <!-- Since concavity plays a key role in the maximization, and since most common probability distributions—in particular the exponential family—are only logarithmically concave, it is usually more convenient to work with a logarithmic transformation of the likelihood function, known as the log-likelihood function. --> <!-- 凹性は最大化において重要な役割を果たすが、一般的な確率分布、特に指数族は対数的に凹であるため、対数尤度関数として知られる尤度関数の対数変換で作業する方が便利である。 --></li>
 </ul>
 </section>
 <section id="the-score" class="slide level2">
@@ -701,9 +699,9 @@ l (\theta) = \log L(\theta)
 <section id="fisher-information" class="slide level2">
 <h2>Fisher Information</h2>
 <ul>
-<li>In mathematical statistics, the Fisher information (sometimes simply called information) is a way of measuring the amount of information that an observable random variable <span class="math inline">X</span> carries about an unknown parameter <span class="math inline">\theta</span> of a distribution that models <span class="math inline">X</span>.</li>
-<li>Formally, it is the variance of fthe score, or the expected value of the observed information.</li>
-<li>The Fisher information is a way of measuring the amount of information that an observable random variable <span class="math inline">X</span> carries about an unknown parameter $$ upon which the probability of <span class="math inline">X</span> depends.</li>
+<li>In mathematical statistics, <strong>the Fisher information</strong> is a way of <em>measuring the amount of information</em> that an observable random variable <span class="math inline">X</span> carries about an unknown parameter <span class="math inline">\theta</span> of a distribution that models <span class="math inline">X</span>.</li>
+<li>Formally, it is the variance of the score, or the expected value of the observed information.</li>
+<li>The Fisher information is a way of <em>measuring the amount of information</em> that an observable random variable <span class="math inline">X</span> carries about an unknown parameter <span class="math inline">\theta</span> upon which the probability of <span class="math inline">X</span> depends.</li>
 </ul>
 </section></section>
 <section>
@@ -716,52 +714,54 @@ l (\theta) = \log L(\theta)
 <!-- ## 第1節 監査 -->
 <ul>
 <li>Auditing of financial accounts is the process of verifying that economic events in the real world are accurately summarized in the financial statements of a legal entity. <!-- 財務諸表監査は、現実世界における経済事象が事業体の財務諸表に正確に記載されているかどうかを検証するプロセスである。 --></li>
-<li>An audit opinion, the product of such auditing provides: <!-- このような監査の成果である監査意見は、下記の点について独立した第三者による合理的保証を提供するものである。 --></li>
-</ul>
+<li>An audit opinion, the product of such auditing provides: <!-- このような監査の成果である監査意見は、下記の点について独立した第三者による合理的保証を提供するものである。 -->
 <ol type="1">
 <li>Reasonable assurance. <!-- 1. 合理的保証。 --></li>
 <li>By an independent third party. <!-- 2. 独立した第三者による。 --></li>
 <li>That the financial statements are presented fairly in all material respects. <!-- 3. 財務諸表がすべての重要な点において適正に表示されていること。 --></li>
-<li>In accordance to some financial reporting framework, e.g., generally accepted accounting principles. <!-- 4. ある財務報告の枠組み（たとえばGAAP）に準拠していること。 --></li>
+<li>In accordance to some financial reporting framework, e.g., GAAP. <!-- 4. ある財務報告の枠組み（たとえばGAAP）に準拠していること。 --></li>
 <li>Applied consistently so that year-to-year trends and comparisons are possible. <!-- 5. 継続性をもって適用されているため、年度間の傾向と比較が可能であること。 --></li>
-</ol>
+</ol></li>
+</ul>
 </section>
 <section class="slide level2">
 
 <ul>
 <li>In the USA, the auditing framework is dictated by generally accepted <em>accounting</em> principles (GAAP) and generally accepted <em>auditing</em> standards (GAAS). <!-- 米国では、監査の枠組みは（判断規範たる）一般的に認められた会計原則（Generally Accepted Accounting Principles：以下GAAP）と（行為規範たる）一般に認められた監査基準（Generally Accepted Accounting Standards：以下、GAAS）によって規律されている。 --></li>
-<li>Internationally the International Standards on Auditing (ISA) issued by the International Auditing and Assurance Standards Board (IAASB) is considered as the benchmark for audit process. <!-- 国際的には、国際監査・保証基準審議会（International Auditing and Assurance Standards Board：以下、IAASB）が発行する国際監査基準（International Standards on Auditing：以下、ISA）が監査の行為規範とされている。 --></li>
+<li>Internationally the <strong>International Standards on Auditing</strong> (ISA) issued by the <em>International Auditing and Assurance Standards Board</em> (IAASB) is considered as the benchmark for audit process. <!-- 国際的には、国際監査・保証基準審議会（International Auditing and Assurance Standards Board：以下、IAASB）が発行する国際監査基準（International Standards on Auditing：以下、ISA）が監査の行為規範とされている。 --></li>
 <li>Under US generally accepted accounting principles (GAAP) auditors must release one of three types of opinions of the overall financial statements: <!-- 米国のGAASの下では、監査人は財務諸表全体について3種類の意見のいずれかを公表しなければならない。 --></li>
 </ul>
 </section>
 <section class="slide level2">
 
 <ol type="1">
-<li>An unqualified auditor’s opinion is the opinion that the financial statements are presented fairly. <!-- 1. 無限定適正意見（unqualified opinion）は、財務諸表が適正に表示されているという意見である。 --></li>
-<li>A qualified opinion is that the financial statements are presented fairly in all material respects in accordance with GAAP: <!-- 1. 限定付適正意見（qualified opinion）は、財務諸表がすべての重要な点においてGAAPに準拠して適正に表示されていると認められるものの、下記のような意見の限定と範囲の限定がある。 -->
+<li>An <strong>unqualified</strong> auditor’s opinion is the opinion that the financial statements are presented fairly. <!-- 1. 無限定適正意見（unqualified opinion）は、財務諸表が適正に表示されているという意見である。 --></li>
+<li>A <strong>qualified opinion</strong> is that the financial statements are presented fairly in all material respects in accordance with GAAP: <!-- 1. 限定付適正意見（qualified opinion）は、財務諸表がすべての重要な点においてGAAPに準拠して適正に表示されていると認められるものの、下記のような意見の限定と範囲の限定がある。 -->
 <ol type="1">
 <li>Except for a material misstatement that does not pervasively affect the users ability to rely on the financial statements. <!-- 1. 財務諸表を信頼する利用者の判断に広範な影響を与えない重要な虚偽表示が存在する。 --></li>
 <li>Or with a scope limitation that is of limited significance. <!-- 2. 重要であるが広範ではない監査範囲の限定が存在する。 --></li>
 </ol></li>
-<li>An adverse audit opinion is issued when the financial statements do not present fairly due to departure from US GAAP with an explanation of the nature and size of the misstatement. <!-- 1. GAAPに準拠しないことにより財務諸表が適正に表示されていない場合には、監査意見として不適正意見（adverse opinion）が表明される。不適正意見には、虚偽表示の種類と影響についての説明が記載される。 --></li>
+<li>An <strong>adverse audit opinion</strong> is issued when the financial statements do not present fairly due to departure from US GAAP with an explanation of the nature and size of the misstatement. <!-- 1. GAAPに準拠しないことにより財務諸表が適正に表示されていない場合には、監査意見として不適正意見（adverse opinion）が表明される。不適正意見には、虚偽表示の種類と影響についての説明が記載される。 --></li>
 </ol>
 </section>
 <section class="slide level2">
 
 <ul>
-<li>Additionally an auditor can issue a <strong>disclaimer</strong> which is considered <em>a type of qualified opinion</em> because there is insufficient and appropriate evidence to form an opinion or because of lack of independence. <!-- さらに監査人は、監査意見を形成するのに十分かつ適切な証拠がない、あるいは独立性を欠いているという理由で、（限定意見の一種とみなされる）意見不表明を示すことができる。 --></li>
-<li>In a disclaimer the auditor explains the reasons for withholding an opinion and explicitly indicates that no opinion is expressed. <!-- 意見不表明では、監査人は意見の表明を差し控える理由を説明し、意見を表明しないことを示す。 --></li>
-<li>The wording of these reports typically appears as follows: <!-- これらの監査報告書の文言は、一般的に以下のようになる。 --></li>
+<li>Additionally an auditor can issue a <strong>disclaimer</strong> which is considered <em>a type of qualified opinion</em> because there is insufficient and appropriate evidence to form an opinion or because of lack of independence. <!-- さらに監査人は、監査意見を形成するのに十分かつ適切な証拠がない、あるいは独立性を欠いているという理由で、（限定意見の一種とみなされる）意見不表明を示すことができる。 --> <!-- - In a disclaimer the auditor explains the reasons for withholding an opinion and explicitly indicates that no opinion is expressed. --> <!-- 意見不表明では、監査人は意見の表明を差し控える理由を説明し、意見を表明しないことを示す。 --> <!-- - The wording of these reports typically appears as follows: --> <!-- これらの監査報告書の文言は、一般的に以下のようになる。 --></li>
 </ul>
 <ol type="1">
 <li><strong>Unqualified</strong> (<em>Clean</em>) Opinion : We believe these financial statements are (1) fairly presented in (2) accordance with GAAP (3) consistently applied. <!-- 1. 無限定適正意見： 監査人は、これらの財務諸表が（1）継続的に適用された（2）GAAPに準拠して（2）適正に表示されていると判断している。 --></li>
 <li><strong>Qualified Opinion</strong> : We believe these financial statements are (1) fairly presented in (2) accordance with GAAP (3) consistently applied; except for (4) A List of Exceptions. <!-- 1. 条件付適正意見：監査人は、これらの財務諸表が（1）除外事項を除いて、（2）継続的に適用された（3）GAAPに準拠して（4）適正に表示されていると判断している。 --></li>
 <li><strong>Adverse Opinion</strong>: We DO NOT believe these financial statements are (1) fairly presented in (2) accordance with GAAP (3) consistently applied; THE AUDITORS DISAGREE WITH A List of Exceptions. <!-- 1. 反対意見：監査人は、これらの財務諸表が（1）継続的に適用された（2）GAAPに準拠して（2）適正に表示されていると判断していない。 --></li>
 </ol>
-</section>
-<section id="risk-assessment-in-audit-planning" class="slide level2">
-<h2>Risk Assessment in Audit Planning</h2>
+</section></section>
+<section>
+<section id="risk-assessment-in-audit-planning" class="title-slide slide level1 center">
+<h1>Risk Assessment in Audit Planning</h1>
 <!-- ## 第2節 監査計画におけるリスク評価 -->
+</section>
+<section id="risk-assessment" class="slide level2">
+<h2>Risk Assessment</h2>
 <ul>
 <li>Risk assessment in auditing is <strong>the determination of quantitative value of risk</strong> of a particular subset of accounting operations related to the rendering of the audit opinion - i.e., on whether the accounts have material error when GAAP has been consistently applied. <!-- 監査におけるリスク評価とは、監査意見の表明に関連する会計業務の特定の箇所で発生するリスクの定量的価値を決定することである。ここでリスクとは、GAAPを継続適用している企業において、財務諸表に重要な虚偽表示があるかどうかについてである。 --></li>
 <li>Quantitative risk assessment requires calculations of two components of risk — <em>the magnitude of the potential loss</em>, and <em>the probability that the loss will occur</em>. <!-- 定量的リスク評価には、潜在的な虚偽表示の影響額（損失）と、その虚偽表示が発生する確率という2つのリスク要素の計算が求められる。 --></li>
@@ -800,21 +800,17 @@ l (\theta) = \log L(\theta)
 </section>
 <section class="slide level2">
 
-<!-- A Risk Assessment Matrix (RAM) is a calculation spreadsheet that is used in risk assessment to define, estimate, argue, and support particular risks involved in decision-making. In auditing, the objective of the RAM is to construct a set of audit tasks (the audit program) that cost-effectively assures that the eventual audit decision will be correct with a particular level of confidence. -->
-<p>RAMとは、意思決定に関する特定のリスクを定義し、見積り、議論し、 サポートするために、リスク評価において利用されるスプレッドシートである。監査では、RAMの目的は、最終的な監査人の意思決定がコスト効率的に特定の信頼度で上回っていることを保証する監査計画を構築することである。</p>
-<!-- Different statistical philosophies dictate the particular mathematical approach which is applied in the RAM. We will briefly review the alternatives here, with the goal of describing a simple, somewhat objective approach appropriate for the initial stages of auditing planning. -->
-<!-- Mathematicians recognize three broad approaches to risk calculations for decision-making: (1) the Neyman–Pearson hypothesis testing framework; (2) the Minimax game theoretic framework; and (3) Bayes Risk. This chapter proposes a simplified Bayes Risk as most appropriate for early planning of audits. -->
-<p>様々な統計学の理論によって、RAMに適用される特定の数学的なアプローチは定義される。ここでは、監査計画の初期段階に適している単純である程度客観的なアプロ ーチを示すことを目的として、そのアプローチの候補を簡単に紹介する。 数学において、意思決定のためのリスク計算については大まかに、(1) Neyman-Pearsonの仮説検定フレームワーク、(2) ミニマックス法（Minimax）によるゲーム理論的フレームワーク、(3) ベイズリスクの3つのアプローチがある。本章では、監査の初期計画に最も適した簡便化したベイズリスクを提案する。</p>
-<!-- The Neyman–Pearson lemma allows performing a hypothesis test between two simple hypotheses using a likelihood-ratio test, and provides a method of statistical inference from evidence. In statistics, a result is called statistically significant if it has been predicted as unlikely to have occurred by chance alone, according to a pre-determined threshold probability, the significance level. The phrase “test of significance” was coined by statistician Ronald Fisher, and plays an important part in our substantive tests of account balances and material error. Statistical hypothesis testing is sometimes called confirmatory data analysis, in contrast to exploratory data analysis, which may not have pre-specified hypotheses. Statistical hypothesis tests define a procedure that controls (fixes) the probability of incorrectly deciding that a default position (null hypothesis) is incorrect based on how likely it would be for a set of observations to occur if the null hypothesis were true. Note that this probability of making an incorrect decision is not the probability that the null hypothesis is true, nor whether any specific alternative hypothesis is true. This contrasts with other possible techniques of decision theory in which the null and alternative hypothesis are treated on a more equal basis. -->
-<p>Neyman-Pearsonの補題は、尤度比検定を用いて2つの単純な仮説間の仮説検定を行うことを可能にし、証拠から統計的推論を行う方法を提供する。統計学では、ある結果が、あらかじめ決められた閾値（有意水準）に従って、偶然だけでは起こりそうもないと考えられる場合、統計的に有意と呼ばれる。「有意性の検定（test of significance）」という言葉は、統計学者Ronald Fisherにより創り出された用語で、監査人の世界でも会計残高や重要な虚偽表示に対する実証手続において重要な役割を果たしている。統計的仮説検定は、事前に規定された仮説を持たない探索的データ分析とは対比して、確認的データ分析（confirmatory data analysis）と呼ばれることもある。統計的仮説検定は、帰無仮説が真であった場合に、一連の観察結果がどの程度起こりうるかに基づいて、既定の立場（帰無仮説）が誤っていると決定する確率をコントロール（修正）する手順を規定している。この間違った意思決定をする確率は、帰無仮説が真である確率でも、特定の対立仮説が真である確率でもないことに注意されたい。これは、帰無仮説と対立仮説がより平等に扱われる決定理論の他の可能な手法とは対照的である。</p>
-<!-- Minimax is a decision rule published in 1928 by John von Neumann and is used in decision theory, game theory, statistics, and philosophy for minimizing the possible loss for a worst case (maximum loss) scenario. Originally formulated for two- players, zero-sum game theory, covering both the cases where players take alternate moves and those where they make simultaneous moves, it has also been extended to more complex games and to general decision-making in the presence of uncertainty. -->
-<p>ミニマックス法は、1928年にJohn von Neumannによって発表された意思決定ルールであり、意思決定理論、ゲーム理論、統計学、および哲学において、最悪の場合つまり最大損失（maximum loss）のシナリオで起こりうる損失を最小化するために用いられる。もともとは、2人のプレイヤーが交互に行動する場合と同時に行動する場合の両方を対象としたゼロサムゲーム理論のために定式化されたが、より複雑なゲームや不確実性が存在する場合の一般的な意思決定にも拡張されている。</p>
-<!-- Bayes risk is the expected value of a loss function. It is typically optimized when a Bayes estimator decision rule is designed to minimize the posterior expected loss. The most common risk function used for Bayesian estimation is the mean square error (MSE), or squared-error risk Ex[(θˆ(x) − θ)2] for parameter θ. -->
-<p>ベイズリスクは損失関数の期待値である。ベイズ推定量の決定規則が事後的な期待損失を最小化するように設計されるとき、ベイズリスクは通常最適化される。 ベイズ推定に使用される最も一般的なリスク関数は、平均二乗誤差、またはパラメータ<span class="math inline">\theta</span>に対する二乗誤差リスク<span class="math inline">\mathrm{E}_x[\hat \theta (x) - \theta^2]</span>である。</p>
-<!-- The probability of something happening multiplied by the resulting cost or benefit if it does is commonly known as the “expectation value” and is used to compare levels of risk and commensurate audit task scope and sample size in the subsequent audit program design. -->
-<p>何かが起こる確率にそれが起こったときに生じるコストまたは利益を乗じたものは、一般に「期待値」として知られており、その後の監査計画の設計において、リスクのレベルとそれに見合った監査業務範囲およびサンプルサイズを比較するために使用される。</p>
-<!-- For audits performed by an outside audit firm, risk assessment is a very crucial stage before accepting an audit engagement. It is an integral part of determining the audit tasks that will be performed in the audit program. According to ISA315 “the auditor should perform risk assessment procedures to obtain an understanding of the entity and its environment, including its internal control.” The auditor obtains initial evidence regarding the classes of transactions at the client and the operating effectiveness of the client’s internal controls. In auditing standards, audit risk is stated to include inherent risk (IR) control risk (CR) and detection risk (DR) (Srivastava and Shafer 2008; Jones 2017; Bedard, Graham, and Jackson 2005; Knechel 2007). -->
-<p>外部の監査事務所が行う監査において、リスク評価は監査契約を引き受ける前でも非常に重要な局面である。 またリスク評価は、監査計画において実施する監査業務を決定する上で不可欠なものである。 ISA315は「監査人は、内部統制を含む企業およびその環境を理解するために、リスク評価手続を実施しなければならない。」と規定している。 監査人は、被監査会社の取引類型および被監査会社の内部統制の有効性に関する最初の証拠を入手し、リスク評価手続を実施する。 監査基準では、監査リスクには、固有リスク（inherent risk：IR）、統制リスク（control risk：CR）、および発見リスク（detection risk：DR）が含まれるとされている（Srivastava and Shafer 2008; Jones 2017; Bedard, Graham, and Jackson 2005; Knechel 2007）。</p>
+<p>A Risk Assessment Matrix (RAM) is a calculation spreadsheet that is used in risk assessment to define, estimate, argue, and support particular risks involved in decision-making. In auditing, the objective of the RAM is to construct a set of audit tasks (the audit program) that cost-effectively assures that the eventual audit decision will be correct with a particular level of confidence. <!-- RAMとは、意思決定に関する特定のリスクを定義し、見積り、議論し、 サポートするために、リスク評価において利用されるスプレッドシートである。監査では、RAMの目的は、最終的な監査人の意思決定がコスト効率的に特定の信頼度で上回っていることを保証する監査計画を構築することである。 --></p>
+<p>Different statistical philosophies dictate the particular mathematical approach which is applied in the RAM. We will briefly review the alternatives here, with the goal of describing a simple, somewhat objective approach appropriate for the initial stages of auditing planning. Mathematicians recognize three broad approaches to risk calculations for decision-making: (1) the Neyman–Pearson hypothesis testing framework; (2) the Minimax game theoretic framework; and (3) Bayes Risk. This chapter proposes a simplified Bayes Risk as most appropriate for early planning of audits. <!-- 様々な統計学の理論によって、RAMに適用される特定の数学的なアプローチは定義される。ここでは、監査計画の初期段階に適している単純である程度客観的なアプロ ーチを示すことを目的として、そのアプローチの候補を簡単に紹介する。 --> <!-- 数学において、意思決定のためのリスク計算については大まかに、(1) Neyman-Pearsonの仮説検定フレームワーク、(2) ミニマックス法（Minimax）によるゲーム理論的フレームワーク、(3) ベイズリスクの3つのアプローチがある。本章では、監査の初期計画に最も適した簡便化したベイズリスクを提案する。 --></p>
+<p>The Neyman–Pearson lemma allows performing a hypothesis test between two simple hypotheses using a likelihood-ratio test, and provides a method of statistical inference from evidence. In statistics, a result is called statistically significant if it has been predicted as unlikely to have occurred by chance alone, according to a pre-determined threshold probability, the significance level. The phrase “test of significance” was coined by statistician Ronald Fisher, and plays an important part in our substantive tests of account balances and material error. Statistical hypothesis testing is sometimes called confirmatory data analysis, in contrast to exploratory data analysis, which may not have pre-specified hypotheses. Statistical hypothesis tests define a procedure that controls (fixes) the probability of incorrectly deciding that a default position (null hypothesis) is incorrect based on how likely it would be for a set of observations to occur if the null hypothesis were true. Note that this probability of making an incorrect decision is not the probability that the null hypothesis is true, nor whether any specific alternative hypothesis is true. This contrasts with other possible techniques of decision theory in which the null and alternative hypothesis are treated on a more equal basis. <!-- Neyman-Pearsonの補題は、尤度比検定を用いて2つの単純な仮説間の仮説検定を行うことを可能にし、証拠から統計的推論を行う方法を提供する。統計学では、ある結果が、あらかじめ決められた閾値（有意水準）に従って、偶然だけでは起こりそうもないと考えられる場合、統計的に有意と呼ばれる。「有意性の検定（test of significance）」という言葉は、統計学者Ronald Fisherにより創り出された用語で、監査人の世界でも会計残高や重要な虚偽表示に対する実証手続において重要な役割を果たしている。統計的仮説検定は、事前に規定された仮説を持たない探索的データ分析とは対比して、確認的データ分析（confirmatory data analysis）と呼ばれることもある。統計的仮説検定は、帰無仮説が真であった場合に、一連の観察結果がどの程度起こりうるかに基づいて、既定の立場（帰無仮説）が誤っていると決定する確率をコントロール（修正）する手順を規定している。この間違った意思決定をする確率は、帰無仮説が真である確率でも、特定の対立仮説が真である確率でもないことに注意されたい。これは、帰無仮説と対立仮説がより平等に扱われる決定理論の他の可能な手法とは対照的である。 --></p>
+<p>Minimax is a decision rule published in 1928 by John von Neumann and is used in decision theory, game theory, statistics, and philosophy for minimizing the possible loss for a worst case (maximum loss) scenario. Originally formulated for two- players, zero-sum game theory, covering both the cases where players take alternate moves and those where they make simultaneous moves, it has also been extended to more complex games and to general decision-making in the presence of uncertainty. <!-- ミニマックス法は、1928年にJohn von Neumannによって発表された意思決定ルールであり、意思決定理論、ゲーム理論、統計学、および哲学において、最悪の場合つまり最大損失（maximum loss）のシナリオで起こりうる損失を最小化するために用いられる。もともとは、2人のプレイヤーが交互に行動する場合と同時に行動する場合の両方を対象としたゼロサムゲーム理論のために定式化されたが、より複雑なゲームや不確実性が存在する場合の一般的な意思決定にも拡張されている。 --></p>
+<p>Bayes risk is the expected value of a loss function. It is typically optimized when a Bayes estimator decision rule is designed to minimize the posterior expected loss. The most common risk function used for Bayesian estimation is the mean square error (MSE), or squared-error risk Ex[(θˆ(x) − θ)2] for parameter θ. <!-- ベイズリスクは損失関数の期待値である。ベイズ推定量の決定規則が事後的な期待損失を最小化するように設計されるとき、ベイズリスクは通常最適化される。 --> <!-- ベイズ推定に使用される最も一般的なリスク関数は、平均二乗誤差、またはパラメータ$\theta$に対する二乗誤差リスク$\mathrm{E}_x[\hat \theta (x) - \theta^2]$である。 --></p>
+<p>The probability of something happening multiplied by the resulting cost or benefit if it does is commonly known as the “expectation value” and is used to compare levels of risk and commensurate audit task scope and sample size in the subsequent audit program design. <!-- 何かが起こる確率にそれが起こったときに生じるコストまたは利益を乗じたものは、一般に「期待値」として知られており、その後の監査計画の設計において、リスクのレベルとそれに見合った監査業務範囲およびサンプルサイズを比較するために使用される。 --></p>
+<p>For audits performed by an outside audit firm, risk assessment is a very crucial stage before accepting an audit engagement. It is an integral part of determining the audit tasks that will be performed in the audit program. According to ISA315 “the auditor should perform risk assessment procedures to obtain an understanding of the entity and its environment, including its internal control.” The auditor obtains initial evidence regarding the classes of transactions at the client and the operating effectiveness of the client’s internal controls. In auditing standards, audit risk is stated to include inherent risk (IR) control risk (CR) and detection risk (DR) (Srivastava and Shafer 2008; Jones 2017; Bedard, Graham, and Jackson 2005; Knechel 2007). <!-- 外部の監査事務所が行う監査において、リスク評価は監査契約を引き受ける前でも非常に重要な局面である。
+またリスク評価は、監査計画において実施する監査業務を決定する上で不可欠なものである。
+ISA315は「監査人は、内部統制を含む企業およびその環境を理解するために、リスク評価手続を実施しなければならない。」と規定している。
+監査人は、被監査会社の取引類型および被監査会社の内部統制の有効性に関する最初の証拠を入手し、リスク評価手続を実施する。
+監査基準では、監査リスクには、固有リスク（inherent risk：IR）、統制リスク（control risk：CR）、および発見リスク（detection risk：DR）が含まれるとされている（Srivastava and Shafer 2008; Jones 2017; Bedard, Graham, and Jackson 2005; Knechel 2007）。 --></p>
 </section>
 <section id="audit-risk-model" class="slide level2">
 <h2>Audit Risk Model</h2>
@@ -840,31 +836,20 @@ AR = IR \times CR \times DR
 </section>
 <section class="slide level2">
 
-<!-- This formula is an extreme simplification of the occurrence of loss in the real world, and is only suitable for the early, exploratory stages of planning an audit. As evidence is collected at mid-year and year-end, audit tasks will need to be updated, and audit scope changed to meet the interim findings of the audit. There are several problems with the simplified formula: -->
-<p>ここで公式は、現実の世界における損失の発生を極端に単純化したものであり、監査計画の初期の探索的な段階にのみ適している。 年度半ばや年度末に監査証拠が収集されるにつれ、監査作業が更新され、監査実施時の発見に応じて監査範囲を変更する必要がある。 Cox (2008)は、単純化したリスクアプローチの式には下記のような問題があると指摘している。</p>
-<!-- 1. **Poor Resolution**. Typical risk matrices can correctly and unambiguously compare only a small fraction (typically less than 10%) of randomly selected pairs of hazards. They can assign identical ratings to quantitatively very different risks (“range compression”).
-
-1. **Errors**. Risk matrices can mistakenly assign higher qualitative ratings to quantitatively smaller risks. For risks with negatively correlated frequencies and severities, they can be “worse than useless,” leading to worse-than-random decisions.
-
-2. **Suboptimal Resource Allocation**. Effective allocation of resources to risk-reducing countermeasures cannot be based on the categories provided by risk matrices.
-
-3. **Ambiguous Inputs and Outputs**. Categorizations
-of severity cannot be made objectively for uncertain consequences.
-Inputs to risk matrices (e.g., frequency and severity categorizations) and resulting outputs (i.e., risk ratings) require subjective interpretation, and different users may obtain opposite ratings of the same quantitative risks. -->
+<p>This formula is an extreme simplification of the occurrence of loss in the real world, and is only suitable for the early, exploratory stages of planning an audit. <!-- ここで公式は、現実の世界における損失の発生を極端に単純化したものであり、監査計画の初期の探索的な段階にのみ適している。 --> As evidence is collected at mid-year and year-end, audit tasks will need to be updated, and audit scope changed to meet the interim findings of the audit. <!-- 年度半ばや年度末に監査証拠が収集されるにつれ、監査作業が更新され、監査実施時の発見に応じて監査範囲を変更する必要がある。 --> There are several problems with the simplified formula: <!-- Cox (2008)は、単純化したリスクアプローチの式には下記のような問題があると指摘している。 --></p>
 <ol type="1">
-<li><strong>解像度が低い問題</strong>（Poor Resolution） : 一般的なリスクマトリクスでは、無作為に選択したリスク項目の組み合わせのほとんどを正しく確実に比較することができない（通常正しく比較できるのは10％以下）。 リスクマトリクスには、定量的に大きく異なるリスクに対して、同一の評価を割り当ててしまう問題（範囲圧縮（range compression）と呼ばれる問題）がある。</li>
-<li><strong>誤りが生じる問題</strong>（Errors）: リスクマトリクスでは定量的に小さいリスクに対して、より高い定量的評価を誤って割り当ててしまう可能性がある。 リスクの発生可能性と潜在的な影響が負の相関を持つリスクについては、リスクマトリクスはランダムより悪い決定を導く、つまり「役に立たないどころか有害である」となる可能性がある。</li>
-<li><strong>資源の最適配分ができない可能性</strong>（Suboptimal Resource Allocation）: リスクマトリクスによるリスク分類では、リスク低減対策への効果的な資源配分ができない可能性がある。</li>
-<li><strong>入力と出力が曖昧である問題</strong>（Ambiguous Inputs and Outputs） : 不確実な出力結果が不確実な場合、潜在的な影響の分類を客観的に行うことができない可能性がある。 リスクマトリクスへの入力（例：リスクの発生可能性と潜在的な影響の分類）とその出力結果（例：リスク評価）には主観的な解釈が必要であり、同じ定量的リスクでも利用者によって評価が正反対になる可能性がある。</li>
+<li><strong>Poor Resolution</strong>. Typical risk matrices can correctly and unambiguously compare only a small fraction (typically less than 10%) of randomly selected pairs of hazards. They can assign identical ratings to quantitatively very different risks (“range compression”). <!-- 1. **解像度が低い問題**（Poor Resolution） : 一般的なリスクマトリクスでは、無作為に選択したリスク項目の組み合わせのほとんどを正しく確実に比較することができない（通常正しく比較できるのは10％以下）。 --> <!-- リスクマトリクスには、定量的に大きく異なるリスクに対して、同一の評価を割り当ててしまう問題（範囲圧縮（range compression）と呼ばれる問題）がある。 --></li>
+<li><strong>Errors</strong>. Risk matrices can mistakenly assign higher qualitative ratings to quantitatively smaller risks. For risks with negatively correlated frequencies and severities, they can be “worse than useless,” leading to worse-than-random decisions. <!-- 1. **誤りが生じる問題**（Errors）: リスクマトリクスでは定量的に小さいリスクに対して、より高い定量的評価を誤って割り当ててしまう可能性がある。 --> <!-- リスクの発生可能性と潜在的な影響が負の相関を持つリスクについては、リスクマトリクスはランダムより悪い決定を導く、つまり「役に立たないどころか有害である」となる可能性がある。 --></li>
+<li><strong>Suboptimal Resource Allocation</strong>. Effective allocation of resources to risk-reducing countermeasures cannot be based on the categories provided by risk matrices. <!-- 1. **資源の最適配分ができない可能性**（Suboptimal Resource Allocation）: リスクマトリクスによるリスク分類では、リスク低減対策への効果的な資源配分ができない可能性がある。 --></li>
+<li><strong>Ambiguous Inputs and Outputs</strong>. Categorizations of severity cannot be made objectively for uncertain consequences. Inputs to risk matrices (e.g., frequency and severity categorizations) and resulting outputs (i.e., risk ratings) require subjective interpretation, and different users may obtain opposite ratings of the same quantitative risks. –&gt; <!-- 2. **入力と出力が曖昧である問題**（Ambiguous Inputs and Outputs） : 不確実な出力結果が不確実な場合、潜在的な影響の分類を客観的に行うことができない可能性がある。 --> <!-- リスクマトリクスへの入力（例：リスクの発生可能性と潜在的な影響の分類）とその出力結果（例：リスク評価）には主観的な解釈が必要であり、同じ定量的リスクでも利用者によって評価が正反対になる可能性がある。 --></li>
 </ol>
 </section>
-<section id="第3節-secのedgar財務情報データベースへのアクセス" class="slide level2">
-<h2>第3節 SECのEDGAR財務情報データベースへのアクセス</h2>
-<!-- One of the first steps in planning an analytical review is a review of current and prior year filings with the SEC.  -->
-<p>分析的レビューを計画する最初のステップの一つは、現在および過年度のSEC提出書類の確認である。 <!-- These will include annual and quarterly financial statements, restatements, proxy statements, lawsuits, and numerous other documents, where their acquisition and incorporation into workpapers is an essential prerequisite of audit planning.  --> これらには、年次報告書、四半期財務諸表、修正再表示、委任状、訴訟、およびその他 多くの文書が含まれ、これらを入手し、監査調書に取り込むことは、監査計画立案の重要な前段階である。 <!-- Fortunately, complete information is available on the SEC’s website at sec.gov.  --> 幸いなことに、すべての情報はSECのウェブサイトであるsec.govで入手できる。 <!-- Many of the most relevant documents to an audit are maintained by the SEC in XBRL format (as .XML files) which can be downloaded into the working papers from the Internet.  --> 監査に最も関連する文書の多くは、SECによってXBRL形式（.XMLファイル）で整備されており、インターネットから監査調書にダウンロードすることができる。 <!-- XBRL is eXtensible Business Reporting Language, a freely available, global markup language for exchanging business information.  --> XBRLとは、拡張可能な事業報告言語（eXtensible Business Reporting Language）の略で、ビジネス情報を伝達するための、自由で利用可能でグローバルなマークアップ言語である。 <!-- XBRL allows the expression of semantic meaning, which lends to an unambiguous definition of accounts and other financial information.  --> XBRLは、意味論的意味（semantic meaning）を表現することを可能にし、会計やその他の財務情報の明確な定義を可能にする。 <!-- XBRL representations of financial reports are more reliable and less subject to misinterpretation than any disseminations in other formats.  --> XBRLで表現された財務報告書は、他のフォーマットで作成された財務報告書よりも信頼性が高く、誤解を招きにくい。 <!-- XBRL also allows for automated parsing of information, which can greatly improve the efficiency of audit ratio and statistical analysis. --> また、XBRLは情報の自動解析を可能にするため、監査で利用する比率や統計分析の効率を大幅に向上させることができる。</p>
-<!-- The following code chunk accesses the SEC’s XBRL databases to acquire current and prior year filings for any listed company, and read it as a dataset that can be manipulated by R.  -->
-<p>以下のコード・チャンクにより、SECのXBRLデータベースにアクセスし、任意の上場企業の現在および前年度の提出書類を取得し、Rで処理できるデータセットとして読み込むことができる。 <!-- For this example, we extract General Motors’ 2016 and 2017 financials from the EDGAR database at sec.gov. I use the finstr package to access EDGAR files. --> この例では、General Motors社の2016年と2017年の財務情報をsec.govのEDGARデータベースから抽出する。本章では、EDGARファイルにアクセスするために<code>finstr</code>パッケージを使用する<sup>1</sup>。</p>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>[訳註：] 日本からEDGARデータベースへのアクセスには制限があるため，訳書ではEDGARデータベースから直接データ取得は行わず，いったんXBRLファイルをダウンロードしてローカルに保存し，そのファイルを読み込む形でデータ取得を行っている。ここでは作業ディレクトリに<code>XBRL</code> フォルダを作成し，そこに<code>xml</code>ファイルを保存している。</p></li></ol></aside></section>
+<section id="accessing-the-secs-edgar-database-of-financial-information" class="slide level2">
+<h2>Accessing the SEC’s EDGAR Database of Financial Information</h2>
+<!-- ## 第3節 SECのEDGAR財務情報データベースへのアクセス -->
+<p>One of the first steps in planning an analytical review is a review of current and prior year filings with the SEC. <!-- 分析的レビューを計画する最初のステップの一つは、現在および過年度のSEC提出書類の確認である。 --> These will include annual and quarterly financial statements, restatements, proxy statements, lawsuits, and numerous other documents, where their acquisition and incorporation into workpapers is an essential prerequisite of audit planning. <!-- これらには、年次報告書、四半期財務諸表、修正再表示、委任状、訴訟、およびその他 多くの文書が含まれ、これらを入手し、監査調書に取り込むことは、監査計画立案の重要な前段階である。 --> Fortunately, complete information is available on the SEC’s website at sec.gov. <!-- 幸いなことに、すべての情報はSECのウェブサイトであるsec.govで入手できる。 --> Many of the most relevant documents to an audit are maintained by the SEC in XBRL format (as .XML files) which can be downloaded into the working papers from the Internet. <!-- 監査に最も関連する文書の多くは、SECによってXBRL形式（.XMLファイル）で整備されており、インターネットから監査調書にダウンロードすることができる。 --> XBRL is eXtensible Business Reporting Language, a freely available, global markup language for exchanging business information. <!-- XBRLとは、拡張可能な事業報告言語（eXtensible Business Reporting Language）の略で、ビジネス情報を伝達するための、自由で利用可能でグローバルなマークアップ言語である。 --> XBRL allows the expression of semantic meaning, which lends to an unambiguous definition of accounts and other financial information. <!-- XBRLは、意味論的意味（semantic meaning）を表現することを可能にし、会計やその他の財務情報の明確な定義を可能にする。 --> XBRL representations of financial reports are more reliable and less subject to misinterpretation than any disseminations in other formats. <!-- XBRLで表現された財務報告書は、他のフォーマットで作成された財務報告書よりも信頼性が高く、誤解を招きにくい。 --> XBRL also allows for automated parsing of information, which can greatly improve the efficiency of audit ratio and statistical analysis. <!-- また、XBRLは情報の自動解析を可能にするため、監査で利用する比率や統計分析の効率を大幅に向上させることができる。 --></p>
+<p>The following code chunk accesses the SEC’s XBRL databases to acquire current and prior year filings for any listed company, and read it as a dataset that can be manipulated by R. <!-- 以下のコード・チャンクにより、SECのXBRLデータベースにアクセスし、任意の上場企業の現在および前年度の提出書類を取得し、Rで処理できるデータセットとして読み込むことができる。 --> For this example, we extract General Motors’ 2016 and 2017 financials from the EDGAR database at sec.gov. I use the finstr package to access EDGAR files [^1] . <!-- この例では、General Motors社の2016年と2017年の財務情報をsec.govのEDGARデータベースから抽出する。本章では、EDGARファイルにアクセスするために`finstr`パッケージを使用する[^1]。 --> [^1]: [訳註：] 日本からEDGARデータベースへのアクセスには制限があるため，訳書ではEDGARデータベースから直接データ取得は行わず，いったんXBRLファイルをダウンロードしてローカルに保存し，そのファイルを読み込む形でデータ取得を行っている。ここでは作業ディレクトリに<code>XBRL</code> フォルダを作成し，そこに<code>xml</code>ファイルを保存している。</p>
+</section>
 <section class="slide level2">
 
 <h3 id="finstr-package"><code>finstr</code> package</h3>
@@ -1834,32 +1819,32 @@ n \approx  \frac{log(1-confidence)}{log(1-\frac{10-risk_{intelligence} \times ri
 <section id="wicked-problems" class="slide level2">
 <h2>Wicked Problems</h2>
 <ul>
-<li>Audits are classic “wicked problems” sharing the following characteristics (Rittel and Webber 1973): <!-- 監査は、次の特徴を共有する古典的な「悪い問題」である（Rittel and Webber 1973）。 --></li>
+<li>Audits are classic <strong>wicked problems</strong> sharing the following characteristics (Rittel and Webber 1973): <!-- 監査は、次の特徴を共有する古典的な「悪い問題」である（Rittel and Webber 1973）。 --></li>
 </ul>
 <ol type="1">
-<li>There is no definitive formulation of auditing.</li>
-<li>Audits have no stopping rule.</li>
-<li>Audit products are not true-or-false rather are opinions.</li>
-<li>There is no immediate and no ultimate test of an audit conclusion.</li>
+<li>There is no definitive formulation of auditing. <!-- 1. 監査の明確な定式化がない。 --></li>
+<li>Audits have no stopping rule. <!-- 2. 監査には停止規則がない。 --></li>
+<li>Audit products are not true-or-false rather are opinions. <!-- 監査報告書は真偽ではなく意見である。 --></li>
+<li>There is no immediate and no ultimate test of an audit conclusion. <!-- 監査の結論には即時テストも最終テストもない。 --></li>
+<li>Each audit is a one-shot operation. <!-- 監査は一回限りの作業である。 --></li>
 </ol>
 </section>
 <section class="slide level2">
 
-<ol start="5" type="1">
-<li>Each audit is a one-shot operation.</li>
-<li>Audits do not have an enumerable or an exhaustively describable set of potential solutions nor is there a well-described set of permissible operations that may be incorporated into the audit program.</li>
-<li>Every audit is essentially unique.</li>
-<li>Every audit procedure can be considered to be a response to some other finding.</li>
-<li>The existence of an audit discrepancy can be explained in numerous ways. The choice of explanation determines the nature of the problems resolution and the audit opinion.</li>
+<ol start="6" type="1">
+<li>Audits do not have an enumerable or an exhaustively describable set of potential solutions nor is there a well-described set of permissible operations that may be incorporated into the audit program. <!-- 監査には、列挙可能な、あるいは網羅的に記述可能な潜在的解決策の集合があるわけではなく、また監査プログラムに組み込むことができる許容される操作のセットも存在しない。 --></li>
+<li>Every audit is essentially unique. <!-- すべての監査は本質的に一意である。 --></li>
+<li>Every audit procedure can be considered to be a response to some other finding. <!-- すべての監査手続は他の発見事項に対する対応であると考えることができる。 --></li>
+<li>The existence of an audit discrepancy can be explained in numerous ways. The choice of explanation determines the nature of the problems resolution and the audit opinion. <!-- 監査上の不一致の存在は、多くの方法で説明することができる。どの説明を選択するかによって、問題解決と監査意見の性質が決まる。--></li>
 </ol>
 </section>
 <section class="slide level2">
 
 <ol start="10" type="1">
-<li>The auditor has no right to be wrong and is ultimately liable for the consequences of audit opinions.</li>
-<li>The solution depends on how the problem is framed and vice versa, i.e., the problem definition depends on the solution.</li>
-<li>Stakeholders have radically different world views and different frames for understanding the problem.</li>
-<li>The constraints that the problem is subject to and the resources needed to solve it change over time.</li>
+<li>The auditor has no right to be wrong and is ultimately liable for the consequences of audit opinions. <!-- 監査人は監査意見を誤る権利を有しておらず、監査意見の結果について最終的な責任を負う。 --></li>
+<li>The solution depends on how the problem is framed and vice versa, i.e., the problem definition depends on the solution. <!-- つまり問題の定義が解決策に依存している。 --></li>
+<li>Stakeholders have radically different world views and different frames for understanding the problem. <!-- 利害関係者は、根本的に異なる世界観を持っており、問題を理解するためのフレームも異なる。 --></li>
+<li>The constraints that the problem is subject to and the resources needed to solve it change over time. <!-- この問題が直面している制約や、解決に必要な資源は、時間とともに変化する。 --></li>
 </ol>
 <!--
 1. 監査の明確な定式化がない。
@@ -1929,7 +1914,6 @@ n \approx  \frac{log(1-confidence)}{log(1-\frac{10-risk_{intelligence} \times ri
 </div>
 </div>
 </section></section>
-
     </div>
   </div>
 
