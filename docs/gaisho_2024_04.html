@@ -8,10 +8,10 @@
 <link href="gaisho_2024_04_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="gaisho_2024_04_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="gaisho_2024_04_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.57">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Soichi Matsuura">
-  <meta name="dcterms.date" content="2024-10-16">
+  <meta name="dcterms.date" content="2024-10-23">
   <title>外国書購読 Day4  Risk Assessment and Planning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -430,7 +430,7 @@ Soichi Matsuura
 </div>
 </div>
 
-  <p class="date">2024-10-16</p>
+  <p class="date">2024-10-23</p>
 </section>
 <section>
 <section id="machine-learning-methods" class="title-slide slide level1 center">
@@ -458,7 +458,7 @@ Soichi Matsuura
 <section id="risk-and-ai" class="slide level2">
 <h2>Risk and AI</h2>
 <ul>
-<li>In practice, risk presents deep learning (and AI in general) with its greatest challenges. <!-- 実際、リスクは深層学習（およびAI全般）にとって最大の課題である。 --></li>
+<li>In practice, risk presents <strong>deep learning</strong> (and AI in general) with its greatest challenges. <!-- 実際、リスクは深層学習（およびAI全般）にとって最大の課題である。 --></li>
 <li>For example, self-driving cars are trained on massive datasets extracted from many other cars; that knowledge of how to drive is encapsulated in weights in a network model that is firm-wired into a computer unit in a car. <!-- たとえば、自動運転車は、多くの他の車から抽出された大規模なデータセットで訓練される。 --> <!-- その運転方法の知識は、車のコンピュータユニットに固定されたネットワークモデルの重みにカプセル化されている。 --></li>
 <li>It matters whether that unit was trained to save pedestrians, or to save property, or to save the driver - each implies a different decision risk. <!-- そのユニットが歩行者を救うために訓練されたか、財産を救うために訓練されたか、運転手を救うために訓練されたかは重要な問題である。 --></li>
 </ul>
@@ -585,29 +585,28 @@ Soichi Matsuura
 <span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>        train_images, <span class="co"># training image data</span></span>
 <span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>        train_labels, <span class="co"># training label data</span></span>
 <span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">epochs =</span> <span class="dv">10</span>,  <span class="co"># the number of times the model will be trained</span></span>
-<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">batch_size =</span> <span class="dv">128</span> <span class="co"># the number of samples per gradient update</span></span>
-<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">batch_size =</span> <span class="dv">128</span>) <span class="co"># the number of samples per gradient update</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/10
-469/469 - 1s - loss: 0.2538 - accuracy: 0.9259 - 1s/epoch - 3ms/step
+469/469 - 1s - loss: 0.2571 - accuracy: 0.9258 - 1s/epoch - 2ms/step
 Epoch 2/10
-469/469 - 1s - loss: 0.1022 - accuracy: 0.9700 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.1036 - accuracy: 0.9688 - 857ms/epoch - 2ms/step
 Epoch 3/10
-469/469 - 1s - loss: 0.0678 - accuracy: 0.9793 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0677 - accuracy: 0.9800 - 928ms/epoch - 2ms/step
 Epoch 4/10
-469/469 - 1s - loss: 0.0489 - accuracy: 0.9850 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0496 - accuracy: 0.9854 - 947ms/epoch - 2ms/step
 Epoch 5/10
-469/469 - 1s - loss: 0.0375 - accuracy: 0.9886 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0374 - accuracy: 0.9888 - 935ms/epoch - 2ms/step
 Epoch 6/10
-469/469 - 1s - loss: 0.0283 - accuracy: 0.9918 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0289 - accuracy: 0.9921 - 935ms/epoch - 2ms/step
 Epoch 7/10
-469/469 - 1s - loss: 0.0210 - accuracy: 0.9940 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0219 - accuracy: 0.9939 - 884ms/epoch - 2ms/step
 Epoch 8/10
-469/469 - 1s - loss: 0.0167 - accuracy: 0.9954 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0163 - accuracy: 0.9954 - 787ms/epoch - 2ms/step
 Epoch 9/10
-469/469 - 1s - loss: 0.0122 - accuracy: 0.9966 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.0128 - accuracy: 0.9966 - 808ms/epoch - 2ms/step
 Epoch 10/10
-469/469 - 1s - loss: 0.0098 - accuracy: 0.9973 - 1s/epoch - 2ms/step</code></pre>
+469/469 - 1s - loss: 0.0098 - accuracy: 0.9972 - 820ms/epoch - 2ms/step</code></pre>
 </div>
 </div>
 </section>
@@ -637,11 +636,11 @@ Epoch 10/10
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">loss</td>
-<td style="text-align: right;">0.0718203</td>
+<td style="text-align: right;">0.0688071</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">accuracy</td>
-<td style="text-align: right;">0.9823000</td>
+<td style="text-align: right;">0.9818000</td>
 </tr>
 </tbody>
 </table>
@@ -704,12 +703,17 @@ L (\theta) = f(x \mid \theta), \quad l (\theta) = \log L(\theta)
 <li>The Fisher information is a way of <em>measuring the amount of information</em> that an observable random variable <span class="math inline">X</span> carries about an unknown parameter <span class="math inline">\theta</span> upon which the probability of <span class="math inline">X</span> depends.</li>
 </ul>
 </section></section>
-<section>
 <section id="risk-assessment-and-audit-planning" class="title-slide slide level1 center">
 <h1>Risk Assessment and Audit Planning</h1>
 <!-- # 第4章：リスク評価と監査計画 -->
 </section>
-<section id="auditing" class="slide level2">
+
+<section>
+<section id="auditing" class="title-slide slide level1 center">
+<h1>Auditing</h1>
+
+</section>
+<section id="auditing-1" class="slide level2">
 <h2>Auditing</h2>
 <!-- ## 第1節 監査 -->
 <ul>
@@ -718,7 +722,7 @@ L (\theta) = f(x \mid \theta), \quad l (\theta) = \log L(\theta)
 <ol type="1">
 <li>Reasonable assurance. <!-- 1. 合理的保証。 --></li>
 <li>By an independent third party. <!-- 2. 独立した第三者による。 --></li>
-<li>That the financial statements are presented fairly in all material respects. <!-- 3. 財務諸表がすべての重要な点において適正に表示されていること。 --></li>
+<li>Financial statements are presented fairly in all material respects. <!-- 3. 財務諸表がすべての重要な点において適正に表示されていること。 --></li>
 <li>In accordance to some financial reporting framework, e.g., GAAP. <!-- 4. ある財務報告の枠組み（たとえばGAAP）に準拠していること。 --></li>
 <li>Applied consistently so that year-to-year trends and comparisons are possible. <!-- 5. 継続性をもって適用されているため、年度間の傾向と比較が可能であること。 --></li>
 </ol></li>
@@ -735,14 +739,35 @@ L (\theta) = f(x \mid \theta), \quad l (\theta) = \log L(\theta)
 <section class="slide level2">
 
 <ol type="1">
-<li>An <strong>unqualified</strong> auditor’s opinion is the opinion that the financial statements are presented fairly. <!-- 1. 無限定適正意見（unqualified opinion）は、財務諸表が適正に表示されているという意見である。 --></li>
-<li>A <strong>qualified opinion</strong> is that the financial statements are presented fairly in all material respects in accordance with GAAP: <!-- 1. 限定付適正意見（qualified opinion）は、財務諸表がすべての重要な点においてGAAPに準拠して適正に表示されていると認められるものの、下記のような意見の限定と範囲の限定がある。 -->
+<li>An <strong>unqualified</strong> auditor’s opinion is the opinion that the financial statements are presented fairly.</li>
+<li>A <strong>qualified opinion</strong> is that the financial statements are presented fairly in all material respects in accordance with GAAP:
 <ol type="1">
-<li>Except for a material misstatement that does not pervasively affect the users ability to rely on the financial statements. <!-- 1. 財務諸表を信頼する利用者の判断に広範な影響を与えない重要な虚偽表示が存在する。 --></li>
-<li>Or with a scope limitation that is of limited significance. <!-- 2. 重要であるが広範ではない監査範囲の限定が存在する。 --></li>
+<li>Except for a material misstatement that does not pervasively affect the users ability to rely on the financial statements.</li>
+<li>Or with a scope limitation that is of limited significance.</li>
 </ol></li>
-<li>An <strong>adverse audit opinion</strong> is issued when the financial statements do not present fairly due to departure from US GAAP with an explanation of the nature and size of the misstatement. <!-- 1. GAAPに準拠しないことにより財務諸表が適正に表示されていない場合には、監査意見として不適正意見（adverse opinion）が表明される。不適正意見には、虚偽表示の種類と影響についての説明が記載される。 --></li>
+<li>An <strong>adverse audit opinion</strong> is issued when the financial statements do not present fairly due to departure from US GAAP with an explanation of the nature and size of the misstatement.</li>
 </ol>
+<aside class="notes">
+<ol type="1">
+<li>無限定適正意見（unqualified opinion）は、財務諸表が適正に表示されているという意見である。</li>
+<li>限定付適正意見（qualified opinion）は、財務諸表がすべての重要な点においてGAAPに準拠して適正に表示されていると認められるものの、下記のような意見の限定と範囲の限定がある。
+<ol type="1">
+<li>財務諸表を信頼する利用者の判断に広範な影響を与えない重要な虚偽表示が存在する。</li>
+<li>重要であるが広範ではない監査範囲の限定が存在する。</li>
+</ol></li>
+<li>GAAPに準拠しないことにより財務諸表が適正に表示されていない場合には、監査意見として不適正意見（adverse opinion）が表明される。不適正意見には、虚偽表示の種類と影響についての説明が記載される。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -750,10 +775,27 @@ L (\theta) = f(x \mid \theta), \quad l (\theta) = \log L(\theta)
 <li>Additionally an auditor can issue a <strong>disclaimer</strong> which is considered <em>a type of qualified opinion</em> because there is insufficient and appropriate evidence to form an opinion or because of lack of independence. <!-- さらに監査人は、監査意見を形成するのに十分かつ適切な証拠がない、あるいは独立性を欠いているという理由で、（限定意見の一種とみなされる）意見不表明を示すことができる。 --> <!-- - In a disclaimer the auditor explains the reasons for withholding an opinion and explicitly indicates that no opinion is expressed. --> <!-- 意見不表明では、監査人は意見の表明を差し控える理由を説明し、意見を表明しないことを示す。 --> <!-- - The wording of these reports typically appears as follows: --> <!-- これらの監査報告書の文言は、一般的に以下のようになる。 --></li>
 </ul>
 <ol type="1">
-<li><strong>Unqualified</strong> (<em>Clean</em>) Opinion : We believe these financial statements are (1) fairly presented in (2) accordance with GAAP (3) consistently applied. <!-- 1. 無限定適正意見： 監査人は、これらの財務諸表が（1）継続的に適用された（2）GAAPに準拠して（2）適正に表示されていると判断している。 --></li>
-<li><strong>Qualified Opinion</strong> : We believe these financial statements are (1) fairly presented in (2) accordance with GAAP (3) consistently applied; except for (4) A List of Exceptions. <!-- 1. 条件付適正意見：監査人は、これらの財務諸表が（1）除外事項を除いて、（2）継続的に適用された（3）GAAPに準拠して（4）適正に表示されていると判断している。 --></li>
-<li><strong>Adverse Opinion</strong>: We DO NOT believe these financial statements are (1) fairly presented in (2) accordance with GAAP (3) consistently applied; THE AUDITORS DISAGREE WITH A List of Exceptions. <!-- 1. 反対意見：監査人は、これらの財務諸表が（1）継続的に適用された（2）GAAPに準拠して（2）適正に表示されていると判断していない。 --></li>
+<li><strong>Unqualified</strong> (<em>Clean</em>) Opinion : We believe these financial statements are (1) fairly presented in (2) accordance with GAAP (3) consistently applied.</li>
+<li><strong>Qualified Opinion</strong> : We believe these financial statements are (1) fairly presented in (2) accordance with GAAP (3) consistently applied; except for (4) A List of Exceptions.</li>
+<li><strong>Adverse Opinion</strong>: We DO NOT believe these financial statements are (1) fairly presented in (2) accordance with GAAP (3) consistently applied; THE AUDITORS DISAGREE WITH A List of Exceptions.</li>
 </ol>
+<aside class="notes">
+<ol type="1">
+<li>無限定適正意見： 監査人は、これらの財務諸表が（1）継続的に適用された（2）GAAPに準拠して（2）適正に表示されていると判断している。</li>
+<li>条件付適正意見：監査人は、これらの財務諸表が（1）除外事項を除いて、（2）継続的に適用された（3）GAAPに準拠して（4）適正に表示されていると判断している。</li>
+<li>反対意見：監査人は、これらの財務諸表が（1）継続的に適用された（2）GAAPに準拠して（2）適正に表示されていると判断していない。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="risk-assessment-in-audit-planning" class="title-slide slide level1 center">
@@ -764,14 +806,13 @@ L (\theta) = f(x \mid \theta), \quad l (\theta) = \log L(\theta)
 <h2>Risk Assessment</h2>
 <ul>
 <li>Risk assessment in auditing is <strong>the determination of quantitative value of risk</strong> of a particular subset of accounting operations related to the rendering of the audit opinion - i.e., on whether the accounts have material error when GAAP has been consistently applied. <!-- 監査におけるリスク評価とは、監査意見の表明に関連する会計業務の特定の箇所で発生するリスクの定量的価値を決定することである。ここでリスクとは、GAAPを継続適用している企業において、財務諸表に重要な虚偽表示があるかどうかについてである。 --></li>
-<li>Quantitative risk assessment requires calculations of two components of risk — <em>the magnitude of the potential loss</em>, and <em>the probability that the loss will occur</em>. <!-- 定量的リスク評価には、潜在的な虚偽表示の影響額（損失）と、その虚偽表示が発生する確率という2つのリスク要素の計算が求められる。 --></li>
-<li>The economic events of the accounting cycles are called accounting transactions, and are traditionally recorded in journals. <!-- 会計サイクルの経済事象は会計取引と呼ばれ、古くから仕訳帳に記録されている。 --></li>
+<li>Quantitative risk assessment requires calculations of two components of risk — <em>the magnitude of the potential loss</em>, and <em>the probability that the loss will occur</em>. <!-- 定量的リスク評価には、潜在的な虚偽表示の影響額（損失）と、その虚偽表示が発生する確率という2つのリスク要素の計算が求められる。 --> <!-- - The economic events of the accounting cycles are called accounting transactions, and are traditionally recorded in journals. --> <!-- 会計サイクルの経済事象は会計取引と呼ばれ、古くから仕訳帳に記録されている。 --></li>
 <li>An accounting cycle begins when accounting personnel create a transaction from a source document and ends with the completion of the financial reports and closing of temporary accounts in preparation for a new cycle. <!-- 会計サイクルは、経理担当者が原始資料から取引を作成することから始まり、財務報告の提出と新しいサイクルに備えた名目勘定の閉鎖をもって終了する。 --></li>
 </ul>
 </section>
 <section id="accounting-cycles" class="slide level2">
 <h2>5 Accounting Cycles</h2>
-<p>The five accounting cycles are: <!-- （第3章 第8節で説明したように）以下のような5つの会計サイクルがある。 --></p>
+<p>The <em>five accounting cycles</em> are: <!-- （第3章 第8節で説明したように）以下のような5つの会計サイクルがある。 --></p>
 <ol type="1">
 <li>Revenue cycle.</li>
 <li>Expenditure cycle (this cycle focuses on two separate resources: inventory and human resources and often considers two separate cycles: purchasing and payroll/HR ).</li>
@@ -794,23 +835,115 @@ L (\theta) = f(x \mid \theta), \quad l (\theta) = \log L(\theta)
 <li><p>Risk assessment consists of subjective and objective evaluations of risk in which assumptions and uncertainties are clearly considered and presented. <!-- リスク評価は、仮定と不確実性が明確に検討・表示されたリスクの主観的・客観的評価で構成される。  --></p></li>
 <li><p>Part of the difficulty in risk management is that measurement of both potential loss and probability of occurrence is error prone and subjective. <!-- リスクマネジメントの難しさの一つは、潜在的な虚偽表示の影響額と虚偽表示が発生する確率の両方の測定が誤差が生じやすく主観的であることである。 --></p></li>
 <li><p>Risk with a large potential loss and a low probability of occurring is often treated differently from one with a low potential loss and a high likelihood of occurring. <!-- 潜在的な虚偽表示の影響額が大きく虚偽表示が発生する確率が低いリスクと、潜在的な虚偽表示の影響額が小さく虚偽表示が発生する確率が高いリスクは、しばしば異なった扱いを受ける。 --></p></li>
-<li><p>In theory, both are of nearly equal priority, but in practice it can be very difficult to manage when faced with the scarcity of resources, especially time, in which to conduct the risk management process. <!-- 理論的には、両者の優先順位はほぼ同じであるが、実際には、リスクマネジメントプロセスを実施するための資源（特に時間）の制約に直面した場合、そのマネジメントは非常に困難となる。 --></p></li>
-<li><p>This is one conundrum engendered by auditing’s inherently “wicked” character. <!-- これは、監査が本質的に「厄介（wicked）」な性格を持っているために生じる難問の一つである。 --></p></li>
 </ul>
 </section>
 <section class="slide level2">
 
-<p>A Risk Assessment Matrix (RAM) is a calculation spreadsheet that is used in risk assessment to define, estimate, argue, and support particular risks involved in decision-making. In auditing, the objective of the RAM is to construct a set of audit tasks (the audit program) that cost-effectively assures that the eventual audit decision will be correct with a particular level of confidence. <!-- RAMとは、意思決定に関する特定のリスクを定義し、見積り、議論し、 サポートするために、リスク評価において利用されるスプレッドシートである。監査では、RAMの目的は、最終的な監査人の意思決定がコスト効率的に特定の信頼度で上回っていることを保証する監査計画を構築することである。 --></p>
-<p>Different statistical philosophies dictate the particular mathematical approach which is applied in the RAM. We will briefly review the alternatives here, with the goal of describing a simple, somewhat objective approach appropriate for the initial stages of auditing planning. Mathematicians recognize three broad approaches to risk calculations for decision-making: (1) the Neyman–Pearson hypothesis testing framework; (2) the Minimax game theoretic framework; and (3) Bayes Risk. This chapter proposes a simplified Bayes Risk as most appropriate for early planning of audits. <!-- 様々な統計学の理論によって、RAMに適用される特定の数学的なアプローチは定義される。ここでは、監査計画の初期段階に適している単純である程度客観的なアプロ ーチを示すことを目的として、そのアプローチの候補を簡単に紹介する。 --> <!-- 数学において、意思決定のためのリスク計算については大まかに、(1) Neyman-Pearsonの仮説検定フレームワーク、(2) ミニマックス法（Minimax）によるゲーム理論的フレームワーク、(3) ベイズリスクの3つのアプローチがある。本章では、監査の初期計画に最も適した簡便化したベイズリスクを提案する。 --></p>
-<p>The Neyman–Pearson lemma allows performing a hypothesis test between two simple hypotheses using a likelihood-ratio test, and provides a method of statistical inference from evidence. In statistics, a result is called statistically significant if it has been predicted as unlikely to have occurred by chance alone, according to a pre-determined threshold probability, the significance level. The phrase “test of significance” was coined by statistician Ronald Fisher, and plays an important part in our substantive tests of account balances and material error. Statistical hypothesis testing is sometimes called confirmatory data analysis, in contrast to exploratory data analysis, which may not have pre-specified hypotheses. Statistical hypothesis tests define a procedure that controls (fixes) the probability of incorrectly deciding that a default position (null hypothesis) is incorrect based on how likely it would be for a set of observations to occur if the null hypothesis were true. Note that this probability of making an incorrect decision is not the probability that the null hypothesis is true, nor whether any specific alternative hypothesis is true. This contrasts with other possible techniques of decision theory in which the null and alternative hypothesis are treated on a more equal basis. <!-- Neyman-Pearsonの補題は、尤度比検定を用いて2つの単純な仮説間の仮説検定を行うことを可能にし、証拠から統計的推論を行う方法を提供する。統計学では、ある結果が、あらかじめ決められた閾値（有意水準）に従って、偶然だけでは起こりそうもないと考えられる場合、統計的に有意と呼ばれる。「有意性の検定（test of significance）」という言葉は、統計学者Ronald Fisherにより創り出された用語で、監査人の世界でも会計残高や重要な虚偽表示に対する実証手続において重要な役割を果たしている。統計的仮説検定は、事前に規定された仮説を持たない探索的データ分析とは対比して、確認的データ分析（confirmatory data analysis）と呼ばれることもある。統計的仮説検定は、帰無仮説が真であった場合に、一連の観察結果がどの程度起こりうるかに基づいて、既定の立場（帰無仮説）が誤っていると決定する確率をコントロール（修正）する手順を規定している。この間違った意思決定をする確率は、帰無仮説が真である確率でも、特定の対立仮説が真である確率でもないことに注意されたい。これは、帰無仮説と対立仮説がより平等に扱われる決定理論の他の可能な手法とは対照的である。 --></p>
-<p>Minimax is a decision rule published in 1928 by John von Neumann and is used in decision theory, game theory, statistics, and philosophy for minimizing the possible loss for a worst case (maximum loss) scenario. Originally formulated for two- players, zero-sum game theory, covering both the cases where players take alternate moves and those where they make simultaneous moves, it has also been extended to more complex games and to general decision-making in the presence of uncertainty. <!-- ミニマックス法は、1928年にJohn von Neumannによって発表された意思決定ルールであり、意思決定理論、ゲーム理論、統計学、および哲学において、最悪の場合つまり最大損失（maximum loss）のシナリオで起こりうる損失を最小化するために用いられる。もともとは、2人のプレイヤーが交互に行動する場合と同時に行動する場合の両方を対象としたゼロサムゲーム理論のために定式化されたが、より複雑なゲームや不確実性が存在する場合の一般的な意思決定にも拡張されている。 --></p>
-<p>Bayes risk is the expected value of a loss function. It is typically optimized when a Bayes estimator decision rule is designed to minimize the posterior expected loss. The most common risk function used for Bayesian estimation is the mean square error (MSE), or squared-error risk Ex[(θˆ(x) − θ)2] for parameter θ. <!-- ベイズリスクは損失関数の期待値である。ベイズ推定量の決定規則が事後的な期待損失を最小化するように設計されるとき、ベイズリスクは通常最適化される。 --> <!-- ベイズ推定に使用される最も一般的なリスク関数は、平均二乗誤差、またはパラメータ$\theta$に対する二乗誤差リスク$\mathrm{E}_x[\hat \theta (x) - \theta^2]$である。 --></p>
-<p>The probability of something happening multiplied by the resulting cost or benefit if it does is commonly known as the “expectation value” and is used to compare levels of risk and commensurate audit task scope and sample size in the subsequent audit program design. <!-- 何かが起こる確率にそれが起こったときに生じるコストまたは利益を乗じたものは、一般に「期待値」として知られており、その後の監査計画の設計において、リスクのレベルとそれに見合った監査業務範囲およびサンプルサイズを比較するために使用される。 --></p>
-<p>For audits performed by an outside audit firm, risk assessment is a very crucial stage before accepting an audit engagement. It is an integral part of determining the audit tasks that will be performed in the audit program. According to ISA315 “the auditor should perform risk assessment procedures to obtain an understanding of the entity and its environment, including its internal control.” The auditor obtains initial evidence regarding the classes of transactions at the client and the operating effectiveness of the client’s internal controls. In auditing standards, audit risk is stated to include inherent risk (IR) control risk (CR) and detection risk (DR) (Srivastava and Shafer 2008; Jones 2017; Bedard, Graham, and Jackson 2005; Knechel 2007). <!-- 外部の監査事務所が行う監査において、リスク評価は監査契約を引き受ける前でも非常に重要な局面である。
-またリスク評価は、監査計画において実施する監査業務を決定する上で不可欠なものである。
-ISA315は「監査人は、内部統制を含む企業およびその環境を理解するために、リスク評価手続を実施しなければならない。」と規定している。
-監査人は、被監査会社の取引類型および被監査会社の内部統制の有効性に関する最初の証拠を入手し、リスク評価手続を実施する。
-監査基準では、監査リスクには、固有リスク（inherent risk：IR）、統制リスク（control risk：CR）、および発見リスク（detection risk：DR）が含まれるとされている（Srivastava and Shafer 2008; Jones 2017; Bedard, Graham, and Jackson 2005; Knechel 2007）。 --></p>
+<ul>
+<li>In theory, both are of nearly equal priority, but in practice it can be very difficult to manage when faced with the scarcity of resources, especially time, in which to conduct the risk management process. <!-- 理論的には、両者の優先順位はほぼ同じであるが、実際には、リスクマネジメントプロセスを実施するための資源（特に時間）の制約に直面した場合、そのマネジメントは非常に困難となる。 --></li>
+<li>This is one conundrum engendered by auditing’s inherently “wicked” character. <!-- これは、監査が本質的に「厄介（wicked）」な性格を持っているために生じる難問の一つである。 --></li>
+<li>A Risk Assessment Matrix (RAM) is a calculation spreadsheet that is used in risk assessment to define, estimate, argue, and support particular risks involved in decision-making.</li>
+<li>In auditing, the objective of the RAM is to construct a set of audit tasks (the audit program) that cost-effectively assures that the eventual audit decision will be correct with a particular level of confidence. <!-- RAMとは、意思決定に関する特定のリスクを定義し、見積り、議論し、 サポートするために、リスク評価において利用されるスプレッドシートである。監査では、RAMの目的は、最終的な監査人の意思決定がコスト効率的に特定の信頼度で上回っていることを保証する監査計画を構築することである。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Different statistical philosophies dictate the particular mathematical approach which is applied in the RAM.</li>
+<li>We will briefly review the alternatives here, with the goal of describing a simple, somewhat objective approach appropriate for the initial stages of auditing planning.</li>
+<li>Mathematicians recognize three broad approaches to risk calculations for decision-making: (1) the - Neyman–Pearson hypothesis testing framework; (2) the Minimax game theoretic framework; and (3) Bayes Risk.</li>
+<li>This chapter proposes a simplified Bayes Risk as most appropriate for early planning of audits.</li>
+</ul>
+<aside class="notes">
+<p>様々な統計学の理論によって、RAMに適用される特定の数学的なアプローチは定義される。ここでは、監査計画の初期段階に適している単純である程度客観的なアプロ ーチを示すことを目的として、そのアプローチの候補を簡単に紹介する。 数学において、意思決定のためのリスク計算については大まかに、(1) Neyman-Pearsonの仮説検定フレームワーク、(2) ミニマックス法（Minimax）によるゲーム理論的フレームワーク、(3) ベイズリスクの3つのアプローチがある。本章では、監査の初期計画に最も適した簡便化したベイズリスクを提案する。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><strong>The Neyman–Pearson lemma</strong> allows performing a hypothesis test between two simple hypotheses using a likelihood-ratio test, and provides a method of statistical inference from evidence.</li>
+<li>In statistics, a result is called statistically significant if it has been predicted as unlikely to have occurred by chance alone, according to a pre-determined threshold probability, the significance level.</li>
+<li>The phrase “<strong>test of significance</strong>” was coined by statistician Ronald Fisher, and plays an important part in our substantive tests of account balances and material error.</li>
+<li>Statistical hypothesis testing is sometimes called <strong>confirmatory data analysis</strong>, in contrast to exploratory data analysis, which may not have pre-specified hypotheses.</li>
+</ul>
+<aside class="notes">
+<p>Neyman-Pearsonの補題は、尤度比検定を用いて2つの単純な仮説間の仮説検定を行うことを可能にし、証拠から統計的推論を行う方法を提供する。 統計学では、ある結果が、あらかじめ決められた閾値（有意水準）に従って、偶然だけでは起こりそうもないと考えられる場合、統計的に有意と呼ばれる。 「有意性の検定（test of significance）」という言葉は、統計学者Ronald Fisherにより創り出された用語で、監査人の世界でも会計残高や重要な虚偽表示に対する実証手続において重要な役割を果たしている。 統計的仮説検定は、事前に規定された仮説を持たない探索的データ分析とは対比して、確認的データ分析（confirmatory data analysis）と呼ばれることもある。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Statistical hypothesis tests define a procedure that controls (fixes) the probability of incorrectly deciding that a default position (null hypothesis) is incorrect based on how likely it would be for a set of observations to occur if <em>the null hypothesis were true</em>.</li>
+<li>Note that this probability of making an incorrect decision is not the probability that the <strong>null hypothesis is true</strong>, nor whether <strong>any specific alternative hypothesis is true</strong>.</li>
+<li>This contrasts with other possible techniques of decision theory in which the null and alternative hypothesis are treated on a more equal basis.</li>
+</ul>
+<aside class="notes">
+<p>統計的仮説検定は、帰無仮説が真であった場合に、一連の観察結果がどの程度起こりうるかに基づいて、既定の立場（帰無仮説）が誤っていると決定する確率をコントロール（修正）する手順を規定している。 この間違った意思決定をする確率は、帰無仮説が真である確率でも、特定の対立仮説が真である確率でもないことに注意されたい。 これは、帰無仮説と対立仮説がより平等に扱われる決定理論の他の可能な手法とは対照的である。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="minimax-and-bayes-risk" class="slide level2">
+<h2>Minimax and Bayes Risk</h2>
+<ul>
+<li>Minimax is a decision rule published in 1928 by John von Neumann and is used in decision theory, game theory, statistics, and philosophy for minimizing the possible loss for a worst case (maximum loss) scenario. <!-- - Originally formulated for two- players, zero-sum game theory, covering both the cases where players take alternate moves and those where they make simultaneous moves, it has also been extended to more complex games and to general decision-making in the presence of uncertainty. --> <!-- ミニマックス法は、1928年にJohn von Neumannによって発表された意思決定ルールであり、意思決定理論、ゲーム理論、統計学、および哲学において、最悪の場合つまり最大損失（maximum loss）のシナリオで起こりうる損失を最小化するために用いられる。もともとは、2人のプレイヤーが交互に行動する場合と同時に行動する場合の両方を対象としたゼロサムゲーム理論のために定式化されたが、より複雑なゲームや不確実性が存在する場合の一般的な意思決定にも拡張されている。 --></li>
+<li>Bayes risk is the expected value of a loss function.</li>
+<li>It is typically optimized when a Bayes estimator decision rule is designed to minimize the posterior expected loss.</li>
+<li>The most common risk function used for Bayesian estimation is the mean square error (MSE), or squared-error risk <span class="math inline">\mathrm{E}X[\theta (X) - \theta )]</span> for parameter <span class="math inline">\theta</span>. <!-- ベイズリスクは損失関数の期待値である。ベイズ推定量の決定規則が事後的な期待損失を最小化するように設計されるとき、ベイズリスクは通常最適化される。 --> <!-- ベイズ推定に使用される最も一般的なリスク関数は、平均二乗誤差、またはパラメータ$\theta$に対する二乗誤差リスク$\mathrm{E}_x[\hat \theta (x) - \theta^2]$である。 --></li>
+</ul>
+<!-- The probability of something happening multiplied by the resulting cost or benefit if it does is commonly known as the “**expectation value**” and is used to compare levels of risk and commensurate audit task scope and sample size in the subsequent audit program design. -->
+<!-- 何かが起こる確率にそれが起こったときに生じるコストまたは利益を乗じたものは、一般に「期待値」として知られており、その後の監査計画の設計において、リスクのレベルとそれに見合った監査業務範囲およびサンプルサイズを比較するために使用される。 -->
+</section>
+<section class="slide level2">
+
+<ul>
+<li>For audits performed by an outside audit firm, risk assessment is a <em>very crucial stage</em> before accepting an audit engagement.</li>
+<li>It is an integral part of determining the audit tasks that will be performed in the audit program.</li>
+<li>According to ISA315 “<em>the auditor should perform risk assessment procedures to obtain an understanding of the entity and its environment, including its internal control</em>.”</li>
+<li>The auditor obtains initial evidence regarding the classes of transactions at the client and the operating effectiveness of the client’s internal controls.</li>
+<li>In auditing standards, audit risk is stated to include inherent risk (<strong>IR</strong>) control risk (<strong>CR</strong>) and detection risk (<strong>DR</strong>) <!-- -  (Srivastava and Shafer 2008; Jones 2017; Bedard, Graham, and Jackson 2005; Knechel 2007). --></li>
+</ul>
+<aside class="notes">
+<p>外部の監査事務所が行う監査において、リスク評価は監査契約を引き受ける前でも非常に重要な局面である。 またリスク評価は、監査計画において実施する監査業務を決定する上で不可欠なものである。 ISA315は「監査人は、内部統制を含む企業およびその環境を理解するために、リスク評価手続を実施しなければならない。」と規定している。 監査人は、被監査会社の取引類型および被監査会社の内部統制の有効性に関する最初の証拠を入手し、リスク評価手続を実施する。 監査基準では、監査リスクには、固有リスク（inherent risk：IR）、統制リスク（control risk：CR）、および発見リスク（detection risk：DR）が含まれるとされている（Srivastava and Shafer 2008; Jones 2017; Bedard, Graham, and Jackson 2005; Knechel 2007）。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="audit-risk-model" class="slide level2">
 <h2>Audit Risk Model</h2>
@@ -836,10 +969,14 @@ AR = IR \times CR \times DR
 </section>
 <section class="slide level2">
 
-<p>This formula is an extreme simplification of the occurrence of loss in the real world, and is only suitable for the early, exploratory stages of planning an audit. <!-- ここで公式は、現実の世界における損失の発生を極端に単純化したものであり、監査計画の初期の探索的な段階にのみ適している。 --> As evidence is collected at mid-year and year-end, audit tasks will need to be updated, and audit scope changed to meet the interim findings of the audit. <!-- 年度半ばや年度末に監査証拠が収集されるにつれ、監査作業が更新され、監査実施時の発見に応じて監査範囲を変更する必要がある。 --> There are several problems with the simplified formula: <!-- Cox (2008)は、単純化したリスクアプローチの式には下記のような問題があると指摘している。 --></p>
+<ul>
+<li>This formula is an <em>extreme simplification of the occurrence of loss in the real world</em>, and is only suitable for the early, exploratory stages of planning an audit. <!-- ここで公式は、現実の世界における損失の発生を極端に単純化したものであり、監査計画の初期の探索的な段階にのみ適している。 --></li>
+<li>As evidence is collected at mid-year and year-end, audit tasks will need to be updated, and audit scope changed to meet the interim findings of the audit. <!-- 年度半ばや年度末に監査証拠が収集されるにつれ、監査作業が更新され、監査実施時の発見に応じて監査範囲を変更する必要がある。 --></li>
+<li>There are several problems with the simplified formula: <!-- Cox (2008)は、単純化したリスクアプローチの式には下記のような問題があると指摘している。 --></li>
+</ul>
 <ol type="1">
-<li><strong>Poor Resolution</strong>. Typical risk matrices can correctly and unambiguously compare only a small fraction (typically less than 10%) of randomly selected pairs of hazards. They can assign identical ratings to quantitatively very different risks (“range compression”). <!-- 1. **解像度が低い問題**（Poor Resolution） : 一般的なリスクマトリクスでは、無作為に選択したリスク項目の組み合わせのほとんどを正しく確実に比較することができない（通常正しく比較できるのは10％以下）。 --> <!-- リスクマトリクスには、定量的に大きく異なるリスクに対して、同一の評価を割り当ててしまう問題（範囲圧縮（range compression）と呼ばれる問題）がある。 --></li>
-<li><strong>Errors</strong>. Risk matrices can mistakenly assign higher qualitative ratings to quantitatively smaller risks. For risks with negatively correlated frequencies and severities, they can be “worse than useless,” leading to worse-than-random decisions. <!-- 1. **誤りが生じる問題**（Errors）: リスクマトリクスでは定量的に小さいリスクに対して、より高い定量的評価を誤って割り当ててしまう可能性がある。 --> <!-- リスクの発生可能性と潜在的な影響が負の相関を持つリスクについては、リスクマトリクスはランダムより悪い決定を導く、つまり「役に立たないどころか有害である」となる可能性がある。 --></li>
+<li><strong>Poor Resolution</strong>. Typical risk matrices can correctly and unambiguously compare only a small fraction (typically less than 10%) of randomly selected pairs of hazards. <!-- They can assign identical ratings to quantitatively very different risks (“range compression”). --> <!-- 1. **解像度が低い問題**（Poor Resolution） : 一般的なリスクマトリクスでは、無作為に選択したリスク項目の組み合わせのほとんどを正しく確実に比較することができない（通常正しく比較できるのは10％以下）。 --> <!-- リスクマトリクスには、定量的に大きく異なるリスクに対して、同一の評価を割り当ててしまう問題（範囲圧縮（range compression）と呼ばれる問題）がある。 --></li>
+<li><strong>Errors</strong>. Risk matrices can mistakenly assign higher qualitative ratings to quantitatively smaller risks. <!-- For risks with negatively correlated frequencies and severities, they can be “worse than useless,” leading to worse-than-random decisions. --> <!-- 1. **誤りが生じる問題**（Errors）: リスクマトリクスでは定量的に小さいリスクに対して、より高い定量的評価を誤って割り当ててしまう可能性がある。 --> <!-- リスクの発生可能性と潜在的な影響が負の相関を持つリスクについては、リスクマトリクスはランダムより悪い決定を導く、つまり「役に立たないどころか有害である」となる可能性がある。 --></li>
 <li><strong>Suboptimal Resource Allocation</strong>. Effective allocation of resources to risk-reducing countermeasures cannot be based on the categories provided by risk matrices. <!-- 1. **資源の最適配分ができない可能性**（Suboptimal Resource Allocation）: リスクマトリクスによるリスク分類では、リスク低減対策への効果的な資源配分ができない可能性がある。 --></li>
 <li><strong>Ambiguous Inputs and Outputs</strong>. Categorizations of severity cannot be made objectively for uncertain consequences. Inputs to risk matrices (e.g., frequency and severity categorizations) and resulting outputs (i.e., risk ratings) require subjective interpretation, and different users may obtain opposite ratings of the same quantitative risks. –&gt; <!-- 2. **入力と出力が曖昧である問題**（Ambiguous Inputs and Outputs） : 不確実な出力結果が不確実な場合、潜在的な影響の分類を客観的に行うことができない可能性がある。 --> <!-- リスクマトリクスへの入力（例：リスクの発生可能性と潜在的な影響の分類）とその出力結果（例：リスク評価）には主観的な解釈が必要であり、同じ定量的リスクでも利用者によって評価が正反対になる可能性がある。 --></li>
 </ol>
@@ -847,12 +984,31 @@ AR = IR \times CR \times DR
 <section id="accessing-the-secs-edgar-database-of-financial-information" class="slide level2">
 <h2>Accessing the SEC’s EDGAR Database of Financial Information</h2>
 <!-- ## 第3節 SECのEDGAR財務情報データベースへのアクセス -->
-<p>One of the first steps in planning an analytical review is a review of current and prior year filings with the SEC. <!-- 分析的レビューを計画する最初のステップの一つは、現在および過年度のSEC提出書類の確認である。 --> These will include annual and quarterly financial statements, restatements, proxy statements, lawsuits, and numerous other documents, where their acquisition and incorporation into workpapers is an essential prerequisite of audit planning. <!-- これらには、年次報告書、四半期財務諸表、修正再表示、委任状、訴訟、およびその他 多くの文書が含まれ、これらを入手し、監査調書に取り込むことは、監査計画立案の重要な前段階である。 --> Fortunately, complete information is available on the SEC’s website at sec.gov. <!-- 幸いなことに、すべての情報はSECのウェブサイトであるsec.govで入手できる。 --> Many of the most relevant documents to an audit are maintained by the SEC in XBRL format (as .XML files) which can be downloaded into the working papers from the Internet. <!-- 監査に最も関連する文書の多くは、SECによってXBRL形式（.XMLファイル）で整備されており、インターネットから監査調書にダウンロードすることができる。 --> XBRL is eXtensible Business Reporting Language, a freely available, global markup language for exchanging business information. <!-- XBRLとは、拡張可能な事業報告言語（eXtensible Business Reporting Language）の略で、ビジネス情報を伝達するための、自由で利用可能でグローバルなマークアップ言語である。 --> XBRL allows the expression of semantic meaning, which lends to an unambiguous definition of accounts and other financial information. <!-- XBRLは、意味論的意味（semantic meaning）を表現することを可能にし、会計やその他の財務情報の明確な定義を可能にする。 --> XBRL representations of financial reports are more reliable and less subject to misinterpretation than any disseminations in other formats. <!-- XBRLで表現された財務報告書は、他のフォーマットで作成された財務報告書よりも信頼性が高く、誤解を招きにくい。 --> XBRL also allows for automated parsing of information, which can greatly improve the efficiency of audit ratio and statistical analysis. <!-- また、XBRLは情報の自動解析を可能にするため、監査で利用する比率や統計分析の効率を大幅に向上させることができる。 --></p>
-<p>The following code chunk accesses the SEC’s XBRL databases to acquire current and prior year filings for any listed company, and read it as a dataset that can be manipulated by R. <!-- 以下のコード・チャンクにより、SECのXBRLデータベースにアクセスし、任意の上場企業の現在および前年度の提出書類を取得し、Rで処理できるデータセットとして読み込むことができる。 --> For this example, we extract General Motors’ 2016 and 2017 financials from the EDGAR database at sec.gov. I use the finstr package to access EDGAR files [^1] . <!-- この例では、General Motors社の2016年と2017年の財務情報をsec.govのEDGARデータベースから抽出する。本章では、EDGARファイルにアクセスするために`finstr`パッケージを使用する[^1]。 --> [^1]: [訳註：] 日本からEDGARデータベースへのアクセスには制限があるため，訳書ではEDGARデータベースから直接データ取得は行わず，いったんXBRLファイルをダウンロードしてローカルに保存し，そのファイルを読み込む形でデータ取得を行っている。ここでは作業ディレクトリに<code>XBRL</code> フォルダを作成し，そこに<code>xml</code>ファイルを保存している。</p>
+<ul>
+<li>One of the first steps in planning an analytical review is a review of current and prior year filings with the SEC. <!-- 分析的レビューを計画する最初のステップの一つは、現在および過年度のSEC提出書類の確認である。 --></li>
+<li>These will include annual and quarterly financial statements, restatements, proxy statements, lawsuits, and numerous other documents, where their acquisition and incorporation into workpapers is an essential prerequisite of audit planning. <!-- これらには、年次報告書、四半期財務諸表、修正再表示、委任状、訴訟、およびその他 多くの文書が含まれ、これらを入手し、監査調書に取り込むことは、監査計画立案の重要な前段階である。 --></li>
+<li>Fortunately, complete information is available on the SEC’s website at sec.gov. <!-- 幸いなことに、すべての情報はSECのウェブサイトであるsec.govで入手できる。 --></li>
+<li>Many of the most relevant documents to an audit are maintained by the SEC in XBRL format (as .XML files) which can be downloaded into the working papers from the Internet. <!-- 監査に最も関連する文書の多くは、SECによってXBRL形式（.XMLファイル）で整備されており、インターネットから監査調書にダウンロードすることができる。 --></li>
+</ul>
+</section>
+<section id="xbrl" class="slide level2">
+<h2>XBRL</h2>
+<ul>
+<li>XBRL is <strong>eXtensible Business Reporting Language</strong>, a freely available, global markup language for exchanging business information. <!-- XBRLとは、拡張可能な事業報告言語（eXtensible Business Reporting Language）の略で、ビジネス情報を伝達するための、自由で利用可能でグローバルなマークアップ言語である。 --></li>
+<li>XBRL allows the expression of semantic meaning, which lends to an unambiguous definition of accounts and other financial information. <!-- XBRLは、意味論的意味（semantic meaning）を表現することを可能にし、会計やその他の財務情報の明確な定義を可能にする。 --></li>
+<li>XBRL representations of financial reports are more reliable and less subject to misinterpretation than any disseminations in other formats. <!-- XBRLで表現された財務報告書は、他のフォーマットで作成された財務報告書よりも信頼性が高く、誤解を招きにくい。 --></li>
+<li>XBRL also allows for automated parsing of information, which can greatly improve the efficiency of audit ratio and statistical analysis. <!-- また、XBRLは情報の自動解析を可能にするため、監査で利用する比率や統計分析の効率を大幅に向上させることができる。 --></li>
+</ul>
 </section>
 <section class="slide level2">
 
-<h3 id="finstr-package"><code>finstr</code> package</h3>
+<ul>
+<li>The following code chunk accesses the SEC’s XBRL databases to acquire current and prior year filings for any listed company, and read it as a dataset that can be manipulated by R. <!-- 以下のコード・チャンクにより、SECのXBRLデータベースにアクセスし、任意の上場企業の現在および前年度の提出書類を取得し、Rで処理できるデータセットとして読み込むことができる。 --></li>
+<li>For this example, we extract General Motors’ 2016 and 2017 financials from the EDGAR database at sec.gov. I use the finstr package to access EDGAR files [^1] . <!-- この例では、General Motors社の2016年と2017年の財務情報をsec.govのEDGARデータベースから抽出する。本章では、EDGARファイルにアクセスするために`finstr`パッケージを使用する[^1]。 --> [^1]: [訳註：] 日本からEDGARデータベースへのアクセスには制限があるため，訳書ではEDGARデータベースから直接データ取得は行わず，いったんXBRLファイルをダウンロードしてローカルに保存し，そのファイルを読み込む形でデータ取得を行っている。ここでは作業ディレクトリに<code>XBRL</code> フォルダを作成し，そこに<code>xml</code>ファイルを保存している。</li>
+</ul>
+</section>
+<section id="finstr-package" class="slide level2">
+<h2><code>finstr</code> package</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>コード</summary>
@@ -1143,18 +1299,15 @@ Element: LiabilitiesNoncurrent  =  + OtherPostretirementDefinedBenefitPlanLiabil
 Number of elements in errors:  0 </code></pre>
 </div>
 </div>
-<p>Result:</p>
-<pre><code>Number of errors:  0
-Number of elements in errors:  0</code></pre>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a>check<span class="sc">$</span>expression[<span class="dv">1</span>]</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a>check<span class="sc">$</span>expression[<span class="dv">1</span>]</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "+ Revenues - CostsAndExpenses"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a>check<span class="sc">$</span>calculated <span class="sc">/</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a>check<span class="sc">$</span>calculated <span class="sc">/</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  5538  9962 10016</code></pre>
 </div>
@@ -1173,15 +1326,15 @@ Number of elements in errors:  0</code></pre>
 <h2><code>expose()</code> function</h2>
 <p>To rearrange the statement to simple two-level hierarchy use the expose function. <!-- 財務諸表を単純な2階層に再構成するには、`expose()`関数を使用する。 --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">expose</span>(balance_sheet,</span>
-<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Assets</span></span>
-<span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Current Assets"</span> <span class="ot">=</span> <span class="st">"AssetsCurrent"</span>,</span>
-<span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Noncurrent Assets"</span> <span class="ot">=</span> <span class="fu">other</span>(<span class="st">"Assets"</span>),</span>
-<span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Liabilites and equity</span></span>
-<span id="cb29-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Current Liabilities"</span> <span class="ot">=</span> <span class="st">"LiabilitiesCurrent"</span>,</span>
-<span id="cb29-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Noncurrent Liabilities"</span> <span class="ot">=</span> <span class="fu">other</span>(<span class="fu">c</span>(<span class="st">"Liabilities"</span>, <span class="st">"CommitmentsAndContingencies"</span>)),</span>
-<span id="cb29-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Stockholders Equity"</span> <span class="ot">=</span> <span class="st">"StockholdersEquity"</span></span>
-<span id="cb29-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">expose</span>(balance_sheet,</span>
+<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Assets</span></span>
+<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Current Assets"</span> <span class="ot">=</span> <span class="st">"AssetsCurrent"</span>,</span>
+<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Noncurrent Assets"</span> <span class="ot">=</span> <span class="fu">other</span>(<span class="st">"Assets"</span>),</span>
+<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Liabilites and equity</span></span>
+<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Current Liabilities"</span> <span class="ot">=</span> <span class="st">"LiabilitiesCurrent"</span>,</span>
+<span id="cb28-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Noncurrent Liabilities"</span> <span class="ot">=</span> <span class="fu">other</span>(<span class="fu">c</span>(<span class="st">"Liabilities"</span>, <span class="st">"CommitmentsAndContingencies"</span>)),</span>
+<span id="cb28-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Stockholders Equity"</span> <span class="ot">=</span> <span class="st">"StockholdersEquity"</span></span>
+<span id="cb28-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -1201,27 +1354,33 @@ Number of elements in errors:  0</code></pre>
 </div></section><section class="slide level2">
 
 <ul>
-<li>Here, the balance sheet stays divided by assets, liabilities, and equity. For the second level we are exposing current assets from noncurrent and similarly for the liabilities. We choose to separate equity. <!-- ここで、貸借対照表は資産、負債、および資本に区分できる。つぎに、（資産区分において）流動資産は固定資産から分離（expose）でき、負債についても同様に分離する。（貸方については）資本を負債と区分する。 --></li>
-<li>Function expose expects a list of vectors with element names. Function other helps us identify elements without enumerating every single element. Using other reduces potential errors, as the function knows which elements are not specified and keeps the balance sheet complete. <!-- `expose()`関数は、要素名を持つベクトルのリストを受け取る。`other()`関数を使えば、すべての要素を列挙することなく、要素を特定することができる。`other()`を使うことで、どの要素が指定されていないかがわかるので、潜在的なミスを減らすことができ、貸借対照表を（漏れのない）完全なものに保つことができる。 --></li>
-<li>Sometimes it is easier to define a complement than a list of elements. In this case we can use the%without% operator. <!-- 要素のリストよりも（特定の要素の）補数を定義する方が簡単な場合もある。この場合、演算子`%without%`が利用可能である。 --></li>
-<li>Let us expose, for example, tangible and then intangible assets (Table 3): <!-- 例えば、（下記のコードチャンクにより）有形固定資産、無形固定資産の順に表示してみよう（表3）。 --></li>
+<li><p>Here, the balance sheet stays divided by assets, liabilities, and equity. For the second level we are exposing current assets from noncurrent and similarly for the liabilities. We choose to separate equity. <!--
+ここで、貸借対照表は資産、負債、および資本に区分できる。つぎに、（資産区分において）流動資産は固定資産から分離（expose）でき、負債についても同様に分離する。（貸方については）資本を負債と区分する。
+--></p></li>
+<li><p>Function <code>expose()</code> expects a list of vectors with element names. <!--
+`expose()`関数は、要素名を持つベクトルのリストを受け取る。
+--></p></li>
+<li><p>Function <code>other()</code> helps us identify elements without enumerating every single element. <!-- `other()`関数を使えば、すべての要素を列挙することなく、要素を特定することができる。--></p></li>
+<li><p>Using <code>other()</code> reduces potential errors, as the function knows which elements are not specified and keeps the balance sheet complete. <!-- `other()`を使うことで、どの要素が指定されていないかがわかるので、潜在的なミスを減らすことができ、貸借対照表を（漏れのない）完全なものに保つことができる。 --></p></li>
+<li><p>Sometimes it is easier to define a complement than a list of elements. In this case we can use the <code>%without%</code> operator. <!-- 要素のリストよりも（特定の要素の）補数を定義する方が簡単な場合もある。この場合、演算子`%without%`が利用可能である。 --></p></li>
+<li><p>Let us expose, for example, tangible and then intangible assets (Table 3): <!-- 例えば、（下記のコードチャンクにより）有形固定資産、無形固定資産の順に表示してみよう（表3）。 --></p></li>
 </ul>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">expose</span>( balance_sheet,</span>
-<span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Assets</span></span>
-<span id="cb31-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tangible Assets"</span> <span class="ot">=</span> <span class="st">"Assets"</span> <span class="sc">%without%</span> <span class="fu">c</span>(</span>
-<span id="cb31-4"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="st">"AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent"</span>,</span>
-<span id="cb31-5"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NotesAndLoansReceivableNetCurrent"</span>,</span>
-<span id="cb31-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gm_AssetsSubjecttoorAvailableforOperatingLeaseNetCurrent"</span></span>
-<span id="cb31-7"><a href="" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb31-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Intangible Assets"</span> <span class="ot">=</span> <span class="fu">other</span>(<span class="st">"Assets"</span>),</span>
-<span id="cb31-9"><a href="" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Liabilites and equity</span></span>
-<span id="cb31-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Liabilities"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Liabilities"</span>, <span class="st">"CommitmentsAndContingencies"</span>),</span>
-<span id="cb31-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Stockholders Equity"</span> <span class="ot">=</span> <span class="st">"StockholdersEquity"</span></span>
-<span id="cb31-12"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">expose</span>( balance_sheet,</span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Assets</span></span>
+<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tangible Assets"</span> <span class="ot">=</span> <span class="st">"Assets"</span> <span class="sc">%without%</span> <span class="fu">c</span>(</span>
+<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="st">"AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent"</span>,</span>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NotesAndLoansReceivableNetCurrent"</span>,</span>
+<span id="cb30-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gm_AssetsSubjecttoorAvailableforOperatingLeaseNetCurrent"</span></span>
+<span id="cb30-7"><a href="" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb30-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Intangible Assets"</span> <span class="ot">=</span> <span class="fu">other</span>(<span class="st">"Assets"</span>),</span>
+<span id="cb30-9"><a href="" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Liabilites and equity</span></span>
+<span id="cb30-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Liabilities"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Liabilities"</span>, <span class="st">"CommitmentsAndContingencies"</span>),</span>
+<span id="cb30-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Stockholders Equity"</span> <span class="ot">=</span> <span class="st">"StockholdersEquity"</span></span>
+<span id="cb30-12"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Financial statement: 3 observations from 2015-12-31 to 2017-12-31 
  Element                                  2017-12-31 2016-12-31 2015-12-31
@@ -1233,24 +1392,33 @@ Number of elements in errors:  0</code></pre>
  + Stockholders.Equity                     35001      43836      39871    
  + OtherLiabilitiesAndStockholdersEquity_   1199        239        452    </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a>diff_bs <span class="ot">&lt;-</span> <span class="fu">diff</span>(balance_sheet)</span>
-<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">capture.output</span>(</span>
-<span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a>    bs_table <span class="ot">&lt;-</span> <span class="fu">print</span>(</span>
-<span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a>        diff_bs,</span>
-<span id="cb33-5"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">html =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb33-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">big.mark =</span> <span class="st">","</span>,</span>
-<span id="cb33-7"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">dateFormat =</span> <span class="st">"%Y"</span></span>
-<span id="cb33-8"><a href="" aria-hidden="true" tabindex="-1"></a>        ), <span class="at">file =</span> <span class="st">"NUL"</span>)</span>
-<span id="cb33-9"><a href="" aria-hidden="true" tabindex="-1"></a>bs_table <span class="sc">|&gt;</span></span>
-<span id="cb33-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb33-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">longtable =</span> T,</span>
-<span id="cb33-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Lagged Differences in Balance Sheets"</span>,</span>
-<span id="cb33-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># "latex",</span></span>
-<span id="cb33-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">booktabs =</span> T) <span class="sc">|&gt;</span></span>
-<span id="cb33-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(</span>
-<span id="cb33-16"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>),</span>
-<span id="cb33-17"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">full_width =</span> F,</span>
-<span id="cb33-18"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">font_size =</span> <span class="dv">18</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a>diff_bs <span class="ot">&lt;-</span> <span class="fu">diff</span>(balance_sheet)</span>
+<span id="cb32-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">capture.output</span>(</span>
+<span id="cb32-3"><a href="" aria-hidden="true" tabindex="-1"></a>    bs_table <span class="ot">&lt;-</span> <span class="fu">print</span>(</span>
+<span id="cb32-4"><a href="" aria-hidden="true" tabindex="-1"></a>        diff_bs,</span>
+<span id="cb32-5"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">html =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb32-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">big.mark =</span> <span class="st">","</span>,</span>
+<span id="cb32-7"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">dateFormat =</span> <span class="st">"%Y"</span></span>
+<span id="cb32-8"><a href="" aria-hidden="true" tabindex="-1"></a>        ), <span class="at">file =</span> <span class="st">"NUL"</span>)</span>
+<span id="cb32-9"><a href="" aria-hidden="true" tabindex="-1"></a>bs_table <span class="sc">|&gt;</span></span>
+<span id="cb32-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">longtable =</span> T,</span>
+<span id="cb32-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Lagged Differences in Balance Sheets"</span>,</span>
+<span id="cb32-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># "latex",</span></span>
+<span id="cb32-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">booktabs =</span> T) <span class="sc">|&gt;</span></span>
+<span id="cb32-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(</span>
+<span id="cb32-16"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>),</span>
+<span id="cb32-17"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">full_width =</span> F,</span>
+<span id="cb32-18"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">font_size =</span> <span class="dv">18</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="" class="slide level2 output-location-slide"><div class="cell output-location-slide">
 <div class="cell-output-display">
 <table class="table table-striped table-hover table-condensed caption-top" data-quarto-postprocess="true" style="font-size: 18px; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>Lagged Differences in Balance Sheets</caption>
@@ -1317,9 +1485,13 @@ Number of elements in errors:  0</code></pre>
 
 
 </div>
-</div>
-<!-- These are the basic tools that you need to access the information on sec.gov. Note that there are numerous reports on EDGAR; finstr will be able to access and format any financial statements in XBRL format on the EDGAR database. Almost all of the EDGAR information is maintained in HTML format, and I will provide code later in this chapter to access and parse HTML files in EDGAR. -->
-<p>これらは、（SECのウェブサイトである）sec.govの情報にアクセスするために必要な基本ツールである。EDGARには数多くの報告書があることに注意してほしい。finstrを利用することで、EDGARデータベース上のXBRL形式の財務諸表にアクセスし、形式化されたデータを扱うことができる。ほぼすべてのEDGAR情報はHTML形式で管理されており、EDGARのHTMLファイルにアクセスして解析するコードをこの章の後半で説明する。</p>
+</div></section><section class="slide level2">
+
+<ul>
+<li>These are the basic tools that you need to access the information on <code>sec.gov</code>.</li>
+<li>Note that there are numerous reports on <strong>EDGAR</strong>; finstr will be able to access and format any financial statements in <strong>XBRL</strong> format on the EDGAR database.</li>
+<li>Almost all of the EDGAR information is maintained in <strong>HTML</strong> format, and I will provide code later in this chapter to access and parse HTML files in EDGAR. <!-- これらは、（SECのウェブサイトである）sec.govの情報にアクセスするために必要な基本ツールである。EDGARには数多くの報告書があることに注意してほしい。finstrを利用することで、EDGARデータベース上のXBRL形式の財務諸表にアクセスし、形式化されたデータを扱うことができる。ほぼすべてのEDGAR情報はHTML形式で管理されており、EDGARのHTMLファイルにアクセスして解析するコードをこの章の後半で説明する。 --></li>
+</ul>
 </section>
 <section id="caveats-on-accessing-edgar-information-with-r" class="slide level2">
 <h2>Caveats on accessing EDGAR information with R</h2>
@@ -1337,41 +1509,57 @@ Number of elements in errors:  0</code></pre>
 <ul>
 <li>The following are some problems and workarounds I have found in my own use of these packages.</li>
 <li>For example, an auditor might run into problems accessing Tesla’s data in XML format, during a time that the SEC seems to have changed naming conventions.</li>
-<li>Access of Tesla data up to 2018 works properly, as shown in the following code chunk. <!-- 以下は、私自身がこれらのRパッケージを使用する際に発見したいくつかの問題と解決策である。例えば、SECが命名規則を変更したと思われる時期、監査人はTesla社のXML形式のデータにアクセスする際に問題に遭遇する可能性がある。2018年までのTesla社データへのアクセスは、以下のコード・チャンクに示すように適切に機能する。 --></li>
+<li>Access of Tesla data up to 2018 works properly, as shown in the following code chunk. <!-- 以下は、私自身がこれらのRパッケージを使用する際に発見したいくつかの問題と解決策である。
+例えば、SECが命名規則を変更したと思われる時期、監査人はTesla社のXML形式のデータにアクセスする際に問題に遭遇する可能性がある。
+2018年までのTesla社データへのアクセスは、以下のコード・チャンクに示すように適切に機能する。 --></li>
 </ul>
 </section>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("finreportr")</span></span>
-<span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(finreportr)</span>
-<span id="cb34-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The following commands will directly load</span></span>
-<span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># EDGAR information into the R workspace for analysis tesla_co &lt;- CompanyInfo("TSLA")</span></span>
-<span id="cb34-5"><a href="" aria-hidden="true" tabindex="-1"></a>tesla_ann <span class="ot">&lt;-</span> <span class="fu">AnnualReports</span>(<span class="st">"TSLA"</span>)</span>
-<span id="cb34-6"><a href="" aria-hidden="true" tabindex="-1"></a>tesla_ann</span>
-<span id="cb34-7"><a href="" aria-hidden="true" tabindex="-1"></a>tesla_inc <span class="ot">&lt;-</span> <span class="fu">GetIncome</span>(<span class="st">"TSLA"</span>, <span class="dv">2018</span>)</span>
-<span id="cb34-8"><a href="" aria-hidden="true" tabindex="-1"></a>tesla_bs <span class="ot">&lt;-</span> <span class="fu">GetBalanceSheet</span>(<span class="st">"TSLA"</span>, <span class="dv">2018</span>)</span>
-<span id="cb34-9"><a href="" aria-hidden="true" tabindex="-1"></a>tesla_cf <span class="ot">&lt;-</span> <span class="fu">GetCashFlow</span>(<span class="st">"TSLA"</span>, <span class="dv">2018</span>)</span>
-<span id="cb34-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tesla_inc)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("finreportr")</span></span>
+<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(finreportr)</span>
+<span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The following commands will directly load</span></span>
+<span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># EDGAR information into the R workspace for analysis tesla_co &lt;- CompanyInfo("TSLA")</span></span>
+<span id="cb33-5"><a href="" aria-hidden="true" tabindex="-1"></a>tesla_ann <span class="ot">&lt;-</span> <span class="fu">AnnualReports</span>(<span class="st">"TSLA"</span>)</span>
+<span id="cb33-6"><a href="" aria-hidden="true" tabindex="-1"></a>tesla_ann</span>
+<span id="cb33-7"><a href="" aria-hidden="true" tabindex="-1"></a>tesla_inc <span class="ot">&lt;-</span> <span class="fu">GetIncome</span>(<span class="st">"TSLA"</span>, <span class="dv">2018</span>)</span>
+<span id="cb33-8"><a href="" aria-hidden="true" tabindex="-1"></a>tesla_bs <span class="ot">&lt;-</span> <span class="fu">GetBalanceSheet</span>(<span class="st">"TSLA"</span>, <span class="dv">2018</span>)</span>
+<span id="cb33-9"><a href="" aria-hidden="true" tabindex="-1"></a>tesla_cf <span class="ot">&lt;-</span> <span class="fu">GetCashFlow</span>(<span class="st">"TSLA"</span>, <span class="dv">2018</span>)</span>
+<span id="cb33-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tesla_inc)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>But this code will not be able to access Tesla’s 2019 reports, because it throws an error: <!-- しかしこのコードでは、Tesla社の2019年レポートにアクセスすることはできず、エラーメッセージが表示される。 --></p>
 </section>
 <section class="slide level2">
 
 <ul>
-<li>What has happened: rather than asking for ‘tsla-20191231.xml’ the package should have asked for <code>tsla- 10k_20191231_htm.xml</code>.</li>
-<li>EDGAR either made a mistake in their index files, or changed naming conventions.</li>
-<li>You can explore this further by going to their website. <!-- 何が起きたのかというと、「tsla-20191231.xml」を要求するのではなく、「tsla10k_20191231_htm.xml」を要求すべきであった。したがって、EDGARシステムがインデックスファイルの名前を間違ったか、命名規則を変更した可能性がある。EDGARのウェブサイトに行けば、さらに詳しく調べることができる。 --></li>
-<li>You can also use the <code>xml2</code> package to read what is in the correct file, bypassing finreportr altogether (or just wait for the repositories to be updated with corrected code). Consider this workaround to access 2019 data. <!-- また、finreportrの使用をやめて、xml2パッケージを使用することで、正しいファイルの内容を読み取ることもできる（あるいは、修正されたコードでfinreportrのリポジトリが更新されるのを待つだけでよい）。2019年のデータにアクセスするための解決策を考えてみよう。 --></li>
+<li><p>What has happened: rather than asking for <code>tsla-20191231.xml</code> the package should have asked for <code>tsla-10k_20191231_htm.xml</code>.</p></li>
+<li><p>EDGAR either made a mistake in their index files, or changed naming conventions.</p></li>
+<li><p>You can explore this further by going to their website.</p></li>
+<li><p>You can also use the <code>xml2</code> package to read what is in the correct file, bypassing <code>finreportr</code> altogether (or just wait for the repositories to be updated with corrected code).</p></li>
+<li><p>Consider this workaround to access 2019 data.</p></li>
 </ul>
+<aside class="notes">
+<p>何が起きたのかというと、「tsla-20191231.xml」を要求するのではなく、「tsla10k_20191231_htm.xml」を要求すべきであった。したがって、EDGARシステムがインデックスファイルの名前を間違ったか、命名規則を変更した可能性がある。EDGARのウェブサイトに行けば、さらに詳しく調べることができる。 また、finreportrの使用をやめて、xml2パッケージを使用することで、正しいファイルの内容を読み取ることもできる（あるいは、修正されたコードでfinreportrのリポジトリが更新されるのを待つだけでよい）。2019年のデータにアクセスするための解決策を考えてみよう。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section class="slide level2">
-
+<section id="edgar-package" class="slide level2">
+<h2><code>edgar</code> package</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(xml2, curl)</span>
-<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a>u1 <span class="ot">&lt;-</span> <span class="st">"https://www.sec.gov/Archives/edgar/data/1318605/000156459020004475/tsla-10k_20191231_htm.xml"</span></span>
-<span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a>url_file <span class="ot">&lt;-</span> <span class="fu">curl_download</span>(u1, <span class="at">destfile=</span><span class="st">"~/Downloads/u1.xml"</span>) <span class="co"># to download and save</span></span>
-<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a>list_url_1 <span class="ot">&lt;-</span> <span class="fu">as_list</span>(<span class="fu">read_xml</span>(u1)) <span class="co"># to read into R</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(xml2, curl)</span>
+<span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a>u1 <span class="ot">&lt;-</span> <span class="st">"https://www.sec.gov/Archives/edgar/data/1318605/000156459020004475/tsla-10k_20191231_htm.xml"</span></span>
+<span id="cb34-3"><a href="" aria-hidden="true" tabindex="-1"></a>url_file <span class="ot">&lt;-</span> <span class="fu">curl_download</span>(u1, <span class="at">destfile =</span> <span class="st">"~/Downloads/u1.xml"</span>) <span class="co"># to download and save</span></span>
+<span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a>list_url_1 <span class="ot">&lt;-</span> <span class="fu">as_list</span>(<span class="fu">read_xml</span>(u1)) <span class="co"># to read into R</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>If you would rather avoid the challenge of working with XML altogether, there is another workaround.</li>
@@ -1381,20 +1569,20 @@ Number of elements in errors:  0</code></pre>
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("edgar")</span></span>
-<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(edgar)</span>
-<span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a>cik.no <span class="ot">&lt;-</span> <span class="dv">0001318605</span> <span class="co"># Tesla</span></span>
-<span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a>form.type <span class="ot">&lt;-</span> <span class="st">"10-K"</span></span>
-<span id="cb36-5"><a href="" aria-hidden="true" tabindex="-1"></a>filing.year <span class="ot">=</span> <span class="dv">2019</span></span>
-<span id="cb36-6"><a href="" aria-hidden="true" tabindex="-1"></a>quarter <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
-<span id="cb36-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">getFilings</span>(</span>
-<span id="cb36-9"><a href="" aria-hidden="true" tabindex="-1"></a>    cik.no,</span>
-<span id="cb36-10"><a href="" aria-hidden="true" tabindex="-1"></a>    form.type,</span>
-<span id="cb36-11"><a href="" aria-hidden="true" tabindex="-1"></a>    filing.year,</span>
-<span id="cb36-12"><a href="" aria-hidden="true" tabindex="-1"></a>    quarter,</span>
-<span id="cb36-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">downl.permit =</span> <span class="st">"y"</span></span>
-<span id="cb36-14"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("edgar")</span></span>
+<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(edgar)</span>
+<span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a>cik.no <span class="ot">&lt;-</span> <span class="dv">0001318605</span> <span class="co"># Tesla</span></span>
+<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a>form.type <span class="ot">&lt;-</span> <span class="st">"10-K"</span></span>
+<span id="cb35-5"><a href="" aria-hidden="true" tabindex="-1"></a>filing.year <span class="ot">=</span> <span class="dv">2019</span></span>
+<span id="cb35-6"><a href="" aria-hidden="true" tabindex="-1"></a>quarter <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb35-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">getFilings</span>(</span>
+<span id="cb35-9"><a href="" aria-hidden="true" tabindex="-1"></a>    cik.no,</span>
+<span id="cb35-10"><a href="" aria-hidden="true" tabindex="-1"></a>    form.type,</span>
+<span id="cb35-11"><a href="" aria-hidden="true" tabindex="-1"></a>    filing.year,</span>
+<span id="cb35-12"><a href="" aria-hidden="true" tabindex="-1"></a>    quarter,</span>
+<span id="cb35-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">downl.permit =</span> <span class="st">"y"</span></span>
+<span id="cb35-14"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>NULL</code>になりました。</p>
 <p>Additionally, you may wish to look at stock prices, and this is easy to do with the tseries package. <!-- さらに、株価を調べたい場合、`tseries`パッケージを使えば簡単にできる。 --></p>
@@ -1402,100 +1590,259 @@ Number of elements in errors:  0</code></pre>
 <section id="audit-staffing-and-budgets" class="slide level2">
 <h2>Audit Staffing and Budgets</h2>
 <!-- ## 第5節 監査チームの編成と監査契約の予算 -->
-<!-- The audit program lays out in advance of mid-year and year-end tests, the procedures that will be used to collect evidence and to analyze it with the objective of reporting the “correct” audit opinion, while keeping costs within the contracted audit budget. This section provides an example of an audit program that might be created after the risk assessment. In addition to auditing steps on samples drawn from specific computer files, the example demonstrates the sort of results that the audit would produce, and describes the corrective steps or reporting that would accompany the audit results. -->
-<p>監査計画において、監査契約の予算の範囲内でコストを抑えつつ、「正しい」監査意見を報告することを目的として、期中および期末の監査手続に先立ち、監査証拠の収集とその分析に使用する手順を示す。本節では、リスク評価の後に作成される監査計画の例を示す。特定のコンピュータ・ファイルから抽出したサンプルの監査の手順に加え、この例では、監査がどのような結果をもたらすかを示し、監査結果に伴う是正措置や報告について説明する。</p>
-<!-- Audit budgeting, which primarily is determined by the allocation of audit staff, is too often made in an ad hoc manner. Prior years’ budgets and assignments influence staffing; so does availability of knowledgeable staff. Human resource problems, especially in specialized, knowledge intensive industries such as auditing, will never be an exact science. Nonetheless, management should attempt to instill a reasonable level of cost–benefit discipline in staffing decisions. -->
-<p>監査予算は、主に監査スタッフの割り当てによって決定されるが、アドホックな方法で決定されることが多い。前年度の予算と割り当てが監査チームの編成に影響し、知識豊富なスタッフの利用可能性も影響する。人的資源の問題は、特に監査のような専門的で知識集約型の産業においては、決して完全で厳密な科学的手法により決定できるわけではない。それにもかかわらず、監査事務所の監査業務の経営層は、監査チームの編成の意思決定において、合理的なレベルのコスト・ベネフィットの原則を浸透させるよう努めるべきである。</p>
-<!-- At the planning stage, audit managers will determine the scope of each audit test. From a statistical perspective, this can be estimated as a cost proportional to the sample sizes that are decided on for the tests. From a staffing perspective, this is proportional to the number of auditors assigned to the audit tasks. Similarly, the benefit derived from that expenditure can be perceived in terms of the monetary error that could be detected; typically a percentage of the value of the account or years transaction stream. -->
-<p>計画段階で、監査マネジャーは各監査手続の範囲を決定する。統計的な観点からは、これは監査手続のために決定されるサンプルサイズに比例するコストとして見積もることができる。監査チームの編成の観点からは、これは監査業務に割り当てられる監査人の人数に比例する。同様に、その費用から得られる便益は、検出される可能性のある誤謬額（典型的には、勘定の金額のまたは年間の取引量の割合）という点で捉えることができる。</p>
-<!-- Audit programs are collections of audit tests that test different critical transaction and systems processing features in the client’s accounting systems. I assume that audit planning required for each of the individual audit tests is set to a scope which overall maximizes the audit risk reduction for a given cost of conducting the audit with this program. -->
-<p>監査計画とは、被監査会社の会計システムにおける様々な重要な取引やシステム処理の機能を検証する監査手続の総体である。監査計画における個々の監査手続に必要な範囲は、この監査計画を用いて監査を実施するために与えられたコストに対して、全体として監査リスクを最小化するような範囲に設定されると仮定している。</p>
-<!-- Staffing is “lumpy” in the sense that you typically get whole auditors assigned to an audit. The number of auditors assigned to an audit will be commensurate with their potential for detecting monetary error—the benefit received from an audit test. We would hope to see the following sort of relation between the potential benefit derived from performing a set of audit tasks, and the person-months of audit staff assigned to a specific audit program (and thus the cost) (Fig. 1). -->
-<p>監査チームの編成は、通常、監査人全員が監査に割り当てられるという意味で「ざっくりとしたもの（lumpy）」である。監査に割り当てられる監査人の数は、（監査手続から得られる利益である）金銭的誤謬の発見の可能性に見合ったものとなる。本書では、一連の監査業務の実施から得られる潜在的便益と、（コストである）特定の監査計画に割り当てられる監査スタッフの人月（person-month）との間に、以下のような関係があることを想定している（図1）。</p>
+<ul>
+<li>The audit program lays out in advance of mid-year and year-end tests, the procedures that will be used to collect evidence and to analyze it with the objective of reporting the “correct” audit opinion, while keeping costs within the contracted audit budget.</li>
+<li>This section provides an example of an audit program that might be created after the risk assessment. In addition to auditing steps on samples drawn from specific computer files, the example demonstrates the sort of results that the audit would produce, and describes the corrective steps or reporting that would accompany the audit results. <!-- 監査計画において、監査契約の予算の範囲内でコストを抑えつつ、「正しい」監査意見を報告することを目的として、期中および期末の監査手続に先立ち、監査証拠の収集とその分析に使用する手順を示す。本節では、リスク評価の後に作成される監査計画の例を示す。特定のコンピュータ・ファイルから抽出したサンプルの監査の手順に加え、この例では、監査がどのような結果をもたらすかを示し、監査結果に伴う是正措置や報告について説明する。 --></li>
+</ul>
 </section>
 <section class="slide level2">
 
+<ul>
+<li>Audit budgeting, which primarily is determined by the allocation of audit staff, is too often made in an ad hoc manner.</li>
+<li>Prior years’ budgets and assignments influence staffing; so does availability of knowledgeable staff. Human resource problems, especially in specialized, knowledge intensive industries such as auditing, will never be an exact science.</li>
+<li>Nonetheless, management should attempt to instill a reasonable level of cost–benefit discipline in staffing decisions.</li>
+</ul>
+<aside class="notes">
+<p>監査予算は、主に監査スタッフの割り当てによって決定されるが、アドホックな方法で決定されることが多い。前年度の予算と割り当てが監査チームの編成に影響し、知識豊富なスタッフの利用可能性も影響する。人的資源の問題は、特に監査のような専門的で知識集約型の産業においては、決して完全で厳密な科学的手法により決定できるわけではない。それにもかかわらず、監査事務所の監査業務の経営層は、監査チームの編成の意思決定において、合理的なレベルのコスト・ベネフィットの原則を浸透させるよう努めるべきである。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>At the planning stage, audit managers will determine the scope of each audit test. From a statistical perspective, this can be estimated as a cost proportional to the sample sizes that are decided on for the tests.</li>
+<li>From a staffing perspective, this is proportional to the number of auditors assigned to the audit tasks.</li>
+<li>Similarly, the benefit derived from that expenditure can be perceived in terms of the monetary error that could be detected; typically a percentage of the value of the account or years transaction stream.</li>
+</ul>
+<aside class="notes">
+<p>計画段階で、監査マネジャーは各監査手続の範囲を決定する。統計的な観点からは、これは監査手続のために決定されるサンプルサイズに比例するコストとして見積もることができる。監査チームの編成の観点からは、これは監査業務に割り当てられる監査人の人数に比例する。同様に、その費用から得られる便益は、検出される可能性のある誤謬額（典型的には、勘定の金額のまたは年間の取引量の割合）という点で捉えることができる。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><p>Audit programs are collections of audit tests that test different critical transaction and systems processing features in the client’s accounting systems.</p></li>
+<li><p>I assume that audit planning required for each of the individual audit tests is set to a scope which overall maximizes the audit risk reduction for a given cost of conducting the audit with this program.</p></li>
+<li><p>Staffing is “lumpy” in the sense that you typically get whole auditors assigned to an audit.</p></li>
+<li><p>The number of auditors assigned to an audit will be commensurate with their potential for detecting monetary error—the benefit received from an audit test.</p></li>
+<li><p>We would hope to see the following sort of relation between the potential benefit derived from performing a set of audit tasks, and the person-months of audit staff assigned to a specific audit program (and thus the cost) (Fig. 1).</p></li>
+</ul>
+<aside class="notes">
+<p>監査計画とは、被監査会社の会計システムにおける様々な重要な取引やシステム処理の機能を検証する監査手続の総体である。監査計画における個々の監査手続に必要な範囲は、この監査計画を用いて監査を実施するために与えられたコストに対して、全体として監査リスクを最小化するような範囲に設定されると仮定している。 監査チームの編成は、通常、監査人全員が監査に割り当てられるという意味で「ざっくりとしたもの（lumpy）」である。監査に割り当てられる監査人の数は、（監査手続から得られる利益である）金銭的誤謬の発見の可能性に見合ったものとなる。本書では、一連の監査業務の実施から得られる潜在的便益と、（コストである）特定の監査計画に割り当てられる監査スタッフの人月（person-month）との間に、以下のような関係があることを想定している（図1）。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="audit-staffing-and-budgets-1">Audit Staffing and Budgets</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a>benefit <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">10000</span>, <span class="dv">10</span>)</span>
-<span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="" aria-hidden="true" tabindex="-1"></a>staff_allocated <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(benefit, <span class="fu">floor</span>(<span class="dv">10</span><span class="sc">*</span>(<span class="fu">log</span>(benefit<span class="sc">^</span>.<span class="dv">06</span>))))</span>
-<span id="cb37-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(staff_allocated, <span class="fu">aes</span>(staff_allocated[,<span class="dv">1</span>],staff_allocated[,<span class="dv">2</span>]) ) <span class="sc">+</span></span>
-<span id="cb37-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb37-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span><span class="st">"Audit Risk Reduction"</span>,</span>
-<span id="cb37-8"><a href="" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span><span class="st">"Staff Auditor Person-Months"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a>benefit <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">10000</span>, <span class="dv">10</span>)</span>
+<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a>staff_allocated <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(benefit, <span class="fu">floor</span>(<span class="dv">10</span><span class="sc">*</span>(<span class="fu">log</span>(benefit<span class="sc">^</span>.<span class="dv">06</span>))))</span>
+<span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(staff_allocated, <span class="fu">aes</span>(staff_allocated[,<span class="dv">1</span>],staff_allocated[,<span class="dv">2</span>]) ) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb36-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span><span class="st">"Audit Risk Reduction"</span>,</span>
+<span id="cb36-8"><a href="" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span><span class="st">"Staff Auditor Person-Months"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="gaisho_2024_04_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<img data-src="gaisho_2024_04_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
 <section id="the-risk-assessment-matrix" class="slide level2">
 <h2>The Risk Assessment Matrix</h2>
 <!-- ## 第6節 リスク評価マトリクス -->
-<!-- A Risk Assessment Matrix is constructed prior to and during the analytical review phase of the audit (see Fig. 2 for an example of a RAM dashboard). During this phase, the auditor will scan any business intelligence from media and Internet sources that would be relevant to potential risks to be encountered in the audit of the client. Prior years’ working papers will also be perused for ascertain experiences, client specific risks, and application of the “rule of 3’s” to adjust any anticipated risks and expectations during the current year audit. -->
-<p>リスク評価マトリクスは、監査の分析的手続の前段階およびその実施中に 作成される（RAMダッシュボードの例については、図 2を参照）。この段階において、監査人は、メディアやインターネット上の情報源から、当該被監査会社の監査で遭遇する潜在的なリスクに関連するビジネス情報を調べ上げる。また、過年度の監査調書を閲覧し、経験やクライアント固有のリスクを確認し、「3つの法則（rules of three）」を適用して、当年度の監査で想定されるリスクや 予想事項を調整する。</p>
-<!-- Audit firms tend to enforce firm specific procedures in auditing. Each of the “Big 4” audit firms (which audit almost all of the listed firms on US exchanges) displayed unique biases in rendering adverse attestations: Ernst and Young focused on accounts receivables, revenue recognition, taxes, and fixed assets; PricewaterhouseCoopers focused on accounts receivables, revenue recognition, taxes, and payables; KPMG focused on accounts receivables, revenue recognition, taxes, and inventory; and Deloitte and Touche focused on revenue recognition, taxes, liabilities, inventory, and executive compensation (Cheffers 2012). These biases are likely to reflect signature audit methods, internal forms and checklists, and audit histories that are unique to individual firms. These firms will consequently allocate larger portions of the audit budget to certain accounts at the expense of others. Additionally, auditors tend to allocate more time to auditing debit balance accounts, assuming double-entry will assure the accuracy of the credit accounts. The specific accounts selected for audit depend on firm policy, procedures, and managing partners. -->
-<p>監査事務所は、監査事務所特有の手続を実施する傾向がある。（米国証券取引所の上場企業のほとんどを監査している）4大監査事務所は、不適正意見を行う際にそれぞれ独自の傾向がある。それぞれ、EY監査事務所（Ernst &amp; Young）は売掛金、収益認識、税金、および固定資産、PwC監査事務所（PricewaterhouseCoopers）は売掛金、収益認識、税金、および買掛金、KPMG監査事務所は売掛金、収益認識、税金、および棚卸資産、Deloitte監査事務所（Deloitte &amp; Touche）は収益認識、税金、負債、棚卸資産、および役員報酬に重点を置いている（Cheffers 2012）。このような傾向は、各監査事務所特有の監査手法、内部規程、チェックリスト、および監査事務所の歴史を反映していると考えられる。このような監査事務所は、その結果、監査予算の多くを特定の勘定科目に割り当て、他の勘定科目を犠牲にすることになる。さらに、監査人は、複式簿記の法則により貸方勘定の正確性を確保するために、借方勘定残高の監査に多くの時間を割く傾向がある。監査対象として選択される勘定科目は、監査事務所の方針、手続、パートナーによって異なる。</p>
-<!-- In this section, I will show how to construct a Risk Assessment Matrix on a client–server dashboard. Dashboards are well suited to auditing—they accommodate the information needs of auditors (and their laptops) in the field, while assuring the security, integrity, completeness, and privacy of client and audit records behind firewalls. The Risk Assessment Matrix will assume we are planning the audit of the simulated system presented in chapter “Simulated Transactions for Auditing Service Organizations” (Fig. 2). -->
-<p>本節では、被監査会社サーバーのダッシュボード上でリスク評価マトリクスを作成する方法を紹介する。ダッシュボードは監査に適している。ファイアウォールの背後にある被監査会社と監査調書記録のセキュリティ、一貫性、完全性、およびプライバシーを保証しながら、現場の監査人（とそのノートパソコン）の情報ニーズに対応する。後にシステムの監査を行っていると仮定した場合のリスク評価マトリクスを示す。</p>
-<!-- ## Using Shiny to create a Risk Assessment Matrix Dashboard -->
+<ul>
+<li>A <strong>Risk Assessment Matrix</strong> is constructed prior to and during the <strong>analytical review</strong> phase of the audit (see Fig. 2 for an example of a RAM dashboard).</li>
+<li>During this phase, the auditor will scan any business intelligence from media and Internet sources that would be relevant to potential risks to be encountered in the audit of the client. Prior years’ working papers will also be perused for ascertain experiences, client specific risks, and application of the “rule of 3’s” to adjust any anticipated risks and expectations during the current year audit.</li>
+</ul>
+<aside class="notes">
+<p>リスク評価マトリクスは、監査の分析的手続の前段階およびその実施中に 作成される（RAMダッシュボードの例については、図 2を参照）。 この段階において、監査人は、メディアやインターネット上の情報源から、当該被監査会社の監査で遭遇する潜在的なリスクに関連するビジネス情報を調べ上げる。ま た、過年度の監査調書を閲覧し、経験やクライアント固有のリスクを確認し、「3つの法則（rules of three）」を適用して、当年度の監査で想定されるリスクや 予想事項を調整する。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="第7節-リスク評価マトリクス作成のためのshinyの利用" class="slide level2">
-<h2>第7節 リスク評価マトリクス作成のためのShinyの利用</h2>
-<!-- Auditors face a particular problem in the field, in that much of the information they need may be in prior years’ workpapers, in proprietary client files, in central locations in the audit firm, behind firewalls, and on powerful servers or cloud platforms. To secure the clients records and address privacy concerns, it is important that only the necessary information be maintained on mobile platforms such as laptops that are used in the field. -->
-<p>監査人が現場で特に問題に直面するのは、必要な情報の多くが、過年度の監査調書、被監査会社の機密ファイル、監査事務所内の中枢部、ファイアウォールの向こう側、および強力なサーバーやクラウドプラットフォーム上に存在する可能性があるという点である。被監査会社の記録を保護し、プライバシーの問題に対処するためには、必要な情報のみを、現場で使用されるノートパソコンなどの モバイル機器の環境で管理することが重要である。</p>
-<!-- The standard solution to such problems is found in client–server systems that place high-performance, secure systems on a centralized server, and provide the field auditor with light, client software that runs on a laptop, communicating with the server over the Internet. Shiny is the client–server extension of the R language, and as with the rest of the R language, is uniquely suited to handling the ad hoc nature of audits, where each audit often represents an entirely new set of analyses. -->
-<p>このような問題に対する標準的な解決策には、高性能で安全なシステムを集中管理されたサーバーに置き、現場の監査人には（インターネットを介してサーバーと通信して）ラップトップ上で動作する動作の軽いクライアント・ソフトウェアを提供するクライアントサーバーシステムがある。</p>
-<!-- Shiny is a tool for fast prototyping of digital dashboards, giving you a large number of HTML Widgets at your disposal which lend themselves really well to building general-purpose web applications. Shiny is particularly suited for fast prototyping and is fairly easy to use for someone who is not a programmer. Dashboards locally display some data (such as in a database or a file) providing a variety of metrics in an interactive way. -->
-<p>ShinyはR言語のクライアントサーバーの拡張であり、R言語の他の部分と同様に、監査のアドホックな性質を扱うのに独自の適性がある。Shinyは、デジタル・ダッシュボードのプロトタイプを素早く作成するためのツールであり、自由に使える多数のHTMLウィジェットを提供し、汎用のウェブ・アプリケーションを構築するのに非常に適している。Shynyは特に高速なプロトタイプの作成に適しており、プログラマーでなくてもかなり簡単に使うことができる。ダッシュボードは、（データベースやファイルなどの）データをローカルに表示し、インタラクティブな方法で様々な指標を示す。</p>
-<!-- Reactive programming starts with reactive values that change in response to user input (such as positioning the confidence and cost sliders) and builds on top of them with reactive expressions that access reactive values and execute other reactive expressions. Reactivity based code for the Risk Assessment Matrix dashboard appears below. This has two parts: (1) the user interface “ui” which conceivably would operate on the field auditor’s laptop, and (2) the server-side “server” operations that would take place at the audit firms headquarters behind a firewall, and with access to firm and client files. First I will look at the user interface. -->
-<p>リアクティブプログラミング（Reactive programming）は、ユーザーの入力に反応して変化するリアクティブ値（信頼度スライダーやコストスライダーの位置決めなど）から始まり、リアクティブ値に反応して他のリアクティブ表現を実行するリアクティブ表現によりダッシュボードの良く見える場所に作成される。リスク評価マトリクス・ダッシュボードのリアクティブベースのコードを以下で示す。2つの部分から構成されている。すなわち、(1)現場の監査人のノートパソコンで動作すると考えられる「ユーザインタフェース（user interface：UI）」、および(2)ファイアウォールで保護された監査事務所の本部で行われ、監査事務所と被監査会社のファイルにアクセスできるサーバサイドの「サーバ（server：server）」操作である。まず、ユーザーインターフェースを見てみよう。</p>
+<section class="slide level2">
+
+<ul>
+<li>Audit firms tend to enforce firm specific procedures in auditing.</li>
+<li>Each of the “Big 4” audit firms <!-- (which audit almost all of the listed firms on US exchanges) --> displayed unique biases in rendering adverse attestations:
+<ul>
+<li>Ernst and Young focused on accounts receivables, revenue recognition, taxes, and fixed assets;</li>
+<li>PricewaterhouseCoopers focused on accounts receivables, revenue recognition, taxes, and payables;</li>
+<li>KPMG focused on accounts receivables, revenue recognition, taxes, and inventory; and</li>
+<li>Deloitte and Touche focused on revenue recognition, taxes, liabilities, inventory, and executive compensation (Cheffers 2012).</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>監査事務所は、監査事務所特有の手続を実施する傾向がある。（米国証券取引所の上場企業のほとんどを監査している）4大監査事務所は、不適正意見を行う際にそれぞれ独自の傾向がある。 それぞれ、EY監査事務所（Ernst &amp; Young）は売掛金、収益認識、税金、および固定資産、 PwC監査事務所（PricewaterhouseCoopers）は売掛金、収益認識、税金、および買掛金、 KPMG監査事務所は売掛金、収益認識、税金、および棚卸資産、 Deloitte監査事務所（Deloitte &amp; Touche）は収益認識、税金、負債、棚卸資産、および役員報酬に重点を置いている（Cheffers 2012）。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>These biases are likely to reflect signature audit methods, internal forms and checklists, and audit histories that are unique to individual firms.</li>
+<li>These firms will consequently allocate larger portions of the audit budget to certain accounts at the expense of others.</li>
+<li>Additionally, auditors tend to allocate more time to auditing debit balance accounts, assuming double-entry will assure the accuracy of the credit accounts.</li>
+<li>The specific accounts selected for audit depend on firm policy, procedures, and managing partners.</li>
+</ul>
+<aside class="notes">
+<p>このような監査事務所は、その結果、監査予算の多くを特定の勘定科目に割り当て、他の勘定科目を犠牲にすることになる。 さらに、監査人は、複式簿記の法則により貸方勘定の正確性を確保するために、借方勘定残高の監査に多くの時間を割く傾向がある。 監査対象として選択される勘定科目は、監査事務所の方針、手続、パートナーによって異なる。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>In this section, I will show how to construct a Risk Assessment Matrix on a <em>client–server dashboard</em>.</li>
+<li>Dashboards are well suited to auditing—they accommodate the information needs of auditors (and their laptops) in the field, while assuring the security, integrity, completeness, and privacy of client and audit records behind firewalls.</li>
+<li>The Risk Assessment Matrix will assume we are planning the audit of the simulated system presented in chapter “Simulated Transactions for Auditing Service Organizations” (Fig. 2).</li>
+</ul>
+<aside class="notes">
+<p>本節では、クライアントサーバーのダッシュボード上でリスク評価マトリクスを作成する方法を紹介する。<memo>client-serverはクライアントサーバー ダッシュボードは監査に適している。ファイアウォールの背後にある被監査会社と監査調書記録のセキュリティ、一貫性、完全性、およびプライバシーを保証しながら、現場の監査人（とそのノートパソコン）の情報ニーズに対応する。 後にシステムの監査を行っていると仮定した場合のリスク評価マトリクスを示す。</memo></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="using-shiny-to-create-a-risk-assessment-matrix-dashboard" class="title-slide slide level1 center">
+<h1>Using Shiny to create a Risk Assessment Matrix Dashboard</h1>
+
+</section>
+<section id="ram" class="slide level2">
+<h2>RAM</h2>
+<!-- ## 第7節 リスク評価マトリクス作成のためのShinyの利用 -->
+<ul>
+<li>Auditors face a particular problem in the field, in that much of the information they need may be in prior years’ workpapers, in proprietary client files, in central locations in the audit firm, behind firewalls, and on powerful servers or cloud platforms. <!-- - To secure the clients records and address privacy concerns, it is important that only the necessary information be maintained on mobile platforms such as laptops that are used in the field. --> <!-- 監査人が現場で特に問題に直面するのは、必要な情報の多くが、過年度の監査調書、被監査会社の機密ファイル、監査事務所内の中枢部、ファイアウォールの向こう側、および強力なサーバーやクラウドプラットフォーム上に存在する可能性があるという点である。
+被監査会社の記録を保護し、プライバシーの問題に対処するためには、必要な情報のみを、現場で使用されるノートパソコンなどの モバイル機器の環境で管理することが重要である。 --></li>
+<li>The standard solution to such problems is found in client–server systems that place high-performance, secure systems on a centralized server, and provide the field auditor with light, client software that runs on a laptop, communicating with the server over the Internet.</li>
+<li><code>Shiny</code> is the client–server extension of the R language, and as with the rest of the R language, is uniquely suited to handling the ad hoc nature of audits, where each audit often represents an entirely new set of analyses. <!-- このような問題に対する標準的な解決策には、高性能で安全なシステムを集中管理されたサーバーに置き、現場の監査人には（インターネットを介してサーバーと通信して）ラップトップ上で動作する動作の軽いクライアント・ソフトウェアを提供するクライアントサーバーシステムがある。 --></li>
+</ul>
 </section>
 <section id="shiny-app" class="slide level2">
 <h2>Shiny App</h2>
+<ul>
+<li><code>Shiny</code> is a tool for fast prototyping of digital dashboards, giving you a large number of HTML Widgets at your disposal which lend themselves really well to building general-purpose web applications.</li>
+<li><code>Shiny</code> is particularly suited for fast prototyping and is fairly easy to use for someone who is not a programmer. Dashboards locally display some data (such as in a database or a file) providing a variety of metrics in an interactive way. <!-- ShinyはR言語のクライアントサーバーの拡張であり、R言語の他の部分と同様に、監査のアドホックな性質を扱うのに独自の適性がある。Shinyは、デジタル・ダッシュボードのプロトタイプを素早く作成するためのツールであり、自由に使える多数のHTMLウィジェットを提供し、汎用のウェブ・アプリケーションを構築するのに非常に適している。Shynyは特に高速なプロトタイプの作成に適しており、プログラマーでなくてもかなり簡単に使うことができる。ダッシュボードは、（データベースやファイルなどの）データをローカルに表示し、インタラクティブな方法で様々な指標を示す。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="create-a-ram-dashboard">Create a RAM Dashboard</h3>
+<ul>
+<li>Reactive programming starts with reactive values that change in response to user input <!-- (such as positioning the confidence and cost sliders)  --> and builds on top of them with reactive expressions that access reactive values and execute other reactive expressions.</li>
+<li>Reactivity based code for the Risk Assessment Matrix dashboard appears below.</li>
+<li>This has two parts: (1) the <strong>user interface</strong> “ui” which conceivably would operate on the field auditor’s laptop, and (2) the <strong>server-side “server” operations</strong> that would take place at the audit firms headquarters behind a firewall, and with access to firm and client files.</li>
+<li>First I will look at the user interface. <!-- リアクティブプログラミング（Reactive programming）は、ユーザーの入力に反応して変化するリアクティブ値（信頼度スライダーやコストスライダーの位置決めなど）から始まり、リアクティブ値に反応して他のリアクティブ表現を実行するリアクティブ表現によりダッシュボードの良く見える場所に作成される。リスク評価マトリクス・ダッシュボードのリアクティブベースのコードを以下で示す。2つの部分から構成されている。すなわち、(1)現場の監査人のノートパソコンで動作すると考えられる「ユーザインタフェース（user interface：UI）」、および(2)ファイアウォールで保護された監査事務所の本部で行われ、監査事務所と被監査会社のファイルにアクセスできるサーバサイドの「サーバ（server：server）」操作である。まず、ユーザーインターフェースを見てみよう。 --></li>
+</ul>
+</section>
+<section id="shiny-app-1" class="slide level2">
+<h2>Shiny App</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Define UI for application</span></span>
-<span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny) <span class="co"># Load the shiny package</span></span>
-<span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">titlePanel</span>(<span class="st">"Risk Assessment Matrix"</span>),</span>
-<span id="cb38-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarLayout</span>(</span>
-<span id="cb38-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sidebarPanel</span>(</span>
-<span id="cb38-7"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Input: 監査テストの統計的信頼水準</span></span>
-<span id="cb38-8"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sliderInput</span>(<span class="st">"confidence"</span>, <span class="st">"Confidence:"</span>,</span>
-<span id="cb38-9"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">min =</span> .<span class="dv">7</span>,</span>
-<span id="cb38-10"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">max =</span> .<span class="dv">999</span>,</span>
-<span id="cb38-11"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">value =</span> .<span class="dv">95</span>),</span>
-<span id="cb38-12"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="co"># Input: サンプル取引ごとの監査コスト</span></span>
-<span id="cb38-13"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sliderInput</span>(<span class="st">"cost"</span>, <span class="st">"Audit $ / transaction:"</span>,</span>
-<span id="cb38-14"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">min =</span> <span class="dv">0</span>,</span>
-<span id="cb38-15"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">max =</span> <span class="dv">500</span>,</span>
-<span id="cb38-16"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">value =</span> <span class="dv">100</span>),</span>
-<span id="cb38-17"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="co"># Input: Text for providing a caption for the RAM</span></span>
-<span id="cb38-18"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="fu">textInput</span>(</span>
-<span id="cb38-19"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">inputId =</span> <span class="st">"caption"</span>,</span>
-<span id="cb38-20"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">label =</span> <span class="st">"クライアント:"</span>,</span>
-<span id="cb38-21"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">value =</span> <span class="st">"XYZ Corp."</span>)</span>
-<span id="cb38-22"><a href="" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb38-23"><a href="" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Main panel for displaying outputs</span></span>
-<span id="cb38-24"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mainPanel</span>(</span>
-<span id="cb38-25"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Output: slider values entered</span></span>
-<span id="cb38-26"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">tableOutput</span>(<span class="st">"values"</span>),</span>
-<span id="cb38-27"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Output: Formatted text for caption</span></span>
-<span id="cb38-28"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="fu">h3</span>(<span class="fu">textOutput</span>(<span class="st">"caption"</span>, <span class="at">container =</span> span)), <span class="co"># Output: total cost of the audit</span></span>
-<span id="cb38-29"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="fu">textOutput</span>(<span class="st">"view"</span>),</span>
-<span id="cb38-30"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Output: RAM summary with sample sizes (scope) and cost</span></span>
-<span id="cb38-31"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="fu">verbatimTextOutput</span>(<span class="st">"summary"</span>),</span>
-<span id="cb38-32"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># h6("Risk choices are: 1 = Low, 2=Medium, 3=High"),</span></span>
-<span id="cb38-33"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"リスク選択: 1 = 低, 2 = 中, 3 = 高"</span>),</span>
-<span id="cb38-34"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># h6("Risk_intel = the risk level indicated by business intelligence scanning"),</span></span>
-<span id="cb38-35"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"リスク知能 = ビジネス・インテリジェンス・スキャンニングで示されるリスク水準"</span>),</span>
-<span id="cb38-36"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># h6("Risk_prior = the risk level indicated by audits in prior years"),</span></span>
-<span id="cb38-37"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"前年度リスク = 前期に監査人が示したリスク水準"</span>),</span>
-<span id="cb38-38"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># h6("Account Amount and the Ave. Transaction size are in $ without decimals or 000 dividers"),</span></span>
-<span id="cb38-39"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"Scope = estimated discovery sample size that will be needed in the audit of this account"</span>),</span>
-<span id="cb38-40"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"Audit cost = audit labor dollars per sampled transaction"</span>),</span>
-<span id="cb38-41"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"Confidence = statistical confidence"</span>)</span>
-<span id="cb38-42"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb38-43"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb38-44"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Define UI for application</span></span>
+<span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny) <span class="co"># Load the shiny package</span></span>
+<span id="cb37-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb37-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">titlePanel</span>(<span class="st">"Risk Assessment Matrix"</span>),</span>
+<span id="cb37-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarLayout</span>(</span>
+<span id="cb37-7"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sidebarPanel</span>(</span>
+<span id="cb37-8"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Input: 監査テストの統計的信頼水準</span></span>
+<span id="cb37-9"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sliderInput</span>(<span class="st">"confidence"</span>, <span class="st">"Confidence:"</span>,</span>
+<span id="cb37-10"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">min =</span> .<span class="dv">7</span>,</span>
+<span id="cb37-11"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">max =</span> .<span class="dv">999</span>,</span>
+<span id="cb37-12"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">value =</span> .<span class="dv">95</span>),</span>
+<span id="cb37-13"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Input: サンプル取引ごとの監査コスト</span></span>
+<span id="cb37-14"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sliderInput</span>(<span class="st">"cost"</span>, <span class="st">"Audit $ / transaction:"</span>,</span>
+<span id="cb37-15"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">min =</span> <span class="dv">0</span>,</span>
+<span id="cb37-16"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">max =</span> <span class="dv">500</span>,</span>
+<span id="cb37-17"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">value =</span> <span class="dv">100</span>),</span>
+<span id="cb37-18"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Input: Text for providing a caption for the RAM</span></span>
+<span id="cb37-19"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">textInput</span>(</span>
+<span id="cb37-20"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="at">inputId =</span> <span class="st">"caption"</span>,</span>
+<span id="cb37-21"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="st">"クライアント:"</span>,</span>
+<span id="cb37-22"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="at">value =</span> <span class="st">"XYZ Corp."</span>)</span>
+<span id="cb37-23"><a href="" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb37-24"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Main panel for displaying outputs</span></span>
+<span id="cb37-25"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mainPanel</span>(</span>
+<span id="cb37-26"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Output: slider values entered</span></span>
+<span id="cb37-27"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">tableOutput</span>(<span class="st">"values"</span>),</span>
+<span id="cb37-28"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Output: Formatted text for caption</span></span>
+<span id="cb37-29"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h3</span>(<span class="fu">textOutput</span>(<span class="st">"caption"</span>, <span class="at">container =</span> span)),</span>
+<span id="cb37-30"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Output: total cost of the audit</span></span>
+<span id="cb37-31"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">textOutput</span>(<span class="st">"view"</span>),</span>
+<span id="cb37-32"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Output: RAM summary with sample sizes (scope) and cost</span></span>
+<span id="cb37-33"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">verbatimTextOutput</span>(<span class="st">"summary"</span>),</span>
+<span id="cb37-34"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"リスク選択: 1 = 低, 2 = 中, 3 = 高"</span>),</span>
+<span id="cb37-35"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"リスク知能 = ビジネス・インテリジェンス・スキャンニングで示されるリスク水準"</span>),</span>
+<span id="cb37-36"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"前年度リスク = 前期に監査人が示したリスク水準"</span>),</span>
+<span id="cb37-37"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"Scope = estimated discovery sample size that will be needed in the audit of this account"</span>),</span>
+<span id="cb37-38"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"Audit cost = audit labor dollars per sampled transaction"</span>),</span>
+<span id="cb37-39"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"Confidence = statistical confidence"</span>),</span>
+<span id="cb37-40"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">h6</span>(<span class="st">"Account Amount and the Ave. Transaction size are in $ without decimals or 000 dividers"</span>)</span>
+<span id="cb37-41"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb37-42"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb37-43"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
@@ -1511,71 +1858,114 @@ n \approx  \frac{log(1-confidence)}{log(1-\frac{10-risk_{intelligence} \times ri
 <li>These are dynamically (reactively in the Shiny vernacular) updated for changes in confidence level and transaction auditing costs established by the auditor. <!-- これらは、監査人による信頼度と取引監査コストの設定の変更に対して、動的に（Shiny流に言えばリアクティブに）更新される。 --></li>
 <li>A total audit cost of field tests is computed, to be incorporated into the overall budget of the audit. <!-- 実証手続の総監査費用が計算され、監査全体の予算に組み込まれる。 --></li>
 </ul>
-<p>In practice, the server side of the Risk Assessment Matrix will have access to prior years working papers (assuming they are digitized) and to client accounting files, as well as proprietary audit firm data and technologies. <!-- 実際には、リスク評価マトリクスのサーバーサイドは、監査事務所の機密データや技術だけでなく、（デジタル化されていることが前提であるが）過年度の監査調書や被監査会社の会計ファイルにアクセスすることができる。 --></p>
+</section></section>
+<section>
+<section id="確率の補足" class="title-slide slide level1 center">
+<h1>確率の補足</h1>
+<ul>
+<li>この式は、<strong>二項分布</strong>に基づく発見サンプルサイズ (discovery sample size)」を計算するための公式</li>
+<li>二項分布はあるイベントが <span class="math inline">n</span> 回の試行の中で何回発生するかを表す確率分布</li>
+<li>成功確率を<span class="math inline">p</span>としたとき、試行回数 <span class="math inline">n</span> の中で少なくとも1回そのイベントが発生する確率を求める。</li>
+<li>サンプリングにおいて問題となるのは、「ある許容誤差率」以上のエラーが存在するかどうかを確認するために、どれだけのサンプルサイズを用意すればよいか、という点</li>
+<li>この場合、誤り率 <span class="math inline">p = 0.05</span> であり、これを発見するために必要なサンプルサイズ <span class="math inline">n</span> を求めています。</li>
+</ul>
+</section>
+<section id="少なくとも1つの誤りを見つける確率" class="slide level2">
+<h2>少なくとも1つの誤りを見つける確率</h2>
+<p>あるサンプルサイズ <span class="math inline">n</span> を持ち、誤り率が <span class="math inline">p = 0.05</span> であると仮定 <!-- 少なくとも1つの誤りが検出される確率を計算する。 --></p>
+<ol type="1">
+<li><p><strong>誤りが1つも見つからない確率</strong>: 各サンプルで誤りが発生しない確率は<span class="math inline">1 - p</span>で，<span class="math inline">n</span>の全てにおいて誤りが1つも発生しない確率は<span class="math inline">(1 - p)^n</span></p></li>
+<li><p><strong>少なくとも1つの誤りが見つかる確率</strong>:</p>
+<ul>
+<li>少なくとも1つの誤りが発生する確率は、1から「誤りが1つも見つからない確率」を引いたもの。<span class="math inline">1 - (1 - p)^n</span></li>
+</ul></li>
+<li><p><strong>信頼水準<span class="math inline">\text{confidence}</span></strong>: 「少なくとも1つの誤りを検出できる確率」が信頼水準<span class="math inline">\text{confidence}</span>以上であるために必要なサンプルサイズ<span class="math inline">n</span>を計算 <span class="math display">
+1 - (1 - p)^n = \text{confidence}
+</span></p></li>
+</ol>
+</section>
+<section id="サンプルサイズnを求める" class="slide level2">
+<h2>サンプルサイズ<span class="math inline">n</span>を求める</h2>
+<p>サンプルサイズ<span class="math inline">n</span>を解く。両辺から1を引いて整理して，対数をとる。 <span class="math display">
+\begin{aligned}
+(1 - p)^n &amp;= 1 - \text{confidence}\\
+\log((1 - p)^n) &amp;= \log(1 - \text{confidence})\\
+n \log(1 - p) &amp;= \log(1 - \text{confidence})
+\end{aligned}
+</span></p>
+<p><span class="math inline">n</span> を求めるために、両辺を <span class="math inline">\log(1 - p)</span> で割ると， <span class="math display">
+n = \frac{\log(1 - \text{confidence})}{\log(1 - p)}
+</span> <!-- これが、サンプルサイズ$n$を計算する公式です。 --></p>
+</section>
+<section class="slide level2">
+
+<p>許容誤差率<span class="math inline">p = 0.05</span>と信頼水準<span class="math inline">\text{confidence} = 0.95</span>を使うと次のようになる。 <span class="math display">
+n = \frac{\log(1 - 0.95)}{\log(1 - 0.05)}
+</span></p>
+<p>この計算結果は、発見サンプルサイズ<span class="math inline">n</span>を示しており、監査などにおいて設定された許容誤差率（5%）を 95% の確信で検出するために必要なサンプル数を表している。 この式は、二項分布に基づき「少なくとも1つの誤りを検出する確率が信頼水準<span class="math inline">\text{confidence}</span>に達するために必要なサンプルサイズ<span class="math inline">n</span>」を計算するためのものです。 <!-- 信頼水準が高いほど、許容誤差率が低いほど、必要なサンプルサイズは大きくなります。 --></p>
+<!-- In practice, the server side of the Risk Assessment Matrix will have access to prior years working papers (assuming they are digitized) and to client accounting files, as well as proprietary audit firm data and technologies. -->
+<!-- 実際には、リスク評価マトリクスのサーバーサイドは、監査事務所の機密データや技術だけでなく、（デジタル化されていることが前提であるが）過年度の監査調書や被監査会社の会計ファイルにアクセスすることができる。 -->
 </section>
 <section id="shiny-app-server" class="slide level2">
 <h2>Shiny App (Server)</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>コード</summary>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a>    ram <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>(<span class="st">"extdata"</span>,</span>
-<span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="st">"risk_asst_matrix.csv"</span>,</span>
-<span id="cb39-4"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">package =</span> <span class="st">"auditanalytics"</span>,</span>
-<span id="cb39-5"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">mustWork =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb39-6"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb39-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-8"><a href="" aria-hidden="true" tabindex="-1"></a>    sliderValues <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
-<span id="cb39-9"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="fu">data.frame</span>(</span>
-<span id="cb39-10"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">Audit_Parameter =</span> <span class="fu">c</span>(<span class="st">"confidence"</span>, <span class="st">"cost"</span>),</span>
-<span id="cb39-11"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">Value =</span> <span class="fu">as.character</span>(<span class="fu">c</span>(input<span class="sc">$</span>confidence, input<span class="sc">$</span>cost)),</span>
-<span id="cb39-12"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb39-13"><a href="" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb39-14"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-15"><a href="" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>values <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
-<span id="cb39-16"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sliderValues</span>()</span>
-<span id="cb39-17"><a href="" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb39-18"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-19"><a href="" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>caption <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
-<span id="cb39-20"><a href="" aria-hidden="true" tabindex="-1"></a>        input<span class="sc">$</span>caption</span>
-<span id="cb39-21"><a href="" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb39-22"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-23"><a href="" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>summary <span class="ot">&lt;-</span> <span class="fu">renderPrint</span>({</span>
-<span id="cb39-24"><a href="" aria-hidden="true" tabindex="-1"></a>        ram <span class="ot">&lt;-</span> ram</span>
-<span id="cb39-25"><a href="" aria-hidden="true" tabindex="-1"></a>        conf <span class="ot">&lt;-</span> input<span class="sc">$</span>confidence</span>
-<span id="cb39-26"><a href="" aria-hidden="true" tabindex="-1"></a>        cost <span class="ot">&lt;-</span> input<span class="sc">$</span>cost</span>
-<span id="cb39-27"><a href="" aria-hidden="true" tabindex="-1"></a>        risk <span class="ot">&lt;-</span> (<span class="dv">10</span> <span class="sc">-</span> (<span class="fu">as.numeric</span>(ram[,<span class="dv">2</span>]) <span class="sc">*</span> <span class="fu">as.numeric</span>(ram[,<span class="dv">3</span>])) )<span class="sc">/</span><span class="dv">100</span></span>
-<span id="cb39-28"><a href="" aria-hidden="true" tabindex="-1"></a>        Scope <span class="ot">&lt;-</span>  <span class="fu">ceiling</span>( <span class="fu">log</span>(<span class="dv">1</span><span class="sc">-</span>conf) <span class="sc">/</span> <span class="fu">log</span>( <span class="dv">1</span><span class="sc">-</span> risk))</span>
-<span id="cb39-29"><a href="" aria-hidden="true" tabindex="-1"></a>        ram <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ram[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], Scope)</span>
-<span id="cb39-30"><a href="" aria-hidden="true" tabindex="-1"></a>        Min_cost <span class="ot">&lt;-</span> Scope <span class="sc">*</span> cost</span>
-<span id="cb39-31"><a href="" aria-hidden="true" tabindex="-1"></a>        ram <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ram[,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>], Min_cost)</span>
-<span id="cb39-32"><a href="" aria-hidden="true" tabindex="-1"></a>        ram</span>
-<span id="cb39-33"><a href="" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb39-34"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-35"><a href="" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>view <span class="ot">&lt;-</span> <span class="fu">renderText</span>({ <span class="co"># 監査費用を表示</span></span>
-<span id="cb39-36"><a href="" aria-hidden="true" tabindex="-1"></a>        ram <span class="ot">&lt;-</span> ram <span class="co"># リスク評価行列を読み込む</span></span>
-<span id="cb39-37"><a href="" aria-hidden="true" tabindex="-1"></a>        conf <span class="ot">&lt;-</span> input<span class="sc">$</span>confidence <span class="co"># 監査の信頼度</span></span>
-<span id="cb39-38"><a href="" aria-hidden="true" tabindex="-1"></a>        cost <span class="ot">&lt;-</span> input<span class="sc">$</span>cost <span class="co"># 監査費用</span></span>
-<span id="cb39-39"><a href="" aria-hidden="true" tabindex="-1"></a>        risk <span class="ot">&lt;-</span> (<span class="dv">10</span> <span class="sc">-</span> (<span class="fu">as.numeric</span>(ram[,<span class="dv">2</span>]) <span class="sc">*</span> <span class="fu">as.numeric</span>(ram[,<span class="dv">3</span>])) )<span class="sc">/</span><span class="dv">100</span> <span class="co"># リスク</span></span>
-<span id="cb39-40"><a href="" aria-hidden="true" tabindex="-1"></a>        Scope <span class="ot">&lt;-</span>  <span class="fu">ceiling</span>( <span class="fu">log</span>(<span class="dv">1</span><span class="sc">-</span>conf) <span class="sc">/</span> <span class="fu">log</span>( <span class="dv">1</span><span class="sc">-</span> risk)) <span class="co"># 範囲</span></span>
-<span id="cb39-41"><a href="" aria-hidden="true" tabindex="-1"></a>        ram <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ram[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], Scope) <span class="co"># リスク評価行列に範囲を追加</span></span>
-<span id="cb39-42"><a href="" aria-hidden="true" tabindex="-1"></a>        Min_cost <span class="ot">&lt;-</span> Scope <span class="sc">*</span> cost <span class="co"># 最小監査費用を計算</span></span>
-<span id="cb39-43"><a href="" aria-hidden="true" tabindex="-1"></a>        minimum_audit_cost <span class="ot">&lt;-</span> <span class="fu">sum</span>(Min_cost) <span class="co"># 最小監査費用を合計</span></span>
-<span id="cb39-44"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="st">"Minimum estimated audit cost = "</span>,minimum_audit_cost) <span class="co"># 最小監査費用を表示</span></span>
-<span id="cb39-45"><a href="" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb39-46"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a>    ram <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">system.file</span>(<span class="st">"extdata"</span>,</span>
+<span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="st">"risk_asst_matrix.csv"</span>,</span>
+<span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">package =</span> <span class="st">"auditanalytics"</span>,</span>
+<span id="cb38-5"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">mustWork =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb38-6"><a href="" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb38-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="" aria-hidden="true" tabindex="-1"></a>    sliderValues <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb38-9"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="fu">data.frame</span>(</span>
+<span id="cb38-10"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">Audit_Parameter =</span> <span class="fu">c</span>(<span class="st">"confidence"</span>, <span class="st">"cost"</span>),</span>
+<span id="cb38-11"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">Value =</span> <span class="fu">as.character</span>(<span class="fu">c</span>(input<span class="sc">$</span>confidence, input<span class="sc">$</span>cost)),</span>
+<span id="cb38-12"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-13"><a href="" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb38-14"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-15"><a href="" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>values <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb38-16"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sliderValues</span>()</span>
+<span id="cb38-17"><a href="" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb38-18"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-19"><a href="" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>caption <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb38-20"><a href="" aria-hidden="true" tabindex="-1"></a>        input<span class="sc">$</span>caption</span>
+<span id="cb38-21"><a href="" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb38-22"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-23"><a href="" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>summary <span class="ot">&lt;-</span> <span class="fu">renderPrint</span>({</span>
+<span id="cb38-24"><a href="" aria-hidden="true" tabindex="-1"></a>        ram <span class="ot">&lt;-</span> ram</span>
+<span id="cb38-25"><a href="" aria-hidden="true" tabindex="-1"></a>        conf <span class="ot">&lt;-</span> input<span class="sc">$</span>confidence</span>
+<span id="cb38-26"><a href="" aria-hidden="true" tabindex="-1"></a>        cost <span class="ot">&lt;-</span> input<span class="sc">$</span>cost</span>
+<span id="cb38-27"><a href="" aria-hidden="true" tabindex="-1"></a>        risk <span class="ot">&lt;-</span> (<span class="dv">10</span> <span class="sc">-</span> (<span class="fu">as.numeric</span>(ram[,<span class="dv">2</span>]) <span class="sc">*</span> <span class="fu">as.numeric</span>(ram[,<span class="dv">3</span>])) )<span class="sc">/</span><span class="dv">100</span></span>
+<span id="cb38-28"><a href="" aria-hidden="true" tabindex="-1"></a>        Scope <span class="ot">&lt;-</span>  <span class="fu">ceiling</span>( <span class="fu">log</span>(<span class="dv">1</span><span class="sc">-</span>conf) <span class="sc">/</span> <span class="fu">log</span>( <span class="dv">1</span><span class="sc">-</span> risk))</span>
+<span id="cb38-29"><a href="" aria-hidden="true" tabindex="-1"></a>        ram <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ram[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], Scope)</span>
+<span id="cb38-30"><a href="" aria-hidden="true" tabindex="-1"></a>        Min_cost <span class="ot">&lt;-</span> Scope <span class="sc">*</span> cost</span>
+<span id="cb38-31"><a href="" aria-hidden="true" tabindex="-1"></a>        ram <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ram[,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>], Min_cost)</span>
+<span id="cb38-32"><a href="" aria-hidden="true" tabindex="-1"></a>        ram</span>
+<span id="cb38-33"><a href="" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb38-34"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-35"><a href="" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>view <span class="ot">&lt;-</span> <span class="fu">renderText</span>({ <span class="co"># 監査費用を表示</span></span>
+<span id="cb38-36"><a href="" aria-hidden="true" tabindex="-1"></a>        ram <span class="ot">&lt;-</span> ram <span class="co"># リスク評価行列を読み込む</span></span>
+<span id="cb38-37"><a href="" aria-hidden="true" tabindex="-1"></a>        conf <span class="ot">&lt;-</span> input<span class="sc">$</span>confidence <span class="co"># 監査の信頼度</span></span>
+<span id="cb38-38"><a href="" aria-hidden="true" tabindex="-1"></a>        cost <span class="ot">&lt;-</span> input<span class="sc">$</span>cost <span class="co"># 監査費用</span></span>
+<span id="cb38-39"><a href="" aria-hidden="true" tabindex="-1"></a>        risk <span class="ot">&lt;-</span> (<span class="dv">10</span> <span class="sc">-</span> (<span class="fu">as.numeric</span>(ram[,<span class="dv">2</span>]) <span class="sc">*</span> <span class="fu">as.numeric</span>(ram[,<span class="dv">3</span>])) )<span class="sc">/</span><span class="dv">100</span> <span class="co"># リスク</span></span>
+<span id="cb38-40"><a href="" aria-hidden="true" tabindex="-1"></a>        Scope <span class="ot">&lt;-</span>  <span class="fu">ceiling</span>( <span class="fu">log</span>(<span class="dv">1</span><span class="sc">-</span>conf) <span class="sc">/</span> <span class="fu">log</span>( <span class="dv">1</span><span class="sc">-</span> risk)) <span class="co"># 範囲</span></span>
+<span id="cb38-41"><a href="" aria-hidden="true" tabindex="-1"></a>        ram <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ram[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], Scope) <span class="co"># リスク評価行列に範囲を追加</span></span>
+<span id="cb38-42"><a href="" aria-hidden="true" tabindex="-1"></a>        Min_cost <span class="ot">&lt;-</span> Scope <span class="sc">*</span> cost <span class="co"># 最小監査費用を計算</span></span>
+<span id="cb38-43"><a href="" aria-hidden="true" tabindex="-1"></a>        minimum_audit_cost <span class="ot">&lt;-</span> <span class="fu">sum</span>(Min_cost) <span class="co"># 最小監査費用を合計</span></span>
+<span id="cb38-44"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="st">"Minimum estimated audit cost = "</span>,minimum_audit_cost) <span class="co"># 最小監査費用を表示</span></span>
+<span id="cb38-45"><a href="" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb38-46"><a href="" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
-<section class="slide level2">
-
-<!-- R Studio gives you various options for assembling Shiny apps, including apps with server side code resident on either an RStudio or a bespoke server, and stand-alone client side apps which can be constructed with the following code. -->
-<p>R Studioでは、Shinyアプリを組み立てるための様々なオプション（サーバーサイドのコードをR Studioまたは特注のサーバーに常駐させるアプリや、下記のコードで構築できるスタンドアローンのクライアントサイドアプリなど）を提供している。</p>
+<p>R Studio gives you various options for assembling Shiny apps, including apps with server side code resident on either an RStudio or a bespoke server, and stand-alone client side apps which can be constructed with the following code.</p>
+<!-- R Studioでは、Shinyアプリを組み立てるための様々なオプション（サーバーサイドのコードをR Studioまたは特注のサーバーに常駐させるアプリや、下記のコードで構築できるスタンドアローンのクライアントサイドアプリなど）を提供している。 -->
 </section>
 <section class="slide level2">
 
 <div class="cell" data-context="server">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
 </div>
@@ -1585,10 +1975,14 @@ n \approx  \frac{log(1-confidence)}{log(1-\frac{10-risk_{intelligence} \times ri
 
 <iframe src="https://u66nae-soichi-matsuura.shinyapps.io/Audit_Analytics_chap4/" width="100%" height="1200" frameborder="0">
 </iframe>
-</section>
-<section id="generating-the-audit-budget-from-the-risk-assessment-matrix" class="slide level2">
-<h2>Generating the Audit Budget from the Risk Assessment Matrix</h2>
+</section></section>
+<section>
+<section id="generating-the-audit-budget-from-the-risk-assessment-matrix" class="title-slide slide level1 center">
+<h1>Generating the Audit Budget from the Risk Assessment Matrix</h1>
 <!-- ## 第8節 リスク評価マトリクスからの監査契約の予算の策定 -->
+</section>
+<section id="audit-budgets" class="slide level2">
+<h2>Audit Budgets</h2>
 <ul>
 <li><strong>The Risk Assessment Matrix</strong> (RAM) will generate qualitative measures of risk along with initial estimates of minimum (discovery) sample sizes.</li>
 <li>This will generally not be sufficient to accurately budget the audit, since higher risk accounts will require audit scope beyond mere “discovery” of errors.</li>
@@ -1614,7 +2008,7 @@ n \approx  \frac{log(1-confidence)}{log(1-\frac{10-risk_{intelligence} \times ri
 </ul>
 </section>
 <section id="technical-sampling-structure-of-the-audit-program" class="slide level2">
-<h2>Technical Sampling Structure of the Audit Program$$</h2>
+<h2>Technical Sampling Structure of the Audit Program</h2>
 <!-- ## 監査計画の技術的なサンプリング構造 -->
 <ul>
 <li>The technical tests of internal control (interim testing) and account balances (substantive testing) consist of audit work investigating the items in transaction samples. <!-- - they are transaction-centric.  --> <!-- 内部統制の技術的な検証（運用評価手続）と勘定残高の監査手続（実証手続）は、取引サンプルの項目（それらは取引中心である）を調査する監査業務から構成されている。 --></li>
@@ -1624,26 +2018,47 @@ n \approx  \frac{log(1-confidence)}{log(1-\frac{10-risk_{intelligence} \times ri
 <section class="slide level2">
 
 <h3 id="example-salse-transaciton">Example : salse transaciton</h3>
-<p>Consider a sales transaction. <!-- 売上取引を例として考えてみよう。 --> - A sale could be <em>recorded at the wrong amount</em>, or <em>the wrong item sold could have been recorded</em>, or the sale could have been shipped to <em>the wrong customer</em>, or be recorded in <em>the wrong period</em>. <!-- 売上が誤った金額で計上されていたり、誤った商品の品目が計上されていたり、売上が誤った顧客に出荷されたことになっていたり、誤った期間に計上されていたりする可能性がある。 --> - Each of these problems reflect a specific audit risk, control weakness, and audit procedure. <!-- これらの問題はそれぞれ、特定の監査リスク、統制上の脆弱性、および監査手続を反映している。 --> - Auditors’ concern with such errors differs in the interim and substantive tests. <!-- このような虚偽表示に対する監査人の関心は、運用評価手続と実証手続では異なる。 --> - In interim tests, the auditor is concerned with estimating the rate at which each type of error occurs. <!-- 運用評価手続では、監査人は各種の逸脱率を推定することに関心を持つ。 --> - Where this rate suggests a control weakness is significant, the auditor needs to expand the scope of substantive auditing of account balances that are affected by the control weakness. <!-- この逸脱率が、統制上の脆弱性が重要であることを示唆している場合、監査人は、統制上の脆弱性の影響を受ける勘定残高の実証手続の範囲を拡大する必要がある。 --></p>
+<!-- Consider a sales transaction. -->
+<!-- 売上取引を例として考えてみよう。 -->
+<ul>
+<li>A sale could be <em>recorded at the wrong amount</em>, or <em>the wrong item sold could have been recorded</em>, or the sale could have been shipped to <em>the wrong customer</em>, or be recorded in <em>the wrong period</em>. <!-- 売上が誤った金額で計上されていたり、誤った商品の品目が計上されていたり、売上が誤った顧客に出荷されたことになっていたり、誤った期間に計上されていたりする可能性がある。 --></li>
+<li>Each of these problems reflect a specific audit risk, control weakness, and audit procedure. <!-- これらの問題はそれぞれ、特定の監査リスク、統制上の脆弱性、および監査手続を反映している。 --></li>
+<li>Auditors’ concern with such errors differs in the interim and substantive tests. <!-- このような虚偽表示に対する監査人の関心は、運用評価手続と実証手続では異なる。 --> <!-- - In interim tests, the auditor is concerned with estimating the rate at which each type of error occurs. --> <!-- 運用評価手続では、監査人は各種の逸脱率を推定することに関心を持つ。 --></li>
+<li>Where this rate suggests a control weakness is significant, the auditor needs to expand the scope of substantive auditing of account balances that are affected by the control weakness. <!-- この逸脱率が、統制上の脆弱性が重要であることを示唆している場合、監査人は、統制上の脆弱性の影響を受ける勘定残高の実証手続の範囲を拡大する必要がある。 --></li>
+</ul>
 </section>
 <section class="slide level2">
 
 <ul>
 <li>Placing these considerations in a <em>more formal mathematical setting</em>, let <span class="math inline">T_{i,j}</span> represent a particular control weakness <span class="math inline">j</span> in transaction type <span class="math inline">i</span>. <!-- これらの検討をより正式な数学的設定に置き換え、$T_{i,j}$ を取引種類$i$における特定の統制上の脆弱性$j$を表すとする。 --></li>
-<li>Let <span class="math inline">S_{i,j}</span> be the interim testing sample size suggested by the RAM to test for control weakness <span class="math inline">j</span> in transaction type <span class="math inline">i</span>. <!-- 取引種類$i$における統制上の脆弱性$j$を検証するためにリスク評価マトリクスが提案する運用評価手続のサンプルサイズを$S_{i,j}$ とする。 --></li>
-<li>Let <span class="math inline">C_{i,j}</span> be the audit cost to test for control weakness <span class="math inline">j</span> in a single transaction of type <span class="math inline">i</span>. Then a simple linear cost model would be: <!-- ここで、$C_{i,j}$を$i$の種類の取引における統制上の脆弱性$j$を検証するための監査手続のコストとする。この場合、単純な線形コストモデルは下記のようになる。 --></li>
+<li>Let <span class="math inline">S_{i,j}</span> be the <strong>interim testing sample size</strong> suggested by the RAM to test for control weakness <span class="math inline">j</span> in transaction type <span class="math inline">i</span>. <!-- 取引種類$i$における統制上の脆弱性$j$を検証するためにリスク評価マトリクスが提案する運用評価手続のサンプルサイズを$S_{i,j}$ とする。 --></li>
+<li>Let <span class="math inline">C_{i,j}</span> be the <strong>audit cost</strong> to test for control weakness <span class="math inline">j</span> in a single transaction of type <span class="math inline">i</span>.</li>
 </ul>
+<p>Then a simple linear cost model would be: <!-- ここで、$C_{i,j}$を$i$の種類の取引における統制上の脆弱性$j$を検証するための監査手続のコストとする。この場合、単純な線形コストモデルは下記のようになる。 --></p>
 <p><span class="math display">
 \text{total cost of technical interim test} = \sum _{i,j} S_{i,j} \times C_{i,j}
 </span></p>
 </section>
 <section class="slide level2">
 
-<p>The matrix form is typically more useful in writing R language code, because the transaction, cost, and sample values are matrices that can directly use the fast BLAS/LAPACK implementations in R for linear algebra, rather than coding slow, messy, nested for statements. The matrix form is: <!-- 行列形式は、遅くて面倒な入れ子になったfor文をコーディングするよりも、R言語のコードを書く際には通常より有用である。なぜならば、取引、コスト、およびサンプルの値は行列であり、線形代数のためのRの高速なBLAS/LAPACK実装を直接使うことができるからである。行列の形式は以下の通りである。 --></p>
+<p>The matrix form is typically more useful in writing R language code, because the transaction, cost, and sample values are matrices that can directly use the fast BLAS/LAPACK implementations in R for linear algebra, rather than coding slow, messy, nested for statements. The matrix form is:</p>
 <p><span class="math display">
-\text{total cost of technical interim test} = 1_{(i)}^T \times \left (T \times S^T \times C \right ) \times 1_{(j)}
+\text{total cost of technical interim test} = 1_{(i)}^{\top} \times \left (T \times S^{\top} \times C \right ) \times 1_{(j)}
 </span></p>
-<p>where <span class="math inline">1_{(i)}^T</span> is the row <span class="math inline">i</span>-vector whose entries are all <span class="math inline">1</span>’s, <span class="math inline">1_(j)</span> is the column <span class="math inline">j</span>-vector whose entries are all <span class="math inline">1</span>’s, <span class="math inline">T = \{T_{i,j} \}</span>, <span class="math inline">S = \{ S_{i,j} \}</span>, and <span class="math inline">C = \{ C_{i,j} \}</span>. <!-- ここで、$1_{(i)}^T$は要素がすべて1の$i$行ベクトル、$1_(j)$は要素がすべて$1$の$j$列のベクトル、$T = \{T_{i,j} \}$、$S = \{ S_{i,j} \}$、$C = \{ C_{i,j} \}$である。 --></p>
+<p>where <span class="math inline">1_{(i)}^{\top}</span> is the row <span class="math inline">i</span>-vector whose entries are all <span class="math inline">1</span>’s, <span class="math inline">1_(j)</span> is the column <span class="math inline">j</span>-vector whose entries are all <span class="math inline">1</span>’s, <span class="math inline">T = \{T_{i,j} \}</span>, <span class="math inline">S = \{ S_{i,j} \}</span>, and <span class="math inline">C = \{ C_{i,j} \}</span>.</p>
+<aside class="notes">
+<p>行列形式は、遅くて面倒な入れ子になったfor文をコーディングするよりも、R言語のコードを書く際には通常より有用である。なぜならば、取引、コスト、およびサンプルの値は行列であり、線形代数のためのRの高速なBLAS/LAPACK実装を直接使うことができるからである。行列の形式は以下の通りである。 ここで、<span class="math inline">1_{(i)}^T</span>は要素がすべて1の<span class="math inline">i</span>行ベクトル、<span class="math inline">1_(j)</span>は要素がすべて<span class="math inline">1</span>の<span class="math inline">j</span>列のベクトル、<span class="math inline">T = \{T_{i,j} \}</span>、<span class="math inline">S = \{ S_{i,j} \}</span>、<span class="math inline">C = \{ C_{i,j} \}</span>である。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="sample-sizes-for-budgeting" class="slide level2">
 <h2>Sample Sizes for Budgeting</h2>
@@ -1653,80 +2068,109 @@ n \approx  \frac{log(1-confidence)}{log(1-\frac{10-risk_{intelligence} \times ri
 <li>Discovery sampling for discovery of <em>out-of-control</em> transaction streams <!-- 1. 統制から逸脱している取引を発見するための発見サンプリング --></li>
 <li>Attribute sampling for estimating transaction error rate <!-- 2. 取引の逸脱率を推定するための属性サンプリング --></li>
 </ol>
-<p>Discovery sampling sets a sample size that is likely to discover at least one error in the sample if the actual transaction error rate exceeds the minimum acceptable error-rate (alternatively called the out-of-control* rate of error). <!-- 発見サンプリングでは、実際の取引の逸脱率が最低許容逸脱率（minimum acceptable error rate）を超えた場合に（統制上の逸脱率（control rate of error）とも呼ばれる）、サンプルの中に少なくとも1つの逸脱を発見する可能性のあるサンプルサイズを設定する。 --> Discovery tests helps the auditor decide whether the systems processing a particular transaction stream are in or out of control. <!-- 発見サンプリングによる手続は、監査人が、個々の取引を処理するシステムが統制されているのか、または内部統制から逸脱しているかを判断するのに役立つ。 --></p>
+<p><em>Discovery sampling</em> sets a sample size that is likely to discover at least one error in the sample if the actual transaction error rate exceeds the minimum acceptable error-rate (alternatively called the out-of-control* rate of error). <!-- 発見サンプリングでは、実際の取引の逸脱率が最低許容逸脱率（minimum acceptable error rate）を超えた場合に（統制上の逸脱率（control rate of error）とも呼ばれる）、サンプルの中に少なくとも1つの逸脱を発見する可能性のあるサンプルサイズを設定する。 --> Discovery tests helps the auditor decide whether the systems processing a particular transaction stream are in or out of control. <!-- 発見サンプリングによる手続は、監査人が、個々の取引を処理するシステムが統制されているのか、または内部統制から逸脱しているかを判断するのに役立つ。 --></p>
+<aside class="notes">
+<p>許容逸脱率とは、母集団において不備の発生が許容される割合の上限値となり、内部統制の実施基準では前述の通り10%未満となります。 内部統制の実務上は、実施基準上、90%以上の信頼性確保が必要となるため、許容逸脱率は9%が上限です。</p>
+<p>発見サンプリングは、目標となるエラー水準を固定して行うサンプリングである。 目標エラー割合は０％かそれに近く設定されるため１件のエラー発見時に目標未達が確定するので、テストは停止される。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
-<p>Budgeted sample sizes in interim testing will depend on whether the RAM suggests that control risk is low or high. <!-- 運用評価手続におけるサンプルサイズの予算は、リスク評価マトリクスにおいて統制リスクが低い/高いことを示唆しているかによって決定する。 --> If it is low, then the discovery sample size plus a ‘security’ factor for cases where error is discovered will estimated the scope of auditing. <!-- リスクが低い場合には、監査の範囲は、発見サンプリングにおけるサンプルサイズに、逸脱が発見された場合の「安全性（security）」ファクターを加えたものによって推定される。 --></p>
+<ul>
+<li>Budgeted sample sizes in interim testing will depend on whether the RAM suggests that control risk is <em>low or high</em>. <!-- 運用評価手続におけるサンプルサイズの予算は、リスク評価マトリクスにおいて統制リスクが低い/高いことを示唆しているかによって決定する。 --></li>
+<li>If it is low, then the discovery sample size plus a <strong>‘security’ factor</strong> for cases where error is discovered will estimated the scope of auditing. <!-- リスクが低い場合には、監査の範囲は、発見サンプリングにおけるサンプルサイズに、逸脱が発見された場合の「安全性（security）」ファクターを加えたものによって推定される。 --></li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a>confidence <span class="ot">&lt;-</span> <span class="fu">seq</span>(.<span class="dv">99</span>, <span class="fl">0.7</span>, <span class="sc">-</span><span class="fl">0.01</span>) <span class="co"># 0.99から0.7まで0.01刻みのベクトル</span></span>
-<span id="cb41-2"><a href="" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> (<span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> confidence)) <span class="sc">/</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>) <span class="co"># 発見サンプルサイズを計算</span></span>
-<span id="cb41-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(confidence,n, <span class="at">type=</span><span class="st">"l"</span>) <span class="co"># 発見サンプルサイズをプロット</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a>confidence <span class="ot">&lt;-</span> <span class="fu">seq</span>(.<span class="dv">99</span>, <span class="fl">0.7</span>, <span class="sc">-</span><span class="fl">0.01</span>) <span class="co"># 0.99から0.7まで0.01刻みのベクトル</span></span>
+<span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> (<span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> confidence)) <span class="sc">/</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>) <span class="co"># 発見サンプルサイズを計算</span></span>
+<span id="cb40-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(confidence,n, <span class="at">type=</span><span class="st">"l"</span>) <span class="co"># 発見サンプルサイズをプロット</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="gaisho_2024_04_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
+<img data-src="gaisho_2024_04_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
 <section class="slide level2">
 
 <p>So for a 5% intolerable error rate at 95% confidence we have: <!-- したがって、信頼度95％で許容不能な逸脱率5％のサンプルサイズは、以下のように計算することができる。 --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a>confidence <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
-<span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> (<span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> confidence)) <span class="sc">/</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>)</span>
-<span id="cb42-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st"> Discovery sample size = "</span>, <span class="fu">ceiling</span>(n))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a>confidence <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
+<span id="cb41-2"><a href="" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> (<span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> confidence)) <span class="sc">/</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>)</span>
+<span id="cb41-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st"> Discovery sample size = "</span>, <span class="fu">ceiling</span>(n))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  Discovery sample size =  59</code></pre>
 </div>
 </div>
 <p>Where the RAM assesses control risk to be anything higher, the auditor can assume that scope will be expanded to include attribute sampling. <!-- リスク評価マトリクスが統制リスクをより高く評価する場合には、監査人は、属性サンプリングを実施する範囲を拡大することを前提とする可能性がある。 --></p>
+<aside class="notes">
+<p>ここでの log(1 - confidence) と log(1 - 0.05) は、それぞれ信頼水準と許容誤差率を基に、どれだけのサンプルが必要かを対数で計算しています。 これは「二項分布」を利用した計算方法であり、ある確率（この場合、許容誤差率が5%）のイベントが95%の確信で検出されるために必要なサンプル数を算出しています。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
-<p>Attribute sampling estimates the error rate in the entire transaction population with some confidence (e.g., 95%) that the estimate is within the out-of-control error-rate cutoff for that transaction stream. <!-- 属性サンプリングは、ある信頼度（例えば95％）により、母集団である取引全体における逸脱率を推定する。ここで信頼度は、その推定値が当該取引ストリームの許容逸脱率（閾値）以内であることに関するものである。 --> If it is found that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream. <!-- （発見サンプリングにより）特定の取引ストリームが統制から逸脱していることが判明した場合、属性推定はこの取引ストリームを処理するシステムの実際の逸脱率を決定するのに役立つ。属性サンプルから推定される逸脱は、逸脱率または逸脱数のいずれか、あるいは両方である。 --></p>
-<p>If discovery sampling suggests that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream. <!-- （発見サンプリングにより）特定の取引ストリームが統制から逸脱していることが判明した場合、属性推定はこの取引ストリームを処理するシステムの実際の逸脱率を決定するのに役立つ。 --> Errors estimates from attribute samples may either be <em>rates</em> or <em>amounts</em> or both. <!-- 属性サンプルから推定される逸脱は、逸脱率または逸脱数のいずれか、あるいは両方である。 --> Attribute sampling size is determined using Cohen’s power analysis (Cohen 1992) which is implemented in R’s <em>pwr</em> package, We compute both in the following code chunk<br>
-<!-- 属性サンプリングにおけるサンプルサイズは、R のpwrパッケージに実装されている Cohenの検出力分析（Cohen 1992）を使用して決定する。以下のコードチャンクで両者を計算することができる。 --></p>
+<ul>
+<li><p>Attribute sampling estimates the error rate in the entire transaction population with some confidence (e.g., 95%) that the estimate is within the out-of-control error-rate cutoff for that transaction stream. <!-- 属性サンプリングは、ある信頼度（例えば95％）により、母集団である取引全体における逸脱率を推定する。ここで信頼度は、その推定値が当該取引ストリームの許容逸脱率（閾値）以内であることに関するものである。 --></p></li>
+<li><p>If it is found that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream. <!-- （発見サンプリングにより）特定の取引ストリームが統制から逸脱していることが判明した場合、属性推定はこの取引ストリームを処理するシステムの実際の逸脱率を決定するのに役立つ。属性サンプルから推定される逸脱は、逸脱率または逸脱数のいずれか、あるいは両方である。 --></p></li>
+<li><p>If discovery sampling suggests that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream. <!-- （発見サンプリングにより）特定の取引ストリームが統制から逸脱していることが判明した場合、属性推定はこの取引ストリームを処理するシステムの実際の逸脱率を決定するのに役立つ。 --></p></li>
+<li><p>Errors estimates from attribute samples may either be <em>rates</em> or <em>amounts</em> or both. <!-- 属性サンプルから推定される逸脱は、逸脱率または逸脱数のいずれか、あるいは両方である。 --></p></li>
+</ul>
 </section>
 <section class="slide level2">
 
+<p><em>Attribute sampling size</em> is determined using Cohen’s power analysis (Cohen 1992) which is implemented in R’s <em>pwr</em> package, We compute both in the following code chunk <!-- 属性サンプリングにおけるサンプルサイズは、R のpwrパッケージに実装されている Cohenの検出力分析（Cohen 1992）を使用して決定する。以下のコードチャンクで両者を計算することができる。 --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("pwr") # first time only</span></span>
-<span id="cb44-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)　<span class="co"># Cohen本のpower analysis</span></span>
-<span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># エラーの'レート'を推定するための属性サンプル</span></span>
-<span id="cb44-5"><a href="" aria-hidden="true" tabindex="-1"></a>size <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># トランザクションの総数</span></span>
-<span id="cb44-6"><a href="" aria-hidden="true" tabindex="-1"></a>Delta <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="sc">*</span> size <span class="co"># 5%の許容エラー率を検出する</span></span>
-<span id="cb44-7"><a href="" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fl">0.3</span> <span class="sc">*</span> size <span class="co"># 変動（おそらく1/3）を推測する</span></span>
-<span id="cb44-8"><a href="" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">&lt;-</span> Delta<span class="sc">/</span>sigma <span class="co"># 許容度÷変動</span></span>
-<span id="cb44-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-10"><a href="" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
-<span id="cb44-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">d =</span> effect,</span>
-<span id="cb44-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb44-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">power =</span> <span class="fl">0.8</span>,</span>
-<span id="cb44-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"one.sample"</span>,</span>
-<span id="cb44-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">alternative =</span> <span class="st">"greater"</span> <span class="do">## look for overstatement of earnings</span></span>
-<span id="cb44-16"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb44-17"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-18"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st"> Attribute sample size for occurrence of error = "</span>, <span class="fu">ceiling</span>(sample<span class="sc">$</span>n))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>コード</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("pwr") # first time only</span></span>
+<span id="cb43-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)　<span class="co"># Cohen本のpower analysis</span></span>
+<span id="cb43-3"><a href="" aria-hidden="true" tabindex="-1"></a>size <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># トランザクションの総数</span></span>
+<span id="cb43-4"><a href="" aria-hidden="true" tabindex="-1"></a>Delta <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="sc">*</span> size <span class="co"># 5%の許容エラー率を検出する</span></span>
+<span id="cb43-5"><a href="" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fl">0.3</span> <span class="sc">*</span> size <span class="co"># 変動（おそらく1/3）を推測する</span></span>
+<span id="cb43-6"><a href="" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">&lt;-</span> Delta<span class="sc">/</span>sigma <span class="co"># 許容度÷変動</span></span>
+<span id="cb43-7"><a href="" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>( <span class="co"># pwr.t.test関数を使用</span></span>
+<span id="cb43-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">d =</span> effect, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>,</span>
+<span id="cb43-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"one.sample"</span>,</span>
+<span id="cb43-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">alternative =</span> <span class="st">"greater"</span> <span class="do">## look for overstatement of earnings</span></span>
+<span id="cb43-11"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb43-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st"> Attribute sample size for occurrence of error = "</span>, <span class="fu">ceiling</span>(sample<span class="sc">$</span>n))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  Attribute sample size for occurrence of error =  224</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># エラーの'金額'を推定するための属性サンプル</span></span>
-<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>size <span class="ot">&lt;-</span> <span class="dv">100000</span>     <span class="do">## total amount of transactions</span></span>
-<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">50</span>           <span class="do">## average value of transaction</span></span>
-<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>Delta <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="sc">*</span> mu <span class="do">## detect 5% amount intolerrable error</span></span>
-<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">30</span>        <span class="do">## variability</span></span>
-<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">&lt;-</span> Delta<span class="sc">/</span>sigma</span>
-<span id="cb46-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-8"><a href="" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
-<span id="cb46-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> effect,</span>
-<span id="cb46-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb46-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.8</span>,</span>
-<span id="cb46-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"one.sample"</span>,</span>
-<span id="cb46-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">"greater"</span>)   <span class="do">## look for sales value too large</span></span>
-<span id="cb46-14"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-15"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st"> Attribute sample size for amount of error = "</span>, <span class="fu">ceiling</span>(sample<span class="sc">$</span>n))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Attribute sampling determines sample size to estimate the <em>error amount</em> in a transaction stream. <!-- # エラーの'金額'を推定するための属性サンプル --></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a>size <span class="ot">&lt;-</span> <span class="dv">100000</span>     <span class="do">## total amount of transactions</span></span>
+<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">50</span>           <span class="do">## average value of transaction</span></span>
+<span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a>Delta <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="sc">*</span> mu <span class="do">## detect 5% amount intolerrable error</span></span>
+<span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">30</span>        <span class="do">## variability</span></span>
+<span id="cb45-5"><a href="" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">&lt;-</span> Delta<span class="sc">/</span>sigma</span>
+<span id="cb45-6"><a href="" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
+<span id="cb45-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> effect, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>,</span>
+<span id="cb45-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"one.sample"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span>)</span>
+<span id="cb45-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st"> Attribute sample size for amount of error = "</span>, <span class="fu">ceiling</span>(sample<span class="sc">$</span>n))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  Attribute sample size for amount of error =  892</code></pre>
@@ -1735,14 +2179,36 @@ n \approx  \frac{log(1-confidence)}{log(1-\frac{10-risk_{intelligence} \times ri
 </section>
 <section class="slide level2">
 
-<p>The auditor faces different decisions in substantive testing. <!-- 監査人は、実証手続において様々な意思決定に直面する。 --> The particular type of account determines the impact of control weaknesses found in interim testing. <!-- 特定の勘定科目の種類によって、運用評価手続で発見された統制上の脆弱性の影響の評価が決まる。 --> For example, a 5% error rate in a $1 million sales account discovered in interim testing implies a $50,000 error in annual sales on the trial balance. <!-- 例えば、運用評価手続で発見された100万ドルの売上勘定における5％の逸脱率は、試算表上の年間売上高に5万ドルの虚偽表示額を意味する。 --> In contrast, assume that accounts receivable turn over 10 times annually, then that 5% error rate implies only a $5000 misstatement in accounts receivable. <!-- 一方、売掛金回転率が年間10回と仮定すると、5％の逸脱率は（売掛金の残高が10万ドルなので）売掛金に5000ドルの虚偽表示額を意味するだけである。 --> Whether sales or accounts receivable are ‘fairly stated’ depends on the immateriality level set by the auditor – a $10,000 materiality level would imply that sales is not fairly presented, while accounts receivable is fairly stated. <!-- 売上高または売掛金が「公正に表示」されているかは、監査人が設定する重要性の基準によって決まる。 --> <!-- 重要性の基準が1万ドルであれば、売上高は公正に表示されていないが、売掛金は公正に表示されていることになる。 --></p>
+<ul>
+<li>The auditor faces different decisions in <em>substantive testing</em>. <!-- 監査人は、実証手続において様々な意思決定に直面する。 --></li>
+<li>The particular type of account determines the impact of <em>control weaknesses</em> found in interim testing. <!-- 特定の勘定科目の種類によって、運用評価手続で発見された統制上の脆弱性の影響の評価が決まる。 --></li>
+<li>For example, a 5% error rate in a $1 million sales account discovered in interim testing implies a $50,000 error in annual sales on the trial balance. <!-- 例えば、運用評価手続で発見された100万ドルの売上勘定における5％の逸脱率は、試算表上の年間売上高に5万ドルの虚偽表示額を意味する。 --></li>
+<li>Assume that accounts receivable turn over 10 times annually, then that 5% error rate implies only a $5000 misstatement in accounts receivable. <!-- 一方、売掛金回転率が年間10回と仮定すると、5％の逸脱率は（売掛金の残高が10万ドルなので）売掛金に5000ドルの虚偽表示額を意味するだけである。 --></li>
+<li>Whether sales or accounts receivable are ‘fairly stated’ depends on the immateriality level set by the auditor – a $10,000 materiality level would imply that sales is not fairly presented, while accounts receivable is fairly stated. <!-- 売上高または売掛金が「公正に表示」されているかは、監査人が設定する重要性の基準によって決まる。 --> <!-- 重要性の基準が1万ドルであれば、売上高は公正に表示されていないが、売掛金は公正に表示されていることになる。 --></li>
+</ul>
 </section>
 <section class="slide level2">
 
-<p>At year-end where there will be a complete set of transactions available for the year, and substantive samples are typically focused on acceptance sampling to determine of the account balance is ‘fairly stated’ (does not contain intolerable or material error). <!-- 年度末にはその年度の完全な取引のすべてが入手可能であり、実証手続のサンプルは通常、勘定残高が「公正に記載されている」（許容できない虚偽表示や重要な虚偽表示が含まれていない）かどうかを判断するための採択サンプリングに重点が置かれる。 --> The approach is the same as attribute sampling of amounts, and is inherently more straightforward than interim control tests. <!-- このアプローチは、金額についての属性サンプリングと同じであり、運用評価手続よりも本質的に単純である。 --> Substantive tests estimate the error rate in an account balance with some confidence (e.g., 95%) that the estimate is within the ‘materiality’ or ‘intolerable error’ cutoff for that account balance<br>
-<!-- 実証手続は、ある勘定残高の虚偽表示率を推定し、その推定値がその勘定残高の「重要性」または「許容不可能な虚偽表示」の閾値以内であることを一定の信頼度（例えば95％）で確信するものである。 --></p>
-<p>For example, consider sampling sales invoices from the accounts receivable aging report and comparing them to supporting documentation to see if they were billed in the correct amounts, to the correct customers, and on the correct dates. <!-- 　例えば、売掛金滞留報告書から売掛金請求書をサンプリングし、それらを証憑書類と比較して、正しい金額、正しい顧客、正しい日付で請求されたかどうかを確認することを検討する。 --> Additionally, auditors might trace invoices to shipping log, and match invoice dates to the shipment dates for those items in the shipping log, to see if sales are being recorded in the correct accounting period. <!-- さらに、監査人は、請求書から出荷記録をたどり、請求書の日付と出荷記録にある商品の出荷日を照合し、売上が正しい会計期間に計上されているかどうかを確認する。 --> This can include an examination of invoices issued after the period being audited, to see if they should have been included in a prior period. <!-- これには、監査対象期間の後に発行された請求書が、以前の期間に含まれるべきものであるかどうかの調査も含まれる。 --></p>
-<p>Acceptance sampling size is determined using Cohen’s power analysis which is implemented in R’s <em>pwr</em> package, If discovery sampling suggests that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream. <!-- 採択サンプリングにおけるサイズは、Rの`pwr`パッケージに実装されているCohenの検出力分析（Cohen 1992）を使用して決定される。 --> <!-- 発見サンプリングが特定の取引ストリームが統制から逸脱していることを示唆している場合、属性推定はこのトランザクションの流れを処理するシステムの実際の逸脱率を決定するのに役立つ。 --> Errors estimates from attribute samples may either be <em>rates of erroneous transactions</em> or from a monetary unit sampling perspective, can be <em>rates of monetary error in the transaction stream</em>. <!-- 属性サンプリングから推定されるエラーは、誤った取引の率である場合もあれば、金額単位サンプリングの観点からは、取引ストリームの虚偽表示額の割合である場合もある。 --></p>
+<ul>
+<li>At year-end where there will be a complete set of transactions available for the year, and substantive samples are typically focused on acceptance sampling to determine of the account balance is ‘fairly stated’ (does not contain intolerable or material error). <!-- 年度末にはその年度の完全な取引のすべてが入手可能であり、実証手続のサンプルは通常、勘定残高が「公正に記載されている」（許容できない虚偽表示や重要な虚偽表示が含まれていない）かどうかを判断するための採択サンプリングに重点が置かれる。 --></li>
+<li>The approach is the same as attribute sampling of amounts, and is inherently more straightforward than interim control tests. <!-- このアプローチは、金額についての属性サンプリングと同じであり、運用評価手続よりも本質的に単純である。 --></li>
+<li>Substantive tests estimate the error rate in an account balance with some confidence (e.g., 95%) that the estimate is within the ‘materiality’ or ‘intolerable error’ cutoff for that account balance <!-- 実証手続は、ある勘定残高の虚偽表示率を推定し、その推定値がその勘定残高の「重要性」または「許容不可能な虚偽表示」の閾値以内であることを一定の信頼度（例えば95％）で確信するものである。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>For example, consider sampling sales invoices from the accounts receivable aging report and comparing them to supporting documentation to see if they were billed in the correct amounts, to the correct customers, and on the correct dates. <!-- 　例えば、売掛金滞留報告書から売掛金請求書をサンプリングし、それらを証憑書類と比較して、正しい金額、正しい顧客、正しい日付で請求されたかどうかを確認することを検討する。 --></li>
+<li>Additionally, auditors might trace invoices to shipping log, and match invoice dates to the shipment dates for those items in the shipping log, to see if sales are being recorded in the correct accounting period. <!-- さらに、監査人は、請求書から出荷記録をたどり、請求書の日付と出荷記録にある商品の出荷日を照合し、売上が正しい会計期間に計上されているかどうかを確認する。 --></li>
+<li>This can include an examination of invoices issued after the period being audited, to see if they should have been included in a prior period. <!-- これには、監査対象期間の後に発行された請求書が、以前の期間に含まれるべきものであるかどうかの調査も含まれる。 --></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><strong>Acceptance sampling size</strong> is determined using Cohen’s power analysis which is implemented in R’s <em>pwr</em> package, If <strong>discovery sampling</strong> suggests that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream. <!-- 採択サンプリングにおけるサイズは、Rの`pwr`パッケージに実装されているCohenの検出力分析（Cohen 1992）を使用して決定される。 --> <!-- 発見サンプリングが特定の取引ストリームが統制から逸脱していることを示唆している場合、属性推定はこのトランザクションの流れを処理するシステムの実際の逸脱率を決定するのに役立つ。 --></li>
+<li>Errors estimates from attribute samples may either be <em>rates of erroneous transactions</em> or from a monetary unit sampling perspective, can be <em>rates of monetary error in the transaction stream</em>. <!-- 属性サンプリングから推定されるエラーは、誤った取引の率である場合もあれば、金額単位サンプリングの観点からは、取引ストリームの虚偽表示額の割合である場合もある。 --></li>
+</ul>
 </section>
 <section class="slide level2">
 
@@ -1750,56 +2216,119 @@ n \approx  \frac{log(1-confidence)}{log(1-\frac{10-risk_{intelligence} \times ri
 <div class="cell">
 <details class="code-fold">
 <summary>コード</summary>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="" aria-hidden="true" tabindex="-1"></a>size   <span class="ot">&lt;-</span> <span class="dv">100000</span>      <span class="co"># 取引の総額</span></span>
-<span id="cb48-2"><a href="" aria-hidden="true" tabindex="-1"></a>mu     <span class="ot">&lt;-</span> <span class="dv">50</span>          <span class="co"># 取引の平均値</span></span>
-<span id="cb48-3"><a href="" aria-hidden="true" tabindex="-1"></a>Delta  <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="sc">*</span> mu   <span class="co"># 5%の金額の許容誤差を検出</span></span>
-<span id="cb48-4"><a href="" aria-hidden="true" tabindex="-1"></a>sigma  <span class="ot">&lt;-</span> <span class="dv">30</span>          <span class="co"># 変動</span></span>
-<span id="cb48-5"><a href="" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">&lt;-</span> Delta <span class="sc">/</span> sigma <span class="co"># 許容度÷変動</span></span>
-<span id="cb48-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-7"><a href="" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>( <span class="co"># Cohenのpower analysis</span></span>
-<span id="cb48-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> effect,       <span class="co"># Cohenのd</span></span>
-<span id="cb48-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="co"># 有意水準</span></span>
-<span id="cb48-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.8</span>,      <span class="co"># 効果量</span></span>
-<span id="cb48-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"one.sample"</span>, <span class="co"># 一標本検定</span></span>
-<span id="cb48-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">"greater"</span> <span class="co"># 偽陽性</span></span>
-<span id="cb48-13"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb48-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st"> Attribute sample size for amount of error = "</span>, <span class="fu">ceiling</span>(sample<span class="sc">$</span>n))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>size   <span class="ot">&lt;-</span> <span class="dv">100000</span>      <span class="co"># 取引の総額</span></span>
+<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>mu     <span class="ot">&lt;-</span> <span class="dv">50</span>          <span class="co"># 取引の平均値</span></span>
+<span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a>Delta  <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="sc">*</span> mu   <span class="co"># 5%の金額の許容誤差を検出</span></span>
+<span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a>sigma  <span class="ot">&lt;-</span> <span class="dv">30</span>          <span class="co"># 変動</span></span>
+<span id="cb47-5"><a href="" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">&lt;-</span> Delta <span class="sc">/</span> sigma <span class="co"># 許容度÷変動</span></span>
+<span id="cb47-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>( <span class="co"># Cohenのpower analysis</span></span>
+<span id="cb47-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> effect,       <span class="co"># Cohenのd</span></span>
+<span id="cb47-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="co"># 有意水準</span></span>
+<span id="cb47-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.8</span>,      <span class="co"># 効果量</span></span>
+<span id="cb47-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"one.sample"</span>, <span class="co"># 一標本検定</span></span>
+<span id="cb47-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">"greater"</span> <span class="co"># 偽陽性</span></span>
+<span id="cb47-13"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb47-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st"> Attribute sample size for amount of error = "</span>, <span class="fu">ceiling</span>(sample<span class="sc">$</span>n))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  Attribute sample size for amount of error =  892</code></pre>
 </div>
 </div>
-</section>
-<section id="notable-audit-failures-and-why-they-occurred" class="slide level2">
-<h2>Notable Audit Failures and Why They Occurred</h2>
+</section></section>
+<section>
+<section id="notable-audit-failures-and-why-they-occurred" class="title-slide slide level1 center">
+<h1>Notable Audit Failures and Why They Occurred</h1>
 <!-- 注目すべき監査の失敗とその原因 -->
 <ul>
 <li>Audit and accounting practice have been strongly influenced by a string of scandals that have occurred nearly every 7 years since the Reagan reforms of the early 1980s.</li>
 <li>The medical, legal and accounting professions were opened up to free-market forces when all three professions were allowed direct-to-consumer marketing and brand-building.</li>
 <li>Rules regarding pricing and competition for talent were also relaxed.</li>
-<li>In auditing the repeal of AICPA Ethics Rules Section 501 on advertising, recruiting from other firms and other free-market innovations moved the industry from its cossetted clubby culture to a profit-oriented business. − By the late 1990s audit firms were averaging $7 of IT revenue for every $1 of audit revenue.</li>
 </ul>
+<aside class="notes">
+<p>監査実務と会計実務は、1980年代初頭のレーガン改革以来、ほぼ7年ごとに発生している一連のスキャンダルに強く影響を受けてきた。 医療、法律、会計の各専門職は、直接消費者向けのマーケティングとブランド構築が許可されたとき、自由市場の力によって開かれた。 価格設定や人材の競争に関する規則も緩和された。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
 <ul>
+<li>In auditing the repeal of AICPA Ethics Rules Section 501 on advertising, recruiting from other firms and other free-market innovations moved the industry from its cossetted clubby culture to a profit-oriented business. − By the late 1990s audit firms were averaging $7 of IT revenue for every $1 of audit revenue.</li>
 <li>The year 2001 witnessed a series of financial frauds involving Enron Corporation auditing firm Arthur Andersen, the telecommunications company WorldCom, Qwest, and Sunbeam among other well-known corporations.</li>
-<li>These problems highlighted the need to review the effectiveness of accounting standards, auditing regulations and corporate governance principles.</li>
+</ul>
+<aside class="notes">
+<p>監査において、AICPA倫理規則第501条（広告、他の企業からの採用など）の廃止、他の企業からの採用などの自由市場の革新により、業界は、保護されたクラブ文化から利益志向のビジネスへと移行した。 1990年代後半には、監査会社は監査収益1ドルに対してIT収益7ドルを平均していた。 2001年には、エンロン社、監査会社アーサー・アンダーセン、通信会社ワールドコム、クエスト、サンビームなどの他の有名な企業を巻き込んだ一連の財務詐欺事件が発生した。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>These problems highlighted the need to review <strong>the effectiveness</strong> of accounting standards, auditing regulations and corporate governance principles.</li>
 <li>In some cases, management manipulated the figures shown in financial reports to indicate a better economic performance.</li>
 <li>In others, tax and regulatory incentives encouraged over-leveraging of companies and decisions to bear extraordinary and unjustified risk.</li>
 </ul>
+<aside class="notes">
+<p>これらの問題は、会計基準、監査規制、企業ガバナンス原則の有効性を見直す必要性を浮き彫りにした。 一部の場合、経営陣は財務報告書に表示される数字を操作して、より良い経済的成績を示そうとした。 他の場合、税制や規制上のインセンティブが企業の過剰レバレッジや非常識なリスクを負う決定を促した。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
 <ul>
-<li><p>The Enron scandal deeply influenced the development of new regulations to improve the reliability of financial reporting and increased public awareness about the importance of having accounting standards that show the financial reality of companies and the objectivity and independence of auditing firms.</p></li>
-<li><p>In addition to being the largest bankruptcy reorganization in American history, the Enron scandal undoubtedly is the biggest audit failure. The scandal caused the dissolution of Arthur Andersen which at the time was one of the five largest accounting firms in the world.</p></li>
-<li><p>One consequence of these events was the passage of the Sarbanes–Oxley Act in 2002. The act significantly raises criminal penalties for securities fraud for destroying, altering, or fabricating records in federal investigations or any scheme or attempt to defraud shareholders.</p></li>
+<li>The <strong>Enron scandal</strong> deeply influenced the development of new regulations to improve the reliability of financial reporting and increased public awareness about the importance of having accounting standards that show the financial reality of companies and the objectivity and independence of auditing firms.</li>
+<li>In addition to being the largest bankruptcy reorganization in American history, the Enron scandal undoubtedly is the biggest audit failure. The scandal caused <em>the dissolution of Arthur Andersen</em> which at the time was one of the five largest accounting firms in the world.</li>
+<li>One consequence of these events was the passage of the <strong>Sarbanes–Oxley Act in 2002</strong>. <!-- The act significantly raises criminal penalties for securities fraud for destroying, altering, or fabricating records in federal investigations or any scheme or attempt to defraud shareholders. --></li>
 </ul>
+<aside class="notes">
+<p>エンロンの不祥事は、会計基準が企業の財務の実態を示し、監査会社の客観性と独立性を示すことの重要性についての公衆の認識を高めるための新しい規制の開発に大きな影響を与えた。 アメリカ史上最大の破産再編であるだけでなく、エンロンの不祥事は間違いなく最大の監査失敗である。 この不祥事は、当時世界で5番目に大きな会計事務所の1つであったアーサー・アンダーセンの解散を引き起こした。 これらの出来事の一つの結果は、2002年にサーベインズ・オクスリー法が成立したことである。 この法律は、連邦捜査で記録を破壊、変更、または偽造し、株主を詐欺しようとするあらゆる計画や試みに対する証券詐欺の刑事罰を大幅に引き上げている。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="auditing-a-wicked-problem" class="title-slide slide level1 center">
+<h1>Auditing: A Wicked Problem</h1>
+
 </section>
-<section id="auditing-a-wicked-problem" class="slide level2">
-<h2>Auditing: A Wicked Problem</h2>
+<section id="wicked-problem" class="slide level2">
+<h2>Wicked Problem</h2>
 <ul>
 <li>In theory, independent audits increase the value and credibility of the financial statements, reduce investor risk, and reduce the cost of capital of audited firms. <!-- 理論上では，独立した監査は，財務諸表の価値と信頼性を高め，投資家のリスクを低減し，監査対象企業の資本コストを低減する。 --></li>
 <li>They are often required under securities law and by investors and creditors. <!-- これらは，証券法によって要求されることが多く，投資家や債権者によっても要求される。 --></li>
@@ -1868,8 +2397,7 @@ n \approx  \frac{log(1-confidence)}{log(1-\frac{10-risk_{intelligence} \times ri
 <li>Roberts (2002) and Roberts (2000) identified three strategies to address wicked problems: <strong>competitive, authoritative and collaborative</strong>. <!-- Roberts (2002)やRoberts (2000)は，悪い問題，:競争的，権威的，協調的に対処するための3つの戦略を特定している。 --></li>
 <li><strong>Competitive strategies</strong> attempt to solve wicked problems by pitting opposing points of view against each other requiring parties that hold these views to come up with their preferred solutions. <!-- 競争戦略は、対立する視点を互いに対立させることで悪い問題を解決しようとする。これにより、これらの視点を持つ当事者は、自分たちの好ましい解決策を考え出さなければならない。 --></li>
 <li>The advantage of this approach is that different solutions can be weighed up against each other and the best one chosen. <!-- このアプローチの利点は，異なる解決策を互いに比較し，最良の解決策を選択できることである。 --></li>
-<li>The disadvantage is that this adversarial approach creates a confrontational environment in which knowledge sharing is discouraged. <!-- 欠点は，この対立的なアプローチが，知識共有が奨励されない対立的な環境を作り出すことである。 --></li>
-<li>Consequently the parties involved may not have an incentive to come up with their best possible solution. <!-- その結果，関係する当事者は，最善の解決策を考え出す動機付けを持たないかもしれない。 --></li>
+<li>The disadvantage is that this adversarial approach creates a confrontational environment in which knowledge sharing is discouraged. <!-- 欠点は，この対立的なアプローチが，知識共有が奨励されない対立的な環境を作り出すことである。 --> <!-- - Consequently the parties involved may not have an incentive to come up with their best possible solution. --> <!-- その結果，関係する当事者は，最善の解決策を考え出す動機付けを持たないかもしれない。 --></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -1897,11 +2425,11 @@ n \approx  \frac{log(1-confidence)}{log(1-\frac{10-risk_{intelligence} \times ri
 <li><p>Auditing for better or worse has chosen to couch the industrial organization of the audit business in an authoritarian structure. <!-- 監査は，良いか悪いかにかかわらず，監査業務の産業構造を権威主義的な構造で表現することを選択している。 --></p></li>
 <li><p>Authority for rendering audit opinions is vested in a small number of firms; the Fortune 500 firms must typically be audited by one of the Big Four audit firms; <!-- firm employees must receive extensive training typically 4–5 years of college education and passage of a CPA certification examination. --> <!-- 監査意見の提出権限は，わずかな数の企業に委任されており，フォーチュン500企業は，通常，ビッグフォー監査法人のいずれかによって監査を受けなければならない。 --> <!-- 企業の従業員は，通常，4～5年の大学教育を受け，CPA資格試験に合格しなければならない。 --></p></li>
 <li><p>Audits authoritative strategy for solving its wicked problem offers the advantage of substantially reduced cost and greater efficiency of audits. <!-- 監査の権威主義的な戦略は、監査のコストを大幅に削減し、監査の効率を向上させるという利点がある。 --></p></li>
-<li><p>Its disadvantage is that no matter how well educated the auditors are they will not have as much information about IT storage and processing platforms, financial investment instruments, production operations, international law and so forth as dedicated professionals. <!-- その欠点は、監査人がどれだけ教育を受けていても、専門家にはITストレージや処理プラットフォーム、金融投資商品、生産運用、国際法などについての情報が十分にはないということである。 --> <!-- - Information technology along with the automation of audit tasks and decision- making are helping auditors respond to an increasingly complex business environment in the context of their authoritative strategy. --> <!-- 情報技術と監査業務および意思決定の自動化は、監査人が権威主義的戦略の文脈で、ますます複雑化するビジネス環境に対応するのを助けている。 --></p></li>
+<li><p>Its disadvantage is that no matter how well educated the auditors are they will not have as much information about IT storage and processing platforms. <!-- financial investment instruments, production operations, international law and so forth as dedicated professionals. --> <!-- その欠点は、監査人がどれだけ教育を受けていても、専門家にはITストレージや処理プラットフォーム、金融投資商品、生産運用、国際法などについての情報が十分にはないということである。 --> <!-- - Information technology along with the automation of audit tasks and decision- making are helping auditors respond to an increasingly complex business environment in the context of their authoritative strategy. --> <!-- 情報技術と監査業務および意思決定の自動化は、監査人が権威主義的戦略の文脈で、ますます複雑化するビジネス環境に対応するのを助けている。 --></p></li>
 </ul>
 </section>
-<section id="final-thoughts-on-audit-planning-and-budgets" class="slide level2">
-<h2>Final Thoughts on Audit Planning and Budgets</h2>
+<section id="final-thoughts-on-planning-and-budgets" class="slide level2">
+<h2>Final Thoughts on Planning and Budgets</h2>
 <ul>
 <li>Planning and budgeting of audits is not an <em>exact science</em>, rather it is contextual, with uncertain outcomes, incomplete and asymmetric information, and ongoing negotiations with the client and between audit offices. <!-- 監査の計画と予算は精密科学ではなく、不確実な結果、不完全で非対称な情報、およびクライアントと監査事務所間の交渉が継続している文脈にある。 --></li>
 <li>The judgment and experience of auditors, managers, and the profession are essential to a complete and effective planning process. <!-- 監査人、管理者、および専門家の判断と経験は、完全かつ効果的な計画プロセスに不可欠である。 --> <!-- The prior exposition moves us toward quantification and standardization of the process. --> <!-- - 前述の説明は、プロセスの定量化と標準化に向けて進んでいる。 --> <!-- It offers audit professionals computational and statistical tools to automate tedious, repetitive tasks, while allowing them to focus on critical issues that demand their expertise.  --> <!-- 監査専門家には、退屈で繰り返しの多いタスクを自動化するための計算と統計ツールを提供し、専門知識を要する重要な問題に焦点を当てることができる。 --></li>
