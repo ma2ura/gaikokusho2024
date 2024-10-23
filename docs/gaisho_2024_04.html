@@ -588,25 +588,25 @@ Soichi Matsuura
 <span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">batch_size =</span> <span class="dv">128</span>) <span class="co"># the number of samples per gradient update</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/10
-469/469 - 1s - loss: 0.2571 - accuracy: 0.9258 - 1s/epoch - 2ms/step
+469/469 - 1s - loss: 0.2615 - accuracy: 0.9249 - 946ms/epoch - 2ms/step
 Epoch 2/10
-469/469 - 1s - loss: 0.1036 - accuracy: 0.9688 - 857ms/epoch - 2ms/step
+469/469 - 1s - loss: 0.1031 - accuracy: 0.9692 - 879ms/epoch - 2ms/step
 Epoch 3/10
-469/469 - 1s - loss: 0.0677 - accuracy: 0.9800 - 928ms/epoch - 2ms/step
+469/469 - 1s - loss: 0.0687 - accuracy: 0.9793 - 797ms/epoch - 2ms/step
 Epoch 4/10
-469/469 - 1s - loss: 0.0496 - accuracy: 0.9854 - 947ms/epoch - 2ms/step
+469/469 - 1s - loss: 0.0498 - accuracy: 0.9855 - 797ms/epoch - 2ms/step
 Epoch 5/10
-469/469 - 1s - loss: 0.0374 - accuracy: 0.9888 - 935ms/epoch - 2ms/step
+469/469 - 1s - loss: 0.0377 - accuracy: 0.9890 - 800ms/epoch - 2ms/step
 Epoch 6/10
-469/469 - 1s - loss: 0.0289 - accuracy: 0.9921 - 935ms/epoch - 2ms/step
+469/469 - 1s - loss: 0.0287 - accuracy: 0.9915 - 809ms/epoch - 2ms/step
 Epoch 7/10
-469/469 - 1s - loss: 0.0219 - accuracy: 0.9939 - 884ms/epoch - 2ms/step
+469/469 - 1s - loss: 0.0220 - accuracy: 0.9933 - 810ms/epoch - 2ms/step
 Epoch 8/10
-469/469 - 1s - loss: 0.0163 - accuracy: 0.9954 - 787ms/epoch - 2ms/step
+469/469 - 1s - loss: 0.0175 - accuracy: 0.9947 - 829ms/epoch - 2ms/step
 Epoch 9/10
-469/469 - 1s - loss: 0.0128 - accuracy: 0.9966 - 808ms/epoch - 2ms/step
+469/469 - 1s - loss: 0.0130 - accuracy: 0.9964 - 940ms/epoch - 2ms/step
 Epoch 10/10
-469/469 - 1s - loss: 0.0098 - accuracy: 0.9972 - 820ms/epoch - 2ms/step</code></pre>
+469/469 - 1s - loss: 0.0105 - accuracy: 0.9972 - 1s/epoch - 2ms/step</code></pre>
 </div>
 </div>
 </section>
@@ -636,11 +636,11 @@ Epoch 10/10
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">loss</td>
-<td style="text-align: right;">0.0688071</td>
+<td style="text-align: right;">0.0667089</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">accuracy</td>
-<td style="text-align: right;">0.9818000</td>
+<td style="text-align: right;">0.9815000</td>
 </tr>
 </tbody>
 </table>
@@ -717,16 +717,29 @@ L (\theta) = f(x \mid \theta), \quad l (\theta) = \log L(\theta)
 <h2>Auditing</h2>
 <!-- ## 第1節 監査 -->
 <ul>
-<li>Auditing of financial accounts is the process of verifying that economic events in the real world are accurately summarized in the financial statements of a legal entity. <!-- 財務諸表監査は、現実世界における経済事象が事業体の財務諸表に正確に記載されているかどうかを検証するプロセスである。 --></li>
-<li>An audit opinion, the product of such auditing provides: <!-- このような監査の成果である監査意見は、下記の点について独立した第三者による合理的保証を提供するものである。 -->
+<li>Auditing of financial accounts is the process of verifying that economic events in the real world are accurately summarized in the financial statements of a legal entity.</li>
+<li>An audit opinion, the product of such auditing provides:
 <ol type="1">
-<li>Reasonable assurance. <!-- 1. 合理的保証。 --></li>
-<li>By an independent third party. <!-- 2. 独立した第三者による。 --></li>
-<li>Financial statements are presented fairly in all material respects. <!-- 3. 財務諸表がすべての重要な点において適正に表示されていること。 --></li>
-<li>In accordance to some financial reporting framework, e.g., GAAP. <!-- 4. ある財務報告の枠組み（たとえばGAAP）に準拠していること。 --></li>
-<li>Applied consistently so that year-to-year trends and comparisons are possible. <!-- 5. 継続性をもって適用されているため、年度間の傾向と比較が可能であること。 --></li>
+<li>Reasonable assurance.</li>
+<li>By an independent third party.</li>
+<li>Financial statements are presented fairly in all material respects.</li>
+<li>In accordance to some financial reporting framework, e.g., GAAP.</li>
+<li>Applied consistently so that year-to-year trends and comparisons are possible.</li>
 </ol></li>
 </ul>
+<aside class="notes">
+<p>財務諸表監査は、現実世界における経済事象が事業体の財務諸表に正確に記載されているかどうかを検証するプロセスである。 このような監査の成果である監査意見は、下記の点について独立した第三者による合理的保証を提供するものである。 1. 合理的保証。 2. 独立した第三者による。 3. 財務諸表がすべての重要な点において適正に表示されていること。 4. ある財務報告の枠組み（たとえばGAAP）に準拠していること。 5. 継続性をもって適用されているため、年度間の傾向と比較が可能であること。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -812,14 +825,7 @@ L (\theta) = f(x \mid \theta), \quad l (\theta) = \log L(\theta)
 </section>
 <section id="accounting-cycles" class="slide level2">
 <h2>5 Accounting Cycles</h2>
-<p>The <em>five accounting cycles</em> are: <!-- （第3章 第8節で説明したように）以下のような5つの会計サイクルがある。 --></p>
-<ol type="1">
-<li>Revenue cycle.</li>
-<li>Expenditure cycle (this cycle focuses on two separate resources: inventory and human resources and often considers two separate cycles: purchasing and payroll/HR ).</li>
-<li>Conversion cycle (Production cycle).</li>
-<li>Financing (Capital Acquisition and repayment).</li>
-<li>Fixed assets.</li>
-</ol>
+<p>The <em>five accounting cycles</em> are: <!-- （第3章 第8節で説明したように）以下のような5つの会計サイクルがある。 --> 1. Revenue cycle. 2. Expenditure cycle (this cycle focuses on two separate resources: inventory and human resources and often considers two separate cycles: purchasing and payroll/HR ). 3. Conversion cycle (Production cycle). 4. Financing (Capital Acquisition and repayment). 5. Fixed assets.</p>
 <!--
 1. 収益サイクル
 2. 費用サイクル（このサイクルは、商品と人材という2つの別々の資源に焦点を当ており、購買と給与・HRという2つの別々のサイクルとされることもある。）
@@ -841,9 +847,10 @@ L (\theta) = f(x \mid \theta), \quad l (\theta) = \log L(\theta)
 
 <ul>
 <li>In theory, both are of nearly equal priority, but in practice it can be very difficult to manage when faced with the scarcity of resources, especially time, in which to conduct the risk management process. <!-- 理論的には、両者の優先順位はほぼ同じであるが、実際には、リスクマネジメントプロセスを実施するための資源（特に時間）の制約に直面した場合、そのマネジメントは非常に困難となる。 --></li>
-<li>This is one conundrum engendered by auditing’s inherently “wicked” character. <!-- これは、監査が本質的に「厄介（wicked）」な性格を持っているために生じる難問の一つである。 --></li>
-<li>A Risk Assessment Matrix (RAM) is a calculation spreadsheet that is used in risk assessment to define, estimate, argue, and support particular risks involved in decision-making.</li>
-<li>In auditing, the objective of the RAM is to construct a set of audit tasks (the audit program) that cost-effectively assures that the eventual audit decision will be correct with a particular level of confidence. <!-- RAMとは、意思決定に関する特定のリスクを定義し、見積り、議論し、 サポートするために、リスク評価において利用されるスプレッドシートである。監査では、RAMの目的は、最終的な監査人の意思決定がコスト効率的に特定の信頼度で上回っていることを保証する監査計画を構築することである。 --></li>
+<li>This is one conundrum engendered by auditing’s inherently “<strong>wicked</strong>” character. <!-- これは、監査が本質的に「厄介（wicked）」な性格を持っているために生じる難問の一つである。 --></li>
+<li>A <strong>Risk Assessment Matrix</strong> (RAM) is a calculation spreadsheet that is used in risk assessment to define, estimate, argue, and support particular risks involved in decision-making.</li>
+<li>In auditing, the objective of the RAM is to construct a set of audit tasks that <em>cost-effectively</em> assures that the eventual audit decision will be correct with a particular level of confidence. <!-- RAMとは、意思決定に関する特定のリスクを定義し、見積り、議論し、 サポートするために、リスク評価において利用されるスプレッドシートである。
+監査では、RAMの目的は、最終的な監査人の意思決定がコスト効率的に特定の信頼度で上回っていることを保証する監査計画を構築することである。 --></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -851,11 +858,11 @@ L (\theta) = f(x \mid \theta), \quad l (\theta) = \log L(\theta)
 <ul>
 <li>Different statistical philosophies dictate the particular mathematical approach which is applied in the RAM.</li>
 <li>We will briefly review the alternatives here, with the goal of describing a simple, somewhat objective approach appropriate for the initial stages of auditing planning.</li>
-<li>Mathematicians recognize three broad approaches to risk calculations for decision-making: (1) the - Neyman–Pearson hypothesis testing framework; (2) the Minimax game theoretic framework; and (3) Bayes Risk.</li>
-<li>This chapter proposes a simplified Bayes Risk as most appropriate for early planning of audits.</li>
+<li>Mathematicians recognize three broad approaches to risk calculations for decision-making: (1) the <strong>Neyman–Pearson hypothesis</strong> testing framework; (2) the <strong>Minimax game theoretic</strong> framework; and (3) <strong>Bayes Risk</strong>.</li>
+<li>This chapter proposes a simplified <strong>Bayes Risk</strong> as most appropriate for early planning of audits.</li>
 </ul>
 <aside class="notes">
-<p>様々な統計学の理論によって、RAMに適用される特定の数学的なアプローチは定義される。ここでは、監査計画の初期段階に適している単純である程度客観的なアプロ ーチを示すことを目的として、そのアプローチの候補を簡単に紹介する。 数学において、意思決定のためのリスク計算については大まかに、(1) Neyman-Pearsonの仮説検定フレームワーク、(2) ミニマックス法（Minimax）によるゲーム理論的フレームワーク、(3) ベイズリスクの3つのアプローチがある。本章では、監査の初期計画に最も適した簡便化したベイズリスクを提案する。</p>
+<p>様々な統計学の理論によって、RAMに適用される特定の数学的なアプローチは定義される。 ここでは、監査計画の初期段階に適している単純である程度客観的なアプローチを示すことを目的として、そのアプローチの候補を簡単に紹介する。 数学において、意思決定のためのリスク計算については大まかに、(1) Neyman-Pearsonの仮説検定フレームワーク、(2) ミニマックス法（Minimax）によるゲーム理論的フレームワーク、(3) ベイズリスクの3つのアプローチがある。本章では、監査の初期計画に最も適した簡便化したベイズリスクを提案する。</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -970,16 +977,31 @@ AR = IR \times CR \times DR
 <section class="slide level2">
 
 <ul>
-<li>This formula is an <em>extreme simplification of the occurrence of loss in the real world</em>, and is only suitable for the early, exploratory stages of planning an audit. <!-- ここで公式は、現実の世界における損失の発生を極端に単純化したものであり、監査計画の初期の探索的な段階にのみ適している。 --></li>
-<li>As evidence is collected at mid-year and year-end, audit tasks will need to be updated, and audit scope changed to meet the interim findings of the audit. <!-- 年度半ばや年度末に監査証拠が収集されるにつれ、監査作業が更新され、監査実施時の発見に応じて監査範囲を変更する必要がある。 --></li>
-<li>There are several problems with the simplified formula: <!-- Cox (2008)は、単純化したリスクアプローチの式には下記のような問題があると指摘している。 --></li>
-</ul>
+<li>This formula is an <em>extreme simplification of the occurrence of loss in the real world</em>, and is only suitable for the early, exploratory stages of planning an audit. <!-- ここで公式は、現実の世界における損失の発生を極端に単純化したものであり、監査計画の初期の探索的な段階にのみ適している。 --> <!-- - As evidence is collected at mid-year and year-end, audit tasks will need to be updated, and audit scope changed to meet the interim findings of the audit. --> <!-- 年度半ばや年度末に監査証拠が収集されるにつれ、監査作業が更新され、監査実施時の発見に応じて監査範囲を変更する必要がある。 --> There are several problems with the simplified formula: <!-- Cox (2008)は、単純化したリスクアプローチの式には下記のような問題があると指摘している。 -->
 <ol type="1">
-<li><strong>Poor Resolution</strong>. Typical risk matrices can correctly and unambiguously compare only a small fraction (typically less than 10%) of randomly selected pairs of hazards. <!-- They can assign identical ratings to quantitatively very different risks (“range compression”). --> <!-- 1. **解像度が低い問題**（Poor Resolution） : 一般的なリスクマトリクスでは、無作為に選択したリスク項目の組み合わせのほとんどを正しく確実に比較することができない（通常正しく比較できるのは10％以下）。 --> <!-- リスクマトリクスには、定量的に大きく異なるリスクに対して、同一の評価を割り当ててしまう問題（範囲圧縮（range compression）と呼ばれる問題）がある。 --></li>
-<li><strong>Errors</strong>. Risk matrices can mistakenly assign higher qualitative ratings to quantitatively smaller risks. <!-- For risks with negatively correlated frequencies and severities, they can be “worse than useless,” leading to worse-than-random decisions. --> <!-- 1. **誤りが生じる問題**（Errors）: リスクマトリクスでは定量的に小さいリスクに対して、より高い定量的評価を誤って割り当ててしまう可能性がある。 --> <!-- リスクの発生可能性と潜在的な影響が負の相関を持つリスクについては、リスクマトリクスはランダムより悪い決定を導く、つまり「役に立たないどころか有害である」となる可能性がある。 --></li>
-<li><strong>Suboptimal Resource Allocation</strong>. Effective allocation of resources to risk-reducing countermeasures cannot be based on the categories provided by risk matrices. <!-- 1. **資源の最適配分ができない可能性**（Suboptimal Resource Allocation）: リスクマトリクスによるリスク分類では、リスク低減対策への効果的な資源配分ができない可能性がある。 --></li>
-<li><strong>Ambiguous Inputs and Outputs</strong>. Categorizations of severity cannot be made objectively for uncertain consequences. Inputs to risk matrices (e.g., frequency and severity categorizations) and resulting outputs (i.e., risk ratings) require subjective interpretation, and different users may obtain opposite ratings of the same quantitative risks. –&gt; <!-- 2. **入力と出力が曖昧である問題**（Ambiguous Inputs and Outputs） : 不確実な出力結果が不確実な場合、潜在的な影響の分類を客観的に行うことができない可能性がある。 --> <!-- リスクマトリクスへの入力（例：リスクの発生可能性と潜在的な影響の分類）とその出力結果（例：リスク評価）には主観的な解釈が必要であり、同じ定量的リスクでも利用者によって評価が正反対になる可能性がある。 --></li>
+<li><strong>Poor Resolution</strong>. Typical risk matrices can correctly and unambiguously compare only a small fraction <!-- (< 10%) --> of randomly selected pairs of hazards. <!-- They can assign identical ratings to quantitatively very different risks (“range compression”). --></li>
+<li><strong>Errors</strong>. Risk matrices can mistakenly assign higher qualitative ratings to quantitatively smaller risks. <!-- For risks with negatively correlated frequencies and severities, they can be “worse than useless,” leading to worse-than-random decisions. --></li>
+<li><strong>Suboptimal Resource Allocation</strong>. Effective allocation of resources to risk-reducing countermeasures cannot be based on the categories provided by risk matrices.</li>
+<li><strong>Ambiguous Inputs and Outputs</strong>. Categorizations of severity cannot be made objectively for uncertain consequences. Inputs to risk matrices <!-- (e.g., frequency and severity categorizations)  --> and resulting outputs <!-- (i.e., risk ratings) --> require subjective interpretation, and different users may obtain opposite ratings of the same quantitative risks.</li>
+</ol></li>
+</ul>
+<aside class="notes">
+<ol type="1">
+<li><strong>解像度が低い問題</strong>（Poor Resolution） : 一般的なリスクマトリクスでは、無作為に選択したリスク項目の組み合わせのほとんどを正しく確実に比較することができない（通常正しく比較できるのは10％以下）。 リスクマトリクスには、定量的に大きく異なるリスクに対して、同一の評価を割り当ててしまう問題（範囲圧縮（range compression）と呼ばれる問題）がある。 <!-- <!-- 2. **誤りが生じる問題**（Errors）: リスクマトリクスでは定量的に小さいリスクに対して、より高い定量的評価を誤って割り当ててしまう可能性がある。 --> リスクの発生可能性と潜在的な影響が負の相関を持つリスクについては、リスクマトリクスはランダムより悪い決定を導く、つまり「役に立たないどころか有害である」となる可能性がある。 –&gt;</li>
+<li><strong>資源の最適配分ができない可能性</strong>（Suboptimal Resource Allocation）: リスクマトリクスによるリスク分類では、リスク低減対策への効果的な資源配分ができない可能性がある。</li>
+<li><strong>入力と出力が曖昧である問題</strong>（Ambiguous Inputs and Outputs） : 不確実な出力結果が不確実な場合、潜在的な影響の分類を客観的に行うことができない可能性がある。リスクマトリクスへの入力（例：リスクの発生可能性と潜在的な影響の分類）とその出力結果（例：リスク評価）には主観的な解釈が必要であり、同じ定量的リスクでも利用者によって評価が正反対になる可能性がある。</li>
 </ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="accessing-the-secs-edgar-database-of-financial-information" class="slide level2">
 <h2>Accessing the SEC’s EDGAR Database of Financial Information</h2>
@@ -1004,9 +1026,9 @@ AR = IR \times CR \times DR
 
 <ul>
 <li>The following code chunk accesses the SEC’s XBRL databases to acquire current and prior year filings for any listed company, and read it as a dataset that can be manipulated by R. <!-- 以下のコード・チャンクにより、SECのXBRLデータベースにアクセスし、任意の上場企業の現在および前年度の提出書類を取得し、Rで処理できるデータセットとして読み込むことができる。 --></li>
-<li>For this example, we extract General Motors’ 2016 and 2017 financials from the EDGAR database at sec.gov. I use the finstr package to access EDGAR files [^1] . <!-- この例では、General Motors社の2016年と2017年の財務情報をsec.govのEDGARデータベースから抽出する。本章では、EDGARファイルにアクセスするために`finstr`パッケージを使用する[^1]。 --> [^1]: [訳註：] 日本からEDGARデータベースへのアクセスには制限があるため，訳書ではEDGARデータベースから直接データ取得は行わず，いったんXBRLファイルをダウンロードしてローカルに保存し，そのファイルを読み込む形でデータ取得を行っている。ここでは作業ディレクトリに<code>XBRL</code> フォルダを作成し，そこに<code>xml</code>ファイルを保存している。</li>
+<li>For this example, we extract General Motors’ 2016 and 2017 financials from the EDGAR database at sec.gov. I use the finstr package to access EDGAR files <sup>1</sup> . <!-- この例では、General Motors社の2016年と2017年の財務情報をsec.govのEDGARデータベースから抽出する。本章では、EDGARファイルにアクセスするために`finstr`パッケージを使用する[^1]。 --></li>
 </ul>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>[訳註：] 日本からEDGARデータベースへのアクセスには制限があるため，訳書ではEDGARデータベースから直接データ取得は行わず，いったんXBRLファイルをダウンロードしてローカルに保存し，そのファイルを読み込む形でデータ取得を行っている。ここでは作業ディレクトリに<code>XBRL</code> フォルダを作成し，そこに<code>xml</code>ファイルを保存している。</p></li></ol></aside></section>
 <section id="finstr-package" class="slide level2">
 <h2><code>finstr</code> package</h2>
 <div class="cell">
@@ -1493,15 +1515,14 @@ Number of elements in errors:  0 </code></pre>
 <li>Almost all of the EDGAR information is maintained in <strong>HTML</strong> format, and I will provide code later in this chapter to access and parse HTML files in EDGAR. <!-- これらは、（SECのウェブサイトである）sec.govの情報にアクセスするために必要な基本ツールである。EDGARには数多くの報告書があることに注意してほしい。finstrを利用することで、EDGARデータベース上のXBRL形式の財務諸表にアクセスし、形式化されたデータを扱うことができる。ほぼすべてのEDGAR情報はHTML形式で管理されており、EDGARのHTMLファイルにアクセスして解析するコードをこの章の後半で説明する。 --></li>
 </ul>
 </section>
-<section id="caveats-on-accessing-edgar-information-with-r" class="slide level2">
-<h2>Caveats on accessing EDGAR information with R</h2>
+<section id="caveats-on-accessing-edgar-with-r" class="slide level2">
+<h2>Caveats on accessing EDGAR with R</h2>
 <!-- ## 第4節 Rを利用したEDGAR情報へのアクセスの注意事項 -->
 <ul>
 <li>One of the most useful functions that R and its packages offer auditors and accountants is the ability to quickly and directly access SEC filings with very simple R code. <!-- 監査人や会計士がRとそのパッケージを利用する際に最も便利な機能の一つは、非常にシンプルなRコードでSEC提出書類に素早く直接アクセスできることである。 --></li>
 <li>This comes with caveats, as EDGAR’s database formatting and naming conventions are not always stable, and can change without warning. <!-- ただし、これには注意点があり、EDGARのデータベースのフォーマットや命名規則（naming convention）は常に一定ではなく、警告なしに変更されることがある。 --></li>
 <li>Additionally, the R packages which support access to SEC databases are not always reliably maintained, and changes at the SEC may not be reflected in the code. <!-- さらに、SECデータベースへのアクセスをサポートするRパッケージは、常に確実にメンテナンスされているわけではなく、SECでの変更がRパッケージのコードに反映されないこともある。 --></li>
-<li>When you run into problems using the EDGAR related code chunks in this chapter, it is advisable to visit <a href="https://www.sec.gov/edgar/">https://www.sec.gov/edgar/</a> to look at the files in the SEC’s repositories, and see whether they conform to the expectations of R’s packages. <!-- 本章のEDGAR関連のコードチャンクを使用して問題が発生した場合は、ウェブサイト(https://www.sec.gov/edgar/)にアクセスし、SECのリポジトリにあるファイルを見て、Rのパッケージで想定されているコードに適合しているかどうかを確認することをお勧めする。 --></li>
-<li>Though useful, the EDGAR functions in R require the auditor to be both flexible and willing to debug errant routines. <!-- 便利ではあるがRのEDGAR関数を使う限り、監査人は、柔軟に対応し、誤ったパッケージのコードのデバッグをしなければならない。 --></li>
+<li>When you run into problems using the EDGAR related code chunks in this chapter, it is advisable to visit <a href="https://www.sec.gov/edgar/">https://www.sec.gov/edgar/</a> to look at the files in the SEC’s repositories, and see whether they conform to the expectations of R’s packages. <!-- 本章のEDGAR関連のコードチャンクを使用して問題が発生した場合は、ウェブサイト(https://www.sec.gov/edgar/)にアクセスし、SECのリポジトリにあるファイルを見て、Rのパッケージで想定されているコードに適合しているかどうかを確認することをお勧めする。 --> <!-- - Though useful, the EDGAR functions in R require the auditor to be both flexible and willing to debug errant routines. --> <!-- 便利ではあるがRのEDGAR関数を使う限り、監査人は、柔軟に対応し、誤ったパッケージのコードのデバッグをしなければならない。 --></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -1640,14 +1661,13 @@ Number of elements in errors:  0 </code></pre>
 <section class="slide level2">
 
 <ul>
-<li><p>Audit programs are collections of audit tests that test different critical transaction and systems processing features in the client’s accounting systems.</p></li>
-<li><p>I assume that audit planning required for each of the individual audit tests is set to a scope which overall maximizes the audit risk reduction for a given cost of conducting the audit with this program.</p></li>
-<li><p>Staffing is “lumpy” in the sense that you typically get whole auditors assigned to an audit.</p></li>
-<li><p>The number of auditors assigned to an audit will be commensurate with their potential for detecting monetary error—the benefit received from an audit test.</p></li>
-<li><p>We would hope to see the following sort of relation between the potential benefit derived from performing a set of audit tasks, and the person-months of audit staff assigned to a specific audit program (and thus the cost) (Fig. 1).</p></li>
+<li>Audit programs are collections of audit tests that test different critical transaction and systems processing features in the client’s accounting systems.</li>
+<li>I assume that audit planning required for each of the individual audit tests is set to a scope which overall <strong>maximizes the audit risk reduction</strong> for a given cost of conducting the audit with this program.</li>
+<li>Staffing is “lumpy” in the sense that you typically get whole auditors assigned to an audit.</li>
+<li>The number of auditors assigned to an audit will be commensurate with their potential for detecting monetary error—the benefit received from an audit test. <!-- - We would hope to see the following sort of relation between the potential benefit derived from performing a set of audit tasks, and the person-months of audit staff assigned to a specific audit program. --> <!-- (and thus the cost) (Fig. 1). --></li>
 </ul>
 <aside class="notes">
-<p>監査計画とは、被監査会社の会計システムにおける様々な重要な取引やシステム処理の機能を検証する監査手続の総体である。監査計画における個々の監査手続に必要な範囲は、この監査計画を用いて監査を実施するために与えられたコストに対して、全体として監査リスクを最小化するような範囲に設定されると仮定している。 監査チームの編成は、通常、監査人全員が監査に割り当てられるという意味で「ざっくりとしたもの（lumpy）」である。監査に割り当てられる監査人の数は、（監査手続から得られる利益である）金銭的誤謬の発見の可能性に見合ったものとなる。本書では、一連の監査業務の実施から得られる潜在的便益と、（コストである）特定の監査計画に割り当てられる監査スタッフの人月（person-month）との間に、以下のような関係があることを想定している（図1）。</p>
+<p>監査計画とは、被監査会社の会計システムにおける様々な重要な取引やシステム処理の機能を検証する監査手続の総体である。 監査計画における個々の監査手続に必要な範囲は、この監査計画を用いて監査を実施するために与えられたコストに対して、全体として監査リスクを最小化するような範囲に設定されると仮定している。 監査チームの編成は、通常、監査人全員が監査に割り当てられるという意味で「ざっくりとしたもの（lumpy）」である。 監査に割り当てられる監査人の数は、（監査手続から得られる利益である）金銭的誤謬の発見の可能性に見合ったものとなる。 本書では、一連の監査業務の実施から得られる潜在的便益と、（コストである）特定の監査計画に割り当てられる監査スタッフの人月（person-month）との間に、以下のような関係があることを想定している（図1）。</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1664,14 +1684,10 @@ Number of elements in errors:  0 </code></pre>
 
 <h3 id="audit-staffing-and-budgets-1">Audit Staffing and Budgets</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a>benefit <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">10000</span>, <span class="dv">10</span>)</span>
-<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a>staff_allocated <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(benefit, <span class="fu">floor</span>(<span class="dv">10</span><span class="sc">*</span>(<span class="fu">log</span>(benefit<span class="sc">^</span>.<span class="dv">06</span>))))</span>
-<span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(staff_allocated, <span class="fu">aes</span>(staff_allocated[,<span class="dv">1</span>],staff_allocated[,<span class="dv">2</span>]) ) <span class="sc">+</span></span>
-<span id="cb36-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb36-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span><span class="st">"Audit Risk Reduction"</span>,</span>
-<span id="cb36-8"><a href="" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span><span class="st">"Staff Auditor Person-Months"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a>benefit <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">10000</span>, <span class="dv">10</span>) <span class="co"># 10から10000まで10刻み</span></span>
+<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a>staff_allocated <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(benefit, <span class="fu">floor</span>(<span class="dv">10</span> <span class="sc">*</span> (<span class="fu">log</span>(benefit<span class="sc">^</span>.<span class="dv">06</span>))))</span>
+<span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(staff_allocated, <span class="fu">aes</span>(staff_allocated[,<span class="dv">1</span>],staff_allocated[,<span class="dv">2</span>]) ) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span><span class="st">"Audit Risk Reduction"</span>,  <span class="at">y =</span><span class="st">"Staff Auditor Person-Months"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="gaisho_2024_04_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
@@ -1774,10 +1790,10 @@ Number of elements in errors:  0 </code></pre>
 <h2>RAM</h2>
 <!-- ## 第7節 リスク評価マトリクス作成のためのShinyの利用 -->
 <ul>
-<li>Auditors face a particular problem in the field, in that much of the information they need may be in prior years’ workpapers, in proprietary client files, in central locations in the audit firm, behind firewalls, and on powerful servers or cloud platforms. <!-- - To secure the clients records and address privacy concerns, it is important that only the necessary information be maintained on mobile platforms such as laptops that are used in the field. --> <!-- 監査人が現場で特に問題に直面するのは、必要な情報の多くが、過年度の監査調書、被監査会社の機密ファイル、監査事務所内の中枢部、ファイアウォールの向こう側、および強力なサーバーやクラウドプラットフォーム上に存在する可能性があるという点である。
+<li>Auditors face a particular problem in the field, in that much of the information they need may be in prior years’ workpapers, in proprietary client files, in central locations in the audit firm and on powerful servers or cloud platforms. <!-- - To secure the clients records and address privacy concerns, it is important that only the necessary information be maintained on mobile platforms such as laptops that are used in the field. --> <!-- 監査人が現場で特に問題に直面するのは、必要な情報の多くが、過年度の監査調書、被監査会社の機密ファイル、監査事務所内の中枢部、ファイアウォールの向こう側、および強力なサーバーやクラウドプラットフォーム上に存在する可能性があるという点である。
 被監査会社の記録を保護し、プライバシーの問題に対処するためには、必要な情報のみを、現場で使用されるノートパソコンなどの モバイル機器の環境で管理することが重要である。 --></li>
-<li>The standard solution to such problems is found in client–server systems that place high-performance, secure systems on a centralized server, and provide the field auditor with light, client software that runs on a laptop, communicating with the server over the Internet.</li>
-<li><code>Shiny</code> is the client–server extension of the R language, and as with the rest of the R language, is uniquely suited to handling the ad hoc nature of audits, where each audit often represents an entirely new set of analyses. <!-- このような問題に対する標準的な解決策には、高性能で安全なシステムを集中管理されたサーバーに置き、現場の監査人には（インターネットを介してサーバーと通信して）ラップトップ上で動作する動作の軽いクライアント・ソフトウェアを提供するクライアントサーバーシステムがある。 --></li>
+<li>The standard solution to such problems is found in client–server systems that place secure systems on a centralized server, and provide the field auditor with light, client software that runs on a laptop, communicating with the server over the Internet.</li>
+<li><code>Shiny</code> is the client–server extension of the <em>R</em>, and as with the rest of the <em>R</em>, is uniquely suited to handling the ad hoc nature of audits, where each audit often represents an entirely new set of analyses. <!-- このような問題に対する標準的な解決策には、高性能で安全なシステムを集中管理されたサーバーに置き、現場の監査人には（インターネットを介してサーバーと通信して）ラップトップ上で動作する動作の軽いクライアント・ソフトウェアを提供するクライアントサーバーシステムがある。 --></li>
 </ul>
 </section>
 <section id="shiny-app" class="slide level2">
@@ -1793,9 +1809,25 @@ Number of elements in errors:  0 </code></pre>
 <ul>
 <li>Reactive programming starts with reactive values that change in response to user input <!-- (such as positioning the confidence and cost sliders)  --> and builds on top of them with reactive expressions that access reactive values and execute other reactive expressions.</li>
 <li>Reactivity based code for the Risk Assessment Matrix dashboard appears below.</li>
-<li>This has two parts: (1) the <strong>user interface</strong> “ui” which conceivably would operate on the field auditor’s laptop, and (2) the <strong>server-side “server” operations</strong> that would take place at the audit firms headquarters behind a firewall, and with access to firm and client files.</li>
-<li>First I will look at the user interface. <!-- リアクティブプログラミング（Reactive programming）は、ユーザーの入力に反応して変化するリアクティブ値（信頼度スライダーやコストスライダーの位置決めなど）から始まり、リアクティブ値に反応して他のリアクティブ表現を実行するリアクティブ表現によりダッシュボードの良く見える場所に作成される。リスク評価マトリクス・ダッシュボードのリアクティブベースのコードを以下で示す。2つの部分から構成されている。すなわち、(1)現場の監査人のノートパソコンで動作すると考えられる「ユーザインタフェース（user interface：UI）」、および(2)ファイアウォールで保護された監査事務所の本部で行われ、監査事務所と被監査会社のファイルにアクセスできるサーバサイドの「サーバ（server：server）」操作である。まず、ユーザーインターフェースを見てみよう。 --></li>
+<li>This has two parts:
+<ol type="1">
+<li>the <strong>user interface</strong> “ui” which conceivably would operate on the field auditor’s laptop, and</li>
+<li>the <strong>server-side “server” operations</strong> that would take place at the audit firms headquarters and with access to firm and client files. <!-- - First I will look at the user interface. --></li>
+</ol></li>
 </ul>
+<aside class="notes">
+<p>リアクティブプログラミング（Reactive programming）は、ユーザーの入力に反応して変化するリアクティブ値（信頼度スライダーやコストスライダーの位置決めなど）から始まり、リアクティブ値に反応して他のリアクティブ表現を実行するリアクティブ表現によりダッシュボードの良く見える場所に作成される。 リスク評価マトリクス・ダッシュボードのリアクティブベースのコードを以下で示す。2つの部分から構成されている。 すなわち、(1)現場の監査人のノートパソコンで動作すると考えられる「ユーザインタフェース（user interface：UI）」、および(2)ファイアウォールで保護された監査事務所の本部で行われ、監査事務所と被監査会社のファイルにアクセスできるサーバサイドの「サーバ（server：server）」操作である。まず、ユーザーインターフェースを見てみよう。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="shiny-app-1" class="slide level2">
 <h2>Shiny App</h2>
@@ -1863,8 +1895,7 @@ n \approx  \frac{log(1-confidence)}{log(1-\frac{10-risk_{intelligence} \times ri
 <section id="確率の補足" class="title-slide slide level1 center">
 <h1>確率の補足</h1>
 <ul>
-<li>この式は、<strong>二項分布</strong>に基づく発見サンプルサイズ (discovery sample size)」を計算するための公式</li>
-<li>二項分布はあるイベントが <span class="math inline">n</span> 回の試行の中で何回発生するかを表す確率分布</li>
+<li>この式は、<strong>二項分布</strong>に基づく発見サンプルサイズ (discovery sample size)」を計算するための公式で，二項分布とはあるイベントが <span class="math inline">n</span> 回の試行の中で何回発生するかを表す確率分布</li>
 <li>成功確率を<span class="math inline">p</span>としたとき、試行回数 <span class="math inline">n</span> の中で少なくとも1回そのイベントが発生する確率を求める。</li>
 <li>サンプリングにおいて問題となるのは、「ある許容誤差率」以上のエラーが存在するかどうかを確認するために、どれだけのサンプルサイズを用意すればよいか、という点</li>
 <li>この場合、誤り率 <span class="math inline">p = 0.05</span> であり、これを発見するために必要なサンプルサイズ <span class="math inline">n</span> を求めています。</li>
@@ -2087,9 +2118,22 @@ n = \frac{\log(1 - 0.95)}{\log(1 - 0.05)}
 <section class="slide level2">
 
 <ul>
-<li>Budgeted sample sizes in interim testing will depend on whether the RAM suggests that control risk is <em>low or high</em>. <!-- 運用評価手続におけるサンプルサイズの予算は、リスク評価マトリクスにおいて統制リスクが低い/高いことを示唆しているかによって決定する。 --></li>
-<li>If it is low, then the discovery sample size plus a <strong>‘security’ factor</strong> for cases where error is discovered will estimated the scope of auditing. <!-- リスクが低い場合には、監査の範囲は、発見サンプリングにおけるサンプルサイズに、逸脱が発見された場合の「安全性（security）」ファクターを加えたものによって推定される。 --></li>
+<li>Budgeted sample sizes in interim testing will depend on whether the RAM suggests that control risk is <em>low or high</em>.</li>
+<li>If it is low, then the discovery sample size plus a <strong>‘security’ factor</strong> for cases where error is discovered will estimated the scope of auditing.</li>
 </ul>
+<aside class="notes">
+<p>運用評価手続におけるサンプルサイズの予算は、リスク評価マトリクスにおいて統制リスクが低い/高いことを示唆しているかによって決定する。 リスクが低い場合には、監査の範囲は、発見サンプリングにおけるサンプルサイズに、逸脱が発見された場合の「安全性（security）」ファクターを加えたものによって推定される。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a>confidence <span class="ot">&lt;-</span> <span class="fu">seq</span>(.<span class="dv">99</span>, <span class="fl">0.7</span>, <span class="sc">-</span><span class="fl">0.01</span>) <span class="co"># 0.99から0.7まで0.01刻みのベクトル</span></span>
 <span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> (<span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> confidence)) <span class="sc">/</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>) <span class="co"># 発見サンプルサイズを計算</span></span>
@@ -2109,8 +2153,9 @@ n = \frac{\log(1 - 0.95)}{\log(1 - 0.05)}
  Discovery sample size =  59</code></pre>
 </div>
 </div>
-<p>Where the RAM assesses control risk to be anything higher, the auditor can assume that scope will be expanded to include attribute sampling. <!-- リスク評価マトリクスが統制リスクをより高く評価する場合には、監査人は、属性サンプリングを実施する範囲を拡大することを前提とする可能性がある。 --></p>
+<p>Where the RAM assesses control risk to be anything higher, the auditor can assume that scope will be expanded to include attribute sampling.</p>
 <aside class="notes">
+<p>リスク評価マトリクスが統制リスクをより高く評価する場合には、監査人は、属性サンプリングを実施する範囲を拡大することを前提とする可能性がある。</p>
 <p>ここでの log(1 - confidence) と log(1 - 0.05) は、それぞれ信頼水準と許容誤差率を基に、どれだけのサンプルが必要かを対数で計算しています。 これは「二項分布」を利用した計算方法であり、ある確率（この場合、許容誤差率が5%）のイベントが95%の確信で検出されるために必要なサンプル数を算出しています。</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2127,11 +2172,24 @@ n = \frac{\log(1 - 0.95)}{\log(1 - 0.05)}
 <section class="slide level2">
 
 <ul>
-<li><p>Attribute sampling estimates the error rate in the entire transaction population with some confidence (e.g., 95%) that the estimate is within the out-of-control error-rate cutoff for that transaction stream. <!-- 属性サンプリングは、ある信頼度（例えば95％）により、母集団である取引全体における逸脱率を推定する。ここで信頼度は、その推定値が当該取引ストリームの許容逸脱率（閾値）以内であることに関するものである。 --></p></li>
-<li><p>If it is found that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream. <!-- （発見サンプリングにより）特定の取引ストリームが統制から逸脱していることが判明した場合、属性推定はこの取引ストリームを処理するシステムの実際の逸脱率を決定するのに役立つ。属性サンプルから推定される逸脱は、逸脱率または逸脱数のいずれか、あるいは両方である。 --></p></li>
-<li><p>If discovery sampling suggests that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream. <!-- （発見サンプリングにより）特定の取引ストリームが統制から逸脱していることが判明した場合、属性推定はこの取引ストリームを処理するシステムの実際の逸脱率を決定するのに役立つ。 --></p></li>
-<li><p>Errors estimates from attribute samples may either be <em>rates</em> or <em>amounts</em> or both. <!-- 属性サンプルから推定される逸脱は、逸脱率または逸脱数のいずれか、あるいは両方である。 --></p></li>
+<li>Attribute sampling estimates the error rate in the entire transaction population with some confidence (e.g., 95%) that the estimate is within the <em>out-of-control error-rate cutoff</em> for that transaction stream.</li>
+<li>If it is found that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream.</li>
+<li>If discovery sampling suggests that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream.</li>
+<li>Errors estimates from attribute samples may either be <em>rates</em> or <em>amounts</em> or both.</li>
 </ul>
+<aside class="notes">
+<p>属性サンプリングは、ある信頼度（例えば95％）により、母集団である取引全体における逸脱率を推定する。ここで信頼度は、その推定値が当該取引ストリームの許容逸脱率（閾値）以内であることに関するものである。 （発見サンプリングにより）特定の取引ストリームが統制から逸脱していることが判明した場合、属性推定はこの取引ストリームを処理するシステムの実際の逸脱率を決定するのに役立つ。属性サンプルから推定される逸脱は、逸脱率または逸脱数のいずれか、あるいは両方である。 （発見サンプリングにより）特定の取引ストリームが統制から逸脱していることが判明した場合、属性推定はこの取引ストリームを処理するシステムの実際の逸脱率を決定するのに役立つ。 属性サンプルから推定される逸脱は、逸脱率または逸脱数のいずれか、あるいは両方である。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -2330,65 +2388,133 @@ n = \frac{\log(1 - 0.95)}{\log(1 - 0.05)}
 <section id="wicked-problem" class="slide level2">
 <h2>Wicked Problem</h2>
 <ul>
-<li>In theory, independent audits increase the value and credibility of the financial statements, reduce investor risk, and reduce the cost of capital of audited firms. <!-- 理論上では，独立した監査は，財務諸表の価値と信頼性を高め，投資家のリスクを低減し，監査対象企業の資本コストを低減する。 --></li>
-<li>They are often required under securities law and by investors and creditors. <!-- これらは，証券法によって要求されることが多く，投資家や債権者によっても要求される。 --></li>
-<li>But such assertions have grown increasingly contentious over time as the definitions and usage of financial statements have evolved and changed. <!-- しかし，これらの主張は，財務諸表の定義や使用法が進化し変化するにつれて，ますます論争の的となってきている。 --></li>
-<li>Scholars are increasingly aware that many of auditing’s difficulties reflect its status as a wicked problem. <!-- 学者たちは，監査の多くの困難が，それが悪い問題であるという状況を反映していることにますます気づいている。 --></li>
+<li>In theory, independent audits increase the value and credibility of the financial statements, reduce investor risk, and reduce the cost of capital of audited firms.</li>
+<li>They are often required under securities law and by investors and creditors.</li>
+<li>But such assertions have grown increasingly contentious over time as the definitions and usage of financial statements have evolved and changed.</li>
+<li>Scholars are increasingly aware that many of auditing’s difficulties reflect its status as a wicked problem.</li>
 </ul>
+<aside class="notes">
+<p>理論上では，独立した監査は，財務諸表の価値と信頼性を高め，投資家のリスクを低減し，監査対象企業の資本コストを低減する。 これらは，証券法によって要求されることが多く，投資家や債権者によっても要求される。 しかし，これらの主張は，財務諸表の定義や使用法が進化し変化するにつれて，ますます論争の的となってきている。 学者たちは，監査の多くの困難が，それが悪い問題であるという状況を反映していることにますます気づいている。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
 <ul>
-<li>Wicked problems are difficult or impossible to solve because of incomplete, contradictory and changing requirements that are often difficult to recognize. <!-- 悪い問題は，不完全で矛盾した要件や変化する要件によって解決が困難または不可能であり，これらの要件はしばしば認識が難しい。 --></li>
-<li>The term wicked is used not in the sense of evil but rather its resistance to resolution. <!-- 「悪い」という用語は，悪意のあるという意味ではなく，むしろ解決に対する抵抗という意味で使われている。 --></li>
-<li>Moreover because of complex interdependencies, the effort to solve one aspect of a wicked problem may reveal or create other problems. <!-- さらに，複雑な相互依存関係のため，悪い問題の一つの側面を解決しようとする努力は，他の問題を明らかにしたり作り出したりするかもしれない。 --></li>
-<li>Contrast this with relatively tame soluble problems in mathematics, chess or puzzle solving (Coyne 2005; Ludwig 2001; Rittel and Webber 1973). <!-- これに対して，数学，チェス，パズル解決などの比較的穏やかな解決可能な問題とは対照的である（Coyne 2005; Ludwig 2001; Rittel and Webber 1973）。 --></li>
+<li>Wicked problems are difficult or impossible to solve because of incomplete, contradictory and changing requirements that are often difficult to recognize.</li>
+<li>The term <strong>wicked</strong> is used not in the sense of evil but rather <strong>its resistance to resolution</strong>.</li>
+<li>Moreover because of complex interdependencies, the effort to solve one aspect of a wicked problem may reveal or create other problems.</li>
+<li>Contrast this with relatively tame soluble problems in mathematics, chess or puzzle solving (Coyne 2005; Ludwig 2001; Rittel and Webber 1973).</li>
 </ul>
+<aside class="notes">
+<p>悪い問題は，不完全で矛盾した要件や変化する要件によって解決が困難または不可能であり，これらの要件はしばしば認識が難しい。 「悪い」という用語は，悪意のあるという意味ではなく，むしろ解決に対する抵抗という意味で使われている。 さらに，複雑な相互依存関係のため，悪い問題の一つの側面を解決しようとする努力は，他の問題を明らかにしたり作り出したりするかもしれない。 これに対して，数学，チェス，パズル解決などの比較的穏やかな解決可能な問題とは対照的である（Coyne 2005; Ludwig 2001; Rittel and Webber 1973）。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="wicked-problems" class="slide level2">
 <h2>Wicked Problems</h2>
 <ul>
-<li>Audits are classic <strong>wicked problems</strong> sharing the following characteristics (Rittel and Webber 1973): <!-- 監査は、次の特徴を共有する古典的な「悪い問題」である（Rittel and Webber 1973）。 --></li>
+<li>Audits are classic <strong>wicked problems</strong> sharing the following characteristics (Rittel and Webber 1973):</li>
 </ul>
 <ol type="1">
-<li>There is no definitive formulation of auditing. <!-- 1. 監査の明確な定式化がない。 --></li>
-<li>Audits have no stopping rule. <!-- 2. 監査には停止規則がない。 --></li>
-<li>Audit products are not true-or-false rather are opinions. <!-- 監査報告書は真偽ではなく意見である。 --></li>
-<li>There is no immediate and no ultimate test of an audit conclusion. <!-- 監査の結論には即時テストも最終テストもない。 --></li>
-<li>Each audit is a one-shot operation. <!-- 監査は一回限りの作業である。 --></li>
+<li>There is no definitive formulation of auditing.</li>
+<li>Audits have no stopping rule.</li>
+<li>Audit products are not true-or-false rather are opinions.</li>
+<li>There is no immediate and no ultimate test of an audit conclusion.</li>
+<li>Each audit is a one-shot operation.</li>
 </ol>
+<aside class="notes">
+<p>監査は、次の特徴を共有する古典的な「悪い問題」である（Rittel and Webber 1973）。</p>
+<ol type="1">
+<li>監査の明確な定式化がない。</li>
+<li>監査には停止規則がない。</li>
+<li>監査の成果物は真偽ではなく意見である。</li>
+<li>監査の結論には即時テストも最終テストもない。</li>
+<li>各監査は一回限りの作業である。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
 <ol start="6" type="1">
-<li>Audits do not have an enumerable or an exhaustively describable set of potential solutions nor is there a well-described set of permissible operations that may be incorporated into the audit program. <!-- 監査には、列挙可能な、あるいは網羅的に記述可能な潜在的解決策の集合があるわけではなく、また監査プログラムに組み込むことができる許容される操作のセットも存在しない。 --></li>
-<li>Every audit is essentially unique. <!-- すべての監査は本質的に一意である。 --></li>
-<li>Every audit procedure can be considered to be a response to some other finding. <!-- すべての監査手続は他の発見事項に対する対応であると考えることができる。 --></li>
-<li>The existence of an audit discrepancy can be explained in numerous ways. The choice of explanation determines the nature of the problems resolution and the audit opinion. <!-- 監査上の不一致の存在は、多くの方法で説明することができる。どの説明を選択するかによって、問題解決と監査意見の性質が決まる。--></li>
+<li>Audits do not have an enumerable or an exhaustively describable set of potential solutions nor is there a well-described set of permissible operations that may be incorporated into the audit program.</li>
+<li>Every audit is essentially unique.</li>
+<li>Every audit procedure can be considered to be a response to some other finding.</li>
+<li>The existence of an audit discrepancy can be explained in numerous ways. The choice of explanation determines the nature of the problems resolution and the audit opinion.</li>
 </ol>
+<aside class="notes">
+<ol start="6" type="1">
+<li>監査には、列挙可能な、あるいは網羅的に記述可能な潜在的解決策の集合があるわけではなく、また監査プログラムに組み込むことができる許容される操作のセットも存在しない</li>
+<li>すべての監査は本質的に一意である。</li>
+<li>すべての監査手続は他の発見事項に対する対応であると考えることができる。</li>
+<li>監査上の不一致の存在は、多くの方法で説明することができる。どの説明を選択するかによって、問題解決と監査意見の性質が決まる。説明の選択により、問題解決と監査意見の性質が決まる。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
 <ol start="10" type="1">
-<li>The auditor has no right to be wrong and is ultimately liable for the consequences of audit opinions. <!-- 監査人は監査意見を誤る権利を有しておらず、監査意見の結果について最終的な責任を負う。 --></li>
-<li>The solution depends on how the problem is framed and vice versa, i.e., the problem definition depends on the solution. <!-- つまり問題の定義が解決策に依存している。 --></li>
-<li>Stakeholders have radically different world views and different frames for understanding the problem. <!-- 利害関係者は、根本的に異なる世界観を持っており、問題を理解するためのフレームも異なる。 --></li>
-<li>The constraints that the problem is subject to and the resources needed to solve it change over time. <!-- この問題が直面している制約や、解決に必要な資源は、時間とともに変化する。 --></li>
+<li>The auditor has no right to be wrong and is ultimately liable for the consequences of audit opinions.</li>
+<li>The solution depends on how the problem is framed and vice versa, i.e., the problem definition depends on the solution.</li>
+<li>Stakeholders have radically different world views and different frames for understanding the problem.</li>
+<li>The constraints that the problem is subject to and the resources needed to solve it change over time.</li>
 </ol>
-<!--
-1. 監査の明確な定式化がない。
-2. 監査には停止規則がない。
-3. 監査の成果物は真偽ではなく意見である。
-4. 監査の結論には即時テストも最終テストもない。
-5. 各監査は一回限りの作業である。
-6.  監査には、列挙可能な、あるいは網羅的に記述可能な潜在的解決策の集合があるわけではなく、また監査プログラムに組み込むことができる許容される操作のセットも存在しない
-7.  すべての監査は本質的に一意である。
-8.  すべての監査手続は他の発見事項に対する対応であると考えることができる。
-9.  監査上の不一致の存在は、多くの方法で説明することができる。どの説明を選択するかによって、問題解決と監査意見の性質が決まる。説明の選択により、問題解決と監査意見の性質が決まる。
-10.  監査人は監査意見を誤る権利を有しておらず、監査意見の結果について最終的な責任を負う。
-11. つまり問題の定義が解決策に依存している。
-12. 利害関係者は、根本的に異なる世界観を持っており、問題を理解するためのフレームも異なる。
-13. 問題の対象となる制約や、解決に必要な資源は、時間とともに変化する。 -->
+<aside class="notes">
+<ol start="10" type="1">
+<li>監査人は監査意見を誤る権利を有しておらず、監査意見の結果について最終的な責任を負う。</li>
+<li>つまり問題の定義が解決策に依存している。</li>
+<li>利害関係者は、根本的に異なる世界観を持っており、問題を理解するためのフレームも異なる。</li>
+<li>問題の対象となる制約や、解決に必要な資源は、時間とともに変化する。 –&gt;</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -2442,6 +2568,7 @@ n = \frac{\log(1 - 0.95)}{\log(1 - 0.05)}
 </div>
 </div>
 </section></section>
+
     </div>
   </div>
 
