@@ -8,7 +8,7 @@
 <link href="gaisho_2024_02_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="gaisho_2024_02_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="gaisho_2024_02_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.56">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Soichi Matsuura">
   <title>外国書購読 Day2  Foundations of Audit Analytics</title>
@@ -703,7 +703,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"id":1,"options":{"editor-quick-suggestions":"false","editor-font-scale":"0.5","dpi":72,"comment":"","out-height":"","fig-height":5,"classes":"","fig-cap":"","editor-word-wrap":"true","label":"unnamed-chunk-1","output":"true","fig-width":7,"warning":"true","out-width":"700px","read-only":"false","autorun":"false","context":"interactive","message":"true","results":"markup","editor-max-height":""},"code":"# assign 5 to x\n\n# show x\n\n# assign 1 to 10 to vector_1_10\n\n# show vector_1_10 usign print()"},{"id":2,"options":{"editor-quick-suggestions":"false","editor-font-scale":"0.5","dpi":72,"comment":"","out-height":"","fig-height":5,"classes":"","fig-cap":"","editor-word-wrap":"true","label":"unnamed-chunk-2","output":"true","fig-width":7,"warning":"true","out-width":"700px","read-only":"false","autorun":"false","context":"interactive","message":"true","results":"markup","editor-max-height":""},"code":"mat <- seq(1, 25) |> matrix(5,5,byrow = T)\n\n# inverse matrix\n\n# determinant of the matrix\n\nqr(mat)$rank # 2 なので正則でない"},{"id":3,"options":{"editor-quick-suggestions":"false","editor-font-scale":"0.5","dpi":72,"comment":"","out-height":"","fig-height":5,"classes":"","fig-cap":"","editor-word-wrap":"true","label":"unnamed-chunk-3","output":"true","fig-width":7,"warning":"true","out-width":"700px","read-only":"false","autorun":"false","context":"interactive","message":"true","results":"markup","editor-max-height":""},"code":"mydata <- data.frame(\n  ID = c(1, 2, 3, 4),\n  Color = c(\"red\", \"white\", \"red\", NA),\n  Passed = c(TRUE, TRUE, TRUE, FALSE)\n)\n\n# mydataからColorを取り出す\n\n# mydataからIDの3番目の要素を取り出す"},{"id":4,"options":{"editor-quick-suggestions":"false","editor-font-scale":"0.5","dpi":72,"comment":"","out-height":"","fig-height":5,"classes":"","fig-cap":"","editor-word-wrap":"true","label":"unnamed-chunk-4","output":"true","fig-width":7,"warning":"true","out-width":"700px","read-only":"false","autorun":"false","context":"interactive","message":"true","results":"markup","editor-max-height":""},"code":"mylist <- list(\n  a <- c(\"one\", \"two\", \"three\"),\n  b <- c(1,2,3),\n  c <- matrix(1:9, nrow = 3)\n)\n\n# mylistからaを取り出す\n\n# mylistからbの2番目の要素を取り出す"}];
+  globalThis.qwebrCellDetails = [{"options":{"warning":"true","autorun":"false","out-width":"700px","results":"markup","fig-width":7,"classes":"","fig-cap":"","editor-word-wrap":"true","message":"true","label":"unnamed-chunk-1","output":"true","dpi":72,"context":"interactive","comment":"","editor-quick-suggestions":"false","read-only":"false","out-height":"","fig-height":5,"editor-max-height":"","editor-font-scale":"0.5"},"id":1,"code":"# assign 5 to x\n\n# show x\n\n# assign 1 to 10 to vector_1_10\n\n# show vector_1_10 usign print()"},{"options":{"warning":"true","autorun":"false","out-width":"700px","results":"markup","fig-width":7,"classes":"","fig-cap":"","editor-word-wrap":"true","message":"true","label":"unnamed-chunk-2","output":"true","dpi":72,"context":"interactive","comment":"","editor-quick-suggestions":"false","read-only":"false","out-height":"","fig-height":5,"editor-max-height":"","editor-font-scale":"0.5"},"id":2,"code":"mat <- seq(1, 25) |> matrix(5,5,byrow = T)\n\n# inverse matrix\n\n# determinant of the matrix\n\nqr(mat)$rank # 2 なので正則でない"},{"options":{"warning":"true","autorun":"false","out-width":"700px","results":"markup","fig-width":7,"classes":"","fig-cap":"","editor-word-wrap":"true","message":"true","label":"unnamed-chunk-3","output":"true","dpi":72,"context":"interactive","comment":"","editor-quick-suggestions":"false","read-only":"false","out-height":"","fig-height":5,"editor-max-height":"","editor-font-scale":"0.5"},"id":3,"code":"mydata <- data.frame(\n  ID = c(1, 2, 3, 4),\n  Color = c(\"red\", \"white\", \"red\", NA),\n  Passed = c(TRUE, TRUE, TRUE, FALSE)\n)\n\n# mydataからColorを取り出す\n\n# mydataからIDの3番目の要素を取り出す"},{"options":{"warning":"true","autorun":"false","out-width":"700px","results":"markup","fig-width":7,"classes":"","fig-cap":"","editor-word-wrap":"true","message":"true","label":"unnamed-chunk-4","output":"true","dpi":72,"context":"interactive","comment":"","editor-quick-suggestions":"false","read-only":"false","out-height":"","fig-height":5,"editor-max-height":"","editor-font-scale":"0.5"},"id":4,"code":"mylist <- list(\n  a <- c(\"one\", \"two\", \"three\"),\n  b <- c(1,2,3),\n  c <- matrix(1:9, nrow = 3)\n)\n\n# mylistからaを取り出す\n\n# mylistからbの2番目の要素を取り出す"}];
 
   </script>
   <script type="module">
@@ -3872,7 +3872,7 @@ list1 "a"  "b"  "c" </code></pre>
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
@@ -3883,7 +3883,7 @@ list1 "a"  "b"  "c" </code></pre>
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
@@ -4025,7 +4025,7 @@ list1 "a"  "b"  "c" </code></pre>
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1200,
+        width: 1400,
 
         height: 700,
 

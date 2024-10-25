@@ -8,7 +8,7 @@
 <link href="gaisho_2024_01_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="gaisho_2024_01_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="gaisho_2024_01_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.56">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Soichi Matsuura">
   <title>外国書購読 Day1  Day1:Guidance and Introduction</title>
@@ -31,6 +31,7 @@
     }
   </style>
   <link rel="stylesheet" href="gaisho_2024_01_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="mystyle.css">
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
@@ -626,7 +627,7 @@
   };
 
   // Store cell data
-  globalThis.qwebrCellDetails = [{"id":1,"options":{"editor-quick-suggestions":"false","out-height":"","comment":"","read-only":"false","dpi":72,"editor-max-height":"","fig-cap":"","editor-font-scale":"0.5","message":"true","warning":"true","fig-height":5,"autorun":"false","label":"unnamed-chunk-1","fig-width":7,"classes":"","results":"markup","context":"interactive","editor-word-wrap":"true","out-width":"700px","output":"true"},"code":"1 + 2 # 足し算\n3 * 4 # かけ算\n6 ** 2 # 累乗\nsqrt(2) # 平方根"},{"id":2,"options":{"editor-quick-suggestions":"false","out-height":"","comment":"","read-only":"false","dpi":72,"editor-max-height":"","fig-cap":"","editor-font-scale":"0.5","message":"true","warning":"true","fig-height":5,"autorun":"false","label":"unnamed-chunk-2","fig-width":7,"classes":"","results":"markup","context":"interactive","editor-word-wrap":"true","out-width":"700px","output":"true"},"code":"# 関数mymeanを定義\nmymean <- function(x) {\n  x1 <- sum(x)\n  x2 <- length(x)\n  x <- x1 / x2\n  return(x)\n}\nx <- 1:100 # 1から100までの数列\nmymean(x)"},{"id":3,"options":{"editor-quick-suggestions":"false","out-height":"","comment":"","read-only":"false","dpi":72,"editor-max-height":"","fig-cap":"","editor-font-scale":"0.5","message":"true","warning":"true","fig-height":5,"autorun":"false","label":"unnamed-chunk-3","fig-width":7,"classes":"","results":"markup","context":"interactive","editor-word-wrap":"true","out-width":"700px","output":"true"},"code":"# サイコロを作成し，投げる回数と試行回数を設定\ndice <- 1:6; toss <- 10; trial <- 10\nresult <- numeric(trial)\n# 繰り返し処理\nfor (i in 1:trial) {\n  x <- sample(dice, toss, replace = TRUE)\n  result[i] <- mymean(x)\n}\nresult"},{"id":4,"options":{"editor-quick-suggestions":"false","out-height":"","comment":"","read-only":"false","dpi":72,"editor-max-height":"","fig-cap":"","editor-font-scale":"0.5","message":"true","warning":"true","fig-height":5,"autorun":"false","label":"unnamed-chunk-4","fig-width":7,"classes":"","results":"markup","context":"interactive","editor-word-wrap":"true","out-width":"700px","output":"true"},"code":"for (i in 1:trial) {\n  if (result[i] > 3.5) {\n    print(\"大きい\") # 条件を満たすとき\n  } else {\n    print(\"小さい\") # 条件を満たさないとき\n  }\n}"},{"id":5,"options":{"editor-quick-suggestions":"false","out-height":"","comment":"","read-only":"false","dpi":72,"editor-max-height":"","fig-cap":"","editor-font-scale":"0.5","message":"true","warning":"true","fig-height":5,"autorun":"false","label":"unnamed-chunk-5","fig-width":7,"classes":"","results":"markup","context":"interactive","editor-word-wrap":"true","out-width":"700px","output":"true"},"code":"dice <- 1:6\ntoss <- 10\nx <- sample(dice, toss, replace = TRUE)\nmean(x)"}];
+  globalThis.qwebrCellDetails = [{"id":1,"code":"1 + 2 # 足し算\n3 * 4 # かけ算\n6 ** 2 # 累乗\nsqrt(2) # 平方根","options":{"classes":"","results":"markup","out-width":"700px","editor-quick-suggestions":"false","fig-width":7,"context":"interactive","dpi":72,"output":"true","label":"unnamed-chunk-1","autorun":"false","fig-height":5,"warning":"true","read-only":"false","editor-max-height":"","message":"true","editor-font-scale":"0.5","comment":"","fig-cap":"","editor-word-wrap":"true","out-height":""}},{"id":2,"code":"# 関数mymeanを定義\nmymean <- function(x) {\n  x1 <- sum(x)\n  x2 <- length(x)\n  x <- x1 / x2\n  return(x)\n}\nx <- 1:100 # 1から100までの数列\nmymean(x)","options":{"classes":"","results":"markup","out-width":"700px","editor-quick-suggestions":"false","fig-width":7,"context":"interactive","dpi":72,"output":"true","label":"unnamed-chunk-2","autorun":"false","fig-height":5,"warning":"true","read-only":"false","editor-max-height":"","message":"true","editor-font-scale":"0.5","comment":"","fig-cap":"","editor-word-wrap":"true","out-height":""}},{"id":3,"code":"# サイコロを作成し，投げる回数と試行回数を設定\ndice <- 1:6; toss <- 10; trial <- 10\nresult <- numeric(trial)\n# 繰り返し処理\nfor (i in 1:trial) {\n  x <- sample(dice, toss, replace = TRUE)\n  result[i] <- mymean(x)\n}\nresult","options":{"classes":"","results":"markup","out-width":"700px","editor-quick-suggestions":"false","fig-width":7,"context":"interactive","dpi":72,"output":"true","label":"unnamed-chunk-3","autorun":"false","fig-height":5,"warning":"true","read-only":"false","editor-max-height":"","message":"true","editor-font-scale":"0.5","comment":"","fig-cap":"","editor-word-wrap":"true","out-height":""}},{"id":4,"code":"for (i in 1:trial) {\n  if (result[i] > 3.5) {\n    print(\"大きい\") # 条件を満たすとき\n  } else {\n    print(\"小さい\") # 条件を満たさないとき\n  }\n}","options":{"classes":"","results":"markup","out-width":"700px","editor-quick-suggestions":"false","fig-width":7,"context":"interactive","dpi":72,"output":"true","label":"unnamed-chunk-4","autorun":"false","fig-height":5,"warning":"true","read-only":"false","editor-max-height":"","message":"true","editor-font-scale":"0.5","comment":"","fig-cap":"","editor-word-wrap":"true","out-height":""}},{"id":5,"code":"dice <- 1:6\ntoss <- 10\nx <- sample(dice, toss, replace = TRUE)\nmean(x)","options":{"classes":"","results":"markup","out-width":"700px","editor-quick-suggestions":"false","fig-width":7,"context":"interactive","dpi":72,"output":"true","label":"unnamed-chunk-5","autorun":"false","fig-height":5,"warning":"true","read-only":"false","editor-max-height":"","message":"true","editor-font-scale":"0.5","comment":"","fig-cap":"","editor-word-wrap":"true","out-height":""}}];
 
   </script>
   <script type="module">
@@ -3090,8 +3091,9 @@ Assets = Liabilities + Shareholders' Equity
 </ul>
 <p>こだわりがなければ、Posit Cloudを使うのが一番簡単</p>
 <div class="quarto-auto-generated-content">
+<p><img src="img/kobe_logo.png" class="slide-logo"></p>
 <div class="footer footer-default">
-
+<p>Kobe University, Business Administration</p>
 </div>
 </div>
 </section></section>
@@ -3118,7 +3120,7 @@ Assets = Liabilities + Shareholders' Equity
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': true,
+'controlsAuto': false,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
@@ -3128,7 +3130,7 @@ Assets = Liabilities + Shareholders' Equity
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: false,
+        controls: true,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide
