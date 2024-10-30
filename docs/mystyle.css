@@ -16,3 +16,7 @@
   border-radius: 3px; /* 擬似要素にも角を丸めるスタイルを追加 */
   transform: translateY(-50%); /* 擬似要素を垂直方向に中央揃え */
 }
+
+.mark {
+  background: linear-gradient(transparent 60%, yellow 0%);
+}
