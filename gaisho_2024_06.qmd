@@ -1,0 +1,1641 @@
+---
+title: |
+  <b>外国書購読 Day6</b> </br>
+  <span style="color: #282A36; ">
+    Chapter 5. <br> Analytical Review: Technical Analysis
+  </span>
+author: "Soichi Matsuura"
+date: "13 Nov. 2024"
+format:
+  revealjs:
+    theme: ["default", "dracula.scss"]
+    transition: slide
+    slide-number: true
+    code-line-numbers: false
+    html-math-method: katex
+    chalkboard: true
+    width: 1300
+    # height: 900
+    footer: "Kobe University, Business Administration"
+    logo: "img/kobe_logo.png"
+    include-in-header:
+      text: |
+        <style>
+        .v-center-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        </style>
+execute:
+  echo: true
+  warning: false
+  highlight-style: github
+# filters:
+#   - webr
+# webr:
+#   packages: ['dplyr','ggplot2','readr'] # Install R packages on document open
+css: mystyle.css
+---
+
+
+# Analytical Review
+<!-- ## 分析的手続 -->
+
+## Analytical Procedures
+
+- **Analytical procedures** (分析的手続) [^5-1] are evaluations of financial information made by a study of plausible relationships between both financial and non-financial data.
+- Analytical procedures are used in all stages of the audit including planning, *substantive testing* (実証手続) [^5-2], and final review.
+- It serves as a vital planning function in the entirety of the audit procedures.
+
+[^5-1]: 財務データ相互間又は財務データと非財務データとの間に存在すると推定される関係を分析・検討することによって、財務情報を評価することをいう。
+[^5-2]: 勘定科目における重要な虚偽記載を検出する目的で行う検証のことをいう。
+
+
+:::{.notes}
+分析的手続は、財務データと非財務データの両者間の関係を調べることによって行われる財務情報の評価である。
+分析的手続は、監査計画、実証的手続、最終的なレビューなど、監査のすべての段階で使用される。
+それは監査手続全体の重要な計画機能として機能する。
+
+
+分析的手続は，監査人が財務データ相互間（売上総利益率分析など）又は財務データ以外のデータと財務データとの間（一人当たりの人件費分析など）に存在すると推定される関係を分析・検討することによって，財務情報を評価する監査手続である。また，分析的手続には，他の関連情報と矛盾する，又は監査人の推定値と大きく乖離する変動や関係についての追加的な調査も含まれる(CPAテキスト)。
+
+関連する財務または非財務データに基づいて、帳簿金額に対する期待値を算出する。
+期待値の算出に使用するデータは、例えば公表された統計資料などのように、監査対象金額から独立し、合理的に妥当と認められるデータでなければならない。そうでない場合にはそのデータを別途検証することが必要となる。
+期待値と帳簿金額の差異で理由の説明なしに受け入れてよい最大値、すなわち「許容金額」を決定する。
+:::
+
+## Analytical Review Procedures
+
+- **Analytical review procedures** are applied at several points in a firm’s audit to establish "<mark class="mark">plausible relationships among both financial and non-financial data</mark>" as a cost-effective test of the conclusions derived from fieldwork.
+- These procedures compare financial and organization information of an audit client such as budgets, industry news, forecasts, market information, non-financial information, bank and tax information.
+- Their goal is to <mark class = "mark">flag "exceptional" situations</mark> that would require more extensive auditing, and commensurately expand the scope of auditing for these accounts.
+
+:::{.notes}
+分析的レビュー手続は、現場調査から導かれた結論の費用対効果のテストとして、「財務データと非財務データの両者間の妥当な関係」を確立するために、会社の監査のいくつかのポイントで適用される。
+これらの手続きは、予算、業界ニュース、会社のガイダンスとニュースリリース、予測、市場情報、議事録や契約などの非財務情報、および銀行や税金の情報など、監査クライアントの財務情報と組織情報を比較する。
+その目的は、より広範囲な監査を必要とする「例外的な」状況をフラグ付けし、それらの勘定科目の監査範囲を相応に拡大することである。
+:::
+
+
+## Assisting in Audit Planning
+
+- Prior to interim and substantive fieldwork, they play an essential role in assisting the auditor to "adequately plan work" and "obtain a sufficient understanding of the entity and its environment."
+- Prior to fieldwork, <mark class = "mark">auditors have very little access to client transactions</mark> (which may not have yet occurred) and analytical procedures based on industry and economy-wide news offer cost-effective tools for audit planning.
+
+:::{.notes}
+中間期間と実質的な現場調査の前に、それらは監査人が「適切に仕事を計画する」ことと「企業とその環境を十分に理解する」ことを支援する上で重要な役割を果たす。
+フィールドワークの前に、監査人はクライアントの取引にほとんどアクセスできず（まだ発生していないかもしれない）、業界や経済全体のニュースに基づく分析手続きは、監査計画のための費用対効果の高いツールを提供する。
+
+:::
+
+
+## Audit engagement
+
+- The auditor’s "<mark class="mark">analytical review of significant ratios and trends</mark>" relies on historical ratios which provide the basis for assessing risk and planning the audit (AICPA, 1988).
+- AICPA statement **AU Section 329 ** states that *analytical procedures are used throughout the audit engagement* - in audit planning, execution, and review - and specifically at three times during the audit:
+
+:::{.notes}
+監査人の「重要な比率とトレンドの分析的レビュー」は、リスクの評価と監査の計画の基礎となる過去の財務比率に依存している(AICPA、1988)。
+AICPAの声明AUセクション329[^3]は、分析的手続が監査計画、実行、レビューのすべての段階で使用され、特に監査の3回の時点で使用されることを述べている。
+:::
+
+[^3]: PCAOBの監査基準の1つで、AU section 329 「Substantive Analytical Procedures」のこと。
+
+## Three Times During the Audit
+
+1. To assist in planning the nature, timing, and extent of other auditing procedures;
+2. As a substantive test to obtain **audit evidence** about assertions related to account balances or classes of transactions
+3. As an overall review of the financial information in the final review stage of the audit.
+
+The AICPA couches its pronouncements on analytical procedures in the language of statistics, borrowing statistical terms such as "*precision* " (精度), "*likelihood* " (尤度), and "*expectation* " (期待値) in describing analytical tests.
+
+
+:::{.notes}
+1.その他の監査手続きの性質、タイミング、範囲を計画するのに役立つ
+2.勘定残高や取引のクラスに関連する主張についての監査証拠を取得するための実証的なテストとして
+3.監査の最終レビュー段階での財務情報の総合的なレビューとして
+
+AICPAは、分析手続きに関するその声明を統計学の言葉で表現し、分析的テストを説明する際に「精度」「尤度」「期待値」といった統計学用語を借用している。
+:::
+
+## Audit Technologies
+
+- Audit technologies now use **objective statistical methods** to support or replace auditor judgment, making audits more cost-effective and reducing the risk of errors.
+- The modern audit approach relies on **assumptions about data distributions** to guide audit decisions.
+- Audits may not fully use statistical methods because financial data distributions can be complex.
+- <mark class = "mark">Empirical Research shows that financial data distributions vary widely between different firms and accounts</mark>.
+
+<!-- - As audit technologies evolve, auditor judgment has been augmented or superseded by **objective statistical methods** that aim to make auditing more cost-effective, and control the risk of audit error.
+- Central to the modern audit’s quasi-statistical framework are the **assumptions made about data distributions** in framing and implementing audit decisions.
+- A likely reason that audits have not embraced statistical approaches more completely is the complexity of financial data distributions. -->
+<!-- - Seldom is it possible to make the standard Gaussian assumption underlying commonly used parametric statistical tests and estimators. -->
+<!-- 標準的なガウス分布の仮定を行うことができることはめったになく、一般的に使用されるパラメトリックな統計的検定や推定量の背後にある仮定を行うことができることはめったにない。 -->
+<!-- - Empirical research suggests that *financial data distributions vary* considerably from firm to firm and account to account. -->
+<!-- , and may be multimodal, fat tailed, or otherwise difficult to use. -->
+
+
+:::{.notes}
+監査技術の進化に伴い、監査人の判断は、監査をより費用対効果の高いものにし、監査エラーのリスクをコントロールすることを目指す客観的な統計的手法によって着実に補完または置き換えられてきた。
+近代監査の準統計的枠組みの中心には、監査決定の策定と実施においてデータ分布についての仮定がある。
+統計的アプローチを完全に採用していない理由の1つは、財務データの分布の複雑さである。
+実証研究は、財務データの分布が企業ごと、勘定科目ごとに大きく異なり、多峰性、ファットテール、またはその他の使用が困難なものである可能性があることを示唆している。
+:::
+
+
+# Institutional Context of Analytical Review
+
+## AICPA Definition
+
+- The AICPA defines **analytical review procedures** to “...consist of *evaluations* of financial information made by a study of plausible relationships among both financial and non-financial data.”
+- Analytical procedures are used in planning the audit; as a substantive test to obtain audit evidence about assertions related to account balances or classes of transactions.
+<!-- and as an overall review of the financial information in the final review stage of the audit. -->
+- The AICPA emphasizes that "... in some cases, <mark class = "mark">analytical procedures can be more effective or efficient</mark> than tests of details for achieving particular substantive testing objectives".
+
+:::{.notes}
+AICPAは、分析的レビュー手続を「...財務情報の評価であり、財務データと非財務データの両方の間の妥当な関係を調査することによって行われる」と定義している。
+分析手続きは、監査計画に使用され、勘定残高や取引のクラスに関連する主張についての監査証拠を取得するための実証的なテストとして使用される。
+AICPAは、「...いくつかの場合には、特定の実証的テスト目標を達成するために、分析手続きが詳細テストよりも効果的または効率的であることがある」と強調している。
+:::
+
+
+## AICPA Guidelines
+
+- The AICPA’s guidelines on *analytical review* aim to help audits identify major errors in financial statements.
+- Analytical review procedures use *external information available* during audit planning.
+<!-- - They often rely on non-transaction data and require assumptions about the statistical traits and relevance of this data to the financial statements. -->
+- **Analytical review** includes any audit methods, qualitative or quantitative, that aren’t directly related to testing the client’s transactions or balances during control and substantive testing.
+- **Analytical procedures** compare recorded amounts or ratios with expectations set by the auditor.
+
+:::{.notes}
+AICPAのガイドラインは、監査が財務諸表の主要な誤りを特定するのを助けることを目的としている。
+分析的レビュー手続は、監査計画中に利用可能な外部情報を使用する。これらはしばしば非取引データに依存し、このデータの統計的特性と財務諸表への関連性についての仮定が必要とされる。
+分析的レビューには、監査人の取引や残高のテストと直接関連しない、定性的または定量的な監査方法が含まれ，分析手続きは、監査人が設定した期待値と記録された金額または比率を比較する。
+:::
+
+
+## The nature of analytical review
+
+- Official pronouncements of the AICPA on **the nature and objectives of analytical review** support theoverall objectives of an audit: discovery of material errors in the financial statements.
+- Analytical review procedures flexibly and opportunistically rely on external information available at the time of planning the audit; they depend heavily on non-transaction data sources, and typically need to make explicit or implicit assumptions about the underlying statistical characteristics of such data and its relevance to the financial statements to be audited.
+<!-- - Analytical review procedures generally refer to any qualitative or quantitative audit methods that do not directly relate to tests of the client’s own transactions and balances during the control and substantive testing of the financial system. -->
+<!-- - Analytical procedures involve comparisons of recorded amounts, or ratios developed from recorded amounts, to expectations developed by the auditor. -->
+
+:::{.notes}
+AICPAの公式声明は、分析的レビューの性質と目的について、監査の全体的な目的を支持しており、財務諸表の重大な誤りを発見することを目的としている。
+分析的レビュー手続は、監査計画時に利用可能な外部情報に柔軟かつ機会主義的に依存し、非取引データソースに大きく依存し、通常はそのようなデータの基礎となる統計的特性と財務諸表への関連性について明示的または暗黙の仮定を行う必要がある。
+分析的レビュー手続は、一般的に、財務システムのコントロールと実証的テスト中に、クライアント自身の取引や残高のテストと直接関連しない、定性的または定量的な監査方法を指す。
+分析手続きには、監査人が開発した記録された金額または比率と、監査人が開発した期待値との比較が含まれる。
+:::
+
+
+## AICPA
+
+According to the AICPA:
+
+> “The auditor develops such expectations by identifying and using plausible relationships that are reasonably expected to exist based on the auditor’s understanding of the client.
+> The expected effectiveness and efficiency of an analytical procedure in identifying potential misstatements depends on, among other things, the precision of the expectation.
+> The expectation should be precise enough to provide the desired level of assurance that differences that may be potential material misstatements, individually or when aggregated with other misstatements, would be identified for the auditor to investigate.
+> As expectations become more precise, the range of expected differences becomes narrower and, accordingly, the likelihood increases that significant differences from the expectations are due to misstatements.
+> Expectations developed at a detailed level generally have a greater chance of detecting misstatement of a given amount than do broad comparisons.
+> Monthly amounts will generally be more effective than annual amounts and comparisons by location or line of business usually will be more effective than company-wide comparisons.”
+
+:::{.notes}
+監査人は，クライアントに関する理解に基づいて合理的に存在すると予想される関係を特定し，使用することによって，そのような期待値を開発する。
+分析手続きが潜在的な誤記載を特定する際の期待される効果と効率は，期待値の精度に依存する。
+期待値は，監査人が調査するために潜在的な重大な誤記載として個別にまたは他の誤記載と集計された場合に特定される可能性がある差異を提供するための所望の保証レベルを提供するために十分に精密であるべきである。
+期待値がより精密になるにつれて，期待される差異の範囲は狭くなり，その結果，期待値からの重大な差異が誤記載に起因する可能性が高まる。
+詳細レベルで開発された期待値は，広範な比較よりも特定の金額の誤記載を検出する可能性が高い。
+月次金額は一般的に年次金額よりも効果的であり，地域や事業部門ごとの比較は通常，企業全体の比較よりも効果的である。
+:::
+
+
+## Sufficiency Competent Evidence
+
+- Analytical review procedures have been in use at least since the 1940s, and were introduced into the authoritative auditing literature in 1970 with the *promulgation* (公布) of Statement on Auditing Procedures (SAP) No. 54 (AU section 320.70).
+- This Statement specified that **sufficient competent evidential matter** (十分にして適格な証拠) “is obtained through two general classes of auditing procedures:
+
+1. **Tests of details** of transactions and balances (詳細テスト)
+2. **Analytical review** of significant ratios and trends. (分析的実証手続)”
+
+
+:::{.notes}
+分析的レビュー手続は、少なくとも1940年代以来使用されており、1970年に監査手続声明（SAP）第54号（AUセクション320.70）の公布によって権威ある監査文献に導入された。
+この声明は、「十分で適格な証拠は、2つの一般的な監査手続きを通じて取得される」と規定している。
+
+1. 取引と残高の詳細テスト
+2. 重要な比率とトレンドの分析的レビュー
+:::
+
+
+---
+
+
+- Statistical terms such as "*precision*," "*likelihood*," and "*expectation*" in the audit context are presented but not further defined in the AICPA’s pronouncements.
+- But statistical tests commonly used by auditors do provide specific and practical definitions of these terms.
+- Additionally, "**assurance**" as used in the context of analytical review for substantive tests has been linked in SAS 56 to the “**statistical confidence**” that the auditor has in his or her tests.
+<!-- - SAS No. 56 required auditors to use analytical procedures to assist in planning the nature, timing, and extent of other auditing rocedures and as an overall review of the financial statements in the final review of the audit. -->
+<!-- - The Statement also recommended that analytical procedures be used "as a substantive test to obtain evidence." -->
+
+
+:::{.notes}
+監査における制度や尤度、期待値のような統計用語は、AICPAの声明には提示されているが、さらに定義されていない。
+しかし、監査人が一般的に使用する統計的検定は、これらの用語の具体的で実用的な定義を提供している。
+さらに、実証的テストの文脈で使用される「保証」という用語は、監査人がテストに対して持つ「統計的信頼性」と関連付けられている。
+この声明は、分析手続きを「証拠を得るための実証的なテストとして使用することを推奨している。」
+SAS No. 56は、監査人に対して、他の監査手続きの性質、タイミング、範囲を計画するのに分析手続きを使用するよう求め、監査の最終レビューでの財務諸表の総合的なレビューとして使用するよう求めた。
+このステートメントもまた，分析的手続きを「証拠を得るための実証的なテストとして使用することを推奨している。」
+:::
+
+
+## Related Research
+
+- Over the last half century, research in many areas has expanded the statistical toolset available to auditors for analytical procedures.
+- Research assessing account values and transaction flows using statistical time-series methods appear.
+ <!-- in, e.g., Asare and Wright (1997a,b), Kinney and Uecker (1982), Kinney (1979), Loebbecke and Steinbart (1987), Mueller and Anderson (2002), Nelson (1994), Stringer (1975). -->
+- The practical application of various judgmental or hybrid approaches has been investigated through an equally rich stream of behavioral audit decision research.
+<!-- , which has appeared in, e.g., Ameen and Strawser (1994), Anderson et al. (1995), Anderson et al. (1994), Biggs et al. (1988), Kogan et al. (2010), Libby (1985).  -->
+- <mark class = "mark">Statistical approaches have been augmented with computationally intensive machine learning approaches</mark> and this is currently an active area of development in the audit industry.
+<!-- ; e.g., see, Wilson and Colbert (1989), Coakley (1995), Koskivaara (2004a), Koskivaara (2006), Coakley and Brown (1993), Knechel (1988), Coakley and Brown (1993), Koskivaara and Back (2007), Koskivaara (2004b). -->
+
+:::{.notes}
+過去半世紀にわたり、多くの分野での研究が、監査人が分析手続きに使用できる統計ツールセットを拡大してきた。
+統計的時系列法を用いた勘定価値や取引フローの評価を行った研究が登場している。
+さまざまな判断的またはハイブリッドアプローチの実用的な適用は、同様に豊富な行動監査意思決定研究の流れを通じて調査されてきた。
+統計的アプローチは、計算量の多い機械学習アプローチで補完され、現在は監査業界での開発の活発な分野となっている。
+:::
+
+---
+
+- During the planning stage, the analytical review procedure enhances the auditor’s understanding of the client’s business and helps in identifying significant transactions and events that have occurred since the last audit date.
+- It also identifies unusual transactions and events, amounts, ratios, or trends that might be significant to the financial statements and may represent specific risks relevant to the audit.
+- Risk assessment procedures require understanding the entity and its environment.
+
+:::{.notes}
+計画段階では、分析的レビュー手続は、監査人がクライアントのビジネスを理解し、前回の監査日から発生した重要な取引やイベントを特定するのに役立ちます。
+また、財務諸表に重要であり、監査に関連する特定のリスクを表す可能性のある異常な取引やイベント、金額、比率、トレンドを特定します。
+リスク評価手続きには、企業とその環境を理解することが必要です。
+:::
+
+## Planning Stage
+
+- The whole process assists the auditor in planning the nature, extent and timing of other auditing procedures.
+- Measuring risks to identify significant areas requiring the **auditor’s attention** is also covered here.
+- Results of the analytical procedures performed during the planning stage help identify risks that may, based on the auditor’s judgment, require special audit consideration.
+- Examples of these are those that are considered as non-routine, unusual and complex transactions, business risks that may result in material misstatement, fraud risk, significant related party transactions, accounting estimates and principles.
+
+
+:::{.notes}
+全体的なプロセスは、他の監査手続きの性質、範囲、タイミングを計画するのに監査人を支援します。
+監査人の注意を必要とする重要な領域を特定するためのリスクの測定もここでカバーされています。
+計画段階で実施された分析手続きの結果は、監査人の判断に基づいて特別な監査検討を必要とする可能性のあるリスクを特定するのに役立ちます。
+これには、非ルーチン、異常、複雑な取引、重大な誤記載をもたらす可能性のあるビジネスリスク、詐欺リスク、重要な関連当事者取引、会計上の見積りと原則などが含まれます。
+:::
+
+
+---
+
+- Analytical procedures include the review of data aggregated at high levels, such as comparing financial statements to budgeted or anticipated results. Generally, financial data are used, but relevant non-financial data (e.g., number of employees, square footage of selling space, or volume of good produced) may also be considered.
+
+- Analytical review procedures typically include a review of the current and prior year’s financial statements and the current year’s budget. Comparisons are made between the current year’s actual and budgeted financial statements. There must also be an analysis to compare the current and previous year’s actual financial statements to test for internal consistency.
+
+:::{.notes}
+分析的手続は、予算や予想される結果と比較するなど、高いレベルで集約されたデータのレビューを含みます。一般的には財務データが使用されますが、従業員数、販売スペースの平方フィート、生産された商品の数量などの関連する非財務データも考慮される場合があります。
+
+分析的レビュー手続には、通常、前年と当年の財務諸表と当年の予算のレビューが含まれます。当年度の実績と予算の財務諸表を比較します。また、内部整合性をテストするために、当年度と前年度の実績の財務諸表を比較するための分析も行われます。
+:::
+
+
+## Expectations
+
+- Auditors must develop independent expectations for comparison to recorded amounts.
+- Examples of these expectations include financial information for comparable prior periods, anticipated results from budgets and forecasts, relationship among data within the current period, industry norms and relationships of financial data with non-financial information.
+- Income statement accounts have **more predictable** relationships compared to balance sheet accounts.
+- In addition, accounts based on management discretion such as bonus, other employee benefits, and other related expenses are less predictable.
+
+---
+
+- In performing analytical procedures, the auditor may also use financial analysis ratios which may be classified as liquidity ratios, activity ratios, profitability ratios, investors ratios, and long-term debt paying ability ratios.
+- Additional analyses, such as common size analysis (vertical and horizontal), analysis of industry statistics, and trend analysis, may also be valuable depending on the nature of transactions.
+
+- Recent years have seen an increased emphasis on the use of analytical procedures, as it helps identify significant audit risks without relying on the client’s own attestations.
+- However, analytical review comparisons are based on expected plausible relationships among data.
+
+
+## Limitations
+
+- **Limitations** exist in the use of analytical procedures because differences noted do not necessarily indicate errors or fraud, but simply the need for further analysis and investigation—specifically of the client’s own documentation, as well as entities doing business with the client.
+- Changes in an account and in accounting principles, and inherent differences between industry norms and the client all contribute to fluctuations in expected amounts.
+- Hence, the auditor needs to exercise professional judgment in analyzing the results.
+- Analytical procedures are usually designed to point out audit areas that are indicative of potential risks, need special emphasis or additional attention. Thus there are a number of practical guidelines that should dictate their application:
+
+
+---
+
+
+1. Avoid mechanical computations and comparisons. Instead, determine trends, ratios, and relationships that are most
+   relevant to the business. Develop expectations on plausible or predictable relationships based on historical patterns in the
+   operation of the business. These will serve as benchmarks for comparisons to determine unusual or unexpected changes.
+2. Unusual or unexpected relationships would be characterized by anything out-of-the-ordinary or those that do not make
+   sense or at odds with comparable industry data
+3. For nonprofit organizations, analytical procedures should lead to information regarding changes in programs, nature of
+   activities, grantors, fund-raising events, political environment, and the impact of the economy in the collection of promises
+   to give.
+
+---
+
+Some of the typical analytical procedures applied are:
+
+1. Compare receipts from annual fund-raising drives to total support. This can help spot issues with revenue recognition.
+2. Compare support and revenue sources over the past 5 years. This may reveal revenue sources that need closer review.
+3. Evaluate the ratio of fund-raising expenses to contribution revenue. A low expense compared to recorded revenue might indicate overstated revenue. Little or no fund-raising expense alongside contribution revenue might suggest underreported expenses to keep expense ratios favorable.
+
+<!--
+1. Comparison of receipts from annual fund-raising drives to total support. This procedure could help detect improper
+   revenue recognition.
+2. Comparison of support and revenue by source for the past 5 years. This procedure may identify revenue sources that
+   require increased attention.
+3. Evaluation of the ratio of fund-raising expenses to contribution revenues. This could also help detect improper revenue
+   recognition. If the expense is significantly lower than the amount needed to produce recorded revenue, it might indicate
+   overstating of revenues. If there is little or no fund-raising expense while reporting contribution revenue, this might
+   indicate underreported expenses to maintain favorable expense ratios.
+ -->
+
+
+---
+
+4.	Scan financial information for unusual changes, unexpected patterns, or major fluctuations that might highlight areas with a higher risk of error. For instance, a big increase in notes payable could suggest new loans, while significant shifts in total net assets or in different asset classes (unrestricted, temporarily restricted, permanently restricted) may indicate negative trends or concerns about the organization’s viability.
+5.	Obtaining information information from prior audits. This enables the auditor to make preliminary judgments about the inherent and control risks about material accounts and to focus on substantive procedures to reduce the detection risk.
+
+<!--
+4. Scanning of financial information to identify unusual changes, unexpected relationships, and major fluctuations which
+   could indicate specific areas of risk of material misstatement. For example, a large increase in notes payable might indicate
+   new loans acquired. Also, significant changes in total net assets or changes in net assets by class (unrestricted, temporarily
+   restricted, permanently restricted) might indicate unfavorable trends or going concern problems.
+5. Obtaining information information from prior audits. This enables the auditor to make preliminary judgments about the
+   inherent and control risks about material accounts and to focus on substantive procedures to reduce the detection risk.
+ -->
+
+
+# Technical Measures of a Company’s Financial Health
+
+## Technical Metrics
+
+- Analytical review uses both *internal and external data sources*.
+- Many methods exist for gathering firm intelligence, reflecting the growth of online financial analysis resources.
+- Internal metrics like accounting equations and ratios were traditionally key for spotting irregularities, risks, and weaknesses.
+- In the past decade, websites, forums, social media, and databases provide richer insights than basic ratios.
+- *Financial analysts* now monitor online sources, offering real-time firm health assessments beyond traditional, retrospective accounting metrics.
+
+<!--
+Analytical review information is obtained from a variety of sources, internal and external to the firm.
+There are a wealth of methods available for firm intelligence gathering, a reflection of the rapid growth of Internet resources on financial analysis and firm intelligence.
+I will start with a brief analysis of internal technical metrics for analytical review—primarily accounting, equations and ratios.
+These traditionally were the main source of information, alerting the auditor to potential irregularities and accounting risks, as well as control weaknesses.
+Over the past decade, new information has become available on websites, forums, social network feeds, and databases which is arguably much more informative than crude ratio metrics.
+Financial analysts routinely monitor the Internet for firm related information, which has become much more useful in assessing firm health and problems than the limited, retrospective metrics reported by accountants.
+-->
+
+## Fundamental Equations
+
+
+<!-- Technical metrics have their roots in `Al-Khwārizmi`’s method (from The Compendious Book on Calculation by Completion and Balancing, c.825) which  -->
+Introduced algebra to accounting leading to the three fundamental equations:
+
+1. **The Bookkeeping equation** (double-entry) for error control,
+2. "Real" accounts (実在勘定) for tracking wealth; this is called the “basic accounting equation.”
+  An elaborate form of this equation is presented in a balance sheet which lists all assets, liabilities, and equity, as well as totals to ensure that it balances, and
+3. "Nominal" accounts (名目勘定) for tracking activity; closing out these accounts at year-end yields the net income amount, which
+   arguably is the most important single statistic produced in the accounting process from a stockholders perspective.
+
+
+## Technical Metrics
+
+- Technical metrics in analytical review involve an exploration of these fundamental equations and their components, both in current and prior years’ statements and in the context of information obtained from interviews, news, and other sources, with the aim of identifying areas of risk in the current year’s audit.
+- Ratio analysis provides one of the specific ways that these relationships may be expanded to compare with other firms in an industry or between accounting periods for the same firm.
+- A financial ratio (or accounting ratio) is a relative magnitude of two selected numerical values taken from an enterprise’s financial statements.
+
+## Financial Ratios
+
+- Often used in accounting, there are many standard ratios used to try to evaluate the overall financial condition of a corporation or other organization.
+- Financial ratios may be used by managers within a firm, by current and potential shareholders (owners) of a firm, and by a firm’s creditors.
+- Financial analysts use financial ratios to compare the strengths and weaknesses in various companies.
+- If shares in a company are traded in a financial market, the market price of the shares is used in certain financial ratios.
+
+## Use of Ratios
+
+- Ratios can be expressed as a decimal value, such as 0.10, or given as an equivalent percent value, such as 10%.
+- Some ratios are usually quoted as percentages, especially ratios that are usually or always less than 1, such as earnings yield, while others are usually quoted as decimal numbers, especially ratios that are usually more than 1, such as P/E ratio; these latter are also called **multiples**.
+<!-- - Given any ratio, one can take its reciprocal; if the ratio was above 1, the reciprocal will be below 1, and conversely. -->
+- The reciprocal expresses the same information, but may be more understandable: for instance, the earnings yield can be compared with bond yields, while the P/E ratio cannot be: for example, a P/E ratio of 20 corresponds to an earnings yield of 5%.
+
+:::{.notes}
+比率は，小数値で表すこともできる（例：0.10）し，パーセント値として表すこともできる（例：10%）。
+一部の比率は，特に1未満の比率については，通常または常に1未満の比率については，パーセンテージとして引用されることが多いが，他の比率は，通常1より大きい比率については，小数値として引用されることが多い。これらの後者は，倍数とも呼ばれる。
+任意の比率が与えられた場合，その逆数を取ることができる。比率が1より大きい場合，逆数は1より小さくなり，逆もまた同様である。
+逆数は同じ情報を表現するが，より理解しやすいかもしれない。たとえば，株価収益率は債券利回りと比較することができるが，P/E比率はできない。たとえば，P/E比率が20の場合，収益率は5%に対応する。
+:::
+
+## Calculation of Ratios
+
+- Values used in calculating financial ratios are taken from the balance sheet, income statement, statement of cash flows or (sometimes) the statement of retained earnings.
+- These comprise the firm’s “accounting statements” or financial statements.
+- The statements’ data is based on the accounting method and accounting standards used by the organization.
+
+:::{.notes}
+財務比率の計算に使用される値は、貸借対照表、損益計算書、キャッシュフロー計算書、または（場合によっては）利益剰余金計算書から取られる。
+これらは、企業の「会計諸表」または財務諸表を構成する。
+財務諸表のデータは、組織が使用する会計方法と会計基準に基づいている。
+:::
+
+## Purpose and Types of Ratios
+
+<mark class = "mark">Financial ratios quantify many aspects of a business</mark> and are an integral part of the financial statement analysis.
+Financial ratios are categorized according to the financial aspect of the business which the ratio measures:
+
+- *Liquidity ratios* measure the availability of cash to pay debt.
+- *Activity ratios* measure how quickly a firm converts non-cash assets to cash assets.
+- *Debt ratios* measure the firm’s ability to repay long-term debt.
+
+:::{.notes}
+財務比率は、企業の多くの側面を数量化し、財務諸表分析の重要な部分である。
+財務比率は、比率が測定するビジネスの財務面に応じて分類される。
+
+- *流動比率* は、債務を支払うための現金の利用可能性を測定する。
+- *活動比率* は、企業が非現金資産を現金資産にどれだけ速く変換するかを測定する。
+- *負債比率* は、企業が長期債務を返済する能力を測定する。
+
+:::
+
+---
+
+- *Profitability ratios* measure the firm’s use of its assets and control of its expenses to generate an acceptable rate of return.
+- *Market ratios* measure investor response to owning a company’s stock and also the cost of issuing stock. These are
+     concerned with the return on investment for shareholders, and with the relationship between return and the value of an
+     investment in company’s shares.
+
+:::{.notes}
+収益性比率は、企業が資産をどのように活用し、費用をどのようにコントロールして収益率を適切な水準に維持するかを測定する。
+市場比率は、企業の株式を所有する投資家の反応と株式の発行コストを測定する。これらは、株主の投資リターンと株式投資の価値との関係に関連している。
+:::
+
+## Comparisons of Ratios
+
+Financial ratios allow for comparisons:
+
+- between *companies* (企業比較)
+- between *industries* (産業比較)
+- between different *time periods* for one company (時点比較)
+- between a single company and its industry average (企業と業界平均比較)
+
+## Limitations of Ratios
+
+- Ratios generally are not useful unless they are benchmarked against something else, like past performance or another company, or industry averages.
+- Thus, the ratios of firms in different industries, which face different risks, capital requirements, and competition are usually hard to compare.
+- Financial ratios may not be directly comparable between companies that use different accounting methods or follow various standard accounting practices.
+
+:::{.notes}
+比率は、過去の業績や他の企業、または業界平均などと比較されない限り、一般的には有用ではありません。
+したがって、異なるリスク、資本要件、競争に直面する異なる業界の企業の比率は通常比較が難しい。
+財務比率は、異なる会計方法を使用する企業やさまざまな標準的な会計慣行に従う企業間で直接比較できない場合があります。
+:::
+
+
+## Various Financial Statements
+
+- Most public companies are required by law to use generally accepted accounting principles for their home countries, but private companies, partnerships, and sole proprietorships may not use accrual basis accounting.
+- Large **multi-national corporations** may use *International Financial Reporting Standards* to produce their financial statements, or they may use the generally accepted accounting principles of their home country.
+- There is no international standard for calculating the summary data presented in all financial statements, and the terminology is not always consistent between companies, industries, countries, and time periods.
+<!-- - Various abbreviations may be used in financial statements, especially financial statements summarized on the Internet.  -->
+<!-- -　Sales reported by a firm are usually net sales, which deducts returns, allowances, and early payment discounts from the charge on an invoice.  -->
+<!-- - Net income is always the amount after taxes, depreciation, amortization, and interest, unless otherwise stated. -->
+
+
+:::{.notes}
+ほとんどの公開企業は、自国の一般的に受け入れられている会計原則を使用することが法律で義務付けられていますが、非公開企業、パートナーシップ、個人事業主は、発生主義会計を使用することができない場合があります。
+大規模な多国籍企業は、国際財務報告基準を使用して財務諸表を作成することがあります。または、自国の一般的に受け入れられている会計原則を使用することがあります。
+すべての財務諸表に示される要約データを計算するための国際基準は存在せず、用語は企業、業界、国、時期によって常に一貫しているわけではありません。
+財務諸表、特にインターネット上で要約された財務諸表では、さまざまな略語が使用されることがあります。
+企業が報告する売上高は通常純売上高であり、返品、手数料、請求書の料金から返品、手数料、早期支払い割引を差し引いた金額です。
+純利益は、税金、減価償却費、償却費、利息を除いた金額ですが、別段の記載がない限りです。
+:::
+
+## Other Financial items
+
+Other commonly used terms are:
+
+- $COGS =$ Cost of goods sold or cost of sales (売上原価)
+- $EBIT =$ Earnings before interest and taxes (利払前税引前利益)
+- $EBITDA =$ Earnings before interest, taxes, depreciation, and amortization (利払前・税引前・減価償却前利益)
+- $EPS =$ Earnings per share (一株当り利益)
+
+
+## Common Technical Metrics
+
+### 負債比率
+
+- **Debt-to-equity ratio**: compares a company’s total debt to shareholders’ equity. Both of these numbers can be found on a company’s balance sheet. To calculate debt-to-equity ratio, you divide a company’s total liabilities by its shareholder equity, or
+  - Debt-to-Equity Ratio = Total Liabilities / Shareholders’ Equity.
+  - If a company has a debt-to-equity ratio of 2 to 1, it means that the company has two dollars of debt to every one dollar shareholders invest in the company.
+  <!-- - In other words, the company is taking on debt at twice the rate that its owners are investing in the company. -->
+
+---
+
+### 棚卸資産回転率
+
+- **Inventory turnover ratio**:
+Inventory turnover is calculated by dividing a company’s cost of sales by its average inventory.
+- To find the average inventory, add the beginning and ending inventory balances from the balance sheet and divide by two.
+- This ratio shows how efficiently a company manages its inventory.
+<!-- compares a company’s cost of sales on its income statement with its average inventory balance for the period. To calculate the average inventory balance for the period, look at the inventory numbers listed on the balance sheet. Take the balance listed for the period of the report and add it to the balance listed for the previous comparable period, and then divide by two. (Remember that balance sheets are snapshots in time. So the inventory balance for the previous period is the beginning balance for the current period, and the inventory balance for the current period is the ending balance.) To calculate the inventory turnover ratio, you divide a company’s cost of sales (just below the net revenues on the income statement) by the average inventory for the period, or -->
+  - **Inventory Turnover Ratio** = Cost of Sales / Average Inventory for the Period.
+  - If a company has an inventory turnover ratio of 2 to 1, it means that the company’s inventory turned over twice in the reporting period.
+
+
+:::{.notes}
+棚卸資産回転率
+
+- **棚卸資産回転率**：棚卸資産回転率は、企業の売上原価を平均棚卸資産で割って計算される。
+- 平均棚卸資産を求めるには、貸借対照表に記載されている棚卸資産の数値を見る。
+  期間の平均棚卸資産残高を求めるには、貸借対照表に記載されている棚卸資産の残高を合計し、2で割る。
+  (貸借対照表は時間のスナップショットであることを覚えておく。したがって、前期の棚卸資産残高は、現在期の開始残高であり、現在期の棚卸資産残高は、終了残高である。)
+  棚卸資産回転率を計算するには、企業の売上原価（損益計算書の純収益の直下）を期間の平均棚卸資産で割る。
+  企業の棚卸資産回転率が2対1の場合、報告期間中に企業の棚卸資産が2回回転したことを意味する。
+:::
+
+
+---
+
+### 営業利益率
+
+- **Operating margin**: compares a company’s operating income to net revenues. Both of these numbers can be found on a company’s income statement. To calculate operating margin, you divide a company’s income from operations (before interest and income tax expenses) by its net revenues, or
+  - Operating Margin = Income from Operations / Net Revenues.
+  - Operating margin is usually expressed as a percentage. It shows, for each dollar of sales, what percentage was profit.
+
+
+---
+
+### PER
+
+- **P/E ratio**: compares a company’s common stock price with its earnings per share. To calculate a company’s P/E ratio, you divide a company’s stock price by its earnings per share, or
+  - P/E Ratio = Price per share / Earnings per share.
+  - If a company’s stock is selling at $20 per share and the company is earning $2 per share, then the company’s P/E Ratio is 10 to 1. The company’s stock is selling at 10 times its earnings.
+
+:::{.notes}
+- **P/E比率**：企業の普通株価を1株当たり利益と比較する。
+  企業のP/E比率を計算するには、企業の株価を1株当たり利益で割る。
+  - P/E比率 = 株価 / 1株当たり利益。
+  - 企業の株価が1株当たり20ドルで、企業が1株当たり2ドルを稼いでいる場合、企業のP/E比率は10対1である。企業の株価は、利益の10倍で売られている。
+:::
+
+
+---
+
+### 運転資本
+
+- **Working capital**: is the money leftover if a company paid its current liabilities (that is, its debts due within 1-year of the
+  date of the balance sheet) from its current assets.
+  - Working Capital = Current Assets - Current Liabilities
+
+And so forth.
+
+:::{.notes}
+- **運転資本**：運転資本は、企業が貸借対照表の日付から1年以内に支払うべき負債（つまり、流動資産）を流動資産から支払った場合に残るお金である。
+  - 運転資本 = 流動資産 - 流動負債
+
+など。
+:::
+
+
+<!----
+
+---
+
+- There are numerous ratios available for analysis, but diminishing returns to the auditor for some of the less used ratios.
+- The above ratios are probably sufficient for a quick check of corporate health. Where the auditor or analyst has questions, there is a wealth of information online about how to compute financial ratios and other technical metrics.
+- Do not hesitate to use these resources where specific situations require something more than these most basic metrics.
+
+:::{.notes}
+分析に利用可能な多くの比率があるが、あまり使用されていない比率に対して監査人に対するリターンが減少する。
+上記の比率は、企業の健康状態を素早くチェックするのに十分であると考えられる。
+監査人やアナリストが疑問を持っている場合、金融比率やその他の技術指標を計算する方法についての情報がオンラインで豊富に提供されている。
+これらの最も基本的な指標以上のものが必要な特定の状況がある場合は、これらのリソースを利用することをためらわないでください。
+:::
+
+--->
+
+## Accessing Financial Information from EDGAR
+
+- The EDGAR database (https://www.sec.gov/edgar/) offers a wealth of financial information on industry competitors, but only if they are publicly traded companies.
+- Use package `edgar` to extract this information.
+- Note that the SEC recently started requiring identification before access.
+- This is accomplished by the `username` parameter, which is typically set to your work email.
+<!-- - The subsequent _R_ code extracts information on Tesla Motors from Edgar; this information is then analyzed for sentiment, which is presented as a bar chart. -->
+
+## Tesla's F/S
+
+```{r tesla_financials}
+#| eval: false
+pacman::p_load(edgar, tidyverse, kableExtra)
+
+cik.no = 0001318605   # Tesla
+form.type = "10-K"    # 10-K is the annual report
+filing.year = 2018    # 2018 is the year of the report
+quarter = c(1,2,3,4)  # All quarters
+useragent = "matsuura@fc.ritsumei.ac.jp"
+```
+
+
+## `getFilings()` Function
+
+`getFilings()` function takes CIKs, form type, filing year, and quarter of the filing as input.
+It creates new directory ’~/Downloads/Edgar filings_full text’ to store all downloaded filings
+
+```{r getfilings2}
+#| eval: false
+getFilings(
+   cik.no,
+   form.type,
+   filing.year,
+   quarter,
+   useragent,
+   downl.permit = "y"
+   )
+```
+
+---
+
+`getFilingsHTML()` function takes CIKs, form type, filing year, and quarter of the filing as input.
+The function imports edgar filings downloaded via getFilings function; otherwise, it downloads the filings which are not already been downloaded.
+It then reads the downloaded filing, scraps main body the filing, and save the filing content in ’~/Downloads/Edgar filings_HTML view’ directory in HTML format.
+
+```{r getfilingsHTML}
+#| eval: false
+#| code-fold: true
+getFilingsHTML(
+  cik.no = cik.no,
+  form.type = form.type,
+  filing.year = filing.year,
+  quarter = quarter
+  )
+```
+
+## `getMasterIndex()` Function
+
+This function creates a new directory ’~/Downloads/Master Indexes’ into current working directory to save these Rda Master Index.
+
+```{r getmasterindex}
+#| eval: false
+getMasterIndex(filing.year)
+```
+
+Management Discussion creates a new directory with name "~/Downloads/MD&A section text"
+
+---
+
+`getSentiment` function takes CIK(s), form type(s), and year(s) as input parameters.
+The function first imports available downloaded filings in local woking directory ’Edgar filings’ created by `getFilings` function; otherwise, it downloads the filings which is not already been downloaded.
+It then reads the filings, cleans the filings, and computes the sentiment measures.
+The function returns a dataframe with filing information, and sentiment measures.
+
+
+
+
+
+## Accessing Financial Information from EDGAR
+<!-- ## EDGARからの財務情報のアクセス -->
+
+- The EDGAR database offers a wealth of financial information on industry competitors, but only if they are publicly traded companies.
+<!-- EDGARデータベースは、上場企業に限定されるが，業界の競合他社に関する財務情報を豊富に提供している。 -->
+<!-- - Use package edgar to extract this information. -->
+<!-- この財務情報を抽出するために`edgar`パッケージを使用する。 -->
+- The subsequent R code extracts information on Tesla Motors from Edgar; this information is then analyzed for sentiment, which is presented as a bar chart.
+<!-- 以下のRコードは、EdgarデータベースからTesla Motorsの情報を抽出し、その情報を感情分析して棒グラフとして表示する。 -->
+
+---
+
+```{r getfiling}
+#| eval: false
+pacman::p_load(edgar, tidyverse, kableExtra)
+
+cik.no = 0001318605 # Tesla
+form.type = "10-K"
+filing.year = 2018
+quarter = c(1,2,3,4)
+
+getFilings(
+    cik.no,
+    form.type,
+    filing.year,
+    quarter,
+    downl.permit = "y"
+    )
+
+getFilingsHTML(
+    cik.no = cik.no,
+    form.type = form.type,
+    filing.year = filing.year,
+    quarter = quarter
+    )
+
+
+# This function creates a new directory ’~/Downloads/Master Indexes’ into current working directory to save these Rda Master Index.
+getMasterIndex(filing.year)
+
+# Management Discussion creates a new directory with name "~/Downloads/MD&A section text"
+getMgmtDisc(
+    cik.no = cik.no,
+    filing.year = filing.year)
+
+sentiment_analysis <- getSentiment(
+    cik.no,
+    form.type,
+    filing.year) |>
+    t()
+
+
+d <- sentiment_analysis
+names <- rownames(d)
+rownames(d) <- NULL
+sentiment_analysis <- cbind(names,d)
+
+colnames(sentiment_analysis) <- c("sentiment","n")
+
+sentiment_analysis <- as.data.frame(
+    sentiment_analysis[10:nrow(sentiment_analysis),]
+    )
+
+
+ggplot(sentiment_analysis, aes(sentiment, n)) +
+    geom_col() +
+    theme(axis.text.x = element_text(
+        angle = 45, hjust = 1)
+        ) + xlab("Sentiment") +
+        ylab("Frequency expressed in 10-k")
+```
+
+
+
+## Accessing Financial Information from EDGAR (https://www.sec.gov/edgar/) with the finreportr Package
+<!-- finreportrパッケージを使用したEDGAR（https://www.sec.gov/edgar/）からの財務情報のアクセス -->
+
+
+```{r finreportr}
+#| eval: false
+pacman::p_load(finreportr)
+
+# The following commands will directly load EDGAR information into the R workspace for analysis
+tesla_co <- CompanyInfo("TSLA")
+tesla_ann <- AnnualReports("TSLA")
+tesla_inc <- GetIncome("TSLA", 2018)
+tesla_bs <- GetBalanceSheet("TSLA", 2018)
+tesla_cf <- GetCashFlow("TSLA", 2018)
+head(tesla_inc)
+```
+
+
+---
+
+```{r read_bs}
+pacman::p_load_gh("bergant/finstr")
+pacman::p_load(tidyverse, edgar, XBRL, kableExtra)
+# ローカルに保存しているxbrlファイルを読み込む
+old_o <- options(stringsAsFactors = FALSE) # 文字列をファクターとして扱わない
+xbrl_data_2016 <- xbrlDoAll("XBRL/gm-20161231.xml")
+xbrl_data_2017 <- xbrlDoAll("XBRL/gm-20171231.xml")
+options(old_o)
+
+st2016 <- xbrl_get_statements(xbrl_data_2016)
+st2017 <- xbrl_get_statements(xbrl_data_2017)
+
+balance_sheet2017 <- st2017$ConsolidatedBalanceSheets
+balance_sheet2016 <- st2016$ConsolidatedBalanceSheets
+balance_sheet <- merge(balance_sheet2017, balance_sheet2016)
+```
+
+## Wide to Long Form
+
+- The `finreportr` package returns a data.frame in “long form.”
+- Because analysis typically benefits from datasets in “short form” with one row per account, `finreportr` data.frames need to be reshaped.
+<!-- - Hadley Wickham has created a comprehensive package called `reshape2` that uses metaphors of melt and cast. -->
+- You melt data so that **each row is a unique id-variable combination** (i.e., is in “long form”) and then you cast the melted data into any shape you would like.
+<!-- There are specific commands for casting data.frames dcast, arrays acast, and so forth. -->
+In the next example, we take the Tesla income statement in ‘long form’ that we acquired with the `finreportr` package and dcast it into a more usable form.
+
+## Reshaping the Income Statement
+
+```{r getincome}
+#| eval: false
+tesla_inc <- GetIncome("TSLA", 2018) |>
+    rbind(GetIncome("TSLA", 2017)) |>
+    rbind(GetIncome("TSLA", 2016)) |>
+    rbind(GetIncome("TSLA", 2015))
+head(tesla_inc)
+
+tesla_inc <-tesla_inc |>
+    filter(month(startDate) == 01 & month(endDate) == 12) |>
+    mutate(Year = year(endDate)) |>
+    group_by(Metric, Year) |>
+    slice(1L) |>
+    dcast(Metric ~ Year, value.var = ’Amount’)
+head(tesla_inc)
+```
+
+## Computing Technical Metrics
+<!-- ## 財務指標の計算 -->
+
+- In the prior section, I showed you how to acquire financial information from the SEC’s repositories.
+- This section provides general guidelines for computing technical metrics such as ratios from that statement data.
+- Consider the calculation of the *current ratio* (流動比率) which is defined as:
+
+$$
+Current Ratio = \frac{Current Assets}{Current Liabilities}
+$$
+
+
+
+
+##  calculate current ratio
+
+```{r trans_currentratio}
+balance_sheet |>
+    transmute(date = endDate,
+        CurrentRatio = AssetsCurrent / LiabilitiesCurrent )
+```
+
+- Other ratios may be calculated in a similar straightforward manner using the dplyr package in the tidyverse library.
+- Note that several other packages (e.g., `edgar`, `finreportr`) are available to extract EDGAR filings.
+- The `finstr` package can only process links to XBRL files, but `finreportr` can access data from both HTML and XBRL files.
+
+
+
+## Visualization of Technical Metrics
+
+- Visualizations are compact, yet can reveal patterns that would not be readily identified in the raw data.
+- This is because the human brain is much more attuned to analyzing visual scenes than to analyzing lists of numbers and characters.
+- Visualizing financial statements exposes a limited number of key values, and emphasizes their relationships and trends.
+- In the following code chunk, I aggregate a balance sheet by selected concepts (Table 1).
+
+## Aggregate the balance sheet
+
+```{r htmlTable}
+library(htmlTable)
+bs_simple <- expose(
+  balance_sheet,
+    # Assets
+    "Current Assets" = "AssetsCurrent",
+    "Noncurrent Assets" = other("Assets"),
+    # Liabilites and equity
+    "Current Liabilities" = "LiabilitiesCurrent",
+    "Noncurrent Liabilities" = other(c("Liabilities", "CommitmentsAndContingencies")),
+    "Stockholders Equity" = "StockholdersEquity"
+)
+
+```
+
+
+## Print B/S
+
+Print the balance sheet; capture the output to a NULL file, and reformat with the `kableExtra` package
+
+```{r capture_output}
+#| output-location: slide
+capture.output(bs_table <-
+                 print(bs_simple,
+                   html = FALSE,　big.mark = ",",　dateFormat = "%Y"),
+               file = 'NUL')
+bs_table |>
+  kable(longtable = T,
+        caption = "Abbreviated Balance Sheet",
+        "latex", booktabs = T) |>
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = F)
+```
+
+
+## plot the balance sheet
+
+```{r plot_bs}
+finstr::plot_double_stacked_bar(bs_simple)
+```
+
+---
+
+
+facet balance sheet DR and CR accounts
+
+```{r plot_bs_facet}
+finstr::plot_double_stacked_bar(bs_simple, by_date = FALSE)
+```
+
+---
+
+use *proportional form* to highlight changes in balance sheet structure
+
+```{r plot_bs_prop}
+bs_simple_prop <- proportional(bs_simple)
+finstr::plot_double_stacked_bar(bs_simple_prop)
+```
+
+# Internet Resources for Analytical Review
+
+## Web-Accessible Financial and Firm Data
+
+- The exponential growth of *web-accessible financial* and firm data has revolutionized analytical review over the past decade.
+- Intelligence scanning of Internet resources is the automated search for financial information, inventory sentiment, discussions, news, and other audit related information.
+- It has eclipsed calculation of technical metrics as a source of internal control weaknesses, accounting problems or fraud, and audit risk over the past decade.
+- Today, the audit that does not fully take advantage of statistical software and Internet resources leaves itself open to negligence, misconduct, and lawsuits.
+
+
+:::{.notes}
+過去10年間にわたり、ウェブアクセス可能な財務および企業データの指数関数的な成長は、分析レビューを革命化してきた。
+インテリジェンススキャンは、財務情報、在庫センチメント、ディスカッション、ニュース、およびその他の監査関連情報を自動的に検索するものである。
+過去10年間にわたり、技術指標の計算を超えて、内部統制の弱点、会計上の問題や不正、および監査リスクの情報源としての地位を碾きつぶしてきた。
+今日、統計ソフトウェアとインターネットリソースを十分に活用しない監査は、怠慢、不正行為、および訴訟のリスクにさらされる。
+:::
+
+---
+
+
+- Arguably, the most important number on the financial statements is **sales revenue**.
+- This reflects the audited firm’s market strength in the face of competitors products, highlights product or service quality issues that reflect control weaknesses, and provides a general guide to other demand-side measures of firm health.
+- I have focused the following analytical review　algorithms on such demand-side measures of customer satisfaction, as these may be the auditors’ single best source of　qualitative intelligence on control weaknesses and accounting irregularities.
+
+
+:::{.notes}
+ほとんどの場合、財務諸表で最も重要な数字は売上収益である。
+これは、競合他社の製品に対する監査済み企業の市場力を反映し、コントロールの弱点を反映する製品やサービスの品質問題を強調し、企業の健康状態の需要側の他の指標に一般的なガイドを提供する。
+私は、顧客満足度の需要側の指標に焦点を当て、これらが監査人にとってコントロールの弱点や会計上の不正の質的情報の最良の情報源である可能性があるため、次の分析レビューアルゴリズムをこれに集中させている。
+:::
+
+
+---
+
+- Sales revenues are fundamental drivers of business success—they reflect customers’ impressions of the company’s products, value proposition, and brand.
+- The difference between a product and a business is the repeat sales.
+- Customer loyalty to a brand is a major part of the valuation of many companies and spawns innovative “loyalty” programs to lock-in customers.
+- Success or failure of these loyalty programs in subscription businesses (e.g., magazines, cable services, phone services) is measured by customer loyalty and brand recognition.
+- Most organizations have data that can be used to target customers and to understand the key drivers of the revenue stream.
+
+
+:::{.notes}
+売上収益は、企業の成功の基本的な要因であり、顧客の会社の製品、価値提案、およびブランドに対する印象を反映している。
+製品とビジネスの違いは、リピートセールスである。
+ブランドに対する顧客のロイヤリティは、多くの企業の評価の主要な部分であり、顧客をロックインするための革新的な「ロイヤリティ」プログラムを生み出している。
+これらのロイヤリティプログラムの成功または失敗は、顧客のロイヤリティとブランド認知によって測定される。
+ほとんどの組織は、顧客をターゲットにするためのデータを持っており、収益ストリームの主要なドライバーを理解するために使用できる。
+:::
+
+---
+
+<!-- Customers are the fuel that powers a business. -->
+- Loss of customers impacts sales. Furthermore, it is much more difficult and costly to gain new customers than it is to retain existing customers.
+- Customers’ impressions of the firm and its products provide important, non-financial metrics for assessing the health of a firm.
+- A firm with many dissatisfied customers is likely to suffer from weak management with high turnover, unreported control weaknesses, and to engage in “aggressive” accounting in reporting to lending institutions and shareholders.
+
+
+
+:::{.notes}
+顧客はビジネスを動かす燃料である。
+顧客の喪失は売上に影響を与える。
+さらに、新規顧客を獲得することは、既存の顧客を維持するよりもはるかに困難でコストがかかる。
+顧客の会社や製品に対する印象は、会社の健康状態を評価するための重要な財務指標である。
+多くの不満足な顧客を抱える企業は、高い離職率を持つ弱い経営、報告されない内部統制の不備、および貸金機関や株主に報告する際の「強引」な会計を行う可能性が高い。
+:::
+
+## Internet Resources for Analytical Review
+
+- The Internet has numerous resources—social networks, forums, product reviews, industry reports, and investment advice - that can alert the auditor to problems in a client’s controls and financials.
+- Internet resources play an essential role in analytical review, and in identifying audit risks that require increased diligence and scope.
+- The remaining part of this chapter explores these Internet resources and how to incorporate them into the analytical review procedures.
+
+:::{.notes}
+インターネットには、ソーシャルネットワーク、フォーラム、製品レビュー、業界レポート、投資アドバイスなど、監査人にクライアントのコントロールや財務に問題があることを警告する多くのリソースがある。
+インターネットリソースは、分析レビューと監査リスクの識別において重要な役割を果たし、増加した注意と範囲が必要な監査リスクを特定するのに役立つ。
+この章の残りの部分では、これらのインターネットリソースとそれらを分析レビュー手続きに組み込む方法について探求する。
+:::
+
+# US Census Data (後半)
+
+## US Census  国勢調査
+
+
+- Where location and demographics are important in a business, the US Census provides extensive and reliable data.
+- _R_ provides several packages to access and use those repositories.
+- Data from the *US Census Bureau* is stored in tables, and to find the table for a particular metric you can use the function `acs.lookup` in the `acs` package.
+- Note that to run this code you willneed to get and install a census API key which you can request at https://api.census.gov/data/key_signup.html.
+
+Install the key with `api.key.install`.
+
+
+## `acs` Package
+
+- The `acs.fetch` function is used to download data from the US Census American Community Survey.
+- The `acs.lookup` function provides a convenience function to use in advance to locate tables and variables that may be of interest.
+
+- `acs.lookup` takes arguments similar to acs.fetch—in particular, `table.number`, `table.name`, and `keyword`, as well as `endyear`, `span`, and `dataset` — and searches for matches in the meta-data of the Census tables.
+- When multiple search terms are passed to a given argument (e.g., keyword=c(“Female,” “GED”)), the tool returns matches where ALL of the terms are found; similarly, when more than one lookup argument is used (e.g., table.number=“B01001,” keyword=“Female”), the tool searches for matches that include all of the terms (i.e., terms are combined with a logical “AND,” not a logical “OR”).
+
+---
+
+Results from `acs.lookup` - which are `acs.lookup` class objects—can then be inspected, subsetted (with [square brackets]), and combined (with c or +) to create custom `acs.lookup` objects to store and later pass to `acs.fetch` which has the following arguments:
+
+- `endyear` is an integer indicating the latest year of the data in the survey (e.g., for data from the 2007–2011 5-year ACS data, endyear would be 2011).
+- `span` is an integer indicating the span (in years) of the desired ACS data (should be 1, 3, or 5 for ACS datasets, and 0 for decennial census SF1 and SF3 datasets); defaults to 5, but ignored and reset to 0 if `dataset = sf1` or `sf3`.
+- `geography` is a geo.set object specifying the census geography or geographies to be fetched; can be created “on the fly” with a call to `geo.make()`.
+
+---
+
+- `table.name` is a string giving the search term(s) to find in the name of the ACS census table (for example, “Sex” or
+  “Age”); accepts multiple words, which must all be found in the returned table names; always case-sensitive.
+  (Note: when
+  set, this variable is passed to an internal call to acs.lookup—see acs.lookup).
+- `table.number` is a string (not a number) indicating the table from the Census to fetch; examples: “B01003” or
+  “B23013”; always case-sensitive.
+  Used to fetch all variables for a given table number; if “table.number” is provided,
+  other lookup variables (“table.name” or “keyword”) will be ignored.
+- `variable` is an object of acs.lookup class, or a string or vector of strings indicating the exact variable number to
+  fetch.
+
+---
+
+- `Non-acs.lookup` examples include “B01003_001” or “B23013_003” or c(“B01003_001”, “B23013_003”).
+- `keyword` is a string or vector of strings giving the search term(s) to find in the name of the census variable (for example,
+  “Male” or “Haiti”); always case-sensitive.
+- `dataset` is either “acs” (the default), “sf1,” or “sf3,” indicating whether to fetch data from in the American Community
+  Survey or the SF1/SF3 datasets.
+
+In the following example, we will compute the 2014–2019 female-to-male populations of the USA across age groups, and plot these as a bar graph.
+
+
+```{r fem_to_male}
+#| output-location: slide
+#| cache: true
+pacman::p_load(acs)
+api.key.install("e6045d03ade2aa986ae443b6f9b21250df4b13fc")
+
+look <- acs.lookup(
+    endyear = 2019,
+    keyword = c("Female"))
+i_look <- look@results[1:24,c(1,4)] |> t()
+colnames(i_look) <- i_look[1,]
+
+geo <- geo.make(state = "IL") # Illinois
+fet <- acs.fetch(
+          endyear = 2014,
+          span = 5,
+          table.number = "B01001",
+          keyword = c("Female"), # 女性
+          geography = geo)
+
+fet_tbl <- fet@estimate # get the estimate table
+fet_tbl <- rbind(fet_tbl,i_look[2,]) |> t() # add the Illinois data
+colnames(fet_tbl) <- c("population","age_group") # name the columns
+
+fet_tbl <-as.data.frame(fet_tbl)
+# make age_group an ordered factor and convert population to numeric
+fet_tbl$age_group <- factor(fet_tbl$age_group, levels = fet_tbl$age_group)
+fet_tbl$population <- as.numeric(as.character(fet_tbl$population))
+fet_fem <-as.data.frame(fet_tbl)
+
+fet <- acs.fetch(endyear = 2014,
+          span = 5,
+          table.number = "B01001",
+          keyword = c("Male"), # 男性
+          geography = geo)
+
+fet_tbl <- fet@estimate
+
+fet_tbl <- rbind(fet_tbl,i_look[2,]) |> t()
+colnames(fet_tbl) <- c("population","age_group")
+
+fet_tbl <-as.data.frame(fet_tbl)
+fet_tbl$age_group <- factor(fet_tbl$age_group, levels = fet_tbl$age_group)
+fet_tbl$population <- as.numeric(as.character(fet_tbl$population))
+fet_male <-as.data.frame(fet_tbl)
+
+# Compute the ratio of females to males by U.S. county
+fet_ratio <- fet_fem |> dplyr::inner_join(fet_male, by = "age_group")
+fet_ratio$fem_to_male <- fet_ratio$population.x / fet_ratio$population.y # 比率
+fet_ratio$age_group <- sub("Female:", "", fet_ratio$age_group)
+fet_ratio$age_group <- factor(fet_ratio$age_group, levels = fet_ratio$age_group)
+
+# 作図
+ggplot(fet_ratio[-1,], aes(age_group, fem_to_male)) +
+  geom_col() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  xlab("Age Group") +
+  ylab("Female to Male Ratio")
+```
+
+
+
+
+## Geographic Graphs
+
+```{r fem_to_male2}
+#| cache: true
+#| output-location: slide
+pacman::p_load(acs)
+# Set API key
+api.key.install("e6045d03ade2aa986ae443b6f9b21250df4b13fc")
+
+# Lookup table for age groups
+look <- acs.lookup(endyear = 2019, keyword = c("Female"))
+age_groups <- look@results[1:24, "label"]
+
+# Function to fetch ACS data
+fetch_data <- function(keyword, geo) {
+  fet <- acs.fetch(endyear = 2014, span = 5, table.number = "B01001", keyword = keyword, geography = geo)
+  fet_tbl <- fet@estimate
+  colnames(fet_tbl) <- age_groups
+  fet_tbl <- as.data.frame(t(fet_tbl))
+  fet_tbl <- fet_tbl[-1, , drop = FALSE]
+  colnames(fet_tbl) <- "population"
+  fet_tbl$age_group <- rownames(fet_tbl)
+  fet_tbl$population <- as.numeric(as.character(fet_tbl$population))
+  return(fet_tbl)
+}
+
+# Geographic area (Illinois)
+geo <- geo.make(state = "IL")
+
+# Fetch female and male data
+fet_fem <- fetch_data("Female", geo)
+fet_male <- fetch_data("Male", geo)
+
+# Compute female to male ratio
+fet_ratio <- fet_fem %>%
+  inner_join(fet_male, by = "age_group", suffix = c(".fem", ".male")) %>%
+  mutate(fem_to_male = population.fem / population.male)
+
+# Plot
+ggplot(fet_ratio, aes(x = age_group, y = fem_to_male)) +
+  geom_col() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  xlab("Age Group") +
+  ylab("Female to Male Ratio")
+```
+
+
+---
+
+- The first table on the Census Bureau list is `B01001`.
+- Look at `look_tbl = look@results` under `variable.code`, for example, the `_009` at the end indicates the column of the table; each column tabulates a different age range for males or females.
+
+- If your end result is to create choropleth maps, using the `choroplethr` package, it is more straightforward to use the function `get_acs_data()` inside the `choroplethr` package instead of `acs.fetch` in the `acs` package.
+
+---
+
+```{r chroplethrmaps}
+pacman::p_load(choroplethrMaps, choroplethr)
+
+# map = one of "state", "county" or "zip"
+# column_idx = 15 of table B01001 is "Sex by Age: Male: 45 to 49 years"
+# column_idx = 39 of table B01001 is "Sex by Age: Female: 45 to 49 years"
+M45 <- get_acs_data(tableId = "B01001", map = "county", column_idx=15)
+F45 <- get_acs_data(tableId = "B01001", map = "county", column_idx=39)
+M45 <- M45[[1]]
+head(M45)
+```
+
+---
+
+```{r}
+F45 <- F45[[1]]
+head(F45)
+```
+
+---
+
+```{r}
+R45 <- M45 |> dplyr::inner_join(F45, by = "region")
+R45$value <- R45$value.y / R45$value.x
+
+county_choropleth(R45[,c(1,4)], title = "Female / Male Ratio: 45 - 49 y.o. by County")
+```
+
+
+
+<!--- ここから下は動く --->
+
+## R and Application Programming Interfaces (API)
+
+The _R_ statistical language is particularly well-suited to ad hoc intelligence scanning, as it include many bespoke packages
+that support one-off analyses of Internet datasets and datastreams.
+
+- **Application Programming Interfaces** (API) provide access to Internet datastreams.
+- Such data is not static, as users are constantly posting to datastreams and databases; rather these services think in terms of “streaming” dataflows that are constantly updated with changes to the database.
+- Datastreams may be “throttled” by their owners, to prevent overwhelming systems servers with data requests. Three API protocols are used for most web data access:
+
+---
+
+1. JSON = JavaScript Object Notation is an open-standard file format that uses human-readable text to transmit data objects
+   consisting of attribute–value pairs and array data types (or any other serializable value). It is a very common data format
+   used for asynchronous browser–server communication, including as a replacement for XML in some AJAX-style systems.
+2. REST = Representational State Transfer (REST) is a software architectural style that defines a set of constraints to be
+   used for creating web services. Web services that conform to the REST architectural style, termed RESTful web services,
+   provide interoperability between computer systems on the Internet. RESTful web services allow the requesting systems
+   to access and manipulate textual representations of web resources by using a uniform and predefined set of stateless
+   operations. Other kinds of web services, such as SOAP web services, expose their own arbitrary sets of operations.
+3. SOAP = Simple Object Access Protocol is a messaging protocol specification for exchanging structured information in the
+   implementation of web services in computer networks. Its purpose is to provide extensibility, neutrality, and independence.
+    It uses XML Information Set for its message format, and relies on application layer protocols, most often Hypertext
+   Transfer Protocol (HTTP) or Simple Mail Transfer Protocol (SMTP), for message negotiation and transmission.
+
+
+In addition, access security for most Internet services is managed by `OAuth = Open Authorization`; pronounced “oh-
+auth.”
+OAuth is an open standard for token-based authentication and authorization on the Internet.
+It allows an end user’s account information to be used by third-party services without exposing the user’s password.
+OAuth was introduced in 2006 by Twitter, with the OAuth 1.0 protocol published in April 2010.
+The OAuth 2.0 framework was published in 2012 and is not backwards compatible with OAuth 1.0.
+OAuth 2.0 provides specific authorization flows for web applications, desktop applications, mobile phones, and smart devices.
+Facebook’s Graph API only supports OAuth 2.0; Google and Amazon support OAuth 2.0 as the recommended authorization mechanism for all of its APIs; Microsoft supports OAuth 2.0 for various APIs and its Azure Active Directory service, which is used to secure many Microsoft and third party APIs.
+Because of support from major firms, OAuth 2.0 has become the de facto standard for web services.
+
+
+
+# Technical Analysis of Product and Customer News Sources on the Web
+
+## text mining and NLP
+
+- Most text mining and natural language processing (NLP) modeling uses "bag of words" (*BoW*) or "*bag of n-grams*" methods.
+- Despite their simplicity, these models usually demonstrate good performance on text categorization and classification tasks.
+- But in contrast to their theoretical simplicity and practical efficiency, building bag-of-words models involves technical challenges.
+- This is especially the case in R because of its *copy-on-modify semantics*.
+
+
+
+:::{.notes}
+ほとんどのテキストマイニングと自然言語処理（NLP）モデリングは、「Bag-of-Words(BoW)」または「n-gramのバッグ」の方法を使用する。
+単純さにもかかわらず、これらのモデルは通常、テキストの分類および分類タスクで優れたパフォーマンスを発揮します。
+しかし、理論的な単純さと実用的な効率に対して、Bag-of-Wordsモデルの構築には技術的な課題が伴います。
+これは特に、Rのコピー修正セマンティクスのためです。
+:::
+
+## Text Analysis 3 steps
+
+Let us briefly review some of the steps in a typical text analysis pipeline:
+<!-- 典型的なテキスト分析パイプラインのいくつかのステップを簡単に見直してみましょう。 -->
+
+1. The auditor usually begins by constructing a *document-term matrix* (DTM) or *term-co-occurrence matrix* (TCM) from input documents.
+  <!-- 監査人は通常、入力ドキュメントから文書用語行列（DTM）または用語共起行列（TCM）を構築して開始します。 -->
+  In other words, the first step is to *vectorize text* by creating a map from words or n-grams to a vector space.
+  <!-- 言い換えれば、最初のステップは、テキストをベクトル化して、単語またはn-gramからベクトル空間へのマップを作成することです。 -->
+2. The auditor fits a model to that DTM. These models might include text classification, topic modeling, similarity search,　etc.
+  <!-- 監査人は、そのDTMにモデルを適合させます。これらのモデルには、テキスト分類、トピックモデリング、類似性検索などが含まれる可能性があります。 -->
+  Fitting the model will include tuning and validating the model.
+  <!-- モデルの適合には、モデルの調整と検証が含まれます。 -->
+3. Finally the auditor applies the model to new data.
+  <!-- 最後に、監査人はモデルを新しいデータに適用します。 -->
+
+## NLP with the text2vec Package
+
+- Texts themselves can take up a lot of memory, but vectorized texts usually do not, because they are stored as *sparse matrices*.
+<!-- 文字列自体は多くのメモリを占有する可能性がありますが、ベクトル化された文字列は通常、疎行列として保存されるため、メモリを多く消費しません。 -->
+- Because of R’s copy-on-modify semantics, it is not easy to iteratively grow a DTM; constructing a DTM, even for a small collections of documents, can be a serious bottleneck.
+<!-- Rのコピー・オン・モディファイセマンティクスのため、DTMを反復的に拡張することは簡単ではありません。たとえドキュメントのコレクションが小さくても、DTMを構築することは深刻なボトルネックになる可能性があります。 -->
+- It involves reading the whole collection of text documents into memory and processing it as single vector, which can easily increase memory use by a factor of two to four.
+<!-- これには、テキストドキュメントのコレクション全体をメモリに読み込み、単一のベクトルとして処理することが含まれます。これにより、メモリ使用量が2〜4倍に簡単に増加する可能性があります。 -->
+- The `text2vec` package solves this problem by providing a better way of constructing a document-term matrix.
+<!-- text2vecパッケージは、文書用語行列を構築するためのより良い方法を提供することで、この問題を解決します。 -->
+- As an example of NLP using the `text2vec` package, I will parse a dataset that comes with the package—the movie_review dataset.
+<!-- text2vecパッケージを使用したNLPの例として、パッケージに付属しているデータセットであるmovie_reviewデータセットを解析します。 -->
+- It consists of 5000 movie reviews, each of which is marked as positive or negative. First, split the dataset into two parts—train and test.
+
+---
+
+```{r}
+pacman::p_load(text2vec, data.table)
+
+data("movie_review") # load the dataset
+setDT(movie_review) # convert to data.table
+setkey(movie_review, id) # set key for faster subsetting
+set.seed(2017L) # set seed for reproducibility
+
+all_ids = movie_review$id
+train_ids = sample(all_ids, 4000)
+test_ids = setdiff(all_ids, train_ids)
+train = movie_review[J(train_ids)]
+test = movie_review[J(test_ids)]
+
+class(movie_review)
+
+head(movie_review)
+```
+
+
+### Vocabulary-Based Vectorization
+
+- To represent documents in vector space, we first have to create “term” mappings.
+<!-- ドキュメントをベクトル空間で表現するためには、最初に「用語」マッピングを作成する必要があります。 -->
+- We call them terms instead of words because they can be, not just single words, but arbitrary n-grams—contiguous sequence of n items, where items can be phonemes, syllables, letters, words or base pairs.
+<!-- われわれは、それらを単語と呼ぶのではなく、任意のn-gram（n個のアイテムの連続シーケンス、アイテムは音素、音節、文字、単語、または塩基対である可能性がある）と呼びます。 -->
+- We represent a set of documents as a sparse matrix, where each row corresponds to a document and each column corresponds to a term.
+<!-- 一連のドキュメントを疎行列として表現し、各行がドキュメントに対応し、各列が用語に対応するようにします。 -->
+- Create a vocabulary-based DTM by collecting unique terms from all documents and mark each of them with a unique ID using the create_vocabulary() function, using an iterator to create the vocabulary.
+<!-- すべてのドキュメントから一意の用語を収集し、create_vocabulary（）関数を使用してそれぞれの用語に一意のIDを付けます。 -->
+
+##
+
+The following code chunk:
+
+1. creates an iterator over tokens with the itoken() function. All functions prefixed with create_ work with these
+   iterators. R users might find this idiom unusual, but the iterator abstraction allows us to hide most of details about input
+   and to process data in memory-friendly chunks.
+2. builds the vocabulary with the create_vocabulary() function.
+
+```{r}
+# define preprocessing function and tokenization function
+prep_fun = tolower
+tok_fun = word_tokenizer
+
+it_train = itoken(train$review,
+             preprocessor = prep_fun,
+             tokenizer = tok_fun,
+             ids = train$id,
+             progressbar = FALSE)
+vocab = create_vocabulary(it_train)
+```
+
+
+---
+
+
+Alternatively, we could create list of tokens and reuse it in further steps. Each element of the list should represent a document, and each element should be a character vector of tokens.
+
+```{r}
+train_tokens = train$review |>
+  prep_fun() |>
+  tok_fun()
+it_train = itoken(train_tokens,
+                  ids = train$id,
+                  progressbar = FALSE)
+
+vocab = create_vocabulary(it_train)
+vocab
+```
+
+---
+
+```{r}
+vectorizer = vocab_vectorizer(vocab)
+t1 = Sys.time()
+dtm_train = create_dtm(it_train, vectorizer)
+print(difftime(Sys.time(), t1, units = "sec"))
+
+dim(dtm_train)
+
+identical(rownames(dtm_train), train$id)
+```
+
+
+##
+
+Once we have a vocabulary, we can construct a document-term matrix.
+
+```{r}
+vectorizer = vocab_vectorizer(vocab)
+t1 = Sys.time()
+dtm_train = create_dtm(it_train, vectorizer)
+print(difftime(Sys.time(), t1, units = "sec"))
+```
+
+
+- At this point, we are ready to fit our model.
+- Here we will use the glmnet (Lasso and Elastic-Net Regularized Generalized Linear Models) package to fit a logistic regression model with an L1 penalty (LASSO = least absolute shrinkage and selection operator) and fourfold cross-validation.
+
+---
+
+```{r}
+pacman::p_load(glmnet)
+
+NFOLDS = 4
+t1 = Sys.time()
+glmnet_classifier = cv.glmnet(
+  x = dtm_train, y = train[["sentiment"]],
+  family = "binomial",
+  alpha = 1, type.measure = "auc",
+  nfolds = NFOLDS, thresh = 1e-3, maxit = 1e3
+  )
+print(difftime(Sys.time(), t1, units = "sec"))
+
+plot(glmnet_classifier)
+```
+
+
+
+```{r}
+print(paste("max AUC =", round(max(glmnet_classifier$cvm), 4)))
+```
+
+- We have successfully fit a model to our DTM.
+- Now we can check the model’s performance on test data.
+- Note that we use exactly the same functions from prepossessing and tokenization.
+- Also we reuse/use the same vectorizer—function which maps terms to indices.
+
+---
+
+```{r}
+# Note that most text2vec functions are pipe friendly!
+it_test = test$review |>
+  prep_fun() |> tok_fun() |>
+  itoken(ids = test$id, progressbar = FALSE)
+
+dtm_test = create_dtm(it_test, vectorizer)
+preds = predict(glmnet_classifier, dtm_test, type = "response")[,1]
+glmnet:::auc(test$sentiment, preds)
+```
+
+
+## Pruning Vocabulary
+
+- The result shows that performance on the test data is roughly the same as we expected from cross-validation.
+- Note though that the training time for the model was high.
+- We can reduce it and also significantly improve accuracy by “pruning” the vocabulary.
+- For example, we can find words “a,” “the,” “in,” “I,” “you,” “on,” etc. in almost all documents, but they do not provide much useful information.
+- Usually such words are called “stop words.”
+- On the other hand, the corpus also contains very uncommon terms, which are contained in only a few documents.
+- These terms are also useless, because we do not have sufficient statistics for them.
+- Here we will remove predefined stopwords, very common and very unusual terms.
+
+
+---
+
+
+```{r}
+stop_words = c("i",
+               "me",
+               "my",
+               "myself",
+               "we",
+               "our",
+               "ours",
+               "ourselves",
+               "you",
+               "your",
+               "yours")
+
+t1 = Sys.time()
+vocab = create_vocabulary(it_train, stopwords = stop_words)
+print(difftime(Sys.time(), t1, units = "sec"))
+```
+
+---
+
+```{r}
+pruned_vocab = prune_vocabulary(vocab,
+                                 term_count_min = 10,
+                                 doc_proportion_max = 0.5,
+                                 doc_proportion_min = 0.001)
+vectorizer = vocab_vectorizer(pruned_vocab)
+
+# create dtm_train with new pruned vocabulary vectorizer
+
+t1 = Sys.time()
+dtm_train = create_dtm(it_train, vectorizer)
+print(difftime(Sys.time(), t1, units = "sec"))
+
+dim(dtm_train)
+
+
+# create DTM for test data with the same vectorizer:
+dtm_test = create_dtm(it_test, vectorizer)
+dim(dtm_test)
+```
+
+
+## 2-grams
+
+This model can be improved by using n-grams instead of words—in the following code chunk, I use up to 2-grams:
+
+```{r}
+t1 = Sys.time()
+vocab = create_vocabulary(it_train, ngram = c(1L, 2L))
+print(difftime(Sys.time(), t1, units = "sec"))
+vocab = prune_vocabulary(vocab, term_count_min = 10,
+                         doc_proportion_max = 0.5)
+
+bigram_vectorizer = vocab_vectorizer(vocab)
+
+dtm_train = create_dtm(it_train, bigram_vectorizer)
+
+t1 = Sys.time()
+glmnet_classifier = cv.glmnet(
+  x = dtm_train, y = train[["sentiment"]],
+  family = "binomial", alpha = 1,
+  type.measure = "auc", nfolds = NFOLDS,
+  thresh = 1e-3, maxit = 1e3
+  )
+print(difftime(Sys.time(), t1, units = "sec"))
+```
+
+---
+
+```{r}
+plot(glmnet_classifier)
+```
+
+---
+
+```{r}
+print(paste("max AUC =", round(max(glmnet_classifier$cvm), 4)))
+```
+
+
+---
+
+```{r}
+# apply vectorizer
+dtm_test = create_dtm(it_test, bigram_vectorizer)
+
+preds =
+  predict(
+    glmnet_classifier,
+    dtm_test,
+    type = "response")[,1]
+
+glmnet:::auc(test$sentiment, preds)
+```
+
+
+
+- To further improve performance, we can use “feature hashing” which achieves greater speed by avoiding a lookup over an associative array.
+- Another benefit is that it leads to a very low memory footprint, since we can map an arbitrary number of features into much more compact space, using `text2vec`.
+- The method often makes AUC slightly worse in exchange for improved execution times, which on large collections of documents can provide a significant advantage.
+
+
+:::{.notes}
+さらなるパフォーマンス向上のために、「特徴ハッシュ」を使用することができます。これにより、連想配列のルックアップを回避して高速化が実現されます。
+もう一つの利点は、非常に低いメモリフットプリントをもたらすことです。任意の数の特徴を、はるかにコンパクトなスペースにマッピングすることができるためです。
+この方法は、大量のドキュメントを処理する際に、実行時間を短縮するためにルックアップを回避することで高速化を実現します。
+:::
+
+---
+
+
+```{r}
+h_vectorizer = hash_vectorizer(hash_size = 2 ^ 14, ngram = c(1L, 2L))
+
+t1 = Sys.time()
+dtm_train = create_dtm(it_train, h_vectorizer)
+print(difftime(Sys.time(), t1, units = "sec"))
+```
+
+---
+
+```{r}
+#| code-fold: true
+t1 = Sys.time()
+glmnet_classifier = cv.glmnet(
+  x = dtm_train,
+  y = train[["sentiment"]],
+  family = "binomial",
+  alpha = 1,
+  type.measure = "auc",
+  nfolds = 5,
+  thresh = 1e-3,
+  maxit = 1e3
+  )
+print(difftime(Sys.time(), t1, units = "sec"))
+```
+
+---
+
+```{r}
+plot(glmnet_classifier)
+```
+
+---
+
+
+```{r}
+print(paste("max AUC =", round(max(glmnet_classifier$cvm), 4)))
+
+dtm_test = create_dtm(it_test, h_vectorizer) # apply vectorizer
+preds = predict(
+        glmnet_classifier,  # predict
+        dtm_test,
+        type = "response")[, 1]
+glmnet:::auc(test$sentiment, preds) # calculate AUC
+```
+
+## Useful Functions
+
+- Before analysis it can be useful to transform DTM, using the `normalize` function, since lengths of the documents in collection can significantly vary.
+- Normalization transforms the rows of DTM so we adjust values measured on different scales to a not to transform rows so that the sum of the row values equals $1$.
+- There is also a `TfIdf` function which not only normalizes DTM, but also increase the weight of terms which are specific to a single document or handful of documents and decrease the weight for terms used in most documents.
+<!-- - Both can further improve execution time and accuracy, which may be of value in very large datasets. -->
+
+:::{.notes}
+分析の前に、ドキュメントの長さが大幅に異なる可能性があるため、normalize関数を使用してDTMを変換すると便利です。
+正規化は、異なるスケールで測定された値を調整するために行を変換するので、行の値の合計が$1$に等しくなるように変換しません。
+`TfIdf`関数は、DTMを正規化するだけでなく、1つのドキュメントまたは少数のドキュメントに特有の用語の重みを増加させ、ほとんどのドキュメントで使用される用語の重みを減少させます。
+両方とも、非常に大きなデータセットで価値があるかもしれない、実行時間と精度をさらに向上させることができます。
+:::
+
+
+
+
