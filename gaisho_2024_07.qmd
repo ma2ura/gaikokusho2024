@@ -3,7 +3,7 @@ title: |
   <b>外国書購読 Day7</b> </br>
   <span style="color: #282A36; "> Chapter 6. <br> Analytical Review: Intelligence Scanning </span>
 author: "Soichi Matsuura"
-date: "13 Nov. 2024"
+date: "20 Nov. 2024"
 format:
   revealjs:
     theme: ["default", "dracula.scss"]
@@ -29,26 +29,142 @@ execute:
   echo: true
   warning: false
   highlight-style: github
-# filters:
-#   - webr
-# webr:
-#   packages: ['dplyr','ggplot2','readr'] # Install R packages on document open
 css: mystyle.css
 ---
+
+# 本日の学習内容
+
+1. HTML / CSS / XPath
+2. Chapter 6. Analytical Review: Intelligence Scanning
+
+講義の最初に，ウェブサイトの仕組みを簡単に説明し，ウェブ・スクレイピングのための基礎知識を整理します。
+
+## packages
+
+<!-- 必要なパッケージをインストールする -->
+I use `pacman::p_load()` to install packages from CRAN and `pacman::p_load_gh()` from GitHub.
+
+```{r}
+pacman::p_load(tidyverse, kableExtra)
+pacman::p_load(tidytext, textdata, htm2txt, tokenizers, wordcloud, rvest)
+pacman::p_load_gh("mkearney/rtweet", "hrbrmstr/seymour","mkearney/newsAPI")
+pacman::p_load(maps, tm, SnowballC, RColorBrewer, RCurl, stringr, httr, XML)
+```
+
+## 事前準備
+
+ウェブスクレイピングについて学習する前に、必要な知識を整理します。
+
+- HTML / CSS
+- XPath
+
+これらの知識があると、ウェブサイトから必要なデータを取得することができます。
+
+## HTML
+
+- **HTML**(HyperText Markup Language)は、Webページの内容を記述するためのマークアップ言語です。
+- 基本的には、タグという記号を使って、テキストや画像などの要素を囲むことで、その要素の意味を示します。
+
+```{html}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>外国書購読2024</title>
+</head>
+<body>
+<h1>見出し1</h1>
+  ここに本文
+</body>
+</html>
+```
+
+## CSS
+
+- **CSS**(Cascading Style Sheets)は、Webページの見た目を指定するための言語です。
+- HTMLで記述された要素に対して、色や大きさ、位置などのスタイルを指定することができます。
+
+```{css}
+h1 {
+  color: blue;
+  font-size: 24px;
+}
+```
+
+とすると、`<h1>`タグで囲まれたテキストが青色になり、フォントサイズが24pxになります。
+
+
+## XPath
+
+- **XPath**は、XML文書の中から要素を選択するための言語です。
+- XPathは、XML文書の構造を辿りながら、要素を指定することができます。
+- XPathは、Webスクレイピングの際に、特定の要素を取得するために使用されます。
+- XPathは、HTML文書にも適用することができます。
+
+## HTMLの表
+
+- HTMLの表は、`<table>`タグで囲まれた要素で構成されます。
+- 表の行は`<tr>`タグで、列は`<td>`タグで囲まれます。
+- 表の見出しは`<th>`タグで囲まれます。
+
+```{html}
+<table id="namelist">
+  <caption>
+    表1: 名前のリスト
+  </caption>
+  <thead>
+    <tr>
+      <th>氏名</th><th>属性</th><th>年齢</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Chris</td><td>HTML tables</td><td>22</td>
+    </tr>
+    <tr>
+      <td>Dennis</td><td>Web accessibility</td><td>45</td>
+    </tr>
+    <tr>
+      <td>Sarah</td><td>JavaScript frameworks</td><td>29</td>
+    </tr>
+    <tr>
+      <td>Karen</td><td>Web performance</td><td>36</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+## 表を抽出 | table
+
+Wikipeidaのページから表を抽出します。
+
+```{r}
+#| tbl-font-size: "80%"
+pacman::p_load(rvest,tidyverse, knitr, kableExtra)
+url_akb <- "https://ja.wikipedia.org/wiki/AKB48"
+AKB_table <- url_akb |> read_html() |> html_nodes("table") |> html_table(fill = T)
+AKB_table[[9]] |> as_tibble() |>head(10) |>
+ kable(format="html") |> kable_styling(font_size = 10)
+```
+
+
+## 表を抽出 | xpath
+
+```{r}
+url <- read_html("HTML/gaisho.html")
+url |>html_node(xpath = '//*[@id="namelist"]') |>
+  html_table(fill = T) |>
+  as_tibble() |> kable()
+```
+
+ここで，`xpath = '//*[@id="namelist"]'`は，`id="namelist"`という属性を持つ要素を指定しています。
+
 
 
 # Intelligence Scanning of Internet Resources
 <!-- ## インターネット資源の知能スキャン -->
 
-## packages
 
-
-```{r}
-pacman::p_load(tidyverse, kableExtra)
-pacman::p_load(tidytext, textdata, htm2txt, tokenizers, wordcloud, rvest)
-pacman::p_load_gh("mkearney/rtweet", "hrbrmstr/seymour", "mkearney/newsAPI", "mkearney/newsAPI")
-pacman::p_load(maps, tm, SnowballC, RColorBrewer, RCurl, stringr, httr, XML)
-```
 
 ## Analytical Procedures
 
@@ -64,22 +180,32 @@ pacman::p_load(maps, tm, SnowballC, RColorBrewer, RCurl, stringr, httr, XML)
 ---
 
 - Though this information is available, the raw information itself may need considerable interpretation and processing before an auditor may rely on it for audit work.
-<!-- このような情報を利用できる一方で，監査作業に頼る前に、生の情報それ自体がかなりの解釈と処理を必要とする場合がある。 -->
-- The most useful information for analytical review may be qualitative and textual, so unsuitable for the sort of mathematical analysis offered in spreadsheet packages and statistical programs.
-<!-- 分析的レビュー(analytical review)に最も有用な情報が質的かつ文字である可能性もあるため、スプレッドシートパッケージや統計プログラムで提供される数学的分析には適していない場合がある。 -->
+- <mark class="mark">The most useful information for analytical review may be qualitative and textual</mark>, so unsuitable for the sort of mathematical analysis offered in spreadsheet packages and statistical programs.
 - Qualitative data may be most useful when it is used to gauge sentiment of customers, investors, partners, employees, and vendors toward the company.
-<!-- 質的データは，顧客，投資家，パートナー，従業員，およびベンダーが企業に対してどのような感情を抱いているかを測定するために使用されるときに最も有用である。 -->
 - It is only in the past decade that tools have become available to glean such intelligence from Internet streams and databases.
-<!-- この10年間で、インターネットのストリームやデータベースからそのような情報を収集するツールが利用可能となった。 -->
+
+
+
+:::{.notes}
+このような情報を利用できる一方で，監査作業に頼る前に、生の情報それ自体がかなりの解釈と処理を必要とする場合がある。
+分析的レビュー(analytical review)に最も有用な情報が質的かつ文字である可能性もあるため、スプレッドシートパッケージや統計プログラムで提供される数学的分析には適していない場合がある。
+質的データは，顧客，投資家，パートナー，従業員，およびベンダーが企業に対してどのような感情を抱いているかを測定するために使用されるときに最も有用である。
+この10年間で、インターネットのストリームやデータベースからそのような情報を収集するツールが利用可能となった。
+:::
+
 
 ---
 
 - This chapter provides a set of tools that will assist the auditor in interpreting and understanding the relevant qualitative data accessed through the Internet.
-<!-- この章では、インターネットを通じで入手した関連する質的データを監査人が解釈し、理解するのを支援する一連のツールを提供する。 -->
 - I provide algorithms to map qualitative audit intelligence into consumer, investor, and vendor sentiment.
-<!-- 本書では、質的監査情報を消費者や投資家、ベンダーの感情(sentiment)に写像するアルゴリズムを提供する。 -->
 - I also suggest useful Internet resources for the audit, and provide algorithms for interpreting the scanned intelligence concerning the audit client, its competitors and the industry.
-<!-- また、監査のための有用なインターネットリソースを示唆し、監査クライアント、その競争相手、および業界に関するスキャンされた情報を解釈するためのアルゴリズムを提供する。 -->
+
+:::{.notes}
+この章では、インターネットを通じで入手した関連する質的データを監査人が解釈し、理解するのを支援する一連のツールを提供する。
+本書では、質的監査情報を消費者や投資家、ベンダーの感情(sentiment)に写像するアルゴリズムを提供する。
+また、監査のための有用なインターネットリソースを示唆し、監査クライアント、その競争相手、および業界に関するスキャンされた情報を解釈するためのアルゴリズムを提供する。
+:::
+
 
 ## Sentiment Analysis with Tidy Data
 
@@ -98,6 +224,7 @@ pacman::p_load(maps, tm, SnowballC, RColorBrewer, RCurl, stringr, httr, XML)
 - <mark class="mark">Each observation is a row</mark>.
 - <mark class="mark">Each type of observational unit is a table</mark>.
 
+
 <!--
 - 各変数は列である。
 - 各観察は行である。
@@ -107,34 +234,46 @@ pacman::p_load(maps, tm, SnowballC, RColorBrewer, RCurl, stringr, httr, XML)
 ---
 
 - We thus define the tidy text format as being a table with one-token-per-row.
-<!-- したがって、整然とした文字列フォーマットを、一行ごとに一つのトークン(one-token-per-row)を持つ表として定義する。 -->
 - A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.
-<!-- トークンとは、分析に利用することに関心のある、単語のような意味のある文字列の単位である。 -->
-<!-- トークン化(tokenization)とは、テキストをトークンに分割するプロセスである。 -->
 - This one-token-per-row structure is in contrast to the ways text is often stored in current analyses, perhaps as strings or in a document-term matrix.
-<!-- この一行ごとに一つのトークンの構造は、本書が分析の中でしばしば格納していた構造とは対照的で、おそらく文字列や文書用語行列となる。 -->
+
+
+:::{.notes}
+したがって、整然とした文字列フォーマットを、一行ごとに一つのトークン(one-token-per-row)を持つ表として定義する。
+トークンとは、分析に利用することに関心のある、単語のような意味のある文字列の単位である。
+トークン化(tokenization)とは、テキストをトークンに分割するプロセスである。
+この一行ごとに一つのトークンの構造は、本書が分析の中でしばしば格納していた構造とは対照的で、おそらく文字列や文書用語行列となる。
+:::
 
 ---
 
 - For tidy text mining, the token that is stored in each row is most often a single word, but can also be an n-gram, sentence, or paragraph.
-<!-- 整然なテキストマイニングのために、各行に格納されるトークンは単一の単語だが、n-gram、文、または段落も可能である。 -->
+
 - R’s `tidytext` package provides functionality to tokenize by commonly used units of text like these and convert to a one-term-per-row format.
-<!-- Rのtidytextパッケージは、これらのような一般的に使用されるテキストの単位をトークナイズし、一用語ごとの行形式に変換する機能を提供している。 -->
+
+
+:::{.notes}
+整然なテキストマイニングのために、各行に格納されるトークンは単一の単語だが、n-gram、文、または段落も可能である。
+Rのtidytextパッケージは、これらのような一般的に使用されるテキストの単位をトークナイズし、一用語ごとの行形式に変換する機能を提供している。
+:::
 
 ## Sentiment Analysis with Tidy Data
 
-- One way to analyze the sentiment of a text is to consider the text as a combination of its individual words and the sentiment content of the whole text as the sum of the sentiment content of the individual words.
-<!-- テキストの感情を分析する一つの方法は、テキストを個々の単語の組み合わせとして考え、全体のテキストの感情内容を個々の単語の感情内容の合計として考えることである。 -->
+- One way to analyze the sentiment of a text is to consider <mark class="mark">the text as a combination of its individual words and the sentiment content of the whole text as the sum of the sentiment content of the individual words</mark>.
 - This is not the only way to approach sentiment analysis, but it is an often-used approach, and an approach that naturally takes advantage of the tidy tool ecosystem.
-<!-- これが感情分析にアプローチする唯一の方法というわけではないが、よく使用されるアプローチであり、整然なツールエコシステムの利点を自然に活用するアプローチといえる。 -->
 - The `tidytext` package contains several sentiment lexicons in the sentiments dataset.
-<!-- tidytextパッケージには，sentimentsデータセットにいくつかの感情辞書が含まれている。 -->
+
+
+:::{.notes}
+テキストの感情を分析する一つの方法は、テキストを個々の単語の組み合わせとして考え、全体のテキストの感情内容を個々の単語の感情内容の合計として考えることである。
+これが感情分析にアプローチする唯一の方法というわけではないが、よく使用されるアプローチであり、整然なツールエコシステムの利点を自然に活用するアプローチといえる。
+tidytextパッケージには，sentimentsデータセットにいくつかの感情辞書が含まれている。
+:::
 
 ## Sentiment
 
 For example, consider the following code chunk.
 <!-- たとえば，次のコードチャンクを考えてみよう。 -->
-
 
 ```{r}
 sentiments
@@ -161,16 +300,16 @@ The three general-purpose lexicons are
 - All three were constructed via either crowdsourcing (using, for example, Amazon Mechanical Turk) or by the labor of one of the authors, and were validated using some combination of crowdsourcing again, restaurant or movie reviews, or Twitter data.
 <!-- これら3つはいずれも、クラウドソーシング（例えば、Amazon Mechanical Turkの使用）または著者の一人の労働によって構築され、クラウドソーシングを再び使用したり、レストランや映画のレビュー、またはTwitterのデータを使用して検証された。 -->
 
----
+## lexicon
 
-- The `nrc` lexicon categorizes words in a binary fashion (“yes”/“no”) into categories of positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise, and trust.
+- The `nrc` lexicon categorizes words in a **binary fashion** (“yes”/“no”) into categories of <mark class="mark">positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise, and trust</mark>.
 <!-- nrc語彙集は、ポジティブ、ネガティブ、怒り、期待、嫌悪、恐怖、喜び、悲しみ、驚き、信頼のカテゴリーに「はい」/「いいえ」の二項方式で単語を分類している。 -->
-- The `bing` lexicon categorizes words in a binary fashion into positive and negative categories.
+- The `bing` lexicon categorizes words in a **binary fashion** into positive and negative categories.
 <!-- bing語彙集は、ポジティブとネガティブのカテゴリーに単語を二項方式で分類している。 -->
 - The `AFINN` lexicon assigns words with a score that runs between $−5$ and $5$, with negative scores indicating negative sentiment and positive scores indicating positive sentiment.
 <!-- AFINN語彙集は、−5から5までのスコアを単語に割り当て、ネガティブなスコアはネガティブな感情を、ポジティブなスコアはポジティブな感情を示している。 -->
 
----
+## `afinn` dictionary
 
 All of this information is tabulated in the sentiments dataset, and `tidytext` provides a function `get_sentiments()` to get specific sentiment lexicons without the columns that are not used in that lexicon.
 <!-- このすべての情報は感情データセットに表形式でまとめられており、tidytextは特定の感情語彙集を、その語彙集で使用されていない列なしで取得するための関数`get_sentiments()`を提供している。 -->
@@ -179,60 +318,71 @@ All of this information is tabulated in the sentiments dataset, and `tidytext` p
 get_sentiments("afinn") # afinn辞書
 ```
 
----
+## `bing` dictionary
 
 ```{r}
 get_sentiments("bing")  # bing辞書
 ```
 
----
+## `nrc` dictionary
 
 ```{r}
 get_sentiments("nrc")   # nrc辞書
 ```
 
----
+## Sentiment lexison
 
 - There are also some domain-specific sentiment lexicons available, constructed to be used with text from a specific content area - e.g., for accounting and finance.
-<!-- 特定の分野、例えば会計やファイナンスの教科書を使用するために構築された、ドメイン固有の感情語彙集もある。 -->
 - Dictionary-based methods like the ones we are discussing find the total sentiment of a piece of text by adding up the individual sentiment scores for each word in the text.
-<!-- 本書で説明しているような辞書ベースの方法により、テキスト内の各単語の個別の感情スコアを合計することでテキストの総合的な感情が分かる。 -->
 - Not every English word is in the lexicons because many English words are pretty neutral.
-<!-- 多くの英単語がかなり中立的なため、すべての英単語が語彙集に含まれているわけではない。 -->
+
+:::{.notes}
+特定の分野、例えば会計やファイナンスの教科書を使用するために構築された、ドメイン固有の感情語彙集もある。
+本書で説明しているような辞書ベースの方法により、テキスト内の各単語の個別の感情スコアを合計することでテキストの総合的な感情が分かる。
+多くの英単語がかなり中立的なため、すべての英単語が語彙集に含まれているわけではない。
+:::
+
 
 ---
 
 
 - It is important to keep in mind that these methods do not take into account qualifiers before a word, such as in “no good” or “not true”; a lexicon-based method like this is based on unigrams only.
-<!-- これらの方法は、「no good」や「not true」といった単語の前にある修飾語を考慮に入れないことを念頭に置くことが重要である。 -->
-<!-- このような語彙集ベースの方法はユニグラム(unigram)のみに基づいている。 -->
 - One last caveat is that the size of the chunk of text that we use to add up unigram sentiment scores can have an effect on results.
-<!-- 最後の注意点として、ユニグラムの感情スコアを合計するために使用するテキストのチャンクのサイズが結果に影響を与える可能性がある。 -->
 - A text the size of many paragraphs can often have positive and negative sentiment averaged out to about zero, while sentence-sized or paragraph-sized text often works better.
-<!-- 多くのパラグラフのサイズは、しばしばポジティブとネガティブの感情が平均してゼロになることがありますが、文サイズや段落サイズのテキストの方がうまく機能することがよくあります。 -->
 
----
 
-- With data in a tidy format, sentiment analysis can be done as an inner join.
-<!-- データが整然データ形式であれば、感情分析は内部結合として実行できる。 -->
-- This is another of the great successes of viewing text mining as a tidy data analysis task; much as removing stop words is an antijoin operation, performing sentiment analysis is an inner join operation.
-<!-- これは、テキストマイニングを整然データ分析としてみなすことができる、というの大きな成功の一つである。 -->
-<!-- ストップワードの削除がアンチジョイン操作であるように、感情分析の実行は内部結合操作である。 -->
+:::{.notes}
+これらの方法は、「no good」や「not true」といった単語の前にある修飾語を考慮に入れないことを念頭に置くことが重要である。
+このような語彙集ベースの方法はユニグラム(unigram)のみに基づいている。
+最後の注意点として、ユニグラムの感情スコアを合計するために使用するテキストのチャンクのサイズが結果に影響を与える可能性がある。
+多くのパラグラフのサイズは、しばしばポジティブとネガティブの感情が平均してゼロになることがありますが、文サイズや段落サイズのテキストの方がうまく機能することがよくあります。
+:::
+
+
+## Text mining
+
+- With data in a tidy format, **sentiment analysis** can be done as an inner join.
+- This is another of the great successes of viewing text mining as a tidy data analysis task; much as removing **stop words** is an antijoin operation, performing sentiment analysis is an <mark class="mark">inner join operation</mark>.
 - Let us look at the words with a joy score from the NRC lexicon.
-<!-- NRC辞書からjoyスコアを持つ単語を見てみよう。 -->
 - For this example, we capture an HTML formatted General Motors’ 10-K report for 2017 from SEC’s ECGAR database, demonstrating that HTML documents may be used in the workpapers, as well as those in XBRL format.
-<!-- この例では、SECのECGARデータベースから2017年のHTMLフォーマットのGeneral Motorsの10-Kレポートをキャプチャし、XBRLフォーマットのものと同様にHTMLドキュメントが法律文書で使用される可能性があることを示している。 -->
+
+
+:::{.notes}
+データが整然データ形式であれば、感情分析は内部結合として実行できる。
+これは、テキストマイニングを整然データ分析としてみなすことができる、というの大きな成功の一つである。
+ストップワードの削除がアンチジョイン操作であるように、感情分析の実行は内部結合操作である。
+NRC辞書からjoyスコアを持つ単語を見てみよう。
+この例では、SECのECGARデータベースから2017年のHTMLフォーマットのGeneral Motorsの10-Kレポートをキャプチャし、XBRLフォーマットのものと同様にHTMLドキュメントが法律文書で使用される可能性があることを示している。
+:::
 
 ## Word Cloud of Sentiment
 
 ```{r wordcloud1}
 #| cache: true
 #| output-location: slide
-# url = "https://www.sec.gov/Archives/edgar/data/1467858/000146785818000022/gm201710k.htm"
 txt <- read_html("XBRL/gm201710k.htm", encoding = "UTF-8") |> html_text()
 text_stuff <- txt |>
-  tokenize_words() |>
-  unlist() |> as_tibble()
+  tokenize_words() |> unlist() |> as_tibble()
 colnames(text_stuff) <- "word"
 stuff_sentiment <- text_stuff |>
   inner_join(get_sentiments("bing"), by = "word")
@@ -243,6 +393,23 @@ text_stuff |>
   count(word) |>
   with(wordcloud(word, colors = rainbow(3), rot.per = 0.15, n, max.words = 1000))
 ```
+
+<!--
+txt <- read_html("XBRL/gm201710k.htm", encoding = "UTF-8") |> html_text()
+text_stuff <- txt |>
+  tokenize_words() |> unlist() |> as_tibble()
+colnames(text_stuff) <- "word"
+stuff_sentiment <- text_stuff |>
+  inner_join(get_sentiments("bing"), by = "word")
+
+text_stuff |>
+  anti_join(get_stopwords()) |>
+  inner_join(stuff_sentiment) |>
+  count(word) |>
+  with(wordcloud(word, colors = rainbow(3), rot.per = 0.15, n, max.words = 1000))
+
+
+ -->
 
 ## Sentiment Analysis with Tidy Data
 
@@ -456,9 +623,9 @@ glimpse(djt)
 
 ---
 
-- Start by going to https://developer.feedly.com/ and then page to https://feedly.com/v3/auth/dev to sign in, get a user ID and then follow steps to get your access token.
+- Start by going to [https://developer.feedly.com/](https://developer.feedly.com/) and then page to [https://feedly.com/v3/auth/dev](https://feedly.com/v3/auth/dev) to sign in, get a user ID and then follow steps to get your access token.
 <!-- まず、https://developer.feedly.com/にアクセスし、https://feedly.com/v3/auth/devに移動してサインインし、ユーザーIDを取得し、手順にしたがってアクセストークンを取得する。 -->
-- This requires either a “Pro” account or a regular account and you manually requesting OAuth codes.
+- This requires either a "Pro" account or a regular account and you manually requesting OAuth codes.
 <!-- これには「Pro」アカウントまたは通常のアカウントが必要であり、OAuthコードを手動でリクエストする必要がある。 -->
 - Store it in your `~/.Renviron` in `FEEDLY_ACCESS_TOKEN`.
 <!-- これを`~/.Renviron`に`FEEDLY_ACCESS_TOKEN`として保存する。 -->
@@ -592,18 +759,21 @@ df <- do.call("rbind", df)
 
 ---
 
-- Feedly is a news aggregator application for various web browsers and mobile devices running “iOS” and “Android,” also available as a cloud-based service.
-<!-- Feedlyは、さまざまなWebブラウザや「iOS」、「Android」を実行するモバイルデバイス向けのニュースアグリゲータアプリケーションであり、クラウドベースのサービスとしても利用できる。 -->
+- Feedly is a news aggregator application for various web browsers and mobile devices running "iOS" and "Android", also available as a cloud-based service.
 - It compiles news feeds from a variety of online sources for the user to customize and share with others.
-<!-- さまざまなオンライン・ソースからのニュース・フィードを編集し、ユーザーがカスタマイズして他のユーザーと共有できる。 -->
-- Methods are provided to retrieve information about and contents of “Feedly” collections and streams.
-<!-- 「Feedly」コレクションやストリームに関する情報やコンテンツを取得するためのメソッドが提供されている。 -->
+- Methods are provided to retrieve information about and contents of "Feedly" collections and streams.
+
+:::{.notes}
+Feedlyは、さまざまなWebブラウザや「iOS」、「Android」を実行するモバイルデバイス向けのニュースアグリゲータアプリケーションであり、クラウドベースのサービスとしても利用できる。
+さまざまなオンライン・ソースからのニュース・フィードを編集し、ユーザーがカスタマイズして他のユーザーと共有できる。
+「Feedly」コレクションやストリームに関する情報やコンテンツを取得するためのメソッドが提供されている。
+:::
 
 ---
 
-- Neither feedly_search() nor feedly_stream() require authentication (i.e., you do not need a developer token) to retrieve the contents of the API call.
+- Neither `feedly_search()` nor `feedly_stream()` require authentication (i.e., you do not need a developer token) to retrieve the contents of the API call.
 <!-- `feedly_search()`も`feedly_stream()`も、APIコールの内容を取得するのに認証は不要である (つまり、開発者トークンは不要)。 -->
-- For feedly_stream(), you do need to know the Feedly-structured feed id which is (generally) feed/FEED_URL (e.g., feed/http://feeds.feedburner.com/RBloggers).
+- For `feedly_stream()`, you do need to know the Feedly-structured feed id which is (generally) feed/FEED_URL (e.g., feed / http://feeds.feedburner.com/RBloggers).
 <!-- `feedly_stream()`については、Feedlyで構造化されたfeed IDが必要であり，(一般的に) feed/FEED_URL (例: feed/http://feeds.feedburner.com/RBloggers) となっている。 -->
 - I have generally found Feedly to be more useful than Google News for business intelligence scanning, because it is less hampered by throttling, and the curation extends to industry specific feeds (rather than Google’s algorithmic guess about the topic).
 <!-- ビジネス・インテリジェンスのスキャンには、Google NewsよりもFeedlyの方が便利である。というのもFeedlyはスロットリングに邪魔されることが少なく、キュレーションが（トピックに関するGoogleのアルゴリズムによる推測ではなく）産業固有のフィードにまで及ぶからである。- スロットリング（throttling）とは、システムの過負荷や特定利用者による資源の独占を回避するため、一定の制限値を超えた場合に意図的に性能を低下させたり、要求を一時的に拒否したりする制御のこと。- -->
@@ -611,7 +781,7 @@ df <- do.call("rbind", df)
 ---
 
 - In the following example, consider a “stream” to be all the historical items in a feed.
-- Maximum “page size” (max number of items returned in a single call) is 1000.
+- Maximum "page size" (max number of items returned in a single call) is 1000.
 <!-- 最大「ページサイズ」（1回の呼び出しで返されるアイテムの最大数）は1000である。 -->
 - For simplicity, there is a blanket assumption that if continuation is actually present, we can ask for a large number of items (e.g., 10,000).
 <!-- 単純化のために，継続が実際に存在する場合，多くのアイテム（例えば，10000個）を要求することができるというblanket assumptionがある。？？ -->
@@ -625,7 +795,9 @@ read.csv(system.file("extdata",
     kable() |> kable_styling(font_size = 12)
 ```
 
----
+
+
+## Example: feedly
 
 <!--
 # Find writeups for seymour functions at https://github.com/hrbrmstr/seymour/tree/master/man
@@ -640,6 +812,7 @@ read.csv(system.file("extdata",
 ## the following should retreive your Feedly access token, but if not,
 ## you can log into the site and request the token.
  -->
+
 
 ```{r}
 #| eval: false
@@ -697,12 +870,12 @@ glimpse(streams[[1]]$items)
 
 ---
 
-<!-- API datastreams from social networks, blogs, and other Internet resources tend to be best for qualitative intelligence scanning. -->
-APIデータストリームは、ソーシャルネットワーク、ブログ、その他のインターネットリソースからのデータは、質的な情報スキャンに最適である。
-<!-- They can alert the auditor to information that would not appear in financial news or in the accounting statements and transactions.  -->
-APIデータストリームは、財務ニュースや会計報告書、取引には現れない情報を監査人に知らせることができる。
-<!-- Such information is an essential part of the analytical review process, but until the advent of Internet accessible resources and automated tools provided by R, has not been accessible to auditors in a cost-effective way. -->
-このような情報は、分析的検討(analytical review process)において不可欠なものだが、インターネットからアクセス可能なリソースやRが提供する自動化ツールが登場するまでは、監査人が費用対効果の高い方法で情報にアクセスすることはできなかった。
+- API datastreams from social networks, blogs, and other Internet resources tend to be best for qualitative intelligence scanning.
+<!-- APIデータストリームは、ソーシャルネットワーク、ブログ、その他のインターネットリソースからのデータは、質的な情報スキャンに最適である。 -->
+- They can alert the auditor to information that would not appear in financial news or in the accounting statements and transactions.
+<!-- APIデータストリームは、財務ニュースや会計報告書、取引には現れない情報を監査人に知らせることができる。 -->
+- Such information is an essential part of the analytical review process, but until the advent of Internet accessible resources and automated tools provided by _R_, has not been accessible to auditors in a cost-effective way.
+<!-- このような情報は、分析的検討(analytical review process)において不可欠なものだが、インターネットからアクセス可能なリソースやRが提供する自動化ツールが登場するまでは、監査人が費用対効果の高い方法で情報にアクセスすることはできなかった。 -->
 
 
 
@@ -766,65 +939,64 @@ The html_nodes() function turns each HTML tag into a row in an R dataframe.
 
 ## SelectorGadget
 
-`SelectorGadget` is a javascript bookmarklet that allows you to interactively figure out what css selector you need to extract desired components from a page.
+- `SelectorGadget` is a javascript bookmarklet that allows you to interactively figure out what css selector you need to extract desired components from a page.
 <!-- SelectorGadgetは、あなたがページから望むコンポーネントを抽出するために必要なcssセレクタを対話的に見つけることができるjavascriptブックマークレットである。 -->
 <!-- To install it, go to the page: https://cran.r-project.org/web/packages/rvest/vignettes/selectorgadget.html -->
 <!-- SelectorGadgetをインストールするには，次のウェブサイトにアクセスする。 -->
 <!-- [https://cran.r-project.org/web/packages/rvest/vignettes/selectorgadget.html](https://cran.r-project.org/web/packages/rvest/vignettes/selectorgadget.html) -->
 
 
-Install selectorgadget on the Chrome Browser (only at the time of this writing) from https://selectorgadget.com/.
+- Install `selectorgadget` on the Chrome Browser (only at the time of this writing) from `https://selectorgadget.com/`.
 <!-- Chromeブラウザにselectorgadgetをインストールするには，（この執筆時点では）[https://selectorgadget.com/](https://selectorgadget.com/)からインストールする。 -->
-SelectorGadget is an open-source tool that simplifies CSS selector generation and discovery on complicated sites.
+`SelectorGadget` is an open-source tool that simplifies CSS selector generation and discovery on complicated sites.
 <!-- SelectorGadgetは、複雑なサイトでのCSSセレクタの生成と発見を簡素化するオープンソースのツールである。 -->
 
----
 
+## How to use SelectorGadget
 
-Install the Chrome Extension or drag the bookmarklet to your bookmark bar, then go to any page and launch it.
-A box will open in the bottom right of the website.
+- Install the Chrome Extension or drag the bookmarklet to your bookmark bar, then go to any page and launch it.
+- A box will open in the bottom right of the website.
 <!-- Chrome拡張機能をインストールするか、ブックマークレットをブックマークバーにドラッグして、任意のページに移動してSelectorGadgetを起動させと，ウェブサイトの右下にボックスが開く。 -->
-
-Click on a page element that you would like your selector to match (it will turn green).
+- Click on a page element that you would like your selector to match (it will turn green).
 <!-- あるページの要素をクリックすると、その要素と一致するセレクタが生成される（緑色になる）。 -->
 
-SelectorGadget will then generate a minimal CSS selector for that element, and will highlight (yellow) everything that is matched by the selector.
+- `SelectorGadget` will then generate a minimal CSS selector for that element, and will highlight (yellow) everything that is matched by the selector.
 <!-- SelectorGadgetは、その要素に対する最小のCSSセレクタを生成し、そのセレクタに一致するすべてのものを黄色くハイライトする。 -->
-Now click on a highlighted element to remove it from the selector (red), or click on an unhighlighted element to add it to the selector.
+- Now click on a highlighted element to remove it from the selector (red), or click on an unhighlighted element to add it to the selector.
 <!-- 次に、セレクタからハイライトされた要素を削除するためにクリックする（赤色になる）か、ハイライトされていない要素をクリックしてセレクタに追加する。 -->
-Through this process of selection and rejection, SelectorGadget helps you come up with the perfect CSS selector for your needs.
+<!-- - Through this process of selection and rejection, SelectorGadget helps you come up with the perfect CSS selector for your needs. -->
 <!-- この選択と拒否のプロセスを通じて、SelectorGadgetはあなたのニーズに合った完璧なCSSセレクタを見つけることに役立つ。 -->
 
----
+## How to use SelectorGadget 2
 
 To use it, open the page:
 <!-- ウェブサイトを開いて使ってみよう。 -->
 
 1. Click on the element you want to select.
 <!-- 1. 選択したい要素をクリックする。 -->
-Selectorgadget will make a first guess at what css selector you want.
+`Selectorgadget` will make a first guess at what css selector you want.
 <!-- Selectorgadgetは、あなたが望むcssセレクタを最初に推測する。 -->
 It is likely to be bad since it only has one example to learn from, but it is a start.
 <!-- それは1つの例しか学習していないのでおそらく悪いものになるが、最初だけである。 -->
 Elements that match the selector will be highlighted in yellow.
 <!-- セレクタに一致する要素は黄色でハイライトされる。 -->
-2. Click on elements that should not be selected.
+1. Click on elements that should not be selected.
 They will turn red.
 <!-- 3. 選択されてはいけない要素をクリックすると赤くなる。 -->
 Click on elements that should be selected.
 They will turn green.
 <!-- 選択されるべき要素をクリックすると，緑色になる。 -->
-3. Iterate until only the elements you want are selected.
+1. Iterate until only the elements you want are selected.
 <!-- 3. 望む要素だけが選択されるまで繰り返す。 -->
 Selectorgadget is not perfect and sometimes will not be able to find a useful css selector.
 Sometimes starting from a different element helps.
 <!-- Selectorgadgetは完璧ではなく、時々有用なcssセレクタを見つけることができないことがあるが，ときおり異なる要素から始めることが役立つことがある。 -->
 
 
-## Other important functions:
+## How to use SelectorGadget 3
 <!-- ## 他の重要な関数 -->
 
-1. If you prefer, you can use xpath selectors instead of css: html_nodes(doc, xpath = "//table//td")).
+1. If you prefer, you can use xpath selectors instead of `css: html_nodes(doc, xpath = "//table//td")`.
 <!-- 1. 望むなら、cssの代わりにxpathセレクタを使うこともできる: `html_nodes(doc, xpath = "//table//td"))`. -->
 2. Extract the tag names with `html_tag()`, text with `html_text()`, a single attribute with `html_attr()` or all attributes with `html_attrs()`.
 <!-- 1. `html_tag()`でタグ名を、`html_text()`でテキストを、`html_attr()`で単一の属性を、`html_attrs()`で全ての属性を抽出する。 -->
@@ -839,41 +1011,45 @@ Extract, modify, and submit forms with `html_form()`, `set_values()`, and `submi
 
 - Here is an example of a simple sentiment analysis for customers’ comments on restaurants in Hanoi Vietnam.
 <!-- 以下は、ベトナムのハノイのレストランに関する顧客のコメントに対するシンプルな感情分析の例である。 -->
-- Start by pointing your browser to https://www.tripadvisor.com and searching for “Asian” cuisine in “Hanoi” (as homework, consider other cities or services based on specific audit needs).
+- Start by pointing your browser to https://www.tripadvisor.com and searching for “Asian” cuisine in “Hanoi”.
+<!-- - (as homework, consider other cities or services based on specific audit needs). -->
 <!-- まず、ウェブブラウザで[https://www.tripadvisor.com](https://www.tripadvisor.com)を訪れ、"Hanoi"の"Asian"料理を検索する（宿題として、特定の監査ニーズ(audit needs)に基づいて他の都市やサービスを考えてみよう）。 -->
-- Click on the “Asian” menu, which brings you to web page https://www.tripadvisor.com/Restaurants-g293924-Hanoi.html.
+- Click on the “Asian” menu, which brings you to web page.
+<!-- https://www.tripadvisor.com/Restaurants-g293924-Hanoi.html. -->
 <!-- "Asian"メニューをクリックすると、[https://www.tripadvisor.com/Restaurants-g293924-Hanoi.html](https://www.tripadvisor.com/Restaurants-g293924-Hanoi.html)というウェブページに移動する。 -->
-- Turn on selectorgadget in Chrome browser and highlight all of the reviews.
+- Turn on `selectorgadget` in Chrome browser and highlight all of the reviews.
 <!-- Chromeブラウザでselectorgadgetをオンにして、すべてのレビューをハイライトしよう。 -->
-- In the menu at the bottom of your screen, this will give you an index ".is-9" which is the designator for the CSS code that you have outlined (you can verify this in Chrome by clicking the three dot menu at the upper right-hand corner of the screen, clicking “More Tools” = “Developer Tools” and checking the webpage HTML; or right-click and inspect for a quick look)
+
+## selectorgadget
+
+- In the menu at the bottom of your screen, this will give you an index ".is-9" which is the designator for the CSS code that you have outlined (you can verify this in Chrome by clicking the three dot menu at the upper right-hand corner of the screen,
+- clicking “More Tools” = “Developer Tools” and
+- checking the webpage HTML; or right-click and inspect for a quick look)
 <!-- 画面下部のメニューに".is-9 "というインデックスが表示される。 -->
 <!-- これは、アウトライン化したCSSコードを示している（Chromeでは、画面右上の3つのドットメニューをクリックし、"その他のツール"="デベロッパーツール "をクリックし、ウェブペ
 ージのHTMLを確認することで確認できる。） -->
 
 
----
+## Example: Trip Advisor Reviews
 
 ```{r}
 #| cache: true
-#| code-fold: true
-library(RColorBrewer)
-url <- "HTML/hanoi.html"
-## Extract the reviews in the CSS selector
-reviews <- url |>
-    read_html() |>
-    html_nodes("._T")
+#| output-location: slide
+url <- "HTML/hanoi.html" # htmlファイルの場所
+reviews <- url |> read_html() |> # rvest
+    html_nodes("._T") # selectorgadget
 ## Pull the text out of the reviews
 quote <- reviews |>  html_text()
 ## Turn the character string "quote" into a data.frame and View
-data.frame(quote, stringsAsFactors = FALSE) %>% View()
+## data.frame(quote, stringsAsFactors = FALSE) |> View() # 中身チェック
 pal2 <- brewer.pal(8,"Dark2") ## from RColorBrewer
-wordcloud(quote, colors=pal2)
+wordcloud(quote, colors = pal2)
 ```
 
-<!-- In TripAdvisor, you can use the same methods, in various geographical regions, for: Hotels, Things to do, Restaurants, Flights, Vacation Rentals,Cruises and other things. -->
-TripAdvisorでは、ホテル、アクティビティ、レストラン、フライト、バケーションレンタル、クルーズなど、さまざまな地理的地域で同じ方法を使用できる。
-<!-- Similar methods work for other review and aggregation sites. -->
-他のレビューや集計サイトでも同様の方法が使える。
+- In TripAdvisor, you can use the same methods, in various geographical regions, for: Hotels, Things to do, Restaurants, Flights, Vacation Rentals,Cruises and other things.
+<!-- TripAdvisorでは、ホテル、アクティビティ、レストラン、フライト、バケーションレンタル、クルーズなど、さまざまな地理的地域で同じ方法を使用できる。 -->
+- Similar methods work for other review and aggregation sites.
+<!-- 他のレビューや集計サイトでも同様の方法が使える。 -->
 
 
 
@@ -882,18 +1058,18 @@ TripAdvisorでは、ホテル、アクティビティ、レストラン、フラ
 
 ## Example: Movie Reviews
 
-The next example scrapes information about “The Lego Movie” from IMDB.
+- The next example scrapes information about "The Lego Movie" from IMDB.
 <!-- 次の例は，IMDBから「レゴ・ムービー」に関する情報をスクレイピングする。 -->
-We start by downloading and parsing the file with `html()`.
+- We start by downloading and parsing the file with `html()`.
 <!-- まず、`html()`を使ってファイルをダウンロードして解析する。 -->
-To extract the rating, we start with `Selectorgadget` to figure out which css selector matches the data we want.
+- To extract the rating, we start with `Selectorgadget` to figure out which css selector matches the data we want.
 <!-- 評価を抽出するためには、Selectorgadgetを使って、どのcssセレクタが欲しいデータと一致しているのかを探す。 -->
-We use `html_node()` to find the first node that matches that selector, extract its contents with `html_text()`, and convert it to numeric with `as.numeric()`.
+- We use `html_node()` to find the first node that matches that selector, extract its contents with `html_text()`, and convert it to numeric with `as.numeric()`.
 <!-- `html_node()`関数を用いて、そのセレクタに一致する最初のノードを見つけ、`html_text()`でその内容を抽出し、`as.numeric()`で数値に変換する。 -->
 
 ## Example: Tabular Data
 
-- Some websites publish their data in an easy-to-read table without offering the option to download the data.
+- Some websites publish their data in an **easy-to-read table** without offering the option to download the data.
 <!-- いくつかのウェブサイトは、データをダウンロードするオプションを提供せずに、読みやすい表形式で公開されている。 -->
 - Package `rvest` uses `html_table()` for tabular data.
 <!-- `rvest`パッケージは，表形式のデータに対して`html_table()`を使う。 -->
@@ -958,27 +1134,22 @@ reps[, c(1:2, 4:9)] |> as_tibble() |>
 <!-- `wordcloud`で表示することができる。 -->
 
 
-
 ## Word Cloud of Roland Piano Reviews
-
 
 ```{r pianoworld}
 #| cache: true
 #| code-fold: true
 handle <- handle("http://forum.pianoworld.com//") # handle to the website
 # path to the login page
-path   <- "ubbthreads.php/ubb/login.html?ocu=http%3A%2F%2Fforum.pianoworld.com%2F"
+path <- "ubbthreads.php/ubb/login.html?ocu=http%3A%2F%2Fforum.pianoworld.com%2F"
 
 # fields found in the login form.
 login <- list(
-  amember_login = "westland" # ユーザーネーム
- ,amember_pass  = "powerpcc" # パスワード
- ,amember_redirect_url =
-   "http://forum.pianoworld.com//ubbthreads.php/forum_summary.html"
-)
-
+  amember_login = "westland", # ユーザーネーム
+  amember_pass  = "powerpcc", # パスワード
+  amember_redirect_url = "http://forum.pianoworld.com//ubbthreads.php/forum_summary.html"
+  )
 response <- POST(handle = handle, path = path, body = login)
-
 
 # Copy the URL of the page you are scraping
 url <- "http://forum.pianoworld.com/"
@@ -1000,17 +1171,17 @@ pal2 <- brewer.pal(8,"Dark2") # from RColorBrewer
 wordcloud(unlist(quote), colors=pal2)
 ```
 
-## Final Comments on Analytical Review with R
+## Final Comments
 
 - The previous algorithms and examples should give the reader an overview of some of the tools available to assist with analytical review.
 <!-- 前述のアルゴリズムと例は、読者に分析検討(analytical review)を支援するためのいくつかのツールの概要を提供するはずである。 -->
-- This is, of course, not a complete list of tools, or of opportunities.
+<!-- - This is, of course, not a complete list of tools, or of opportunities. -->
 <!-- もちろん，これは完全なツールのリストでも機会のリストでもない。 -->
-- Much of the code in this chapter draws from dynamic and continually updated databases, streams, and standards.
+- Much of the code in this chapter draws from <mark class="mark">dynamic and continually updated databases, streams, and standards</mark>.
 <!-- この章の多くのコードは、動的で絶えず更新されるデータベースやデータ流(stream)、およびスタンダードから引用されている。 -->
 - New tools and repositories are constantly coming online, particularly in accounting and finance, where the market is large and rich.
 <!-- 特に会計と金融の分野では、市場が大きく豊かであるため、新しいツールやリポジトリが絶えずオンラインで登場している。 -->
-<!-- - New packages are often introduced on GitHub rather than the official Comprehensive R Archive Network (CRAN) repositories, and auditors should always be on the lookout for new offerings. -->
+- New packages are often introduced on **GitHub** rather than the official <mark class="mark">Comprehensive R Archive Network (CRAN)</mark> repositories, and auditors should always be on the lookout for new offerings.
 <!-- 新しいパッケージは、公式のComprehensive R Archive Network (CRAN)リポジトリではなく、GitHubでよく紹介される。 -->
 <!-- 監査人は常に新しいパッケージを探すことが望ましい。 -->
 
@@ -1020,10 +1191,9 @@ wordcloud(unlist(quote), colors=pal2)
 <!-- 本章はスタート地点を提供するが、野心的な監査人には、インターネットリソースを探るための新しい方法論を開発するための多くの機会がある。 -->
 <!-- - This will require a level of patience and curiosity that exceeds merely writing code.  -->
 <!-- これにはコードを書くこと以上の忍耐と好奇心が必要である。 -->
-- As I mentioned in the preface, the R language is not a typical language with a single core of developers and guidelines; rather it is a sharing platform for a wide range of data analytic functions—features which make it useful, dynamic, and sometimes messy.
-<!-- 前書きで述べたように、R言語は、単一の開発者のコアとガイドラインを持つ典型的な言語ではなく、幅広いデータ解析機能を共有するプラットフォームであり、 -->
-<!-- それが有用で，動的で、時には混沌としている特徴を持っている。 -->
-- The effort put into familiarizing oneself with the R ecosystem will pay off many times over in access to the latest, most sophisticated algorithms that exist anywhere in industry.
+- As I mentioned in the preface, the R language is not a typical language with a single core of developers and guidelines; rather it is a <mark class="mark">sharing platform for a wide range of data analytic functions - features which make it useful, dynamic, and sometimes messy</mark>.
+<!-- 前書きで述べたように、R言語は、単一の開発者のコアとガイドラインを持つ典型的な言語ではなく、幅広いデータ解析機能を共有するプラットフォームであり、それが有用で，動的で、時には混沌としている特徴を持っている。 -->
+- The effort put into familiarizing oneself with the R ecosystem will pay off many times over in access to the latest, **most sophisticated algorithms** that exist anywhere in industry.
 <!-- Rエコシステムに精通するための努力は、業界のどこにも存在する最新で最も洗練されたアルゴリズムに何度もアクセスすることで多くの利益をもたらすだろう。 -->
 <!-- - Because of its unique character, you can be assured that R’s packages will always be at the forefront of financial analysis and analytical review, now and in the future. -->
 <!-- その独特な性格のために、Rのパッケージは、今後も将来も常に金融分析と分析検討の最前線にあることを保証される。 -->
