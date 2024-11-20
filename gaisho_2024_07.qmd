@@ -12,6 +12,8 @@ format:
     code-line-numbers: false
     html-math-method: katex
     chalkboard: true
+    touch: true
+    controls: true
     width: 1300
     # height: 900
     footer: "Kobe University, Business Administration"
@@ -65,7 +67,7 @@ pacman::p_load(maps, tm, SnowballC, RColorBrewer, RCurl, stringr, httr, XML)
 - **HTML**(HyperText Markup Language)は、Webページの内容を記述するためのマークアップ言語です。
 - 基本的には、タグという記号を使って、テキストや画像などの要素を囲むことで、その要素の意味を示します。
 
-```{html}
+```
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -84,7 +86,7 @@ pacman::p_load(maps, tm, SnowballC, RColorBrewer, RCurl, stringr, httr, XML)
 - **CSS**(Cascading Style Sheets)は、Webページの見た目を指定するための言語です。
 - HTMLで記述された要素に対して、色や大きさ、位置などのスタイルを指定することができます。
 
-```{css}
+```
 h1 {
   color: blue;
   font-size: 24px;
@@ -107,7 +109,7 @@ h1 {
 - 表の行は`<tr>`タグで、列は`<td>`タグで囲まれます。
 - 表の見出しは`<th>`タグで囲まれます。
 
-```{html}
+```
 <table id="namelist">
   <caption>
     表1: 名前のリスト
@@ -139,8 +141,6 @@ h1 {
 Wikipeidaのページから表を抽出します。
 
 ```{r}
-#| tbl-font-size: "80%"
-pacman::p_load(rvest,tidyverse, knitr, kableExtra)
 url_akb <- "https://ja.wikipedia.org/wiki/AKB48"
 AKB_table <- url_akb |> read_html() |> html_nodes("table") |> html_table(fill = T)
 AKB_table[[9]] |> as_tibble() |>head(10) |>
@@ -169,56 +169,69 @@ url |>html_node(xpath = '//*[@id="namelist"]') |>
 ## Analytical Procedures
 
 - Analytical procedures involve <mark class="mark">the study of plausible relationships between both financial and non-financial data</mark>.
-<!-- 分析的手続は，財務データと非財務データの両方の間に存在する妥当な関係の研究が含まれる。 -->
-- Before the mid-2000s, sources of such information were spotty, unreliable, and scarce, and that, indeed, was considered a prime reason for markets needing annual, audited financial statements.
-<!-- 2000年代中期以前は、このような情報ソースは断片的で、信頼性が低く、乏しかったため、市場が監査済み財務諸表を必要とする主な理由と考えられていた。 -->
-- Today, there are numerous social networks, news, and discussion boards that offer both raw and curated, streaming sources of useful business intelligence.
-<!-- 今日では、有用なビジネスインテリジェンスの生の情報源とキュレーションされたストリーミングソースの両方を提供する多数のソーシャルネットワーク、ニュース、およびディスカッションボードがある。 -->
-- The auditor who does not scan for such client and industry intelligence both increases the cost of auditing, and can be considered negligent in not investigating all available information about the financial health of their client.
-<!-- このようなクライアントおよび業界のインテリジェンスを調べない監査人は、監査コストを増加させ、クライアントの財務健全性に関する利用可能なすべての情報を調査しないという点で、怠慢とみなされるかもしれない。 -->
+- Before the mid-2000s, sources of such information were <mark class="mark">spotty, unreliable, and scarce</mark>, and that, indeed, was considered a prime reason for markets needing **annual, audited financial statements**.
+- Today, there are <mark class="mark">numerous social networks, news, and discussion boards that offer both raw and curated, streaming sources of useful business intelligence</mark>.
+
+
+
+:::{.notes}
+分析的手続は，財務データと非財務データの両方の間に存在する妥当な関係の研究が含まれる。
+2000年代中期以前は、このような情報ソースは断片的で、信頼性が低く、乏しかったため、市場が監査済み財務諸表を必要とする主な理由と考えられていた。
+今日では、有用なビジネスインテリジェンスの生の情報源とキュレーションされたストリーミングソースの両方を提供する多数のソーシャルネットワーク、ニュース、およびディスカッションボードがある。
+:::
 
 ---
 
+- The auditor who does not scan for such client and industry intelligence both increases the cost of auditing, and can be considered **negligent** in not investigating all available information about the financial health of their client.
 - Though this information is available, the raw information itself may need considerable interpretation and processing before an auditor may rely on it for audit work.
 - <mark class="mark">The most useful information for analytical review may be qualitative and textual</mark>, so unsuitable for the sort of mathematical analysis offered in spreadsheet packages and statistical programs.
-- Qualitative data may be most useful when it is used to gauge sentiment of customers, investors, partners, employees, and vendors toward the company.
-- It is only in the past decade that tools have become available to glean such intelligence from Internet streams and databases.
+
+
 
 
 
 :::{.notes}
 このような情報を利用できる一方で，監査作業に頼る前に、生の情報それ自体がかなりの解釈と処理を必要とする場合がある。
 分析的レビュー(analytical review)に最も有用な情報が質的かつ文字である可能性もあるため、スプレッドシートパッケージや統計プログラムで提供される数学的分析には適していない場合がある。
-質的データは，顧客，投資家，パートナー，従業員，およびベンダーが企業に対してどのような感情を抱いているかを測定するために使用されるときに最も有用である。
-この10年間で、インターネットのストリームやデータベースからそのような情報を収集するツールが利用可能となった。
+このようなクライアントおよび業界のインテリジェンスを調べない監査人は、監査コストを増加させ、クライアントの財務健全性に関する利用可能なすべての情報を調査しないという点で、怠慢とみなされるかもしれない。
 :::
 
 
 ---
 
-- This chapter provides a set of tools that will assist the auditor in interpreting and understanding the relevant qualitative data accessed through the Internet.
-- I provide algorithms to map qualitative audit intelligence into consumer, investor, and vendor sentiment.
-- I also suggest useful Internet resources for the audit, and provide algorithms for interpreting the scanned intelligence concerning the audit client, its competitors and the industry.
+- **Qualitative data** may be most useful when it is used to <mark class="mark">gauge sentiment of customers, investors, partners, employees, and vendors toward the company</mark>.
+- It is only in the past decade that tools have become available to glean such intelligence from Internet streams and databases.
+- This chapter provides a set of tools that will assist the auditor in interpreting and understanding <mark class="mark">the relevant qualitative data accessed through the Internet</mark>.
+
 
 :::{.notes}
+質的データは，顧客，投資家，パートナー，従業員，およびベンダーが企業に対してどのような感情を抱いているかを測定するために使用されるときに最も有用である。
+この10年間で、インターネットのストリームやデータベースからそのような情報を収集するツールが利用可能となった。
 この章では、インターネットを通じで入手した関連する質的データを監査人が解釈し、理解するのを支援する一連のツールを提供する。
-本書では、質的監査情報を消費者や投資家、ベンダーの感情(sentiment)に写像するアルゴリズムを提供する。
-また、監査のための有用なインターネットリソースを示唆し、監査クライアント、その競争相手、および業界に関するスキャンされた情報を解釈するためのアルゴリズムを提供する。
+
 :::
 
 
 ## Sentiment Analysis with Tidy Data
 
-- When human readers approach a text, we use our understanding of the emotional intent of words to infer whether a section of text is positive or negative, or perhaps characterized by some other more nuanced emotion like surprise or disgust.
-<!-- 人間の読者がテキストにアプローチするとき、私たちは単語の感情的な意図を理解して、テキストのセクションがポジティブかネガティブか、または驚きや嫌悪など、もっと微妙な感情に特徴づけられているかどうかを推測する。 -->
-- We can use the tools of text mining to approach the emotional content of text programmatically.
-<!-- テキストの感情的な内容をプログラムでアプローチするために、テキストマイニングのツールを使用することができる。 -->
+- I provide **algorithms** to map qualitative audit intelligence into consumer, investor, and vendor sentiment.
+- I also suggest useful Internet resources for the audit, and provide algorithms for interpreting the scanned intelligence concerning the audit client, its competitors and the industry.
+- When human readers approach a text, we use our understanding of <mark class="mark">the emotional intent of words</mark> to infer whether a section of text is positive or negative, or perhaps characterized by some other more nuanced emotion like surprise or disgust.
+- We can use the tools of **text mining** to approach the emotional content of text programmatically.
+
+
+:::{.notes}
+本書では、質的監査情報を消費者や投資家、ベンダーの感情(sentiment)に写像するアルゴリズムを提供する。
+また、監査のための有用なインターネットリソースを示唆し、監査クライアント、その競争相手、および業界に関するスキャンされた情報を解釈するためのアルゴリズムを提供する。
+人間の読者がテキストにアプローチするとき、私たちは単語の感情的な意図を理解して、テキストのセクションがポジティブかネガティブか、または驚きや嫌悪など、もっと微妙な感情に特徴づけられているかどうかを推測する。
+テキストの感情的な内容をプログラムでアプローチするために、テキストマイニングのツールを使用することができる。
+:::
+
 
 ## Tidy Data
 
 - We start by representing text in R’s **tidy** structure:
 <!-- 私たちはRの**整然**(tidy)構造でテキストを表現することから始める： -->
-
 
 - <mark class="mark">Each variable is a column</mark>.
 - <mark class="mark">Each observation is a row</mark>.
@@ -231,11 +244,88 @@ url |>html_node(xpath = '//*[@id="namelist"]') |>
 - 各タイプの観察単位はテーブルである。
  -->
 
+
+## 整然データとは (補足)
+
+
+> “Tidy datasets are all alike, but every messy dataset is messy in its own way.”
+> — Hadley Wickham
+
+
+- R神Hadley Wickham氏は，データの型を理解することを，データ分析の第一歩とし，その一貫として**整然データ**(tidy data)という考え方を提唱しています。
+- 整然データとは，次のようなルールに従って構築されたデータのことです(Wickham, 2014), 参考[https://id.fnshr.info/2017/01/09/tidy-data-intro/](https://id.fnshr.info/2017/01/09/tidy-data-intro/)。
+
+
+<!--
+1. Each variable is a column; each column is a variable.
+2. Each observation is a row; each row is an observation.
+3. Each value is a cell; each cell is a single value.
+ -->
+
+## 整然データのルール
+
+:::{.callout-important}
+1. 各観測値(observation)は行(row)であり、各行は1つの観測値である。
+2. 各変数(variable)は列(column)であり、各列は1つの変数である。
+3. 各値(value)はセル(cell)であり、1セルは1つの値である。
+:::
+
+
+:::{layout-ncol=3}
+![1.観測値](img/observation.png)
+
+![2.変数](img/variables.png)
+
+![3.値](img/values.png)
+:::
+
+## 整然データの特徴と操作
+
+整然データのルールを満たすデータは，データの整理や可視化が容易になります。
+そして整然データを扱うために非常に強力なツールを提供してくれるのが，`tidyverse`パッケージ群です。
+以下では，`tidyverse`パッケージ群の中でも，データの整理に特化した`tidyr`パッケージを使って，整然データを作成する方法を学びます。
+
+```{r}
+library(tidyr)
+```
+
+## long形式とwide形式
+
+人間には読みやすいけれどパソコンは読みにくい，というデータの形式があります。例えば下の表を見てみましょう。
+
+| 地点    |   2022    |   2023   |
+|:------:|:--------:|:--------:|
+| トヨタ自動車 | 31379507  | 37154298  |
+| 日産自動車 | 8424585  |  10596695  |
+| 本田技研工業 |  14552696  | 16907725  |
+: 自動車会社3社の売上高
+
+このような形のデータをワイド形式(wide)といいます。
+この表は，人間にとっては分かりやすいですが，実はコンピュータにとっては，分かりにくいものです。
+またこのデータは、列が変数になっていないので整然データではありません。
+
+## Readalbe data
+
+ロング型の表はこう。
+
+| 企業名     |  年度 |  売上高     |
+|:---------:|:----:|:-----------:|
+| トヨタ自動車 | 2022  | 31379507    |
+| トヨタ自動車 | 2023  | 37154298    |
+| 日産自動車   | 2022  | 8424585    |
+| 日産自動車   | 2023  | 10596695    |
+| 本田技研工業 | 2022  | 14552696    |
+| 本田技研工業 | 2023  | 16907725    |
+: 自動車会社のロング型の表
+
+このような形式のデータをロング型(long)といいます。
+
+
 ---
 
-- We thus define the tidy text format as being a table with one-token-per-row.
-- A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.
-- This one-token-per-row structure is in contrast to the ways text is often stored in current analyses, perhaps as strings or in a document-term matrix.
+- We thus define the tidy text format as being a table with **one-token-per-row**.
+- <mark class="mark">A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens</mark>.
+- This one-token-per-row structure is in contrast to the ways text is often stored in current analyses, perhaps as strings or in a **document-term matrix**.
 
 
 :::{.notes}
@@ -261,7 +351,7 @@ Rのtidytextパッケージは、これらのような一般的に使用され�
 
 - One way to analyze the sentiment of a text is to consider <mark class="mark">the text as a combination of its individual words and the sentiment content of the whole text as the sum of the sentiment content of the individual words</mark>.
 - This is not the only way to approach sentiment analysis, but it is an often-used approach, and an approach that naturally takes advantage of the tidy tool ecosystem.
-- The `tidytext` package contains several sentiment lexicons in the sentiments dataset.
+- The `tidytext` package contains several **sentiment lexicons** in the `sentiments` dataset.
 
 
 :::{.notes}
@@ -281,7 +371,7 @@ sentiments
 
 ## Sentiment Dictionary
 
-The three general-purpose lexicons are
+The three general-purpose lexicons (辞典) are
 <!-- 3つの汎用辞書は次のとおりです。 -->
 
 - `bing` from Bing Liu and collaborators at University of Illinois—Chicago,
@@ -293,12 +383,15 @@ The three general-purpose lexicons are
 
 ---
 
-- All three of these lexicons are based on unigrams, i.e., single words.
-<!-- これら3つの辞書はすべて、つまりユニグラム(つまり，単一の単語)で構成されている。 -->
+- All three of these lexicons are based on **unigrams**, i.e., single words.
 - These lexicons contain many English words and <mark class = "mark">the words are assigned scores for positive/negative sentiment</mark>, and also possibly emotions like joy, anger, sadness, and so forth.
-<!-- これらの辞書には多くの英単語が含まれており、その単語にはポジティブ／ネガティブな感情のスコアが割り当てられ、また喜び、怒り、悲しみなどの感情も可能性として含まれている。 -->
 - All three were constructed via either crowdsourcing (using, for example, Amazon Mechanical Turk) or by the labor of one of the authors, and were validated using some combination of crowdsourcing again, restaurant or movie reviews, or Twitter data.
-<!-- これら3つはいずれも、クラウドソーシング（例えば、Amazon Mechanical Turkの使用）または著者の一人の労働によって構築され、クラウドソーシングを再び使用したり、レストランや映画のレビュー、またはTwitterのデータを使用して検証された。 -->
+
+:::{.notes}
+これら3つの辞書はすべて、つまりユニグラム(つまり，単一の単語)で構成されている。
+これらの辞書には多くの英単語が含まれており、その単語にはポジティブ／ネガティブな感情のスコアが割り当てられ、また喜び、怒り、悲しみなどの感情も可能性として含まれている。
+これら3つはいずれも、クラウドソーシング（例えば、Amazon Mechanical Turkの使用）または著者の一人の労働によって構築され、クラウドソーシングを再び使用したり、レストランや映画のレビュー、またはTwitterのデータを使用して検証された。
+:::
 
 ## lexicon
 
@@ -306,7 +399,7 @@ The three general-purpose lexicons are
 <!-- nrc語彙集は、ポジティブ、ネガティブ、怒り、期待、嫌悪、恐怖、喜び、悲しみ、驚き、信頼のカテゴリーに「はい」/「いいえ」の二項方式で単語を分類している。 -->
 - The `bing` lexicon categorizes words in a **binary fashion** into positive and negative categories.
 <!-- bing語彙集は、ポジティブとネガティブのカテゴリーに単語を二項方式で分類している。 -->
-- The `AFINN` lexicon assigns words with a score that runs between $−5$ and $5$, with negative scores indicating negative sentiment and positive scores indicating positive sentiment.
+- The `AFINN` lexicon assigns words with a **score** that runs between $−5$ and $5$, with negative scores indicating negative sentiment and positive scores indicating positive sentiment.
 <!-- AFINN語彙集は、−5から5までのスコアを単語に割り当て、ネガティブなスコアはネガティブな感情を、ポジティブなスコアはポジティブな感情を示している。 -->
 
 ## `afinn` dictionary
@@ -332,7 +425,7 @@ get_sentiments("nrc")   # nrc辞書
 
 ## Sentiment lexison
 
-- There are also some domain-specific sentiment lexicons available, constructed to be used with text from a specific content area - e.g., for accounting and finance.
+- There are also some <mark class="mark">domain-specific sentiment lexicons</mark> available, constructed to be used with text from a specific content area - e.g., for accounting and finance.
 - Dictionary-based methods like the ones we are discussing find the total sentiment of a piece of text by adding up the individual sentiment scores for each word in the text.
 - Not every English word is in the lexicons because many English words are pretty neutral.
 
@@ -342,6 +435,13 @@ get_sentiments("nrc")   # nrc辞書
 多くの英単語がかなり中立的なため、すべての英単語が語彙集に含まれているわけではない。
 :::
 
+## 会計専門極性辞書
+
+神奈川大学の平井先生らが作成した会計専門極性辞書
+
+[会計専門極性辞書](https://mac-ie-kanagawa-u.studio.site/Dictionary)
+
+- 平井裕久・小村亜唯子・川邊貴彬（2024）「トーン分析における会計専門極性辞書の利用可能性」『産業徑理』Vol.83, No.4, pp.41-50.
 
 ---
 
@@ -579,12 +679,22 @@ rt <- search_tweets(
 Query used to select and customize streaming collection method.
 There are four possible methods.
 
-1. The default, q = "", returns a small random sample of all publicly available Twitter statuses.
+1. The default, `q = ""`, returns a small random sample of all publicly available Twitter statuses.
 2. To filter by keyword, provide a comma separated character string with the desired phrase(s) and keyword(s).
 3. Track users by providing a comma separated list of user IDs or screen names.
 4. Use four latitude/longitude bounding box points to stream by geo location.
 
-This must be provided via a vector of length 4, e.g., `c(-125, 26, -65, 49)`.
+<!-- This must be provided via a vector of length 4, e.g., `c(-125, 26, -65, 49)`. -->
+
+:::{.notes}
+ストリーミング収集方法を選択してカスタマイズするために使用されるクエリ。
+4つの可能な方法がある。
+1 デフォルトの`q = ""`は、すべての公開可能なTwitterステータスの小さなランダムサンプルを返す。
+2 キーワードでフィルタリングするには、希望のフレーズとキーワードを含むカンマ区切りの文字列を提供する。
+3 ユーザIDまたはスクリーン名のカンマ区切りリストを提供することで、ユーザをトラックする。
+4 緯度/経度の境界ボックスの4つのポイントを使用して、ジオロケーションでストリーミングする。
+:::
+
 
 ---
 
@@ -638,7 +748,7 @@ glimpse(djt)
 
 ```{r}
 #| eval: false
-pkgenv <- new.env(parent=emptyenv()) # 新しい環境を作成
+pkgenv <- new.env(parent = emptyenv()) # 新しい環境を作成
 pkgenv$token <- Sys.getenv("FEEDLY_ACCESS_TOKEN") # 環境変数からトークンを取得
 #’ In reality, this is more complex since the non-toy example has to #’ refresh tokens when they expire.
 # 実際には、トークンが期限切れになったときにトークンを更新する必要があるため、より複雑になる。
@@ -651,7 +761,7 @@ feedly_token <- function() {
 
 - For the purposes of this example, consider a “stream” to be all the historical items in a feed.
 <!-- この例における目的は，「ストリーム」とはフィード内のすべての過去のアイテムを指すものとする。 -->
-- Maximum “page size” (max number of items returned in a single call) is 1000.
+- Maximum "page size" (max number of items returned in a single call) is 1000.
 
 - For simplicity, there is a blanket assumption that if continuation is actually present, we can ask for a large number of items (e.g., 10,000).
 
@@ -870,23 +980,24 @@ glimpse(streams[[1]]$items)
 
 ---
 
-- API datastreams from social networks, blogs, and other Internet resources tend to be best for qualitative intelligence scanning.
-<!-- APIデータストリームは、ソーシャルネットワーク、ブログ、その他のインターネットリソースからのデータは、質的な情報スキャンに最適である。 -->
+- <mark class="mark">API datastreams from social networks, blogs, and other Internet resources tend to be best for qualitative intelligence scanning</mark>.
 - They can alert the auditor to information that would not appear in financial news or in the accounting statements and transactions.
-<!-- APIデータストリームは、財務ニュースや会計報告書、取引には現れない情報を監査人に知らせることができる。 -->
-- Such information is an essential part of the analytical review process, but until the advent of Internet accessible resources and automated tools provided by _R_, has not been accessible to auditors in a cost-effective way.
-<!-- このような情報は、分析的検討(analytical review process)において不可欠なものだが、インターネットからアクセス可能なリソースやRが提供する自動化ツールが登場するまでは、監査人が費用対効果の高い方法で情報にアクセスすることはできなかった。 -->
+- <mark class="mark">Such information is an essential part of the analytical review process</mark>, but until the advent of Internet accessible resources and automated tools provided by _R_, has not been accessible to auditors in a cost-effective way.
 
-
+:::{.notes}
+APIデータストリームは、ソーシャルネットワーク、ブログ、その他のインターネットリソースからのデータは、質的な情報スキャンに最適である。
+APIデータストリームは、財務ニュースや会計報告書、取引には現れない情報を監査人に知らせることができる。
+このような情報は、分析的検討(analytical review process)において不可欠なものだが、インターネットからアクセス可能なリソースやRが提供する自動化ツールが登場するまでは、監査人が費用対効果の高い方法で情報にアクセスすることはできなかった。
+:::
 
 
 # Accessing General Web Content through Web Scraping
 
 ## Introduction to Web Scraping
 
-- Where relevant intelligence is not available through APIs, but is presented on websites, it is possible to web scrape data.
+- Where relevant intelligence is not available through APIs, but is <mark class="mark">presented on websites, it is possible to web scrape data</mark>.
 <!-- APIで利用できなくても、ウェブサイトで情報が提供されている場合、ウェブスクレイピングでデータを取得することができる。 -->
-- This can be difficult and messy, but R provides a number of effective helper tools to scrape and organize data from websites.
+- This can be difficult and messy, but <mark class="mark">R provides a number of effective helper tools</mark> to scrape and organize data from websites.
 <!-- この作業は難しく，ごちゃごちゃになることもあるが，Rにはウェブサイトからデータをスクレイピングして整理するための効果的なヘルパーツールがいくつか用意されている。 -->
 
 
@@ -894,19 +1005,28 @@ glimpse(streams[[1]]$items)
 
 
 - I provide here a brief introduction to the concept and practices of web scraping in R using the `rvest` package.
-<!-- ここでは、`rvest`パッケージを使ってRでウェブスクレイピングの概念と実践について簡単に紹介する。 -->
-- Tools like `rvest` and Beautiful Soup (Python) inject structure into web scraping, which has become important because so few companies are willing to part with their proprietary customer datasets.
-<!-- `rvest`やPythonの`Beautiful Soup`といったツールは、ウェブスクレイピングに構造を注入するために重要になってきている。というのも、独自の顧客データを手放そうとする企業が少ないためである。 -->
+
+- Tools like `rvest` and **Beautiful Soup** (Python) inject structure into **web scraping**, which has become important because so few companies are willing to part with their proprietary customer datasets.
+
+:::{.notes}
+ここでは、`rvest`パッケージを使ってRでウェブスクレイピングの概念と実践について簡単に紹介する。
+`rvest`やPythonの`Beautiful Soup`といったツールは、ウェブスクレイピングに構造を注入するために重要になってきている。というのも、独自の顧客データを手放そうとする企業が少ないためである。
+:::
+
 
 ---
 
 
 - They have no choice but to expose some of this proprietary data via the web, though, and this is where auditors have an opportunity to accumulate valuable information germane to audit risk.
-<!-- しかし、企業はウェブサイトを通じてその独自のデータの一部を公開せざるをえず，これが監査リスクに関連する貴重な情報を蓄積する機会を監査人に与えている。 -->
-- The process of scraping data from the web exemplifies the computer-plus-human model of computing.
-<!-- ウェブからデータをスクレイピングするプロセスは、コンピューティングのコンピュータ＋人間モデルを体現している。 -->
+- The process of scraping data from the web exemplifies the **computer-plus-human model** of computing.
 - It is also a nice introduction to building custom software for scraping a specific website.
-<!-- また、特定のウェブサイトをスクレイピングするためのカスタム・ソフトウェアを構築する良い導入でもある。 -->
+
+:::{.notes}
+しかし、企業はウェブサイトを通じてその独自のデータの一部を公開せざるをえず，これが監査リスクに関連する貴重な情報を蓄積する機会を監査人に与えている。
+ウェブからデータをスクレイピングするプロセスは、コンピューティングのコンピュータ＋人間モデルを体現している。
+また、特定のウェブサイトをスクレイピングするためのカスタム・ソフトウェアを構築する良い導入でもある。
+:::
+
 
 ## `rvest` Basics
 
