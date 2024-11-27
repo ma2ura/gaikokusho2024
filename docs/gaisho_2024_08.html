@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<script src="gaisho_2024_08_files/libs/clipboard/clipboard.min.js"></script>
+<script src="gaisho_2024_08_files/libs/quarto-html/tabby.min.js"></script>
+<script src="gaisho_2024_08_files/libs/quarto-html/popper.min.js"></script>
+<script src="gaisho_2024_08_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="gaisho_2024_08_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="gaisho_2024_08_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="gaisho_2024_08_files/libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.32">
+
+  <meta name="author" content="Soichi Matsuura">
+  <meta name="dcterms.date" content="2024-11-27">
+  <title>外国書購読 Day8   Chapter 7.   Design of Audit Programs </title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="gaisho_2024_08_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="gaisho_2024_08_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="gaisho_2024_08_files/libs/revealjs/dist/theme/quarto-c3f8326322c1af3e281abcb81ab64f0a.css">
+  <link rel="stylesheet" href="mystyle.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+  <link href="gaisho_2024_08_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="gaisho_2024_08_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="gaisho_2024_08_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="gaisho_2024_08_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="gaisho_2024_08_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="gaisho_2024_08_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <style>
+  .v-center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title"><p><b>外国書購読 Day8</b> <br> <span style="color: #282A36; "> Chapter 7. <br> Design of Audit Programs </span></p></h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Soichi Matsuura 
+</div>
+</div>
+</div>
+
+  <p class="date">2024-11-27</p>
+</section>
+<section>
+<section id="audit-programs-as-natural-experiments" class="title-slide slide level1 center">
+<h1>Audit Programs as Natural Experiments</h1>
+<!-- #  第1節 自然実験としての監査計画 -->
+</section>
+<section id="table-of-contents" class="slide level2">
+<h2>Table of contents</h2>
+<ol type="1">
+<li>Audit Programs as Natural Experiments</li>
+<li>Collecting and Analyzing Audit Evidence: Sampling</li>
+<li>AICPA Guidelines on audit sampling</li>
+<li>Sampling for Interim Tests of Compliance</li>
+<li>A Statistical Decision Framework for Auditing</li>
+</ol>
+<!-- 
+6. Audit Tests as Learning Models
+7. Materiality
+8. Risk
+9. The AICPA on Sampling Approaches and Risks
+10. AICPA Pronouncements on Generally Accepted Auditing Standards
+11. Types of Sampling Allowed or Discussed by AICPA
+12. Accounting Transaction Distributions
+13. The Audit Cycle
+14. The Context of Auditing and Information Technology
+15. Auditors’ Opinion: The Product of an Audit 
+-->
+</section>
+<section id="audit-programs" class="slide level2">
+<h2>Audit Programs</h2>
+<ul>
+<li>Audit programs can best be thought of as <mark class="mark">stylized natural experiments</mark>.</li>
+<li>A <strong>natural experiment</strong> is an empirical study in which the activities of firms, individuals or groups are exposed to the experimental and control conditions that are determined by nature, or by other factors outside the control of the auditors.</li>
+<li>The process governing the exposures resembles a “random” assignment. The concept of “<strong>randomness</strong>” is itself controversial, and I will briefly comment on this later in the chapter; it is intended to <mark class="mark">assure that samples are representative for some decision-making objective</mark>.</li>
+</ul>
+<aside class="notes">
+<p>監査計画は、定型化された自然実験（natural experiment）と考えるのが最も適切である。 自然実験とは、企業、個人あるいは集団の活動が、自然または監査人のコントロール外の他の要因によって決定される実験条件と対象条件に晒される経験的研究をいう。- 実験条件と対照条件のばく露を管理するプロセスは、「無作為」割り当てに似ている。 「ランダムであること（randomness）」の概念自体は議論の余地があり、本章の後半で簡単に解説するが、これはサンプルが何らかの意思決定を行う目的のために（母集団を）代表するものであることを担保するためのものである。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="natural-and-field-experiments" class="slide level2">
+<h2>Natural and Field Experiments</h2>
+<ul>
+<li><strong>Characteristics of Natural Experiments</strong>: Observational studies not traditionally controlled; allow causal inference through condition comparisons, unlike non-experimental studies.</li>
+<li><em>Applications</em>: Used when controlled experiments are impractical or unethical, as in fields like epidemiology and economics (Meyer 1995).</li>
+<li><em>Limitations</em>: Related designs like field and quasi-experiments are unsuitable for audit programs.</li>
+</ul>
+<aside class="notes">
+<p>自然実験は観察にもとづく研究であり、（介入をともなう）伝統的な意味での実験では扱われない。 自然実験と実験とはいえない観察研究の違いは、前者には因果推論につながる条件比較が存在するが、後者には存在しないことである。 自然実験は、疫学や経済学が扱ういくつかの研究分野のように、（介入をともなう）統制された実験を実施することが極めて困難であったり、倫理的に問題があったりする場合に、研究計画として採用される（Meyer 1995）。 同じく統計学の手法であるフィールド実験（field experiment）と準実験（quasi-experiments）は自然実験に密接に関連しているが、監査計画には適していない。 以下はその違いである。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!---
+- Natural experiments are observational studies and are not controlled in the traditional sense of an experiment.
+- The difference between a natural experiment and a non-experimental observational study is that the former includes a comparison of conditions that pave the way for causal inference, but the latter does not.
+- Natural experiments are employed as study designs when controlled experimentation is extremely difficult to implement or unethical, such as in several research areas addressed by epidemiology and economics (Meyer 1995).
+- Field and quasi-experiments are closely related, but are not appropriate for audit programs; here are the differences:
+--->
+</section>
+<section id="natural-and-quasi-experiments-in-auditing" class="slide level2">
+<h2>Natural and Quasi-Experiments in Auditing</h2>
+<ol type="1">
+<li><p>Natural experiments rely on an <mark class="mark">external force (e.g., a government, nonprofit, etc.) controlling the randomization treatment assignment and implementation</mark>,</p></li>
+<li><p>Field experiments require researchers to retain control over randomization and implementation.</p></li>
+<li><p>Quasi-experiments occur when treatments are administered as-if randomly (e.g., US Congressional districts where candidates win with slim-margins, weather patterns, natural disasters, etc.).</p></li>
+</ol>
+<aside class="notes">
+<ol type="1">
+<li>自然実験は、無作為割り当てとその遂行を管理する外部の力（政府、非営利団体など）に依存している、</li>
+<li>フィールド実験では、無作為化とその遂行を分析者が管理する必要がある。</li>
+<li>準実験は、無作為に処置が実施される場合に行われる（例：候補者が僅差で勝利する米国議会選挙区、天候パターン、または自然災害など）。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-role-of-randomization-in-auditing" class="slide level2">
+<h2>The Role of Randomization in Auditing</h2>
+<ul>
+<li><mark class="mark">The perspective of audits as natural experiments</mark> motivates the methods applied to auditing in this book.</li>
+<li>It is also the reason that the <em>R</em> language is such an <strong>invaluable tool</strong> for auditing.</li>
+<li>At the core of this concept is <mark class="mark">the statistical analysis of samples</mark> to ultimately render the auditor’s opinion.</li>
+</ul>
+<aside class="notes">
+<p>自然実験としての監査を捉える考え方が、本書において統計的手法を監査に適用する動機となっている。 また、監査にとってR言語が非常に貴重なツールである理由でもある。 この概念の基礎となるのが、最終的に監査人の意見を述べるために、サンプルに対して統計的分析を行うことである。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="collecting-and-analyzing-audit-evidence-sampling" class="title-slide slide level1 center">
+<h1>Collecting and Analyzing Audit Evidence: Sampling</h1>
+<!-- ## 第2節 監査証拠の収集と分析：サンプリング -->
+</section>
+<section id="sampling-in-auditing" class="slide level2">
+<h2>Sampling in Auditing</h2>
+<ul>
+<li><p>A statistical sample is a <strong>subset of the population</strong> that is, for purposes of analysis, <strong>representative</strong> of that population.</p></li>
+<li><p>The population is all of the transactions relevant to a particular audit or procedure.</p></li>
+<li><p>For example, in confirmation of accounts receivable (A/R) the population is all of the accounts receivable from customers buying on credit for the year (assuming an annual audit).</p></li>
+<li><p>Audit samples are usually several orders of magnitude smaller than the population.</p></li>
+</ul>
+<aside class="notes">
+<p>統計的サンプルとは、母集団の部分集合である。 これらは、分析の目的に照らして、その母集団を代表している。 部集団は、特定の監査または手続きに関連するすべての取引である。 例えば、売掛金（A/R）の確認では、その年度に掛売上を計上した売掛金のすべてが母集団となる（年次監査を想定）。 監査サンプルは通常、母集団より数桁小さい。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sampling-units" class="slide level2">
+<h2>Sampling units</h2>
+<ul>
+<li>The <strong>sampling base</strong> or metric is the unit used to draw the sample.</li>
+<li><strong>Monetary unit sampling</strong> (one dollar is a sample item) is applied at year end for substantive testing - <mark class="mark">determining whether the financial statement account balances contain material errors</mark>.</li>
+<li>Transaction or Record sampling (one accounting transaction is a sample item) is applied at year-end for internal control testing - determining whether the inherent level of transaction processing error risk exists in each accounting cycle.</li>
+</ul>
+<aside class="notes">
+<p>サンプリング単位（sampling unit, base, or metric）は、サンプルを抽出するために利用される単位である。 金額単位サンプリング（ドルベースでは1ドルがサンプル単位となる）は、財務諸表の勘定残高に重要な虚偽表示があるかを判定する実証手続に適用される。 取引あるいは記録のサンプリング（会計取引1件が一つのサンプル項目となる）は，各会計サイクルに存在する取引処理エラーリスクの固有レベルを判定するために，期末に運用評価手続(internal control testing)に適用される。？？ <!-- 取引あるいは記録のサンプリング(会計取引1つが1サンプル項目)は、期末の運用評価手続に適用される。これは、各会計サイクルに存在する取引処理エラーリスクの固有レベルを判定するためである。
+ --></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="aicpa-guidelines-on-audit-sampling" class="title-slide slide level1 center">
+<h1>AICPA Guidelines on audit sampling</h1>
+<!-- ## 第3節 監査サンプリングについてのAICPAによるガイドライン -->
+</section>
+<section id="statistical-inference-in-auditing" class="slide level2">
+<h2>Statistical Inference in Auditing</h2>
+<!-- - Samples are the Achilles heel of statistical inference, and audit inference is no exception. -->
+<!-- サンプルは統計的推論のアキレス腱であり、それは監査実務における推論においても例外ではない。 -->
+<ul>
+<li><p>Ideally, <mark class="mark">samples should be random</mark> - the sample should be <em>representative</em> , or every item in the population should have an equal chance of being included in the sample.</p></li>
+<li><p>In addition, a <mark class="mark">probability model is required to draw valid inferences</mark> - this model may have a significant impact on the choice of sampling method, as does the particular feature being measured.</p></li>
+<li><p>The more accurately the model and sampling depict reality, the more accurate, and less costly will be the audit inference.</p></li>
+<li><p>Sampling is performed because it is typically <strong>infeasible</strong> to make a <em>detailed inspection</em> . <!-- and audit of anything but the smallest portion of the population. --></p></li>
+</ul>
+<aside class="notes">
+<p>理想的には，サンプルは無作為抽出されるべきである。 つまり、サンプルは母集団を代表しているべきであり、母集団におけるすべての項目がサンプルに含まれる可能性が等しくなければならない。 さらに、妥当な推論を行うためには、確率モデルが必要である。 この確率モデルは、測定される特定の特徴と同様に、サンプリング方法の選択に大きな影響を与える可能性がある。 確率モデルとサンプリングがより正確に現実を描写していればいるほど、より正確で、より少ないコストで監査実務における推論を行うことができる。 サンプリングが行われるのは、通常、（監査の対象となる）母集団のうちごく少数の場合を除いて精査を行うことは不可能だからである。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="hypothesis-testing-in-auditing" class="slide level2">
+<h2>Hypothesis Testing in Auditing</h2>
+<ul>
+<li>Without sampling, audits would be economically unjustifiable.</li>
+<li>In statistical hypothesis testing <!-- (termed Neyman–Pearson hypothesis tests after the Neyman–Pearson Lemma) --> , the <strong>p-value</strong> is <mark class="mark">the probability for a given statistical model that, when the null hypothesis is true the sample mean would be greater than or equal to the actual observed results</mark>.</li>
+<li>Hypotheses are ways of <em>bifurcating</em> the decision space of a particular statistical inference task.</li>
+<li>In auditing, this bifurcation is a stylized <mark class="mark">accept or do not accept</mark> that a transaction stream is in-control (interim tests) or an account balance is fairly stated or is not fairly stated (substantive tests).</li>
+</ul>
+<aside class="notes">
+<p>サンプリングがなければ、監査は経済的に正当化できないほどにコストがかかるものになる。 統計的仮説検定（Neyman-Pearsonの補題に由来してNeyman-Pearson仮説検定と呼ばれる）において、<span class="math inline">p</span>値（確率値または漸近有意確率ととも呼ばれる）とは、帰無仮説が真であるとき、標本平均が実際の観測結果以上となる確率である。 仮説は、ある統計的推論において決定空間（decision space）を（受容と棄却の）2つの部分集合に分割する方法である。 監査業務では、この二分法は、取引の流れが統制されているか（運用評価手続）、または勘定残高が適正に表示されているか（実証手続）についての受容と棄却を定型化しているものである。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="conservatism-principle" class="slide level2">
+<h2>Conservatism Principle</h2>
+<ul>
+<li>Auditing makes decisions on control and fairness through searches for material or intolerable errors. <!-- (the apportionment of materiality to individual accounts generates the set of intolerable errors for those accounts). --></li>
+<li>In an auditing context, <mark class="mark">the p-value of a test is the probability that the monetary error in the account balance would be intolerable</mark>.</li>
+<li>One of the auditing’s idiosyncrasies is that audit tests consider only <strong>one-sided tests</strong>.</li>
+<li>Auditing, because of the Conservatism Principal, is concerned with overstating income and assets, or understating liabilities and expenses. As a consequence, all audit tests are one-sided.</li>
+</ul>
+<aside class="notes">
+<p>監査は、重要な虚偽表示や許容不能な虚偽表示（個々の勘定科目へ重要性を配分することは、それらの勘定科目に対して許容不能な虚偽表示の集合を生み出す）の有無の探索を通じて、統制の有効性と財務諸表の適正性に関する意思決定を行う。 したがって、監査の文脈では、検定の<span class="math inline">p</span>値は、勘定残高の虚偽表示額が許容できないものとなる確率である。 監査実務の特色の一つは、（原則として）監査手続が片側検定（one-sided tests）しか行わないことである。 保守主義の原則に基づいて，監査は収益や資産を過大計上したり，負債や費用を過少計上したりすることを問題としている。 その結果、監査手続は片側だけを検証している。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="three-sampling-methods-in-auditing" class="slide level2">
+<h2>Three Sampling methods in Auditing</h2>
+<!-- There are three types of sampling commonly used in audits: -->
+<!-- 監査実務でよく使われるサンプリング手法は下記の3種がある。 -->
+<ol type="1">
+<li><strong>Discovery Sampling for Interim Tests</strong> : Determines sample size to ensure at least one error is detected if the actual error rate exceeds the acceptable level. <!-- Helps auditors decide if transaction systems are in or out of control. --></li>
+<li><strong>Attribute Sampling for Interim Tests</strong> : Estimates the error rate in the transaction population with confidence (e.g., 95%) to determine if systems are within acceptable error thresholds. If out of control, it assesses the actual error rate.</li>
+<li><strong>Acceptance Sampling for Substantive Tests</strong> : Combines discovery and attribute sampling to evaluate internal control effectiveness. If controls are insufficient, attribute sampling estimates the error rate to guide further analysis.</li>
+</ol>
+<aside class="notes">
+<ol type="1">
+<li>発見サンプリング：実際の取引の逸脱率が最低許容逸脱率（minimum acceptable error rate）を超えた場合に（統制上の逸脱率（control rate of error）とも呼ばれる）、サンプルの中に少なくとも1つの逸脱を発見する可能性のあるサンプルサイズを設定する。 発見サンプリングによる手続は、監査人が、個々の取引を処理するシステムが統制されているのか、または内部統制から逸脱しているかを判断するのに役立つ。</li>
+<li>運用評価手続における属性サンプリング：取引母集団全体の逸脱率を推定し、その推定値がその取引の最低許容逸脱率の閾値内にあることを特定の信頼度（例えば95％）により推定するために、取引単位サンプルについてのサンプルサイズを設定する。 特定の取引の流れが内部統制から逸脱していると判明した場合、属性サンプリングによる推定値は当該取引の流れを処理する内部統制の実際の逸脱率を決定するのに役立つ。 属性サンプルでは逸脱率も虚偽表示額も推定することができる。</li>
+<li>運用評価手続のための採択サンプリング： 発見サンプリングによる分析の結果、特定の種類の取引の逸脱に対する内部統制が「統制されている」か「統制されていない」かの判断が下される。 内部統制が不十分であることが判明した場合、監査人は運用評価手続における属性サンプリングに移行する。 属性サンプリングでは、取引母集団全体の逸脱率を推定し、その推定値がその取引の最低許容逸脱率の閾値内にあることを特定の信頼度（例えば 95％）により推定するために、取引単位サンプルについてのサンプルサイズを設定する。 特定の取引の流れが内部統制から逸脱していると判明した場合、属性サンプリングによる推定値は当該取引の流れを処理する内部統制の実際の逸脱率を決定するのに役立つ。 属性サンプルでは逸脱率も虚偽表示額も推定することができる。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!-- 
+1. **discovery sampling for interim tests** : Discovery sampling for interim tests sets an estimation sample size for transaction-unit samples, so that we are likely to discover at least one error in the sample if the actual transaction error rate exceeds the minimum acceptable error rate (alternatively called the out-of-control rate of error). Discovery tests help the auditor decide whether the systems processing a particular transaction stream are in or out of control. 
+1. 発見サンプリング：実際の取引の逸脱率が最低許容逸脱率（minimum acceptable error rate）を超えた場合に（統制上の逸脱率（control rate of error）とも呼ばれる）、サンプルの中に少なくとも1つの逸脱を発見する可能性のあるサンプルサイズを設定する。 
+発見サンプリングによる手続は、監査人が、個々の取引を処理するシステムが統制されているのか、または内部統制から逸脱しているかを判断するのに役立つ。
+2. **attribute sampling for interim tests** : sets estimation sample size for transaction-unit samples to estimate the error rate in the entire transaction population with some confidence (e.g., 95%) that the estimate is within the out-of-control error rate cutoff for that transaction stream. If it is found that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream. Error estimates from attribute samples may either be rates or amounts or both. 
+2. 運用評価手続における属性サンプリング：取引母集団全体の逸脱率を推定し、その推定値がその取引の最低許容逸脱率の閾値内にあることを特定の信頼度（例えば95％）により推定するために、取引単位サンプルについてのサンプルサイズを設定する。 
+特定の取引の流れが内部統制から逸脱していると判明した場合、属性サンプリングによる推定値は当該取引の流れを処理する内部統制の実際の逸脱率を決定するのに役立つ。 
+属性サンプルでは逸脱率も虚偽表示額も推定することができる。 
+3. **acceptance sampling for substantive tests** : Discovery sample analysis results in a decision of whether the internal control over a particular type of transaction error is “in-control” or “out of control.” If internal control is found to be insufficient, the auditor moves on to attribute sampling for interim tests, which sets estimation sample size for transaction-unit samples to estimate the error rate in the entire transaction population with some confidence (e.g., 95%) that the estimate is within the out-of-control error rate cutoff for that transaction stream. If it is found that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream. Errors estimates from attribute samples may either be rates or amounts or both. 
+3. 運用評価手続のための採択サンプリング： 発見サンプリングによる分析の結果、特定の種類の取引の逸脱に対する内部統制が「統制されている」か「統制されていない」かの判断が下される。 内部統制が不十分であることが判明した場合、監査人は運用評価手続における属性サンプリングに移行する。 属性サンプリングでは、取引母集団全体の逸脱率を推定し、その推定値がその取引の最低許容逸脱率の閾値内にあることを特定の信頼度（例えば 95％）により推定するために、取引単位サンプルについてのサンプルサイズを設定する。 
+特定の取引の流れが内部統制から逸脱していると判明した場合、属性サンプリングによる推定値は当該取引の流れを処理する内部統制の実際の逸脱率を決定するのに役立つ。 
+属性サンプルでは逸脱率も虚偽表示額も推定することができる。
+--->
+</section>
+<section id="power-analysis-in-auditing" class="slide level2">
+<h2>Power Analysis in Auditing</h2>
+<ul>
+<li>The sample sizes <!-- (an important consideration in determining the scope and budget of an audit)  --> can be determined using Cohen’s power analysis (Cohen 1992) which is implemented in R’s <code>pwr</code> package. <!-- （監査の範囲と予算を決定する際の重要な考慮事項である）サンプルサイズは、Rの`pwr`パッケージで実装されているCohenの検出力分析（Cohen 1992）を用いて決定することができる。 --></li>
+<li>Statistical “power” is the complement (i.e., <span class="math inline">1 − \beta</span>) of the probability <span class="math inline">\beta</span> of a <strong>type II error</strong> (type II error is the failure to reject a false null hypothesis, and is also known as a “<strong>false negative</strong>(偽陰性)”.) <!-- 統計的「検出力」とは、第2種の過誤の確率$\beta$の補数(つまり$1-\beta$)である。ここで第2種の過誤とは、偽である帰無仮説を棄却できないことであり、「偽陰性（false negative）」とも呼ばれる。 --></li>
+<li>Recall that, in statistical hypothesis testing, the probability <span class="math inline">\alpha</span> of a type I error is the “<strong>significance</strong>”(有意水準) of the test (a type I error is the rejection of a true null hypothesis, and is also known as a “<strong>false positive</strong>(偽陽性)”) (Fig. 1). <!-- 統計的仮説検定では、第1種の過誤の確率$\alpha $が検定の「有意」水準であったことを思い出してほしい。ここで第1種の過誤は真である帰無仮説を棄却してしまうことであり、「偽陽性（false positive）」とも呼ばれる（図1を参照されたい）。 --></li>
+</ul>
+</section>
+<section id="calculating-sample-size" class="slide level2">
+<h2>Calculating Sample Size</h2>
+<p>To calculate the required sample size, you need to know <strong>four things</strong>: <!-- 必要なサンプルサイズを計算するには、下記の4つの項目を判断する必要がある。 --></p>
+<ul>
+<li>The size of the error to detect.</li>
+<li>The variance of the response.</li>
+<li>The desired significance level.</li>
+<li>The desired power.</li>
+</ul>
+<!-- 
+- 検出すべき誤謬の大きさ
+- 応答の分散？
+- 必要な有意水準
+- 必要な検出力
+ -->
+</section></section>
+<section>
+<section id="sampling-for-interim-tests-of-compliance" class="title-slide slide level1 center">
+<h1>Sampling for Interim Tests of Compliance</h1>
+<!-- ## 第4節 運用評価手続における監査サンプリング -->
+</section>
+<section id="discovery-sampling" class="slide level2">
+<h2>Discovery Sampling</h2>
+<!-- ## 発見サンプリング -->
+<ul>
+<li><strong>Discovery sampling</strong> chooses a sample to determine <mark class="mark">whether an error rate does not exceed a designated percentage of the population</mark>.</li>
+<li>If the sample does not contain errors, then the actual error rate is assumed to be lower than the minimum unacceptable rate.</li>
+<li>The sampling calculation includes the following factors:
+<ul>
+<li>Confidence level.</li>
+<li>Minimum unacceptable error rate.</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>発見サンプリングは、逸脱率が母集団の特定の割合を越えていないことを判断するためにサンプルを抽出する。 サンプルに誤謬が含まれていない場合、実際の逸脱率は最低許容不能逸脱率よりも低いとみなされる。 サンプリングの計算には以下の項目が含まれる。 - 信頼水準 - 最低許容不能逸脱率</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="confidence-level" class="slide level2">
+<h2>Confidence Level</h2>
+<ul>
+<li><strong>Confidence level</strong> (信頼水準) <sup>1</sup> is a concept that <mark class="mark">an approach that has fallen out of fashion in favor of frequentist inference, Bayesian inference, and decision theory</mark>.</li>
+<li>It is still used in decision theoretic approaches such as auditing, and roughly reflects the confidence that the auditor has in a particular decision (e.g., the balance is “<strong>fairly stated</strong>”).</li>
+<li>Confidence is a concept that is intertwined with perceptions of “risk” associated with audit failures.</li>
+</ul>
+<aside class="notes">
+<p>信頼水準は，フィデューシャル推論（fiducial inference）に由来する概念であり，頻度論的推論、ベイズ推論、および意思決定理論に支持されなくなり潮流から外れたアプローチといえる。 ただし、信頼水準は、監査における意思決定において今でも使われており、監査人が特定の意思決定（例えば、勘定残高が「公正に表示されているか」の意思決定）の際に有している信頼度を大まかに表している。 信頼度は、監査の失敗に関連する「リスク」の認識と密接に関係している概念である。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>信頼水準は同じ母集団からサンプルを繰り返し抽出する場合に母数が含まれる区間のパーセントを表す。</p></li></ol></aside></section>
+<section id="unacceptable-error-rates" class="slide level2">
+<h2>Unacceptable Error Rates</h2>
+<ul>
+<li><strong>Unacceptable error rates</strong>(許容不能誤謬率) are parameters that are fixed at the start of an audit by the audit manager.</li>
+<li>They may be set by the firm, by prior years experience, or by some other method.</li>
+<li>In general, their choice is idiosyncratic, determined by policies and perspectives of a particular firm or audit professional.</li>
+</ul>
+<aside class="notes">
+<p>許容不能誤謬率は、監査責任者が監査を始めるにあたってに固定するパラメータである。 このパラメータは、監査事務所によって設定されることもあれば、過去の経験によって設定されることもあり、また他の方法によって設定されることもある。 一般に、その選択は分析者によって異なり、特定の監査事務所や監査専門家の方針や考え方によって独自に（idiosyncratic）判断される。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="uru-model" class="slide level2">
+<h2>Uru Model</h2>
+<ul>
+<li>We can compute the discovery sample size using what mathematicians call an <strong>urn model</strong>.</li>
+<li>Urn models are typically stated as draws of colored balls from an urn.</li>
+<li>In our case, we can consider the urn to be the set of all transactions of a given type that the firm processes in a given accounting period.</li>
+</ul>
+<aside class="notes">
+<p>発見サンプリングにおけるサンプルサイズは、数学者が壷モデル（urn model）と呼ぶモデルを使って計算できる。 壷モデルは、通常、壷からの色付きボールの抽選として記述される。 運用評価手続の場合、壷は、企業がある会計期間に処理する、特定の種類に属する取引すべての集合であると考えることができる。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="壺モデル" class="slide level2">
+<h2>壺モデル</h2>
+<ol type="1">
+<li>壺モデルでは、壺にはよく混ぜ合わされた<span class="math inline">x</span>個の白い球と<span class="math inline">y</span>個の黒い球とが入っている。</li>
+<li>壺から球を1つ<strong>ランダムに取り出し</strong>、その色を観察する。</li>
+<li>取り出した球を壺に戻し、選択プロセスを繰り返す。</li>
+</ol>
+<p>このモデルで次のような問題を考える。</p>
+<ul>
+<li><span class="math inline">n</span>回の観測で白と黒の球の割合を推測できるか? その推測はどの程度の信頼性があるか?</li>
+<li>球をn個だけ取り出したとき、その中に黒い球がない可能性はどれくらいだろうか?</li>
+</ul>
+</section>
+<section id="uru-model-in-audit" class="slide level2">
+<h2>Uru model in Audit</h2>
+<ul>
+<li>Assume that <mark class="mark">the auditor determines that the minimum acceptable error rate for a particular transaction type (or alternately our out-of-control rate of error for that transaction type) is <span class="math inline">p</span></mark>.</li>
+<li>The discovery sample size needed for confidence <span class="math inline">c</span> is <span class="math display">
+\Pr[x \geq 0] = 1− \Pr[x = 0]
+</span> the probability that <span class="math inline">x</span>, the number of errors discovered, is anything but <span class="math inline">0</span>.</li>
+</ul>
+<aside class="notes">
+<p>監査人が特定の取引タイプ(あるいはその取引タイプの統制上の逸脱率)に対する最低許容逸脱率を<span class="math inline">p</span>と決定したと仮定する。 信頼度<span class="math inline">c</span>に対して必要な発見サンプルのサイズは， 発見された誤謬の数<span class="math inline">x</span>が<span class="math inline">0</span>以外となる確率である<span class="math inline">\Pr[x \geq 0] = 1 - \Pr[x = 0]</span>となる。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="culculating-the-error-rate" class="slide level2">
+<h2>Culculating the error rate</h2>
+<p>We can start by solving the probability of finding no errors in a sample of <span class="math inline">n</span> draws from the urn: <!-- まず、壷から$n$回引いたサンプルにおいて誤謬が発見されない確率を計算することから始めよう。 --></p>
+<p><span class="math display">
+\Pr[X \geq 0] = 1 - \dbinom{n}{0} \times p^0 \times (1-p)^{n-0} = 1 - (1 - p )^n
+</span></p>
+<p>For confidence level <span class="math inline">c</span> we want to choose <span class="math inline">n</span> so that: <!-- 信頼水準$c$（および母集団における最低許容逸脱率$p$）に対して、サンプルサイズ$n$を次のように決める。 --></p>
+<p><span class="math display">
+\Pr[X \geq 0] = c  \Longrightarrow 1 - (1 - p )^n = c \Longrightarrow n = \frac{\log(1-c)}{\log(1-p)}
+</span></p>
+</section>
+<section id="sample-size-calculation" class="slide level2">
+<h2>Sample Size Calculation</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.0005</span>, <span class="fl">0.015</span>, <span class="fl">0.0005</span>) <span class="co"># minimum acceptable error rate</span></span>
+<span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fl">0.95</span> <span class="co"># confidence level</span></span>
+<span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="dv">1</span><span class="sc">-</span>c)<span class="sc">/</span><span class="fu">log</span>(<span class="dv">1</span><span class="sc">-</span>p) <span class="co"># sample size</span></span>
+<span id="cb1-5"><a href="" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(p, n)</span>
+<span id="cb1-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(samp) <span class="sc">+</span> <span class="fu">aes</span>(p, n) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb1-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"発見サンプリングにおけるサンプルサイズ"</span>,</span>
+<span id="cb1-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"最低許容逸脱率"</span>,</span>
+<span id="cb1-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"サンプルサイズ"</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>(<span class="at">base_family =</span> <span class="st">"HiraginoSans-W3"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="sample-size-calculation-output" class="slide level2 output-location-slide"><h2>Sample Size Calculation</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="gaisho_2024_08_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="coefficient-of-variation-formulas" class="slide level2">
+<h2>Coefficient of Variation Formulas</h2>
+<!-- ## サンプルサイズに対する変動係数の公式 -->
+<!-- - If the auditor is not just concerned with the error rate, but also <mark class="mark">the stability of the error rate</mark>, then interim test sampling questions will involve both the error rate and the variability of that rate.  -->
+<ul>
+<li>When auditors consider both the error rate and its <strong>stability</strong>, interim test sampling must address both the error rate and its variability. <!-- 監査人が単に逸脱率だけでなくその安定性（stability）にも関心を持つ場合、運用評価手続のサンプリングを行う際には逸脱率とその変動率の両方を計算することになる。 --> <!-- - If the out-of-control error rate is $\mu_1$ and our goal is to detect an error of size $\Delta$ where the standard deviation of the sample is assumed to be $\sigma$ then the sample size formula above becomes --></li>
+<li>If the out-of-control error rate is <span class="math inline">\mu_1</span> and the goal is to detect an error of a given size <span class="math inline">\Delta</span> with sample standard deviation <span class="math inline">\sigma</span>, the sample size formula is adjusted accordingly<sup>1</sup>. <!-- 最低許容逸脱率が$\mu _1$であり、サンプルの標準偏差が$\sigma$であると仮定した場合の誤謬の大きさ$\Delta$を検出することが目標である場合、上記のサンプルサイズの式は下記のようになる。 --> <span class="math display">
+n = \frac{8 CV^2}{PE^2 } \left[ 1 + (1 - PE)^2 \right ]
+</span></li>
+</ul>
+<!-- ここで$PE$は比例誤差（proportionate error）で$PE = 1$であり、$CV$は変動係数（coefficient of variation）で$CV = 1$である。 -->
+<aside><ol class="aside-footnotes"><li id="fn2"><p>Where <span class="math inline">PE</span> is the proportionate error <span class="math inline">PE = 1</span> and <span class="math inline">CV</span> is the coefficient of variation <span class="math inline">CV = 1</span>.</p></li></ol></aside></section>
+<section id="determining-the-variability-of-the-population" class="slide level2">
+<h2>Determining the Variability of the Population</h2>
+<p>Sometimes the auditor will not have any idea of the variability of the population, but will still wish to consider it in sample size. <!-- 監査人が母集団のばらつきを知らない場合でも、サンプルサイズの計画において考慮したい場合がある。この場合、$≈13≈35％$のばらつきを選択するのが典型的である。 --> In this case, a variability of <span class="math inline">\approx 1/3 \approx 35\%</span> is typical. In this case: <!-- 逸脱率が低い場合には、以下のように計算することができる。 --></p>
+<p><span class="math display">
+n \approx \frac{1 + (1 - PE)^2}{PE^2} \approx \frac{2}{PE^2}
+</span></p>
+<p>for small error rates.</p>
+</section>
+<section id="rules-of-threes-to-calculate-95-upper-confidence-bounds" class="slide level2">
+<h2>Rules of Threes to Calculate 95% Upper Confidence Bounds</h2>
+<!-- ### 上側信頼区間95%の3つのルール -->
+<ul>
+<li>The rule of threes can be used to address the following type of question: <mark class="mark">“The manager of the audit has told us that there have been no errors in the A/R account balance in the last 20 audits. Does this information give me an estimate whether there will be an error in this year’s audit of A/R?”</mark></li>
+<li>The answer is “<strong>yes</strong>” . : Given no observed errors in the past <span class="math inline">n</span> years, a 95% upper bound on the rate of occurrence is <span class="math inline">3/n</span></li>
+<li>Observed events <span class="math inline">Y</span> (no errors in the audit) follow a <span class="math inline">Poisson(\lambda)</span> distribution based on <span class="math inline">n</span> samples, per the law of rare errors. <!-- - The basis of this is that, by the law of rare errors, the observed events $Y$ (i.e., no errors in the audit) follow a $Poisson(\lambda)$ distribution using $n$ samples.  --></li>
+</ul>
+<aside class="notes">
+<!-- 3つの法則は、次のような質問にも使える。 -->
+<!-- 「監査の責任者は、過去20年の監査で売掛金の勘定残高に虚偽表示が存在しなかったと言っている。この情報から、今年の売掛金の監査で虚偽表示が発生するかどうかの予想はつくだろうか？」この問いに対する答えは「YES」である。 -->
+<!-- 過去$n$年間に観測された虚偽表示がないとすると、発生率の95％の上限は$3/n$となる。 -->
+<!-- その根拠は，誤差法則により、観測された事象$Y$（すなわち、監査において誤りがなかったこと）が$n$個のサンプルを用いたポアソン分布$Poisson(\lambda)$に従う，ということである。 -->
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-sum-of-poisson-random-variables" class="slide level2">
+<h2>The sum of Poisson random variables</h2>
+<ul>
+<li><mark class="mark">The sum of Poisson random variables is Poisson</mark>, so the question of at least one <span class="math inline">Y</span> not equal to zero is the probability that the sum <span class="math inline">\sum Y_i</span> is greater than zero. <!-- ポアソン分布にしたがう確率変数の合計はポワソン分布にしたがうので、少なくとも1つの$Y$が0に等しくないという問題は，$\sum Y_i$が$0$より大きい確率となる。 --></li>
+<li>Let this probability be, for example, 0.95 so that <span class="math inline">P\left[ \sum Y_i = 0\right ] = \mathrm{e}^{-n \lambda} = 0.05</span>. <!-- この確率を例えば$0.95$とすると、$P[Y_i = 0] = e - n \lambda  = 0.05$となる。 --></li>
+<li>Taking logarithms gives <span class="math inline">n \lambda = - \ln (0.05) \approx 3</span>. <!-- 対数をとると、$n \lambda  = - \ln (0.05) \approx 3$となる。 --></li>
+<li>Thus the rate <span class="math inline">\lambda \fallingdotseq 3/n</span>. <!-- よって比率は$\lambda \approx 3/n$ となる。 --></li>
+</ul>
+<!-- ### 属性サンプリング -->
+</section>
+<section id="attribute-sampling" class="slide level2">
+<h2>Attribute Sampling</h2>
+<ul>
+<li>Each time a control is tested, the auditor examines the evidence (samples, etc.) to decide on the <mark class="mark">hypothesis that the account is fairly stated, or internal control is effective</mark>. <!-- 内部統制が検証されるたびに、監査人は監査証拠（抽出したサンプルなど）を検討し、勘定項目が公正に表示している、あるいは内部統制が有効であるという仮説を決定する。 --></li>
+<li>Each time a control is tested, the auditor examines <strong>the evidence</strong> (samples, etc.) to decide on the hypothesis that the account is <strong>fairly stated</strong>, or internal control is <strong>effective</strong>. <!-- 監査人は、「内部統制が有効な」システムであっても、許容逸脱率sで偶発的な誤謬（occasional error）が発生することがあるため、逸脱率$s=0$（サンプルサイズが小さくなる）と仮定することもできるが、できれば実際の誤謬の現実的な推定値を用いるべきである。 --></li>
+<li>The Risk Assessment Matrix and review of prior years’ audit papers for the control system will provide this rate <span class="math inline">s</span>. <!-- リスク評価マトリックスと、その統制システムに関する過年度の監査調書をレビューすることにより、この逸脱率$s$がわかる。 --></li>
+</ul>
+</section>
+<section id="hypothesis-test-in-attribute-sampling" class="slide level2">
+<h2>Hypothesis Test in Attribute Sampling</h2>
+<p>The control decision takes the form of the following hypothesis test: <!-- 内部統制（の有効性）に関する判断は、以下の仮説検定の形をとる。 --></p>
+<ul>
+<li><span class="math inline">H_0</span>: The client’s system is in control, controls are effective, and error rate is approximately <span class="math inline">s</span>.</li>
+<li><span class="math inline">H_a</span>: The client’s controls are not effective, and the system is producing an intolerable number of errors <span class="math inline">&gt; r</span>.</li>
+</ul>
+<!-- - $H_0$: 被監査会社のシステムは統制されており、内部統制は有効で、誤謬率はおよそ$s$である。 -->
+<!-- - $H_a$: 被監査会社の統制は有効ではなく、内部統制システムは許容不能誤謬率$>r$を発生させている。 -->
+<!-- Restating, if the expected error rate is s, the intolerable error rate is $r$, and the error rate in the control system is $\varepsilon$ then restate the hypotheses as: -->
+<p>If the expected error rate is <span class="math inline">s</span>, the intolerable error rate is <span class="math inline">r</span>, and the control system error rate is <span class="math inline">\varepsilon</span>, the hypotheses can be stated as: <!-- 予想逸脱率を$s$、許容不能逸脱率を$r$、内部統制システムの逸脱率を$\varepsilon$とすると、仮説を次のように書き換えることができる。 --></p>
+<ul>
+<li><span class="math inline">H_0</span>: <span class="math inline">\varepsilon = s</span>、<span class="math inline">\quad H_a</span>: <span class="math inline">\varepsilon \geq s \quad \text{where} \quad r,\varepsilon \in [0, 1]</span> <!-- 
+- $H_0$: $\varepsilon = s$ ここで、$\varepsilon \in [0, 1]$
+- $H_a$: $\varepsilon \geq s$ ここで、$r, \varepsilon \in [0, 1]$
+ --></li>
+</ul>
+</section>
+<section id="power-and-sample-size-calculation" class="slide level2">
+<h2>Power and Sample Size Calculation</h2>
+<ul>
+<li>This requires a one-sample proportion test to calculate power and sample size. <!-- このような仮説検定を行うには、検出力とサンプルサイズを計算するために1標本の比率検定（one-sample proportion test）を必要とする。 --></li>
+<li>The null hypothesis is <span class="math inline">\varepsilon = s</span>, and the alternative hypothesis is <span class="math inline">\varepsilon &gt; r</span> with the standard power and significance assumptions of <span class="math inline">\alpha = 0.05</span> and <span class="math inline">\beta = 0.8</span>. <!-- 帰無仮説は$=s$、対立仮説は$>r$で、標準的な有意水準と検出力の仮定は$\alpha = 0.05$と$\beta = 0.8$である。 --></li>
+<li>Let us test a <span class="math inline">5\%</span> intolerable error rate <span class="math inline">r = 0.05</span> and an expected error rate <span class="math inline">s = 0.01</span> (Fig. 3): <!-- 5％の許容不能な逸脱率$r = 0.05$と予想逸脱率$s = 0.01$を検定しよう（図3を参照されたい）。 --></li>
+</ul>
+</section>
+<section id="power-test" class="slide level2">
+<h2>Power Test</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr) <span class="co"># Power test</span></span>
+<span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">pwr.p.test</span>( <span class="co"># proportion test</span></span>
+<span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">h =</span> <span class="fu">ES.h</span>( <span class="co"># effect size</span></span>
+<span id="cb2-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">p1 =</span> <span class="fl">0.05</span>, <span class="co"># intolerable error rate</span></span>
+<span id="cb2-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">p2 =</span> <span class="fl">0.01</span>  <span class="co"># expected error rate</span></span>
+<span id="cb2-6"><a href="" aria-hidden="true" tabindex="-1"></a>  ), </span>
+<span id="cb2-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="co"># significance level</span></span>
+<span id="cb2-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.80</span>, <span class="co"># power</span></span>
+<span id="cb2-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">"greater"</span>) <span class="co"># one-side test</span></span>
+<span id="cb2-10"><a href="" aria-hidden="true" tabindex="-1"></a>sample <span class="co"># output</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     proportion power calculation for binomial distribution (arcsine transformation) 
+
+              h = 0.250692
+              n = 98.37558
+      sig.level = 0.05
+          power = 0.8
+    alternative = greater</code></pre>
+</div>
+</div>
+</section>
+<section id="plot-for-power-test" class="slide level2">
+<h2>Plot for Power test</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># output pwr packages</span></span>
+<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sample)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="gaisho_2024_08_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="acceptance-sampling" class="slide level2">
+<h2>Acceptance sampling</h2>
+<!-- ### 採択サンプリング -->
+<ul>
+<li><p>The basic idea of calculating power or sample size with the <code>pwr</code> package is to leave out the argument you want to calculate. <!-- `pwr`パッケージで検出力やサンプルサイズを計算する基本的な考え方は、計算したい引数を省略することである。 --></p></li>
+<li><p>If you want to calculate sample size, leave <span class="math inline">n</span> out of the function. <!-- サンプルサイズを計算したい場合は、関数からnを省く。 --></p></li>
+<li><p>To calculate power and sample size for one-sample t-tests, we need to set the type argument to <code>one.sample</code>. <!-- 1標本のt検定における検出力とサンプルサイズを計算するには、type引数を one.sampleに設定する必要がある。 --></p></li>
+<li><p>Each time an account is audited or a control is tested, the auditor examines the evidence (samples, etc.) to decide on the hypothesis that the account is fairly stated, or internal control is effective. <!-- 勘定の監査や内部統制の検証が行われるたびに、監査人は監査証拠（抽出されたサンプルなど）を検討し、勘定科目が公正に表示されている、あるいは内部統制が有効であるという仮説を決定する。 --></p></li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<p>The decision takes the form of a hypothesis test. <!-- その判断は仮説検証の形をとる。 --> For an account balance, this is: <!-- 勘定残高の場合は、以下のようになる。 --></p>
+<ul>
+<li><span class="math inline">H_0</span> : The client’s balance for the account is correct (error is zero)</li>
+<li><span class="math inline">H_a</span> : The client’s balance for the account contained a material error.</li>
+</ul>
+<!-- 
+- $H_0$ : 被監査会社の勘定残高は正しい（虚偽表示はゼロである）
+- $H_a$ : その被監査会社の勘定残高に重要な虚偽表示がある。
+ -->
+<p>If intolerable error (i.e., the part of materiality allocated to this account) is <span class="math inline">M</span> and the error in the account balance is <span class="math inline">\varepsilon</span> then restate this as: <!-- 許容不能虚偽表示額（すなわち、この勘定科目に割り当てられた重要性の部分）をMとし、勘定科目の残高の虚偽表示額を$\varepsilon$とした場合、これを下記のように言い直す。 --></p>
+<p><span class="math inline">H_0</span> : <span class="math inline">\varepsilon = 0</span> 、<span class="math inline">H_a</span> : <span class="math inline">\varepsilon = M</span></p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><p>In the alternative hypothesis, whether <span class="math inline">M</span> is Dr or Cr is determined by the <strong>Conservatism Principle</strong> - the direction that will produce the lowest income. <!-- 対立仮説では、$M$が借方であるか貸方であるかは、保守主義の原則（つまり最低の利益をもたらす方向）によって決定される。 --></p></li>
+<li><p>Let us start with a basic formula for distinguishing between a zero error <span class="math inline">\mu_0</span> and the actual error <span class="math inline">\mu_1</span> with a one-sided test, a Normal distribution probability model having homogeneous variances <span class="math inline">\sigma^2_0 = \sigma^2_1 = \sigma^2</span> and single sample compared to a known (i.e., <span class="math inline">\mu_0 = 0</span>) distribution. <!-- ゼロ誤差$mu_0$と実際の誤差$\mu_1$を片側検定で区別するための基本式から始めよう。 --> <!-- ここで、均一分散$\sigma _0 = \sigma_0 = \sigma$を持つ正規分布確率モデルと、既知の（つまり$\mu_0 = 0$）分布と比較した単一標本である。 --></p></li>
+</ul>
+</section>
+<section id="rule-of-thumb" class="slide level2">
+<h2>Rule of Thumb</h2>
+<p>The “rule of thumb” for sample size is <!-- サンプル・サイズの「経験則（rule of thumb）」は次のとおりである。 --></p>
+<p><span class="math display">
+n = \frac{8}{\Delta^2}
+</span> Where the error <span class="math inline">\Delta</span> we are trying to detect is <!-- ここで検出した誤謬は$\Delta$で下記である。 --> <span class="math display">
+\Delta = \frac{\mu_1 - \mu_0}{\sigma}
+</span></p>
+</section>
+<section class="slide level2">
+
+<p>This is derived from the Normal sample formula: <!-- これは正規分布のサンプルの公式から導かれる。 --> <span class="math display">
+n = \frac{2 ( z_{1 - \alpha} + z_{1 - \beta} )^2 }{\left ( \frac{\mu_1 - \mu_0}{\sigma}\right )^2}
+</span></p>
+<p>For <span class="math inline">\alpha = 0.05</span>、<span class="math inline">\beta = 0.20</span>、<span class="math inline">z_{1-\alpha} = 1.96</span>、<span class="math inline">z_{1-\beta} = 0.84</span>, the value</p>
+<p><span class="math display">
+2(z_{1 - \alpha } + z_{1-\beta})^2 \approx 8
+</span>. <!-- $\alpha = 0.05$、$\beta = 0.20$、$z_{1-\alpha} = 1.96$、$z_{1-\beta} = 0.84$であるとき、$2 ( z_{1 - \alpha } + z_{1-\beta})^2 \approx 8$という値になる。 --></p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>This formula is used to calculate <em>detectable error in the population</em> using a given sample size <span class="math inline">n</span> is <span class="math inline">\Delta = \sqrt{\frac{8}{n}}</span>, the inversion of <span class="math inline">n = \frac{8}{\Delta^2}</span>.</li>
+<li>Suppose you are auditing a financial account, and want to compare the actual error in the account to an assumption (null hypothesis) that that account is fairly stated (has zero error).</li>
+<li>You will measure the actual expected error <span class="math inline">\mu_2</span> with respect to an assumed error of <span class="math inline">\mu_1</span>, which will typically be zero. We can then define <span class="math inline">\mu_1 − \mu_2</span>.</li>
+<li>The smaller the difference you want to detect, the larger the required sample size.</li>
+</ul>
+<aside class="notes">
+<p>この式は、所与となるサンプルサイズ<span class="math inline">n</span>を用いた母集団における検出可能な誤謬を計算するためにも用いられる。<span class="math inline">\Delta = \sqrt{\frac{8}{n}}</span>であり、<span class="math inline">n = \frac{8}{\Delta^2}</span>の逆数である。 財務諸表の勘定について監査をしていて、勘定の実際の虚偽表示を、勘定が公正に表示されている（虚偽表示がゼロである）という仮定（帰無仮説）と比較したいとする。 あなたは、仮定された虚偽表示額<span class="math inline">\mu_1</span>（これは通常ゼロになる）に対して実際の予想虚偽表示額<span class="math inline">\mu_2</span>を測定する。 そして<span class="math inline">\Delta = \mu_1 - \mu_2</span>と定義できる。 検出したい差が小さければ小さいほど、必要なサンプルサイズは大きくなる。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<ul>
+<li><p>Of the four variables that go into the sample size calculation, the variance of the responses can be the most difficult to determine.</p></li>
+<li><p>Usually, before you do your experiment, you do not know what variance to expect.</p></li>
+<li><p>Investigators often conduct a pilot study to determine the expected variance, or information from a previously published study can be used.</p></li>
+<li><p>The effect size combines the minimal relevant difference and the variability into one measurement <span class="math inline">\sigma</span>. <!-- - Significance $\alpha$ is often set at $0.05$, for a 95% confidence, after a suggestion by RA Fisher in the 1920s (Stigler 2008). --></p></li>
+</ul>
+<aside class="notes">
+<p>サンプルサイズ計算に必要な4つの変数のうち、応答変数の分散を決定するのが最も難しいかもしれない。 通常、実験を行う前に、どのような分散が期待されるかはわからない。 研究者はしばしば、予想される分散を決定するためにパイロット研究を実施する、または以前に発表された研究の情報を使用することもできる。 効果量は、最小の関連する差と変動を1つの測定値<span class="math inline">\sigma</span>にまとめる。 有意性<span class="math inline">\alpha</span>は、1920年代にR.A Fisherによって提案された後、信頼度<span class="math inline">95\%</span>で<span class="math inline">0.05</span>に設定されることが多い(Stigler 2008)。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="power-test-for-one-sided-test" class="slide level2">
+<h2>Power test for One-sided Test</h2>
+<ul>
+<li><span class="math inline">1 - \beta</span>, where <span class="math inline">\beta</span> is the probability of a Type 2 error (failing to reject the null hypothesis when the alternative hypothesis is true). In other words, if you have a 20% chance of failing to detect a real difference, then the power of your test is <span class="math inline">0.8</span>, which was suggested in (Cohen 1992) (Fig. 4). <!-- $1- \beta$、ここで$\beta$は第2種の過誤（対立仮説が真であるときに帰無仮説を棄却できない場合）の確率である。 --> <!-- 言い換えると、本当の差を検出できない確率が20％の場合、検定の検出力は$0.8$である。 --> <!-- これはCohen (1992)で示されている（図4を参照されたい）。 --></li>
+<li>The calculation for the total sample size is <!-- サンプルサイズの計算は以下の通りである。 --></li>
+</ul>
+<p><span class="math display">
+n = \frac{4 \times (z_{\alpha} + z_{\beta})^2 \times \sigma ^2}{\Delta ^2}
+</span></p>
+</section>
+<section id="power-test-for-one-sided-test-1" class="slide level2">
+<h2>Power test for One-sided Test</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a>Delta <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> Delta<span class="sc">/</span>sigma</span>
+<span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
+<span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> d, </span>
+<span id="cb5-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>, </span>
+<span id="cb5-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> <span class="fl">0.90</span>, </span>
+<span id="cb5-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">'one.sample'</span>)</span>
+<span id="cb5-9"><a href="" aria-hidden="true" tabindex="-1"></a>sample</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     One-sample t test power calculation 
+
+              n = 96.50801
+              d = 0.3333333
+      sig.level = 0.05
+          power = 0.9
+    alternative = two.sided</code></pre>
+</div>
+</div>
+</section>
+<section id="plot-for-power-test-1" class="slide level2">
+<h2>Plot for Power test</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sample)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="gaisho_2024_08_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="acceptance-sampling-with-poisson-data" class="slide level2">
+<h2>Acceptance Sampling with Poisson Data</h2>
+<ul>
+<li>Substantive testing often takes a “monetary unit” perspective of error, where each dollar in an account balance is assumed to be a sample-able unit.</li>
+<li>With monetary units, data can be assumed to be Poisson distributed, taking on discrete dollar-unit values greater than zero (i.e., being left truncated at zero).</li>
+<li>The Poisson distribution has one parameter, the rate <span class="math inline">\lambda</span>. <span class="math display">
+P(X = k) = \frac{\lambda^k }{k!} \mathrm{e}^{-\lambda}
+</span></li>
+</ul>
+<aside class="notes">
+<p>実証手続では、勘定残高の各ドル単位の金額がサンプリング可能な単位（sample-able unit）であると仮定する「金額単位」サンプリングを採用することが多い。 金額単位サンプリングにおいては、データがポアソン分布に従い、ゼロより大きいドル単位の離散的な値をとる（すなわち、ゼロ以下切り捨てられる）と仮定することがある。 ポアソン分布は1つのパラメータ<span class="math inline">\lambda</span>を持っている。 <span class="math inline">\lambda</span>の誤謬率を検出するために必要なサンプルサイズは、下記のとおりである。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="poisson-sampling" class="slide level2">
+<h2>Poisson Sampling</h2>
+<p>The required sample size to detect an error rate of <span class="math inline">\lambda</span> is</p>
+<p><span class="math display">
+n \approx \frac{4}{\lambda}
+</span></p>
+<p>This is derived from the previous formula, noting that for a Poisson randome variable <span class="math inline">Y</span>, the transformed random variable <span class="math inline">\sqrt{Y} = \mathrm{Normal}(\mu = \sqrt{\lambda}, \sigma ^2 = 0.25)</span>.</p>
+<aside class="notes">
+<p><span class="math inline">\lambda</span>の誤謬率を検出するために必要なサンプルサイズは、下記のとおりである。 このような経験則は前式から導かれ、ポアソン確率変数Yについて、変換された確率変数が <span class="math inline">\sqrt{Y} = \mathrm{Normal}(\mu = \sqrt{\lambda}, \sigma ^2 = 0.25</span> となることを利用する。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="a-statistical-decision-framework-for-auditing" class="title-slide slide level1 center">
+<h1>A Statistical Decision Framework for Auditing</h1>
+<!-- ## 第5節 監査における統計的意思決定の枠組み -->
+</section>
+<section id="st-frameworks" class="slide level2">
+<h2>1st Frameworks</h2>
+<p>A statistical decision framework for making audit decisions restructures these standards around a sequence of tasks: <!-- 監査における意思決定を行うための統計的決定フレームワークは、これらの基準を下記の作業を中心に再構築したものである。 --></p>
+<ol type="1">
+<li><strong>Objective of Audit Tasks</strong> : Audit tasks must ultimately provide the basis for the auditor to make a decision to issue one of the four audit opinions: Unqualified, Qualified, Adverse, or Disclaimer.</li>
+</ol>
+<aside class="notes">
+<ol type="1">
+<li><strong>監査業務の目的</strong>：監査業務は、最終的に監査人が4つの監査意見（無限定適正意見、限定付意見、不適正意見、または意見不表明）のいずれかを表明する判断の基礎となるものでなければならない。この決定は、報告基準の実施である。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="nd-frameworks" class="slide level2">
+<h2>2nd Frameworks</h2>
+<ol start="2" type="1">
+<li><strong>True State of the Firm</strong> : <mark class="mark">The audit report is a statement of the auditor’s decision after completing all audit tasks</mark> (thus an opinion, because it is not 100% certain) on the unobservable true state of the firm at the audit date; e.g., whether or not there is a material error in the accounts.
+<ol type="a">
+<li>Errors stem from GAAP non-compliance, period inconsistencies, and flawed information acquisition.</li>
+<li>Investors seek accurate insights into a firm’s true state and rely on auditors to confirm the accuracy of financial reports.</li>
+</ol></li>
+</ol>
+<aside class="notes">
+<ol start="2" type="1">
+<li><strong>被監査会社の真の状態</strong>（True State）： 監査報告書は、貸借対照表日における被監査会社の観察不能な真の状態（例えば、財務諸表における重要な虚偽表示の有無）について、すべての監査作業を完了した後の監査人の意思決定（100％の保証を与えるものでないため、意見といえる）を表明したものである。</li>
+<li>虚偽表示は、（財務諸表が）GAAPへ準拠していないこと、（経営者の会計方針が）会計期間ごとに一貫性がないこと、あるいは不十分な情報、偏った情報、または不適切な情報を公表したことなどから発生する。</li>
+<li>明らかに、投資家は、会社の業務や資産に関する正確な情報提供を望んでいる（これが、監査が公開会社に対して元々義務付けられた理由である）。つまり、投資家は被監査会社の財務報告が観察不能な真の状態を知りたがっており、被監査会社の財務報告がその観察不能な真の状態を正確に表しているか否かについて表明することを監査人に期待しているのである。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside class="notes">
+<ol start="2" type="1">
+<li><strong>被監査会社の真の状態</strong>（True State）： 監査報告書は、貸借対照表日における被監査会社の観察不能な真の状態（例えば、財務諸表における重要な虚偽表示の有無）について、すべての監査作業を完了した後の監査人の意思決定（100％の保証を与えるものでないため、意見といえる）を表明したものである。</li>
+</ol>
+<ol type="a">
+<li>虚偽表示は、（財務諸表が）GAAPへ準拠していないこと、（経営者の会計方針が）会計期間ごとに一貫性がないこと、あるいは不十分な情報、偏った情報、または不適切な情報を公表したことなどから発生する。</li>
+<li>明らかに、投資家は、会社の業務や資産に関する正確な情報提供を望んでいる（これが、監査が公開会社に対して元々義務付けられた理由である）。つまり、投資家は被監査会社の財務報告が観察不能な真の状態を知りたがっており、被監査会社の財務報告がその観察不能な真の状態を正確に表しているか否かについて表明することを監査人に期待しているのである。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="rd-frameworks" class="slide level2">
+<h2>3rd Frameworks</h2>
+<ol start="3" type="1">
+<li><strong>Model</strong> : The audit model is captured in the audit program which is a set of procedures that compare an “ideal” accounting of firm operations in compliance with GAAP to the actual procedures that were applied during the accounting period.
+<ol type="a">
+<li>The audit program provides a decision model for forming an audit opinion.</li>
+<li>Auditors assess risks of material misstatement by understanding the entity, its environment, and internal controls to plan further audit procedures. <!-- a. The audit program presents the decision model that allows rendering an audit opinion. --> <!-- b. The auditor obtains a sufficient understanding of the entity and its environment, including its internal control, to assess the risk of material misstatement of the financial statements, whether due to error or fraud, and to design the nature, timing, and extent of further audit procedures. --></li>
+</ol></li>
+</ol>
+<aside class="notes">
+<ol start="3" type="1">
+<li><strong>監査意思決定モデル</strong>： 監査意思決定モデルは、GAAPに準拠した監査事務所の業務の「理想的な」会計処理と、会計期間中に適用された実際の会計処理とを比較する一連の手続きである監査計画において提示される。</li>
+<li>監査計画は、監査意見を表明するための意思決定モデルを提示する。</li>
+<li>監査人は、誤謬または不正に起因するかどうかにかかわらず、財務諸表の重要な虚偽表示のリスクを評価し、追加の監査手続の種類、時期、および範囲をについての監査計画を立案するために、内部統制を含む企業およびその環境について十分な理解を得る。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="th-frameworks" class="slide level2">
+<h2>4th Frameworks</h2>
+<ol start="4" type="1">
+<li><strong>Evidence</strong> : Acquisition of consistent, unbiased, complete, and adequate audit evidence is the major source of cost of an audit.
+<ol type="a">
+<li>The auditor must obtain sufficient appropriate audit evidence by performing audit procedures to afford a reasonable basis for an opinion regarding the financial statements under audit.</li>
+</ol></li>
+</ol>
+<aside class="notes">
+<ol start="4" type="1">
+<li><strong>監査証拠</strong>： 首尾一貫した、偏りのない、十分かつ適切な監査証拠の入手は、監査コストの主要な要因である。監査人は、監査手続を実施することにより、財務諸表に関する監査意見の合理的な根拠となる十分かつ適切な監査証拠を入手しなければならない。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="th-frameworks-1" class="slide level2">
+<h2>5th Frameworks</h2>
+<ol start="5" type="1">
+<li><strong>Statistical decision theory</strong> : These are mathematical tools that provide widely accepted (and defensible in a court of law) tools to support high quality and defensible audit opinions.
+<ol type="a">
+<li>Auditors should be proficient in statistical theory and possess basic programming skills.</li>
+<li>Independence and due professional care can be ensured using respected statistical decision models.</li>
+<li>Audit decisions may extend beyond statistics, especially with intangible assets and subjective judgments, where objectivity is harder to achieve.</li>
+</ol>
+<!-- 1. Auditing standards suggest that auditors (among other things) must be proficient in statistical theory, and should obtain some computer programming skills.
+ 2. Auditors can assure that they maintain independence in mental attitude (free of bias) and exercise due professional care during the performance of the audit and the preparation of the report by invoking time-tested and widely respected research statistical decision models.
+ 3. Some components of audit decision-making may fall outside the purview of statistics when they involve unobservable constructs, subjective decisions, human behavior and judgment, and so forth. GAAP has focused on objectivizing accounting to the maximum extent; but the growth of the information economy has seen the growth of many intangible components of firm value that have thwarted this objectification. Application of statistical tests are generally more challenging where subjective intangible assets are involved. --></li>
+</ol>
+<aside class="notes">
+<ol start="5" type="1">
+<li><strong>統計的意思決定理論</strong>（Statistical decision theory）： これらの統計的意思決定理論は、高品質で正当化できる監査意見を作成するための手段として、広く受け入れられている（また裁判においても弁明が可能な）数学的ツールである。</li>
+<li>（米国の）監査基準は、監査人が（とりわけ）統計学に精通し、一定のプログラミングスキルを身につけるべきことを示唆している。</li>
+<li>監査人は、監査実施および監査報告書の作成の段階において、長い歴史を持ち、広く評価されている統計的意思決定モデルを利用することにより、（バイアスのない）独立した心理状態を維持し、職業的専門家としての正当な注意を払うわせることができる。</li>
+<li>監査における意思決定の構成要素の中には、観察できない要素、主観的な意思決定、および人間の行動や判断などが含まれる場合には、統計の範疇から外れるものもある。GAAPは、会計が客観的であるように最大限に重点を置いてきたが、情報経済の発展により、企業価値において無形の要素が増加し、この客観化を阻害してきた。主観的な無形資産が含まれる場合、統計的検定の適用は一般的に難しくなる。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="th-frameworks-2" class="slide level2">
+<h2>6th Frameworks</h2>
+<ol start="6" type="1">
+<li><strong>Opinion (Audit Decision)</strong> : Material error in the audited financial statements exists or does not. Typically this decision requires a pooling of information from supporting decisions (e.g., the existence of tolerable error in individual year-end accounts).</li>
+</ol>
+<aside class="notes">
+<ol start="6" type="1">
+<li><strong>監査意見（監査判断）の決定</strong>： 監査済財務諸表に重要な虚偽表示が存在するか否かの決定。通常、監査意見の決定には、その裏付けとなる決定（例えば、個々の期末勘定における許容可能な誤謬の有無など）からの情報の統合（pooling of information）が必要となる。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="th-frameworks-3" class="slide level2">
+<h2>7th Frameworks</h2>
+<ol start="7" type="1">
+<li><strong>Assessment of decision quality</strong>: statistical goodness-of-fit statistics determine how confident the auditor is that the opinion is defensible in court.
+<ol type="a">
+<li>Audit literature often suggests a 70% confidence level, while statistical norms recommend 95% or higher, a standard introduced by Ronald Fisher.</li>
+<li>AICPA and FASB guidance on decision quality can be unclear, with audit adequacy frequently judged in court. <!-- a. Audit literature suggests a minimum 70% confidence level (without a full statistical explanation of the meaning of this), whereas statistical literature suggests confidence approaching 95% or greater for adequate decision-making. Ronald Fisher first proposed the 95% confidence standard in the early twentieth century, a standard that has withstood the test of time. --> <!-- b. AICPA and FASB guidance on “decision quality” can be somewhat equivocal, and unfortunately, too often, the adequacy of audit decision-making is decided in court. --></li>
+</ol></li>
+</ol>
+<aside class="notes">
+<ol start="7" type="1">
+<li>（監査人の）意思決定の品質（decision quality）の評価：適合度検定（goodness-of-fit statistics）は、監査人が、法廷においてその監査意見を擁護可能であるとどの程度確信しているかを決定する。</li>
+<li>監査に関する文献では、信頼水準が最低70％であることが望ましいとされているが（この意味について統計学的な十分な説明はない）、統計学的な文献では、適切な意思決定を行うためには信頼水準が95％以上に近づくことが必要とされている。Ronald Fisherは20世紀初頭に95％の信頼性基準を提唱したが、この基準は現在まで続いている。</li>
+<li>AICPAとFASBの「決定の品質」に関する指針は、やや不明瞭な場合があり、残念なことに、監査の意思決定の適切性は法廷において争われることがあまりに多い。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="audit-tests-as-learning-model" class="title-slide slide level1 center">
+<h1>Audit Tests as Learning Model</h1>
+<!-- ## 第6節 学習モデルとしての監査手続 -->
+</section>
+<section id="audit-tests-as-learning-models" class="slide level2">
+<h2>Audit Tests as Learning Models</h2>
+<p>Auditing may be seen as a sequence of evidence collection and analyses that help the auditor learn enough to render an opinion. Conceptually, the tests involve a sequence of inferences:</p>
+<ol type="1">
+<li>Audit planning will have set the scope and sample size values for audit tasks that, in general, seek to discover (i.e., <strong>discovery sampling</strong>) whether or not transaction processing is or is not in control. <!-- This is usually stated as an assessment of error rates rather than dollar magnitudes of error. --></li>
+<li>If errors are discovered in a particular transaction flow, then sufficient additional evidence must be gathered to assess the rate of error occurrences in the transaction flow (i.e., <strong>attribute sampling</strong>)</li>
+</ol>
+<aside class="notes">
+<p>監査は、監査人が意見を表明するために十分な情報を得るのを助ける、証拠の収集と分析の一連の過程として捉えることができる。概念的には、監査手続は以下の推論の一連を含む。 1. 監査計画は、一般的に、取引処理がコントロールされているかどうかを発見することを目的として、監査業務の範囲とサンプルサイズの値を設定している（発見サンプリング）。これは、通常、誤差率の評価として述べられることが多い。 2. 特定の取引フローに誤りが発見された場合、取引フローにおける誤り発生率を評価するために十分な追加の証拠を収集する必要がある（属性サンプリング）。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<ol start="3" type="1">
+<li><mark class="mark">Transaction flows with error rates that are sufficiently high to be deemed “out of control”</mark> (i.e., intolerable from the audit perspective) are listed on the Internal Control Memo generated at the end of the Interim compliance audit.</li>
+<li>Financial statement account balances affected by any transaction flows with error rates that are sufficiently high to be deemed “out of control” will have their sample sizes in the audit program for year-end substantive tests adjusted <mark class="mark">to assure an accurate assessment of the existence of material error in the audited financial statements</mark>.</li>
+</ol>
+<aside class="notes">
+<ol start="3" type="1">
+<li>誤差率が十分に高い取引フローは、「コントロールされていない」と見なされる（すなわち、監査の観点からは許容できない）ため、内部統制メモにリストされる。</li>
+<li>誤差率が十分に高い取引フローに影響を受ける財務諸表の勘定残高は、監査プログラムにおける年末実体検査のサンプルサイズが調整され、監査済財務諸表における重要な誤謬の存在を正確に評価するために調整される。</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="付録-サンプルサイズの近似" class="title-slide slide level1 center">
+<h1>付録 : サンプルサイズの近似</h1>
+
+</section>
+<section id="式の背景" class="slide level2">
+<h2>1. 式の背景</h2>
+<p>以下は、式 <span class="math inline">n \approx \frac{1 + (1 - PE)^2}{PE^2} \approx \frac{2}{PE^2}</span> の導出方法を示す。</p>
+<ul>
+<li><strong><span class="math inline">PE</span></strong>: 検出確率（または発見効率）。</li>
+<li><strong><span class="math inline">n</span></strong>: 必要なサンプルサイズ。</li>
+</ul>
+<p>サンプルサイズ <span class="math inline">n</span> を検出確率 <span class="math inline">PE</span> に基づいて計算するために、この近似式を使用する。</p>
+</section>
+<section id="式の導出" class="slide level2">
+<h2>2. 式の導出</h2>
+<h3 id="検出確率とサンプルサイズの基本関係">(1) 検出確率とサンプルサイズの基本関係</h3>
+<p>ポアソン過程に対して、検出確率 <span class="math inline">PE</span> 検出されない確率の補完として次のようにモデル化される。</p>
+<p><span class="math display">
+PE = 1 - \mathrm{e}^{-\frac{n}{k}},
+</span></p>
+<p>ここで<span class="math inline">k</span>は定数</p>
+</section>
+<section id="小さい値に対する近似" class="slide level2">
+<h2>(2) 小さい値に対する近似</h2>
+<p>指数関数のテイラー展開による近似 <span class="math inline">e^{-x} \approx 1 - x</span> を適用すると、次のように変形できる。</p>
+<p><span class="math display">
+PE \approx 1 - \left( 1 - \frac{n}{k} \right) = \frac{n}{k}.
+</span></p>
+<p>この式を整理すると、次式が得られる。</p>
+<p><span class="math display">
+n \approx k \cdot PE.
+</span></p>
+</section>
+<section class="slide level2">
+
+<p>検出確率 <span class="math inline">PE</span> を一定の信頼性で達成するためには、誤検出確率 <span class="math inline">(1 - PE)</span> を考慮した補正が必要。 この補正を加えると、次式を得る。 <span class="math display">
+n \approx \frac{1 + (1 - PE)^2}{PE^2}.
+</span> ここで、 - <span class="math inline">1</span>: 基本項。 - <span class="math inline">(1 - PE)^2</span>: 誤検出確率を補正する項。 - <span class="math inline">PE^2</span>: 検出効率のスケーリング。</p>
+</section>
+<section class="slide level2">
+
+<p>検出確率 <span class="math inline">PE</span> が高くなる場合、すなわち <span class="math inline">PE \to 1</span> のとき、<span class="math inline">(1 - PE)^2</span> の項は非常に小さくなる。 <span class="math display">
+n \approx \frac{1}{PE^2} + \frac{(1 - PE)^2}{PE^2} \approx \frac{2}{PE^2}.
+</span></p>
+
+</section></section>
+
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="img/kobe_logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>Kobe University, Business Administration</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="gaisho_2024_08_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="gaisho_2024_08_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="gaisho_2024_08_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="gaisho_2024_08_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="gaisho_2024_08_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="gaisho_2024_08_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="gaisho_2024_08_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="gaisho_2024_08_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="gaisho_2024_08_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="gaisho_2024_08_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1300,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "コピーしました");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "コピーしました");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
