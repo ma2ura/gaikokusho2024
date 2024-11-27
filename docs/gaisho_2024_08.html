@@ -282,7 +282,7 @@ Soichi Matsuura
 <section id="natural-and-field-experiments" class="slide level2">
 <h2>Natural and Field Experiments</h2>
 <ul>
-<li><strong>Characteristics of Natural Experiments</strong>: Observational studies not traditionally controlled; allow causal inference through condition comparisons, unlike non-experimental studies.</li>
+<li><strong>Characteristics of Natural Experiments</strong> : Observational studies not traditionally controlled; allow causal inference through condition comparisons, unlike non-experimental studies.</li>
 <li><em>Applications</em>: Used when controlled experiments are impractical or unethical, as in fields like epidemiology and economics (Meyer 1995).</li>
 <li><em>Limitations</em>: Related designs like field and quasi-experiments are unsuitable for audit programs.</li>
 </ul>
@@ -525,7 +525,7 @@ Soichi Matsuura
 </section>
 <section id="calculating-sample-size" class="slide level2">
 <h2>Calculating Sample Size</h2>
-<p>To calculate the required sample size, you need to know <strong>four things</strong>: <!-- 必要なサンプルサイズを計算するには、下記の4つの項目を判断する必要がある。 --></p>
+<p>To calculate the required sample size, you need to know <strong>four things</strong> : <!-- 必要なサンプルサイズを計算するには、下記の4つの項目を判断する必要がある。 --></p>
 <ul>
 <li>The size of the error to detect.</li>
 <li>The variance of the response.</li>
@@ -715,6 +715,59 @@ n = \frac{8 CV^2}{PE^2 } \left[ 1 + (1 - PE)^2 \right ]
 </ul>
 <!-- ここで$PE$は比例誤差（proportionate error）で$PE = 1$であり、$CV$は変動係数（coefficient of variation）で$CV = 1$である。 -->
 <aside><ol class="aside-footnotes"><li id="fn2"><p>Where <span class="math inline">PE</span> is the proportionate error <span class="math inline">PE = 1</span> and <span class="math inline">CV</span> is the coefficient of variation <span class="math inline">CV = 1</span>.</p></li></ol></aside></section>
+<section id="補足前提条件の整理" class="slide level2">
+<h2>補足｜前提条件の整理</h2>
+<ul>
+<li>エラー率 (<span class="math inline">\mu_1</span>) : 制御外エラー率。</li>
+<li>検出目標 (<span class="math inline">\Delta</span>) : 検出すべきエラーの大きさ。</li>
+<li>標準偏差 (<span class="math inline">\sigma</span>) : サンプルの標準偏差。</li>
+<li>変動係数 (<span class="math inline">CV</span>) : 標準偏差を平均値で正規化したもの。定義は <span class="math display">
+CV = \frac{\sigma}{\mu_1}
+</span></li>
+<li>誤差割合 (<span class="math inline">PE</span>) : 許容誤差（または誤差率）。具体的な値は問題設定による。</li>
+</ul>
+</section>
+<section id="補足サンプルサイズ計算の一般的な考え方" class="slide level2">
+<h2>補足｜サンプルサイズ計算の一般的な考え方</h2>
+<p>サンプルサイズ <span class="math inline">n</span> は、統計的検定のパワー（Type II エラー率 <span class="math inline">\beta</span>）や有意水準（Type I エラー率 <span class="math inline">\alpha</span>）、効果量（エラーの大きさ <span class="math inline">\Delta</span>）、標準偏差 (<span class="math inline">\sigma</span>) に依存する。 <span class="math display">
+n = \left( \frac{z_{1-\alpha} + z_{1-\beta}}{\Delta} \right)^2
+</span></p>
+<ul>
+<li><span class="math inline">z_{1 - \alpha}</span>: 有意水準 <span class="math inline">\alpha</span> に対応する標準正規分布の値。</li>
+<li><span class="math inline">z_{1- \beta}</span>: 検出力（パワー）</li>
+<li><span class="math inline">\Delta</span>: 標準化効果量。</li>
+</ul>
+</section>
+<section id="補足3.-与えられた式の具体化" class="slide level2">
+<h2>補足｜3. 与えられた式の具体化</h2>
+<p>与えられた式の分子と分母を解釈することで、サンプルサイズ計算における調整項を解釈する。</p>
+<ol type="1">
+<li><p>分子 <span class="math inline">8CV^2</span>： 分子 <span class="math inline">8CV^2</span> は、変動係数 <span class="math inline">CV = \sigma / \mu_1</span> を基にサンプルサイズを調整</p></li>
+<li><p>分母 <span class="math inline">PE^2</span> : 分母 <span class="math inline">PE^2</span> は許容誤差の平方。許容誤差が小さいほど、検出のためのサンプルサイズは増加</p></li>
+<li><p>調整項 <span class="math inline">\left[ 1 + (1 - PE)^2 \right]</span> : 括弧内の項は、許容誤差 <span class="math inline">PE</span> を基にした調整項である。この調整により、エラー率の変動がサンプルサイズに与える影響を反映し</p></li>
+</ol>
+</section>
+<section id="補足4.-導出手順簡易化" class="slide level2">
+<h2>補足｜4. 導出手順（簡易化）</h2>
+<ol type="1">
+<li>サンプルサイズ <span class="math inline">n</span> の一般式に基づいて、 <span class="math display">
+n = \frac{C}{(\Delta / \sigma)^2}
+</span> と仮定する（ここで <span class="math inline">C</span> は定数）。</li>
+<li><span class="math inline">\Delta = PE \cdot \mu_1</span>、<span class="math inline">\sigma = CV \cdot \mu_1</span> を代入すると、 <span class="math display">
+n = \frac{C}{(PE \cdot \mu_1 / (CV \cdot \mu_1))^2}
+= \frac{C}{(PE / CV)^2}
+= \frac{C \cdot CV^2}{PE^2}
+</span></li>
+</ol>
+</section>
+<section class="slide level2">
+
+<ol start="3" type="1">
+<li>調整項 <span class="math inline">\left[ 1 + (1 - PE)^2 \right]</span> を掛け合わせ、最終的に <span class="math display">
+n = \frac{8 CV^2}{PE^2} \left[ 1 + (1 - PE)^2 \right]
+</span> が得られる。</li>
+</ol>
+</section>
 <section id="determining-the-variability-of-the-population" class="slide level2">
 <h2>Determining the Variability of the Population</h2>
 <ul>
@@ -1307,7 +1360,7 @@ n \approx \frac{4}{\lambda}
 <section id="th-frameworks-3" class="slide level2">
 <h2>7th Frameworks</h2>
 <ol start="7" type="1">
-<li><strong>Assessment of decision quality</strong>: statistical goodness-of-fit statistics determine how confident the auditor is that the opinion is defensible in court.
+<li><strong>Assessment of decision quality</strong> : statistical goodness-of-fit statistics determine how confident the auditor is that the opinion is defensible in court.
 <ol type="a">
 <li>Audit literature often suggests a 70% confidence level, while statistical norms recommend 95% or higher, a standard introduced by Ronald Fisher.</li>
 <li>AICPA and FASB guidance on decision quality can be unclear, with audit adequacy frequently judged in court. <!-- a. Audit literature suggests a minimum 70% confidence level (without a full statistical explanation of the meaning of this), whereas statistical literature suggests confidence approaching 95% or greater for adequate decision-making. Ronald Fisher first proposed the 95% confidence standard in the early twentieth century, a standard that has withstood the test of time. --> <!-- b. AICPA and FASB guidance on “decision quality” can be somewhat equivocal, and unfortunately, too often, the adequacy of audit decision-making is decided in court. --></li>
@@ -1389,8 +1442,8 @@ n \approx \frac{4}{\lambda}
 <h2>1. 式の背景</h2>
 <p>以下は、式 <span class="math inline">n \approx \frac{1 + (1 - PE)^2}{PE^2} \approx \frac{2}{PE^2}</span> の導出方法を示す。</p>
 <ul>
-<li><strong><span class="math inline">PE</span></strong>: 検出確率（または発見効率）。</li>
-<li><strong><span class="math inline">n</span></strong>: 必要なサンプルサイズ。</li>
+<li><strong><span class="math inline">PE</span></strong> : 検出確率（または発見効率）。</li>
+<li><strong><span class="math inline">n</span></strong> : 必要なサンプルサイズ。</li>
 </ul>
 <p>サンプルサイズ <span class="math inline">n</span> を検出確率 <span class="math inline">PE</span> に基づいて計算するために、この近似式を使用する。</p>
 </section>
