@@ -1,0 +1,1222 @@
+---
+title: "Audit Analytics"
+format:
+  html:
+    toc: true
+    html-math-method: katex
+    css: mystyle.css
+execute:
+  echo: true
+  warning: false
+  highlight-style: github
+filters:
+  - webr
+---
+
+# 分析環境を作る。
+
+## RとRstudioをインストールする。
+
+1. Install R
+2. Install RStudio (or VS Code)
+3. Install Quarto
+
+## パッケージをインストール
+
+最初に`install.packages("pacman")`で`pacman`パッケージをインストールし，
+`library(pacman)`で読み込みます。
+
+次に，`pacman`パッケージの`p_load_gh()`関数を使ってGitHubから`auditanalytics`パッケージをインストール・読み込みを行い，
+`p_load()`関数でCRANから必要なパッケージをインストール・読み込みを行います。
+
+```{r packages}
+# install.packages("pacman") # first time only
+library("pacman")
+pacman::p_load_gh("wesland/auditanalytics")
+pacman::p_load(tidyverse, plotluck, kableExtra, ggthemes, Hmisc, psych)
+```
+
+
+## Rの入門
+
+- Assign a value to a variable with `<-` or `=`.
+- An object's name is flexible, but it must begin with **a letter** and typically follows *snake_case*.
+  - like `df_original`, `my_data`, `total_asset`, etc.
+- Use `#` for comments.
+
+## Assigning values
+
+<!-- 右を左のオブジェクト`x`に代入するには、 -->
+Replace the right-hand side with the left-hand side object `x` with `<-` or `=`.
+
+:::{.v-center-container}
+<span style = "font-family: Myryca MM; font-size:2em; color:#e3439e"><-</span>
+:::
+
+```{r}
+x <- 3
+4 -> y
+x
+y
+```
+
+---
+
+### Example
+
+```{webr-r}
+# assign 5 to x
+
+# show x
+
+# assign 1 to 10 to vector_1_10
+
+# show vector_1_10 usign print()
+
+```
+
+---
+
+### pipe operator `%>%` or `|>`
+
+Use pipes `%>%` or `|>` to chain functions together.
+<!-- パイプ演算子は左の結果を右の関数の第1引数に代入します。 -->
+The pipe operator assigns the left-hand side result to the **first argument** of the right-hand side function.
+
+:::{.v-center-container}
+<span style = "font-family: Myryca MM; font-size:2em; color:#e3439e">A |> function(B)</span>
+:::
+
+has same meaning as `function(A, B)`.
+
+
+---
+
+### Example
+
+Try the following code.
+
+```{r}
+x <- 1:100 # assign 1 to 100 to x
+# calculate the sum of x above 50
+# nested
+sum(subset(x, x > 50))
+# use standard pipe
+x |> subset(x > 50) |> sum()
+# use magrittr pipe
+x %>% subset(x > 50) %>% sum
+
+```
+
+## Use packages
+
+<!-- Rでは元々備わっている関数以外の機能を追加するためにパッケージを利用します。 -->
+We can use packages to add functionality beyond the functions that come with R.
+<!-- パッケージを利用するには、まずインストールする必要があります。 -->
+Install a package to use it.
+
+```{r install_packages}
+#| eval: false
+install.packages("pacman")
+```
+
+
+## read csv data
+
+```{r}
+industry_stats <- readr::read_csv( # read csv file
+    system.file("extdata", # file path
+    "ch_2_dataset.csv",    # file name
+    package = "auditanalytics", # package name
+    mustWork = TRUE # error if file not found
+    )
+  )
+
+head(industry_stats) # show the first 3 rows
+```
+
+
+
+# Chapter 2: Foundations of Audit Analytics
+
+
+
+
+## `plotluck` packages
+
+
+```{r}
+plotluck(industry_stats, .~1)
+```
+
+`.~1` shows distribution of each variable in the data frame, separately.
+
+```{r}
+industry_stats |>
+  dplyr::filter(income >= 0 ) |> # filter data
+  plotluck(income ~ .) # plot the data
+```
+
+
+```{r}
+industry_stats |>
+  dplyr::select(-ticker) |> # tickerを除外
+  dplyr::filter(income >= 0) |> # 利益が0以上のデータ
+  plotluck(income ~ .) # 作図
+
+industry_stats |>
+  dplyr::filter(income >= 0) |> # 利益が0以上のデータ
+  plotluck(income ~ fiscal_year) # income vs fiscal year
+```
+
+
+
+```{r}
+sox_stats <- read_csv(　# read csv file
+    system.file(
+      "extdata",
+      "ch_2_data_types.csv", # dataset
+      package = "auditanalytics",
+      mustWork = TRUE
+      )
+      )
+
+
+head(sox_stats)
+
+summary(sox_stats) # descriptive stats
+
+```
+
+
+
+### make histogram
+
+
+```{r}
+sox_stats |> # choose the variables
+    ggplot() +  # プラスの直後で改行OK
+    aes(x = audit_fee) +  # 変数を指定
+    geom_histogram(bins = 20) # ヒストグラム
+```
+
+
+
+## Categorical Data
+
+
+```{r}
+sox_stats |>
+  filter(as.character(ticker) < "AI") |> # data before "AI"
+  ggplot() +
+  aes(x = ticker, y = audit_fee) + # 軸の指定
+  geom_violin() + # violin plot
+  scale_y_continuous(
+    trans = "log10", # 常用対数
+    labels = scales::comma　# comma format
+    )
+
+
+bank_fin <- read_csv( # CSVファイルを読み込む
+  system.file(
+    "extdata",
+    "ch_2_yahoo_fin.csv", # データセット
+    package = "auditanalytics",
+    mustWork = TRUE
+    )
+  )
+
+head(bank_fin)
+
+bank_fin |>
+  filter(change != "ticker") |> # ticker以外
+  mutate(# データの変換
+    change = as.numeric(change), # 数値に変換
+    capitalization = as.numeric( # Bを削除
+      str_replace(capitalization, "B", "")
+    )
+  ) |>
+  pivot_longer( # wide to long
+    cols = c(price, change, percent_change, volume,
+            vol_ave, capitalization, pe_ratio),
+    names_to = "metric", # 変数名
+    values_to = "value" # 値
+  ) |>
+  ggplot() + # 作図
+    aes(x = metric, y = value) + # 軸の指定
+    geom_boxplot() + # 箱ひげ図
+    scale_y_continuous(
+      trans = "log10",
+      labels = scales::comma
+      ) # 縦軸を対数
+```
+
+
+
+## Binary Data
+
+```{r}
+ggplot(sox_stats) +
+    aes(x = non_audit_fee, y = audit_fee, col = card) + # 軸と色分け
+    geom_violin() + # ヴァイオリンプロット
+    labs(col = "Fraud = 1 (green)") + # 軸ラベル
+    scale_y_continuous(labels = scales::comma) +
+    scale_x_continuous(labels = scales::comma)
+```
+
+
+### 整数に変換 as.integer()
+
+
+```{r}
+sox_stats$card <- as.integer(sox_stats$card)
+
+sox_stats_long <- sox_stats |>
+  pivot_longer( # wide to long
+    cols = c(effective_303, mat_weak_303, sig_def_303,
+             effective_404, auditor_agrees_303),
+    names_to = "metric", # 変数名
+    values_to = "value") # 値
+
+# 作図
+ggplot(sox_stats_long) +
+    aes(x = non_audit_fee, y = audit_fee, col = metric) +
+    geom_violin() + # バイオリン・プロット
+    scale_x_continuous(trans = "log2", labels = scales::comma) +
+    scale_y_continuous(trans = "log2", labels = scales::comma) # 対数軸
+```
+
+
+
+
+### Make an original function
+
+```{r}
+rdate <- function( # 引数を指定
+    x,
+    min = paste0(format(Sys.Date(), "%Y"), "-01-01"),
+    max = paste0(format(Sys.Date(), "%Y"), "-12-31"),
+    sort = TRUE
+    ) { # 関数の本体
+    dates <- sample(
+        seq(as.Date(min), as.Date(max), by = "day"),
+        x, replace = TRUE)
+    if (sort == TRUE) {
+        return(sort(dates))
+    } else {
+        return(dates)
+    }
+}
+
+journal_ent_no <- tibble( # data.frameを作成
+  date = rdate(1000), # ランダムな日付
+  invoice_no = seq(1, 1000) + rbinom(1000, 1, 0.1) # 請求書番号
+) |>
+  arrange(date) |> # 日付で並び替え
+  mutate( # 重複する日付をマーク
+    invoice_no = if_else(duplicated(invoice_no), NA, invoice_no),
+    duplicates = duplicated(invoice_no) # duplicates
+  )
+
+journal_dups <- journal_ent_no |>
+  mutate(
+    raw = row_number(), # row number
+    duplicates = duplicated(invoice_no) # duplicates
+    )
+
+glimpse(journal_dups)
+table(journal_dups$duplicates)
+
+
+
+ggplot(journal_dups) +
+    aes(x = invoice_no, y = raw,
+    shape = duplicates, color = duplicates) +
+    geom_point() # 散布図
+
+
+journal_ent_no |>
+  filter(duplicates == TRUE, invoice_no < 100) |>
+  kable(longtable = T, caption = "Duplicated Invoices") |>
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = F, font_size = 20)
+
+
+journal_dups <- journal_dups |>
+  mutate(
+    invoice = journal_ent_no$invoice_no,
+    omit = !raw %in% journal_ent_no$invoice
+  )
+
+
+glimpse(journal_dups)
+
+ggplot(journal_dups) +
+    aes(x = invoice_no, y = raw, col = omit) +
+    geom_point() + labs(col = "Invoice Omitted?")
+
+```
+
+
+
+
+## Big Data
+
+
+```{r}
+big_data <- read_csv(
+  system.file(
+    "extdata",
+    "ch1_amount_data.csv",
+    package = "auditanalytics",
+    mustWork = TRUE
+    )
+  ) |>
+  pivot_longer(# wide to long
+    cols = c(-year),
+    names_to = "data_type",
+    values_to = "value"
+    )
+head(big_data)
+
+
+big_data$amount <- sqrt(big_data$value)
+big_data %>%
+ ggplot() + aes(x = year, y = amount, col=data_type) +
+  geom_point(aes(color = data_type, size = amount), alpha = 0.5) +
+  scale_size(range = c(0.5, 12)) +
+  scale_y_continuous(trans = "sqrt") +
+  xlim(1990,2020) + xlab("Year") +
+	ylab("Number of Bits of Storage")
+```
+
+## Vectors
+
+
+```{r}
+a <- c(1, 2, 5.3, 6, -2, 4) # number vector
+b <- c("one", "two", "three") # character vector
+c <- c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) # logical vector
+
+a[c(2,4)] # 2nd and 4th elements of the vector
+```
+
+
+
+## Matrix
+
+### sequence of numbers from 1 to 25
+
+```{r}
+vector <- seq(1, 25)
+r <- 5
+c <- 5
+
+mat <- matrix(vector,
+  nrow = r, # row
+  ncol = c, # column
+  byrow = FALSE # 行と列を入れ替えない
+  )
+
+print(mat) # 行列を表示
+```
+
+
+
+## Try this code
+
+```{webr-r}
+mat <- seq(1, 25) |> matrix(5,5,byrow = T)
+
+# Q.1. inverse matrix
+
+# Q.2. determinant of the matrix
+
+qr(mat)$rank #
+```
+
+
+
+## Indexing
+
+```{r}
+# 5行4列の行列を作成
+y <- matrix(1:20, nrow=5,ncol=4)
+y
+
+
+# another example
+cells <- c(1,26,24,68)
+rnames <- c("R1", "R2")
+cnames <- c("C1", "C2")
+mymatrix <- matrix(cells,
+                nrow = 2,
+                ncol = 2,
+                byrow = TRUE,
+                dimnames = list(rnames, cnames)
+                )
+
+mymatrix
+
+
+
+mat[, 4] # 4th column of the matrix
+mat[3,] # 3rd row of the matrix
+mat[2:4,1:3] # rows 2 to 4 and columns 1 to 3
+```
+
+
+```{r}
+set.seed(123) # set seed for reproducibility
+x <- sample(1:20, 9) # 9 random numbers
+mat <- matrix(x, nrow = 3, ncol = 3) # 3x3 matrix
+print(mat) # print the matrix
+
+
+## Inverse Matrix
+solve(mat)
+
+## Unit Matrix
+mat %*% solve(mat) |> round(5) # unit matrix
+
+```
+
+
+
+
+## Create a data frame
+
+```{r}
+ID <- c(1, 2, 3, 4) # numeric vector
+Color <- c("red", "white", "red", NA)　# character vector
+Passed <- c(TRUE, TRUE, TRUE, FALSE) # logical vector
+
+mydata <- data.frame(ID, Color, Passed) # create data frame
+# access elements of the data frame
+mydata[1:2] # columns 1 and 2 of data frame
+mydata[c("ID","Color")] # columns ID and Age from data frame
+
+
+
+## Example: Data Frame
+
+mydata <- data.frame(
+  ID = c(1, 2, 3, 4),
+  Color = c("red", "white", "red", NA),
+  Passed = c(TRUE, TRUE, TRUE, FALSE)
+)
+
+# mydataからColorを取り出す
+mydata["Color"]
+# mydataからIDの3番目の要素を取り出す
+mydata[3,"ID"]
+```
+
+
+
+
+
+## List
+
+```{r}
+a <- b <- "seven"
+z <- y <- 0
+# example of a list with 4 components -
+w <- list(name = "Fred", mynumbers = a, mymatrix = y, age = 5.3)
+w
+
+list1 <- list(name = "Fred", mynumbers = a, mymatrix = y, age = 5.3)
+list2 <- list(name = "Joe", mynumbers = b, mymatrix = z, age = 10.11) # 誤字
+v <- c(list1,list2)
+v
+
+w[[1]] # 1st component of the list
+v[["mynumbers"]] # component named mynumbers in list
+
+
+
+## Example: list
+
+mylist <- list(
+  a <- c("one", "two", "three"),
+  b <- c(1,2,3),
+  c <- matrix(1:9, nrow = 3)
+)
+
+# mylistからaを取り出す
+mylist[1]
+# mylistからbの2番目の要素を取り出す
+mylist[[2]][2]
+
+
+```
+
+
+## factor
+
+```{r}
+gender <- c(rep("male", 20), rep("female", 30))
+gender <- factor(gender)　# ファクター型に変換
+gender
+summary(gender)
+
+
+rating <- c("medium", "large", "small") # 文字ベクトル
+rating <- ordered(rating, levels = c("small", "medium", "large"))
+rating
+
+arry <- read_csv( #
+  system.file(
+    "extdata",
+    "morph_array.csv", #
+    package = "auditanalytics",
+    mustWork = TRUE
+    )
+  )
+
+head(arry)
+
+
+arry |>
+  kable(longtable = T) |>
+  kable_styling( # specify table style
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = F, font_size = 18
+  )
+
+
+
+length(arry) #  要素・コンポーネントの数
+class(arry) # オブジェクトのクラス・型
+names(arry) # オブジェクトの変数名
+```
+
+
+
+# Chapter 3. Analysis of Accounting Transactions
+
+## `lubridate` packages
+
+```{r lubridate01}
+pacman::p_load(auditanalytics, tidyverse)
+```
+
+`lubridate` is a package that makes it easier to work with dates and times in R.
+
+```{r}
+ymd(20101215) # year month day
+
+mdy("4/1/17") # month day year
+
+bday <- dmy("14/10/1979")
+
+month(bday) # 月を取得
+wday(bday, label = TRUE) # 1979年10月14日は日曜日
+year(bday) <- 2016
+wday(bday, label = TRUE) # 2016年10月14日は金曜日
+```
+
+
+
+```{webr-r}
+# 2024年10月16日を日付オブジェクトstartとして作成
+
+# 2025年10月16日を日付オブジェクトendとして作成
+
+# start から年をyear, 月をmonthとして作成
+
+```
+
+## Accounting Transactions for Auditors
+
+
+```{r qplot01}
+price <- rpois(n = 1000, lambda = 2)  # ポワソン分布から1000個の乱数を生成
+price |> head()
+
+quantity <- rpois(1000, 10000) # ポワソン分布から1000個の乱数を生成
+quantity |> head()
+
+value <- price * quantity      # 価格と数量の積
+
+qplot(value, geom = "histogram") # ヒストグラム
+
+qplot(value, geom = "density")   # 密度分布
+```
+
+
+
+```{r}
+disburse <- read_csv(system.file( # csvファイルの読み込み
+    "extdata",
+    "ch_2_AP_disbursements_journal.csv", # ファイル名
+    package = "auditanalytics",
+    mustWork = TRUE
+    )
+  ) # ファイルがない場合はエラーを返す
+
+summary(disburse) # descriptive statistics
+# output the total amount paid
+cat('\n\n 支払帳の合計金額 = ', sum(disburse$amount_paid))
+```
+
+
+```{r bank_fin}
+#| massage: false
+#| error: false
+library(Hmisc) # 記述統計量の計算
+bank_fin <- read.csv(system.file(
+    "extdata",
+    "ch_2_yahoo_fin.csv",
+    package = "auditanalytics",
+    mustWork = TRUE
+    )
+    )
+Hmisc::describe(bank_fin) # Show summary statistics
+
+
+
+library(psych) # 心理統計学のためのパッケージ
+psych::describe(bank_fin) # 記述統計量の出力
+
+psych::describeBy(bank_fin, bank_fin$name)
+```
+
+```{r library}
+pacman::p_load(kableExtra, broom, pastecs) # パッケージの読み込み
+
+## Tidy these up and write them as a formated table, using kableExtra
+pastecs::stat.desc(bank_fin) |> # 記述統計量の計算
+  broom::tidy() |> # データフレームに変換
+  kable(longtable = T, caption = "Summary Statistics") |>
+  kable_styling(full_width = F, font_size = 18)
+```
+
+
+## QQ-Plot
+
+```{r read_disburse}
+disburse <- readr::read_csv(system.file(
+    "extdata",
+    "ch_2_AP_disbursements_journal.csv", # csv file
+    package = "auditanalytics",
+    mustWork = TRUE
+    )
+    )
+
+head(disburse)
+d <- as.numeric(as.character(disburse$amount_paid))
+head(d)
+class(d)
+
+qqnorm(d,
+        main = "Normal Q-Q Plot", # QQプロットを作成
+        xlab = "Theoretical Quantiles", # x軸のラベル
+        ylab = "Sample Quantiles", # y軸のラベル
+        plot.it = TRUE) # プロットするかどうか
+```
+
+
+## Density and Cumulative Distribution
+
+```{r density}
+
+d <- density(disburse$amount_paid) # density of amount paid
+
+plot(d, main = "Density of Amount Paid")  # plot density
+
+polygon(d, col="violet", border="black") # add color
+
+plot(
+    ecdf(disburse$amount_paid), # 累積分布関数を計算
+    main = "Cumulative Density of Amount Paid" # 図のタイトル
+    ) # 誤植 ~いらない
+```
+
+`ecdf()` is a function that computes the empirical cumulative distribution function of a dataset.
+
+
+
+
+```{r glm}
+lr <- read_csv(system.file(
+  "extdata",
+  "ch_2_data_types.csv",
+  package = "auditanalytics",
+  mustWork = TRUE
+  )
+  )
+lgt <- glm( # general linear method
+    formula = insd ~ audit_fee + effective_404, # 回帰モデル
+    family = "binomial", # link function
+    data = lr) # data frame
+
+summary(lgt) # 結果の表示
+
+plot(lgt) # 図の作成
+```
+
+
+
+## `keras`
+
+```{r keras}
+# install.packages("keras") # install keras packages
+library(keras)
+# install_keras() # Run this only once. Installation takes time.
+
+
+mnist <- dataset_mnist() # MNISTデータを読み込む
+
+class(mnist)   # List class
+
+glimpse(mnist) # See the structure of the data
+```
+
+The MNIST database was constructed from NIST's Special Database 3 and Special Database 1 which contain *binary images of handwritten digits*.
+
+
+```{r classify data}
+train_images <- mnist$train$x # image data for training
+train_labels <- mnist$train$y # label data for training
+test_images <- mnist$test$x   # test image data
+test_labels <- mnist$test$y   # test label data
+
+network <- keras_model_sequential() # null model
+network |>
+    # 28*28 pixel images are flattened into 784 pixel vectors
+    layer_dense(units = 512, input_shape = c(28 * 28)) |>
+    # ReLU activation function converts negative values to zero
+    layer_activation('relu') |> # ReLU activation function
+    layer_dense(units = 10) |>  # 10 output layers 1:10
+    # softmax activation function convert the output to a probability distribution
+    layer_activation("softmax") # softmax activation function
+
+
+network |> compile(       # モデルをコンパイル
+  optimizer = "rmsprop",  # 最適化アルゴリズム
+  loss = "categorical_crossentropy", # 損失関数
+  metrics = c("accuracy") # 評価関数
+)
+
+# Training data
+train_images <- array_reshape( # 行列に変換
+    train_images,              # 訓練用画像データ
+    c(60000, 28 * 28)          # 画像の形状
+    )
+# Test data
+test_images <- array_reshape( # 行列に変換
+    test_images,              # テスト用画像データ
+    c(10000, 28 * 28)         # 画像の形状
+    )
+# 0が黒，255が白のデータを0-1の範囲に正規化
+train_images <- train_images / 255
+test_images  <- test_images  / 255
+
+
+train_labels <- to_categorical(train_labels) #
+test_labels <- to_categorical(test_labels)   #
+
+
+
+history <- network |>
+    fit( # training the model
+        train_images, # training image data
+        train_labels, # training label data
+        epochs = 10,  # the number of times the model will be trained
+        batch_size = 128 # the number of samples per gradient update
+        )
+
+plot(history) # 訓練の履歴をプロット
+
+metrics <- network |>
+    evaluate(test_images, test_labels, verbose = 0)
+metrics |> kable()
+```
+
+
+# Chapter 4. Risk Assessment and Audit Planning
+
+## Auditing
+
+
+```{r}
+pacman::p_load(finstr, XBRL, xbrlus, pander, knitr, kableExtra)
+
+
+old_o <- options(stringsAsFactors = FALSE) # 文字列をファクターとして扱わない
+
+xbrl_data_2016 <- xbrlDoAll("XBRL/gm-20161231.xml")
+xbrl_data_2017 <- xbrlDoAll("XBRL/gm-20171231.xml")
+
+options(old_o) # 文字列をファクターとして扱う
+
+st2016 <- xbrl_get_statements(xbrl_data_2016)
+st2017 <- xbrl_get_statements(xbrl_data_2017)
+
+
+print(st2017) # 2017年度の財務諸表
+
+# 連結貸借対照表を取得
+balance_sheet2017 <- st2017$ConsolidatedBalanceSheets
+balance_sheet2016 <- st2016$ConsolidatedBalanceSheets
+
+# 連結損益計算書
+income2017 <- st2017$ConsolidatedIncomeStatements
+income2016 <- st2016$ConsolidatedIncomeStatements
+
+## 貸借対照表を出力
+capture.output(
+    bs_table <- print( # 出力
+        balance_sheet2017, # オブジェクト名
+        html = FALSE, # html出力しない
+        big.mark = ",", # 3桁区切りにカンマを使用
+        dateFormat = "%Y"), # 日付のフォーマット
+        file= "NUL") # 出力先をNULにする
+
+    bs_table |>
+    head(10) |> # 先頭10行を表示
+        kable(
+            longtable = T, # ページまたぎ
+            caption = "Balance Sheet", # タイトル
+            booktabs = T
+            ) |>
+        kable_styling(
+            bootstrap_options = c("striped", "hover", "condensed"),
+            full_width = F,
+            font_siz = 18
+            )
+```
+
+
+
+```{r}
+balance_sheet <- balance_sheet2017 |> merge(balance_sheet2016)
+
+capture.output(
+    bs_table <- print(
+        balance_sheet,
+        html = FALSE,
+        big.mark = ",",
+        dateFormat = "%Y"
+        ),
+    file = "NUL"
+    )
+
+bs_table |>
+    head(10) |>
+    kable(
+        longtable = T,
+        caption="Merged Balance Sheet",
+        # "latex",
+        booktabs = T) |>
+    kable_styling(
+        bootstrap_options = c("striped", "hover", "condensed"),
+        full_width = F,
+        font_size = 18
+        )
+```
+
+
+```{r}
+check <- check_statement(balance_sheet2017)
+check
+
+
+check_statement(
+    within(balance_sheet2017, InventoryNet <- InventoryNet * 2)
+    )
+
+
+check <- check_statement(income2017, element_id = "OperatingIncomeLoss")
+check
+
+check$expression[1]
+
+check$calculated / 10^6
+```
+
+
+## Rearranging the Statement
+
+
+### `expose()` function
+
+
+```{r}
+expose(balance_sheet,
+    # Assets
+    "Current Assets" = "AssetsCurrent",
+    "Noncurrent Assets" = other("Assets"),
+    # Liabilites and equity
+    "Current Liabilities" = "LiabilitiesCurrent",
+    "Noncurrent Liabilities" = other(c("Liabilities", "CommitmentsAndContingencies")),
+    "Stockholders Equity" = "StockholdersEquity"
+)
+
+expose(balance_sheet,
+    # Assets
+    "Tangible Assets" = "Assets" %without% c(
+        "AssetsOfDisposalGroupIncludingDiscontinuedOperationCurrent",
+        "NotesAndLoansReceivableNetCurrent",
+        "gm_AssetsSubjecttoorAvailableforOperatingLeaseNetCurrent"
+        ),
+    "Intangible Assets" = other("Assets"),
+   # Liabilites and equity
+    "Liabilities" = c("Liabilities", "CommitmentsAndContingencies"),
+    "Stockholders Equity" = "StockholdersEquity"
+    )
+```
+
+
+```{r}
+diff_bs <- diff(balance_sheet)
+capture.output(
+    bs_table <- print(
+        diff_bs,
+        html = FALSE,
+        big.mark = ",",
+        dateFormat = "%Y"
+        ), file = "NUL")
+
+bs_table |>
+    head(10) |>
+    kable(longtable = T,
+    caption = "Lagged Differences in Balance Sheets",
+    # "latex",
+    booktabs = T) |>
+    kable_styling(
+        bootstrap_options = c("striped", "hover", "condensed"),
+        full_width = F,
+        font_size = 18)
+```
+
+
+```{r}
+#| eval: FALSE
+pacman::p_load(finreportr)
+
+tesla_ann <- AnnualReports("TSLA")
+tesla_ann
+tesla_inc <- GetIncome("TSLA", 2018)
+tesla_bs <- GetBalanceSheet("TSLA", 2018)
+tesla_cf <- GetCashFlow("TSLA", 2018)
+head(tesla_inc)
+```
+
+But this code will not be able to access Tesla’s 2019 reports, because it throws an error:
+
+
+
+### `edgar` package
+
+```{r}
+#| eval: false
+pacman::p_load(xml2, curl, edgar)
+u1 <- "https://www.sec.gov/Archives/edgar/data/1318605/000156459020004475/tsla-10k_20191231_htm.xml"
+url_file <- curl_download(u1, destfile = "~/Downloads/u1.xml") # to download and save
+list_url_1 <- as_list(read_xml(u1)) # to read into R
+
+cik.no <- 0001318605 # Tesla
+form.type <- "10-K"
+filing.year = 2019
+quarter = c(1,2,3,4)
+
+getFilings(
+    cik.no,
+    form.type,
+    filing.year,
+    quarter,
+    downl.permit = "y"
+    )
+```
+
+`NULL`になりました。
+
+
+## Audit Staffing and Budgets
+
+### Audit Staffing and Budgets
+
+```{r}
+benefit <- seq(10, 10000, 10) # 10から10000まで10刻み
+staff_allocated <- data.frame(benefit, floor(10 * (log(benefit^.06))))
+
+ggplot(staff_allocated, aes(staff_allocated[,1],staff_allocated[,2]) ) +
+    geom_line() + labs(x ="Audit Risk Reduction",  y ="Staff Auditor Person-Months")
+```
+
+
+
+
+### Shiny App
+
+
+```{r}
+# Define UI for application
+library(shiny) # Load the shiny package
+
+ui <- fluidPage(
+    titlePanel("Risk Assessment Matrix"),
+    sidebarLayout(
+        sidebarPanel(
+            # Input: 監査テストの統計的信頼水準
+            sliderInput("confidence", "Confidence:",
+                        min = .7,
+                        max = .999,
+                        value = .95),
+            # Input: サンプル取引ごとの監査コスト
+            sliderInput("cost", "Audit $ / transaction:",
+                        min = 0,
+                        max = 500,
+                        value = 100),
+            # Input: Text for providing a caption for the RAM
+            textInput(
+                inputId = "caption",
+                label = "クライアント:",
+                value = "XYZ Corp.")
+        ),
+        # Main panel for displaying outputs
+        mainPanel(
+            # Output: slider values entered
+            tableOutput("values"),
+            # Output: Formatted text for caption
+            h3(textOutput("caption", container = span)),
+            # Output: total cost of the audit
+            textOutput("view"),
+            # Output: RAM summary with sample sizes (scope) and cost
+            verbatimTextOutput("summary"),
+            h6("リスク選択: 1 = 低, 2 = 中, 3 = 高"),
+            h6("リスク知能 = ビジネス・インテリジェンス・スキャンニングで示されるリスク水準"),
+            h6("前年度リスク = 前期に監査人が示したリスク水準"),
+            h6("Scope = estimated discovery sample size that will be needed in the audit of this account"),
+            h6("Audit cost = audit labor dollars per sampled transaction"),
+            h6("Confidence = statistical confidence"),
+            h6("Account Amount and the Ave. Transaction size are in $ without decimals or 000 dividers")
+        )
+    )
+)
+
+# サーバー側の設定
+server <- function(input, output) {
+    ram <- read.csv(system.file("extdata",
+        "risk_asst_matrix.csv",
+        package = "auditanalytics",
+        mustWork = TRUE)
+        )
+
+    sliderValues <- reactive({
+        data.frame(
+            Audit_Parameter = c("confidence", "cost"),
+            Value = as.character(c(input$confidence, input$cost)),
+            stringsAsFactors = FALSE)
+        })
+
+    output$values <- renderTable({
+        sliderValues()
+        })
+
+    output$caption <- renderText({
+        input$caption
+        })
+
+    output$summary <- renderPrint({
+        ram <- ram
+        conf <- input$confidence
+        cost <- input$cost
+        risk <- (10 - (as.numeric(ram[,2]) * as.numeric(ram[,3])) )/100
+        Scope <-  ceiling( log(1-conf) / log( 1- risk))
+        ram <- cbind(ram[,1:5], Scope)
+        Min_cost <- Scope * cost
+        ram <- cbind(ram[,1:6], Min_cost)
+        ram
+        })
+
+    output$view <- renderText({ # 監査費用を表示
+        ram <- ram # リスク評価行列を読み込む
+        conf <- input$confidence # 監査の信頼度
+        cost <- input$cost # 監査費用
+        risk <- (10 - (as.numeric(ram[,2]) * as.numeric(ram[,3])) )/100 # リスク
+        Scope <-  ceiling( log(1-conf) / log( 1- risk)) # 範囲
+        ram <- cbind(ram[,1:5], Scope) # リスク評価行列に範囲を追加
+        Min_cost <- Scope * cost # 最小監査費用を計算
+        minimum_audit_cost <- sum(Min_cost) # 最小監査費用を合計
+        c("Minimum estimated audit cost = ",minimum_audit_cost) # 最小監査費用を表示
+        })
+}
+```
+
+
+```{r}
+#| eval: false
+# Run the application
+shinyApp(ui = ui, server = server)
+```
+
+<iframe src="https://u66nae-soichi-matsuura.shinyapps.io/Audit_Analytics_chap4/" width="100%" height="1200" frameborder="0"></iframe>
+
+## Generating the Audit Budget from the Risk Assessment Matrix
+
+
+```{r}
+confidence <- seq(.99, 0.7, -0.01) # 0.99から0.7まで0.01刻みのベクトル
+n <- (log(1 - confidence)) / log(1 - 0.05) # 発見サンプルサイズを計算
+plot(confidence,n, type="l") # 発見サンプルサイズをプロット
+
+confidence <- 0.95
+n <- (log(1 - confidence)) / log(1 - 0.05)
+cat("\n Discovery sample size = ", ceiling(n))
+```
+
+
+
+
+```{r warning=F, eval=T, echo=T}
+# install.packages("pwr") # first time only
+library(pwr)　# Cohen本のpower analysis
+
+size <- 1000 # トランザクションの総数
+Delta <- 0.05 * size # 5%の許容エラー率を検出する
+sigma <- 0.3 * size # 変動（おそらく1/3）を推測する
+effect <- Delta/sigma # 許容度÷変動
+
+sample <- pwr.t.test( # pwr.t.test関数を使用
+    d = effect, sig.level = 0.05, power = 0.8,
+    type = "one.sample",
+    alternative = "greater" ## look for overstatement of earnings
+    )
+
+cat("\n Attribute sample size for occurrence of error = ", ceiling(sample$n))
+```
+
+- `size` : 総トランザクション数（ここでは1000）。
+- `Delta` : 許容エラー率として5%を想定しており、1000件中5%である「50件のエラーを検出できるようにしたい」という設定。
+- `sigma` : 変動の範囲としてトランザクション数の約30%（1/3）を想定し、標準偏差に相当
+- `effect` : 効果の大きさ（エラー率÷変動）で、これが実際に検出したい差を標準化したもの
+- `d = effect` : effectで計算された効果の大きさを指定。これは検出したいエラー率が、変動に対してどれだけの比率かを示しています。
+- sig.level = 0.05: 有意水準を5%に設定。
+- `power = 0.8` : 検出力（power）を80%に設定。これは、実際に効果が存在する場合にそれを80%の確率で検出できることを意味します。
+- `type = "one.sample"` : 1標本のt検定を使用する設定。つまり、1つの標本の平均が期待値と異なるかどうかを調べるもの。
+- `alternative = "greater"` : 片側検定で、「平均が期待よりも大きい」場合（例：利益の過大計上）を検出したいことを示しています。
+
+
+```{r}
+size   <- 100000      # 取引の総額
+mu     <- 50          # 取引の平均値
+Delta  <- 0.05 * mu   # 5%の金額の許容誤差を検出
+sigma  <- 30          # 変動
+effect <- Delta / sigma # 許容度÷変動
+
+sample <- pwr.t.test( # Cohenのpower analysis
+  d = effect,       # Cohenのd
+  sig.level = 0.05, # 有意水準
+  power = 0.8,      # 効果量
+  type = "one.sample", # 一標本検定
+  alternative = "greater" # 偽陽性
+  )
+cat("\n Attribute sample size for amount of error = ", ceiling(sample$n))
+```
+
+
+

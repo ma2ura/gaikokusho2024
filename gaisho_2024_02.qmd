@@ -1,0 +1,1541 @@
+---
+title: |
+  <b>外国書購読 Day2</b> </br>
+  <span style="color: #282A36; ">Foundations of Audit Analytics</span>
+author: "Soichi Matsuura"
+format:
+  revealjs:
+    theme: ["default", "dracula.scss"]
+    transition: convex
+    slide-number: true
+    code-line-numbers: false
+    html-math-method: katex
+    chalkboard: true
+    controls: true
+    width: 1400
+    footer: "Kobe University, Business Administration"
+    logo: "img/kobe_logo.png"
+    include-in-header:
+      text: |
+        <style>
+        .v-center-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        </style>
+execute:
+  echo: true
+  warning: false
+  highlight-style: github
+filters:
+  - webr
+# webr:
+#   packages: ['dplyr','ggplot2','readr'] # Install R packages on document open
+css: mystyle.css
+---
+
+
+# Review of the previous lecture
+
+## Introduction to R
+
+<!-- 代入 -->
+- Assign a value to a variable with `<-` or `=`.
+- An object's name is flexible, but it must begin with **a letter** and typically follows *snake_case*.
+  - like `df_original`, `my_data`, `total_asset`, etc.
+- Use `#` for comments.
+- Use `pacman::p_load()` to load packages.
+
+```{r}
+pacman::p_load(tidyverse, ggthemes, knitr)
+```
+
+## Assigning values
+
+<!-- 右を左のオブジェクト`x`に代入するには、 -->
+Replace the right-hand side with the left-hand side object `x` with `<-` or `=`.
+
+:::{.v-center-container}
+<span style = "font-family: Myryca MM; font-size:2em; color:#e3439e"><-</span>
+:::
+
+```{r}
+x <- 3
+4 -> y
+x
+y
+```
+
+---
+
+### Example
+
+```{webr-r}
+# assign 5 to x
+
+# show x
+
+# assign 1 to 10 to vector_1_10
+
+# show vector_1_10 usign print()
+
+```
+
+---
+
+### pipe operator `%>%` or `|>`
+
+Use pipes `%>%` or `|>` to chain functions together.
+<!-- パイプ演算子は左の結果を右の関数の第1引数に代入します。 -->
+The pipe operator assigns the left-hand side result to the **first argument** of the right-hand side function.
+
+:::{.v-center-container}
+<span style = "font-family: Myryca MM; font-size:2em; color:#e3439e">A |> function(B)</span>
+:::
+
+has same meaning as `function(A, B)`.
+
+
+---
+
+### Example
+
+Try the following code.
+
+```{r}
+x <- 1:100 # assign 1 to 100 to x
+# calculate the sum of x above 50
+# nested
+sum(subset(x, x > 50))
+# use standard pipe
+x |> subset(x > 50) |> sum()
+# use magrittr pipe
+x %>% subset(x > 50) %>% sum
+
+```
+
+## Use packages
+
+<!-- Rでは元々備わっている関数以外の機能を追加するためにパッケージを利用します。 -->
+We can use packages to add functionality beyond the functions that come with R.
+<!-- パッケージを利用するには、まずインストールする必要があります。 -->
+Install a package to use it.
+
+```{r install_packages}
+#| eval: false
+install.packages("pacman")
+```
+
+Installed the `pacman` package.
+
+## Load packages
+
+<!-- パッケージをインストールしただけでは、そのパッケージの関数を利用することができません。 -->
+Just installing a package does not allow you to use its functions.
+<!-- パッケージを利用するためには、`library()`関数を使って読み込む必要があります。 -->
+To use a package, you need to load it with the `library()` function.
+
+```{r load_packages}
+library(pacman)
+```
+
+This allows you to use the functions of the `pacman` package.
+<!-- これで、`pacman`パッケージの関数を利用することができます。 -->
+<!-- 度々いろいろなパッケージをインストールして、それを毎回読み込むのは面倒です。 -->
+
+## Load multiple packages
+<!-- ## パッケージの一括読み込み -->
+<!-- そこで、`pacman`パッケージの`p_load()`関数を使って複数のパッケージを一括で読み込むことができます。 -->
+We can load multiple packages at once using the `p_load()` function of the `pacman` package.
+
+```{r load_once}
+#| cache: true
+p_load(tidyverse, pysch, tableone)
+```
+
+This allows you to use the functions of the `tidyverse`, `pysch`, and `tableone` packages.
+<!-- これで、`tidyverse`, `pysch`, `tableone`パッケージの関数を利用することができます。 -->
+If there are any packages that have not been installed, they will be installed automatically.
+<!-- もし、インストールされていないパッケージがあれば、自動でインストールしてくれます。 -->
+
+
+<!-- ## どのパッケージの関数か明示 -->
+## Specify the package
+
+<!-- `library()`関数を使ってパッケージを読み込まなくても、`::`を使ってパッケージ名を明示することで、そのパッケージの関数を利用することができます。 -->
+You can use the `::` to specify the package name without loading the package with the `library()` function.
+
+::: {.v-center-container}
+<span style = "font-size:2em; color:#e3439e">パッケージ名::関数()</span>
+:::
+
+```{r}
+pacman::p_load(tidyverse, psych, tableone)
+```
+
+Without running `library(pacman)`, you can use the `p_load()` function.
+<!-- `library(pacman)`を実行していなくても`pacman::p_load()`で`p_load()`関数を利用できます。 -->
+Use `dplyr` package's `mutate()` function as `dplyr::mutate()`.
+<!-- `dplyr`パッケージの`mutate()`関数を使う場合は、`dplyr::mutate()`とします。 -->
+
+<!-- # データの確認 -->
+
+<!-- ## データの先頭 -->
+## Check the data
+
+Check the data with the `head()` function.
+<!-- データを読み込んだら、まずはデータを確認するために -->
+
+:::{.v-center-container}
+<span style = "font-family: Myryca MM; font-size:1.5em; color:#e3439e; text-align: center">head()</span>
+:::
+
+
+If you want to see the structure of the data, use the `str()` function.
+<!-- データの概要を知るためには、 -->
+
+:::{.v-center-container}
+<span style = "font-family: Myryca MM; font-size:1.5em; color:#e3439e; text-align: center">str()</span>
+:::
+
+- `num`は数値データ
+- `chr`は文字データ
+
+
+
+
+
+# Chapter 2 Foundations of Audit Analytics
+
+##  Business and Data Analytics
+
+- The modern science of data analytics evolved from early projects to **add scientific rigor** in two fields —
+
+1. games of chance and
+2. governance (Stigler 1986).
+
+<!-- 現代の科学におけるデータ分析は、（1）ギャンブルと（2）国家統治という2つの分野を、厳密な科学として考える初期の試みから生まれた(Stigler 1986)。 -->
+- The latter application, in governance, focused on summarizing the demographics of nation-states and lent its name, **statistics**, to the field.
+<!-- 後者の統計学の国家統治への適用は、国民国家の人口統計の記述に焦点を当て、統計学(statistics)という名前がこの分野に付けられた。 -->
+
+
+
+---
+
+- The field has steadily evolved to include exploratory analysis, which used computers to improve graphics and summarizations; and to include the computationally intensive methods termed machine learning.
+<!-- この分野では、コンピュータを使ってグラフ化や記述統計を助ける探索的データ分析(exploratory analysis)や、機械学習と呼ばれるコンピューターを利用した統計手法などの分野が、着実に発展してきた。 -->
+
+- The mathematical foundations of statistics evolved from the 17th ~ 19th centuries based on work by *Thomas Bayes*, *Pierre-Simon Laplace*, and *Carl Gauss*.
+<!-- 統計学の数学的基礎は、Thomas Bayes、 Pierre-Simon Laplace、およびCarl Gaussら数学者の研究成果に基づいて、17世紀から19世紀にかけて発展した。 -->
+- Statistics as a rigorous scientific accelerated at the turn of the 20th century under *Francis Galton*, *Karl Pearson* and *R.A. Fisher*, introducing experimental design and maximum likelihood estimation (Stigler 1986).
+<!-- 20世紀に入ると、Francis Galton、Karl Pearson、およびR.A. Fisherら統計学者の下で厳密な科学としての統計学が急速に進展し、実験計画法(experimental design)と最尤推定法(maximum likelihood estimation)が広まった(Stigler 1986)。 -->
+
+---
+
+### Exploratory data analysis
+
+- **Exploratory data analysis** (EDA) arose from seminal work in data summarization presented in Cochran et al. (1954) and Tukey (1980).
+<!-- 探索的データ解析(Exploratory data analysis：以下、EDA)は、 Cochran et al. (1954)やTukey (1980)で発表されたデータ要約における重要な研究から生まれた。 -->
+- EDA built on the emerging availability of computing power and software.
+<!-- EDAは、コンピューターの計算能力が向上したり、統計ソフトウェアが利用可能となったことから生じた。 -->
+- EDA is now an essential part of data analytics, and is important for determining how much, and what kind of information is contained in a dataset.
+<!-- 現在、EDAはデータ分析に不可欠な要素であり、データセットにおける情報の量と種類を決定するために重要である。 -->
+
+---
+
+- In contrast, the statistics of Pearson and Fisher tended to focus on **testing of models and prediction**.
+<!-- これとは対照的に、PearsonやFisherらによる統計学は、モデルの検定と予測に重点を置く傾向があった。 -->
+- EDA complements such testing by assessing whether data obtained for testing is actually appropriate for the questions posed; in the vernacular of machine learning, *EDA helps us extract the features that are contained in the data*.
+<!-- EDAは得られたデータが提示された問題に実際に適しているかどうかを評価することで、そのような検定を補完している。 -->
+<!-- 機械学習の言葉で言えば、EDAはデータに含まれる特徴量を抽出するのに役立っている。 -->
+- In our current era of massive, information rich datasets, where often we have no control, and limited information about how the data was obtained, **EDA has become an essential precursor of model testing and prediction**.
+<!-- 現在の大規模で情報量の多いデータセットの時代では、データの取得方法についての制御ができず、限られた情報しか得られないことが多いため、EDAはモデルの検定と予測のための必須の前提条件となっている。 -->
+
+---
+
+- A typical first step in analytical review of a company might be to **review the industry statistics** to find out what part, if any, of our client’s financial accounts are outliers in the industry.
+<!-- ある企業が分析的手続を行う際の典型的な最初のステップは、被監査会社の会計勘定のどの部分が同一産業において異常値であるかを検出するために、産業統計を確かめることである。 -->
+- Unusual account values or relationships can indicate audit risks that would require a broader scope of auditing.
+<!-- 異常な勘定の数値や関係は、より広範な監査を必要とする監査リスクを示す可能性がある。 -->
+- Exploratory statistics are easy to implement, yet are ideal for quickly highlighting unusual account values.
+<!-- 探索的統計は実装が簡単であり、通常とは異なる勘定の金額を素早く強調するのに適している。 -->
+- We will first load a dataset of industry statistics that have been downloaded from *the Wharton Research Data Service* repository, and conduct simple summaries of the data.
+<!-- まず、Wharton Research Data Serviceリポジトリからダウンロードした産業統計のデータセットを読み込み、データの簡単な要約を行う。 -->
+
+---
+
+- The R package `plotluck` *automatically chooses graphs* that are appropriate for the data, and is an ideal tool for quick visualization of data.
+<!-- Rのパッケージplotluckは、データに適したグラフを自動的に選択し、データを素早く可視化するための理想のツールである。 -->
+<!-- We ask: What variables are contained and how they are distributed?  -->
+<!-- このツールを利用することにより、分析者は「（データセットに）どのような変数が含まれ、それらがどのように分布しているか？」を知ることができる。 -->
+- In general, R lets the dot symbols stands for **all variables in the data set** and `.~1` regresses the variables against the intercept, thus giving the distribution (essentially a smoothed histogram) (Fig. 1)
+<!-- 一般に、Rではドット記号が「データセット中のすべての変数」を表し、".~1 "が変数を切片に対して回帰させるので、分布（具体的には平滑化されたヒストグラム）が得られる（図1）。 -->
+
+---
+
+### Installing and loading packages (memo)
+
+- Usually, install a package with `install.packages("hoge")` and load it with `library(hoge)`.
+<!-- - 普通は，`install.packages("hoge")`として，パッケージをインストールし，`library(hoge)`で読み込む。 -->
+<!-- - いちいち面倒なので，`pacman`というパッケージを導入して，簡単にパッケージを読み込む。 -->
+- Now use the `pacman` package to load packages easily.
+
+```{r}
+#| eval: false
+install.packages("pacman") # first time only
+```
+
+load the packages with `pacman::p_load(hoge1, hoge2, hoge3)`.
+
+```{r}
+pacman::p_load(auditanalytics, tidyverse, plotluck, broom)
+```
+
+<!-- で一括読み込みできます。インストールされていないものがあったら，自動でインストールされます。 -->
+You can load them all at once. If there is something not installed, it will be installed automatically.
+
+---
+
+### パッケージの説明
+
+読み込むパッケージの機能
+
+- `auditanalytics` : 著者が作成したパッケージでいろんなデータが活用できる。
+- `tidyverse` : データを操作する最高のパッケージ群で，超絶便利
+- `plotluck` : グラフを一気に作成できるEDA用パッケージ
+- `broom` : 統計モデルの出力をデータフレームに変換
+---
+
+### loading the data and summary statistics
+
+Read the data using the `read.csv()` function and display the summary statistics using the `summary()` function.
+<!-- `read.csv()`関数でデータを読み込み，`summary()`関数で記述統計を表示します。 -->
+Load the dataset from the `auditanalytics` package.
+<!-- `auditanalytics`パッケージに含まれるデータセットを読み込みます。 -->
+
+```{r}
+industry_stats <- read.csv( # CSVファイルを読み込む
+    system.file("extdata",
+    "ch_2_dataset.csv", # ファイル名
+    package = "auditanalytics", mustWork = TRUE
+    ))
+```
+
+You get the data. Let's see the summary statistics.
+
+---
+
+### Access the specific variables in the data
+
+You can access the specific variables in the data using the `$` operator.
+
+:::{.v-center-container}
+<span style = "font-family: Myryca MM; font-size:2em; color:#e3439e">データフレーム$変数名</span>
+:::
+
+If you want access a variable `ticker` of `insudstry_stats` object, you use `industry_stats$ticker`.
+
+---
+
+### Data structure and descriptive statistics
+
+You can see the structure of the data using the `str()` function and the descriptive statistics using the `summary()` function.
+
+```{r}
+#| class-output: code-output
+str(industry_stats) # データ構造
+```
+
+`chr` means character, `int` means integer, and `num` means numeric.
+
+---
+
+```{r}
+summary(industry_stats) # 記述統計
+```
+
+`ticker` is a character variable, so it doesn't have a summary statistics.
+
+---
+
+### `table` function
+
+The `table()` function is useful for counting the number of occurrences of each value in a variable.
+
+```{r}
+#| class-output: code-output
+table(industry_stats$ticker)
+```
+
+---
+
+### `knit` and `kableExtra`
+
+You can make more beautiful graphs using the `knitr` package.
+
+```{r}
+#| code-fold: true
+#| code-summary: "expand for full code"
+pacman::p_load(knitr, kableExtra)
+industry_stats$ticker |>
+  table() |> head(5) |>
+  kable() |>
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+    font_size = 28)
+```
+
+## Make a graph with `plotluck`
+
+```{r plotluck1}
+#| cache: true
+plotluck(industry_stats, .~1)
+```
+
+`.~1` shows distribution of each variable in the data frame, separately.
+
+---
+
+
+Another example: `income` vs. other variables.
+
+```{r plotluck2}
+#| cache: true
+industry_stats |>
+  dplyr::filter(income >= 0 ) |>
+  plotluck(income ~ .)
+```
+
+
+---
+
+- There are *four* continuous (employees, income, sales, and capitalization) and *one* categorical (fiscal year) variable; we will get rid of the ticker.
+<!-- このデータセットは、4つの連続変数(従業員数、利益、売上高、時価総額)と1つの質的変数(会計年度)から構成されている。なお、tickerは除外している。 -->
+- Where there is a significant range of values in a variable, `plotluck` **automatically presents the x-axis on a log scale**.
+<!-- 変数の値の範囲が大きい場合、plotluckは自動的にx軸を対数で表示する。 -->
+<!-- - Let us explore income and the influence of other variables. -->
+<!-- では利益と他の変数の影響を探ってみよう。 -->
+- Output is set to ``verbose`` in order to estimate conditional entropies for ordering the plot (lower values indicate stronger informational value).
+<!-- プロットの順序付けのための条件付きエントロピーを推定するために，出力は「verbose」に設定されている(値が小さいほど情報価値が高い)。 -->
+- There is a clear correlation of income with capitalization, which we can assess by applying frequency weights (Fig. 2).
+<!-- 利益と資本金には明確な相関があり、頻度ウェイト(frequency weights)を適用することで評価できる(図2)。 -->
+
+## EDA of income vs. other variables
+
+```{r plotluck3}
+#| cache: true
+#| fig.cap: "EDA of Income vs. other variables"
+industry_stats |>
+  dplyr::select(-ticker) |> # tickerを除外
+  dplyr::filter(income >= 0) |> # 利益が0以上のデータ
+  plotluck(income ~ .) # 作図
+```
+
+How has the industry’s profit changed? (Fig. 3).
+<!-- 近年、産業の利益はどのように変化してきたのだろうか？ (図3)。 -->
+
+
+## Income distribution over time.
+
+```{r plotluck4}
+#| cache: true
+industry_stats |>
+  dplyr::filter(income >= 0) |> # 利益が0以上のデータ
+  plotluck(income ~ fiscal_year)
+```
+
+Firms with negative income values are excluded.
+
+---
+
+- New methods for analyzing massive datasets have emerged in the past decade, and are continually evolving, as a product of the machine learning revolution.
+- The three most common terms used to describe these tools are reserved for a nested set of three technologies:
+  - *Artificial Intelligence* = “any attempt to mimic human learning/intelligence”
+  - *Machine Learning* = “computational methods for learning from data”
+  - *Deep Learning* = “machine learning methods that mimic human neural networks (perceptrons)”
+
+---
+
+- The emphasis on “learning” instructs us on the differences between these technologies and more traditional statistical approaches.
+- “**Learn**” is a transitive verb (i.e., takes an object) and involves
+  - A *subject* (who makes a decision)
+  - *learns* (from reviewing data) about some
+  - *construct* (parameter value, classification, etc.)
+
+- The essential components of learning are: **the decision**, **the learning method**, **the construct** about which we are learning, and the quality assessment (how well we learned).
+
+---
+
+### AI
+
+- The field of *artificial intelligence* was motivated by Vannevar Bush and Bush’s (1945) article “As we may think” and initiated projects in rule-based and symbolic programs such as early chess programs that involved hardcoded rules crafted by programmers.
+<!-- 人工知能の分野は、Vannevar Bushによる1945年の論文「As we may think」に触発され、プログラマーによって作成されたハードコードされたルールを含む初期のチェスプログラムなど、ルールベースおよびシンボリックプログラムのプロジェクトを開始した。 -->
+<!-- - Despite considerable but sporadic funding,  -->
+<!-- - The field only began flourishing with the machine learning competitions hosted by website Kaggle in 2010. -->
+<!-- かなりの資金が投入されているものの、2010年にKaggleのウェブサイトで開催された機械学習コンペティションによって、この分野は本格的に発展し始めた。 -->
+- **Random forests** quickly became a favorite on the platform, but by 2014, **gradient boosting machines** were outperforming them, and by 2016, **perceptron models**, in particular building on the successes at Google, began dominating the field.
+<!-- ランダムフォレストはすぐにプラットフォームで人気を博したが、2014年には勾配ブースティングマシンがそれを上回り、2016年には特にGoogleの成功を基にしたパーセプトロンモデルが分野を席巻し始めた。 -->
+
+---
+
+### ML
+
+- Machine learning re-envisioned several of the fundamental methods of statistics.
+<!-- 機械学習は、統計学の基本的な手法をいくつか再構築した。 -->
+- Computationally intensive **stochastic gradient boosting** replaces the first-order conditions in calculus used in statistics search for  solutions.
+<!-- 計算量の多い確率的勾配ブースティングは、統計学の解探索に使用される微分条件を置き換える。 -->
+<!-- - The easy to compute, **squared-error loss function** of parametric statistics gave way to a larger selection of solution concepts. -->
+- The simple **squared-error loss function** in parametric statistics expanded to a wider range of solution concepts.
+<!-- 計算しやすい二乗誤差損失関数は、パラメトリック統計学の解概念の選択肢を広げた。 -->
+- Machine learning is not limited to fitting statistical depictions of probability distributions typically defined with 1~3 parameters.
+<!-- ; highly customizable distributions can be crafted by altering the weights of successive layers of machine learning networks. -->
+<!-- 機械学習は、通常1、2、または3つのパラメータで定義される確率分布の統計的表現に適合することに限られていない。機械学習ネットワークの連続した層の重みを変更することで、高度にカスタマイズ可能な分布を作成できる。 -->
+
+---
+
+### Clasification
+
+- For classification problems, **cross-entropy measures** offered much better fit than, say, comparable logit or probit models.
+<!-- 分類問題において、交差エントロピー測度は、例えば、比較可能なロジットやプロビットモデルよりもはるかに良い適合性を提供した。 -->
+<!-- - One particular challenge, ImageNet was notoriously difficult in 2012, consisting of classifying high-resolution color images into 1000 different categories after training on 1.4 million images.  -->
+<!-- 一つの特定の課題であるImageNetは、2012年には悪名高く、140万枚の画像を学習した後、高解像度のカラー画像を1000の異なるカテゴリに分類することから成る。 -->
+- In 2011, the top-five accuracy of the winning model, based on classical approaches to computer vision, was only 74.3%.
+<!-- 2011年には、コンピュータビジョンにおける古典的なアプローチに基づいた勝者モデルのトップ5の精度はわずか74.3%であった。 -->
+<!-- In 2012, a deep-learning method was able to achieve a top-five accuracy of 83.6%. -->
+<!-- 2012年には、ディープラーニング手法がトップ5の精度を83.6%に達成することができた。 -->
+By 2015, the winner reached an accuracy of 96.4%.
+ <!-- and the classification task on ImageNet was considered to be a completely solved problem. -->
+<!-- 2015年には、勝者は96.4%の精度に達し、ImageNetの分類課題は完全に解決されたと考えられた。 -->
+- Business analytics’ embrace of machine learning is inspired by the numerous successes: near-human-level image classification, language translation, speech recognition, handwriting transcription, text-to-speech conversion, autonomous driving and better than human Go and Chess games.
+<!-- ビジネスアナリティクスが機械学習を受け入れるのは、多くの成功に触発されている。例えば、人間に近いレベルの画像分類、言語翻訳、音声認識、手書き文字の転写、テキスト読み上げ変換、自動運転、人間よりも優れた囲碁やチェスのゲームなど。 -->
+
+---
+
+- Despite these successes, there are reasons for a balanced, holistic perspective on the tools of data analytics.
+<!-- これらの成功にもかかわらず、データ分析ツールについてのバランスの取れた包括的な視点を持つ理由がある。 -->
+- Machine learning outperforms twentieth century statistics for:
+<!-- 機械学習は20世紀の統計学を上回る点がある： -->
+
+  - **Large datasets**: These tend to overfit simple statistical models and may be a basis for *p-hacking*
+  <!-- 大規模データセット: これらは単純な統計モデルを過学習させる傾向があり、p-hackingの基礎となる可能性がある -->
+  - **Large complex construct spaces**: In models estimating **many parameters**, like in image processing, 1-3 parameter distributions lack richness.
+  <!-- 大規模で複雑な構築空間: モデルが多くのパラメータを推定している場合、画像処理など、1、2、または3パラメータの確率分布は十分に豊かではない -->
+  - **Feature extraction**: the major contribution of exploratory data analysis was feature extraction from data, which could be used to decide where a dataset was appropriate for model testing.
+  <!-- 特徴抽出: 探索的データ解析の主要な貢献は、データからの特徴抽出であり、これはデータセットがモデル検定に適しているかどうかを決定するために使用できる。 -->
+
+---
+
+But statistical models still outperform machine learning models (though this is steadily evolving) where there is a:
+<!-- しかし、統計モデルは、以下のような場合には機械学習モデルを上回る（ただし、これは着実に進化している）： -->
+
+- clear interpretation of results of analysis
+<!-- 分析結果の明確な解釈 -->
+- consistency
+<!-- 一貫性 -->
+- replicability
+<!-- 再現性 -->
+- formal definition of “information”
+<!-- 「情報」の形式的な定義 -->
+- clear roles for data
+<!-- データの明確な役割 -->
+- clear demands on constructs
+<!-- 構成概念に対する明確な要求 -->
+- clear philosophies on the meaning of “learn”
+<!-- 「学習」の意味に関する明確な（論争のある）哲学 -->
+- formal logic and notation
+
+---
+
+### Rest of Chapter 2
+
+- The rest of this chapter is devoted to *classifying types of data*, which in turn says something about the particular importance that we attach to an entity, and way that we measure it.
+<!-- この章の残りは、データの種類を分類することに費やされており、それは我々がエンティティに付加する特定の重要性と、それを測定する方法について何かを述べている。 -->
+- In the process I will share some of the excellent **graphic tools** that the R language offers the auditor for understanding accounting data.
+<!-- その過程で、R言語が監査人に提供する優れたグラフィックツールのいくつかを紹介する。 -->
+
+# TYPE OF DATA
+
+## Accounting Data Types
+
+- McCarthy (1979, 1982) proposed a design theory of accounting systems that applies the Chen (1976) framework to accounting.
+- In it, accounting transactions are measurements of economic events involving an entity’s contractual activities with a related party.
+- These measurements result in the recording of numbers, time, classifications, and descriptive information.
+- Classifications are dictated by a firm’s Chart of Accounts which delineates the types of economic activities in the firm.
+
+---
+
+### Measurements
+
+- Measurements are in monetary units, thus require some method of valuing an economic event.
+<!-- 測定値は通貨単位であり、経済的事象の評価方法が必要となる。 -->
+- The ubiquity of information assets makes valuation one of the most difficult challenges facing modern accountants.
+<!-- 情報資産の普及により、評価は現代の会計士が直面する最も困難な課題の一つとなっている。 -->
+<!-- - Time in the form of date stamps ensures that economic events are recorded in the correct accounting period.  -->
+<!-- 日付スタンプの形での時間は、経済的事象が正しい会計期間に記録されることを保証する。 -->
+- Descriptive information was originally entered in notes to a journal entry.
+<!-- 記述的情報は、元々仕訳に関するメモに入力されていた。 -->
+- But social networks and news outlets provide auditors with a plethora of relevant information in textual form.
+<!-- しかし、ソーシャルネットワークやニュースメディアは、監査人にテキスト形式の多くの関連情報を提供している。 -->
+<!-- Without methods of interpreting this, auditors substantially increase their risk of failures. -->
+<!-- これを解釈する方法がないと、監査人は失敗のリスクを大幅に高める。 -->
+<!-- The processing and interpretation of each of these types of information is different.  -->
+<!-- これらの情報の処理と解釈は、それぞれ異なる。 -->
+Information technology, statistical methods, and software specify data types to differentiate the processing and storage of data.
+<!-- 情報技術、統計手法、ソフトウェアは、データの処理と保存を区別するためにデータ型を指定する。 -->
+
+
+---
+
+
+- The R language excels at managing data.
+<!-- R言語はデータの管理に優れている。 -->
+- Indeed, this particular strength sets R, as an audit language, above any other software language.
+<!-- 実際、この特定の強みがRを他のどのソフトウェア言語よりも優れた監査言語にしている。 -->
+- This means, when using R, that the auditor never has to worry that some part of the client’s data will remain inaccessible.
+<!-- これは、Rを使用すると、監査人がクライアントのデータの一部にアクセスできないことを心配する必要がないことを意味する。 -->
+- Packages exist for any commercially important data structure and format, whether real-time stream, web-based, cloud-based, or on client’s bespoke system, can be analyzed with R code.
+<!-- パッケージは、リアルタイムストリーム、Webベース、クラウドベース、またはクライアントの特注システムなど、商業的に重要なデータ構造とフォーマットに対して、Rコードで分析することができる。 -->
+
+---
+
+- The next sections of this chapter discuss the most important data and file types, with examples of how these are represented in R.
+- The examples here use several databases ranging from financial reports of industry firms over time, of Sarbanes-Oxley reports and of control breaches.
+- In the process, the management of various types of information are highlighted: e.g., ticker information is categorical, fee information is continuous, breach and SOX-audit decision data is binary, and so forth.
+
+
+## Numerical vs. Categorical
+<!-- ## 量的変数と質的変数 -->
+
+
+- Two basic types of structured data: **numeric** and **categorical**.
+<!-- 構造化データ（structured data）には、主に量的データと質的データの2種類が存在する。 -->
+- Numeric data comes in two forms: **continuous**, such as wind speed or time duration, and **discrete**, such as the count of the occurrence of an event.
+<!-- 量的データには、風速や経過時間のような連続データと、事象の発生回数のような離散データの2種類がある。 -->
+  - Categorical data takes only a fixed set of values
+  <!-- - , such as a type of TV screen or a state name. -->
+<!-- 質的データは、テレビ画面の種類（プラズマ、LCD、LEDなど）や州名（アラバマ、アラスカなど）のように、固定の種類の値を取る。 -->
+  - Binary data is an *important special case of categorical data* that **takes on only one of two values**, such as 0/1 etc.
+<!-- 二値データは、0/1、はい/いいえ、真/偽のような、2つの値のいずれか一方しか取らない質的データの重要な特殊ケースです。 -->
+
+- Another useful type of categorical data is **ordinal data** in which the categories are ordered; an example of this is a numerical rating (1, 2, 3, 4, or 5).
+<!-- もう一つの重要な質的データの形式は、カテゴリに順序が付与される順序データで、数値評価（1、2、3、4、または5）がその例である。 -->
+
+## Classifying the type of data
+
+Why do we bother with a taxonomy of data types?
+
+<!-- なぜ分析者はデータの型(type)をこのように分類するのだろうか？ -->
+- It turns out that for the purposes of data analysis and predictive modeling, *the data type is important* to help determine the type of visual display, data analysis, or statistical model.
+<!-- その理由は、データ分析や予測モデリングを行う上で、データの型が視覚表現、データ分析、あるいは統計モデルの選択に大きな影響を与えるからである。 -->
+- In fact, data science software, such as R and Python, uses these data types to improve computational performance.
+<!-- 実際、RやPythonのようなデータサイエンス・ソフトウェアは、計算性能を向上させるためにこれらのデータの型を利用している。 -->
+- More importantly, the data type for a variable determines how software will handle computations for that variable.
+<!-- さらに重要なことは、データの型によって、ソフトウェアがその変数の計算をどのように処理するかが決まるということである。 -->
+
+---
+
+```{r}
+sox_stats <- read.csv(　# read csv file
+    system.file("extdata", "ch_2_data_types.csv", # dataset
+        package = "auditanalytics", mustWork = TRUE
+))
+# |> filter(card != "card")
+summary(sox_stats) # descriptive stats
+```
+
+<!-- ## 連続(区間、浮動小数点数、数値)データ -->
+## Continuous Data
+
+Continuous data has numeric*(実数値).
+
+- Many of our key financial metrics are continuous measures.
+<!-- 主要な財務指標の多くは連続的な測定値である。 -->
+- Conceptually, we can subdivide continuous data without end.
+<!-- 概念的には、連続データは際限なく分割することができる。 -->
+- We can look at the density functions of continuous data using the `plotluck` package.
+<!-- plotluckパッケージを使って連続データの密度関数を見ることができる。 -->
+
+
+<!-- ## 離散 (整数、カウント)データ -->
+## Discrete (Integer, Count) Data
+
+- In practice, our minimum level of resolution in accounts is one dollar (or single monetary unit).
+<!-- 実際には、（連続データであったとしても）財務諸表における最小の単位は1ドルや1円（または（1,000ドルのような）金額単位）である。 -->
+- This resolution limit is in fact the basis of audit procedures such as dollar-unit sampling.
+<!-- 実際に、このような単位の限界は、金額単位サンプリングなどの監査手続の基礎となっている。 -->
+<!-- We are not limited to dollar levels of resolution; annual reports may use thousands or millions of dollars as their level of resolution. -->
+<!-- 年次報告書では、1,000ドルや100万ドルを金額単位として利用することもある。 -->
+- In this example we use ggplot to produce a histogram of discrete values.
+<!-- この例では、離散データのヒストグラムを作成するためにggplotを使用している。 -->
+- The level of resolution determines the number of bins, in this case 20.
+<!-- 金額単位はビン数（ヒストグラムの棒の数）を決定し、この場合は20である。 -->
+<!-- - Human cognition tends to be overwhelmed by large numbers of bins, which is why we often see financial statistics summarized at levels of resolution larger than one dollar. -->
+<!-- 人間の認知は多数のビンに圧倒される傾向があり、これが1ドルより大きな金額単位で要約された金融の記述統計をよく目にする理由である。 -->
+
+---
+
+```{r}
+sox_stats |> # 変数を選択して作図
+    select("audit_fee","non_audit_fee", "tax_fees") |>
+    ggplot() + aes(x = audit_fee) + geom_histogram(bins = 20)
+```
+
+
+## Categorical Data
+
+<!-- ## 質的データ（ 列挙型，列挙，因子，名義，多項） -->
+*Categorical* (Enums, Enumerated, Factors, Nominal, Polychotomous) Data
+
+- Categorical data can *take on only a specific set of values* representing a set of possible categories.
+<!-- 質的データは、カテゴリーの種類（ティッカーデータ）を表す特定の値（AAPなど）のみを取ることができる。 -->
+- The firm’s Chart of Accounts imposes a categorical data scheme on the economic events which are the basis of journal entries in the accounting system.
+<!-- 会社の財務諸表は、会計システムの仕訳の基礎となる経済事象に、質的データの体系（勘定など）を与えている。 -->
+- In our Sarbanes-Oxley data, we might be interested in the variation over time of audit fees, categorized by the firms they were charged to.
+<!-- Sarbanes-Oxley法のデータについて分析者が、監査人が担当する企業ごとに分類された監査報酬の時系列の変動に関心がある場合には、下記のように分析する。 -->
+
+---
+
+
+```{r}
+sox_stats |>
+  select(ticker, audit_fee, non_audit_fee, tax_fees) |> # 変数選択
+  filter(as.character(ticker) < "AI") |> # AIより前の文字
+  ggplot() + aes(x = ticker, y = audit_fee) + # 作図
+  geom_violin() + # ヴァイオリンプロット
+  scale_y_continuous(trans = "log10", labels = scales::comma) # 対数変換
+```
+
+---
+
+```{r}
+#| code-fold: true
+bank_fin <- read.csv( # CSVファイルを読み込む
+  system.file("extdata", "ch_2_yahoo_fin.csv",
+  package = "auditanalytics", mustWork = TRUE)
+  )
+bank_fin |>
+  filter(change != "ticker") |> # ticker以外
+  mutate(# データの変換
+      change = as.numeric(change), # 数値に変換
+      capitalization = as.numeric( # Bを削除
+          str_replace(capitalization, "B", ""))
+          ) |>
+  pivot_longer( # wide to long
+    cols = c(price, change, percent_change, volume,
+            vol_ave, capitalization, pe_ratio),
+    names_to = "metric", # 変数名
+    values_to = "value" # 値
+  ) |>
+  ggplot() + aes(x = metric, y = value) + # データ
+    geom_boxplot() + # 箱ひげ図
+    scale_y_continuous(trans = "log10", labels = scales::comma) # 縦軸を対数
+```
+
+## Binary Data
+<!-- ## 第5節 二値変数 （二値，二分法，論理，指標，ボール）--->
+
+Binary (Dichotomous, Logical, Indicator, Boolean) Data
+
+- Binary data represents a special case of categorical data with just two categories.
+<!-- 二値データは，たった2つのカテゴリーをもつ質的データの特殊ケースを表している。 -->
+- These are data’s way of providing answers to yes/no or true/false.
+<!-- これは，データが「はい/いいえ」あるいは「真/偽」の答えを提示する方法である。 -->
+− An audit opinion will provide **a yes/no answer** concerning whether the F/S are fairly presented.
+<!-- 監査意見は，財務諸表が構成に表示されているかどうかについて，はい/いいえの答えを提供する。 -->
+<!-- - Usually we are not just interested in the answer, but why particular circumstances, treatments, or parameter settings resulted in this answer.  -->
+<!-- 通常，分析者の関心はその答えに興味があるわけではなく，そのような答えに至った特定の状況，処理，またはパラメータにある。 -->
+- In the following figure, we are interested in whether credit card fraud is influenced by the fees paid to the auditor.
+<!-- クレジットカード不正が監査人が受け取った監査報酬と非監査報酬に影響を受けるかに関心がある場合には、以下の図のように分析する。 -->
+- We analyze a binary variable by looking at the variation in other variables under a $0$ or $1$ value of the binary variable.
+<!-- 分析者は、二値変数の値が0または1の値（クレジットカード不正があったかなかったか）である下で，他の変数（監査報酬と非監査報酬）の変動を見ることで二値変数を分析する。 -->
+
+---
+
+```{r}
+#| code-fold: true
+#| code-summary: "expand for full code"
+ggplot(sox_stats) +
+    aes(x = non_audit_fee, y = audit_fee, col = card) + # 軸と色分け
+    geom_violin() + # ヴァイオリンプロット
+    labs(col = "Fraud = 1 (green)") + # 軸ラベル
+    scale_y_continuous(labels = scales::comma) +
+    scale_x_continuous(labels = scales::comma)
+```
+
+
+---
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "expand for full code"
+# card変数に文字列"card"が含まれていてエラー
+sox_stats$card <- as.integer(sox_stats$card) # 整数に変換
+# gather ではなく pivot_longer を使う
+sox_stats_long <- sox_stats |>
+  pivot_longer(
+    cols = c(effective_303, mat_weak_303, sig_def_303,
+             effective_404, auditor_agrees_303),
+    names_to = "metric",
+    values_to = "value")
+# 作図
+ggplot(sox_stats_long) +
+    aes(x = non_audit_fee, y = audit_fee, col = metric) +
+    geom_violin() + # バイオリン・プロット
+    scale_x_continuous(trans = "log2", labels = scales::comma) +
+    scale_y_continuous(trans = "log2", labels = scales::comma) # 対数軸
+```
+
+---
+
+## Ordinal Data
+<!-- ## 順序 (序数)データ -->
+
+- *Ordinal data* is **categorical data with an explicit ordering**.
+<!-- 序数データは，明確な順序づけのあるカテゴリーデータである。 -->
+- Ordinal data provides an important control over documents of original entry in accounting systems.
+<!-- 序数データは，会計システムにおける原初記入帳(original entry)に対する重要なコントロールを提供している。 -->
+- When a journal entry of any sort is generated, it must be uniquely identifiable, and generally the sequence of identifying numbers is assigned in chronological sequence.
+<!-- いかなる種類の仕訳入力が生成された場合でも、それは一意に識別可能でなければならず、一般的には識別番号の系列は時間順に割り当てられる。 -->
+<!-- In the days of paper transaction processing, accountants expected firms to initiate transactions on prenumbered forms, often with numerous copies made simultaneously through the use of (messy) carbon paper. -->
+<!-- 紙での取引処理の日に，会計士は企業が番号が付けられた様式を利用して取引を開始することを期待しており，しばしば（散らかりがちな）カーボン紙を使用して同時に多数のコピーが作成された。 -->
+- Modern systems assign these numbers internally, but auditors still consider sequential number of input documents to be one of the more important internal controls in a system.
+<!-- 現代の会計システムでは，これらの番号は内部的に割り当てられるが，監査人が依然として入力文書の連番をシステムにおけるより重要な内部統制の一つであると考えている。 -->
+
+
+## Make an original function
+
+```{r}
+## ランダムな日付を生成する関数rdateを作成
+rdate <- function( # 引数を指定
+    x,
+    min = paste0(format(Sys.Date(), "%Y"), "-01-01"),
+    max = paste0(format(Sys.Date(), "%Y"), "-12-31"),
+    sort = TRUE
+    ) { # 関数の本体
+    dates <- sample(
+        seq(as.Date(min), as.Date(max), by = "day"),
+        x, replace = TRUE)
+    if (sort == TRUE) {
+        return(sort(dates))
+    } else {
+        return(dates)
+    }
+}
+```
+
+
+---
+
+### Setting
+
+```{r gen_invoice_no}}
+journal_ent_no <- data.frame(
+  date = 1:1000,
+  invoice_no = 1:1000
+)
+```
+
+Use the `rdate` function to generate a random date for each of the 1000 journal entries.
+
+```{r invoice_no}
+invoice_no <- date <- 1:1000 ## placeholder
+journal_ent_no <- cbind.data.frame(invoice_no,date)
+date <- rdate(1000)
+journal_ent_no$date <- date[order(date)]
+journal_ent_no$invoice_no <- seq(1,1000) + rbinom(1000,1,.1) # add some errors
+duplicates <- duplicated(journal_ent_no$invoice_no)
+raw <- seq(1,1000)
+journal_dups <- cbind.data.frame(raw,duplicates)
+```
+
+---
+
+### `journal_dups` Data
+
+```{r}
+dplyr::glimpse(journal_dups)
+table(journal_dups$duplicates)
+```
+
+---
+
+### Make a graph
+
+You can find the duplicated invoices by looking at the graph.
+
+```{r}
+ggplot(journal_dups) +
+    aes(x = invoice_no, y = raw,
+    shape = duplicates, color = duplicates) +
+    geom_point() # 散布図
+```
+
+
+---
+
+
+```{r}
+journal_ent_no |>
+  filter(duplicates == TRUE, invoice_no < 100) |>
+  kable(longtable = T, caption = "Duplicated Invoices") |>
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = F, font_size = 28)
+```
+
+---
+
+
+- But graphs provide immediate access to the degree of problem, by looking at the number of exceptions in the graph, and are most visible if exceptions are rendered in a contrasting color such as the green used in the accompanying charts.
+<!-- このグラフは，グラフ内の例外の数をみることで，問題の程度にすぐアクセスできる手段を提供している。
+また例外が緑のような補色で作図されている場合は，非常に見やすい。 -->
+- Often this is all that the auditor needs to render an opinion on internal controls, as it is the client’s responsibility to correct these problems.
+<!-- しばしば，これが監査人が内部統制に関する意見を出すために必要なものすべてであり，これらの問題を修正するのはクライアントの責任である。 -->
+
+---
+
+```{r}
+#| code-fold: true
+#| code-summary: "expand for full code"
+journal_dups <- journal_dups |>
+  mutate(
+    invoice = journal_ent_no$invoice_no,
+    omit = !raw %in% journal_ent_no$invoice
+  )
+ggplot(journal_dups) +
+    aes(x = invoice_no, y = raw, col = omit) +
+    geom_point() + labs(col = "Invoice Omitted?")
+```
+
+
+---
+
+### What's ` `!raw %in% hogehoge`
+
+- The `!` operator is used to *negate* a logical value.
+- `%in%` is a binary operator that returns a logical value indicating whether the element on the left is found in the element on the right.
+- So `!raw %in% journal_ent_no$invoice` returns a logical vector of the same length as `raw` that is `TRUE` if the corresponding element of `raw` is not found in `journal_ent_no$invoice`.
+
+## Data Storage and Retrieval
+<!-- ## データの格納と検索 -->
+
+- The amount of recorded data produced by human activity has probably been growing exponentially for more than a millennium.
+<!-- 人間の活動によって記録されたデータの量は、おそらく1000年以上にわたり指数関数的に増加してきた。 -->
+- Most data today is digitized, both for archival storage as well as display.
+<!-- 現在のほとんどのデータは、アーカイブストレージと表示の両方のためにデジタル化されている。 -->
+- This is good for the environment (newsprint alone in the 1970s accounted for 17% of US waste) but it also means that this data is potentially available for computer processing.
+<!-- これは環境にとって良いことである(1970年代の新聞印刷物だけでも、米国の廃棄物の17%を占めていた)が、コンピュータ処理に利用可能であることも意味している。 -->
+- The current amount of digitized data is around 20 trillion GB (=2000万PB = 2万EB = 20ZB).
+<!-- 現在のデジタル化されたデータの量は約20兆GBである。 -->
+
+---
+
+- Much of this increase has been fueled by new structures for storing and retrieving data - video, text, and vast streams of surveillance data - that have arisen since the commercialization of the internet in the 1990s.
+<!-- この情報増加の大部分は、1990年代のインターネットの商業化以来生じてきたデータの格納と検索のための新しい構造(動画、テキスト、大量の監視データのストリームなど)によって促進された。 -->
+<!-- - This was not always the case. -->
+<!-- これは必ずしもそうではなかった。 -->
+- In the nineteenth century, vectors, matrices, and determinants were central tools in engineering and mathematics.
+<!-- 19世紀，ベクトル，行列，行列式は，高額と数学の中心的なツールであった。 -->
+- As accounting developed professional standards in this period, they naturally gravitated to representations that were matrix-like: $accounts \times values for financial reporting$, and $transactions × values$ for journal entries and ledgers.
+<!-- この時代，会計が専門的な基準を発展させるにあたり，自然と行列に似た表現：財務報告における勘定科目$\times$金額，仕訳帳や元帳における取引$\times$金額といった表現に重心が移っていった。 -->
+- In the twentieth century, spreadsheet tools and rectangular tables of data brought matrices into the computer domain (Fig.5). -
+<!-- 20正規には，スプレッドシートツールとデータの矩形テーブルが行列をコンピュータ領域にもたらした（図5）。 -->
+
+---
+
+### Terminology
+
+- Terminology for matrix data can be confusing.
+<!-- 行列データの用語は混乱を招くことがある。 -->
+- Statisticians and data scientists use different terms for the same thing.
+<!-- 統計学者とデータサイエンティストは，同じものに対して異なる用語を使用している。 -->
+- For a statistician, predictor variables are used in a model to predict a response or dependent variable.
+<!-- 統計学者にとって，予測変数は応答変数または従属変数を予測するためにモデルで用いられる。 -->
+- For a data scientist, features are used to predict a target.
+<!-- データサイエンティストにとって，特徴量はターゲットを予測するために用いられる。 -->
+- One synonym is particularly confusing: computer scientists will use the term **sample** for a single row; a sample to a statistician means a collection of rows.
+<!-- 特に混乱を招くのは，サンプルという用語である。 -->
+<!-- コンピュータサイエンティストは，サンプルという用語を単一の行に用いるが，統計学者にとってサンプルとは行の集合を意味する。 -->
+
+---
+
+- Within the past decade, twentieth-century concepts of data storage and retrieval have given way to richer modalities.
+<!-- 過去10年間で，20世紀のデータの格納と検索の概念は，より豊かな形式に置き換えられてきた。 -->
+- Storage of text has learned from the older discipline of library science; but entirely new approaches are demanded by music and video data.
+<!-- テキストの格納は，古い学問である図書館学から学んできたが，音楽や動画データにはまったく新しいアプローチが求められている。 -->
+- One reason that machine learning is able to take on new tasks is their ability to analyze data that would be impossible with the matrix based methods of statistics.
+<!-- 機械学習が新しいタスクに取り組むことができる理由の一つは，統計学の行列ベースの方法では不可能なデータを分析できる能力である。 -->
+- Statistics evolved in the early twentieth century, building on the matrix algebra that dominated most of science then.
+<!-- 統計学は20世紀初頭に発展し，当時の科学の大部分を支配していた行列代数に基づいていた。 -->
+
+
+<!-- - Einstein’s work with tensors initiated a revolution in physics. -->
+<!-- アインシュタインのテンソルに関する研究は，物理学に革命をもたらした。 -->
+<!-- - Physics “tensors” are not exactly the same as the computer science discipline’s “tensor”; the computer science tensor might more correctly be called an array (a multidimensional extension of a matrix). -->
+
+<!-- 物理学の「テンソル」とコンピュータサイエンスの「テンソル」は，厳密には同じものではない。より正確には，コンピュータサイエンスのテンソルは，(行列の多次元拡張である)配列とよばれるべきである。 -->
+<!-- In the language of R, tensors are called arrays, which is probably the more acceptable term in mathematics. -->
+<!-- R言語では，テンソルは配列と呼ばれているが，数学ではおそらくより受け入れられる用語である。 -->
+<!-- Until recently, tensor methods were not available for data analysis. -->
+<!-- 最近まで，テンソル法はデータ分析には利用できなかった。 -->
+<!-- Tensor representation of data is now standard in machine learning models. -->
+<!-- データのテンソル表現は，現在では機械学習モデルの標準である。 -->
+<!-- For example: -->
+<!-- 例えば： -->
+
+<!--
+- Vector data—2D tensors of shape (samples, features)
+- Timeseries data or sequence data—3D tensors of shape (samples, timesteps, features)
+- Images—4D tensors of shape (samples, height, width, channels) or (samples, channels, height, width)
+- Video—5D tensors of shape (samples, frames, height, width, channels) or (samples, frames, channels, height, width)
+-->
+<!-- - ベクトルデータ : 2Dテンソル形(サンプル,特徴量)
+- 時系列またはシーケンスデータ : 3Dテンソル形(サンプル，時点，特徴量)
+- 画像 : 4Dテンソル形(サンプル，高さ，幅，チャンネル)または(サンプル，チャンネル，高さ，幅)
+- 動画 : 5Dテンソル形(サンプル，フレーム，高さ，幅，チャンネル)または(サンプル, フレーム, チャンネル, 高さ, 幅) -->
+
+<!-- Tensor data comes from many sources: sensor measurements, events, text, images, and videos. -->
+<!-- テンソルデータは多くのソース，たとえばセンサー測定，イベント，文字列，画像や動画などから得られる。 -->
+<!-- Social networks, drones, surveillance cameras, and other Internet of Things devices are generating massive volumes of data which, from a traditional statistical standpoint, would be considered unstructured. -->
+<!-- ソーシャル・ネットワークやドローン，監視カメラ，その他のIOTデバイスは，従来の統計的観点からは非構造化とみなされるであろう大量のデータを生成している。 -->
+<!-- These data streams need the extensions to statistics that are provided by machine learning. -->
+<!-- これらのデータストリームは，機械学習によって提供される統計への拡張を必要としている。 -->
+
+
+
+
+## Big Data
+
+The R language uses **seven main storage formats** for data:
+
+- vectors :ベクトル
+- matrices :行列
+- arrays :配列
+- data frames :データフレーム
+- tibbles : データフレームの上位互換
+- lists : リスト
+- factors : 因子(ファクター)
+
+<!-- R言語はデータに対して、ベクトル、行列、配列、データフレーム、tibbles(tidyverse)、リスト、ファクターといった7つの主要な格納形式を使用する。 -->
+
+---
+
+```{r}
+#| fig.cap: "Growth of Stored Data (source: EMC Digital Universe)"
+#| code-fold: true
+big_data <- read_csv(
+  system.file(
+    "extdata", "ch1_amount_data.csv",
+    package = "auditanalytics", mustWork = TRUE)
+    ) |>
+  pivot_longer(
+    cols = c(-year),
+    names_to = "data_type",
+    values_to = "value"
+    )
+head(big_data)
+```
+
+`pivot_longer()` is a function from tidyverse that replaces columns with indicators, and is used here to gather multiple lines on a single graph./
+
+
+---
+
+```{r}
+#| code-fold: true
+#| code-summary: "expand for full code"
+big_data$amount <- sqrt(big_data$value)
+big_data %>%
+ ggplot() + aes(x = year, y = amount, col=data_type) +
+  geom_point(aes(color = data_type, size = amount), alpha = 0.5) +
+  scale_size(range = c(0.5, 12)) +
+  scale_y_continuous(trans = "sqrt") +
+  xlim(1990,2020) + xlab("Year") +
+	ylab("Number of Bits of Storage")
+```
+
+
+
+## Vectors
+<!-- ## ベクトル -->
+You can make a vector using `c()` function.
+
+```{r}
+a <- c(1, 2, 5.3, 6, -2, 4) # number vector
+b <- c("one", "two", "three") # character vector
+c <- c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) # logical vector
+```
+
+Refer to elements of a vector using subscripts.
+
+<!-- 添え字を使ってベクトルの要素を指定する。 -->
+<!-- `a[c(2,4)]`とするとベクトルの2番目と4番目の要素を取り出す。 -->
+```{r}
+a[c(2,4)] # 2nd and 4th elements of the vector
+```
+
+## Matrix
+
+All columns in a matrix must have the same mode (numeric, character, etc.) and the same length.
+<!-- 行列のすべての列は同じモード(数値、文字など)と同じ長さでなければならない。 -->
+The general format is
+<!-- 一般的な形式は次のとおりである。 -->
+
+```{r}
+vector <- seq(1, 25) # sequence of numbers from 1 to 25
+r <- 5
+c <- 5
+```
+
+<!--
+面倒だから除外
+char_vector_rownames <- as.character(seq(1, 5))
+char_vector_colnames <- as.character(seq(1, 5))
+-->
+
+---
+
+Transfer the vector to a $r \times c$ matrix .
+```{r}
+mat <- matrix(vector,
+  nrow = r, # row
+  ncol = c, # column
+  byrow = FALSE # 行と列を入れ替えない
+  )
+print(mat) # 行列を表示
+```
+
+<!-- # dimnames = list(char_vector_rownames, char_vector_colnames) -->
+
+---
+
+If you want to fill the matrix by rows, use `byrow = TRUE`
+
+```{r}
+mat <- matrix(vector, #
+    nrow = r, ncol = c, byrow = TRUE #
+)
+print(mat)
+```
+
+---
+
+You get a $5 \times 5$ matrix.
+Next, you try to solve the inverse matrix with `solve()` and calculate the determinant of the matrix with `det()`.
+
+```{webr-r}
+mat <- seq(1, 25) |> matrix(5,5,byrow = T)
+
+# inverse matrix
+
+# determinant of the matrix
+
+qr(mat)$rank # 2 なので正則でない
+```
+
+<!-- dimnames=list(char_vector_rownames, char_vector_colnames)) -->
+
+---
+
+These options mean
+
+- `byrow = TRUE` indicates that the matrix should be filled by rows.
+<!-- `byrow = TRUE`は、行列が行で埋められることを示している。 -->
+- `byrow = FALSE` indicates that the matrix should be filled by columns (the default).
+<!-- `byrow = FALSE`は、行列が列で埋められることを示している(デフォルト)。 -->
+- `dimnames provides` optional labels for the columns and rows.
+<!-- `dimnames`は、列と行のオプションのラベルを提供する。 -->
+
+---
+
+### Indexing
+
+```{r}
+# 5行4列の行列を作成
+y <- matrix(1:20, nrow=5,ncol=4)
+ # another example
+cells <- c(1,26,24,68)
+rnames <- c("R1", "R2")
+cnames <- c("C1", "C2")
+mymatrix <- matrix(cells,
+                nrow = 2,
+                ncol = 2,
+                byrow = TRUE,
+                dimnames = list(rnames, cnames)
+                )
+```
+
+---
+
+Extract elements from a matrix using subscripts.
+
+```{r}
+mat[, 4] # 4th column of the matrix
+mat[3,] # 3rd row of the matrix
+mat[2:4,1:3] # rows 2 to 4 and columns 1 to 3
+```
+
+---
+
+### Suppliments: Matrix
+
+Now you have below matrix.
+
+```{r}
+set.seed(123) # set seed for reproducibility
+x <- sample(1:20, 9) # 9 random numbers
+mat <- matrix(x, nrow = 3, ncol = 3) # 3x3 matrix
+print(mat) # print the matrix
+```
+
+---
+
+### Inverse Matrix
+
+You caliculate the inverse matrix using `solve()`.
+
+```{r}
+solve(mat)
+```
+
+---
+
+### Unit Matrix
+
+You can check the unit matrix by multiplying the matrix and its inverse matrix.
+Multiplication of matrices is done using `%*%`.
+
+```{r}
+mat %*% solve(mat) |> round(5) # unit matrix
+```
+
+## array
+
+Arrays are similar to matrices but can have more than two dimensions.
+<!-- 配列(arrays)は行列と似ているが、2つ以上の次元を持つことができる。 -->
+
+```{r}
+# Create two vectors of different lengths.
+vector1 <- c(5, 9, 3) # vector with 3 elements
+vector2 <- c(10,11,12,13,14,15) # vector with 6 elements
+column.names <- c("COL1", "COL2", "COL3")
+row.names <- c("ROW1", "ROW2", "ROW3")
+matrix.names <- c("Matrix1", "Matrix2")
+```
+
+---
+
+### Take these vectors as input to the array.
+
+```{r}
+result <- array(
+    c(vector1, vector2), # vectors
+    dim = c(3, 3, 2), # 3x3x2 array
+    dimnames = list(row.names, column.names, matrix.names)
+    )
+class(result)
+```
+
+---
+
+### Show the array.
+
+```{r}
+print(result) # 2 matrices of 3x3
+```
+
+
+<!-- ### Data Frames, Data Tables, and Tibbles -->
+
+## data.frame and tibble
+
+- A data frame is more general than a matrix, in that **different columns can have different modes** (numeric, character, factor, etc.).
+<!-- similar to SAS and SPSS datasets. -->
+<!-- データフレーム(data frame)は行列よりも一般的であり、SASやSPSSのデータセットのように、異なる列には数値、文字、ファクターなどの異なる型をもちうる。 -->
+- Data frames represent **the most widely used format** for data storage and retrieval in the _R_ language
+<!-- データフレームは、R言語でのデータの格納と検索で最も広く使用されている型である。 -->
+
+- Type `data.frame` is like a spreadsheet of Excel. Column means variable and row means observation.
+
+
+---
+
+### Create a data frame
+
+```{r}
+ID <- c(1, 2, 3, 4) # numeric vector
+Color <- c("red", "white", "red", NA)　# character vector
+Passed <- c(TRUE, TRUE, TRUE, FALSE) # logical vector
+mydata <- data.frame(ID, Color, Passed) # create data frame
+# access elements of the data frame
+mydata[1:2] # columns 1 and 2 of data frame
+mydata[c("ID","Color")] # columns ID and Age from data frame
+```
+
+---
+
+### Example: Data Frame
+
+```{webr-r}
+mydata <- data.frame(
+  ID = c(1, 2, 3, 4),
+  Color = c("red", "white", "red", NA),
+  Passed = c(TRUE, TRUE, TRUE, FALSE)
+)
+
+# mydataからColorを取り出す
+
+# mydataからIDの3番目の要素を取り出す
+
+```
+
+---
+
+### Tibbles
+
+- Tibbles are the tidyverse’s **improvements** on data frames, designed to address problems in data analysis at an earlier point.
+<!-- tibbleは、tidyverseによるデータフレームの改良版であり、データ分析の問題をより早い段階で解決するために設計されている。 -->
+- Otherwise they are used exactly as data frames.
+<!-- それ以外はデータフレームと同じように使用される。 -->
+
+- Tibbles are more user-friendly than data frames.
+<!-- だいたい同じだけど、tibbleの方が見やすい。 -->
+
+---
+
+- In _R_, the basic rectangular data structure is a `data.frame()`.
+<!-- Rでは、基本的な長方形のデータ構造は`data.frame()`である。 -->
+- A `data.frame()` also has an implicit integer index based on the row order.
+<!-- `data.frame()`には、行の順序に基づいた暗黙的な整数インデックスもある。 -->
+- While a custom key can be created through the row.names() attribute, the native R `data.frame()` does not support user-specified or multilevel indexes.
+<!-- `row.names()`属性を介してカスタムキーを作成することができるが、基本Rの `data.frame()`はユーザー指定のインデックスや多レベルインデックスをサポートしていない。 -->
+- To overcome this deficiency, two new packages are gaining widespread use: `data.table` and `dplyr`.
+<!-- この欠点を克服するために、data.tableとdplyrの2つの新しいパッケージが広く使用されている。 -->
+- Both support multilevel indexes and offer significant speedups in working with a data.frame.
+<!-- 両方とも多レベルインデックスをサポートし、`data.frame`を使用した場合の処理速度を大幅に向上させる。 -->
+
+## List
+
+- An ordered collection of objects (components).
+<!-- リストはオブジェクト(コンポーネント)の順序付きコレクションである。 -->
+- A list allows you to gather a variety of (possibly unrelated) objects under one name.
+<!-- リストを使用すると、さまざまな(おそらく関連のない)オブジェクトを1つの名前の下にまとめることができる。 -->
+
+```{r}
+a <- b <- "seven"
+z <- y <- 0
+# example of a list with 4 components -
+w <- list(name = "Fred", mynumbers = a, mymatrix = y, age = 5.3)
+
+list1 <- list(name = "Fred", mynumbers = a, mymatrix = y, age = 5.3)
+list2 <- list(name = "Joe", mynumbers = b, mymatrix = z, age = 10.11) # 誤字
+v <- c(list1,list2)
+## Identify elements of a list using the [[]] convention.
+w[[1]] # 1st component of the list
+v[["mynumbers"]] # component named mynumbers in list
+```
+
+---
+
+### Example: list
+
+
+```{webr-r}
+mylist <- list(
+  a <- c("one", "two", "three"),
+  b <- c(1,2,3),
+  c <- matrix(1:9, nrow = 3)
+)
+
+# mylistからaを取り出す
+
+# mylistからbの2番目の要素を取り出す
+
+```
+## Factors
+
+<!-- 因子は、名目的な値を [ 1. ... k ]（kは名目変数の一意な値の数）の範囲の整数ベクトルとして格納し、これらの整数にマッピングされた文字列（元の値）の内部ベクトルを格納する。 -->
+
+
+- Tell R that a variable is nominal by making it a factor.
+<!-- ある変数が名目変数であることをRで指定するには、その変数をファクター型にする。 -->
+- The factor stores the *nominal values* as a vector of integers in the range $[1, \dots , k ]$ (where $k$ is the number of unique values in the nominal variable), and *an internal vector of character strings (the original values) mapped to these integers*.
+<!-- ファクター型は、名目変数のユニークな値の数を$k$とすると、$[1, \dots , k]$の範囲の整数ベクトルとして、これらの整数
+に変換された文字列(元の値)の内部ベクトルとして格納している。 -->
+
+---
+
+### Make factors
+
+Nominal variables are those that represent discrete categories without any intrinsic order.
+
+```{r}
+gender <- c(rep("male", 20), rep("female", 30))
+gender <- factor(gender)　# ファクター型に変換
+summary(gender)
+```
+
+---
+
+### Ordered Factors
+
+Ordered factores are those that represent discrete categories with an intrinsic order.
+
+```{r}
+rating <- c( "medium","large", "small")  # 文字ベクトル
+rating <- ordered(rating) # 順序付きファクターに変換
+print(rating)
+```
+
+`Levels: large < medium < small` ??
+
+---
+
+### Ordered Factors 2
+
+```{r}
+rating <- c("medium", "large", "small") # 文字ベクトル
+rating <- ordered(rating, levels = c("small", "medium", "large"))
+rating
+```
+
+`Levels: small < medium < large` OK!
+
+---
+
+### Factors and Ordered Factors
+
+- R treats factors as nominal (i.e., label or naming) variables and ordered factors as ordinal variables in statistical procedures and graphical analyses.
+<!-- Rは、統計手続きやグラフ分析において、ファクター型(因子型)を，名義変数（ラベル変数や名前変数）か順序付きファクター型（順序付き因子型）として扱う。 -->
+- You can use options in the factor( ) and ordered( ) functions to control the mapping of integers to strings (overriding the alphabetical ordering).
+<!-- 整数から文字列へのマッピングを管理することができる（アルファベット順の順序を上書きする）。また、factor（因子型）を使って値ラベルを作成することもできる。 -->
+<!-- `factor()`と`ordered()`関数のオプションを使って、整数から文字列への変換を制御することができる(アルファベット順を上書きする)。 -->
+- You can also use factors to create value labels.
+<!-- またファクター型(因子型)を使って値ラベルを作成することもできる。 -->
+
+
+---
+
+### Useful Functions for Dataset Inspection and Manipulation
+
+<!-- ## データセットの確認と操作に役立つ関数 -->
+
+```{r}
+#| code-fold: true
+arry <- read.csv( #
+    system.file("extdata", "morph_array.csv", #
+        package = "auditanalytics", mustWork = TRUE))
+arry |>
+    kable(longtable = T) |> #
+    kable_styling( # specify table style
+        bootstrap_options = c("striped", "hover", "condensed"),
+        full_width = F, font_size = 18
+        )
+```
+
+---
+
+### Data Inspection
+
+```{r}
+length(arry) #  要素・コンポーネントの数
+class(arry) # オブジェクトのクラス・型
+names(arry) # オブジェクトの変数名
+```
+
+---
+
+### List
+
+```{r}
+list1 <- list("a","b","c") # リスト作成
+list1
+```
+
+---
+
+## Data Manipulation of Lists
+
+```{r}
+cbind(list1, list1) # オブジェクトを列として結合
+rbind(list1, list1) # オブジェクトを行として結合
+```
+
+
+## Other Data Types
+
+- _R_ supports almost any conceivable type of data structure.
+- A few additional structures that are important to account are:
+  - *Time series data* records successive measurements of the same variable. It is the raw material for statistical forecasting methods, and it is also a key component of the data produced in surveillance.
+  - *Spatial data structures*, which are used in mapping and location analytics, are more complex and varied than rectangular data structures.
+  <!-- - In the object representation, the focus of the data is an object (e.g., a house) and its spatial coordinates. -->
+  <!-- - The field view, by contrast, focuses on small units of space and the value of a relevant metric (pixel brightness, for example). -->
+  - *Graph* (or network) *data structures* are used to represent physical, social, and abstract relationships.
+
+
+## Further Study
+
+- This chapter should be seen as a survey of what is possible for auditors interested in an analytical, algorithmic approach to auditing.
+<!-- この章は、監査に興味のある監査人が分析的かつアルゴリズム的なアプローチを取ることができることを調査したものである。 -->
+<!-- - I have tried to delineate some of the parts of data analytics you should familiarize yourself with. -->
+<!-- データ分析のいくつかの部分を説明し、独学できるようにした。 -->
+<!-- Additionally, Wikipedia is a great resource for statistics; some years ago, there were many disparate sites which publicized a great deal of useful information, and most of their content has been transferred to Wikipedia. -->
+<!-- さらに、Wikipediaは統計学の素晴らしい情報源である。 -->
+<!-- 数年前には、多くの離散したサイトが有用な情報を公開していたが、そのほとんどはWikipediaに移されている。 -->
+<!-- - The _R_ package writeups are excellent sources of empirical statistical methods which might be motivated by particular data structures unique to accounting and auditing. -->
+- The _R_ package writeups are excellent sources for empirical statistical methods tailored to data structures unique to accounting and auditing.
+<!-- Rパッケージのビネット(vignettes)と解説は、会計および監査に固有の特定のデータ構造によって動機付けられる可能性のある経験的統計手法の優れた情報源である。 -->
+<!-- The Journal of Statistical Software was founded by Jan de Leeuw in 1996, the year before the Comprehensive R Archive Network (CRAN) first made R and contributed R packages widely available on the Internet. -->
+<!-- Journal of Statistical Softwareは、Comprehensive R Archive Network (CRAN)によってRと寄稿されたRパッケージがインターネット上で広く利用できるようになる前年、1996年にJan de Leeuwによって設立された。 -->
+
+<!-- - Within a few years, R came increasingly to dominate contributions to JSS, which is often the definitive source for information behind the packages in R. -->
+<!-- 数年のうちに、RはますますJSSへの投稿を支配するようになり、JSSはしばしばRのパッケージの背後にある情報の決定的な情報源となっている。 -->
+<!-- - Many very helpful solutions, articles and tutorials are continually being created by the large group of R experts that contribute to Internet resources like stackoverflow and R-bloggers. -->
+<!-- stackoverflowやR-bloggersのようなインターネットリソースに寄稿しているR専門家の大きなグループによって、非常に役立つ多くの解決策、論文、チュートリアルが継続的に作成されている。 -->
+- Searches of the Internet will also find an increasing number of “data camp” type resources that are parts of larger educational programs.
+<!-- インターネットを検索すると、大規模な教育プログラムの一部である「データキャンプ」タイプのリソースも増えている。 -->
+- Whatever your challenge, you should be able to find assistance through one or more of these resources.
+<!-- どんな問題でも、これらの１つ以上のリソースから助力を見つけることができるはずである。 -->
+
+## R Packages Required for This Chapter
+<!-- ## 第2章で必要なRパッケージ -->
+
+- This chapter’s code requires the following packages to be installed:
+
+  - `tidyverse` : data manipulation and visualization,
+  - `kableExtra` : custom tables,
+  - `plotluck` : make many plots automatically,
+  - `broom` : tidy up model output,
+
+<!-- この章のコードを実行するには、tidyverse、kableExtra、plotluck、broom、ggplot2、lubridate、reshape2の各パッケージをインストールする必要がある。 -->
+
+<!-- - Note: There are two steps to using a package. -->
+<!-- 注意：パッケージを使用するには2つのステップが必要である。 -->
+<!-- - First it must be installed, i.e., copied to a location on your computer where R can access it. -->
+<!-- まず、Rがアクセスできるコンピュータ上の場所にパッケージをインストールする必要がある。 -->
+<!-- - Then it must be loaded into the working memory of R. -->
+<!-- 次に、Rの作業メモリーにロードする必要がある。 -->
+<!-- - To install, for example, the tidyverse package, type install.packages(“tidyverse”) and then press the Enter/Return key. -->
+<!-- たとえば、tidyverseパッケージをインストールするには、`install.packages("tidyverse")`と入力してEnter/Returnキーを押す。 -->
+<!-- - To load the previously installed package type library(tidyverse). -->
+<!-- 以前にインストールしたパッケージをロードするには、`library(tidyverse)`と入力する。 -->
+<!-- - The tidyverse package is now available for use by your program code. -->
+<!-- これでtidyverseパッケージをプログラムコードで使用できるようになった。 -->
+
+## References
+
+- Bush, Vannevar, and Vannevar Bush. 1945. As We May Think. Resonance 5(11).
+- Chen, Peter Pin-Shan. 1976. The Entity-Relationship Model—Toward a Unified View of Data. ACM Transactions on Database Systems (TODS) 1(1): 9–36.
+- Cochran, William G., Frederick Mosteller, and John W. Tukey. 1954. Principles of Sampling. Journal of the American Statistical Association 49(265): 13–35.
+
+---
+
+- McCarthy, William E. 1979. An Entity-Relationship View of Accounting Models. Accounting Review LIV (4): 667–686.
+
+- McCarthy, William E. 1982. The REA Accounting Model: A Generalized Framework for Accounting Systems in a Shared Data Environment. Accounting Review LVII (3): 554–578.
+
+- Stigler, Stephen M. 1986. The History of Statistics: The Measurement of Uncertainty Before 1900. Cambridge: Harvard University Press.
+
+- Tukey, John W. 1980. We Need Both Exploratory and Confirmatory. The American Statistician 34 (1): 23–25.

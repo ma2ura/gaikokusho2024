@@ -1,0 +1,1792 @@
+---
+title: |
+  <b>外国書購読 Day3</b> </br>
+  <span style="color: #282A36; ">Analysis of Accounting Transactions</span>
+author: "Soichi Matsuura"
+format:
+  revealjs:
+    theme: ["default", "dracula.scss"]
+    transition: convex
+    slide-number: true
+    code-line-numbers: false
+    html-math-method: katex
+    chalkboard: true
+    width: 1400
+    footer: "Kobe University, Business Administration"
+    logo: "img/kobe_logo.png"
+    progress: true
+    controls: true
+    include-in-header:
+      text: |
+        <style>
+        .v-center-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        </style>
+execute:
+  echo: true
+  warning: false
+  highlight-style: github
+filters:
+  - webr
+webr:
+  packages: ['dplyr','lubridate','readr'] # Install R packages on document open
+css: mystyle.css
+---
+
+
+# review of Day2
+
+## Big Data
+
+The R language uses **4 storage formats** for data:
+
+- *vectors*
+- *matrix*
+- *data frames*
+- *factors*
+
+<!-- R言語はデータに対して、ベクトル、行列、配列、データフレーム、tibbles(tidyverse)、リスト、ファクターといった7つの主要な格納形式を使用する。 -->
+
+---
+
+## 準備
+
+In order to use packages, you use the `pacman` package to install and load the necessary packages.
+
+```{r}
+pacman::p_load(tidyverse, auditanalytics, knitr, kableExtra)
+```
+
+- `tidyverse` is a collection of R packages designed for data science.
+- `auditanalytics` is a package that provides data in this class.
+- `knitr` is a package for dynamic report generation in R.
+- `kableExtra` is a package for creating tables in R Markdown.
+
+
+---
+
+
+```{r}
+#| fig.cap: "Growth of Stored Data (source: EMC Digital Universe)"
+big_data <- read_csv(
+  system.file("extdata", "ch1_amount_data.csv",
+    package = "auditanalytics", mustWork = TRUE)
+    )
+head(big_data)
+```
+
+---
+
+```{r}
+big_data <- big_data |>
+  pivot_longer( # wide to long
+    cols = c(-year), # year column is not included
+    names_to = "data_type",
+    values_to = "value")
+head(big_data)
+```
+`pivot_longer()` is a function from tidyverse that replaces columns with indicators, and is used here to gather multiple lines on a single graph.
+
+---
+
+### Graph : Growth of Stored Data
+
+```{r}
+#| code-fold: true
+#| code-summary: "expand for full code"
+big_data$amount <- sqrt(big_data$value)
+big_data %>%
+ ggplot() + aes(x = year, y = amount, col = data_type) +
+  geom_point(aes(color = data_type, size = amount), alpha = 0.5) +
+  scale_size(range = c(0.5, 12)) +
+  scale_y_continuous(trans = "sqrt") +
+  xlim(1990,2020) + xlab("Year") +
+	ylab("Number of Bits of Storage")
+```
+
+
+## Vectors
+<!-- ## ベクトル -->
+You can make a vector using `c()` function.
+
+```{r}
+a <- c(1, 2, 5.3, 6, -2, 4) # number vector
+b <- c("one", "two", "three") # character vector
+c <- c(TRUE,TRUE,TRUE,FALSE,TRUE,FALSE) # logical vector
+
+a
+b
+c
+```
+
+## Example: Vectors
+
+```{webr-r}
+d <- c(1, 2, 3, "4", 5)
+# What is the class of d?
+class(d)
+
+e <- c(1, 2, 3, NA, 5, 6)
+# What is the class of e?
+class(e)
+```
+
+
+---
+
+### Vector Operations
+
+Refer to elements of a vector using subscripts.
+
+```{r}
+a[c(2,4)] # 2nd and 4th elements of the vector
+a[c(1:3)] # 1st to 3rd elements of the vector
+a[c(-3)] # all elements except the 3rd
+```
+
+## Matrix
+
+All columns in a matrix must have the **same mode** and the **same length**.
+<!-- 行列のすべての列は同じモード(数値、文字など)と同じ長さでなければならない。 -->
+Transfer the vector to a $5 \times 5$ matrix .
+```{r}
+mat <- matrix(seq(1, 25), 5, 5, byrow = F)
+print(mat)
+```
+
+---
+
+If you want to fill the matrix by rows, use `byrow = TRUE`
+
+```{r}
+mat <- matrix(seq(1, 25), 5, 5, byrow = T)
+print(mat)
+```
+
+## Inverse Matrix and Determinant
+
+Next, you try to solve the inverse matrix with `solve()` and calculate the determinant of the matrix with `det()`.
+
+```{r}
+# create a 3x3 matrix
+mat <- sample(1:100, 9) |> matrix(3, 3, byrow = T)
+solve(mat) # inverse matrix
+
+det(mat) # determinant of the matrix
+```
+
+
+---
+
+Extract elements from a matrix using subscripts.
+
+```{r}
+mat[, 3] # 3th column of the matrix
+mat[3,]  # 3rd row of the matrix
+mat[2:3,1:2] # rows 2 to 4 and columns 1 to 3
+```
+
+
+
+## data.frame and tibble
+
+- A data frame is more general than a matrix, in that **different columns can have different modes** (numeric, character, factor, etc.).
+<!-- similar to SAS and SPSS datasets. -->
+<!-- データフレーム(data frame)は行列よりも一般的であり、SASやSPSSのデータセットのように、異なる列には数値、文字、ファクターなどの異なる型をもちうる。 -->
+- Data frames represent **the most widely used format** for data storage and retrieval in the _R_ language
+<!-- データフレームは、R言語でのデータの格納と検索で最も広く使用されている型である。 -->
+
+- Type `data.frame` is like a spreadsheet of Excel. Column means variable and row means observation.
+
+
+---
+
+### Create a data frame
+
+```{r}
+mydata <- data.frame(
+  ID     = c(1, 2, 3, 4),
+  Color  = c("red", "white", "red", NA),
+  Passed = c(TRUE, TRUE, TRUE, FALSE)
+)
+mydata[c("ID","Color")] # columns ID and Age from data frame
+```
+
+---
+
+### Example: Data Frame
+
+```{webr-r}
+mydata <- data.frame(
+  ID = c(1, 2, 3, 4),
+  Color = c("red", "white", "red", NA),
+  Passed = c(TRUE, TRUE, TRUE, FALSE)
+)
+
+# mydataからColorを取り出す
+
+# mydataからIDの3番目の要素を取り出す
+
+```
+
+
+## List
+
+- An ordered collection of objects (components).
+<!-- リストはオブジェクト(コンポーネント)の順序付きコレクションである。 -->
+- A list allows you to gather a variety of objects under one name.
+<!-- リストを使用すると、さまざまな(おそらく関連のない)オブジェクトを1つの名前の下にまとめることができる。 -->
+
+```{r}
+#| output-location: slide
+a <- "seven"; b <- "seven"
+z <- 0 ; y <- 0
+
+# example of a list with 4 components -
+w <- list(
+  name = "Fred",
+  mynumbers = a,
+  mymatrix = y,
+  age = 5.3
+  )
+w
+```
+
+---
+
+```{r}
+list1 <- list(name = "Fred", mynumbers = a, mymatrix = y, age = 5.3)
+list2 <- list(name = "Joe",  mynumbers = b, mymatrix = z, age = 10.11) # 誤字
+v <- c(list1,list2)
+# Identify elements of a list using the [[]] convention.
+w[[1]] # 1st component of the list
+v[["mynumbers"]] # component named mynumbers in list
+```
+
+## Example: list
+
+
+```{webr-r}
+mylist <- list(
+  a = c("one", "two", "three"),
+  b = c(1,2,3),
+  c = matrix(1:9, nrow = 3)
+)
+# mylistからaを取り出す
+
+# mylistからbの2番目の要素を取り出す
+
+```
+
+
+## Factors
+
+<!-- 因子は、名目的な値を [ 1. ... k ]（kは名目変数の一意な値の数）の範囲の整数ベクトルとして格納し、これらの整数にマッピングされた文字列（元の値）の内部ベクトルを格納する。 -->
+
+- Tell R that a variable is nominal by making it a factor.
+<!-- ある変数が名目変数であることをRで指定するには、その変数をファクター型にする。 -->
+- The factor stores the *nominal values* as a vector of integers in the range $[1, \dots , k ]$ (where $k$ is the number of unique values in the nominal variable), and *an internal vector of character strings (the original values) mapped to these integers*.
+<!-- ファクター型は、名目変数のユニークな値の数を$k$とすると、$[1, \dots , k]$の範囲の整数ベクトルとして、これらの整数
+に変換された文字列(元の値)の内部ベクトルとして格納している。 -->
+
+## Make factors
+
+Nominal variables are those that represent discrete categories without any intrinsic order.
+
+```{r}
+gender <- c(rep("male", 20), rep("female", 30))
+summary(gender)
+gender <- factor(gender)　# ファクター型に変換
+summary(gender)
+```
+
+## Ordered Factors
+
+Ordered factores are those that represent discrete categories with an intrinsic order.
+
+```{r}
+rating <- c( "medium","large", "small")  # 文字ベクトル
+print(rating)
+rating <- ordered(rating) # 順序付きファクターに変換
+print(rating)
+```
+
+## Useful Functions for Dataset Inspection and Manipulation
+
+<!-- ## データセットの確認と操作に役立つ関数 -->
+
+```{r}
+#| code-fold: true
+arry <- read.csv( #
+    system.file("extdata", "morph_array.csv", #
+        package = "auditanalytics", mustWork = TRUE)
+        )
+arry |>
+    kable(longtable = T) |> #
+    kable_styling( # specify table style
+        bootstrap_options = c("striped", "hover", "condensed"),
+        full_width = F, font_size = 18
+        )
+```
+
+---
+
+### Data Inspection
+
+```{r}
+length(arry) #  要素・コンポーネントの数
+class(arry) # オブジェクトのクラス・型
+names(arry) # オブジェクトの変数名
+```
+
+
+# Analysis of Accounting Transactions
+
+## audit precedures and accounting cycle
+<!-- ## 監査手続と会計サイクル -->
+
+
+
+- Audit procedures are designed around the accounting cycles.
+<!-- 監査手続は、会計サイクルに沿って計画される。 -->
+- There are both *practical* and *theoretical* reasons for this.
+<!-- これには、実務的な理由と理論的な理由がある。 -->
+- The accounting cycles define the particular processing of transactions, and **interim tests** (暫定的検証) focus entirely on particular transactions and their processing.
+<!-- 会計サイクルは特定の取引についてのプロセスを定義し、暫定的検証（interim test）は特定の取引とそのプロセスに完全に焦点を当てる。 -->
+- The same economic event will be reflected in multiple transactions, and there are economies in designing audits around this fact.
+<!-- 同じとされた経済事象は複数の取引に反映されることになり、このような事実を中心に監査を計画することは経済的である。 -->
+- In *substantive year-end tests* (実証手続), the income statement accounts are transaction based, and their accurate estimation depends on understanding the accounting cycles.
+<!-- 期末の実証手続では、損益計算書は取引に基づくものであり、その正確な計算は会計サイクルの理解にかかっている。 -->
+
+## PCAOB
+
+Guidance from the PCAOB’s AS 2100 through 2600 can be used to structure the sampling and analysis decision-making in an audit:
+<!-- PCAOB監査基準（以下、AS）の2100から2600までのガイダンス（PCAOBのウェブサイトpcaobus.orgで入手可能）は、監査におけるサンプリングと意思決定分析（analysis decision-making）を構成するために利用することができる。 -->
+
+1. **Planning and risk assessment phase** : Using the *audit risk assessment matrix*, determine which transaction flows will have predicted error rates(予想逸脱率) greater than tolerable rate(許容逸脱率), or predicted error amounts greater than tolerable misstatement amount.
+<!-- 1. **監査計画とリスク評価の段階**： 監査リスク評価マトリクスを使用して、どの取引フローにおいて、予想逸脱率が許容逸脱率を超えるか、または予想虚偽表示額が許容虚偽表示額を超えるかを決定する。-->
+ <!--memo 「許容逸脱率」－母集団における実際の逸脱率が一定の率を上回らないような適切な保証水準を得るために、監査人が設定した所定の内部統制の逸脱率をいう。 -->
+   - Their function is to provide the foundation for determining initial audit scope, the budget and predicted contract cost of the audit, and for selecting particular audit tests that will be performed.
+<!-- この機能は、初期の監査範囲、および監査契約にかかる予算および予定費用を決定し、特定の監査手続の実施を選択するための基礎を提供する。 -->
+   - This work typically uses *little or no transaction data from the client*, rather relies on the prior years audit conclusions and tests, benchmarks from similar firms in the client’s industry and available audit resources.
+<!-- この業務では、通常、被監査会社からの取引データはほとんどまたは全く使用しない。 -->
+<!-- むしろ前年度の監査の結論や監査手続の結果、被監査会社が属する産業の類似企業から算定したベンチマーク、及び利用可能な監査リソースに依存する。 -->
+
+---
+
+2. **Interim compliance tests (tests of transaction, mid-year tests)** (運用評価手続) : Each significant transaction processing step may potentially be tested, but the audit program typically restricts *scope of the interim tests to those found to be “**at risk**” in the planning and risk assessment phase of the audit*.
+Where risk assessment matrix predictions exceed tolerable rates or amounts, plan to use attribute sampling (to find actual rate of error); for other tests, use discovery sampling to detect the possibility that error rate might be intolerable.
+<!-- The product of this phase is the internal control report (specified in AU section 319 and PCAOB AS No. 5) which may also be the basis for assertions in the Sarbanes–Oxley letter signed by management. -->
+<!-- 2. **運用評価手続**： 重要な取引処理のステップを検証する可能性があるが、監査計画は通常、運用評価手続の範囲を監査計画およびリスク評価の段階で「リスクがある」と判断されたものに限定する。リスク評価マトリクスの予測値が、許容逸脱率や許容虚偽表示額を超える場合には、（実際の逸脱率を知るために）属性サンプリング（attribute sampling）を使用するよう計画する。他の場合の手続については、発見サンプリング（discovery sampling）を利用して、逸脱率が許容できない可能性を検出する。この段階の成果物は、（AU section 319およびPCAOB AS No.5に規定される）内部統制報告書であり、これは、Sarbanes–Oxley法の経営者による報告書の主張の基礎となることもある。　 -->
+
+3. **Substantive tests** (実証手続) : Substantive tests assess the probability of **material error** (重要な虚偽表示) in the accounts summarized in the various financial reports distributed to shareholders.
+Based on error rates discovered in interim compliance tests (and reported in the internal control memo) and expand the minimum tests of monetary balances on the trial balance.
+<!-- 3. **実証手続**： 株主へ公表される各種財務報告書に要約されている財務諸表に重要な虚偽表示がある可能性を評価する。運用評価手続で発見された（、また内部統制メモで報告された）逸脱率に基づき、試算表上の金額残高への監査の対象範囲を拡大する。 -->
+
+
+---
+
+- Corporate accounting systems are universally implemented on computer systems today—either in-house systems, or increasingly through service bureaus and **software as a service** (SaaS) infrastructure.
+<!-- 現在、企業の会計システムは、一般的にコンピュータシステム上に構築されている（社内システム上に構築されることもあれば、経理業務を受託するサービスビューロー（service bureaus）やSaaS（Software as a Service）インフラを利用するケースも増えている）。 -->
+- Auditing is fundamentally about *drawing conclusions on the financial statement balances* (which are summary statistic) from detailed investigations of individual accounting transactions.
+<!-- (i.e., the economic events that record the data for these account balances). -->
+<!-- 監査とは、基本的に、個々の会計上の取引（勘定にデータとして記録される経済的事象）の詳細な調査から、（様々な数値を要約したものに過ぎない）財務諸表項目に関する結論を導き出すことである。 -->
+- Since both balances and transactions are recorded in the computer databases today, audit sampling can only be completed with computer programs.
+<!-- 現在、勘定も取引も（紙ではなく）コンピュータのデータベースに記録されるため、監査サンプリングはコンピュータ・プログラムによってのみ行うことが可能である。 -->
+
+---
+
+- Additionally, corporations are retaining more accounting data than ever, partly because of new regulations from e.g. Sarbanes–Oxley, and partly because investors value more information, and corporations strive to provide it.
+<!-- さらに、SOX法などによって要請される新たな規則のために、投資家がより多くの情報を重視し企業がそれを提供しようと努めているので、企業はこれまで以上に多くの会計データを保持するようになっている。 -->
+- Though this creates some up-front costs for auditors, it also makes the selection, audit, and analysis of transaction samples much more efficient.
+<!-- このことは、監査人にとって若干の先行投資にかかる費用が生じるものの、取引サンプルの選択、監査、および分析をより効率的なものにしている。 -->
+The following provides the basic statistics that you need to understand to properly conduct an audit—either test of transaction (mid- year, internal control) or substantive (year-end, balance) tests.
+<!-- 本章の以下の部分は、適切な監査の実施（期中に内部統制に関して行う運用評価手続や期末に勘定に対して行う実証手続）のために理解する必要がある基本的な統計情報について学ぶ。-->
+
+
+
+# The Origin of Accounting Transactions
+
+
+## Accounting Transaction
+
+- Accounting transactions begin as real-world events involving a firm — processes like sales that are localized in value, time, and space.
+<!-- 会計取引は、企業が関与する現実世界の事象（価値、時間、および空間の局所的な売上プロセス）として開始される。 -->
+- The vast majority of these events are irrelevant to accountants — events that have no impact on the wealth of the firm.
+<!-- これらの事象の大部分は、会社の富に影響を与えない事象であり、財務諸表には無関係である。 -->
+- Eligibility for an event to become an accounting transaction is determined by *commercial law* — whatever events will *create income, financial obligations, or financial allocations* are likely to become accounting transactions.
+<!-- ある事象が会計取引となる要件は、商法によって決定され、収入、財的な義務、または財務的な配分を生み出す事象であれば何でも、会計取引となる可能性が高い。 -->
+- The route from event to accounting transaction involves *three components* :
+<!-- 事象から会計取引に至るまでの経路には、3つの要素が含まれる。 -->
+
+## The Origin of Accounting Transactions
+
+1. *The definition of the boundaries of the firm*.
+Thus the same event may be an accounting transaction on a divisional financial statement, but will not be incorporated into the consolidated financial statements.
+<!-- 1. **会社の境界についての定義** 従って、同じ事象が部門レベルの財務諸表上では会計取引である可能性があっても、連結財務諸表には組み込まれないことがある。 -->
+2. *The relevant commercial law applying to the event-transaction*.
+Often this pertains to the definition of “**ownership**” of an asset, or “**obligation**” for a *promise, warranty, or contract*.
+<!-- Where ownership and obligations cannot be determined, the firm may need to report “contingent” liabilities or assets in a note. -->
+<!-- Before the nineteenth century, law mainly related to product transactions, but the twentieth century witnessed an explosion of intricacies in the law which have made this determination much more difficult. -->
+<!-- 2. **事象-取引に適用される商法の関連規定** 多くの場合、これは資産の「所有権」または契約（promise）の「義務」、保証（warranty）、もしくは契約の定義に関係する。所有権や義務が確定できない場合、企業は「偶発（contingent）」債務や資産を注記で報告する必要があるかもしれない。19世紀以前は、法律は主に製品の売買取引に関するものであったが、20世紀に入ると、法律が爆発的に複雑になり、この判断がより難しくなった。 -->
+3. *The capture system for recording the event-transaction*.
+Auditor responsibility for capture of transactions has expanded significantly over the past two decades, particularly with the *Sarbanes–Oxley Act of 2002*.
+Firms are expected to have capture systems to assure that where there is a legal ownership or liability, that it shows up in the accounting reports.
+<!-- 3. **事象-取引の記録システム** 過去20年間、特に2002年のSOX法により、監査人の取引の記録に対する責任は大幅に拡大した。
+企業は、法的な所有権や義務がある場合、それが財務諸表へ表示されることを確実なものとするために、記録システムを構築することが期待されている。 -->
+
+
+## Chart of Accounts
+
+- Once an event has successfully bridged the transition from real world to captured and recorded accounting transaction, *it needs a name and a sign*.
+<!-- ある事象が、現実世界から会計取引として識別され記録されるまでの橋渡しに成功したら、その事象には名前と符号が必要となる。 -->
+- This is the responsibility of the “*Chart of Accounts*”.
+<!-- これが 「勘定科目一覧（Chart of Accounts）」の責任である。 -->
+- The Chart of Accounts is an artificial categorization system that is set up by the firm’s controller or financial executive.
+<!-- 勘定科目一覧は、企業の経理担当者または財務担当役員によって設定される人工的な分類システムである。 -->
+- It varies from firm to firm, reflecting the idiosyncrasies of the firm’s particular business.
+<!-- これは、会社によって異なり、その会社特有のビジネスの特性を反映している。 -->
+
+---
+
+- There are general guidelines for constructing any Chart of Accounts, guided by *generally accepted accounting principles* (GAAP) and needed to assure that investors can easily compare investment in one firm with another.
+<!-- 勘定科目一覧の作成には、一般に公正妥当と認められた会計原則（Generally Accepted Accounting Principles：以下、GAAP）に基づく一般的な指針があり、勘定科目一覧は投資家がある企業への投資と他の企業への投資を容易に比較できるようにするために必要である。 -->
+- High volume transactions such as sales and payroll will have their own journals - today these are typically computer systems dedicated to processing a single type of transaction.
+<!-- 売上や給与計算のような大量の取引は、それぞれ独自の帳簿を持っており、現在、これらの独自の帳簿は、通常、単一種類の取引を処理するための専用コンピュータ・システムとなっている。-->
+
+---
+
+- Less common transactions may receive less attention, and thus may be more error prone.
+<!-- あまり一般的でない取引は、あまり注目されないため、誤謬が発生しやすいかもしれない。  -->
+- In addition, there may be specific idiosyncrasies of GAAP that modify the application and interpretation of any of these *four filters*.
+<!-- さらに、下記の4つのフィルターのどれかの適用と解釈を変更するような、GAAP特有の特性があるかもしれない。 -->
+- Thus when auditors speak of a “*transaction stream*” (取引のフロー) they are fundamentally referencing some real-world event located in time, space, and value, but which has been processed through a set of filters:
+<!-- 従って、監査人が「取引フロー（transaction stream）」と言う場合、基本的には、時間、空間、 および価値で位置づけられる現実世界の事象を指しているが、それは下記の連続したフィルターを通して処理されたものである。 -->
+
+## The Five Filters
+
+1. capture. 取引の識別
+2. legal ownership and valuation. 法的な所有権と評価
+3. firm boundaries. 企業の境界
+4. classification. 分類
+5. GAAP. GAAP
+
+<!--
+1.
+2.
+3.
+4.
+5.
+ -->
+
+
+---
+
+- This complexity is fundamental to process of accounting, and is necessary for assuring that stakeholders have *informative and comparable financial statements*.
+<!-- このような複雑性は、会計プロセスの基本であり、利害関係者が情報提供的で比較可能な財務諸表を入手できるようにするために必要なものである。 -->
+- The remainder of the accounting process is a matter of stylized summarization of the transactions processed through these filters.
+<!-- （5段階のプロセス以外の）会計プロセスの残りの部分は、これらのフィルターを通して処理された取引について数値を定型的に要約していくことに関する問題である。 -->
+- The summarization is inherently **linear-additive** with a few non-linear exceptions applied to allocations over time or output.
+<!-- この要約は本質的に線形加法的（linear-additive）であるが、時間や（生産高などの）アウトプットに応じた配分に適用されるいくつかの非線形の例外もある。 -->
+- Sadly, the most consequential part of accounting - *this five stage filtering process* - is also the part that receives very little formal attention in auditing.
+<!-- 残念ながら、財務諸表の最も重要な部分であるこの5段階のフィルタリング・プロセスは、監査ではほとんど注目されない部分でもある。 -->
+
+
+## Audit Tests as Learning Models
+
+Auditing may be seen as a sequence of evidence collection and analyses that help the auditor learn enough to render an opinion.
+Conceptually, the tests involve a sequence of inferences:
+<!-- 監査は、監査人が監査意見を表明するのに相応しい学習を行わせるための体系的な証拠収集と分析として捉えることができる。 -->
+<!-- 概念的には、監査手続には以下のような一連の推論が含まれる。 -->
+
+1. **Audit planning** will have set scope and sample size values for audit tasks that in general ‘seek to discover’ (i.e., **discovery sampling**) whether or not transaction processing is or is not in control.
+This is usually stated as an *assessment of error rates* rather than dollar magnitudes of error.
+<!-- 1. 監査計画では、運用評価手続に適用される監査範囲とサンプルサイズが設定される。ここで運用評価手続は、全体として取引処理が統制されているか否かを「発見しようとする」ために実施される（すなわち、このような手続は発見サンプリング（discovery sampling）といえる）。このような運用評価手続では、虚偽表示額ではなく逸脱率の評価が行われる。 -->
+
+2. If errors are discovered in a particular transaction flow, then *sufficient additional evidence* (十分な追加的監査証拠) must be gathered to assess the rate of error occurrences in the transaction flow (i.e., attribute sampling).
+<!-- 2. 特定の取引フローにおいて逸脱が発見された場合、その取引フローにおける逸脱率を評価するために、十分な追加証拠が収集されなければならない（すなわち、このような手続は属性サンプリング（attribute sampling）といえる）。 -->
+
+
+---
+
+
+3. Transaction flows with error rates that are sufficiently high to be deemed “out-of-control” (i.e., intolerable from the audit perspective) are listed on *the Internal Control Memo* generated at the end of the *Interim compliance audit*.
+<!-- 3. 「全体として統制できていない（out-of-control）」、つまり監査の観点からは許容できないと判断されるほど十分に逸脱率が高い取引フローは、運用評価手続の最後に作成される内部統制についての内部報告（Internal Control Memo）に記載される。 -->
+
+4. Financial statement account balances affected by any transaction flows with error rates that are sufficiently high to be deemed “out-of-control” will have their sample sizes in the audit program for year-end substantive tests adjusted to assure an accurate assessment of the existence of material error in the audited financial statements.
+<!-- 4. 全体として統制できていないと判断されるほど逸脱率が高い取引フローの影響を受ける財務諸表の勘定残高については、監査計画において実証手続のサンプルサイズが調整される。これは、監査済財務諸表における重要な虚偽表示を正確に評価するためである。 -->
+---
+
+- Various ad hoc and formal models have been proposed for the gradual accumulation of knowledge of the accounts throughout the audit.
+<!-- 監査を通じて財務諸表に関する知識を 段階的に蓄積するために、様々なアドホックモデルや形式的モデルが提案されてきた。 -->
+- My own preference is for systems of audit task evidence accumulation modeled as *Bayesian conjugate priors*.
+<!-- 筆者が好んでいるのは、ベイズ共役事前分布としてモデル化された監査証拠の収集・評価のシステムである。 -->
+- The most general of these involves the *Gamma distribution*, but we will simplify some of the steps using the *simpler one-parameter Poisson distribution*.
+<!-- このようなモデルで最も一般的なのはガンマ分布を利用したものであるが、著者はより単純なパラメータが1つだけのポアソン分布を利用して簡略化している -->
+- Both distributions take on values on the positive quadrant, and thus are *more suitable for modeling accounting distributions than the Normal distribution*.
+<!-- 。どちらの分布も正の象限上の値をとるので、正規分布よりも会計数値をモデル化するのに適している。 -->
+
+
+# Working with Dates
+<!-- 日付データの処理 -->
+
+- Time is an essential component of auditing.
+<!-- 時間は監査を実施するにあたって重要な要素である。 -->
+- *Income statement accounts* represent sums of transactions **within strictly set periods**, and *balance sheet accounts* are stated at **a specific time**.
+<!-- 損益計算書の勘定科目は厳密に設定された期間内の取引額の合計を表し、貸借対照表の勘定科目は特定の時点で計上される。 -->
+<!-- - Auditors routinely test timing of transactions for cutoff errors and frauds such as check kiting allows fraudsters to build up a balance in one bank by writing bad checks on another bank; or lapping involves stealing a customer payment and using any additional payments from that customer to cover the theft. -->
+<!-- 監査人は日常的に、カットオフエラーや、キッティングと呼ばれる小切手詐欺（不正実施者ががある銀行に対して預金がないにもかかかわらず小切手を振り出して、別の銀行の預金の残高を発生させるもの）やラッピング（顧客からの代金を盗み、他の顧客からの代金を窃盗した代金の補填に充てること）のような不正を検査するために取引のタイミングを検証する。 -->
+- Transactions are always time-stamped, and the internal control, processing and auditing of client systems are heavily dependent on timing of transactions.
+<!-- 取引には常にタイムスタンプが押され、クライアントシステムの内部統制、処理、および監査（の信頼性）は取引のタイミングに大きく依存する。 -->
+<!-- Unfortunately, in computer environments, date-time data can be frustrating, error prone and difficult to work with, even though they are an essential element of all accounting systems.  -->
+<!-- 残念なことに、多くのコンピュータ環境において、日付・時刻のデータは、すべての会計システムに重要jな要素であるにもかかわらず、苛立たしく、問題が発生しやすく、扱うのが難しい。 -->
+<!-- Fortunately, the R package *lubridate* simplifies date-time manipulation and calculations in a fashion unparalleled in other software.  -->
+
+## `lubridate` packages
+
+<!-- しかし幸いなことに、Rパッケージ*lubridate*は、他のソフトウェアにはない方法で、日時・時刻データの操作と計算を簡単にしてくれる。 -->
+- The `lubridate` package makes it easier to do the things R does with date-times and possible to do the things that Base-R does not.
+- `lubridate` is included in `tidyverse` package now.
+<!-- `lubridate`パッケージは、日付・時刻データの処理を容易にすることができ、Rの基本関数ではできないことができる。 -->
+- We can use these functions: `ymd()`，`mdy()`，`dmy()` etc.
+<!-- 日時の解析: ymd(), ymd_hms, dmy(), dmy_hms, mdy()など -->
+
+```{r lubridate01}
+pacman::p_load(auditanalytics, tidyverse)
+ymd(20101215) # year month day
+mdy("4/1/17") # month day year
+```
+
+## Other funcitons in `lubridate` packages
+
+A simple function to get and set elements of a date-time, `year()`, `month()`, `mday()`, etc.
+<!-- ## 日時の要素を取得・設定する簡単な関数, year(), month(), mday(),など -->
+
+```{r lubridate02}
+bday <- dmy("14/10/1979")
+month(bday) # 月を取得
+wday(bday, label = TRUE) # 1979年10月14日は日曜日
+year(bday) <- 2016
+wday(bday, label = TRUE) # 2016年10月14日は金曜日
+```
+
+## `with_tz()` and `force_tz()`
+
+Helper functions for handling time zones in `lubridate`: `with_tz()`, `force_tz()`.
+<!-- ## lubridateのタイムゾーンを扱うためのヘルパー関数: with_tz(), force_tz() -->
+
+```{r lubridate03}
+time <- ymd_hms("2010-12-13 15:30:30") # time stamp
+time # 2010年12月13日15時30分30秒
+with_tz(time, "America/Chicago") # time zone change
+force_tz(time, "America/Chicago") #
+```
+
+timezoneに合わせて時刻も変換したい場合は`with_tz()`，timezoneだけを置き換えたい場合は`force_tz()`
+
+## `lubridate` operations
+
+The `lubridate` also expands the type of mathematical operations that can be performed with date-time objects, and defines three time span classes that play roles in auditing:
+<!-- `lubridate`は、日時オブジェクトで実行できる数学的演算の種類も拡張し、監査において役割を果たす3つの時間間隔クラスを定義する。 -->
+
+- **durations**, which measure the *exact amount of time between two points*
+<!-- - 持続時間(durations)は、2つの点の間の正確な時間を測定する -->
+- **periods**, which accurately track clock times despite leap years, leap seconds, and day light savings time
+<!-- - 期間(periods)は、うるう年、うるう秒、夏時間にも対応した時計時間を正確に追跡する -->
+- **intervals**, a protean summary of the time information between two points
+<!-- - 区間(intervals)は、2点間の時間情報の多様な要約である -->
+
+
+## Example of `lubridate` operations
+
+```{webr-r}
+# 2024年10月16日を日付オブジェクトstartとして作成
+
+# 2025年10月16日を日付オブジェクトendとして作成
+
+# start から年をyear, 月をmonthとして作成
+
+```
+
+<!--
+start <- ymd_hms("2024-10-16 13:00:00")
+finish <- ymd_hms("2024-10-16 16:40:00")
+-->
+
+# Accounting Transactions
+
+## Accounting Transactions for Auditors
+
+- Accounting transactions are the **raw data** in an accounting system.
+<!-- 会計取引は、会計システムにおける「生データ」である。 -->
+- They represent measurements of economic events such as sales or purchases, that cross the border of the firm.
+<!-- 会計取引は、企業の境界を越える売上や仕入のような経済事象の測定値を表すものである。 -->
+- Transactions are "measured" and "recorded" on *journal entries*, the documents of original entry.
+<!-- 取引は、原書記入帳(documents of original entry)に*仕訳*で「測定」され、「記録」される。 -->
+- Journal entries were originally simply reminders and descriptive notes recorded in a journal book.
+<!-- 仕訳はもともと、単に仕訳帳に記録されたリマインダーや記述的なメモであった。 -->
+- But with more formal, mathematical developments in accounting, they evolved into their current form of documents of original entry.
+<!-- しかし、会計におけるより形式的で数学的な発展により、原書記入帳の現在の形式に進化した。 -->
+<!-- - For high volume transactions, there will typically be specialized journals, e.g., the Sales Journal, or Purchase Journal, that consolidate the recording of these types of transactions in the accounting systems. -->
+<!-- 高頻度の取引については、売上仕訳帳や仕入仕訳帳などの特殊な仕訳帳があり、会計システムにおけるこの種の取引の記録を統合する。 -->
+
+
+## 20th Century Developments in Accounting
+
+- Before the twentieth century, accounting was concerned mainly with computing the **asset value** of the firm, and focused on economic events that made the firm richer or poorer.
+<!-- 20世紀以前、会計は主に企業の資産価値を計算し、企業を豊かにしたり貧しくしたりする経済的な出来事に焦点を当てていた。 -->
+- The twentieth century saw a transition to a more holistic perspective, where transactions were recorded to track, in addition to wealth, *managerial performance*, and *stakeholder interests*.
+<!-- 20世紀には、より包括的な視点への移行が見られ、取引は財産に加えて、経営者の業績や利害関係者の利益を追跡するために記録されるようになった。 -->
+<!-- In practice, our minimum level of resolution in transactions and accounts is one dollar (a single monetary unit). -->
+<!-- 実務上、取引と勘定の最小解像度は1ドル（単一の通貨単位）である。 -->
+<!-- - This resolution limit is in fact the basis of audit procedures such as dollar-unit sampling. -->
+<!-- この解像度の制限は、ドル単位抽出などの監査手続きの基礎となっている。 -->
+- We are not limited to dollar levels of resolution; annual reports may use *thousands or millions of dollars* as their level of resolution.
+<!-- 解像度のレベルはドルに限定されているわけではなく、年次報告書では数千ドルや数百万ドルを解像度のレベルとして使用することができる。 -->
+- Additionally, accounting and double-entry bookkeeping are methods of generating summarizations of transactions, and these often take the form of **value** $\times$ **quantity** statistics.
+<!-- くわえて、会計と複式簿記は取引の要約を生成する方法であり、これらはしばしば価値$\times $数量の統計量の形をとる。 -->
+
+## The Histogram of Accounting Transactions
+
+- In the histogram below which was constructed from a real-world transaction journal, we use `qplot()` to produce a *histogram of discrete transaction values* at a resolution of one dollar.
+<!-- 以下のヒストグラムは、実際の取引仕訳帳から作成されたものであり、`qplot`（ggplotの省略形）を使用して、1ドルの解像度で離散的な取引値のヒストグラムを作成している。 -->
+- The level of resolution determines the number of histogram bins, in this case 30.
+<!-- 解像度のレベルは、ヒストグラムのビンの数を決定する。この場合は30である。 -->
+- Human cognition tends to be overwhelmed by large numbers of bins, which is why we often see financial statistics summarized at levels of resolution larger than one dollar (Fig. 1).
+<!-- 人間の認知は、多数のビンに圧倒されがちである。これが、しばしば1ドルより大きな解像度で要約された財務統計を見る理由である（図1）。 -->
+
+---
+
+### Fig. 1. Histogram of Accounting Transactions
+
+![Figure 1](img/audit_fig01.png)
+
+
+---
+
+- This histogram displays several characteristics commonly seen in actual transaction probability distributions:
+<!-- このヒストグラムには、実際の取引確率分布でよく見られるいくつかの特徴が表示されている。 -->
+
+1. the distribution is **left-bounded at zero**.
+<!-- 1. 分布はゼロで左に制限されている。 -->
+1. the distribution may be **zero-inflated**, i.e., it may have a substantial number of zero measurements.
+<!-- 2. 分布はゼロが多く含まれている、すなわち、ゼロの測定値が多く含まれている可能性がある。 -->
+1. **the distribution is multimodal**, with a succession of value clusters trailing off to the right.
+<!-- 分布は多峰性であり、右に伸びる値のクラスターが続いている。 -->
+
+
+---
+
+### First characteristics
+
+- The first characteristic is built into accounting systems by design; *account entries should not contain negative values*.
+<!-- 第1の特徴は会計システムの設計に組み込まれている。勘定科目には負の値を含めるべきではない。 -->
+<!-- Rather, when a transaction reduces an account balance, e.g., a reduction of Sales when there is a Sales Return, the reduction should be recorded in the "contra" account Sales Returns and Allowances. -->
+<!-- むしろ、取引が勘定科目の残高を減少させる場合、例えば、売上返品がある場合、減少は「対称」勘定の売上返品と手数料に計上されるべきである。 -->
+- This convention goes back to the birth of accounting.
+<!-- この慣習は会計の誕生にさかのぼる。 -->
+- In ninth century Baghdad, Al-Khwarizmi solved linear and quadratic equations using algebraic methods derived from the work of the Indian mathematician Brahmagupta, who invented negative numbers.
+<!-- 9世紀のバグダッドで、アル＝ワリズミーは、負の数を発明したインドの数学者ブラフマグプタの研究からもたらされた代数的手法を用いて、線形方程式と二次方程式を解いた。 -->
+<!-- Nonetheless, Al-Khwarizmi felt that negative results were meaningless. -->
+<!-- それにもかかわらず、アル＝ワリズミーは、負の結果は意味をなさないと感じていた。 -->
+- In his treatise on the laws of inheritance (where the double-entry system was first published) Al-Khwarizmi instructed his readers to represent negative quantities as debts - i.e., *contra-accounts*.
+<!-- アル＝ワリズミーは、相続の法律に関する彼の論文（複式簿記が初めて発表された場所）で、読者に負の数量を債務（すなわち、対称勘定）として表現するよう指示した。 -->
+
+
+---
+
+### Second Characteristics
+
+- The second characteristic reflects the existence of “convenience” transactions that record an economic event that has no effect on firm wealth.
+<!-- 第2の特徴は、企業の富に影響を与えない経済的事象を記録する「便宜的」な取引の存在を反映している。 -->
+- These could reflect estimates, adjustments, or other ad hoc entries.
+<!-- これらは、見積り、調整、その他のアドホックな仕訳を反映している可能性がある。 -->
+- The final characteristic is most interesting.
+<!-- 最後の特徴は最も興味深い。 -->
+<!-- - The verdict is still out on why we see this in transaction streams, but it seems to have several sources. -->
+<!-- なぜ取引ストリームでこれを見るのかはまだわかっていないが、いくつかのソースがあるようだ。 -->
+- Transactions may be produced by several independent processes, perhaps representing different locations, product values, or other factor.
+<!-- 取引は、異なる場所、製品価値、その他の要因を表すかもしれないが、いくつかの独立したプロセスによって生成される可能性がある。 -->
+- Another explanation arises from the mathematics of many transaction amounts - the unit price times the number of items in the transaction.
+<!-- 別の説明は、多くの取引金額の数学、単価$\times $取引数量から生じる。 -->
+
+
+---
+
+Even where values and quantities are unimodally distributed, their product can be multimodal, as is seen in the following graph (Fig. 2).
+<!-- 値と数量が単峰性分布であっても、その積は多峰性になることがある。 -->
+<!-- 以下のグラフ（図2）を見てみよう。 -->
+
+
+```{r qplot01}
+#| message: false
+#| error: false
+price <- rpois(n = 1000, lambda = 2)  # ポワソン分布から1000個の乱数を生成
+quantity <- rpois(1000, 10000) # ポワソン分布から1000個の乱数を生成
+value <- price * quantity      # 価格と数量の積
+qplot(value, geom = "histogram") # ヒストグラム
+```
+
+---
+
+```{r qqplot2}
+qplot(value, geom = "density")   # 密度分布
+```
+
+
+## The Central Limit Theorem and Accounting
+
+- Because accounting systems use linear operators, and **summation** is central to most accounting computations, it is natural to assume - when sampling, summarizing, or estimating errors - that errors are Normally distributed, because of the **Central Limit Theorem** (CLT).
+<!-- 会計システムは線形演算を使用し、ほとんどの会計計算において加算が中心的な役割を果たすため、サンプリング、要約、誤差の推定を行う際には、中心極限定理（CLT）により、誤差は正規分布に従うと仮定するのが自然である。 -->
+- The CLT provides useful approximations, and is appropriate in many situations.
+<!-- 中心極限定理は有用な近似値を提供し、多くの状況において適切である。 -->
+<!-- Nonetheless, the auditor should not blindly invoke CLT convergence to justify Normality assumptions in the search for material errors in the financial statements (Fig. 3). -->
+<!-- それにもかかわらず、監査人は、財務諸表における重大な誤りを探すために正規性の仮定を正当化するために、中心極限定理の収束を盲目的に引き合いに出すべきではない（図3）。 -->
+<!-- - In a search for material errors, it may not be the entire transaction or account distribution that is important, but just **the upper tail**. -->
+<!-- 重大な誤りを探す際には、取引や勘定の分布全体が重要なのではなく、上側のテールだけが重要であるかもしれない。 -->
+- Audit decisions tend to focus on the existence of material misstatements, which limit them to the upper tail.
+<!-- 監査の意思決定は、重大な誤りの存在に焦点を当てる傾向があり、これは上側のテールに限定される。 -->
+<!-- For a broad range of distributions, the asymptotic upper tail distribution can be inferred from the Fisher–Tippett–Gnedenko (FTG) theorem, an extreme value counterpart to the CLT. -->
+<!-- 広範囲の分布については、中心極限定理の極限値に対応するフィッシャー・ティペット・グネデンコ(FTG)の定理から、漸近的な上側テール分布を推定することができる。 -->
+<!-- The FTG Theorem proves that extreme values can only converge to either the Gumbel, Fréchet, or Weibull distributions or they do not converge at all. -->
+<!-- FTG定理は、極値はガンベル分布、フレシェ分布、またはワイブル分布のいずれかにしか収束しないことを証明している。 -->
+<!-- FTG convergence applies only to the right tail of the distribution, and is widely invoked in insurance risk models. -->
+<!-- FTG収束は分布の右側テールにのみ適用され、保険リスクモデルで広く引用されている。 -->
+<!-- This can be very useful in practice, empirical distributions in finance can be complicated, with multiple modes which may not be stable over time. -->
+<!-- これは実務で非常に有用であり、金融における経験分布は複雑であり、複数のモードがあり、時間の経過とともに安定しない場合がある。 -->
+- Being able to more accurately characterize accounting distributions that matter allows the auditor to potentially reduce sample sizes, and lower the cost of auditing.
+<!-- 重要な会計分布をより正確に特徴付けることができれば、監査人はサンプルサイズを縮小し、監査のコストを削減することができる。 -->
+
+## Couching Institutional Language in Statistical Terms
+<!-- 統計的用語で制度的言語を表現する -->
+
+- Generally, auditing assumes underlying Gaussian distributions of account and transaction values.
+<!-- 一般的に監査では、勘定残高や取引金額が正規分布（ガウス分布）に従うと仮定している。 -->
+<!-- - Evidence has existed for some time (Loebbecke and Steinbart 1987) that empirical distributions of account and transaction values are kurtotic and can be multimodal. -->
+<!-- 会計取引の金額について経験的に想定されている分布が盲目的であり、（実際の分布が）多峰形な可能性があるという実証的証拠は以前から存在する（Loebbecke and Steinbart 1987）。 -->
+- Gaussian assumptions are made for convenience, and there has been no clear evidence to date this assumption is unreasonable.
+<!-- 便宜上正規分布（ガウス分布）が仮定されているわけだが、この仮定が不合理であるという明確な実証的証拠もこれまで存在していない。 -->
+- Auditors are concerned with the potential errors in audit decision-making that can arise from mis-classifying audit asset and transaction distributions.
+<!-- 監査人は、監査する資産や取引の分布を誤分類することから生じる可能性のある監査意思決定における失敗の可能性を懸念している。 -->
+- If these are large, then auditors are either collecting more evidence than needed or unnecessarily incurring additional risk of an incorrect audit opinion.
+<!-- これらの監査意思決定における失敗が大きい場合、監査人は必要以上の監査証拠を収集することになる（ひいては監査コストを押し上げる）か、不必要に誤った監査意見（ひいては潜在的な訴訟につながる）の追加的な損害のリスクを負うことになる。 -->
+
+
+---
+
+
+The AICPA defines *two aspects* to sampling risk when **performing tests of controls**:
+<!-- AICPAは、運用評価手続を実施する際のサンプリングリスクについて、下記の2つの側面を定義している。 -->
+
+1. *The risk of assessing control risk too low* represents the risk that an audit sample supports the conclusion that the design and operation of an internal con rol is effective when in fact it is not.
+<!-- 1.	統制リスクを過大評価するリスクは、内部統制の設計と運用が実際には有効であるにもかかわらず、有効ではないという結論が監査サンプルによって裏付けら るリスクを意味する（第1種の過誤、濡れ衣のリスク）。 -->
+1. *The risk of assessing control risk too high* represents the risk that an audit sample supports the conclusion that the design and operation of an internal control is not effective when in fact it is effective.
+<!-- 2. 統制リスクを過大評価するリスクは、内部統制の設計と運用が実際には有効でないにもかかわらず、有効であるという結論が監査サンプルによって裏付けられるリスクを意味する（第2種の過誤、見逃しのリスク）。 -->
+
+<!--
+松浦メモ 監基報330
+(1) 「運用評価手続」－アサーション・レベルの重要な虚偽表示を防止又は発見・是正する内部統
+制について、その運用状況の有効性を評価するために立案し実施する監査手続をいう。
+(2) 「実証手続」－アサーション・レベルの重要な虚偽表示を看過しないよう立案し実施する監
+査手続をいい、以下の二つの手続で構成される。
+  ① 詳細テスト（取引種類、勘定残高及び注記事項に関して実施する。）
+  ② 分析的実証手続
+(3) 「リスク対応手続」－監査リスクを許容可能な低い水準に抑えるために、識別し評価したア
+サーション・レベルの重要な虚偽表示リスクに対応して、立案し実施する監査手続をいう。リス
+ク対応手続は、運用評価手続と実証手続で構成する。
+
+監査人が監査意見を述べるにあたっては、財務諸表の各項目、構成する要素となる取引や会計事象の正しさを確かめなければならない。その確かめるべき目標を「監査要点」といい、これに適合した十分かつ適切な監査証拠を監査手続を実施して入手する。
+具体的には、
+●実在性（本当にあるのか）
+●網羅性（すべて記録されているか）
+●権利と義務の帰属（会社のものか）
+●評価の妥当性（適切な価額か）
+●期間配分の適切性（正しい期間に計上されているか）
+●表示の妥当性（きちんと開示されているか）
+-->
+
+---
+
+The AICPA defines two aspects to sampling risk when **performing substantive tests**:
+<!-- AICPAは、実証手続を実施する際のサンプリングリスクには2つの側面があると定義している。 -->
+
+1. The risk of incorrect acceptance represents the risk that an audit sample supports the conclusion that a material misstatement does not exist when in fact a material misstatement does exist. This risk is similar to the risk of assessing control risk too low.
+<!-- (1) 誤った承認のリスクは、監査サンプルが、実際には重大な誤りが存在するにもかかわらず、重大な誤りが存在しないという結論を支持するリスクを表している。このリスクは、統制リスクを低く評価しすぎるリスクに類似している。 -->
+2. The risk of incorrect rejection represents the risk that an audit sample supports the conclusion that a material misstatement exists when in fact a material misstatement does not exist. This risk is similar to the risk of assessing control risk too high.
+<!-- (2) 誤った拒否のリスクは、監査サンプルが、実際には重大な誤りが存在しないにもかかわらず、重大な誤りが存在するという結論を支持するリスクを表している。このリスクは、統制リスクを高く評価しすぎるリスクに類似している。 -->
+
+
+---
+
+- Ultimately, an audit must provide shareholders in publicly traded securities an independent verification of the “*fairness*” of accounting reports.
+<!-- 究極的には、監査は上場企業の証券を保有する株主に会計報告の「公正性（fairness）」について独立した立場から立証しなければならない。 -->
+- Audit procedures are dictated by two objectives: *cost efficiency* in data collection and analysis, and “*fairness*” in reporting.
+<!-- 監査手続は、データ収集と分析における監査コストの効率と、報告における「公正性」という2つの目的によって規定される。 -->
+- Fairness is generally interpreted as *absence of “material error”* in the accounting reports.
+<!-- 公正性とは、一般的に会計報告に「重要な虚偽表示」がないことと解釈される。 -->
+- For audits performed by an outside audit firm, risk assessment is a very crucial stage before accepting an audit engagement.
+<!-- 外部の監査法人による行われる監査において，リスク評価は監査契約を引き受ける前でも極めて重要な段階である。 -->
+<!-- It is an integral part of determining the audit tasks that will be performed in the audit program. -->
+<!-- 監査計画で実施される監査業務を決定する上で欠かせない一部である。 -->
+<!-- According to ISA 315, Understanding the Entity and its Environment and Assessing the Risks of Material Misstatement, “the auditor should perform risk assessment procedures to obtain an understanding of the entity and its environment, including its internal control.” -->
+<!-- ISA315「企業およびその環境の理解ならびに重要な虚偽表示リスクの評価」によると、「監査人は、内部統制を含む企業およびその環境を理解するために、リスク評価手続を実施しなければならない。 -->
+
+---
+
+- Evidence relating to the auditor’s risk assessment of a material misstatement in the client’s accounting statements.
+<!-- 監査人は、被監査会社の財務諸表における重要な虚偽表示リスクの評価に関する監査証拠を入手する。 -->
+- Then, the auditor obtains initial evidence regarding the classes of transactions at the client and the operating effectiveness of the client’s internal controls.
+<!-- そして、監査人は、被監査会社の取引の種類および被監査会社の内部統制の有効性に関する（監査計画の）初期における監査証拠を入手する。 -->
+- In auditing, audit risk includes **inherent risk** (IR), **control risk** (CR), and **detection risk** (DR).
+<!-- 監査リスクには、固有リスク（inherent risk：IR）、統制リスク（control risk：CR）、および発見リスク（detection riskDR）が含まれる。 -->
+
+
+
+## The Audit Risk Model
+
+- The audit risk model expresses the risk of an auditor providing an inappropriate opinion of a commercial entity’s accounting statements and is calculated: $AR = IR \times CR \times DR$ .
+<!-- 監査リスクモデルは、営利企業の財務諸表に対する監査意見の表明が不適切なものとなるリスクを表すものであり、$AR = IR \times CR \times DR$で計算される。 -->
+- In this formula, $IR$ refers to the risk involved in a business or transaction.
+<!-- この式において、$IR$とは、事業や取引に潜む固有のリスクを指す。 -->
+<!-- Example, transactions involving exchange of cash may have higher $IR$ than transactions involving settlement by checks. -->
+<!-- 例えば、現金の授受を伴う取引は、小切手による決済を伴う取引よりも$IR$が高くなる可能性がある。 -->
+- $CR$ refers to the risk that a misstatement could occur but **may not be detected and corrected or prevented by entity’s internal control mechanism**.
+<!-- $CR$とは、（事業や取引に潜む）虚偽表示が発生するが、企業の内部統制の仕組みによって発見・是正されない、または防止されないリスクをいう。 -->
+- $DR$ is the probability that *the audit procedures may fail to detect existence of a material error or fraud*.
+<!-- $DR$とは、監査手続が重要な誤謬や不正の存在を発見できない可能性のことである。 -->
+<!-- - While $CR$ depends on *the strength or weakness of the internal control procedures*, DR is either due to sampling error or human factors. -->
+<!-- $CR$が（被監査会社による）内部統制の手続の厳格さや甘さに依存するのに対し、$DR$は（監査人による）サンプリングエラーや人的要因によるものである。 -->
+
+
+---
+
+- Due to the breadth of qualitative and quantitative material that analytical procedures consider, audit risk models have typically been interpreted as abstract heuristics that provide a framework for auditor judgment, but not methods to explicitly process the external data.
+<!-- 分析的手続が考慮する質的および量的なデータの幅が広いため、監査リスクモデルは通常、監査判断の枠組みを提供する抽象的な問題解決方法として解釈されてきたが、外部データを明示的に処理する方法ではなかった。 -->
+
+- But this need not be the case, as there are formal statistical models for assessment of financial reports using external data used by investors.
+<!-- しかし、投資家が利用する外部データを使った財務報告の評価のための正式な統計モデルが存在するのであれば、そうである必要はない。 -->
+
+---
+
+- The most influential of these is the **efficient markets hypothesis** (EMH) which states that asset prices reflected in these markets fully reflect all available information, and provides a strong motivation for reliance on asset markets for decision-making.
+<!-- その中で最も影響力があるのは、効率的市場仮説（efficient markets hypothesis：以下、EMH）である。 -->
+<!-- EMHは、市場に反映される資産価格は利用可能なすべての情報を完全に反映しているとし、意思決定を証券市場に依存する強い動機付けとなっている。 -->
+- The distribution of abnormal returns in US asset markets provides complete and unbiased information about corporate performance.
+<!-- 米国の証券市場における異常リターンの分布は、企業業績に関する完全かつ偏りのない情報を提供している。 -->
+- From the auditor’s perspective, in acquiring plausible financial and non-financial evidence prior to and during actual fieldwork, inexpensive evidence that can fully reflect all available information about a firm and the industry in which it operations should be extremely attractive.
+<!-- 監査人の観点からは、実際の監査実施に先立ち、また監査実施中に、もっともらしい財務的な監査証拠及び非財務的な監査証拠を入手する上で、企業及びその企業が事業を行っている業界に関する入手可能な全ての情報を完全に反映することができる安価な実証的な証拠は、極めて魅力的であるはずである。 -->
+
+---
+
+- Analytical procedures incorporating information-rich asset market statistics hold the potential to substitute for increased audit scope or risk without incurring additional fieldwork.
+<!-- 情報が豊富な証券市場の統計を組み込んだ分析的手続は、追加的な監査の実施を行うことなく、監査範囲の拡大やリスクの増加に代わる可能性を秘めている。 -->
+- Tests of market efficiency have typically been carried out jointly with the **Capital Asset Pricing Model** (CAPM).
+<!-- 市場効率性のテストは通常、資本資産価格モデル（Capital Asset Pricing Model：以下、CAPM）と共同で行われてきた。 -->
+- Both market efficiency and audit models in practice favor an assumption that transaction time series are Gaussian distributed.
+<!-- 市場効率性と監査モデルの両方が、実際には、取引時系列が正規分布（ガウス分布）しているという仮定を支持している。 -->
+- Decision makers understand that this is only an approximation of reality, but it is often considered “*good enough*” with the Central Limit Theorem (CLT) commonly invoked as justification.
+<!-- 意思決定者は、これが現実の近似に過ぎないことを理解しているが、一般的に中心極限定理（CLT）が正当化として引き合いに出されるため、しばしば「これで十分」と考えられている。 -->
+<!-- But as was argued earlier, CLT convergence is most appropriate when trying to generate unbiased estimates for accounts, rather than for assessing extreme value situations such as material errors in financial statements. -->
+<!-- しかし、先に論じたように、CLTの収束が最も適切なのは、財務諸表の重要な虚偽表示のような極値の状況を評価するためではなく、財務諸表に対して不偏の見積りを生成しようとする場合である。 -->
+
+
+## Transaction Samples and Populations
+
+Auditing depends heavily on sampling to control the cost of auditing.
+<!-- 監査は、監査コストに重大な影響を与えるサンプリングに大きく依存している。 -->
+
+- A statistical sample is a subset of the population.
+<!-- 統計的サンプルは母集団の部分集合である。 -->
+- The population is all of the transactions relevant to a particular audit or procedure.
+<!-- 母集団とは、特定の監査や手続に関連するすべての取引のことである。 -->
+<!-- For example, in confirmation of accounts receivable (A/R) the population is all of the accounts receivable from customers buying on credit for the year (assuming an annual audit). -->
+<!-- 例えば、売掛金（accounts receivable：A/R）の確認では、母集団は、（年次監査を想定すると）会計年度に与信取引を行った得意先からの売掛金すべてである。 -->
+- Audit samples are usually several orders of magnitude smaller than the population.
+<!-- 監査サンプルは通常、母集団より数桁小さい。 -->
+<!-- For example, auditors might take a sample of 100 units (transactions or dollars) from a population of 1 million accounts receivable or 0.01% of the items in the population. -->
+<!-- 例えば、監査人は100万単位の勘定の母集団から100単位（取引単位または金額単位）のサンプル（または母集団の0.01%）を抽出する。 -->
+
+
+## Sampling Bases
+
+- The sampling base or metric is the unit used to draw the sample.
+<!-- サンプリング単位（sampling unit, base, or metric）は、サンプルを抽出するために利用される単位である。 -->
+- Monetary unit sampling (one dollar is a sample item) is applied at year end for substantive testing—determining whether the financial statement account balances contain material errors.
+<!-- （ドル単位では1ドルがサンプル単位となる）金額単位サンプリング（Monetary unit sampling）は、財務諸表の勘定残高に重要な虚偽表示があるかを判定する実証手続に適用される。 -->
+- Transaction or Record sampling (one accounting transaction is a sample item) is applied prior to year-end for *internal control testing* - determining whether the inherent level of transaction processing error risk that exists in each accounting cycle.
+<!-- 取引または記録のサンプリング（会計取引1件がサンプル項目となる）は、年末前に内部統制のテストに適用され、各会計サイクルに存在する取引処理エラーリスクの固有レベルを判定する。 (文章が抜けてる)-->
+
+
+
+## Sampling Guidelines
+
+The AICPA provides guidelines on sampling in several standards:
+<!-- AICPAは、いくつかの監査基準において以下のようなサンプリングに関するガイドラインを提供している。 -->
+
+- Risk assessment standards (SAS Nos. 104-111).
+- Defining Professional Requirements Standard (SAS No. 102).
+- Guidance on audit documentation (SAS 103).
+- Communicating internal control related matters (SAS 112 and SAS 115).
+
+
+---
+
+- Audit Risk Alerts such as Communicating Internal Control Related Matters in an Audit—Understanding SAS No. 115
+These discuss several approaches to the audit sampling process.
+- Statistical audit sampling in tests of controls and for substantive tests of details.
+- Non-statistical audit sampling in tests of controls and for substantive tests of details.
+- Monetary unit sampling.
+- Attribute sampling.
+- Multi-location sampling considerations.
+
+<!--
+- リスク評価基準（SAS第104-111号）。
+- 専門的要求事項を定義する基準（SAS第102号）。
+- 監査調書に関する実務指針（SAS第103号）。
+- 内部統制に関連する事項のコミュニケーション（SAS第112号及びSAS第115号）。
+- 監査に関するリスク文書：監査における内部統制に関連する事項のコミュニケーションーSAS第115号の理解ー　
+　これらの文書は、監査サンプリング手続に対して、以下のような手法について議論している。
+- 運用評価手続および実証手続（詳細テスト）における統計的な監査サンプリング。
+- 運用評価手続および実証手続（詳細テスト）における非統計的な監査サンプリング。
+- 金額単位サンプリング
+- 属性サンプリング
+- 全社質問状のサンプリング（Multi-location sampling）の際の考慮事項
+ -->
+
+## Audit and Accounting Manual for SMEs
+
+- Additionally, the *AICPA Audit and Accounting Manual* addresses problems in small- and medium size CPA practices.
+- It explains engagement steps from planning, to performing procedures, to issuing reports:
+<!-- さらに、AICPAによる監査会計マニュアル（Audit and Accounting Manual）は、中小規模の公認会計士の実務における問題に取り組んでいる。また、同マニュアルは、監査契約の段階から監査契約、監査手続の実施や監査報告書の報告に至るまで以下のように説明している。 -->
+
+- Guidance on internal controls.
+- Audit documentation guidelines.
+- Illustrative confirmation letters.
+- Illustrative engagement and representation letters.
+- Illustrative auditor’s reports.
+
+<!--
+- 内部統制に関する実務指針
+- 監査調書に関する実務指針
+- 確認書のひな形
+- 監査契約書および経営者確認書のひな形
+- 監査人報告書のひな形
+ -->
+
+
+## Types of Sampling
+
+The AICPA discusses the following types of sampling in drawing conclusions from audit evidence.
+
+<!-- , which are discussed in depth later in the chapter on Design of Audit Programs: -->
+<!-- AICPAは、（監査人が）監査証拠から結論を導き出す際の各種のサンプリングについて、以下のように説明している（これらのサンプリングについては監査計画の策定の章で詳細に説明する）。 -->
+
+1. **Judgmental sampling** : Items are audited based on personal hunches and convenience involving a subjective selection of items for testing and a subjective evaluation of the results.
+2. **Random sampling** : Applies random number generators to assure that each population unit or item has an equal probability of being selected for the sample.
+3. **Fixed-interval sampling** : Specify an interval and a random starting point which must be greater than zero and less than or equal to the selection interval.
+
+
+---
+
+4. **Random-interval sampling** :Specify an interval and a random seed which is the basis for a series of pseudo-random numbers.
+5. **Conditional sampling** : Apply a condition to subject only a portion of the population to selection.
+6. **Stratified sampling** : A process of dividing a population in subgroups each of which is a set of sampling units with similar characteristics.
+   <!-- Stratified sampling may be considered a particular form of conditional sampling — conditioned on item size (in dollars, etc.). -->
+7. **Transaction or Record sampling** : Treat seach recorded transaction equivalently.
+
+---
+
+8. **Monetary Unit Sampling** : Treats each recorded dollar equivalently.
+9.  **Estimation sampling** : Sampling with an objective to estimate the proportion of errors to see if it is less than some acceptable level.
+10.  **Acceptance sampling** : Sampling with an objective to reject or accept the population under certain conditions.
+11.  **Discovery sampling** : Sampling with an objective to determine if the population is error free.
+
+<!--
+1. 判断サンプリング（judgmental sampling）：サンプル項目は個人的な直感や簡便な方法に基づいて項目の監査を行う方法。主観的に監査手続を行う項目を選択し、その結果を主観的に評価する。
+2. ランダムサンプリング（random sampling）： 各母集団における単位または項目がサンプルとして選択される確率が等しいことを保証するために、乱数発生器を適用する方法。
+3. 固定間隔サンプリング（fixed-interval sampling）： ランダムな開始点と間隔を指定する方法。開始点は0より大きく、選択した間隔以下でなければならない。
+4. セルサンプリングまたは乱数間隔サンプリング（Cell or random-interval sampling）： 間隔と擬似乱数（pseudo-random numbers）の基礎となる乱数種（random seed）を指定する方法。
+5. 条件付サンプリング（conditional sampling）： 母集団の一部だけを選択の対象とする条件付けを行う方法。
+6. 層化サンプリング（）： 母集団を小集団に分けるプロセスで、各小集団は類似した特徴を持つサンプリング単位の集合である。層化サンプリングは、条件付サンプリングの特殊な形態と考えられる。
+7. 取引サンプリングまたは記録サンプリング： 記録された各取引を同等に扱う。
+8. 金額単位サンプリング： 記録された金額単位（ドル）を同等に扱う。
+9. 見積りサンプリング： 虚偽表示や逸脱の割合を見積もり、それがある許容水準より小さいかどうかを確認することを目的としたサンプリング。
+10. 採択サンプリング： ある条件下で母集団の受入れの可否を判断することを 目的とたサンプリング。
+11. 発見サンプリング： 母集団に虚偽表示または逸脱がないかどうかを判断することを目的としたサンプリング。
+  -->
+
+## Accounting Cycles
+
+An accounting cycle begins when accounting personnel create a transaction from a source document and ends with the completion of the financial reports and closing of temporary accounts in preparation for a new cycle.
+<!-- 会計サイクルは、経理担当者が原始文書に取引を記録する際に始まり、財務報告の完了と新しいサイクルに備えた仮勘定の締切で終わる。（主な機能を持つ）下記の5つの会計サイクルがある。 -->
+The five accounting cycles are:
+
+1. **Revenue cycle**.
+    1. Sales orders,
+    2. Cash receipts.
+2. **Expenditure cycle**. This cycle focuses on two separate resources; *inventory* and *human resources*.
+<!-- 3.  and is often considered two separate cycles; purchasing and payroll/HR. -->
+    1. Inventory / purchasing;
+    2. Accounts payable;
+    3. Payroll;
+    4. Cash payments.
+
+---
+
+3. **Conversion cycle** (Production cycle).
+     1. Production;
+     2. Cost accounting.
+4. **Financing** (Capital Acquisition and repayment).
+     1. Borrowing/repayment;
+     2. Issuing stock;
+     3. Dividends;
+     4. Cash management.
+5. **Fixed assets.**
+
+<!--
+1. 収益サイクル
+    1. 販売管理
+    2. 売掛金の回収
+2. 費用サイクル（このサイクルは、商品と人材という2つの別々の資源に焦点を当ており、購買と給与・HRという2つの別々のサイクルとされることもある。）
+    1. 棚卸管理・購買管理
+    2. 買掛金の支払い
+    3. 給与計算
+    4. 給与の支払い
+3. コンバージョン（製造）サイクル
+    1. 製造
+    2. 原価計算
+4. 財務（資金の調達・返済）
+    1. 借入れと返済
+    2. 株式の発行
+    3. 配当
+    4. キャッシュマネジメント
+5. 固定資産 -->
+
+
+<!-- ## 実証手続 -->
+## Substantive Test
+
+- The purpose of substantive procedures is **to provide audit evidence** as to the *completeness*, *accuracy*, and *validity* of the information contained in the accounting records or in the financial statements.
+<!-- 実証手続の目的は、会計記録または財務諸表に含まれる情報の網羅性、正確性、および妥当性に関する監査証拠を提供することである。 -->
+- Substantive testing involves detailed examination of the monetary value of the account balances to determine their accuracy and to draw conclusions about the materiality of the error amounts in the accounts.
+<!-- 実証手続は、勘定残高の正確性を判断し、財務諸表における虚偽表示額の重要性について結論を導き出すために、勘定残高の価値を詳細に検討することを含む。 -->
+- The extent and nature of substantive testing depends upon the decision taken about the effectiveness of the systems of internal control.
+<!-- 実証手続の範囲と種類は、内部統制システムの有効性に関する（監査人の）判断によって決まる。 -->
+- In substantive testing, statistical sampling is used to obtain monetary estimates of the total error amount or confidence limits for the total error amount in a particular account.
+<!-- 実証手続において、統計的サンプリングは、特定の勘定における総虚偽表示の金額の見積りまたは総の信頼区間を得るために使用される。 -->
+- The objective is to obtain **reliable confidence limits**.
+<!-- その目的は、監査で利用可能な信頼区間を得ることである。 -->
+
+
+## Metrics and Estimates
+
+- Statisticians estimate; business analysts measure.
+<!-- 統計学者は推定を行うのに対し、ビジネスアナリストは測定する。 -->
+- Statisticians often use the terms *statistic* and *estimate* for values calculated from the data, to draw a distinction between interpretations of the data, and the “true” state of affairs.
+<!-- 統計学者は、データの解釈と「真の」状態を区別するために、データから計算された値に対して統計量や推定値という言葉をよく使う。 -->
+- Data scientists and business analysts are more likely to refer to such values as a *metric*.
+<!-- データサイエンティストやビジネスアナリストは、このような値を「測定値」(metric)と呼ぶことが多い。 -->
+- The difference reflects the approach of statistics versus data science: accounting for uncertainty lies at the heart of the discipline of statistics.
+<!-- この違いは、統計学とデータサイエンスのアプローチを反映している。 -->
+<!-- 不確実性を考慮することが統計学の中心である。 -->
+<!-- Business or organizational objectives are the focus of data science. -->
+<!-- ビジネスや企業組織の目標は、データサイエンスの焦点として扱われる。 -->
+
+## Audit and Statistics
+
+In the past, the auditors initial step when confronted with a new database is to “foot” the dataset (i.e., compute a total) and “agree” that total to the client’s records (i.e., see whether client’s records agree with the computed total).
+<!-- 従来、監査人が新しいデータベースを扱うときの最初のステップは、データベースの「集計（foot）（すなわち、合計を計算すること）」と、その合計が被監査会社の記録と「一致（agree）」しているか確認することであった。 -->
+This is done with the “sum” command in R.
+<!-- Rでは`sum`コマンドで計算できる。 -->
+
+```{r}
+disburse <- read.csv(system.file( # csvファイルの読み込み
+    "extdata",  "ch_2_AP_disbursements_journal.csv", # ファイル名
+    package = "auditanalytics", mustWork = TRUE)
+    ) # ファイルがない場合はエラーを返す
+```
+
+---
+
+```{r}
+summary(disburse) # descriptive statistics
+# output the total amount paid
+cat('\n\n 支払帳の合計金額 = ', sum(disburse$amount_paid))
+```
+
+
+---
+
+
+_R_ has a number of packages that generate basic statistics fromt the data, beyond that of the built-in *summary* command Here are three of the most useful, applied to our banking industry dataset.
+<!--
+Rには、標準のsummaryコマンド以外に、データから基本的な統計量を計算するパッケージが数多くある。
+ここでは、本書で紹介する銀行業界のデータに適用できる、最も有用な3つのパッケージを紹介する。
+-->
+
+```{r bank_fin}
+library(Hmisc) # 記述統計量の計算
+bank_fin <- read.csv(system.file(
+    "extdata", "ch_2_yahoo_fin.csv",
+    package = "auditanalytics", mustWork = TRUE))
+Hmisc::describe(bank_fin) # Show summary statistics
+```
+
+---
+
+### Bank Financial Data
+
+The *describe* and *describeBy* functions of the *psych* package offer rich reporting of summary statistics, though much of this may be superfluous in auditing.
+<!-- `psych`パッケージの`describe`関数と`describeBy`関数は、要約統計量の豊富なレポーティングを提供するが、その多くは監査には不必要かもしれない。 -->
+
+```{r psych}
+library(psych) # 心理統計学のためのパッケージ
+psych::describe(bank_fin) # 記述統計量の出力
+```
+
+
+---
+
+### Bank Financial Data by Group
+<!-- ### 特定のグループごとの要約統計量をdescribeByで指定可能 -->
+
+```{r}
+psych::describeBy(bank_fin, bank_fin$name)
+```
+
+---
+
+If the auditor wishes to use summary statistics for further processing, these can be formatted into data frames using the *tidy* function in *broom*; alternatively, the data frames can be used to print formatted tables, which may be included in audit papers.
+
+<!-- 監査人がさらなる処理に要約統計量を使用したい場合は、broom の tidy 関数を使用してデータフレームにフォーマットすることができる。あるいは、データフレームを利用してフォーマットされた表を印刷し、監査調書に含めることもできる。 -->
+
+
+```{r library}
+#| error: false
+#| message: false
+pacman::p_load(kableExtra, broom, pastecs) # パッケージの読み込み
+## Tidy these up and write them as a formated table, using kableExtra
+pastecs::stat.desc(bank_fin) |>
+  broom::tidy() |>
+  kable(longtable = T, caption = "Summary Statistics") |>
+  kable_styling(full_width = F, font_size = 18)
+```
+
+---
+
+- However the auditor chooses to summarize a dataset, there are certain common statistics that will be generated.
+<!-- 監査人がデータセットをどのように要約するかにかかわらず、生成される共通の統計量がある。 -->
+
+1. **Count** : How many transactions (or rows) does the dataset contain.
+<!-- 1. 件数（count）： データセットに含まれる取引（または行）の数 -->
+2. **Information** : Potentially the maximum amount that the data can tell you about is the variability of a particular construct.
+<!-- 1. 2.	（データセットに含まれる）情報（information）： データからわかる最大限のことは、特定の構成要素に対する変動性である。 -->
+<!-- Information is context specific (you cannot use a weather database to predict poker outcomes) and there is no absolute measure.  -->
+<!-- 情報は文脈に固有であり（ポーカーの結果を予測するのに天気データベースを使うことはできない）、絶対的な尺度はない。 -->
+In accounting transactions, the count of data is often not a good measure of information content.
+<!-- 会計取引では、データの数は情報量の良い尺度にはならないことが多い。 -->
+Accounting data is highly multicollinear - the same economic event (e.g., a sale) is repeatedly recorded in the data (e.g., as an account receivable of the same amount, as an inventory reduction of a related amount, as a collection, and so forth)
+
+---
+
+<!-- 会計データは非常に多重共線的であり、同じ経済事象が繰り返しデータに記録される（例えば売上の記録に対して、同額の売掛金の記録、関連する金額の在庫の削減の記録、売掛金の回収の記録など）。 -->
+3. **Mean** : The basic estimate of location. The arithmetic mean (or just mean) is the sum of all the values divided by the number of values.
+<!-- 1. 平均値（mean）： 基礎的な（中心）位置の見積り。算術平均（または単に平均と呼ぶ）は、すべての値の合計を値の数で割ったものである。 -->
+4. **Trimmed mean** : An arithmetic mean that removes a small designated percentage of the largest and smallest values before calculating the mean.
+<!-- 1. 刈込み平均（trimmed mean）： 平均を計算する前に、最大値と最小値から一定の割合を除去した算術平均。 -->
+<!-- After removing the specified outlier observations, the trimmed mean is found using a standard arithmetic averaging formula.  -->
+<!-- 外れ値となる特定の観測値を除去した後、標準的な算術平均式を用いて刈込み平均が求められる。 -->
+5. **Outlier** : An outlier is any value that is very distant from the other values in a dataset.
+The exact definition of an outlier is somewhat subjective.
+<!--
+Outliers are exceptions that should be further investigated.
+Being an outlier in itself does not make a data value invalid or erroneous.
+Nonetheless, outliers are often the result of data errors.
+When outliers are the result of bad data, the mean will result in a poor estimate of location, while the median will still be valid.
+Outliers are sometimes informative and sometimes a nuisance, in anomaly detection the points of interest are the outliers, and the greater mass of data serves primarily to define the “normal” against which anomalies are measured. -->
+<!-- 1. 外れ値（outlier）： 外れ値とは、データセット内の他の値から大きく外れた値のことである。外れ値を正確に定義しようとするとやや主観的になってしまうが、データの要約やプロットにおいて特定の（外れ値を検出する方法が）慣例として使われている。外れ値は、さらに詳細に調査されるべき例外である。外れ値だからといってそのデータ値が無効であったり、誤りであったりするわけではないが、データの誤りの結果として外れ値が生じることもある。悪いデータの結果として外れ値が生じている場合、平均値は（中心）位置の推定に問題が起きるが、中央値については有効のままである。外れ値は情報価値がある場合もあれば、厄介な場合もある。異常値検出（anomaly detection）では注目すべき点は外れ値であり、より多くの（他の）データは、異常を測定する基準となる「正常（normal）」を定義する役割を主に果たす。 -->
+1. **Median** : The median is the middle number on a sorted list of the data.
+<!--
+It provides a robust estimate of location since it is not influenced by outliers (extreme cases) that could skew the results.
+An outlier is any value that is very distant from the other values in a dataset.
+The exact definition of an outlier is somewhat subjective, although certain conventions are used in various data summaries and plots.
+Being an outlier in itself does not make a data value invalid or erroneous.
+Still, outliers are often the result of data errors such as mixing data of different units (kilometers versus meters) or bad readings from a sensor.
+When outliers are the result of bad data, the mean will result in a poor estimate of location, while the median will be still valid.
+In any case, outliers should be identified and are usually worthy of further investigation.
+-->
+<!-- 6. 中央値（median）： 中央値は、データを並び替えたリストの真ん中に位置する数字である。結果を歪める可能性のある外れ値の影響を受けないので、中央値は（中心）位置について頑強な推定値を提供する。外れ値は、異なる単位（キロメートルとメートル）のデータが混在していたり、センサーが読み取りに失敗した、といったデータの誤りの結果であることがある。外れ値がデータの誤りの結果である場合、平均値は位置の推定に失敗するが、中央値はまだ有効である（いずれにせよ、外れ値は（その原因が）特定されるべきであり、通常はさらに調査する価値がある）。 -->
+1. **Variance** : The primary variability statistic (though less commonly used than standard deviation). It is the sum of squared deviations from the mean divided by $n − 1$ where $n$ is the count.
+<!-- Location is just one dimension in summarizing a feature. A second dimension, variability, also referred to as dispersion, measures whether the data values are tightly clustered or spread out. At the heart of statistics lies variability: measuring it, reducing it, distinguishing random from real variability, identifying the various sources of real variability, and making decisions in the presence of it. -->
+<!-- 7.	分散（variance）： （標準偏差の方が良く利用されるが）主要なバラツキを測る統計量。平均からの偏差の2乗和をn-1で割ったもので、nは件数である。（中心）位置は特徴を要約する1次のモーメントにすぎない。2次のモーメントであるバラツキは、分散とも呼ばれ、測定値が密集しているか散財しているかを測定する。統計学の本質は、バラツキにある。すなわち、バラツキを測定し、バラツキを小さくし、ランダムなバラツキと実際のバラツキを区別すること、本当のバラツキのさまざまな原因を特定すること、そして（結果に）バラツキがある状況下で意思決定をすることである。 -->
+
+---
+
+8. **Deviations** : (errors, residuals): The difference between the observed values and the estimate of location.
+<!-- 8.	偏差（deviations）： 観測値と推定値との差。誤差（errors）や残差（residuals）ともいう。 -->
+9. **Standard deviation** : The square root of the variance. Standard deviation (sd) is more commonly used than variance, because its values are easy to compare to linear estimators such as the mean.
+<!-- Measures of variability are borrowed from the field of mechanics, where a moment is an expression involving the product of a distance and another physical quantity. In statistics, the first moment of a distribution is the mean, the second moment the variance, and third and fourth moments describe skewness and kurtosis. Higher moments are not particularly robust, so tend not to be used. -->
+<!-- 9.	標準偏差（standard deviation：SD）： 分散の平方根。標準偏差は平均などの線形推定量と比較しやすいので、分散よりもよく使われる。バラツキの測定値は力学の分野に由来しており、同分野ではモーメントが距離と別の物理量（力または質量）の積を含む式である。 -->
+10. **Degrees of freedom** (df): Another concept borrowed mechanics.
+  <!-- Where a mechanism is made of several parts, it is the number of possible independent relative motions between the parts of the mechanism. -->
+<!-- In statistics, the number of degrees of freedom is the number of values in the final calculation of a statistic that are free to vary. It is a rough way to determine whether a dataset is large enough to render a decision based on a particular hypothesis or statistic. Degrees of freedom considerations are important in computing sample statistics, as adjustments are required to assure the statistic is not biased. -->
+<!-- 10.	自由度（degrees of freedom：df）： 力学に由来するもう一つの概念。メカニズムがいくつかの部分から構成されている場合、メカニズムの部分間の独立した相対運動の可能性の数である。統計学では、自由度とは、ある統計量の最終的な計算において、自由に変化する値の数である。これは、データセットが特定の仮説や統計量に基づいて決定を下すのに十分な大きさかどうかを判断するための大まかな手法である。自由度の検討は、統計量が偏らないように調整する必要があるため、標本統計量を計算する上で重要である。 -->
+1.  **Mean absolute deviation** (mad, l1-norm, Manhattan norm): The mean of the absolute value of the deviations from the mean.
+<!-- 11.	平均偏差の絶対値 (mean absolute deviation：mad, L1-norm, Manhattan norm)： 平均からの偏差について絶対値をとった値の平均。 -->
+1.  **Range** : The difference between the largest (max) and the smallest (min) value in a dataset.
+<!-- 12.	範囲（range）：データセット内の最大値と最小値の差 -->
+1.  **Skew and Kurtosis** : In statistics,
+  <!-- the first moment of a distribution is the mean, the second moment the variance, and  -->
+  *third* and *fourth moments* describe skewness and kurtosis.
+  <!-- Higher moments are not particularly robust, so tend not to be used. Typically central moments are reported, which means that the distance is computed from the mean of the distribution of transactions, rather than from zero. -->
+<!-- 13.	歪度（Skew）・尖度（Kurtosis）：統計学では、分布の1次のモーメントが平均、2次のモーメントが分散、3次のモーメントと4次のモーメントが歪度と尖度を表す。それ以上の高次のモーメントは特に頑強でないので、あまり使用されない。（特定の取引の分布に興味がある場合）通常、中心モーメント（つまり平均）が示されるが、これは距離がゼロからではなく、取引の分布の平均から計算されることを表している。 -->
+
+
+---
+
+14.  **Order statistics** : Metrics based on the data values sorted from smallest to biggest.
+<!-- 14.	順序統計量（order statistics）： 小さいものから大きいものへと並べたデータの指標 -->
+15.  **Percentile (quantile)** : The value such that p% of the values take on this value or less and (100 − p)% take on more than this value. The difference between the 75th percentile and the 25th percentile is called the interquartile range (IQR).
+<!-- 15.	パーセンタイル（percentile）・分位数（quantile）： 値のp％がこの値以下で、(100 - p)％がこの値以上であるような値。特に、75パーセンタイルと25パーセンタイルの差を四分位範囲（interquartile range：IQR）という -->
+
+16.  **Correlation coefficient** : A metric that measures the extent to which numeric variables are associated with one another (ranges from −1 to +1).
+<!-- 16.	相関係数： 量的変数が互いにどの程度関連しているかを測定する指標（範囲は-1から+1） -->
+
+17.  **Scatterplot** : A plot in which the x-axis is the value of one variable, and the y-axis the value of another.
+<!-- 17.	散布図（Scatterplot）：X軸をある変数の値、Y軸を別の変数の値とする図。 -->
+
+
+## Important Concepts in Probability and Statistics
+
+- *Probability distributions* are models describing the variability of data or the underlying population from which the data is drawn.
+<!-- 確率分布は、データのバラツキやデータの元となる母集団を記述するモデルである。 -->
+- There are perhaps *50 or 60 different distributions* that are used in characterizing population statistics, but only *half a dozen are commonly used*.
+  <!-- 母集団を特徴づける分布は、50～60種類程度あるが、一般的に使われるのはそのうちの6つだけである。 -->
+- Quite often when we refer to parametric statistics, we are making an assumption of **Normal** (Gaussian) distributions for the data.
+<!-- パラメトリック統計により分析するとき、分析者はデータについて正規分布（ガウス分布）を仮定していることが多い。   -->
+- We will see later that this assumption may not be warranted for accounting and financial transactions.
+<!-- この仮定が会計取引や財務取引では正当化されない場合があることについては、後述する。 -->
+
+---
+
+1. **Normal (Gaussian) distribution** : The *bell-shaped* normal distribution is iconic in traditional statistics. Related terms are:
+<!-- 1. 正規分布またはガウス分布： ベル型の正規分布は、伝統的な統計学の象徴である。関連用語として以下をあげる。 -->
+   - *Standardization* : Subtract the mean and divide by the standard deviation.
+   - *z-score* : The result of standardizing an individual data point.
+   - *Standard normal* : A normal distribution with `mean = 0` and standard deviation = 1.
+   - *QQ-Plot* : A quantile (of the sample) by quantile (of a Normal distribution) plot to visualize how close a sample distribution is to a Normal distribution.
+   <!-- - For the disbursement data, an example of a QQ-plot follows -->
+    <!-- - 標準化（standardization）： 平均を引き、標準偏差で割る。
+    - zスコア（z-score）： 個々のデータポイントを標準化した結果。
+    - 標準正規分布（standard normal distribution）： 平均=0、標準偏差=1の正規分布。
+    - QQプロット（QQ-Plot）：標本分布が正規分布にどれだけ近いかを視覚化するための、（正規分布の）分位数による（標本の）分位数のプロット。以下のQQプロットは、支出データについての具体例である。 -->
+
+## QQ-Plot
+
+Read the disbursement data `ch_2_AP_disbursements_journal.csv` and create a QQ-plot.
+
+```{r read_disburse}
+#| code-fold: true
+disburse <- read.csv(system.file(
+    "extdata", "ch_2_AP_disbursements_journal.csv", # csv file
+    package = "auditanalytics", mustWork = TRUE))
+```
+
+```{r qqplot_disburse}
+d <- as.numeric(as.character(disburse[,"amount_paid"]))
+qqnorm(d,
+        main = "Normal Q-Q Plot", # QQプロットを作成
+        xlab = "Theoretical Quantiles", # x軸のラベル
+        ylab = "Sample Quantiles", # y軸のラベル
+        plot.it = TRUE) # プロットするかどうか
+```
+
+
+
+---
+
+### various distributions
+
+
+2. **Binomial Distribution** : A binomial distribution with parameters $n$ and $p$ is the discrete probability distribution of the number of successes in a sequence of n independent experiments
+<!-- , each asking a yes–no question, and each with its own Boolean-valued outcome: success/yes/true/one (with probability p) or failure/no/false/zero (with probability q = 1 p). -->
+A single success/failure experiment is also called a **Bernoulli trial**  and a sequence of outcomes is called a **Bernoulli process**; for a single trial, the binomial distribution is a **Bernoulli distribution**.
+<!-- The binomial distribution is the basis for the popular binomial test of statistical significance.  -->
+<!-- 2. 二項分布： nとpをパラメータとする二項分布は、n個の独立したベルヌーイ試行（成功か失敗の2値の結果を持つ試行で、成功確率p・失敗確率1-pと表す）における成功回数の離散確率分布。ベルヌーイ試行の結果の列はベルヌーイ過程（Bernoulli process）と呼ばれ、ベルヌーイ試行を一度だけ行う（n=1）の場合の確率分布はベルヌーイ分布と呼ばれる。二項分布は、よく利用される統計的有意についての二項検定の基礎となる。 -->
+3. **Bernoulli distribution** : A Bernoulli distribution is the *discrete probability distribution* of a random variable which takes the value 1 with probability $p$ and the value $0$ with probability $q = 1 − p$.
+<!-- In other words, the probability distribution of any single experiment that asks a yes–no question; the question results in a Boolean-valued outcome, a single bit whose value is success/yes/true/one with probability p and failure/no/false/zero with probability q. -->
+<!-- 3. ベルヌーイ分布： ベルヌーイ分布とは、確率pで値1をとり、確率q = 1 - pで値0をとる確率変数の離散確率分布である。言い換えれば、YES・NOの質問を行うような、あらゆる単体の試行の確率分布である。質問の結果はブール値の結果であり、その値は確率pで1（成功/YES/真）、確率qで0（失敗/NO/偽）である単体の二値の値である。 -->
+
+---
+
+4. **Poisson distribution** : the Poisson distribution is a discrete probability distribution that expresses the probability of a *given number of events occurring in a fixed interval* of time or space if these events occur with a known constant rate and independently of the time since the last event.
+<!-- The waiting time between Poisson events follows an Exponential distribution. -->
+<!-- 4. ポアソン分布（Poisson distribution）：ポアソン分布はある時間または空間の一定区間において、ある事象が一定の割合で（最後の事象からの時間とは独立に）発生する確率を表す離散確率分布である。ポアソン事象間の待ち時間は、指数分布に従う。 -->
+
+
+5. **Density and Cumulative Distribution** : Probabilities have densities (in continuous distributions such as the Normal) or mass functions (in the case of discrete distributions such as the Poisson) that describe the probability of a given outcome. Cumulative distribution functions describe the probability up to a given value.
+<!-- An extension of summary statistics computes estimates of density and cumulative distribution functions for data, as the following example using our disbursements data will show. -->
+
+<!-- 5. （確率）密度と累積分布（Density and Cumulative Distribution）： 確率には所与の結果の確率を表す、密度関数（正規分布などの連続分布の場合）または質量関数（ポアソン分布などの離散分布の場合）がある。累積分布関数は、与えられた値までの確率を記述する。要約統計量（を拡張したdensity関数やecdf関数）は、出金データを使った下記の例が示すように、データの密度分布関数と累積分布関数の推定値を計算する。 -->
+
+---
+
+### Density and Cumulative Distribution
+
+```{r density}
+#| error: false
+#| warning: false
+#| message: false
+d <- density(disburse[,"amount_paid"]) # density
+plot(d, main = "Density of Amount Paid")  # plot density
+polygon(d, col="violet", border="black") # add color
+```
+
+---
+
+```{r CDF}
+plot(
+    ecdf(disburse[,"amount_paid"]), # 累積分布関数を計算
+    main = "Cumulative Density of Amount Paid" # 図のタイトル
+    ) # 誤植 ~いらない
+```
+
+`ecdf()` is a function that computes the empirical cumulative distribution function of a dataset.
+
+
+---
+
+6. **Random Sampling and Sample Bias** : A sample is a subset of data from a larger dataset; statisticians call this larger dataset the population — a large, defined but sometimes theoretical or imaginary set of data. -->
+
+<!-- 2. ランダムサンプリング（Random Sampling）と標本バイアス（Sample Bias）：標本とは、 大きなデータセットから抽出したデータの部分集合である。統計学者は、この大きなデータセットを母集団（population）という。母集団は、（実際に存在する）明確なデータセットを指すこともあるが、理論上または想像上のデータセットを指すこともある。 -->
+
+7. **Central Limit Theorem** : Proves that sums of independent variables asymptotically approach a Normal distribution as *sample size goes to infinity*.
+<!-- 7. 中心極限定理（Central Limit Theorem：CLT）： 無作為に抽出した標本の平均が、標本サイズが大きくなるにつれて漸近的に正規分布に近づくことを証明する定理である。 -->
+
+8. **Standard Error** : This is roughly the standard deviation of the sample data.
+    Standard deviation (which measures the variability of individual data points) is distinct from standard error (which measures the variability of a sample metric).
+
+<!-- 8. 標準誤差（Standard Error）： わかりやすくいうとサンプルから得られた推定量の標準偏差（standard deviation）である。（データのバラツキを測定する）標準偏差は、（標本の推定量のバラツキを測定する）標準誤差とは異なる。 -->
+
+
+9. **Bootstrap and resampling** : A bootstrap sample is taken with replacement from an observed dataset. Resampling takes repeated samples from observed data; includes both bootstrap and permutation (shuffling) procedures.
+
+<!-- 1. リサンプリング（resampling）とブートストラップ（bootstrap）： リサンプリングは、観測されたデータから繰り返し標本を抽出する方法である。ブートストラップと順列（シャッフリング）手順の両方が含まれる。観察されたデータセットから復元を伴う（再）サンプリングから得られた標本をブートスラップ標本と呼ぶ。再サンプリングは，観察されたデータから繰り返し標本を取る．ブートストラップ法と並べ替え（シャッフリング）法の両方が含まれる。 -->
+
+---
+
+10. **Hypothesis Tests** (significance tests): Hypotheses are ways of turning complex problems into yes/no questions.
+    <!-- They are another way of defining an A/B test.  -->
+    <!-- The method grew commonplace after Neyman and Pearson (1933) provided an efficient hypothesis test.  -->
+    Most audit procedures can be couched as hypothesis tests. Here are some key concepts in hypothesis testing:
+<!--
+1.  仮説検定（hypothesis tests）・有意性検定（significance tests）： 仮説は、複雑な問題をYES/NOの問題に変える方法である。A/Bテストを定義するもう1つの方法である。Neyman and Pearson (1933)が効率的な仮説検定を提供した後、この方法が普及することとなった。ほとんどの監査手続は、仮説検定と言い換えることができる。以下は、仮説検定における重要な概念である。
+-->
+  - *p-value* : In statistical hypothesis testing, the p-value or probability value is, for a given hypothesis test, the probability that, when the null hypothesis is true, the statistical summary (such as the sample mean difference between two groups) would be equal to, or more extreme than, the actual observed results.
+  The use and misuse of p-values in statistical hypothesis testing has become a controversial topic.
+  <!-- - p値（p-value）： 統計的仮説検定では、p値または確率値（probability value）とは、ある仮説検定において、帰無仮説が真である場合に、その要約統計量（2群間の標本平均の差など）が実際の観察結果と等しいか、またはそれよりも極端な値になる確率である。統計的仮説検定におけるp値の使い方と誤用は、論争の的となっている。 -->
+  - *Confidence Intervals* : Sampling leads to uncertain results, and that uncertainty is reduced through larger, higher quality samples.
+  Confidence intervals are one way of describing the uncertainty of an estimate or prediction based on a sample.
+  <!-- Confidence intervals are the only remaining tool from the old fiducial statistical inference. -->
+    <!-- - 信頼区間（confidence interval）： サンプリングから得られる（母集団についての）結論は不確実であるが、その不確実性は、より大きな、より質の高い標本（をサンプリングすること）によって減少する。
+    信頼区間は、標本に基づく推定値または予測値の不確実性を記述する1つの方法である。
+    信頼区間は、（頻度主義に基づく）古典的な統計的推論における重要なツールである。 -->
+
+---
+
+  - *Null and Alternative hypotheses* : Ways of dividing the decision space into two parts.
+    <!-- 帰無仮説（null hypotheses）と対立仮説（alternative hypotheses）：（統計的決定理論において）決定空間（decision space）を（受容と棄却の）2つの部分集合に分割する方法と定義することができる。 -->
+  - *One-way and two-way tests* : Hypothesis test that considers one tail or two of the distribution.
+  <!-- - 片側検定（one-way test）と両側検定（two-way test）：分布の片裾を棄却域とする検定を片側検定と呼び、両裾を棄却域とする検定を両側検定と呼ぶ。 -->
+  - *significance* (alpha): Critical value for selecting one or the other hypothesis.
+    This is the probability that you will make a type I error.
+    <!-- - 有意水準（significance level）またはα（alpha）： どちらかの仮説を選択するための閾値。これは第一種の過誤（type Ⅰ error）を犯す確率である。 -->
+  - *power* (1-beta): Critical value for selecting one or the other hypothesis.
+    This is the probability that you will not make a type II error.
+    <!-- - 検出力（power）または1-β： どちらかの仮説を選択するための閾値。これは第二種の過誤（typeⅡ error）を犯さない確率である。 -->
+  - *t-test* : An inferential statistic used to assess whether there is a significant difference between the means of two groups.
+    <!-- -  t検定(t-test)：2群の平均の間に有意差があるかどうかを評価するために使用される（推測を伴う）統計手法。 -->
+
+
+
+
+
+
+---
+
+11.  **Overfitting** : Most measurements, and all samples misrepresent, in some way, the population.
+    There is always danger of fitting models to these misrepresentations, thus generating incorrect decisions.
+    This is controlled by *better sample size* and *quality*, and also by *resampling* to ensure robustness of estimation.
+<!-- 11.  過剰適合（overfitting）： ほとんどの測定とすべての標本は、何らかの形で（真の）母集団から誤差を伴って観察される。このような誤差を伴った観察にモデルを当てはめてしまうことで、誤った決定を生み出してしまう危険性が常に存在する。このような危険性は、より良いサンプルサイズとサンプルの質、また推定の頑健性を確保するためにリサンプリングを行うことによってコントロールできる。 -->
+
+12.  **Linear Regression** : Fits a model of the relationship between a scalar **response** (or **dependent variable**) and one or more **explanatory variables** (or **independent variables**).
+    The following example builds a linear regression model to test the occurrence of insider breaches with audit fees and auditor decisions on section 404 audits, using the Sarbanes–Oxley data.
+<!-- 12.  線形回帰（linear regression）：1つの被説明変数（または従属変数）と1つ以上の説明変数（または独立変数）の間の関係のモデルをあてはめる手法。下記の例では、SOX法に基づく内部統制監査のデータを用いて、セクション404に基づく内部統制監査に関する監査報酬と監査人の意見を説明変数とし、インサイダー違反の発生を被説明変数として検証する線形回帰モデルを用いて検証を行う。 -->
+
+---
+
+Exploratory data analysis (EDA) using R's `plotluck` package and `ch_2_data_types.csv` data file.
+
+```{r ols}
+#| fig-cap: "Exploratory data analysis (EDA) using R's plotluck package"
+
+df <- read.csv(system.file(
+    "extdata", "ch_2_data_types.csv", # csv file
+    package = "auditanalytics", mustWork = TRUE))
+# regression model OLS
+lr <- lm(formula = insd ~ audit_fee + effective_404, data = df)
+summary(lr) # 結果の表示
+```
+
+
+---
+
+- Since *the dependent variable is dichotomous* (binary), results can be improved by using a **logit model** (from the built-in *glm* function).
+<!-- 被説明変数が二値変数なので、結果は（glm関数から）ロジット・モデル（logit model）を利用することで改善できる。 -->
+- The following example also showcases _R_'s analysis of the residual errors (differences between the dependent variable values, and the estimated model on the right-hand side).
+<!-- 以下の例では、R による残差（被説明変数の実際の値とモデルからの推定値との差）の分析（①予測値と残差の散布図、②正規QQプロット、③予測値と標準化残差の絶対値の散布図、④標準化残差とてこ比の散布図）も紹介している。-->
+- Leverage and distance provide measures of how particular transactions influence the estimation, and are important in identifying outliers.
+<!-- てこ比（leverage）とcookの距離（distance）は、特定の取引が推定与える影響についての測定値を提供し、異常値を識別する上で重要である。  -->
+
+
+---
+
+
+```{r glm}
+lgt <- glm( # general linear method
+    formula = insd ~ audit_fee + effective_404, # 回帰モデル
+    family = "binomial", # link function
+    data = df) # data frame
+summary(lgt) # 結果の表示
+```
+
+---
+
+### Graph of the Logit Model
+
+```{r}
+plot(lgt) # 図の作成
+```
+
+# Machine Learning Methods
+<!-- ## 機械学習 -->
+
+Over the past decade, very useful extensions to twentieth century statistical models have been provided by advances in machine learning, and in particular deep-learning.
+<!-- この10年間で、20世紀の統計モデルに非常に有用な拡張機能が機械学習の進歩、とりわけ深層学習によって提供されている。 -->
+Deep learning is a branch of artificial intelligence that is computationally intensive, but highly flexible for inference from data.
+<!-- 深層学習は、計算量が多いが、データからの推論に非常に柔軟な人工知能の分野です。 -->
+Inference is a decision $\delta $ (estimation, prediction) based on data $x \in X$ that hopefully contains information about a particular set of constructs.
+<!-- 推論は、データ$x \in X$に基づいて、特定の構造に関する情報を含んでいることを期待して、決定$\delta$（推定、予測）を行う。 -->
+Inference may be about:
+<!-- 推論は以下のようなものについて行われる。 -->
+
+1. Classification — e.g., identifying faces, threats.
+<!-- 1. 分類 : たとえば、顔、脅威の識別 -->
+2. Estimation — e.g., a vector $\theta = \{\theta_1, \dots , \theta_n\}$.
+<!-- 2. 推定 : たとえば、ベクトル$\theta = \{\theta_1, \dots , \theta_n\}$。 -->
+3. Other decisions that may or may not be carried out in real time; e.g., driving a car.
+<!-- 3. リアルタイムで行われるかどうかはわからないその他の決定: たとえば、車の運転。 -->
+
+## Goals of Machine Learning
+
+- The implicit goal of machine learning is construction of decision strategies that minimize risk.
+<!-- 機械学習の暗黙の目標は、リスクを最小化する決定戦略の構築である。 -->
+- Risk is an informal concept inherited from gambling, and roughly implies the expected loss from using a given decision strategy δ.
+<!-- リスクは、ギャンブルから受け継がれたインフォーマルな概念であり、おおよそ与えられた決定戦略$\delta$を使用した場合の期待損失を意味する。 -->
+- Frequentist and Bayesian statisticians both base their decision strategies on real-world data, but sharply divided on the actual implementation and interpretation of decision risk.
+<!-- 頻度論的統計学者とベイズ統計学者は、ともに現実世界のデータに基づいて決定戦略を立てるが、決定リスクの実際の実装と解釈については、はっきりと分かれている。 -->
+
+
+---
+
+- In practice, risk presents deep learning (and AI in general) with its greatest challenges.
+<!-- 実際、リスクは深層学習（およびAI全般）にとって最大の課題である。 -->
+- For example, self-driving cars are trained on massive datasets extracted from many other cars; that knowledge of how to drive is encapsulated in weights in a network model that is firm-wired into a computer unit in a car.
+<!-- たとえば、自動運転車は、多くの他の車から抽出された大規模なデータセットで訓練される。 -->
+<!-- その運転方法の知識は、車のコンピュータユニットに固定されたネットワークモデルの重みにカプセル化されている。 -->
+- It matters whether that unit was trained to save pedestrians, or to save property, or to save the driver—each implies a different decision risk.
+<!-- そのユニットが歩行者を救うために訓練されたか、財産を救うために訓練されたか、運転手を救うために訓練されたかは重要な問題である。 -->
+
+---
+
+- Traditionally, statistics have used a **squared-error loss function** $l(\theta, \delta (X)) = \mathrm{E}_{\delta} [\delta (X) - \theta )^2]$ where $\delta(X) = \hat{\theta}$ in the case of estimation.
+<!-- 従来、統計学では、推定の場合は$\delta(X) = \hat{\theta}$となる損失関数$l(\theta, \delta (X)) = \mathrm{E}_{\del/ta} [\delta (X) - \theta )^2]$を使用してきた。 -->
+- This is easy to compute using pencil and paper, particularly when optimization relied on *first-order conditions* from calculus.
+<!-- これは、最適化が微積分の一次条件に依存していたときに、鉛筆と紙を使って簡単に計算することができた。 -->
+- But most real-world decisions are not optimally made with squared-error loss functions.
+<!-- しかし、ほとんどの現実世界の決定は、二乗誤差損失関数を用いて最適に行われるものではない。 -->
+- Although squared-error loss is still widely used, machine learning practitioners will also use more complex, sometimes asymmetric loss functions that more closely fit the real-world problems.
+<!-- 二乗誤差損失は今でも広く使われているが、機械学習を用いる実務家は、より複雑で、時には非対称な損失関数を使うこともある。 -->
+<!-- In particular for classification problems such as image recognition, squared-error loss makes little sense, and practitioners will tend to use cross-entropy, drawn from information theory, where the Kraft–McMillan theorem establishes the rationale for its application.  -->
+<!-- 特に画像認識などの分類問題では、二乗誤差損失はあまり意味がなく、実務家は情報理論から引き出された交差エントロピーを使う傾向がある。クラフト・マクミランの定理は、その適用根拠を確立している。 -->
+- Business situations prefer asymmetric loss that penalizes costs and rewards revenues.
+<!-- ビジネスの現場では、コストをペナルティ、収益を報酬とする非対称損失が好まれている。 -->
+
+
+---
+
+
+- Whereas traditional statistics relies heavily on first-order conditions from calculus, *deep learning uses compute-intensive search algorithms* that explore the response surface of the risk function.
+<!-- 従来の統計学は、微積分の一階条件に大きく依存していたのに対し、深層学習は、リスク関数の応答曲面を探索する計算量の多い探索アルゴリズムを用いている。 -->
+
+- The following example presents the “Hello World” of machine learning: recognizing handwritten numbers on the National Institute of Standards dataset.
+<!-- 以下の例は、機械学習の「Hello World」を示している: 国立標準技術研究所(National Institute of Standards)のデータセットに書かれた数値を認識する。 -->
+
+## `keras`
+
+
+Examples below assume that Tensorflow is installed.
+See [https://www.tensorflow.org/install/](https://www.tensorflow.org/install/)。
+<!-- 以下の例は、Tensorflowがインストールされていることを前提としている -->
+```{r keras}
+# install.packages("keras") # install keras packages
+library(keras)
+# install_keras() # Run this only once. Installation takes time.
+```
+
+
+<!-- これで準備が整った。 -->
+
+
+---
+
+```{r mnist}
+#| cache: true
+mnist <- dataset_mnist() # MNISTデータを読み込む
+class(mnist)   # List class
+glimpse(mnist) # See the structure of the data
+```
+
+The MNIST database was constructed from NIST's Special Database 3 and Special Database 1 which contain *binary images of handwritten digits*.
+
+
+---
+
+```{r classify data}
+train_images <- mnist$train$x # image data for training
+train_labels <- mnist$train$y # label data for training
+test_images <- mnist$test$x   # test image data
+test_labels <- mnist$test$y   # test label data
+```
+
+---
+
+Construct a neural network model.
+Keras Model composed of a linear stack of layers.
+
+
+```{r model}
+network <- keras_model_sequential() # null model
+network |>
+    # 28*28 pixel images are flattened into 784 pixel vectors
+    layer_dense(units = 512, input_shape = c(28 * 28)) |>
+    # ReLU activation function converts negative values to zero
+    layer_activation('relu') |> # ReLU activation function
+    layer_dense(units = 10) |>  # 10 output layers 1:10
+    # softmax activation function convert the output to a probability distribution
+    layer_activation("softmax") # softmax activation function
+```
+
+---
+
+Specify the algorithm and function series.
+
+```{r}
+network |> compile(       # モデルをコンパイル
+  optimizer = "rmsprop",  # 最適化アルゴリズム
+  loss = "categorical_crossentropy", # 損失関数
+  metrics = c("accuracy") # 評価関数
+)
+```
+
+---
+
+### Training and Test Data
+
+```{r}
+# Training data
+train_images <- array_reshape( # 行列に変換
+    train_images,              # 訓練用画像データ
+    c(60000, 28 * 28)          # 画像の形状
+    )
+# Test data
+test_images <- array_reshape( # 行列に変換
+    test_images,              # テスト用画像データ
+    c(10000, 28 * 28)         # 画像の形状
+    )
+# 0が黒，255が白のデータを0-1の範囲に正規化
+train_images <- train_images / 255
+test_images  <- test_images  / 255
+```
+
+---
+
+```{r}
+train_labels <- to_categorical(train_labels) #
+test_labels <- to_categorical(test_labels)   #
+```
+
+- Label data is one hot encoded.
+<!-- ラベルデータをone-hotエンコーディング -->
+- `to_categolical()` takes a vector or 1 column matrix of class labels and converts it into a matrix with $p$ columns, one for each category.
+
+- (補足) 0〜9の手書き文字の大小関係は今回関係ないため，10個のカテゴリーを意味する10列の行列に変換してます。
+
+
+
+---
+
+### Training the Model
+
+```{r}
+history <- network |>
+    fit( # training the model
+        train_images, # training image data
+        train_labels, # training label data
+        epochs = 10,  # the number of times the model will be trained
+        batch_size = 128 # the number of samples per gradient update
+        )
+```
+
+---
+
+### Plot
+
+```{r plot_keras}
+plot(history) # 訓練の履歴をプロット
+```
+
+---
+
+model evaluation
+<!-- # モデルを評価 -->
+
+```{r network}
+metrics <- network |>
+    evaluate(test_images, test_labels, verbose = 0)
+metrics |> kable()
+```
+
+
+## `keras` model
+
+- This particular Keras model overfits the MNIST data, with a final accuracy of 98% and loss of 7%.
+<!-- この特定のKerasモデルは、MNISTデータに過学習しており、最終的な精度は98%、損失は7%である。 -->
+
+Machine learning is a vast and rapidly evolving field.
+<!-- 機械学習は広大で急速に進化している分野である。 -->
+It is increasingly for the analysis of social network and other text based intelligence required for the analytical review portion (and other parts) of the audit.
+<!-- 監査の分析的レビュー部分（およびその他の部分）に必要なソーシャルネットワークやその他のテキストベースの知能の分析にますます必要とされている。 -->
+In the future, expect its role in auditing to expand, as suitable models are developed in the field.
+<!-- 将来的には、適切なモデルが開発されるにつれて、監査における役割が拡大することが予想される。 -->
+
+<!-- ##
+Statistical Perspectives on Audit Evidence and its Information Content
+-->
+
+<!-- ## 監査証拠の統計的側面と情報内容 -->
+
+
+# Statistical Perspectives on Audit Evidence and its Information Content
+
+## 補足
+
+パラメータが$\theta$である母集団の従う分布の確率密度関数を$f(x \mid \theta)$とする。
+そのとき，尤度関数は，
+
+$$
+L (\theta) = f(x \mid \theta)
+$$
+
+となり，対数尤度関数は，
+
+$$
+l (\theta) = \log L(\theta)
+$$
+
+となり，スコア関数は，
+
+$$
+\frac{\partial}{\partial \theta} \log l (\theta)
+$$
+
+と定義されます。
+
+## Support and the Additivity of Evidence: The Log-Likelihood
+
+<!-- ### 監査証拠のサポートと追加可能性：対数尤度 -->
+
+- The log-likelihood has an intuitive interpretation, as suggested by the term **“support**.”
+<!-- wikiからのコピペ -->
+<!-- 対数尤度には、「サポート」という用語が示すように、直感的な解釈がある。 -->
+- Given independent events, the overall log-likelihood is the sum of the log-likelihoods of the individual events, just as the overall log-probability is the sum of the log-probability of the individual events.
+<!-- wiki likelihood functionから コピペ -->
+<!-- 独立した事象が与えられたとき、全体の対数尤度は個々の事象の対数尤度の和であり、全体の対数確率は個々の事象の対数確率の和である。 -->
+- Viewing data as evidence, this is interpreted as “support from independent evidence adds,” and the log-likelihood is the “*weight of evidence*.”
+ <!-- wiki likelihood functionから コピペ -->
+<!-- データを証拠として見ると、これは「独立した証拠からのサポートが加わる」と解釈され、対数尤度は「証拠の重み」となる。 -->
+- Interpreting *negative log-probability* as *information content*, log-likelihood of a model, given an event, is the negative of the surprisal of the event, given the model
+<!-- a model is supported by an event to the extent that the event is unsurprising, given the model. -->
+<!-- - wikiから完コピ -->
+<!-- 負の対数確率を情報量や驚きとして解釈すると、ある事象が与えられたときのモデルのサポート（対数尤度）は、そのモデル所与としたときの，当該事象の意外性（負の対数確率）の負の値となる。 -->
+<!-- つまり，そのモデルを所与として，当該事象が驚くべきものではない範囲で，モデルは事象によってサポートされる。 -->
+<!-- Just as the likelihood, given no event, being 1, the log-likelihood, given no event, is 0, which corresponds to the value of the empty sum: without any data, there is no support for any models. wikiから完コピ -->
+<!-- 事象がない場合の尤度が1であるように、事象がない場合の対数尤度は0であり、これは空の和の値に対応する: データがない場合、どのモデルにもサポートはない。 -->
+<!-- The log-likelihood is particularly convenient for maximum likelihood estimation. -->
+<!-- 対数尤度は、最尤推定に特に便利である。 -->
+<!-- Because logarithms are strictly increasing functions, maximizing the likelihood is equivalent to maximizing the log-likelihood. -->
+<!-- 対数は単調増加関数であるため、尤度を最大化することは対数尤度を最大化することと同じである。 -->
+<!-- Since concavity plays a key role in the maximization, and since most common probability distributions—in particular the exponential family—are only logarithmically concave, it is usually more convenient to work with a logarithmic transformation of the likelihood function, known as the log-likelihood function. -->
+<!-- 凹性は最大化において重要な役割を果たすが、一般的な確率分布、特に指数族は対数的に凹であるため、対数尤度関数として知られる尤度関数の対数変換で作業する方が便利である。 -->
+
+## The “Score”　
+
+<!-- #### ここ完全に英語版wikipediaの文章のコピペ (あとで消す) -->
+
+- In statistics, the **score** (or informant) is the gradient of the *log-likelihood function* with respect to the parameter vector.
+<!-- 統計学において、スコア（またはインフォーマント）は、パラメータベクトルに関する対数尤度関数の勾配である。 -->
+- Evaluated at a particular point, the score indicates the steepness of the log-likelihood function and thereby the sensitivity to infinitesimal changes to the parameter values.
+<!-- パラメータベクトルの特定の点で評価されるスコアは、対数尤度関数の急勾配を示し、それによってパラメータ値の微小な変化に対する感度を示す。 -->
+<!-- - If the log-likelihood function is continuous over the parameter space, the score will vanish at a local maximum or minimum; this fact is used in maximum likelihood estimation to find the parameter values that maximize the likelihood function. -->
+<!-- 対数尤度関数がパラメータ空間上で連続である場合、スコアは局所的な最大値または最小値で消滅する。 -->
+<!-- この事実は、最尤推定において尤度関数を最大化するパラメータ値を見つけるために用いられている。 -->
+- Since the score is a function of the observations that are subject to sampling error, it lends itself to a test statistic known as score test in which the parameter is held at a particular value.
+<!-- スコアは、サンプリング誤差の影響を受ける観測値の関数であるため、パラメータを特定の値に保持するスコア検定として知られる検定統計量に適している。 -->
+<!-- Further, the ratio of two likelihood functions evaluated at two distinct parameter values can be understood as a definite integral of the score function. -->
+<!-- さらに、2つの異なるパラメータ値で評価された2つの尤度関数の比は、スコア関数の定積分として理解することができる。 -->
+
+<!-- ### フィッシャー情報量 -->
+## Fisher Information
+
+- In mathematical statistics, the Fisher information (sometimes simply called information) is a way of measuring the amount of information that an observable random variable $X$ carries about an unknown parameter $\theta$ of a distribution that models $X$.
+<!-- 数理統計学において、フィッシャー情報量（単に情報量とよばれることもある）は、観測可能な確率変数$X$が$X$をモデル化する分布の未知のパラメータ$\theta$についてどれだけの情報を持っているかを測定する方法である。 -->
+- Formally, it is the variance of fthe score, or the expected value of the observed information.
+<!-- 厳密には、フィッシャー情報量はスコアの分散、または観測情報の期待値である。 -->
+<!-- In Bayesian statistics, the asymptotic distribution of the posterior mode depends on the Fisher information and not on the prior (according to the Bernstein–von Mises theorem, which was anticipated by Laplace for exponential families). -->
+<!-- xlindoのコピペとwikipediaのコピペ -->
+<!-- ベイズ統計学では、事後モードの漸近分布は事前分布に依存せず、フィッシャー情報量に依存する（指数族に対してラプラスによって予想されたBernstein–von Misesの定理による）。 -->
+<!-- The role of the Fisher information in the asymptotic theory of maximum likelihood estimation was emphasized by the statistician Ronald Fisher (following some initial results by Francis Ysidro Edgeworth).  wikiのコピペ -->
+<!-- 統計学者のロナルド・フィッシャーは、（フランシス・イシドロ・エッジワースによる初期の結果に続いて）最尤推定の漸近理論におけるフィッシャー情報量の役割を強調した。 -->
+<!-- The Fisher information is also used in the calculation of the Jeffreys prior, which is used in Bayesian statistics. -->
+<!-- フィッシャー情報量は、ベイズ統計学で使用されるジェフリーズ事前分布(Jefferrys prior)の計算にも使用される。 -->
+<!-- The Fisher-information matrix is used to calculate the covariance matrices associated with maximum likelihood estimates. wikiコピペ -->
+<!-- フィッシャー情報量行列は、最尤推定に関連する共分散行列を計算するために使用される。 -->
+<!-- It can also be used in the formulation of test statistics, such as the Wald test. wikiコピペ-->
+<!-- フィッシャー情報量は、ワルド検定などの検定統計量の定式化にも使用できる。 -->
+<!-- Statistical systems of a scientific nature (physical, biological, etc.) whose likelihood functions obey shift invariance have been shown to obey maximum Fisher information.  wikiコピペ-->
+<!-- 最尤関数がシフト不変性を満たす科学的な統計システム（物理的、生物学的など）は、最大フィッシャー情報量を満たすことが示されている。 -->
+<!-- The level of the maximum depends upon the nature of the system constraints. wikiコピペ -->
+<!-- 最大値の水準は、システムの制約の性質によって異なる。 -->
+- The Fisher information is a way of measuring the amount of information that an observable random variable $X$ carries about an unknown parameter $\theta $ upon which the probability of $X$ depends.
+<!-- フィッシャー情報量は、観測可能な確率変数$X$が$X$の確率に依存する未知のパラメータ$\theta$についてどれだけの情報を持っているかを測定する方法である。 -->
+<!-- Let f(X; θ) be the probability density function (or probability mass function) for X conditional on the value of θ.  -->
+<!-- $f(X; \theta)$を、$\theta$の値に条件付けられた$X$の確率密度関数（または確率質量関数）であるとしよう。 -->
+<!-- It describes the probability that we observe a given outcome of X, given a known value of θ.  -->
+<!-- これは、既知の値$\theta$が与えられたとき、$X$の特定の値を観測する確率を表している。 -->
+<!-- If f is sharply peaked with respect to changes in θ, it is easy to indicate the “correct” value of θ from the data, or equivalently, that the data X provides a lot of information about the parameter θ.  -->
+<!-- $f$が$\theta$の変化に対して鋭いピークをなしている場合、データから「正しい」$\theta$の値を示すことは容易であり、同様に、データ$X$がパラメータ$\theta$について多くの情報を提供していることがわかる。 -->
+<!-- If the likelihood f is flat and spread out, then it would take many samples like of X to estimate the actual “true” value of θ that would be obtained using the entire population being sampled. -->
+<!-- 尤度$f$が平坦で広がっている場合、$X$のような多くのサンプルが必要となる。これは、サンプリングされる母集団を用いることで得られる実際の「真の」の値$\theta$を推定するために必要となる。 -->

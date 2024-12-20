@@ -1,0 +1,952 @@
+---
+title: |
+  <b>外国書購読 Day5</b> </br>
+  <span style="color: #282A36; ">
+    Review of <br>Chapter 1 ~ 4.
+  </span>
+author: "Soichi Matsuura"
+date: "30 Oct. 2024"
+format:
+  revealjs:
+    theme: ["default", "dracula.scss"]
+    transition: slide
+    slide-number: true
+    code-line-numbers: false
+    html-math-method: katex
+    chalkboard: true
+    width: 1300
+    # height: 900
+    footer: "Kobe University, Business Administration"
+    logo: "img/kobe_logo.png"
+    include-in-header:
+      text: |
+        <style>
+        .v-center-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        </style>
+execute:
+  echo: true
+  warning: false
+  highlight-style: github
+filters:
+  - webr
+webr:
+  packages: ['dplyr','ggplot2','readr'] # Install R packages on document open
+css: mystyle.css
+---
+
+
+# Review of Previous Chapters
+
+## Introduction
+
+Today's lecture is a review of the previous chapters 1 to 4.
+And we will try to use _R_ to understand the basic concepts of the modern audit.
+
+- first 90 minutes: Review of the previous chapters.
+- second 90 minutes: Basic statistical analysis using _R_.
+
+## Aim of the lecture
+
+<br>
+
+:::{.v-center-container}
+<span style = "font-family: Myryca MM; font-size:2em; color: #d16b16; font-weight: bold">Auditing</span>
+<span style = "font-family: Myryca MM; font-size:2em; font-weight: bold">$\times$</span>
+
+<span style = "font-family: Myryca MM; font-size:2em; color: #d06d8c; font-weight: bold">Data Science</span>
+:::
+
+<br>
+
+- To understand the <mark class="mark">basic concepts</mark> of the modern audit.
+- To understand the <mark class="mark">basic statistical analysis</mark>.
+- To construct the <mark class="mark">basic statistical model</mark> for auditing.
+
+# Chap.1 Auditing
+
+## Definition of Auditing
+
+- **An audit** (監査) [^1] is an *independent examination* (独立的検査) of the records of an organization to ascertain how far the financial statements as well as non financial disclosures, present a *true and fair view* (「真実かつ公正な概観」) of the concern.
+- It also provides **assurance** (保証) that the systems of record-keeping are well-controlled and accurate as required by law.
+
+[^1]: 公認会計士監査の種類には，**法定監査**と法定監査以外の監査があり，法定監査のうち*金融商品取引法*に基づく監査をここでは**監査**と呼んでいる，というイメージ
+
+## History of Auditing
+
+- Auditing initially existed primarily for *governmental accounting* (政府会計) and was concerned mostly with *record-keeping* (帳簿記入) rather than accounting procedures.
+<!-- - 監査は当初、主に政府会計のために存在し、会計処理よりもむしろ記録保持に関心があった（Matthews 2006）。 -->
+- After the **Industrial Revolution** that auditing began evolving into a field of *fraud detection* (不正発見) and *financial accountability*.
+<!-- 監査が不正発見と財務説明責任の分野に発展し始めたのは、18世紀の産業革命以降のことである。 -->
+
+- Auditors developed a system for examining a **representative sample** (代表サンプル) of a company’s transactions allowing audits to be completed in *less time* and at *lower costs*.
+<!-- 監査人は、各取引を詳細に調査するのではなく、企業の取引の代表的なサンプルを調査するシステムを開発し、監査をより短時間かつ低コストで完了できるようにした。 -->
+- As businesses have increased in complexity, such "**risk-based**" auditing has evolved to make auditing *more efficient and economical*.
+<!-- ビジネスが複雑化するにつれ、このような「リスクベース」の監査は、監査をより効率的かつ経済的にするために進化してきた。 -->
+
+
+## the Birth of Audit Analytics
+
+- Increased data availability, more powerful computing, and an emphasis on **analytics-driven decision** in business has created many jobs in **data science**.
+- Much of employees analyze data with *MS Excel* or other *spreadsheet*.
+<!-- 従業員の多くは、Microsoft ExcelやGoogle Sheetsなどのスプレッドシートプログラムでデータを分析しています。 -->
+- But MS Excel has *serious limitations* and conflates metadata with formulas and data; and all are called “cells” in Excel.
+- Furthermore Excel is *horrendously slow* [^2].
+
+[^2]: ようするに、データ分析の仕事をするならMS Excelは使うな、ということ。
+
+
+## Programming Languages
+
+- For those who have reached the limits of Excel, Next step is to learn _R_ or Python used by data analysts and data scientists.
+<!-- Excel、SASなどの限界に達した人々にとって、次のステップがあります：RまたはPythonを学ぶ。 -->
+- For anyone interested in **machine learning**(機械学習), working with **large datasets**, or creating complex **data visualizations**, both have become standard tools for analysis.
+<!-- 機械学習、大規模データセットの操作、または複雑なデータの視覚化を行いたい人にとって、両方とも分析のための標準的なツールとなっています。 -->
+- *Python* is better for data manipulation and repeated tasks, <br>
+while _R_ is good for **ad hoc analysis** and **exploring datasets** [^3].
+<!-- Pythonはデータ操作と繰り返しタスクに適していますが、Rはアドホック分析とデータセットの探索に適しています。 -->
+
+[^3]: 経営学研究やコンサルではアドホック分析が多いのでRが使われることが多い。
+
+
+## Use R!
+
+:::{.columns}
+:::{.column width="60%"}
+- _R_ is good for **statistics-heavy projects** and **one-time analyses** of a dataset.
+<!-- Rは統計に重点を置いたプロジェクトやデータセットの一回限りの分析に適しています。 -->
+- _R_ is also more difficult to learn, as many of its conventions assume you have a **solid background** in statistics.
+<!-- Rを学ぶのは難しいですが、その多くの慣習は、統計学に堅固な背景があることを前提としています。 -->
+- Python conceptually uses the same control structures and data types that you will find in other languages, which is why computer scientists prefer Python.
+<!-- Pythonは、概念的には他の言語で見つけることができる同じ制御構造とデータ型を使用しているため、コンピュータサイエンティストはPythonを好むのです。 -->
+:::
+
+:::{.column width="40%"}
+![R4DS2](img/R4DS2.jpg){width=60%}
+:::
+:::
+
+## Reporting with R
+
+- No matter how brilliant your analyses are, if you cannot communicate them, they are worthless.
+<!-- あなたの分析がどれほど優れていても、それを伝えることができなければ、それは無価値です。 -->
+- In support of this, _R_ has the report writing tool called `knitr`.
+<!-- これをサポートするために、Rにはレポート作成ツールknitr（著者自身は小文字のkで綴ります）があります。 -->
+- `knitr` is a powerful tool for **dynamic data report generation** so much so that it is a worthy addition to any programmer’s toolbox.
+<!-- 探索的分析にはあまり適していませんが、knitrは動的データレポート生成のための強力なツールであり、それだけでプログラマーのツールボックスに価値のある追加です。 -->
+- You can use `Rmarkdown` or `Quarto` to create a report with `knitr`.
+
+
+## R and Machine Learning
+
+- **R segues statistics with machine learning (ML)**, which is important since the concepts of ML and *artificial intelligence* derive from statistics.
+<!-- さらに、Rは統計学と機械学習を結びつけており、機械学習と人工知能の概念は統計学に由来しているため、重要です。 -->
+- Much of the Python-based literature on ML *completely misses* underlying statistical concepts and consequently fails to be as effective as _R_ in developing ML algorithms.
+<!-- 機械学習に関するPythonベースの文献の多くは、根本的な統計的概念を完全に見逃しており、その結果、機械学習アルゴリズムの開発においてRほど効果的ではありません。 -->
+- It is written by computer scientists who understand well the Python scientific stack, and who will demonstrate the steps in rote manner of how to achieve a certain goal, but *would not be able to impart much insight into what happens behind the scenes*.
+<!-- それは、Python科学スタックをよく理解しているコンピュータサイエンティストによって書かれており、特定の目標を達成するための手順を単純に示すが、裏側で何が起こっているかについて多くの洞察を提供することはできません。 -->
+
+## R and AI
+
+- If you are planning to work in ML, _R_ is a much more worthwhile investment than Python. (*author's biased opinion*) [^4]
+<!-- 機械学習で働く予定がある場合、PythonよりもRに投資する価値があります。 -->
+- I firmly believe that the extra effort in learning _R_ will be rewarded tenfold if you intend to work in data analytics [^5].
+<!-- ただし、データ分析で働くつもりであれば、Rを学ぶための追加の努力は、10倍に報われると確信しています。 -->
+
+[^4]: 機械学習に関しては、RよりもPythonの方が多くの書籍・情報があるため勉強しやすいです。ただ、機械学習を学ぶのであれば、RとかPythonの前に数学と統計学が立ちはだかります。
+
+[^5]: 要するに、データ分析に関連する仕事（たとえば公認会計士とかコンサルとか）をするなら、Rを学ぶことをお勧めします。Pythonでもよいと思いますが、Rを勉強しておけばPythonはすぐに覚えられますし、RコードをPythonコードにすることは生成AIがやってくれます。
+
+<!--
+## The Roots of Modern Financial Accounting and Auditing
+
+- Accounting and auditing are *ancient*, with many modern practices that are rooted in traditions that date back millennia.
+会計と監査は古代のものであり、数千年前にさかのぼる伝統に根ざした多くの現代の慣行があります。
+- The earliest extant record of humans keeping track of numbers are the Lebombo Bones about 35,000 BCE.
+人間が数を追跡する最古の現存する記録は、レボンボの骨（これまでに数十個が見つかっています）であり、約35,000年前に放射性炭素年代測定されました。
+- The earliest *scribes*(書記) served as lawyers and accountants in the early cities.
+最初の書記は、初期の都市で弁護士や会計士として活躍しました。
+- They would record trade transactions, debts, and advances, in duplicate on clay tablets to be retained by the parties to the transaction.
+彼らは、取引、負債、前払いを粘土板に二重に記録し、取引の当事者が保持するようにしました。
+-->
+
+## The Birth of Modern Auditing
+
+- At the start of the 19c, 11 Londoners listed their occupation as the archaic **Accontants** (会計士).
+<!-- 19世紀初頭、ロンドンの11人が職業を古風な「会計士」としてリストアップしました。 -->
+- *The Bankruptcy Act of 1831* formally recognized accountants by appointing them as “Official Assignees” responsible for preparing company accounts. This laid the groundwork for transparency in financial reporting.
+- Bankrupt firms were especially likely to use their services, which increasingly served an **audit function**.
+<!-- 破産した企業は、彼らのサービスを利用する可能性が特に高く、監査機能を果たすようになりました。 -->
+
+## Audit firms
+
+- The **British Companies Act of 1844** established the incorporation of business by a formal registration process.
+<!-- 1844年の英国会社法は、公式の登録プロセスによる事業の設立を確立しました。 -->
+- It required *annual appointment of auditors* to examine the accounts and balance sheet of all public companies.
+<!-- すべての公開会社の会計と貸借対照表を調査するための監査人の年次任命が必要とされました -->
+- The Companies Act of 1862 *required banks to be audited* and established the practice of *limited cash dividends* to be paid only out of profits.
+<!-- 1862年の会社法は、銀行の監査を義務付け、利益からのみ支払われる限られた現金配当の実践を確立しました。 -->
+- By 1900, the audit was the central practice of accountants.
+<!-- 1900年までに、監査は会計士の中心的な実践となりました。 -->
+
+## The Big 4
+
+- The earliest of the Big Six accounting firms were started in mid-nineteenth century London.
+<!-- 最初のビッグシックス会計事務所のいくつかは、19世紀中頃にロンドンで設立されました。 -->
+  - William **Deloitte** opened a London firm in 1845.
+<!-- ウィリアム・デロイトは1845年にロンドンの会社を設立しました。 -->
+  - Samuel **Price** and Edwin **Waterhouse** formed their partnership in 1849. William **Cooper** started his firm in 1854, to be joined by his brothers in 1861.
+  - William **Peat** started in 1867.
+- With the Institute and professional requirements to become **Chartered Accountants** (勅許会計士), the profession of accountants was firmly established.
+<!-- 会計士としてのプロフェッショナル要件としての協会とチャータード会計士になるための要件が確立され、会計士の職業はしっかりと確立されました。 -->
+
+<!--
+## Public Accounting
+
+- New industries like canals, railroads, and utilities emerged, requiring large capital investments, leading to the establishment of organized exchanges in England and America.
+- British Companies Acts regulated capital markets, while American laws were state-based and less effective. By the early 20th century, America surpassed Britain in industrial power.
+- Major financiers like J.P. Morgan held significant control, with trusts consolidating businesses (300 trusts managing 5,000 companies by 1890). Methods included mergers, stock manipulation, and questionable legal practices.
+-->
+
+
+## Financial Transparency
+
+- Until the 1930s, disclosure of financial statements was **optional**; B/S were prioritized, while P/L were often ignored.
+- The Roaring Twenties saw high speculation, leading to the 1929 crash. This, combined with economic issues like the Hawley-Smoot Tariff Act, deepened the Great Depression.
+- President Franklin D. Roosevelt introduced landmark regulations, including the **Glass-Steagall Act** and the **Securities Acts**.
+- The Securities Act (1933) and the SEC (1934) enforced financial transparency and antifraud measures, establishing GAAP. The CAP and later APB issued foundational accounting standards that shaped **modern financial reporting**.
+
+## Emerging Technologies and Intangibles
+
+- Almost all financial data is *digitally recorded* and stored across servers, clouds, and networks outside firms' direct control.
+- Critical to ensure information systems' integrity and transparent financial reporting, preventing abuses that led to laws like the *Foreign Corrupt Practices Act* and **Sarbanes-Oxley Act**.
+Helps ensure consistent application of International Accounting Standards and aids in controlling asset market bubbles.
+Expanding audit needs have driven growth in the audit market, with accounting students comprising 40% of business school enrollments.
+
+## Accounting Education and Career
+
+- 40% of accounting graduates hired by public accounting firms hold **graduate degrees**; IT and computer science graduates are also significant hires.
+- The Big 4 firms have significantly increased their intake to meet demand (Table 1).
+- In 2018, this sector represented around 15% of the US economy (approx. $2 trillion) and 10% of the global economy (approx. $7 trillion).
+- Accounting skills are vital across fields like banking, investment, and rating agencies, with a growing emphasis on IT expertise in competitive markets.
+
+## Financial Accounting
+
+- The **process of communicating** a financial info. to users  via F/[text]{.class}.
+- **Divisions of Accountancy** :
+  - *Accounting* : "The art of recording, classifying, and summarizing transactions in monetary terms" (AICPA).
+  - *Bookkeeping* : Recording day-to-day transactions.
+  - *Auditing* : Examining and verifying financial records.
+- **Types of Accounting** :
+  - *Management Accounting* : internal use.
+  - *Financial Accounting* : external use.
+   <!-- such as shareholders, creditors, and regulators; subject to GAAP or IFRS standards for structured presentation. -->
+
+## The Products of Accounting: F/S
+
+1. **Balance Sheet** : Shows what a company owns (assets) and owes (liabilities) at a specific point in time. It provides a snapshot of the company's financial position.
+2. **Income Statement** : Reports revenue earned and expenses incurred over a period, showing net profit or loss.
+3. **Cash Flow Statement** : Highlights cash inflows and outflows over a period, indicating cash generation and cash usage.
+4. **Statement of Shareholders’ Equity** : Shows changes in shareholders’ interests over time, including dividends and retained earnings.
+
+## B/S
+
+- **Assets** : Includes cash, inventory, physical assets (like equipment), and intangible assets (like patents). Listed by liquidity, with current assets expected to convert to cash within a year.
+- **Liabilities** : Amounts owed, classified as current (due within a year) or long-term. Examples include loans, rent, payroll, and taxes.
+- **Shareholders' Equity** : Represents owners' investment and retained earnings, calculated as assets minus liabilities. A snapshot of equity at the end of the reporting period.
+
+## P/L and C/F
+
+- **Income Statement** :
+  - Reports revenues, expenses, and net profit over a specific period.
+  - Shows *EPS*, indicating potential shareholder payout if profits are distributed.
+- **Cash Flow Statement** :
+  - Divides cash flows into operating, investing, and financing activities. Demonstrates the company’s *cash movement* rather than just profitability.
+  - "Bottom line" shows net cash increase or decrease, essential for assessing liquidity.
+
+## The Methodology of Accounting
+
+- **Purpose of Financial Accounting** :
+  - Enables firms to **record and report** key economic transactions impacting their wealth.
+
+- **Structure and Principles** :
+  - *Quasi-Axiomatic System* : Uses core principles to document economic events.
+  - *Chart of Accounts* : Firm-specific classifications summarize transactions into accounts.
+  - *GAAP Compliance* : Accounts are organized per generally accepted accounting principles.
+
+---
+
+- **Assumptions and Challenges** :
+  - *Linear System* : Assumes additive, fixed prices and costs, though real economic processes may be non-linear, incomplete, or inaccurate.
+  - *Economic Approximations* : Accounting reports simplify complex data for manageability and scalability.
+
+- **Auditing Perspective** :
+  - Auditors consider trade-offs and uncertainty in financial reports, adapting audit procedures to address inherent accounting limitations.
+
+
+# Chap.2 Foundations of Audit Analytics
+
+##  Business and Data Analytics
+
+- **Origins in Games and Governance** :
+  - Data analytics roots trace back to scientific rigor applied in games of chance and nation-state demographics.
+  - *Statistics* : Derived from governance projects, the term describes methods to summarize and analyze population data.
+
+- **Mathematical Foundations** :
+  - 17c to 19c: Contributions from *Bayes, Laplace,* and *Gauss*.
+  - 20c: *Galton, Pearson,* and *Fisher* formalized statistics with methods like *experimental design* and *maximum likelihood estimation*.
+
+## EDA and Modern Applications
+
+- **EDA Emergence** :
+  - Key developments by *Tukey (1980)* highlighted EDA’s role in data summarization.
+  - *EDA* (探索的データ分析) assesses data appropriateness, structure, and feature extraction, making it vital in large, complex datasets with unknown origins.
+
+- **EDA in Practice** :
+  - Initial industry analysis in audits can reveal financial outliers, identifying potential risks.
+  - Tools like `plotluck` automate suitable data visualizations.
+
+## New Technologies
+
+- New methods for analyzing massive datasets have emerged in the past decade, and are continually evolving, as a product of the **machine learning (ML) revolution**.
+- The three most common terms used to describe these tools are reserved for a nested set of three technologies:
+  - *AI* = “any attempt to mimic human learning/intelligence”
+  - *ML* = “computational methods for learning from data”
+  - *Deep Learning* = “machine learning methods that mimic human neural networks (perceptrons)”
+
+## ML
+
+- **Essential Components of Learning** :
+  - *Decision* : The task or question being answered.
+  - *Learning Method* : The approach or algorithm applied.
+  - *Construct* : The concept or feature being learned.
+  - *Quality Assessment* : Evaluation of learning accuracy and effectiveness.
+
+- Origins of Artificial Intelligence :
+  - Major growth in 2010 with **Kaggle** competitions; **random forests** were popular, later surpassed by **gradient boosting** (2014) and **deep neural networks** (2016).
+
+<!--
+## Advancements in ML
+
+- **Machine Learning Innovations**
+  - *Stochastic Gradient Boosting* : Replaces classical calculus methods, enabling powerful, customized solutions.
+  - *Cross-Entropy for Classification* : Outperformed traditional logit/probit models in complex tasks.
+
+- **ImageNet Challenge**
+  - 2011: Classical models achieved 74.3% top-five accuracy on high-res images.
+  - 2015: Deep learning achieved 96.4% accuracy
+-->
+
+## Business Analytics
+
+**Near-human performance** in image classification, language translation, speech recognition and autonomous driving.
+
+- Strengths of ML:
+  - *Large Datasets* : Avoids overfitting and p-hacking issues.
+  - *Complex Construct Spaces* : Suitable for high-parameter models.
+  - *Feature Extraction* : Builds on EDA to extract useful features.
+
+- **Statistical Model Advantages** :
+  - Interpretation clarity, consistency, replicability, defined data roles, and formal logic.
+
+## Accounting Data Types
+
+McCarthy’s Design Theory (1979, 1982):
+
+  - View accounting transactions as **measurements of economic events**.
+    - *Measurements* : Monetary valuation of economic events.
+    - *Classifications* : Defined by a firm's Chart of Accounts, categorizing economic activities.
+    - *Time Stamps* : Ensures events are recorded in the correct period.
+    - *Descriptive Information* : Originally noted in journal entries, now augmented by social and news media for audit insights.
+
+
+
+# Chap.3 Analysis of Accounting Transactions
+
+
+## audit precedures and accounting cycle
+<!-- ## 監査手続と会計サイクル -->
+
+- **Audit Procedures and Accounting Cycles** :
+  - Audits are structured around accounting cycles due to economies of scale and better transaction tracking.
+  - **Substantive Year-End Tests** [^6] : Income statement accounts are transaction-based, requiring knowledge of cycles for accurate estimation.
+
+[^6]: 実証手続は会計監査における用語であり、勘定科目における重要な虚偽記載を検出する目的で行う検証のことをいい、分析的実証手続と詳細テストの2つの種類がある。
+
+---
+
+
+- **PCAOB Guidance for Audit Stages** :
+  1. *Planning and Risk Assessment* :
+     - Use audit risk assessment to identify high-risk transactions and set audit scope, budget, and tests.
+     <!-- - Relies on prior audits, industry benchmarks. -->
+  2. **Interim Compliance Tests** (運用評価手続) :Mid-year tests focus on high-risk transactions.
+     - **Attribute Sampling** [^7] : For high-risk areas;
+     - **Discovery Sampling** [^8] : To check for possible high error rates.
+
+[^7]: 母集団のある属性の頻度（誤謬率等）を推定する手法
+で母集団全体の誤謬率を推定
+
+[^8]: 母集団の中に特定の重要な誤謬が含まれているものとして、監査人がそこから抽出したサンプルの中に少なくとも当該誤謬の一つは発見で
+きる確率を計算する方法
+
+## Substantive Testing and Technology in Audits
+
+  3. **Substantive Tests** :
+    - Final phase focused on testing financial report balances for material errors based on interim test findings.
+    - Expands testing of trial balance monetary accounts based on discovered error rates.
+
+- **Technology in Audits** :
+  - *Computer-Based Auditing* :
+  <!-- Corporate accounting is digital, allowing auditors to perform efficient transaction sampling. -->
+  - *Data Retention* :
+  <!-- Regulatory and investor demands increase retained data, facilitating detailed sampling. -->
+  - *Key Skills* :
+  <!-- Understanding basic statistics for both mid-year and year-end tests is essential in modern audit sampling and analysis. -->
+
+
+## The Origin of Accounting Transactions
+
+- Eligibility of Events : Only events impacting a firm’s wealth qualify as accounting transactions.
+
+- Three Stages to Accounting Transactions :
+  1. *Firm Boundaries* : divisional vs. consolidated.
+  2. *Commercial Law* : Defines ownership and obligations.
+  3. *Capture Systems* : capture legally significant transactions.
+
+---
+
+- Classification and GAAP Compliance :
+  - *Chart of Accounts* : Custom categories for transaction classification, enabling comparison across firms and adhering to *GAAP*.
+  - High-volume transactions have dedicated journals.
+- The “Transaction Stream” : Real-world events filtered through capture, legal, boundary, classification, and GAAP layers to ensure **informative, comparable financial statements**.
+
+## Audit Tests as Learning Models
+
+Audit Evidence Collection Sequence
+
+1. *Audit Planning* : Defines scope and sample size.
+2. *Error Identification* : If errors are found, additional evidence is collected to estimate the error rate in the transaction flow.
+3. *Control Assessment* : Transaction flows with intolerable error rates are documented in the *Internal Control Memo* at the end of the interim compliance audit.
+4. *Year-End Testing Adjustment* : Affected accounts in financial statements undergo increased sample testing to ensure accurate material error detection.
+
+
+## Working with Dates
+<!-- 日付データの処理 -->
+
+- Time is an essential component of auditing.
+<!-- 時間は監査を実施するにあたって重要な要素である。 -->
+- *Income statement accounts* represent sums of transactions **within strictly set periods**, and *balance sheet accounts* are stated at **a specific time**.
+<!-- 損益計算書の勘定科目は厳密に設定された期間内の取引額の合計を表し、貸借対照表の勘定科目は特定の時点で計上される。 -->
+- The `lubridate` package makes it easier to do the things R does with date-times and possible to do the things that Base-R does not.
+
+後半で実践します。
+
+## Accounting Transactions
+
+- **Definition of Accounting Transactions** :
+  - Represent economic events that impact firm wealth.
+  - *Recorded in Journal Entries* : Specialized journals for high-volume transactions.
+- **Historical Evolution** :
+  - **Pre-20th Century** : firm wealth.
+  - **Modern Focus** : managerial performance and stakeholder interests.
+
+---
+
+- **Resolution and Sampling** :
+  - Transactions recorded with a minimum resolution of one dollar.
+  - Financial reports may aggregate data to thousands or millions.
+
+- **Characteristics of Transaction Distributions** :
+  1. *Left-Bounded at Zero* : Contra-accounts record reductions without negative values.
+  2. *Zero-Inflated* : Presence of non-impacting transactions (estimates, adjustments).
+  3. *Multimodal* : Caused by independent processes, unit price multiplied by quantity, or other factors.
+
+## Sampling Assumptions
+
+- **Central Limit Theorem (CLT) in Accounting** :
+  - Assumes that errors are *Normally distributed* (正規分布)
+  when sampling due to summation reliance in accounting.
+  - **Caution** : Auditors should not rely solely on CLT; normality assumptions may be inappropriate for error identification.
+
+- **Extreme Value Theory for Upper Tail Analysis** :
+  - Focus on **Material Misstatements** (重要な虚偽表示): Audit decisions prioritize the upper tail (extreme values) of distributions.
+
+
+
+## Couching Institutional Language in Statistical Terms
+<!-- 統計的用語で制度的言語を表現する -->
+
+- **Sampling Risks in Auditing** :
+  - *Risk of Assessing Control Risk is* :
+    1. *Too Low* : type II error.
+    <!-- Concluding controls are effective when they are not. -->
+    2. *Too High* : type I error.
+    <!-- Concluding controls are ineffective when they are effective. -->
+  - **Substantive Tests** (実証手続) :
+    1. **Risk of Incorrect Acceptance** : type II error.
+    <!-- Concluding no material misstatement exists when it does. -->
+    2. **Risk of Incorrect Rejection** : type I error.
+    <!-- Concluding a material misstatement exists when it does not. -->
+
+---
+
+- **Audit Risk Model** :
+  - Formula : $AR = IR \times CR \times DR$
+    - **Inherent Risk (IR)** : Risk within transactions.
+    - **Control Risk (CR)** : Risk of undetected misstatements due to internal control weaknesses.
+    - **Detection Risk (DR)** : Risk that audit procedures fail to detect material errors.
+
+- Audit Objectives :
+  - *Fairness* : Assurance of material error absence.
+  - *Efficiency* : Cost-effective data collection and analysis.
+
+---
+
+### Market Efficiency and Analytical Procedures
+
+- Market-Based Evidence :
+  - **Efficient Markets Hypothesis** (EMH)
+  - **Capital Asset Pricing Model** (CAPM)
+
+- **Benefits of Market-Based Analytical Procedures** :
+  - Provides information-rich insights without extensive fieldwork.
+  - Potentially substitutes for increased audit scope or risk reduction.
+
+- **Gaussian Assumptions in Audits** :
+  - Gaussian distributions are assumed for practicality and efficiency.
+  <!-- - **Limitations** : CLT assumptions apply to unbiased estimates rather than extreme values like material errors, where extreme value distributions (e.g., FTG theorem) may be more suitable. -->
+
+## Transaction Samples and Populations
+
+- **Purpose of Sampling** : Controls audit costs by examining a subset of transactions relevant to the audit.
+- **Population vs. Sample** :
+  - Population: All relevant transactions.
+  - Sample: A small, representative subset.
+- **Sampling Methods** :
+  - *Monetary Unit Sampling* : Uses dollars as sample units for year-end substantive testing to detect material errors in a/c balances.
+  - *Transaction/Record Sampling* : Uses individual transactions as sample units for internal control testing prior to year-end.
+   <!-- to assess transaction processing error risk. -->
+
+
+<!-- ## Sampling Bases -->
+
+<!-- - The sampling base or metric is the unit used to draw the sample. -->
+<!-- サンプリング単位（sampling unit, base, or metric）は、サンプルを抽出するために利用される単位である。 -->
+<!-- - Monetary unit sampling (one dollar is a sample item) is applied at year end for substantive testing—determining whether the financial statement account balances contain material errors. -->
+<!-- （ドル単位では1ドルがサンプル単位となる）金額単位サンプリング（Monetary unit sampling）は、財務諸表の勘定残高に重要な虚偽表示があるかを判定する実証手続に適用される。 -->
+<!-- - Transaction or Record sampling (one accounting transaction is a sample item) is applied prior to year-end for *internal control testing* - determining whether the inherent level of transaction processing error risk that exists in each accounting cycle. -->
+<!-- 取引または記録のサンプリング（会計取引1件がサンプル項目となる）は、年末前に内部統制のテストに適用され、各会計サイクルに存在する取引処理エラーリスクの固有レベルを判定する。 (文章が抜けてる)-->
+
+
+
+## Sampling Guidelines
+
+The AICPA provides guidelines on sampling in several standards:
+<!-- AICPAは、いくつかの監査基準において以下のようなサンプリングに関するガイドラインを提供している。 -->
+<!--
+- Risk assessment standards (SAS Nos. 104-111).
+- Defining Professional Requirements Standard (SAS No. 102).
+- Guidance on audit documentation (SAS 103).
+- Communicating internal control related matters (SAS 112 and SAS 115).
+- Audit Risk Alerts such as Communicating Internal Control Related Matters in an Audit—Understanding SAS No. 115
+ -->
+
+These discuss several approaches to the audit sampling process.
+
+- *Statistical audit*
+- *Non-statistical audit*
+- *Monetary unit* sampling
+- *Attribute* sampling
+- *Multi-location* sampling considerations
+
+
+
+## Types of Sampling
+
+The AICPA discusses the following types of sampling in drawing conclusions from audit evidence.
+
+:::{.columns}
+
+:::{.column width="50%"}
+1. Judgmental sampling
+2. Random sampling
+3. Fixed-interval sampling
+4. Random-interval sampling
+5. Conditional sampling
+6. Stratified sampling
+:::
+:::{.column width="50%"}
+7. Transaction or Record sampling
+8. Monetary Unit Sampling
+9.  Estimation sampling
+10.  Acceptance sampling
+11.  Discovery sampling
+:::
+:::
+
+
+## Accounting Cycles
+
+- An accounting cycle begins when accountants *create a transaction from a source document* and ends with the completion of the financial reports and *closing of temporary accounts* in preparation for a new cycle.
+<!-- 会計サイクルは、経理担当者が原始文書に取引を記録する際に始まり、財務報告の完了と新しいサイクルに備えた仮勘定の締切で終わる。（主な機能を持つ）下記の5つの会計サイクルがある。 -->
+
+1. **Revenue cycle**.
+2. **Expenditure cycle**
+3. **Conversion cycle** (Production cycle).
+4. **Financing** (Capital Acquisition and repayment).
+5. **Fixed assets.**
+
+
+<!-- ## 実証手続 -->
+## Substantive Test
+
+- The purpose of substantive procedures is **to provide audit evidence** as to the *completeness*, *accuracy*, and *validity* of the information contained in the accounting records or in the F/S.
+- Substantive testing examines account balances to assess *accuracy and materiality of errors*.
+- The scope of testing depends on the *effectiveness of internal controls*.
+- Statistical sampling is used to estimate total error or set confidence limits for errors in accounts.
+
+
+## Important Concepts in Probability and Statistics
+
+- *Probability distributions* are models describing the variability of data or the underlying population from which the data is drawn.
+<!-- 確率分布は、データのバラツキやデータの元となる母集団を記述するモデルである。 -->
+- There are perhaps *50 or 60 different distributions* that are used in characterizing population statistics, but only *half a dozen are commonly used*.
+  <!-- 母集団を特徴づける分布は、50～60種類程度あるが、一般的に使われるのはそのうちの6つだけである。 -->
+- Quite often when we refer to parametric statistics, we are making an assumption of **Normal** (Gaussian) distributions for the data.
+<!-- パラメトリック統計により分析するとき、分析者はデータについて正規分布（ガウス分布）を仮定していることが多い。   -->
+- We will see later that this assumption may not be warranted for accounting and financial transactions.
+<!-- この仮定が会計取引や財務取引では正当化されない場合があることについては、後述する。 -->
+
+---
+
+1. **Normal (Gaussian) distribution** : The *bell-shaped* normal distribution is iconic in traditional statistics. Related terms are:
+<!-- 1. 正規分布またはガウス分布： ベル型の正規分布は、伝統的な統計学の象徴である。関連用語として以下をあげる。 -->
+   - *Standardization* : Subtract the mean and divide by the standard deviation.
+   - *z-score* : The result of standardizing an individual data point.
+   - *Standard normal* : A normal distribution with `mean = 0` and standard deviation = 1.
+   - *QQ-Plot* : A quantile (of the sample) by quantile (of a Normal distribution) plot to visualize how close a sample distribution is to a Normal distribution.
+   <!-- - For the disbursement data, an example of a QQ-plot follows -->
+    <!-- - 標準化（standardization）： 平均を引き、標準偏差で割る。
+    - zスコア（z-score）： 個々のデータポイントを標準化した結果。
+    - 標準正規分布（standard normal distribution）： 平均=0、標準偏差=1の正規分布。
+    - QQプロット（QQ-Plot）：標本分布が正規分布にどれだけ近いかを視覚化するための、（正規分布の）分位数による（標本の）分位数のプロット。以下のQQプロットは、支出データについての具体例である。 -->
+
+
+
+
+
+## various distributions
+
+1. Normal Dist.
+2. Binomial Dist.
+3. Bernoulli Dist.
+4. Poisson Dist.
+
+each distributions have density and cumulative distribution.
+
+
+## Logit Model
+
+- Since *the dependent variable is dichotomous* (binary), results can be improved by using a **logit model** (from the built-in *glm* function).
+<!-- 被説明変数が二値変数なので、結果は（glm関数から）ロジット・モデル（logit model）を利用することで改善できる。 -->
+- The following example also showcases _R_'s analysis of the residual errors (differences between the dependent variable values, and the estimated model on the right-hand side).
+<!-- 以下の例では、R による残差（被説明変数の実際の値とモデルからの推定値との差）の分析（①予測値と残差の散布図、②正規QQプロット、③予測値と標準化残差の絶対値の散布図、④標準化残差とてこ比の散布図）も紹介している。-->
+- Leverage and distance provide measures of how particular transactions influence the estimation, and are important in identifying outliers.
+<!-- てこ比（leverage）とcookの距離（distance）は、特定の取引が推定与える影響についての測定値を提供し、異常値を識別する上で重要である。  -->
+
+## Machine Learning Methods
+<!-- ## 機械学習 -->
+
+- Inference is a decision $\delta$ (estimation, prediction) based on data $x \in X$ that hopefully contains information about a particular set of constructs.
+<!-- 推論は、データ$x \in X$に基づいて、特定の構造に関する情報を含んでいることを期待して、決定$\delta$（推定、予測）を行う。 -->
+Inference may be about:
+<!-- 推論は以下のようなものについて行われる。 -->
+
+1. *Classification* — e.g., identifying faces, threats.
+<!-- 1. 分類 : たとえば、顔、脅威の識別 -->
+2. *Estimation* — e.g., a vector $\theta = \{\theta_1, \dots , \theta_n\}$.
+<!-- 2. 推定 : たとえば、ベクトル$\theta = \{\theta_1, \dots , \theta_n\}$。 -->
+3. Other decisions that may or may not be carried out in real time; e.g., driving a car.
+<!-- 3. リアルタイムで行われるかどうかはわからないその他の決定: たとえば、車の運転。 -->
+
+# Chap.4 Risk Assessment and Planning
+
+
+## Auditing
+
+- **Purpose** : Verify that financial statements accurately reflect economic events.
+- Audit Opinion Provides:
+  1. Reasonable Assurance
+  2. By an Independent Third Party
+  3. That financial statements are Fairly Presented
+  4. In accordance with a Financial Reporting Framework (e.g., GAAP)
+  5. Consistent Application for comparability over time
+- Auditing Frameworks: GAAP and GAAS, ISA by IAASB
+
+---
+
+- Types of Audit Opinions (US GAAP):
+	1. Unqualified Opinion: Financial statements are fairly presented.
+	2.	Qualified Opinion: Fairly presented except for specific issues (material misstatements or limited scope limitations).
+	3.	Adverse Opinion: Financial statements do not fairly present due to significant departures from GAAP.
+	4.	Disclaimer: Auditor cannot express an opinion due to insufficient evidence or lack of independence.
+<!-- - Typical Report Wording:
+	- Unqualified:
+	“We believe these financial statements are fairly presented in accordance with GAAP consistently applied.”
+	- Qualified:
+	“We believe these financial statements are fairly presented in accordance with GAAP consistently applied; except for [list of exceptions].”
+	- Adverse:
+	“We do not believe these financial statements are fairly presented in accordance with GAAP consistently applied; the auditors disagree with [list of exceptions].” -->
+
+## Risk Assessment in Audit Planning
+<!-- ## 第2節 監査計画におけるリスク評価 -->
+
+- **Purpose of Risk Assessment** :
+  - Obtain an understanding of the *entity* and its *environment*, including *internal controls*.
+  <!-- - Gather initial evidence on transaction types and internal control effectiveness. -->
+- **Audit Risk Model** :
+  - Formula: $AR = IR \times CR \times DR$
+  - Components:
+    1. **Inherent Risk (IR)** :
+       <!-- - Risk due to business nature or transaction types. -->
+       <!-- - Example: Cash transactions have higher IR than check settlements. -->
+    2. **Control Risk (CR)** :
+       <!-- - Risk that errors may not be detected by internal controls. -->
+       <!-- - Depends on internal control effectiveness. -->
+    3. **Detection Risk (DR)** :
+       <!-- - Risk of auditor failing to detect material errors or fraud. -->
+       <!-- - Related to sampling errors or human factors. -->
+
+## Limitations of the Audit Risk Model
+
+1. *Poor Resolution* :Risk matrices can only accurately compare a small fraction of risk scenarios.
+   <!-- - They may assign identical ratings to quantitatively different risks (known as **range compression**). -->
+2. *Errors* : Risk matrices can incorrectly rate smaller risks higher.
+   <!-- - For risks with negatively correlated frequency and severity, they can lead to poor decision-making. -->
+3. *Suboptimal Resource Allocation* : Risk matrices provide categories that may not allow effective resource distribution to address high-risk areas.
+4. *Ambiguity in Inputs and Outputs* : Severity categorizations for uncertain outcomes are subjective.
+   <!-- - Different users may interpret risk ratings differently for identical risks, leading to inconsistent risk assessments. -->
+
+## Accessing the SEC’s EDGAR Database of Financial Information
+
+- Review current and prior year filings with the **SEC** as part of the analytical review in audit planning.
+  - Includes annual/quarterly F/S, restatements, proxy statements, lawsuits, and other relevant documents.
+  - These documents are accessible from [sec.gov](https://www.sec.gov).
+
+- *Key Format* : **XBRL (eXtensible Business Reporting Language)**
+  <!-- - A global, freely available markup language for business information exchange.
+  - **Advantages** :
+    - Provides unambiguous account definitions, reducing misinterpretation risk.
+    - Allows automated parsing for efficient audit ratio and statistical analysis. -->
+
+<!-- [^10]: [訳註：] 日本からEDGARデータベースへのアクセスには制限があるため，訳書ではEDGARデータベースから直接データ取得は行わず，いったんXBRLファイルをダウンロードしてローカルに保存し，そのファイルを読み込む形でデータ取得を行っている。ここでは作業ディレクトリに`XBRL` フォルダを作成し，そこに`xml`ファイルを保存している。 -->
+
+
+## Audit Staffing and Budgets
+
+- *Audit Program* :
+  - Outlines procedures for **evidence collection** and **analysis**
+  - Created after the **risk assessment**, it includes:
+    - *Audit Steps* : Sampling from specific data sources.
+    - *Expected Results* : Example outcomes from tests.
+    - *Corrective Actions* : Procedures based on audit findings.
+- *Audit Budgeting* :
+  <!-- - Challenges: -->
+    <!-- - Primarily influenced by prior years' budgets, staff availability, and expertise. -->
+    <!-- - Specialized industries, like auditing, face unique staffing challenges due to knowledge intensity. -->
+  - **Cost-Benefit Discipline** : Management aims to apply a reasonable cost-benefit analysis to staffing allocations.
+
+---
+
+- **Scope and Staffing** :
+  - *Scope Determination* : Audit managers decide the scope of each test based on sample size and staffing.
+  - *Benefits* : Potential monetary errors detected are usually a percentage of account or transaction values.
+  - *Staff Allocation* : Proportionate to **potential error detection** capability, maximizing audit risk reduction within the budget.
+
+<!-- - **Expected Relation (Fig. 1)** : -->
+  <!-- - There is a **positive correlation** between the **benefit from audit tasks** and the **person-months assigned** to the audit program, which reflects the cost. -->
+
+
+
+
+
+## The Risk Assessment Matrix
+<!-- ## 第6節 リスク評価マトリクス -->
+
+- *Purpose of RAM* :
+  - Constructed during the **analytical review phase** to identify potential risks. Involves scanning *business intelligence* from media and online sources.
+  - Reviews *prior years' working papers* for recurring client risks and applies the "rule of 3’s" for adjusting risk expectations.
+
+- Firm-Specific Biases in Audit Focus:
+  - Each **Big 4** audit firm emphasizes different accounts based on firm history and audit focus:
+
+<!--
+    - **Ernst & Young** : Accounts receivables, revenue recognition, taxes, fixed assets.
+    - **PricewaterhouseCoopers** : Accounts receivables, revenue recognition, taxes, payables.
+    - **KPMG** : Accounts receivables, revenue recognition, taxes, inventory.
+    - **Deloitte & Touche** : Revenue recognition, taxes, liabilities, inventory, executive compensation.
+ -->
+
+:::{.notes}
+監査事務所は、監査事務所特有の手続を実施する傾向がある。（米国証券取引所の上場企業のほとんどを監査している）4大監査事務所は、不適正意見を行う際にそれぞれ独自の傾向がある。
+それぞれ、EY監査事務所（Ernst & Young）は売掛金、収益認識、税金、および固定資産、
+PwC監査事務所（PricewaterhouseCoopers）は売掛金、収益認識、税金、および買掛金、
+KPMG監査事務所は売掛金、収益認識、税金、および棚卸資産、
+Deloitte監査事務所（Deloitte & Touche）は収益認識、税金、負債、棚卸資産、および役員報酬に重点を置いている（Cheffers 2012）。
+:::
+
+## Generating the Audit Budget from the Risk Assessment Matrix
+<!-- ## 第8節 リスク評価マトリクスからの監査契約の予算の策定 -->
+
+
+**The Risk Assessment Matrix** generates qualitative measures of risk along with initial estimates of minimum sample sizes.
+<!-- - This will generally not be sufficient to accurately budget the audit, since higher risk accounts will require audit scope beyond mere “discovery” of errors. -->
+
+<!-- In addition, planning will need to estimate costs associated with: -->
+
+1. Estimating the rates of errors from control weaknesses of all specific types (in interim tests),
+<!-- 1. （運用評価手続において）すべての種類の統制上の脆弱性から逸脱率を推定する。 -->
+1. Assessing the existence and amount of errors in trial balance accounts (in substantive tests), and
+<!-- 2. （実証手続において）試算表の勘定における虚偽表示の有無と金額の評価を行うこと。 -->
+1. Generally assessing structural and qualitative problems in financial information consolidation and presentation.
+<!-- 3. 財務情報の連結と表示における構造的・質的問題について全般的な評価を行うこと。 -->
+
+
+---
+
+- The third item is beyond the scope of simple technical metrics, and will require *the experience and judgment of audit managers*.
+<!-- 3つ目の項目は、単純な技術的な指標の範囲を超えるものであり、監査マネージャーの経験と判断が必要となる。 -->
+- It can probably best be estimated by reviewing prior years’ budgets and assuming similar costs for the current year audit.
+<!-- 過年度の予算を検討し、当年度の監査に同様の費用がかかると想定することで、最も適切に見積ることができる可能性が高い。 -->
+- The first two items, though, can be budgeted through a relatively *simple linear model* with assumptions which reflects the cost structure of a particular audit firm.
+<!-- しかしながら、最初の2つの項目は、各監査事務所のコスト構造を反映した仮定を用いた比較的単純な線形モデルによって予算化することができる。 -->
+- Though each RAM will be auditor and client specific, the prior interactive RAM software can easily be programmed to incorporate such a linear model.
+<!-- それぞれのリスク評価マトリクスは、監査人および被監査会社に固有のものであるが、既存のインタラクティブなリスク評価マトリクスのソフトウェアは、このような線形モデルを組み込むように簡単にプログラムすることができる。 -->
+<!-- - This makes it possible to write the technical parts of the audit program and budgets (items 1 and 2 above) automatically from the interactive RAM software. -->
+<!-- これにより、監査計画と監査契約の予算の技術的な部分（上記の項目1と2）を、インタラクティブなリスク評価マトリクスのソフトウェアから自動的に作成することが可能になる。 -->
+<!-- - The code chunks, models, and algorithms provided below comprise the building blocks to facilitate such an automatic generation. -->
+<!-- 以下に示すコードチャンク、モデル、およびアルゴリズムは、このような自動生成を容易にするための基本的な要素を構成している。 -->
+
+
+## Sample Sizes for Budgeting
+<!-- ### 予算策定のためのサンプルサイズの決定 -->
+
+There are two types of sampling in interim tests:
+<!-- 運用評価手続におけるサンプリングには2種類ある。 -->
+
+1. Discovery sampling [^11] for discovery of *out-of-control* transaction streams
+<!-- 1. 統制から逸脱している取引を発見するための発見サンプリング -->
+2. Attribute sampling for estimating transaction error rate
+<!-- 2. 取引の逸脱率を推定するための属性サンプリング -->
+
+
+[^11]: *Discovery sampling* sets a sample size that is likely to discover at least one error in the sample if the actual transaction error rate exceeds the minimum acceptable error-rate (alternatively called the out-of-control* rate of error).Discovery tests helps the auditor decide whether the systems processing a particular transaction stream are in or out of control.
+<!-- 発見サンプリングでは、実際の取引の逸脱率が最低許容逸脱率（minimum acceptable error rate）を超えた場合に（統制上の逸脱率（control rate of error）とも呼ばれる）、サンプルの中に少なくとも1つの逸脱を発見する可能性のあるサンプルサイズを設定する。 発見サンプリングによる手続は、監査人が、個々の取引を処理するシステムが統制されているのか、または内部統制から逸脱しているかを判断するのに役立つ。 -->
+
+:::{.notes}
+許容逸脱率とは、母集団において不備の発生が許容される割合の上限値となり、内部統制の実施基準では前述の通り10%未満となります。 内部統制の実務上は、実施基準上、90%以上の信頼性確保が必要となるため、許容逸脱率は9%が上限です。
+
+発見サンプリングは、目標となるエラー水準を固定して行うサンプリングである。
+目標エラー割合は０％かそれに近く設定されるため１件のエラー発見時に目標未達が確定するので、テストは停止される。
+:::
+
+
+## Substantive Testing in Audits
+
+- Interim vs. Year-End Testing
+  - **Interim Testing** : Identifies control weaknesses early.
+    - Materiality threshold (e.g. $10,000) determines whether accounts are "**fairly stated**."
+  - **Year-End Testing** :
+    - Focused on *acceptance sampling* to determine if the final account balance is "fairly stated" within materiality limits.
+    - Uses **attribute sampling** to estimate error rate with high confidence (e.g., 95%).
+
+:::{.notes}
+Example: A 5% error rate in a $1 million sales account implies a $50,000 error in annual sales, while the same error rate in accounts receivable (with 10 turnovers per year) implies a $5000 misstatement.
+
+
+:::
+
+---
+
+<!--
+ - **Examples of Substantive Tests** :
+ - *Sales Invoices* : Compare invoices from accounts receivable against supporting documentation for accuracy in amounts, customer details, and billing dates.
+  - *Period Verification* : Trace invoices to shipping logs to ensure sales are recorded in the correct period, including examining invoices issued post-period for prior period relevance.
+-->
+
+- **Sampling Technique** :
+  - **Acceptance Sampling** :
+    - Sample size determined using *Cohen’s power analysis* .
+    - Identifies control weaknesses; if a transaction stream shows high error rates, **attribute estimation** assesses actual error rates.
+  - **Error Estimation** :
+    - Estimates may represent error rates in transaction count or, with *monetary unit sampling*, rates of monetary error in the transaction stream.
+
+## Auditing: A Wicked Problem
+
+- *Background* :
+  - Since the 1980s, Reagan-era reforms introduced free-market dynamics to accounting fields:
+    <!-- - *AICPA Ethics Rules Section 501* -->
+    <!-- - repeal allowed advertising and inter-firm recruitment. -->
+    <!-- - This shift made auditing a profit-driven industry; by the late 1990s, audit firms averaged $7 in IT revenue for every $1 of audit revenue. -->
+- *Major Scandals (2001)* : Enron, WorldCom, and Sunbeam.
+  - *Issues* : Financial misreporting and manipulation to present inflated performance.
+    <!-- - Over-leveraging incentivized by tax and regulatory structures led to excessive risk-taking. -->
+- *Impact of the Enron Scandal* : **Sarbanes–Oxley Act (2002)**
+  - Highlighted weaknesses in **accounting standards**, **auditing regulations**, and **corporate governance**.
+  <!-- - Resulted in the **dissolution of Arthur Andersen**, one of the largest accounting firms globally. -->
+  <!-- - Led to increased public awareness and demand for reliable financial reporting and audit independence. -->
+
+## Wicked Problems
+
+- **Independent Audits** : Aim to increase the **credibility** of financial statements, reduce *investor risk*, and lower the *cost of capital*.
+  - However, audits face criticism as they address a **wicked problem**
+  <!-- - : issues with incomplete, changing requirements and complex interdependencies. -->
+
+- Characteristics of Audits as Wicked Problems
+
+:::{.aside style = "font-size: 0.8em;"}
+  1. No clear problem formulation or stopping rule.
+  2. Audit conclusions are **opinions**, not definitive true/false answers.
+  3. Unique and one-time-only nature for each audit.
+  4. Infinite possible solutions, but no clear set of permissible actions.
+  5. Existence of multiple, competing explanations for audit findings.
+  6. **Stakeholder diversity** : Differing perspectives and changing constraints complicate problem-solving.
+:::
+
+---
+
+- **Strategies for Addressing Wicked Problems** (Roberts 2000; 2002):
+  1. **Competitive** :
+     - Opposing viewpoints generate potential solutions; however, it can hinder **knowledge sharing**.
+  2. **Collaborative** :
+     - Stakeholders collaborate for a consensus; often time-consuming with potential conflicts.
+  3. **Authoritative** :
+     - Responsibility assigned to experts (e.g., CPAs) to streamline decisions; lacks full scope of information.
+
+---
+
+- **Auditing’s Authoritative Approach** :
+  - **Big Four** firms hold authority for large corporations, particularly **Fortune 500**.
+  - Auditors undergo extensive training, including CPA certification.
+  - *Benefits* : Efficiency and reduced costs.
+  - *Challenges* : imited expertise across specialized fields.
+  - *Adaptations* : Use of information technology and automation enhances audit processes in a complex business environment.
+
+
+## Final Thoughts on Planning and Budgets
+
+- **Audit Planning and Budgeting** :
+  - Not an exact science; instead, it is *contextual* and influenced by *uncertainties*, *incomplete information*, and *client negotiations*.
+  - Relies on the *judgment and experience* of auditors and managers
+- Advances in Quantification and Standardization:
+  - Tools and methodologies aim to **quantify** and **standardize** parts of the audit planning process.
+  - Computational and Statistical Tools:
+    <!-- - Automate repetitive tasks, enabling auditors to focus on critical areas that require expertise. -->
+- *Collaboration and Global Consistency* :
+  <!-- - Audit planning often involves **collaboration** across global offices. -->
+  <!-- - **Standardization Tools** : -->
+    <!-- - Aid in unifying procedures across **languages** and **cultures**, improving audit efficiency and reducing miscommunication risks. -->

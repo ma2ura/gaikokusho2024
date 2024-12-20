@@ -1,0 +1,230 @@
+---
+title: "Quartoの使い方"
+author: "Soichi Matsuura"
+date: "13 Nov. 2024"
+format:
+  revealjs:
+    theme: sky
+    transition: slide
+    slide-number: true
+    html-math-method: katex
+    footer: "Kobe University, Business Administration"
+    logo: "img/kobe_logo.png"
+---
+
+
+
+# Rmarkdown / Quarto
+
+## 動的レポーティング
+
+- 本資料を作成している**Quarto**というツールです。Quartoのダウンロードは[こちら](https://quarto.org/)
+- Quarto(クゥアルト)は、Markdown + R/Python/Juliaで動的レポーティングを行うためのツールです。
+- Markdownで記述された文書に、R/Python/Juliaのコードを埋め込むことができます。
+- MS Wordで作文して、MS Excelでデータを処理して、またMS Wordに貼り付ける、という作業を一つのファイルで完結できます。
+
+ぜひ使ってみてください。
+
+## 準備
+
+- Rをインストールする。
+- RStudio / VS Codeをインストールする。
+- Quartoをインストールする。
+
+すべて無料かつオープンソースです。VS CodeはMicrosoft、RstudioとQuartoはPosit社が開発しています。
+ほんとバカみたいですが，RとQuartoのrevealjsで講義用スライドを作成していたのですが，
+授業開始1時間前に最後のコンパイルを実行したらエラーが出て動かない。
+しかもなぜか昨夜の時点からgit commitしてないことが発覚。なんのためのバージョン管理だよ
+
+## 使い方
+
+- Rstudioだと、左上の緑のプラスボタンから「Quarto Document」や「Quarto Presentaion」を選択すると、ファイルが作成されます。
+- 拡張子は`.qmd`となります。
+
+Quartoファイル`.qmd`の構造
+
+1. YAMLヘッダー
+2. Markdown文書
+
+## YAMLヘッダー
+
+ここは文章の構造(メタデータ)を記述する場所です。
+
+- `author` : 著者名
+- `format` : フォーマットの指定
+  - `html` : ウェブサイト作成
+  - `docx` : Word作成
+  - `pdf` : PDF作成 (LaTeXが必要)
+  - `revealjs` : スライド作成
+
+## スライドを作るには、
+
+- `format`で`revealjs`を指定します。
+- `theme`でテーマを指定します。たとえば次のようなもの
+  - blood
+  - dark
+  - night
+  - simple
+  - sky
+  - solarized
+
+## Markdown文書
+
+Markdown記法で書かれた文章を，様々なフォーマットへと変換することができます。
+
+- `#`，`##`，`###` : 1〜3レベルの見出し
+- `*`，`-` : 箇条書き
+- `1.` : 番号付き箇条書き
+- `**`，`__` : 太字
+- `*`，`_` : 斜体
+- `` ` `` : インラインコード
+
+## チャンク
+
+- チャンクはコードブロックを指し，ここにR/Python/Juliaのコードを記述します。
+- Rだと「` ```{r}` と`  ``` `」で囲まれた部分です。
+
+
+:::{.panel-tabset}
+
+## ソース
+
+````
+これがRチャンクです。
+
+```{r}
+plot(cars)
+```
+
+````
+
+## 結果
+
+```{r}
+plot(cars)
+```
+
+:::
+
+## 最小限の設定
+
+:::{.panel-tabset}
+
+## ソース
+
+````
+---
+title: "タイトルとは"
+author: "ちょしゃ"
+format: html
+---
+
+# 第1章：はじめに
+
+## はじめに
+
+- a
+- b
+- c
+
+````
+
+## 結果
+
+![サンプル](img/minimal_sample.png){width=50%}
+:::
+
+
+# Rを組み込む
+
+## データの読み込み
+
+MASSパッケージに含まれるBostonデータを読み込みます。
+
+```{r}
+library(MASS) # データを取得
+df <- Boston # ボストンの住宅価格データ
+head(df) # 先頭5行を表示
+```
+
+## Bostonデータの説明
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- `crim` : 犯罪率
+- `zn`:	広い家の割合
+- `indus`:	非小売業の割合
+- `chas`:	川に近接(1:yes, 0:no)
+- `nox`:	一酸化窒素濃度
+- `rm`:	平均部屋数
+- `age`:	古い家の割合
+
+:::
+
+::: {.column width="50%"}
+
+- `dis`:	主要施設への距離
+- `rad`:	主要高速道路へのアクセス性
+- `tax`:	固定資産税率
+- `ptratio`:	生徒先生の比率
+- `black`:	黒人の割合
+- `lstat`:	低所得者割合
+- `medv`:	住宅価格
+
+:::
+
+::::
+
+
+## 記述統計量
+
+```{r}
+summary(df)
+```
+
+## もっとキレイな記述統計量の表
+
+```{r}
+library(skimr)
+library(kableExtra)
+skim(df) |> kable() |> kable_styling("striped", full_width = F, font_size = 20)
+
+```
+
+
+## データの可視化：ヒストグラム
+
+```{r}
+par(family= "HiraKakuProN-W3")
+hist(df$medv, main="ヒストグラム", xlab="住宅価格")
+```
+
+
+## データの可視化
+
+犯罪率と住宅価格の散布図
+
+```{r}
+par(family= "HiraKakuProN-W3")
+plot(df$crim, df$medv, xlab="犯罪率", ylab="住宅価格")
+```
+
+## 住宅価格を様々な変数で回帰
+
+```{r}
+library(modelsummary)
+library(tinytable)
+results <- list(
+  "model1" = lm(medv ~ crim, data = df),
+  "model2" = lm(medv ~ crim + rm, data = df),
+  "model3" = lm(medv ~ crim + rm + chas, data = df),
+  "model4" = lm(medv ~ crim + rm + chas + age, data = df)
+)
+modelsummary::msummary(
+  results,
+  gof_omit = 'DF|Deviance|AIC|BIC|Log.Lik.', stars = TRUE) |>
+  style_tt(fontsize = 0.5)
+```
+

@@ -1,0 +1,1013 @@
+---
+title: |
+  <b>外国書購読 Day8</b> </br>
+  <span style="color: #282A36; "> Chapter 7. <br>
+  Design of Audit Programs </span>
+author: "Soichi Matsuura"
+date: "27 Nov. 2024"
+format:
+  revealjs:
+    theme: ["default", "dracula.scss"]
+    transition: slide
+    slide-number: true
+    code-line-numbers: false
+    html-math-method: katex
+    chalkboard: true
+    width: 1300
+    # height: 900
+    footer: "Kobe University, Business Administration"
+    logo: "img/kobe_logo.png"
+    include-in-header:
+      text: |
+        <style>
+        .v-center-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        </style>
+execute:
+  echo: true
+  warning: false
+  highlight-style: github
+css: mystyle.css
+---
+
+
+# Audit Programs as Natural Experiments
+<!-- #  第1節 自然実験としての監査計画 -->
+
+
+## Table of contents
+
+1. Audit Programs as Natural Experiments
+2. Collecting and Analyzing Audit Evidence: Sampling
+3. AICPA Guidelines on audit sampling
+4. Sampling for Interim Tests of Compliance
+5. A Statistical Decision Framework for Auditing
+
+
+<!--
+6. Audit Tests as Learning Models
+7. Materiality
+8. Risk
+9. The AICPA on Sampling Approaches and Risks
+10. AICPA Pronouncements on Generally Accepted Auditing Standards
+11. Types of Sampling Allowed or Discussed by AICPA
+12. Accounting Transaction Distributions
+13. The Audit Cycle
+14. The Context of Auditing and Information Technology
+15. Auditors’ Opinion: The Product of an Audit
+-->
+
+## Audit Programs
+
+- Audit programs can best be thought of as <mark class="mark">stylized natural experiments</mark>.
+- A **natural experiment** is an empirical study in which the activities of firms, individuals or groups are exposed to the experimental and control conditions that are determined by nature, or by other factors outside the control of the auditors.
+- The process governing the exposures resembles a “random” assignment.
+The concept of "**randomness**" is itself controversial, and I will briefly comment on this later in the chapter; it is intended to <mark class="mark">assure that samples are representative for some decision-making objective</mark>.
+
+
+:::{.notes}
+監査計画は、定型化された自然実験（natural experiment）と考えるのが最も適切である。
+自然実験とは、企業、個人あるいは集団の活動が、自然または監査人のコントロール外の他の要因によって決定される実験条件と対象条件に晒される経験的研究をいう。-
+実験条件と対照条件のばく露を管理するプロセスは、「無作為」割り当てに似ている。
+「ランダムであること（randomness）」の概念自体は議論の余地があり、本章の後半で簡単に解説するが、これはサンプルが何らかの意思決定を行う目的のために（母集団を）代表するものであることを担保するためのものである。
+:::
+
+## Natural and Field Experiments
+
+- **Characteristics of Natural Experiments** : Observational studies not traditionally controlled; allow causal inference through condition comparisons, unlike non-experimental studies.
+- *Applications*: Used when controlled experiments are impractical or unethical, as in fields like epidemiology and economics (Meyer 1995).
+- *Limitations*: Related designs like field and quasi-experiments are unsuitable for audit programs.
+
+:::{.notes}
+自然実験は観察にもとづく研究であり、（介入をともなう）伝統的な意味での実験では扱われない。
+自然実験と実験とはいえない観察研究の違いは、前者には因果推論につながる条件比較が存在するが、後者には存在しないことである。
+自然実験は、疫学や経済学が扱ういくつかの研究分野のように、（介入をともなう）統制された実験を実施することが極めて困難であったり、倫理的に問題があったりする場合に、研究計画として採用される（Meyer 1995）。
+同じく統計学の手法であるフィールド実験（field experiment）と準実験（quasi-experiments）は自然実験に密接に関連しているが、監査計画には適していない。
+以下はその違いである。
+:::
+
+<!---
+- Natural experiments are observational studies and are not controlled in the traditional sense of an experiment.
+- The difference between a natural experiment and a non-experimental observational study is that the former includes a comparison of conditions that pave the way for causal inference, but the latter does not.
+- Natural experiments are employed as study designs when controlled experimentation is extremely difficult to implement or unethical, such as in several research areas addressed by epidemiology and economics (Meyer 1995).
+- Field and quasi-experiments are closely related, but are not appropriate for audit programs; here are the differences:
+--->
+
+
+## Natural and Quasi-Experiments in Auditing
+
+1. Natural experiments rely on an <mark class="mark">external force (e.g., a government, nonprofit, etc.) controlling the randomization treatment assignment and implementation</mark>,
+2. Field experiments require researchers to retain control over randomization and implementation.
+
+3. Quasi-experiments occur when treatments are administered as-if randomly (e.g., US Congressional districts where candidates win with slim-margins, weather patterns, natural disasters, etc.).
+
+:::{.notes}
+1. 自然実験は、無作為割り当てとその遂行を管理する外部の力（政府、非営利団体など）に依存している、
+2. フィールド実験では、無作為化とその遂行を分析者が管理する必要がある。
+3. 準実験は、無作為に処置が実施される場合に行われる（例：候補者が僅差で勝利する米国議会選挙区、天候パターン、または自然災害など）。
+:::
+
+
+## The Role of Randomization in Auditing
+
+- <mark class="mark">The perspective of audits as natural experiments</mark> motivates the methods applied to auditing in this book.
+- It is also the reason that the _R_ language is such an **invaluable tool** for auditing.
+- At the core of this concept is <mark class="mark">the statistical analysis of samples</mark> to ultimately render the auditor’s opinion.
+
+
+:::{.notes}
+自然実験としての監査を捉える考え方が、本書において統計的手法を監査に適用する動機となっている。
+また、監査にとってR言語が非常に貴重なツールである理由でもある。
+この概念の基礎となるのが、最終的に監査人の意見を述べるために、サンプルに対して統計的分析を行うことである。
+:::
+
+# Collecting and Analyzing Audit Evidence: Sampling
+<!-- ## 第2節 監査証拠の収集と分析：サンプリング -->
+
+## Sampling in Auditing
+
+- A statistical sample is a **subset of the population** that is, for purposes of analysis, **representative** of that population.
+- The population is all of the transactions relevant to a particular audit or procedure.
+- For example, in confirmation of accounts receivable (A/R) the population is all of the accounts receivable from customers buying on credit for the year (assuming an annual audit).
+
+- Audit samples are usually several orders of magnitude smaller than the population.
+
+:::{.notes}
+統計的サンプルとは、母集団の部分集合である。
+これらは、分析の目的に照らして、その母集団を代表している。
+部集団は、特定の監査または手続きに関連するすべての取引である。
+例えば、売掛金（A/R）の確認では、その年度に掛売上を計上した売掛金のすべてが母集団となる（年次監査を想定）。
+監査サンプルは通常、母集団より数桁小さい。
+:::
+
+## Sampling units
+
+- The **sampling base** or metric is the unit used to draw the sample.
+- **Monetary unit sampling** (one dollar is a sample item) is applied at year end for substantive testing - <mark class="mark">determining whether the financial statement account balances contain material errors</mark>.
+- Transaction or Record sampling (one accounting transaction is a sample item) is applied at year-end for internal control testing - determining whether the inherent level of transaction processing error risk exists in each accounting cycle.
+
+
+:::{.notes}
+サンプリング単位（sampling unit, base, or metric）は、サンプルを抽出するために利用される単位である。
+金額単位サンプリング（ドルベースでは1ドルがサンプル単位となる）は、財務諸表の勘定残高に重要な虚偽表示があるかを判定する実証手続に適用される。
+取引あるいは記録のサンプリング（会計取引1件が一つのサンプル項目となる）は，各会計サイクルに存在する取引処理エラーリスクの固有レベルを判定するために，期末に運用評価手続(internal control testing)に適用される。？？
+<!-- 取引あるいは記録のサンプリング(会計取引1つが1サンプル項目)は、期末の運用評価手続に適用される。これは、各会計サイクルに存在する取引処理エラーリスクの固有レベルを判定するためである。
+ -->
+:::
+
+
+# AICPA Guidelines on audit sampling
+<!-- ## 第3節 監査サンプリングについてのAICPAによるガイドライン -->
+
+## Statistical Inference in Auditing
+
+<!-- - Samples are the Achilles heel of statistical inference, and audit inference is no exception. -->
+<!-- サンプルは統計的推論のアキレス腱であり、それは監査実務における推論においても例外ではない。 -->
+- Ideally, <mark class="mark">samples should be random</mark> - the sample should be *representative* , or every item in the population should have an equal chance of being included in the sample.
+
+- In addition, a <mark class="mark">probability model is required to draw valid inferences</mark> - this model may have a significant impact on the choice of sampling method, as does the particular feature being measured.
+
+- The more accurately the model and sampling depict reality, the more accurate, and less costly will be the audit inference.
+
+- Sampling is performed because it is typically **infeasible** to make a *detailed inspection* .
+<!-- and audit of anything but the smallest portion of the population. -->
+
+
+:::{.notes}
+理想的には，サンプルは無作為抽出されるべきである。
+つまり、サンプルは母集団を代表しているべきであり、母集団におけるすべての項目がサンプルに含まれる可能性が等しくなければならない。
+さらに、妥当な推論を行うためには、確率モデルが必要である。
+この確率モデルは、測定される特定の特徴と同様に、サンプリング方法の選択に大きな影響を与える可能性がある。
+確率モデルとサンプリングがより正確に現実を描写していればいるほど、より正確で、より少ないコストで監査実務における推論を行うことができる。
+サンプリングが行われるのは、通常、（監査の対象となる）母集団のうちごく少数の場合を除いて精査を行うことは不可能だからである。
+:::
+
+
+## Hypothesis Testing in Auditing
+
+- Without sampling, audits would be economically unjustifiable.
+- In statistical hypothesis testing
+<!-- (termed Neyman–Pearson hypothesis tests after the Neyman–Pearson Lemma) -->
+, the **p-value** is <mark class="mark">the probability for a given statistical model that, when the null hypothesis is true the sample mean would be greater than or equal to the actual observed results</mark>.
+- Hypotheses are ways of *bifurcating* the decision space of a particular statistical inference task.
+- In auditing, this bifurcation is a stylized <mark class="mark">accept or do not accept</mark> that a transaction stream is in-control (interim tests) or an account balance is fairly stated or is not fairly stated (substantive tests).
+
+
+
+:::{.notes}
+サンプリングがなければ、監査は経済的に正当化できないほどにコストがかかるものになる。
+統計的仮説検定（Neyman-Pearsonの補題に由来してNeyman-Pearson仮説検定と呼ばれる）において、$p$値（確率値または漸近有意確率ととも呼ばれる）とは、帰無仮説が真であるとき、標本平均が実際の観測結果以上となる確率である。
+仮説は、ある統計的推論において決定空間（decision space）を（受容と棄却の）2つの部分集合に分割する方法である。
+監査業務では、この二分法は、取引の流れが統制されているか（運用評価手続）、または勘定残高が適正に表示されているか（実証手続）についての受容と棄却を定型化しているものである。
+
+「運用評価手続」(interim test) : アサーション・レベルの重要な虚偽表示を防止又は発見・是正する内部統制について、その運用状況の有効性を評価するために立案し実施する監査手続をいう。
+「実証手続」(substantive test) :アサーション・レベルの重要な虚偽表示を看過しないよう立案し実施する監査手続をいい、以下の二つの手続で構成される。
+  1. 詳細テスト（取引種類、勘定残高及び注記事項に関して実施する。）
+  2. 分析的実証手続
+アサーション・レベルの重要な虚偽表示リスクとは、固有リスク及び統制リスクの二つの要素で構成される。
+固有リスクと統制リスクは企業側のリスクであり、財務諸表監査とは独立して存在している。
+:::
+
+
+## Conservatism Principle
+
+- Auditing makes decisions on control and fairness through searches for material or intolerable errors.
+<!-- (the apportionment of materiality to individual accounts generates the set of intolerable errors for those accounts). -->
+- In an auditing context, <mark class="mark">the p-value of a test is the probability that the monetary error in the account balance would be intolerable</mark>.
+- One of the auditing’s idiosyncrasies is that audit tests consider only **one-sided tests**.
+- Auditing, because of the Conservatism Principal, is concerned with overstating income and assets, or understating liabilities and expenses. As a consequence, all audit tests are one-sided.
+
+:::{.notes}
+監査は、重要な虚偽表示や許容不能な虚偽表示（個々の勘定科目へ重要性を配分することは、それらの勘定科目に対して許容不能な虚偽表示の集合を生み出す）の有無の探索を通じて、統制の有効性と財務諸表の適正性に関する意思決定を行う。
+したがって、監査の文脈では、検定の$p$値は、勘定残高の虚偽表示額が許容できないものとなる確率である。
+監査実務の特色の一つは、（原則として）監査手続が片側検定（one-sided tests）しか行わないことである。
+保守主義の原則に基づいて，監査は収益や資産を過大計上したり，負債や費用を過少計上したりすることを問題としている。
+その結果、監査手続は片側だけを検証している。
+:::
+
+
+
+## Three Sampling methods in Auditing
+
+<!-- There are three types of sampling commonly used in audits: -->
+<!-- 監査実務でよく使われるサンプリング手法は下記の3種がある。 -->
+
+1.	**Discovery Sampling for Interim Tests** : Determines sample size to ensure at least one error is detected if the actual error rate exceeds the acceptable level.
+<!-- Helps auditors decide if transaction systems are in or out of control. -->
+2.	**Attribute Sampling for Interim Tests** : Estimates the error rate in the transaction population with confidence (e.g., 95%) to determine if systems are within acceptable error thresholds. If out of control, it assesses the actual error rate.
+3.	**Acceptance Sampling for Substantive Tests** : Combines discovery and attribute sampling to evaluate internal control effectiveness. If controls are insufficient, attribute sampling estimates the error rate to guide further analysis.
+
+:::{.notes}
+1. 発見サンプリング：実際の取引の逸脱率が最低許容逸脱率（minimum acceptable error rate）を超えた場合に（統制上の逸脱率（control rate of error）とも呼ばれる）、サンプルの中に少なくとも1つの逸脱を発見する可能性のあるサンプルサイズを設定する。
+発見サンプリングによる手続は、監査人が、個々の取引を処理するシステムが統制されているのか、または内部統制から逸脱しているかを判断するのに役立つ。
+2. 運用評価手続における属性サンプリング：取引母集団全体の逸脱率を推定し、その推定値がその取引の最低許容逸脱率の閾値内にあることを特定の信頼度（例えば95％）により推定するために、取引単位サンプルについてのサンプルサイズを設定する。
+特定の取引の流れが内部統制から逸脱していると判明した場合、属性サンプリングによる推定値は当該取引の流れを処理する内部統制の実際の逸脱率を決定するのに役立つ。
+属性サンプルでは逸脱率も虚偽表示額も推定することができる。
+3. 運用評価手続のための採択サンプリング： 発見サンプリングによる分析の結果、特定の種類の取引の逸脱に対する内部統制が「統制されている」か「統制されていない」かの判断が下される。 内部統制が不十分であることが判明した場合、監査人は運用評価手続における属性サンプリングに移行する。 属性サンプリングでは、取引母集団全体の逸脱率を推定し、その推定値がその取引の最低許容逸脱率の閾値内にあることを特定の信頼度（例えば 95％）により推定するために、取引単位サンプルについてのサンプルサイズを設定する。
+特定の取引の流れが内部統制から逸脱していると判明した場合、属性サンプリングによる推定値は当該取引の流れを処理する内部統制の実際の逸脱率を決定するのに役立つ。
+属性サンプルでは逸脱率も虚偽表示額も推定することができる。
+:::
+
+<!--
+1. **discovery sampling for interim tests** : Discovery sampling for interim tests sets an estimation sample size for transaction-unit samples, so that we are likely to discover at least one error in the sample if the actual transaction error rate exceeds the minimum acceptable error rate (alternatively called the out-of-control rate of error). Discovery tests help the auditor decide whether the systems processing a particular transaction stream are in or out of control.
+1. 発見サンプリング：実際の取引の逸脱率が最低許容逸脱率（minimum acceptable error rate）を超えた場合に（統制上の逸脱率（control rate of error）とも呼ばれる）、サンプルの中に少なくとも1つの逸脱を発見する可能性のあるサンプルサイズを設定する。
+発見サンプリングによる手続は、監査人が、個々の取引を処理するシステムが統制されているのか、または内部統制から逸脱しているかを判断するのに役立つ。
+2. **attribute sampling for interim tests** : sets estimation sample size for transaction-unit samples to estimate the error rate in the entire transaction population with some confidence (e.g., 95%) that the estimate is within the out-of-control error rate cutoff for that transaction stream. If it is found that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream. Error estimates from attribute samples may either be rates or amounts or both.
+2. 運用評価手続における属性サンプリング：取引母集団全体の逸脱率を推定し、その推定値がその取引の最低許容逸脱率の閾値内にあることを特定の信頼度（例えば95％）により推定するために、取引単位サンプルについてのサンプルサイズを設定する。
+特定の取引の流れが内部統制から逸脱していると判明した場合、属性サンプリングによる推定値は当該取引の流れを処理する内部統制の実際の逸脱率を決定するのに役立つ。
+属性サンプルでは逸脱率も虚偽表示額も推定することができる。
+3. **acceptance sampling for substantive tests** : Discovery sample analysis results in a decision of whether the internal control over a particular type of transaction error is “in-control” or “out of control.” If internal control is found to be insufficient, the auditor moves on to attribute sampling for interim tests, which sets estimation sample size for transaction-unit samples to estimate the error rate in the entire transaction population with some confidence (e.g., 95%) that the estimate is within the out-of-control error rate cutoff for that transaction stream. If it is found that a particular transaction stream is out of control, then attribute estimation will help us decide on the actual error rate of the systems that process this transaction stream. Errors estimates from attribute samples may either be rates or amounts or both.
+3. 運用評価手続のための採択サンプリング： 発見サンプリングによる分析の結果、特定の種類の取引の逸脱に対する内部統制が「統制されている」か「統制されていない」かの判断が下される。 内部統制が不十分であることが判明した場合、監査人は運用評価手続における属性サンプリングに移行する。 属性サンプリングでは、取引母集団全体の逸脱率を推定し、その推定値がその取引の最低許容逸脱率の閾値内にあることを特定の信頼度（例えば 95％）により推定するために、取引単位サンプルについてのサンプルサイズを設定する。
+特定の取引の流れが内部統制から逸脱していると判明した場合、属性サンプリングによる推定値は当該取引の流れを処理する内部統制の実際の逸脱率を決定するのに役立つ。
+属性サンプルでは逸脱率も虚偽表示額も推定することができる。
+--->
+
+## Power Analysis in Auditing
+
+- The sample sizes
+<!-- (an important consideration in determining the scope and budget of an audit)  -->
+can be determined using Cohen’s power analysis (Cohen 1992) which is implemented in R’s `pwr` package.
+<!-- （監査の範囲と予算を決定する際の重要な考慮事項である）サンプルサイズは、Rの`pwr`パッケージで実装されているCohenの検出力分析（Cohen 1992）を用いて決定することができる。 -->
+- Statistical "power" is the complement (i.e., $1 − \beta$) of the probability $\beta$ of a **type II error** (type II error is the failure to reject a false null hypothesis, and is also known as a "**false negative**(偽陰性)".)
+<!-- 統計的「検出力」とは、第2種の過誤の確率$\beta$の補数(つまり$1-\beta$)である。ここで第2種の過誤とは、偽である帰無仮説を棄却できないことであり、「偽陰性（false negative）」とも呼ばれる。 -->
+- Recall that, in statistical hypothesis testing, the probability $\alpha$ of a type I error is the "**significance**"(有意水準) of the test (a type I error is the rejection of a true null hypothesis, and is also known as a "**false positive**(偽陽性)") (Fig. 1).
+<!-- 統計的仮説検定では、第1種の過誤の確率$\alpha $が検定の「有意」水準であったことを思い出してほしい。ここで第1種の過誤は真である帰無仮説を棄却してしまうことであり、「偽陽性（false positive）」とも呼ばれる（図1を参照されたい）。 -->
+
+## Calculating Sample Size
+
+To calculate the required sample size, you need to know **four things** :
+<!-- 必要なサンプルサイズを計算するには、下記の4つの項目を判断する必要がある。 -->
+
+- The size of the error to detect.
+- The variance of the response.
+- The desired significance level.
+- The desired power.
+
+
+<!--
+- 検出すべき誤謬の大きさ
+- 応答の分散？
+- 必要な有意水準
+- 必要な検出力
+ -->
+
+# Sampling for Interim Tests of Compliance
+<!-- ## 第4節 運用評価手続における監査サンプリング -->
+
+## Discovery Sampling
+<!-- ## 発見サンプリング -->
+
+- **Discovery sampling** chooses a sample to determine <mark class="mark">whether an error rate does not exceed a designated percentage of the population</mark>.
+- If the sample does not contain errors, then the actual error rate is assumed to be lower than the minimum unacceptable rate.
+- The sampling calculation includes the following factors:
+  - Confidence level.
+  - Minimum unacceptable error rate.
+
+
+:::{.notes}
+発見サンプリングは、逸脱率が母集団の特定の割合を越えていないことを判断するためにサンプルを抽出する。
+サンプルに誤謬が含まれていない場合、実際の逸脱率は最低許容不能逸脱率よりも低いとみなされる。
+サンプリングの計算には以下の項目が含まれる。
+- 信頼水準
+- 最低許容不能逸脱率
+:::
+
+
+## Confidence Level
+
+- **Confidence level** (信頼水準) [^1] is a concept that <mark class="mark">an approach that has fallen out of fashion in favor of frequentist inference, Bayesian inference, and decision theory</mark>.
+- It is still used in decision theoretic approaches such as auditing, and roughly reflects the confidence that the auditor has in a particular decision (e.g., the balance is “**fairly stated**”).
+- Confidence is a concept that is intertwined with perceptions of “risk” associated with audit failures.
+
+[^1]:信頼水準は同じ母集団からサンプルを繰り返し抽出する場合に母数が含まれる区間のパーセントを表す。
+
+:::{.notes}
+信頼水準は，フィデューシャル推論（fiducial inference）に由来する概念であり，頻度論的推論、ベイズ推論、および意思決定理論に支持されなくなり潮流から外れたアプローチといえる。
+ただし、信頼水準は、監査における意思決定において今でも使われており、監査人が特定の意思決定（例えば、勘定残高が「公正に表示されているか」の意思決定）の際に有している信頼度を大まかに表している。
+信頼度は、監査の失敗に関連する「リスク」の認識と密接に関係している概念である。
+:::
+
+
+## Unacceptable Error Rates
+
+- **Unacceptable error rates**(許容不能誤謬率) are parameters that are fixed at the start of an audit by the audit manager.
+- They may be set by the firm, by prior years experience, or by some other method.
+- In general, their choice is idiosyncratic, determined by policies and perspectives of a particular firm or audit professional.
+
+:::{.notes}
+許容不能誤謬率は、監査責任者が監査を始めるにあたってに固定するパラメータである。
+このパラメータは、監査事務所によって設定されることもあれば、過去の経験によって設定されることもあり、また他の方法によって設定されることもある。
+一般に、その選択は分析者によって異なり、特定の監査事務所や監査専門家の方針や考え方によって独自に（idiosyncratic）判断される。
+:::
+
+## Uru Model
+
+- We can compute the discovery sample size using what mathematicians call an **urn model**.
+- Urn models are typically stated as draws of colored balls from an urn.
+- In our case, we can consider the urn to be the set of all transactions of a given type that the firm processes in a given accounting period.
+
+:::{.notes}
+発見サンプリングにおけるサンプルサイズは、数学者が壷モデル（urn model）と呼ぶモデルを使って計算できる。
+壷モデルは、通常、壷からの色付きボールの抽選として記述される。
+運用評価手続の場合、壷は、企業がある会計期間に処理する、特定の種類に属する取引すべての集合であると考えることができる。
+:::
+
+## 壺モデル
+
+1. 壺モデルでは、壺にはよく混ぜ合わされた$x$個の白い球と$y$個の黒い球とが入っている。
+2. 壺から球を1つ**ランダムに取り出し**、その色を観察する。
+3. 取り出した球を壺に戻し、選択プロセスを繰り返す。
+
+このモデルで次のような問題を考える。
+
+- $n$回の観測で白と黒の球の割合を推測できるか? その推測はどの程度の信頼性があるか?
+- 球をn個だけ取り出したとき、その中に黒い球がない可能性はどれくらいだろうか?
+
+
+## Uru model in Audit
+
+- Assume that <mark class="mark">the auditor determines that the minimum acceptable error rate for a particular transaction type (or alternately our out-of-control rate of error for that transaction type) is $p$</mark>.
+- The discovery sample size needed for confidence $c$ is
+$$
+\Pr[x \geq 0] = 1− \Pr[x = 0]
+$$
+the probability that $x$, the number of errors discovered, is anything but $0$.
+
+:::{.notes}
+監査人が特定の取引タイプ(あるいはその取引タイプの統制上の逸脱率)に対する最低許容逸脱率を$p$と決定したと仮定する。
+信頼度$c$に対して必要な発見サンプルのサイズは，
+発見された誤謬の数$x$が$0$以外となる確率である$\Pr[x \geq 0] = 1 - \Pr[x = 0]$となる。
+:::
+
+
+## Culculating the error rate
+
+We can start by solving the probability of finding no errors in a sample of $n$ draws from the urn:
+<!-- まず、壷から$n$回引いたサンプルにおいて誤謬が発見されない確率を計算することから始めよう。 -->
+
+$$
+\Pr[X \geq 0] = 1 - \dbinom{n}{0} \times p^0 \times (1-p)^{n-0} = 1 - (1 - p )^n
+$$
+
+For confidence level $c$ we want to choose $n$ so that:
+<!-- 信頼水準$c$（および母集団における最低許容逸脱率$p$）に対して、サンプルサイズ$n$を次のように決める。 -->
+
+$$
+\Pr[X \geq 0] = c  \Longrightarrow 1 - (1 - p )^n = c \Longrightarrow n = \frac{\log(1-c)}{\log(1-p)}
+$$
+
+## Sample Size Calculation
+
+```{r}
+#| message: false
+#| output-location: slide
+library(tidyverse)
+p <- seq(0.0005, 0.015, 0.0005) # minimum acceptable error rate
+c <- 0.95 # confidence level
+n <- log(1-c)/log(1-p) # sample size
+samp <- data.frame(p, n)
+ggplot(samp) + aes(p, n) + geom_line() +
+  labs(
+    title = "発見サンプリングにおけるサンプルサイズ",
+    x = "最低許容逸脱率",
+    y = "サンプルサイズ") + theme_bw(base_family = "HiraginoSans-W3")
+```
+
+
+## Coefficient of Variation Formulas
+<!-- ## サンプルサイズに対する変動係数の公式 -->
+
+<!-- - If the auditor is not just concerned with the error rate, but also <mark class="mark">the stability of the error rate</mark>, then interim test sampling questions will involve both the error rate and the variability of that rate.  -->
+- When auditors consider both the error rate and its **stability**, <mark class="mark">interim test sampling must address both the error rate and its variability</mark>.
+<!-- 監査人が単に逸脱率だけでなくその安定性（stability）にも関心を持つ場合、運用評価手続のサンプリングを行う際には逸脱率とその変動率の両方を計算することになる。 -->
+<!-- - If the out-of-control error rate is $\mu_1$ and our goal is to detect an error of size $\Delta$ where the standard deviation of the sample is assumed to be $\sigma$ then the sample size formula above becomes -->
+- If the out-of-control error rate is $\mu_1$ and the goal is to detect an error of a given size $\Delta$ with sample standard deviation $\sigma$, the sample size formula is adjusted accordingly[^2].
+<!-- 最低許容逸脱率が$\mu _1$であり、サンプルの標準偏差が$\sigma$であると仮定した場合の誤謬の大きさ$\Delta$を検出することが目標である場合、上記のサンプルサイズの式は下記のようになる。 -->
+$$
+n = \frac{8 CV^2}{PE^2 } \left[ 1 + (1 - PE)^2 \right ]
+$$
+
+[^2]:Where $PE$ is the proportionate error $PE = 1$ and $CV$ is the coefficient of variation $CV = 1$.
+
+<!-- ここで$PE$は比例誤差（proportionate error）で$PE = 1$であり、$CV$は変動係数（coefficient of variation）で$CV = 1$である。 -->
+
+
+
+
+## 補足｜前提条件の整理
+
+
+- エラー率 ($\mu_1$) : 制御外エラー率。
+- 検出目標 ($\Delta$) : 検出すべきエラーの大きさ。
+- 標準偏差 ($\sigma$) : サンプルの標準偏差。
+- 変動係数 ($CV$) : 標準偏差を平均値で正規化したもの。定義は
+  $$
+  CV = \frac{\sigma}{\mu_1}
+  $$
+- 誤差割合 ($PE$) : 許容誤差（または誤差率）。具体的な値は問題設定による。
+
+
+## 補足｜サンプルサイズ計算の一般的な考え方
+
+サンプルサイズ $n$ は、統計的検定のパワー（Type II エラー率 $\beta$）や有意水準（Type I エラー率 $\alpha$）、効果量（エラーの大きさ $\Delta$）、標準偏差 ($\sigma$) に依存する。
+$$
+n = \left( \frac{z_{1-\alpha} + z_{1-\beta}}{\Delta} \right)^2
+$$
+
+- $z_{1 - \alpha}$: 有意水準 $\alpha$ に対応する標準正規分布の値。
+- $z_{1- \beta}$: 検出力（パワー）
+- $\Delta$: 標準化効果量。
+
+
+## 補足｜3. 与えられた式の具体化
+
+与えられた式の分子と分母を解釈することで、サンプルサイズ計算における調整項を解釈する。
+
+1. 分子 $8CV^2$：
+  分子 $8CV^2$ は、変動係数 $CV = \sigma / \mu_1$ を基にサンプルサイズを調整
+2. 分母 $PE^2$ :
+  分母 $PE^2$ は許容誤差の平方。許容誤差が小さいほど、検出のためのサンプルサイズは増加
+
+3. 調整項  $\left[ 1 + (1 - PE)^2 \right]$ :
+  括弧内の項は、許容誤差 $PE$ を基にした調整項である。この調整により、エラー率の変動がサンプルサイズに与える影響を反映し
+
+
+## 補足｜4. 導出手順（簡易化）
+
+1. サンプルサイズ $n$ の一般式に基づいて、
+   $$
+   n = \frac{C}{(\Delta / \sigma)^2}
+   $$
+   と仮定する（ここで $C$ は定数）。
+2. $\Delta = PE \cdot \mu_1$、$\sigma = CV \cdot \mu_1$ を代入すると、
+   $$
+   n = \frac{C}{(PE \cdot \mu_1 / (CV \cdot \mu_1))^2}
+   = \frac{C}{(PE / CV)^2}
+   = \frac{C \cdot CV^2}{PE^2}
+   $$
+
+---
+
+3. 調整項 $\left[ 1 + (1 - PE)^2 \right]$ を掛け合わせ、最終的に
+   $$
+   n = \frac{8 CV^2}{PE^2} \left[ 1 + (1 - PE)^2 \right]
+   $$
+   が得られる。
+
+
+
+## Determining the Variability of the Population
+
+- Sometimes the auditor will not have any idea of the variability of the population, but will still wish to consider it in sample size.
+<!-- 監査人が母集団のばらつきを知らない場合でも、サンプルサイズの計画において考慮したい場合がある。この場合、$≈13≈35％$のばらつきを選択するのが典型的である。 -->
+- In this case, a variability of $\approx 1/3 \approx 35\%$ is typical. In this case:
+<!-- 逸脱率が低い場合には、以下のように計算することができる。 -->
+
+$$
+n \approx \frac{1 + (1 - PE)^2}{PE^2} \approx \frac{2}{PE^2}
+$$
+
+for small error rates.
+
+## Rules of Threes to Calculate 95% Upper Confidence Bounds
+<!-- ### 上側信頼区間95%の3つのルール -->
+
+- The rule of threes can be used to address the following type of question: <mark class="mark">“The manager of the audit has told us that there have been no errors in the A/R account balance in the last 20 audits. Does this information give me an estimate whether there will be an error in this year’s audit of A/R?”</mark>
+- The answer is "**yes**" . : Given no observed errors in the past $n$ years, a 95% upper bound on the rate of occurrence is $3/n$
+- Observed events $Y$ (no errors in the audit) follow a $Poisson(\lambda)$ distribution based on  $n$  samples, per the law of rare errors.
+<!-- - The basis of this is that, by the law of rare errors, the observed events $Y$ (i.e., no errors in the audit) follow a $Poisson(\lambda)$ distribution using $n$ samples.  -->
+
+
+:::{.notes}
+<!-- 3つの法則は、次のような質問にも使える。 -->
+<!-- 「監査の責任者は、過去20年の監査で売掛金の勘定残高に虚偽表示が存在しなかったと言っている。この情報から、今年の売掛金の監査で虚偽表示が発生するかどうかの予想はつくだろうか？」この問いに対する答えは「YES」である。 -->
+<!-- 過去$n$年間に観測された虚偽表示がないとすると、発生率の95％の上限は$3/n$となる。 -->
+<!-- その根拠は，誤差法則により、観測された事象$Y$（すなわち、監査において誤りがなかったこと）が$n$個のサンプルを用いたポアソン分布$Poisson(\lambda)$に従う，ということである。 -->
+:::
+
+## The sum of Poisson random variables
+
+- <mark class="mark">The sum of Poisson random variables is Poisson</mark>, so the question of at least one $Y$ not equal to zero is the probability that the sum $\sum Y_i$ is greater than zero.
+- Let this probability be, for example, 0.95 so that $P\left[ \sum Y_i = 0\right ] = \mathrm{e}^{-n \lambda} = 0.05$.
+- Taking logarithms gives $n \lambda = - \ln (0.05) \approx 3$.
+- Thus the rate $\lambda \fallingdotseq 3/n$.
+
+:::{.notes}
+ポアソン分布にしたがう確率変数の合計はポワソン分布にしたがうので、少なくとも1つの$Y$が0に等しくないという問題は，$\sum Y_i$が$0$より大きい確率となる。
+この確率を例えば$0.95$とすると、$P[Y_i = 0] = e - n \lambda  = 0.05$となる。
+対数をとると、$n \lambda  = - \ln (0.05) \approx 3$となる。
+よって比率は$\lambda \approx 3/n$ となる。
+:::
+
+
+<!-- ### 属性サンプリング -->
+## Attribute Sampling
+
+- Each time a control is tested, the auditor examines the evidence (samples, etc.) to decide on the <mark class="mark">hypothesis that the account is fairly stated, or internal control is effective</mark>.
+- Each time a control is tested, the auditor examines **the evidence** (samples, etc.) to decide on the hypothesis that the account is **fairly stated**, or internal control is **effective**.
+- The Risk Assessment Matrix and review of prior years’ audit papers for the control system will provide this rate $s$.
+
+:::{.notes}
+内部統制が検証されるたびに、監査人は監査証拠（抽出したサンプルなど）を検討し、勘定項目が公正に表示している、あるいは内部統制が有効であるという仮説を決定する。
+監査人は、「内部統制が有効な」システムであっても、許容逸脱率sで偶発的な誤謬（occasional error）が発生することがあるため、逸脱率$s=0$（サンプルサイズが小さくなる）と仮定することもできるが、できれば実際の誤謬の現実的な推定値を用いるべきである。
+リスク評価マトリックスと、その統制システムに関する過年度の監査調書をレビューすることにより、この逸脱率$s$がわかる。
+:::
+
+
+## Hypothesis Test in Attribute Sampling
+
+The control decision takes the form of the following hypothesis test:
+
+
+- $H_0$: The client’s system is in control, controls are effective, and error rate is approximately $s$.
+- <mark class="mark">$H_a$: The client’s controls are not effective, and the system is producing an intolerable number of errors $> r$</mark>.
+<!-- Restating, if the expected error rate is s, the intolerable error rate is $r$, and the error rate in the control system is $\varepsilon$ then restate the hypotheses as: -->
+
+If the expected error rate is $s$, the intolerable error rate is $r$, and the control system error rate is $\varepsilon$, the hypotheses can be stated as:
+
+
+- $H_0$: $\varepsilon = s$、$\quad H_a$: $\varepsilon \geq s \quad \text{where} \quad r,\varepsilon \in [0, 1]$
+
+
+:::{.notes}
+内部統制（の有効性）に関する判断は、以下の仮説検定の形をとる。
+- $H_0$: 被監査会社のシステムは統制されており、内部統制は有効で、誤謬率はおよそ$s$である。
+- $H_a$: 被監査会社の統制は有効ではなく、内部統制システムは許容不能誤謬率$>r$を発生させている。
+予想逸脱率を$s$、許容不能逸脱率を$r$、内部統制システムの逸脱率を$\varepsilon$とすると、仮説を次のように書き換えることができる。
+- $H_0$: $\varepsilon = s$ ここで、$\varepsilon \in [0, 1]$
+- $H_a$: $\varepsilon \geq s$ ここで、$r, \varepsilon \in [0, 1]$
+:::
+
+## Power and Sample Size Calculation
+
+- This requires a one-sample proportion test to calculate power and sample size.
+- The null hypothesis is $\varepsilon = s$, and the alternative hypothesis is $\varepsilon > r$ with the standard power and significance assumptions of $\alpha = 0.05$ and $\beta = 0.8$.
+- Let us test a $5\%$ intolerable error rate $r = 0.05$ and an expected error rate $s = 0.01$ (Fig. 3):
+
+:::{.notes}
+このような仮説検定を行うには、検出力とサンプルサイズを計算するために1標本の比率検定（one-sample proportion test）を必要とする。
+帰無仮説は$=s$、対立仮説は$>r$で、標準的な有意水準と検出力の仮定は$\alpha = 0.05$と$\beta = 0.8$である。
+5％の許容不能な逸脱率$r = 0.05$と予想逸脱率$s = 0.01$を検定しよう（図3を参照されたい）。
+:::
+
+
+## Power Test
+
+```{r}
+library(pwr) # Power test
+sample <- pwr.p.test( # proportion test
+  h = ES.h( # effect size
+    p1 = 0.05, # intolerable error rate
+    p2 = 0.01  # expected error rate
+  ),
+  sig.level = 0.05, # significance level
+  power = 0.80, # power
+  alternative = "greater") # one-side test
+sample # output
+```
+
+## Plot for Power test
+
+```{r}
+# output pwr packages
+plot(sample)
+```
+
+
+## Acceptance sampling
+<!-- ### 採択サンプリング -->
+
+- The basic idea of calculating power or sample size with the `pwr` package is to leave out the argument you want to calculate.
+- If you want to calculate sample size, leave $n$ out of the function.
+- To calculate power and sample size for one-sample t-tests, we need to set the type argument to `one.sample`.
+- Each time an account is audited or a control is tested, the auditor examines the evidence (samples, etc.) to decide on the hypothesis that the account is fairly stated, or internal control is effective.
+
+:::{.notes}
+`pwr`パッケージで検出力やサンプルサイズを計算する基本的な考え方は、計算したい引数を省略することである。
+サンプルサイズを計算したい場合は、関数からnを省く。
+1標本のt検定における検出力とサンプルサイズを計算するには、type引数を one.sampleに設定する必要がある。
+勘定の監査や内部統制の検証が行われるたびに、監査人は監査証拠（抽出されたサンプルなど）を検討し、勘定科目が公正に表示されている、あるいは内部統制が有効であるという仮説を決定する。
+:::
+
+## Case fo Account Balance
+
+The decision takes the form of a hypothesis test.
+For an account balance, this is:
+
+
+- $H_0$ : The client’s balance for the account is correct (error is zero)
+- $H_a$ : The client’s balance for the account contained a material error.
+
+If intolerable error (i.e., the part of materiality allocated to this account) is $M$ and the error in the account balance is $\varepsilon$ then restate this as:
+
+
+$H_0$ : $\varepsilon = 0$ 、$H_a$ : $\varepsilon = M$
+
+
+:::{.notes}
+その判断は仮説検証の形をとる。
+勘定残高の場合は、以下のようになる。
+- $H_0$ : 被監査会社の勘定残高は正しい（虚偽表示はゼロである）
+- $H_a$ : その被監査会社の勘定残高に重要な虚偽表示がある。
+<!-- 許容不能虚偽表示額（すなわち、この勘定科目に割り当てられた重要性の部分）をMとし、勘定科目の残高の虚偽表示額を$\varepsilon$とした場合、これを下記のように言い直す。 -->
+:::
+
+
+## Conservatism Principle
+
+- In the alternative hypothesis, whether $M$ is Dr or Cr is determined by the **Conservatism Principle** - the direction that will produce the lowest income.
+- Let us start with a basic formula for distinguishing between a zero error $\mu_0$ and the actual error $\mu_1$ with a one-sided test, a Normal distribution probability model having homogeneous variances $\sigma^2_0 = \sigma^2_1 = \sigma^2$ and single sample compared to a known (i.e., $\mu_0 = 0$) distribution.
+
+
+:::{.notes}
+対立仮説では、$M$が借方であるか貸方であるかは、保守主義の原則（つまり最低の利益をもたらす方向）によって決定される。
+ゼロ誤差$mu_0$と実際の誤差$\mu_1$を片側検定で区別するための基本式から始めよう。
+ここで、均一分散$\sigma _0 = \sigma_0 = \sigma$を持つ正規分布確率モデルと、既知の（つまり$\mu_0 = 0$）分布と比較した単一標本である。
+:::
+
+
+## Rule of Thumb
+
+The "rule of thumb" for sample size is
+
+
+$$
+n = \frac{8}{\Delta^2}
+$$
+Where the error $\Delta$ we are trying to detect is
+
+$$
+\Delta = \frac{\mu_1 - \mu_0}{\sigma}
+$$
+
+
+:::{.notes}
+サンプル・サイズの「経験則（rule of thumb）」は次のとおりである。
+ここで検出した誤謬は$\Delta$で下記である。
+:::
+
+
+---
+
+This is derived from the Normal sample formula:
+
+$$
+n = \frac{2 ( z_{1 - \alpha} + z_{1 - \beta} )^2 }{\left ( \frac{\mu_1 - \mu_0}{\sigma}\right )^2}
+$$
+
+For $\alpha = 0.05$、$\beta = 0.20$、$z_{1-\alpha} = 1.96$、$z_{1-\beta} = 0.84$, the value
+
+$$
+2(z_{1 - \alpha } + z_{1-\beta})^2 \approx 8
+$$.
+
+
+:::{.notes}
+これは正規分布のサンプルの公式から導かれる。
+$\alpha = 0.05$、$\beta = 0.20$、$z_{1-\alpha} = 1.96$、$z_{1-\beta} = 0.84$であるとき、$2 ( z_{1 - \alpha } + z_{1-\beta})^2 \approx 8$という値になる。
+:::
+
+---
+
+- This formula is used to calculate *detectable error in the population* using a given sample size $n$ is $\Delta = \sqrt{\frac{8}{n}}$, the inversion of $n = \frac{8}{\Delta^2}$.
+- Suppose you are auditing a financial account, and want to compare the actual error in the account to an assumption (null hypothesis) that that account is fairly stated (has zero error).
+- You will measure the actual expected error $\mu_2$ with respect to an assumed error of $\mu_1$, which will typically be zero.  We can then define $\mu_1 − \mu_2$.
+- The smaller the difference you want to detect, the larger the required sample size.
+
+:::{.notes}
+この式は、所与となるサンプルサイズ$n$を用いた母集団における検出可能な誤謬を計算するためにも用いられる。$\Delta = \sqrt{\frac{8}{n}}$であり、$n = \frac{8}{\Delta^2}$の逆数である。
+財務諸表の勘定について監査をしていて、勘定の実際の虚偽表示を、勘定が公正に表示されている（虚偽表示がゼロである）という仮定（帰無仮説）と比較したいとする。
+あなたは、仮定された虚偽表示額$\mu_1$（これは通常ゼロになる）に対して実際の予想虚偽表示額$\mu_2$を測定する。
+そして$\Delta = \mu_1 - \mu_2$と定義できる。
+検出したい差が小さければ小さいほど、必要なサンプルサイズは大きくなる。
+:::
+
+##
+
+- Of the four variables that go into the sample size calculation, the variance of the responses can be the most difficult to determine.
+- Usually, before you do your experiment, you do not know what variance to expect.
+
+- Investigators often conduct a pilot study to determine the expected variance, or information from a previously published study can be used.
+- The effect size combines the minimal relevant difference and the variability into one measurement $\sigma$.
+<!-- - Significance $\alpha$ is often set at $0.05$, for a 95% confidence, after a suggestion by RA Fisher in the 1920s (Stigler 2008). -->
+
+:::{.notes}
+サンプルサイズ計算に必要な4つの変数のうち、応答変数の分散を決定するのが最も難しいかもしれない。
+通常、実験を行う前に、どのような分散が期待されるかはわからない。
+研究者はしばしば、予想される分散を決定するためにパイロット研究を実施する、または以前に発表された研究の情報を使用することもできる。
+効果量は、最小の関連する差と変動を1つの測定値$\sigma$にまとめる。
+有意性$\alpha$は、1920年代にR.A Fisherによって提案された後、信頼度$95\%$で$0.05$に設定されることが多い(Stigler 2008)。
+:::
+
+## Power test for One-sided Test
+
+- $1 - \beta$, where $\beta$ is the probability of a Type 2 error (failing to reject the null hypothesis when the alternative hypothesis is
+true). In other words, if you have a 20% chance of failing to detect a real difference, then the power of your test is $0.8$, which
+was suggested in (Cohen 1992) (Fig. 4).
+- The calculation for the total sample size is
+
+$$
+n = \frac{4 \times (z_{\alpha} + z_{\beta})^2 \times \sigma ^2}{\Delta ^2}
+$$
+
+:::{.notes}
+$1- \beta$、ここで$\beta$は第2種の過誤（対立仮説が真であるときに帰無仮説を棄却できない場合）の確率である。
+言い換えると、本当の差を検出できない確率が20％の場合、検定の検出力は$0.8$である。
+これはCohen (1992)で示されている（図4を参照されたい）。
+サンプルサイズの計算は以下の通りである。
+:::
+
+
+## Power test for One-sided Test
+
+```{r}
+#| fig-cap: "Power and Sample Size for One-sided Test"
+Delta <- 20
+sigma <- 60
+d <- Delta/sigma
+sample <- pwr.t.test(
+  d = d,
+  sig.level = 0.05,
+  power = 0.90,
+  type = 'one.sample')
+sample
+```
+
+
+## Plot for Power test
+
+```{r}
+plot(sample)
+```
+
+## Acceptance Sampling with Poisson Data
+
+- Substantive testing often takes a “monetary unit” perspective of error, where each dollar in an account balance is assumed to be a sample-able unit.
+- With monetary units, data can be assumed to be Poisson distributed, taking on discrete dollar-unit values greater than zero (i.e., being left truncated at zero).
+- The Poisson distribution has one parameter, the rate $\lambda$.
+$$
+P(X = k) = \frac{\lambda^k }{k!} \mathrm{e}^{-\lambda}
+$$
+
+:::{.notes}
+実証手続では、勘定残高の各ドル単位の金額がサンプリング可能な単位（sample-able unit）であると仮定する「金額単位」サンプリングを採用することが多い。
+金額単位サンプリングにおいては、データがポアソン分布に従い、ゼロより大きいドル単位の離散的な値をとる（すなわち、ゼロ以下切り捨てられる）と仮定することがある。
+ポアソン分布は1つのパラメータ$\lambda$を持っている。
+$\lambda$の誤謬率を検出するために必要なサンプルサイズは、下記のとおりである。
+:::
+
+## Poisson Sampling
+
+The required sample size to detect an error rate of $\lambda$ is
+
+$$
+n \approx \frac{4}{\lambda}
+$$
+
+This is derived from the previous formula, noting that for a Poisson randome variable $Y$, the transformed random variable
+$\sqrt{Y} = \mathrm{Normal}(\mu = \sqrt{\lambda}, \sigma ^2 = 0.25)$.
+
+:::{.notes}
+$\lambda$の誤謬率を検出するために必要なサンプルサイズは、下記のとおりである。
+このような経験則は前式から導かれ、ポアソン確率変数Yについて、変換された確率変数が
+$\sqrt{Y} = \mathrm{Normal}(\mu = \sqrt{\lambda}, \sigma ^2 = 0.25$
+となることを利用する。
+:::
+
+# A Statistical Decision Framework for Auditing
+<!-- ## 第5節 監査における統計的意思決定の枠組み -->
+
+## 1st Frameworks
+
+A statistical decision framework for making audit decisions restructures these standards around a sequence of tasks:
+<!-- 監査における意思決定を行うための統計的決定フレームワークは、これらの基準を下記の作業を中心に再構築したものである。 -->
+
+
+1. **Objective of Audit Tasks** :
+   Audit tasks must ultimately provide the basis for the auditor to make a decision to issue one of the four audit opinions: Unqualified, Qualified, Adverse, or Disclaimer.
+
+:::{.notes}
+**監査業務の目的**：監査業務は、最終的に監査人が4つの監査意見（無限定適正意見、限定付意見、不適正意見、または意見不表明）のいずれかを表明する判断の基礎となるものでなければならない。この決定は、報告基準の実施である。
+:::
+
+
+
+## 2nd Frameworks
+
+2. **True State of the Firm** : <mark class="mark">The audit report is a statement of the auditor’s decision after completing all audit tasks</mark> (thus an opinion, because it is not 100% certain) on the unobservable true state of the firm at the audit date; e.g., whether or not there is a material error in the accounts.
+	a. Errors stem from GAAP non-compliance, period inconsistencies, and flawed information acquisition.
+	b. Investors seek accurate insights into a firm’s true state and rely on auditors to confirm the accuracy of financial reports.
+
+:::{.notes}
+2. **被監査会社の真の状態**（True State）： 監査報告書は、貸借対照表日における被監査会社の観察不能な真の状態（例えば、財務諸表における重要な虚偽表示の有無）について、すべての監査作業を完了した後の監査人の意思決定（100％の保証を与えるものでないため、意見といえる）を表明したものである。
+  1. 虚偽表示は、（財務諸表が）GAAPへ準拠していないこと、（経営者の会計方針が）会計期間ごとに一貫性がないこと、あるいは不十分な情報、偏った情報、または不適切な情報を公表したことなどから発生する。
+  2. 明らかに、投資家は、会社の業務や資産に関する正確な情報提供を望んでいる（これが、監査が公開会社に対して元々義務付けられた理由である）。つまり、投資家は被監査会社の財務報告が観察不能な真の状態を知りたがっており、被監査会社の財務報告がその観察不能な真の状態を正確に表しているか否かについて表明することを監査人に期待しているのである。
+:::
+
+:::{.notes}
+2. **被監査会社の真の状態**（True State）： 監査報告書は、貸借対照表日における被監査会社の観察不能な真の状態（例えば、財務諸表における重要な虚偽表示の有無）について、すべての監査作業を完了した後の監査人の意思決定（100％の保証を与えるものでないため、意見といえる）を表明したものである。
+
+  a. 虚偽表示は、（財務諸表が）GAAPへ準拠していないこと、（経営者の会計方針が）会計期間ごとに一貫性がないこと、あるいは不十分な情報、偏った情報、または不適切な情報を公表したことなどから発生する。
+  b. 明らかに、投資家は、会社の業務や資産に関する正確な情報提供を望んでいる（これが、監査が公開会社に対して元々義務付けられた理由である）。つまり、投資家は被監査会社の財務報告が観察不能な真の状態を知りたがっており、被監査会社の財務報告がその観察不能な真の状態を正確に表しているか否かについて表明することを監査人に期待しているのである。
+:::
+
+
+## 3rd Frameworks
+
+
+3. **Model** : The audit model is captured in the audit program which is a set of procedures that compare an “ideal” accounting of firm operations in compliance with GAAP to the actual procedures that were applied during the accounting period.
+	  a. The audit program provides a decision model for forming an audit opinion.
+	  a. Auditors assess risks of material misstatement by understanding the entity, its environment, and internal controls to plan further audit procedures.
+    <!-- a. The audit program presents the decision model that allows rendering an audit opinion. -->
+    <!-- b. The auditor obtains a sufficient understanding of the entity and its environment, including its internal control, to assess the risk of material misstatement of the financial statements, whether due to error or fraud, and to design the nature, timing, and extent of further audit procedures. -->
+
+:::{.notes}
+3. **監査意思決定モデル**： 監査意思決定モデルは、GAAPに準拠した監査事務所の業務の「理想的な」会計処理と、会計期間中に適用された実際の会計処理とを比較する一連の手続きである監査計画において提示される。
+  1. 監査計画は、監査意見を表明するための意思決定モデルを提示する。
+  2. 監査人は、誤謬または不正に起因するかどうかにかかわらず、財務諸表の重要な虚偽表示のリスクを評価し、追加の監査手続の種類、時期、および範囲をについての監査計画を立案するために、内部統制を含む企業およびその環境について十分な理解を得る。
+:::
+
+## 4th Frameworks
+
+
+4. **Evidence** : Acquisition of consistent, unbiased, complete, and adequate audit evidence is the major source of cost of an audit.
+    a. The auditor must obtain sufficient appropriate audit evidence by performing audit procedures to afford a reasonable basis for an opinion regarding the financial statements under audit.
+
+:::{.notes}
+4. **監査証拠**： 首尾一貫した、偏りのない、十分かつ適切な監査証拠の入手は、監査コストの主要な要因である。監査人は、監査手続を実施することにより、財務諸表に関する監査意見の合理的な根拠となる十分かつ適切な監査証拠を入手しなければならない。
+:::
+
+
+## 5th Frameworks
+
+5. **Statistical decision theory** : These are mathematical tools that provide widely accepted (and defensible in a court of law) tools to support high quality and defensible audit opinions.
+    a. Auditors should be proficient in statistical theory and possess basic programming skills.
+    b. Independence and due professional care can be ensured using respected statistical decision models.
+    c. Audit decisions may extend beyond statistics, especially with intangible assets and subjective judgments, where objectivity is harder to achieve.
+
+    <!-- 1. Auditing standards suggest that auditors (among other things) must be proficient in statistical theory, and should obtain some computer programming skills.
+    2. Auditors can assure that they maintain independence in mental attitude (free of bias) and exercise due professional care during the performance of the audit and the preparation of the report by invoking time-tested and widely respected research statistical decision models.
+    3. Some components of audit decision-making may fall outside the purview of statistics when they involve unobservable constructs, subjective decisions, human behavior and judgment, and so forth. GAAP has focused on objectivizing accounting to the maximum extent; but the growth of the information economy has seen the growth of many intangible components of firm value that have thwarted this objectification. Application of statistical tests are generally more challenging where subjective intangible assets are involved. -->
+
+:::{.notes}
+5. **統計的意思決定理論**（Statistical decision theory）： これらの統計的意思決定理論は、高品質で正当化できる監査意見を作成するための手段として、広く受け入れられている（また裁判においても弁明が可能な）数学的ツールである。
+  1. （米国の）監査基準は、監査人が（とりわけ）統計学に精通し、一定のプログラミングスキルを身につけるべきことを示唆している。
+  2. 監査人は、監査実施および監査報告書の作成の段階において、長い歴史を持ち、広く評価されている統計的意思決定モデルを利用することにより、（バイアスのない）独立した心理状態を維持し、職業的専門家としての正当な注意を払うわせることができる。
+  3. 監査における意思決定の構成要素の中には、観察できない要素、主観的な意思決定、および人間の行動や判断などが含まれる場合には、統計の範疇から外れるものもある。GAAPは、会計が客観的であるように最大限に重点を置いてきたが、情報経済の発展により、企業価値において無形の要素が増加し、この客観化を阻害してきた。主観的な無形資産が含まれる場合、統計的検定の適用は一般的に難しくなる。
+:::
+
+
+## 6th Frameworks
+
+6. **Opinion (Audit Decision)** : Material error in the audited financial statements exists or does not. Typically this decision requires a pooling of information from supporting decisions (e.g., the existence of tolerable error in individual year-end accounts).
+
+:::{.notes}
+6. **監査意見（監査判断）の決定**： 監査済財務諸表に重要な虚偽表示が存在するか否かの決定。通常、監査意見の決定には、その裏付けとなる決定（例えば、個々の期末勘定における許容可能な誤謬の有無など）からの情報の統合（pooling of information）が必要となる。
+:::
+
+## 7th Frameworks
+
+
+7. **Assessment of decision quality** : statistical goodness-of-fit statistics determine how confident the auditor is that the opinion is defensible in court.
+	  a. Audit literature often suggests a 70% confidence level, while statistical norms recommend 95% or higher, a standard introduced by Ronald Fisher.
+	  b. AICPA and FASB guidance on decision quality can be unclear, with audit adequacy frequently judged in court.
+   <!-- a. Audit literature suggests a minimum 70% confidence level (without a full statistical explanation of the meaning of this), whereas statistical literature suggests confidence approaching 95% or greater for adequate decision-making. Ronald Fisher first proposed the 95% confidence standard in the early twentieth century, a standard that has withstood the test of time. -->
+   <!-- b. AICPA and FASB guidance on “decision quality” can be somewhat equivocal, and unfortunately, too often, the adequacy of audit decision-making is decided in court. -->
+
+:::{.notes}
+7. （監査人の）意思決定の品質（decision quality）の評価：適合度検定（goodness-of-fit statistics）は、監査人が、法廷においてその監査意見を擁護可能であるとどの程度確信しているかを決定する。
+  1. 監査に関する文献では、信頼水準が最低70％であることが望ましいとされているが（この意味について統計学的な十分な説明はない）、統計学的な文献では、適切な意思決定を行うためには信頼水準が95％以上に近づくことが必要とされている。Ronald Fisherは20世紀初頭に95％の信頼性基準を提唱したが、この基準は現在まで続いている。
+  2. AICPAとFASBの「決定の品質」に関する指針は、やや不明瞭な場合があり、残念なことに、監査の意思決定の適切性は法廷において争われることがあまりに多い。
+:::
+
+# Audit Tests as Learning Model
+<!-- ## 第6節 学習モデルとしての監査手続 -->
+
+
+## Audit Tests as Learning Models
+
+Auditing may be seen as a sequence of evidence collection and analyses that help the auditor learn enough to render an opinion. Conceptually, the tests involve a sequence of inferences:
+
+1. Audit planning will have set the scope and sample size values for audit tasks that, in general, seek to discover (i.e., **discovery sampling**) whether or not transaction processing is or is not in control.
+  <!-- This is usually stated as an assessment of error rates rather than dollar magnitudes of error. -->
+2. If errors are discovered in a particular transaction flow, then sufficient additional evidence must be gathered to assess the rate of error occurrences in the transaction flow (i.e., **attribute sampling**)
+
+:::{.notes}
+監査は、監査人が意見を表明するために十分な情報を得るのを助ける、証拠の収集と分析の一連の過程として捉えることができる。概念的には、監査手続は以下の推論の一連を含む。
+1. 監査計画は、一般的に、取引処理がコントロールされているかどうかを発見することを目的として、監査業務の範囲とサンプルサイズの値を設定している（発見サンプリング）。これは、通常、誤差率の評価として述べられることが多い。
+2. 特定の取引フローに誤りが発見された場合、取引フローにおける誤り発生率を評価するために十分な追加の証拠を収集する必要がある（属性サンプリング）。
+:::
+
+---
+
+3. <mark class ="mark">Transaction flows with error rates that are sufficiently high to be deemed “out of control”</mark> (i.e., intolerable from the audit perspective) are listed on the Internal Control Memo generated at the end of the Interim compliance audit.
+4. Financial statement account balances affected by any transaction flows with error rates that are sufficiently high to be deemed “out of control” will have their sample sizes in the audit program for year-end substantive tests adjusted <mark class="mark">to assure an accurate assessment of the existence of material error in the audited financial statements</mark>.
+
+:::{.notes}
+3. 誤差率が十分に高い取引フローは、「コントロールされていない」と見なされる（すなわち、監査の観点からは許容できない）ため、内部統制メモにリストされる。
+4. 誤差率が十分に高い取引フローに影響を受ける財務諸表の勘定残高は、監査プログラムにおける年末実体検査のサンプルサイズが調整され、監査済財務諸表における重要な誤謬の存在を正確に評価するために調整される。
+:::
+
+# 付録 : サンプルサイズの近似
+
+
+## 1. 式の背景
+
+以下は、式 $n \approx \frac{1 + (1 - PE)^2}{PE^2} \approx \frac{2}{PE^2}$ の導出方法を示す。
+
+
+- **$PE$** : 検出確率（または発見効率）。
+- **$n$** : 必要なサンプルサイズ。
+
+サンプルサイズ $n$ を検出確率 $PE$ に基づいて計算するために、この近似式を使用する。
+
+---
+
+## 2. 式の導出
+
+### (1) 検出確率とサンプルサイズの基本関係
+
+ポアソン過程に対して、検出確率 $PE$ 検出されない確率の補完として次のようにモデル化される。
+
+$$
+PE = 1 - \mathrm{e}^{-\frac{n}{k}},
+$$
+
+ここで$k$は定数
+
+## (2) 小さい値に対する近似
+
+指数関数のテイラー展開による近似 $e^{-x} \approx 1 - x$ を適用すると、次のように変形できる。
+
+$$
+PE \approx 1 - \left( 1 - \frac{n}{k} \right) = \frac{n}{k}.
+$$
+
+この式を整理すると、次式が得られる。
+
+$$
+n \approx k \times PE.
+$$
+
+---
+
+検出確率 $PE$ を一定の信頼性で達成するためには、誤検出確率 $(1 - PE)$ を考慮した補正が必要。
+この補正を加えると、次式を得る。
+$$
+n \approx \frac{1 + (1 - PE)^2}{PE^2}.
+$$
+ここで、
+
+- $1$: 基本項。
+- $(1 - PE)^2$: 誤検出確率を補正する項。
+- $PE^2$: 検出効率のスケーリング。
+
+---
+
+検出確率 $PE$ が高くなる場合、すなわち $PE \to 1$ のとき、$(1 - PE)^2$ の項は非常に小さくなる。
+$$
+n \approx \frac{1}{PE^2} + \frac{(1 - PE)^2}{PE^2} \approx \frac{2}{PE^2}.
+$$
